@@ -32,22 +32,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var tipAmountsArray: [NSNumber] = []
     private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
     private var tipPercentageTextLabelAttributes = [NSString(): NSObject()]
-    //private var userDidSelectBillAmountInTable = false
-    private var billAmount: NSNumber = Double(0) {
-        didSet {
-            self.updateBillAmount(self.billAmount, TipAmount: nil, TipPercentage: nil)
-        }
-    }
-    private var tipAmount: NSNumber = Double(0) {
-        didSet {
-            self.updateBillAmount(nil, TipAmount: self.tipAmount, TipPercentage: nil)
-        }
-    }
-    private var tipPercentage: NSNumber = Double(0) {
-        didSet {
-            self.updateBillAmount(nil, TipAmount: nil, TipPercentage: self.tipPercentage)
-        }
-    }
+    private var userIsDraggingBillAmountTableView: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,45 +88,176 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.billAmount = Double(20.00)
+        self.billAmountTableView.selectRowAtIndexPath(NSIndexPath(forRow: 19, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
     }
     
-    private func prepareTotalAmountTextLabel() {
-        let font = self.totalAmountTextLabel.font.fontWithSize(self.totalAmountTextLabel.font.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
-        let textColor = self.totalAmountTextLabel.textColor
-        let text = self.totalAmountTextLabel.text
-        let shadow = NSShadow()
-        shadow.shadowColor = GratuitousColorSelector.textShadowColor()
-        shadow.shadowBlurRadius = 2.0
-        shadow.shadowOffset = CGSizeMake(2.0, 2.0)
-        let attributes = [
-            NSForegroundColorAttributeName : textColor,
-            NSFontAttributeName : font,
-            //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
-            NSShadowAttributeName : shadow
-        ]
-        self.totalAmountTextLabelAttributes = attributes
-        let attributedString = NSAttributedString(string: text!, attributes: self.totalAmountTextLabelAttributes)
-        self.totalAmountTextLabel.attributedText = attributedString
+    private func indexPathInCenterOfTable(tableView: UITableView) -> NSIndexPath {
+        var indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        
+        var point = tableView.frame.origin
+        point.x += tableView.frame.size.width / 2
+        point.y += tableView.frame.size.height / 2
+        point = tableView.convertPoint(point, fromView: tableView.superview)
+        if let optionalIndexPath = tableView.indexPathForRowAtPoint(point) {
+            indexPath = optionalIndexPath
+        }
+        
+        return indexPath
     }
     
-    private func prepareTipPercentageTextLabel() {
-        let font = self.tipPercentageTextLabel.font.fontWithSize(self.tipPercentageTextLabel.font.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
-        let textColor = self.tipPercentageTextLabel.textColor
-        let text = self.tipPercentageTextLabel.text
-        let shadow = NSShadow()
-        shadow.shadowColor = GratuitousColorSelector.textShadowColor()
-        shadow.shadowBlurRadius = 2.0
-        shadow.shadowOffset = CGSizeMake(2.0, 2.0)
-        let attributes = [
-            NSForegroundColorAttributeName : textColor,
-            NSFontAttributeName : font,
-            //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
-            NSShadowAttributeName : shadow
-        ]
-        self.tipPercentageTextLabelAttributes = attributes
-        let attributedString = NSAttributedString(string: text!, attributes: self.tipPercentageTextLabelAttributes)
-        self.tipPercentageTextLabel.attributedText = attributedString
+    private func updateBillAmountText() {
+        let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView)
+        let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as GratuitousTableViewCell
+        let billAmount = billCell.billAmount
+        
+        let tipAmount: NSNumber = billAmount.doubleValue * self.IDEALTIPPERCENTAGE
+        let tipAmountRoundedString = NSString(format: "%.0f", tipAmount.doubleValue)
+        var tipAmountRoundedNumber = NSNumber(double: tipAmountRoundedString.doubleValue)
+        
+        if tipAmountRoundedNumber.integerValue < 1 {
+            tipAmountRoundedNumber = Double(1.0)
+        }
+        
+        let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue-1, inSection: 0)
+        self.tipAmountTableView.selectRowAtIndexPath(tipIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+        
+        let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
+        self.totalAmountTextLabel.text = NSString(format: "$%.0f", totalAmount)
+        self.tipPercentageTextLabel.text = NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100)
+    }
+    
+    private func updateTipAmountText() {
+        let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView)
+        let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as GratuitousTableViewCell
+        let billAmount = billCell.billAmount
+        
+        let tipAmountIndexPath = self.indexPathInCenterOfTable(self.tipAmountTableView)
+        let tipCell = self.tipAmountTableView.cellForRowAtIndexPath(tipAmountIndexPath) as GratuitousTableViewCell
+        let tipAmount = tipCell.billAmount
+        
+        let tipAmountRoundedString = NSString(format: "%.0f", tipAmount.doubleValue)
+        var tipAmountRoundedNumber = NSNumber(double: tipAmountRoundedString.doubleValue)
+        
+        if tipAmountRoundedNumber.integerValue < 1 {
+            tipAmountRoundedNumber = Double(1.0)
+        }
+        
+        let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
+        self.totalAmountTextLabel.text = NSString(format: "$%.0f", totalAmount)
+        self.tipPercentageTextLabel.text = NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100)
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch tableView.tag {
+        case BILLAMOUNTTAG:
+            var animated = false
+            let middleIndexPath = self.indexPathInCenterOfTable(tableView)
+            if indexPath.row > middleIndexPath.row {
+                if (indexPath.row - middleIndexPath.row) > 1 {
+                    self.userIsDraggingBillAmountTableView = true
+                    animated = true
+                }
+            } else {
+                if (middleIndexPath.row - indexPath.row) > 1 {
+                    self.userIsDraggingBillAmountTableView = true
+                    animated = true
+                }
+            }
+            tableView.selectRowAtIndexPath(indexPath, animated: animated, scrollPosition: UITableViewScrollPosition.Middle)
+        default:
+            tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+        }
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            let tableView = scrollView as UITableView
+            switch tableView.tag {
+            case BILLAMOUNTTAG:
+                self.userIsDraggingBillAmountTableView = false
+                tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            default:
+                tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            }
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        let tableView = scrollView as UITableView
+        switch tableView.tag {
+        case BILLAMOUNTTAG:
+            tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            self.userIsDraggingBillAmountTableView = false
+        default:
+            tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+        }
+    }
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        switch scrollView.tag {
+        case BILLAMOUNTTAG:
+            self.userIsDraggingBillAmountTableView = true
+        default:
+            println(self.userIsDraggingBillAmountTableView)
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let tableView = scrollView as UITableView
+        switch tableView.tag {
+        case BILLAMOUNTTAG:
+            let indexPath = self.indexPathInCenterOfTable(tableView)
+            tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
+            self.updateBillAmountText()
+        default:
+            if self.userIsDraggingBillAmountTableView == false {
+                let indexPath = self.indexPathInCenterOfTable(tableView)
+                tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
+                self.updateTipAmountText()
+            }
+        }
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch tableView.tag {
+        case BILLAMOUNTTAG:
+            return self.billAmountsArray.count
+        default:
+            return self.tipAmountsArray.count
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let tableViewCellClass:String! = NSStringFromClass(GratuitousTableViewCell).componentsSeparatedByString(".").last
+        switch tableView.tag {
+        case BILLAMOUNTTAG:
+            let billTableViewCellString = tableViewCellClass.stringByAppendingString("Bill")
+            let cell = tableView.dequeueReusableCellWithIdentifier(billTableViewCellString) as GratuitousTableViewCell
+            cell.billAmount = self.billAmountsArray[indexPath.row]
+            return cell
+        default:
+            let tipTableViewCellString = tableViewCellClass.stringByAppendingString("Tip")
+            let cell = tableView.dequeueReusableCellWithIdentifier(tipTableViewCellString) as GratuitousTableViewCell
+            cell.billAmount = self.tipAmountsArray[indexPath.row]
+            return cell
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 76.0
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.All.rawValue)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     private func checkScreenHeightForTextSizeAdjuster() -> Double {
@@ -186,122 +302,42 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         return textSizeAdjustment
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch tableView.tag {
-        case BILLAMOUNTTAG:
-            return self.billAmountsArray.count
-        default:
-            return self.tipAmountsArray.count
-        }
+    private func prepareTotalAmountTextLabel() {
+        let font = self.totalAmountTextLabel.font.fontWithSize(self.totalAmountTextLabel.font.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
+        let textColor = self.totalAmountTextLabel.textColor
+        let text = self.totalAmountTextLabel.text
+        let shadow = NSShadow()
+        shadow.shadowColor = GratuitousColorSelector.textShadowColor()
+        shadow.shadowBlurRadius = 2.0
+        shadow.shadowOffset = CGSizeMake(2.0, 2.0)
+        let attributes = [
+            NSForegroundColorAttributeName : textColor,
+            NSFontAttributeName : font,
+            //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
+            NSShadowAttributeName : shadow
+        ]
+        self.totalAmountTextLabelAttributes = attributes
+        let attributedString = NSAttributedString(string: text!, attributes: self.totalAmountTextLabelAttributes)
+        self.totalAmountTextLabel.attributedText = attributedString
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let tableViewCellClass:String! = NSStringFromClass(GratuitousTableViewCell).componentsSeparatedByString(".").last
-        switch tableView.tag {
-        case BILLAMOUNTTAG:
-            let billTableViewCellString = tableViewCellClass.stringByAppendingString("Bill")
-            let cell = tableView.dequeueReusableCellWithIdentifier(billTableViewCellString) as GratuitousTableViewCell
-            cell.billAmount = self.billAmountsArray[indexPath.row]
-            return cell
-        default:
-            let tipTableViewCellString = tableViewCellClass.stringByAppendingString("Tip")
-            let cell = tableView.dequeueReusableCellWithIdentifier(tipTableViewCellString) as GratuitousTableViewCell
-            cell.billAmount = self.tipAmountsArray[indexPath.row]
-            return cell
-        }
-    }
-    
-    private func updateBillAmount(billAmount:NSNumber?, TipAmount tipAmount:NSNumber?, TipPercentage tipPercentage:NSNumber?) {
-        if let billAmount = billAmount {
-            self.billAmountTableView.selectRowAtIndexPath(NSIndexPath(forRow: billAmount.integerValue - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-            
-            let tipAmount: NSNumber = billAmount.doubleValue * self.IDEALTIPPERCENTAGE
-            let tipAmountRoundedString = NSString(format: "%.0f", tipAmount.doubleValue)
-            let tipAmountRoundedNumber = NSNumber(double: tipAmountRoundedString.doubleValue)
-            
-            if tipAmountRoundedNumber.integerValue < 1 {
-                self.tipAmount = Double(1.0)
-            } else {
-                self.tipAmount = tipAmountRoundedNumber
-            }
-        }
-        if let tipAmount = tipAmount {
-            self.tipAmountTableView.selectRowAtIndexPath(NSIndexPath(forRow: tipAmount.integerValue - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-            
-            self.tipPercentage = tipAmount.doubleValue/self.billAmount.doubleValue
-        }
-        if let tipPercentage = tipPercentage {
-            self.tipPercentageTextLabel.attributedText = NSAttributedString(string: NSString(format: "%.0f%%", tipPercentage.doubleValue*100), attributes: self.tipPercentageTextLabelAttributes)
-            self.totalAmountTextLabel.attributedText = NSAttributedString(string: NSString(format: "$%.0f", self.tipAmount.doubleValue+self.billAmount.doubleValue), attributes: self.totalAmountTextLabelAttributes)
-        }
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch tableView.tag {
-        case BILLAMOUNTTAG:
-            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-            let billAmountSelected = self.billAmountsArray[indexPath.row]
-            self.billAmount = self.billAmountsArray[indexPath.row]
-        default:
-            let tipAmountSelected = self.tipAmountsArray[indexPath.row]
-            self.tipAmount = self.tipAmountsArray[indexPath.row]
-        }
-    }
-    
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        let tableView = scrollView as UITableView
-        switch tableView.tag {
-        case BILLAMOUNTTAG:
-            var point3 = tableView.frame.origin
-            point3.x += tableView.frame.size.width / 2
-            point3.y += tableView.frame.size.height / 2
-            point3 = tableView.convertPoint(point3, fromView: tableView.superview)
-            let indexPath = tableView.indexPathForRowAtPoint(point3)
-            println("BillAmount IndexPathSection:\(indexPath?.section) AndIndexPathRow: \(indexPath?.row)")
-            tableView.selectRowAtIndexPath(indexPath?, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
-        default:
-            let indexPath = tableView.indexPathForRowAtPoint(CGPointMake(tableView.frame.size.width/2, tableView.frame.size.height/2))
-            //println("TipAmount IndexPath: \(indexPath?.row)")
-        }
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        let tableView = scrollView as UITableView
-        switch tableView.tag {
-        case BILLAMOUNTTAG:
-            var point3 = tableView.frame.origin
-            point3.x += tableView.frame.size.width / 2
-            point3.y += tableView.frame.size.height / 2
-            point3 = tableView.convertPoint(point3, fromView: tableView.superview)
-            let indexPath = tableView.indexPathForRowAtPoint(point3)
-            
-            println("BillAmount IndexPathRow: \(indexPath?.row)")
-            //tableView.selectRowAtIndexPath(indexPath?, animated: false, scrollPosition: UITableViewScrollPosition.None)
-//            if let indexPath = indexPath {
-//                let billAmountSelected = self.billAmountsArray[indexPath.row]
-//                self.billAmount = self.billAmountsArray[indexPath.row]
-//            }
-        default:
-            let indexPath = tableView.indexPathForRowAtPoint(CGPointMake(tableView.frame.size.width/2, tableView.frame.size.height/2))
-            //println("TipAmount IndexPath: \(indexPath?.row)")       
-        }
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 76.0
-    }
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
-    }
-    
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.All.rawValue)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func prepareTipPercentageTextLabel() {
+        let font = self.tipPercentageTextLabel.font.fontWithSize(self.tipPercentageTextLabel.font.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
+        let textColor = self.tipPercentageTextLabel.textColor
+        let text = self.tipPercentageTextLabel.text
+        let shadow = NSShadow()
+        shadow.shadowColor = GratuitousColorSelector.textShadowColor()
+        shadow.shadowBlurRadius = 2.0
+        shadow.shadowOffset = CGSizeMake(2.0, 2.0)
+        let attributes = [
+            NSForegroundColorAttributeName : textColor,
+            NSFontAttributeName : font,
+            //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
+            NSShadowAttributeName : shadow
+        ]
+        self.tipPercentageTextLabelAttributes = attributes
+        let attributedString = NSAttributedString(string: text!, attributes: self.tipPercentageTextLabelAttributes)
+        self.tipPercentageTextLabel.attributedText = attributedString
     }
 }
 

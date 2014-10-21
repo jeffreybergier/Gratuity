@@ -68,15 +68,25 @@ class GratuitousTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if (selected) {
-            UIView.animateWithDuration(GratuitousAnimations.GratuitousAnimationDuration(), animations: { () -> Void in
+            if animated {
+                UIView.animateWithDuration(GratuitousAnimations.GratuitousAnimationDuration(), animations: { () -> Void in
+                    self.contentView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
+                    self.dollarTextLabel.attributedText = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.selectedLabelTextAttributes) })
+            } else {
                 self.contentView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
                 self.dollarTextLabel.attributedText = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.selectedLabelTextAttributes)
-            })
+            }
+            
         } else {
-            UIView.animateWithDuration(GratuitousAnimations.GratuitousAnimationDuration(), animations: { () -> Void in
+            if animated {
+                UIView.animateWithDuration(GratuitousAnimations.GratuitousAnimationDuration(), animations: { () -> Void in
+                    self.contentView.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+                    self.dollarTextLabel.attributedText = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes) })
+            } else {
                 self.contentView.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
                 self.dollarTextLabel.attributedText = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes)
-            })
+            }
+            
         }
     }
     

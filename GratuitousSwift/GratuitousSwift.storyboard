@@ -97,6 +97,42 @@
                                         <rect key="frame" x="308" y="0.0" width="308" height="296"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableView>
+                                    <visualEffectView opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A1b-jc-I3t">
+                                        <rect key="frame" x="0.0" y="0.0" width="308" height="110.5"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="N4R-gl-IiX">
+                                            <rect key="frame" x="0.0" y="0.0" width="308" height="110.5"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Iv-s6-a15">
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="MdX-jr-bkR">
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    </view>
+                                                    <vibrancyEffect>
+                                                        <blurEffect style="light"/>
+                                                    </vibrancyEffect>
+                                                </visualEffectView>
+                                            </subviews>
+                                        </view>
+                                        <blurEffect style="dark"/>
+                                    </visualEffectView>
+                                    <visualEffectView opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YVW-o4-UmL">
+                                        <rect key="frame" x="0.0" y="185.5" width="308" height="110.5"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3hz-Pd-y3I">
+                                            <rect key="frame" x="0.0" y="0.0" width="308" height="110.5"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZF5-NQ-NmJ">
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="Uzb-CQ-mju">
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    </view>
+                                                    <vibrancyEffect>
+                                                        <blurEffect style="light"/>
+                                                    </vibrancyEffect>
+                                                </visualEffectView>
+                                            </subviews>
+                                        </view>
+                                        <blurEffect style="dark"/>
+                                    </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Zl-sp-dV1">
                                         <rect key="frame" x="72" y="0.0" width="163" height="43.5"/>
                                         <subviews>
@@ -140,19 +176,37 @@
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="top" id="0A7-DJ-zJd"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jem-jz-msI" secondAttribute="leading" priority="750" id="2hE-60-Hz0"/>
                                     <constraint firstItem="3Zl-sp-dV1" firstAttribute="centerX" secondItem="YkV-Bf-bef" secondAttribute="centerX" id="5LU-36-VbK"/>
+                                    <constraint firstItem="A1b-jc-I3t" firstAttribute="bottom" secondItem="YkV-Bf-bef" secondAttribute="bottom" id="8Bk-QS-ydn"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="width" secondItem="YkV-Bf-bef" secondAttribute="width" id="Aoi-fS-KiX"/>
+                                    <constraint firstItem="A1b-jc-I3t" firstAttribute="trailing" secondItem="YkV-Bf-bef" secondAttribute="trailing" id="Brw-5A-AEp"/>
                                     <constraint firstItem="YkV-Bf-bef" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="top" id="Cn8-RZ-5ro"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="top" secondItem="jem-jz-msI" secondAttribute="top" id="EA8-cM-4co"/>
+                                    <constraint firstItem="YVW-o4-UmL" firstAttribute="leading" secondItem="YkV-Bf-bef" secondAttribute="leading" id="HOV-CT-v9Q"/>
                                     <constraint firstItem="3Zl-sp-dV1" firstAttribute="top" secondItem="YkV-Bf-bef" secondAttribute="top" id="HqO-5V-V1W"/>
+                                    <constraint firstItem="A1b-jc-I3t" firstAttribute="top" secondItem="YkV-Bf-bef" secondAttribute="top" id="Jlt-UA-PoQ"/>
                                     <constraint firstItem="3Zl-sp-dV1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YkV-Bf-bef" secondAttribute="leading" priority="750" id="NLz-Qy-nrz"/>
+                                    <constraint firstItem="YVW-o4-UmL" firstAttribute="bottom" secondItem="YkV-Bf-bef" secondAttribute="bottom" id="OSY-nz-CGA"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="leading" secondItem="YkV-Bf-bef" secondAttribute="trailing" id="SuV-fv-mwY"/>
+                                    <constraint firstItem="A1b-jc-I3t" firstAttribute="height" secondItem="YkV-Bf-bef" secondAttribute="height" multiplier="1/3" id="THK-dV-Xah"/>
                                     <constraint firstAttribute="bottom" secondItem="V1Q-ia-Gn2" secondAttribute="bottom" id="UGu-EE-w1X"/>
                                     <constraint firstItem="YkV-Bf-bef" firstAttribute="leading" secondItem="F2W-Pc-eWf" secondAttribute="leading" id="XUP-dQ-s8K"/>
+                                    <constraint firstItem="YVW-o4-UmL" firstAttribute="height" secondItem="YkV-Bf-bef" secondAttribute="height" multiplier="1/3" id="aST-6w-tOd"/>
                                     <constraint firstItem="3Zl-sp-dV1" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YkV-Bf-bef" secondAttribute="trailing" priority="750" id="cbg-pF-OyW"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="centerX" secondItem="jem-jz-msI" secondAttribute="centerX" id="dwE-Rm-5nI"/>
+                                    <constraint firstItem="A1b-jc-I3t" firstAttribute="leading" secondItem="YkV-Bf-bef" secondAttribute="leading" id="et3-Zc-e62"/>
                                     <constraint firstAttribute="bottom" secondItem="YkV-Bf-bef" secondAttribute="bottom" id="gqe-YW-KYV"/>
+                                    <constraint firstItem="A1b-jc-I3t" firstAttribute="height" secondItem="YVW-o4-UmL" secondAttribute="height" id="rxf-qa-2j8"/>
                                     <constraint firstAttribute="trailing" secondItem="V1Q-ia-Gn2" secondAttribute="trailing" id="spX-mx-vqo"/>
+                                    <constraint firstItem="YVW-o4-UmL" firstAttribute="trailing" secondItem="YkV-Bf-bef" secondAttribute="trailing" id="vjg-hB-2Ue"/>
+                                    <constraint firstItem="YVW-o4-UmL" firstAttribute="top" secondItem="A1b-jc-I3t" secondAttribute="bottom" constant="75" id="xac-jr-ghI"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="8Bk-QS-ydn"/>
+                                        <exclude reference="THK-dV-Xah"/>
+                                        <exclude reference="aST-6w-tOd"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.11764705882352941" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
