@@ -17,9 +17,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet weak private var tipPercentageTextLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak private var totalAmountTextLabelBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak private var billAmountTableViewTitleTextLabel: UILabel!
-    @IBOutlet weak private var billAmountTableViewTitleTextLabelView: UIView!
+    //@IBOutlet weak private var billAmountTableViewTitleTextLabelView: UIView!
     @IBOutlet weak private var tipAmountTableViewTitleTextLabel: UILabel!
     @IBOutlet weak private var tipAmountTableViewTitleTextLabelView: UIView!
+    @IBOutlet weak var billAmountSelectedSurroundView: UIView!
+    @IBOutlet weak var billAmountLowerGradientView: GratuitousGradientView!
     
     private let MAXBILLAMOUNT = 500
     private let MAXTIPAMOUNT = 250
@@ -73,7 +75,16 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipAmountTableViewTitleTextLabel.textColor = GratuitousColorSelector.darkTextColor()
         self.billAmountTableViewTitleTextLabel.textColor = GratuitousColorSelector.darkTextColor()
         self.tipAmountTableViewTitleTextLabelView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
-        self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
+        //self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
+        
+        //prepare the cell select surrounds
+        self.billAmountSelectedSurroundView.backgroundColor = UIColor.clearColor()
+        self.billAmountSelectedSurroundView.layer.borderWidth = 3.0
+        self.billAmountSelectedSurroundView.layer.cornerRadius = 0.0
+        self.billAmountSelectedSurroundView.layer.borderColor = GratuitousColorSelector.lightBackgroundColor().CGColor
+        
+        //prepare lower gradient view so its upside down
+        self.billAmountLowerGradientView.isUpsideDown = true
         
         //check screensize and set text side adjustment
         self.textSizeAdjustment = self.checkScreenHeightForTextSizeAdjuster()
@@ -122,8 +133,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipAmountTableView.selectRowAtIndexPath(tipIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
         
         let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
-        self.totalAmountTextLabel.text = NSString(format: "$%.0f", totalAmount)
-        self.tipPercentageTextLabel.text = NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100)
+        let totalAmountAttributedString = NSAttributedString(string: NSString(format: "$%.0f", totalAmount), attributes: self.totalAmountTextLabelAttributes)
+        let tipPercentageAttributedString = NSAttributedString(string: NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100), attributes: self.tipPercentageTextLabelAttributes)
+        self.totalAmountTextLabel.attributedText = totalAmountAttributedString
+        self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
     }
     
     private func updateTipAmountText() {
@@ -143,27 +156,29 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
         
         let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
-        self.totalAmountTextLabel.text = NSString(format: "$%.0f", totalAmount)
-        self.tipPercentageTextLabel.text = NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100)
+        let totalAmountAttributedString = NSAttributedString(string: NSString(format: "$%.0f", totalAmount), attributes: self.totalAmountTextLabelAttributes)
+        let tipPercentageAttributedString = NSAttributedString(string: NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100), attributes: self.tipPercentageTextLabelAttributes)
+        self.totalAmountTextLabel.attributedText = totalAmountAttributedString
+        self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch tableView.tag {
         case BILLAMOUNTTAG:
-            var animated = false
-            let middleIndexPath = self.indexPathInCenterOfTable(tableView)
-            if indexPath.row > middleIndexPath.row {
-                if (indexPath.row - middleIndexPath.row) > 1 {
-                    self.userIsDraggingBillAmountTableView = true
-                    animated = true
-                }
-            } else {
-                if (middleIndexPath.row - indexPath.row) > 1 {
-                    self.userIsDraggingBillAmountTableView = true
-                    animated = true
-                }
-            }
-            tableView.selectRowAtIndexPath(indexPath, animated: animated, scrollPosition: UITableViewScrollPosition.Middle)
+//            var animated = false
+//            let middleIndexPath = self.indexPathInCenterOfTable(tableView)
+//            if indexPath.row > middleIndexPath.row {
+//                if (indexPath.row - middleIndexPath.row) > 0 {
+//                    self.userIsDraggingBillAmountTableView = true
+//                    animated = true
+//                }
+//            } else {
+//                if (middleIndexPath.row - indexPath.row) > 0 {
+//                    self.userIsDraggingBillAmountTableView = true
+//                    animated = true
+//                }
+//            }
+            tableView.selectRowAtIndexPath(indexPath, animated: true /*animated*/, scrollPosition: UITableViewScrollPosition.Middle)
         default:
             tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
         }
@@ -317,7 +332,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             NSShadowAttributeName : shadow
         ]
         self.totalAmountTextLabelAttributes = attributes
-        let attributedString = NSAttributedString(string: text!, attributes: self.totalAmountTextLabelAttributes)
+        var attributedString = NSAttributedString(string: "", attributes: self.totalAmountTextLabelAttributes)
+        if let text = text {
+            attributedString = NSAttributedString(string: text, attributes: self.totalAmountTextLabelAttributes)
+        }
         self.totalAmountTextLabel.attributedText = attributedString
     }
     

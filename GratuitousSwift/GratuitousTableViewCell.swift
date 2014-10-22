@@ -64,7 +64,7 @@ class GratuitousTableViewCell: UITableViewCell {
         let attributedString = NSAttributedString(string: text!, attributes: self.labelTextAttributes)
         self.dollarTextLabel.attributedText = attributedString
     }
-    
+    /*
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if (selected) {
@@ -88,6 +88,6 @@ class GratuitousTableViewCell: UITableViewCell {
             }
             
         }
-    }
+    }*/
     
 }

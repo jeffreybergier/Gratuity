@@ -12,12 +12,12 @@ import QuartzCore
 class GratuitousGradientView: UIView {
     
     internal let gradient = CAGradientLayer()
+    internal let gradientColors = [GratuitousColorSelector.darkBackgroundColor().CGColor, GratuitousColorSelector.darkBackgroundColor().CGColor, GratuitousColorSelector.darkBackgroundColor().colorWithAlphaComponent(0.5).CGColor, GratuitousColorSelector.darkBackgroundColor().colorWithAlphaComponent(0.3).CGColor, GratuitousColorSelector.darkBackgroundColor().colorWithAlphaComponent(0.1).CGColor]
+    
     var isUpsideDown:Bool = false {
         didSet {
-            self.gradient.colors = [UIColor.clearColor().CGColor, UIColor(red: 29.0/255.0, green: 0, blue: 0, alpha: 1).CGColor]
-            //self.gradient.colors = [UIColor.clearColor().CGColor, GratuitousColorSelector.darkBackgroundColor().CGColor]
-            //self.gradient.colors = [UIColor.clearColor().CGColor, GratuitousColorSelector.lightBackgroundColor().CGColor]
-            //self.gradient.colors = [UIColor.whiteColor().CGColor, UIColor.blackColor().CGColor]
+            let colorArray = self.gradientColors.reverse()
+            self.gradient.colors = colorArray
         }
     }
     
@@ -39,10 +39,7 @@ class GratuitousGradientView: UIView {
     internal func commonInitializer() {
         self.backgroundColor = UIColor.clearColor()
         self.gradient.frame = self.bounds
-        self.gradient.colors = [UIColor(red: 29.0/255.0, green: 0, blue: 0, alpha: 1).CGColor, UIColor.clearColor().CGColor]
-        //self.gradient.colors = [UIColor.blackColor().CGColor, UIColor.whiteColor().CGColor]
-        //self.gradient.colors = [GratuitousColorSelector.darkBackgroundColor().CGColor, UIColor.clearColor().CGColor]
-        //self.gradient.colors = [GratuitousColorSelector.lightBackgroundColor().CGColor, UIColor.clearColor().CGColor]
+        self.gradient.colors = self.gradientColors
         self.layer.insertSublayer(self.gradient, atIndex: 0)
     }
     

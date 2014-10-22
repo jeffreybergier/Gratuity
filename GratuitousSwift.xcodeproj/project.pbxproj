@@ -16,6 +16,7 @@
 		7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512619E60F3900CD2B28 /* TipViewController.swift */; };
 		7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */; };
 		7382512D19E6473A00CD2B28 /* GratuitousTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */; };
+		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 				734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */,
 				7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */,
 				7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */,
+				736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */,
 				737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */,
 				737233DE19E8F19C0072EDB4 /* GratuitousAnimations.swift */,
 				7382510D19E60EED00CD2B28 /* Images.xcassets */,
@@ -113,7 +115,6 @@
 			children = (
 				7382512E19E6475500CD2B28 /* TipTableViewCell.swift */,
 				7382512F19E6475500CD2B28 /* TipTableViewCell.xib */,
-				736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */,
 			);
 			name = UnusedClasses;
 			sourceTree = "<group>";
@@ -193,6 +194,7 @@
 				7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */,
 				7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */,
 				737233DD19E8B9B70072EDB4 /* GratuitousColorSelector.swift in Sources */,
+				73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */,
 				7382510719E60EED00CD2B28 /* AppDelegate.swift in Sources */,
 				737233DF19E8F19C0072EDB4 /* GratuitousAnimations.swift in Sources */,
 			);
