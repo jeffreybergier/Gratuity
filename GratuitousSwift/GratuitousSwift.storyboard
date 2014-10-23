@@ -98,24 +98,24 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableView>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xpb-Dz-Chr" customClass="GratuitousGradientView" customModule="Tip" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="616" height="113"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="616" height="113.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qr8-7O-BPw" customClass="GratuitousGradientView" customModule="Tip" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="183" width="616" height="113"/>
+                                        <rect key="frame" x="0.0" y="183.5" width="616" height="112.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhw-69-tGe">
-                                        <rect key="frame" x="0.0" y="113" width="616" height="70"/>
+                                        <rect key="frame" x="0.0" y="113.5" width="616" height="70"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="6OR-Wa-ftF"/>
                                         </constraints>
                                     </view>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRQ-gz-2LJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="308" height="51.5"/>
+                                        <rect key="frame" x="76.5" y="0.0" width="155" height="51.5"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="mg6-kb-ApC">
-                                            <rect key="frame" x="0.0" y="0.0" width="308" height="51.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="155" height="51.5"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75E-j7-8zK">
@@ -133,7 +133,7 @@
                                                     </variation>
                                                 </visualEffectView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Amount on Bill" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="qGH-24-ssK">
-                                                    <rect key="frame" x="8" y="12" width="292" height="27.5"/>
+                                                    <rect key="frame" x="8" y="12" width="139" height="27.5"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -153,7 +153,6 @@
                                                     <variation key="heightClass=compact" constant="8"/>
                                                 </constraint>
                                             </constraints>
-                                            <variation key="heightClass=compact"/>
                                         </view>
                                         <blurEffect style="light"/>
                                     </visualEffectView>
@@ -180,23 +179,26 @@
                                 <constraints>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jem-jz-msI" secondAttribute="trailing" priority="750" id="07t-ST-rt6"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="top" id="0A7-DJ-zJd"/>
+                                    <constraint firstItem="kRQ-gz-2LJ" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="top" id="0nb-4J-FdF"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="trailing" secondItem="Xpb-Dz-Chr" secondAttribute="trailing" id="1Jp-Ce-XAb"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jem-jz-msI" secondAttribute="leading" priority="750" id="2hE-60-Hz0"/>
-                                    <constraint firstItem="kRQ-gz-2LJ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YkV-Bf-bef" secondAttribute="trailing" id="4Xd-g7-R5F">
+                                    <constraint firstItem="YkV-Bf-bef" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="top" id="430-tS-DUT"/>
+                                    <constraint firstItem="kRQ-gz-2LJ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YkV-Bf-bef" secondAttribute="trailing" priority="750" id="4Xd-g7-R5F">
                                         <variation key="heightClass=compact" constant="0.0"/>
                                     </constraint>
-                                    <constraint firstItem="kRQ-gz-2LJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YkV-Bf-bef" secondAttribute="leading" id="4lG-Ua-2bX">
+                                    <constraint firstItem="kRQ-gz-2LJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YkV-Bf-bef" secondAttribute="leading" priority="750" id="4lG-Ua-2bX">
                                         <variation key="heightClass=compact" constant="0.0"/>
                                     </constraint>
                                     <constraint firstItem="jhw-69-tGe" firstAttribute="bottom" secondItem="Xpb-Dz-Chr" secondAttribute="bottom" id="6yW-m1-gZ9"/>
                                     <constraint firstItem="YkV-Bf-bef" firstAttribute="leading" secondItem="Xpb-Dz-Chr" secondAttribute="leading" id="8Al-IP-cgl"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="width" secondItem="YkV-Bf-bef" secondAttribute="width" id="Aoi-fS-KiX"/>
                                     <constraint firstItem="Qr8-7O-BPw" firstAttribute="top" secondItem="jhw-69-tGe" secondAttribute="bottom" id="BxK-x7-si0"/>
-                                    <constraint firstItem="YkV-Bf-bef" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="top" id="Cn8-RZ-5ro"/>
+                                    <constraint firstItem="YkV-Bf-bef" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="top" constant="60" id="Cn8-RZ-5ro"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="top" secondItem="jem-jz-msI" secondAttribute="top" id="EA8-cM-4co"/>
                                     <constraint firstItem="kRQ-gz-2LJ" firstAttribute="centerX" secondItem="YkV-Bf-bef" secondAttribute="centerX" id="Hkt-zY-CaI">
                                         <variation key="heightClass=compact" constant="0.0"/>
                                     </constraint>
+                                    <constraint firstItem="YkV-Bf-bef" firstAttribute="top" secondItem="kRQ-gz-2LJ" secondAttribute="bottom" id="Mz4-i1-uat"/>
                                     <constraint firstItem="YkV-Bf-bef" firstAttribute="leading" secondItem="Qr8-7O-BPw" secondAttribute="leading" id="O9R-x7-t8i"/>
                                     <constraint firstItem="YkV-Bf-bef" firstAttribute="bottom" secondItem="Qr8-7O-BPw" secondAttribute="bottom" id="PW1-up-or5"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="leading" secondItem="YkV-Bf-bef" secondAttribute="trailing" id="SuV-fv-mwY"/>
@@ -224,8 +226,11 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="Cn8-RZ-5ro"/>
+                                        <exclude reference="Mz4-i1-uat"/>
                                         <exclude reference="mJz-ZY-fUY"/>
                                         <exclude reference="rzc-WR-ymW"/>
+                                        <exclude reference="W6o-pf-FLO"/>
                                         <exclude reference="6yW-m1-gZ9"/>
                                         <exclude reference="aKD-XB-Mxf"/>
                                     </mask>

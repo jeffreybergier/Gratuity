@@ -34,7 +34,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var tipAmountsArray: [NSNumber] = []
     private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
     private var tipPercentageTextLabelAttributes = [NSString(): NSObject()]
-    private var userIsDraggingBillAmountTableView: Bool = false
+    //private var userIsDraggingBillAmountTableView: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +86,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //prepare lower gradient view so its upside down
         self.billAmountLowerGradientView.isUpsideDown = true
         
+        //temp timer to find when things are dragging
+        let timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "draggingTimer:", userInfo: nil, repeats: true)
+        
         //check screensize and set text side adjustment
         self.textSizeAdjustment = self.checkScreenHeightForTextSizeAdjuster()
     }
@@ -100,6 +103,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         super.viewDidAppear(animated)
         
         self.billAmountTableView.selectRowAtIndexPath(NSIndexPath(forRow: 19, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+    }
+    
+    func draggingTimer(timer: NSTimer) {
+        println("BillTableView is dragging: \(self.billAmountTableView.dragging)")
+        println("TipTableView is dragging: \(self.tipAmountTableView.dragging)")
     }
     
     private func indexPathInCenterOfTable(tableView: UITableView) -> NSIndexPath {
@@ -189,7 +197,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             let tableView = scrollView as UITableView
             switch tableView.tag {
             case BILLAMOUNTTAG:
-                self.userIsDraggingBillAmountTableView = false
                 tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             default:
                 tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -202,18 +209,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         switch tableView.tag {
         case BILLAMOUNTTAG:
             tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-            self.userIsDraggingBillAmountTableView = false
         default:
             tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-        }
-    }
-    
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        switch scrollView.tag {
-        case BILLAMOUNTTAG:
-            self.userIsDraggingBillAmountTableView = true
-        default:
-            println(self.userIsDraggingBillAmountTableView)
         }
     }
     
@@ -225,11 +222,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
             self.updateBillAmountText()
         default:
-            if self.userIsDraggingBillAmountTableView == false {
+            //if self.billAmountTableView.dragging == false {
                 let indexPath = self.indexPathInCenterOfTable(tableView)
                 tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
                 self.updateTipAmountText()
-            }
+            //}
         }
     }
     

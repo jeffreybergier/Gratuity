@@ -21,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
+		73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableView.swift; sourceTree = "<group>"; };
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
 		737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousColorSelector.swift; sourceTree = "<group>"; };
 		737233DE19E8F19C0072EDB4 /* GratuitousAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimations.swift; sourceTree = "<group>"; };
@@ -74,6 +75,7 @@
 				734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */,
 				7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */,
 				7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */,
+				73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */,
 				736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */,
 				737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */,
 				737233DE19E8F19C0072EDB4 /* GratuitousAnimations.swift */,
