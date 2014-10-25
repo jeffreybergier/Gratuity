@@ -13,6 +13,7 @@ class GratuitousTableViewCell: UITableViewCell {
     @IBOutlet weak private var dollarTextLabel: UILabel!
     
     private var labelTextAttributes = [NSString(): NSObject()]
+    private let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var textSizeAdjustment: NSNumber = 1.0 {
         didSet {
             if (self.labelTextAttributes["NSFont"] != nil) {
@@ -24,7 +25,15 @@ class GratuitousTableViewCell: UITableViewCell {
     }
     var billAmount: NSNumber = Double(0) {
         didSet {
-            self.dollarTextLabel.attributedText = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes)
+            let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(self.billAmount)
+            var stringForLabel = NSAttributedString()
+            if let currencyFormattedString = currencyFormattedString {
+                stringForLabel = NSAttributedString(string: currencyFormattedString, attributes: self.labelTextAttributes)
+            } else {
+                println("GratuitousTableViewCell: Failure to unwrap optional currentFormattedString. You should never see this warning.")
+                stringForLabel = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes)
+            }
+            self.dollarTextLabel.attributedText = stringForLabel
         }
     }
     

@@ -12,27 +12,57 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private weak var tipViewController: TipViewController?
+    let currencyFormatter = NSNumberFormatter()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        //prepare NSUserDefaults
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if userDefaults.objectForKey("billIndexPathRow") == nil {
-            userDefaults.setObject(19, forKey: "billIndexPathRow")
-        }
+        //prepare currency formatter and nsuserdefaults
+        self.prepareUserDefaults()
+        self.prepareCurrencyFormatter()
                 
         //initialize the window and the view controller
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
-        let tipViewController = storyboard.instantiateInitialViewController() as TipViewController
+        self.tipViewController = storyboard.instantiateInitialViewController() as? TipViewController
         
         //configure the window
-        self.window?.backgroundColor = UIColor.whiteColor();
-        self.window?.rootViewController = tipViewController
+        if let tipViewController = self.tipViewController {
+            self.window?.rootViewController = tipViewController
+        } else {
+            println("AppDelegate: TipViewController failed optional unwrapping. You should never receive this warning.")
+        }
+        self.window?.backgroundColor = GratuitousColorSelector.darkBackgroundColor();
         self.window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    func prepareCurrencyFormatter() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChange", name: NSCurrentLocaleDidChangeNotification, object: nil)
+        
+        self.currencyFormatter.locale = NSLocale.currentLocale()
+        self.currencyFormatter.maximumFractionDigits = 0
+        self.currencyFormatter.minimumFractionDigits = 0
+        self.currencyFormatter.alwaysShowsDecimalSeparator = false
+        self.currencyFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+    }
+    
+    func localeDidChange() {
+        let tempVariable = NSLocale.currentLocale()
+        self.currencyFormatter.locale = NSLocale.currentLocale()
+        
+        self.tipViewController?.localeDidChange()
+    }
+    
+    func prepareUserDefaults() {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if userDefaults.integerForKey("billIndexPathRow") == 0 {
+            userDefaults.setInteger(19, forKey: "billIndexPathRow")
+            userDefaults.setInteger(0, forKey: "tipIndexPathRow")
+            userDefaults.synchronize()
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -55,6 +85,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
 
