@@ -13,7 +13,15 @@ class GratuitousTableViewCell: UITableViewCell {
     @IBOutlet weak private var dollarTextLabel: UILabel!
     
     private var labelTextAttributes = [NSString(): NSObject()]
-    private var selectedLabelTextAttributes = [NSString(): NSObject()]
+    var textSizeAdjustment: NSNumber = 1.0 {
+        didSet {
+            if (self.labelTextAttributes["NSFont"] != nil) {
+                let originalFont = self.labelTextAttributes["NSFont"] as UIFont
+                let updatedFont = originalFont.fontWithSize(originalFont.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
+                self.labelTextAttributes["NSFont"] = updatedFont
+            }
+        }
+    }
     var billAmount: NSNumber = Double(0) {
         didSet {
             self.dollarTextLabel.attributedText = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes)
@@ -52,42 +60,9 @@ class GratuitousTableViewCell: UITableViewCell {
         ]
         self.labelTextAttributes = attributes
         
-        //configure the selected text attributes
-        let selectedTextColor = GratuitousColorSelector.darkTextColor()
-        let selectedAttributes = [
-            NSForegroundColorAttributeName : selectedTextColor,
-            NSFontAttributeName : font
-        ]
-        self.selectedLabelTextAttributes = selectedAttributes
-        
         //configure the label to be deselected
         let attributedString = NSAttributedString(string: text!, attributes: self.labelTextAttributes)
         self.dollarTextLabel.attributedText = attributedString
     }
-    /*
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        if (selected) {
-            if animated {
-                UIView.animateWithDuration(GratuitousAnimations.GratuitousAnimationDuration(), animations: { () -> Void in
-                    self.contentView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
-                    self.dollarTextLabel.attributedText = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.selectedLabelTextAttributes) })
-            } else {
-                self.contentView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
-                self.dollarTextLabel.attributedText = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.selectedLabelTextAttributes)
-            }
-            
-        } else {
-            if animated {
-                UIView.animateWithDuration(GratuitousAnimations.GratuitousAnimationDuration(), animations: { () -> Void in
-                    self.contentView.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
-                    self.dollarTextLabel.attributedText = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes) })
-            } else {
-                self.contentView.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
-                self.dollarTextLabel.attributedText = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes)
-            }
-            
-        }
-    }*/
     
 }

@@ -8,31 +8,50 @@
 
 import UIKit
 
-class GratuitousTableView: UITableView {
+class GratuitousTableView: UITableView, UITableViewDelegate {
     
-    var userIsScrolling: Bool = false {
-        didSet {
-            println("GratuitousTableView didSet userIsScrolling: \(self.userIsScrolling)")
-
-        }
+    private let MAXBILLAMOUNT = 500
+    private let MAXTIPAMOUNT = 250
+    private let BILLAMOUNTTAG = 0
+    private let TIPAMOUNTTAG = 1
+    private let IDEALTIPPERCENTAGE = 0.2
+    
+    var isScrolling = false
+    var isUserInitiated = false
+    
+    override init() {
+        super.init()
     }
     
-    var dragging: Bool {
-        didSet {
-            
-        }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.userIsScrolling = true
+    override init(frame: CGRect, style: UITableViewStyle) {
+        super.init(frame: frame, style: style)
     }
     
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
-        self.userIsScrolling = false
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-        self.userIsScrolling = false
+    func scrollingState() -> (isScrolling: Bool, isUserInitiated: Bool) {
+        var scrollingState = (isScrolling: false, isUserInitiated: false)
+        
+        scrollingState.isScrolling = self.isScrolling
+        scrollingState.isUserInitiated = self.isUserInitiated
+        
+        return scrollingState
     }
-
+    
+    func configureTableViewWithCellType(cellClass: String, AndCellIdentifier cellIdentifier: String, AndTag tag: Int, AndViewControllerDelegate delegate: protocol <UITableViewDataSource, UITableViewDelegate>) {
+        self.delegate = delegate
+        self.dataSource = delegate
+        self.tag = tag
+        self.estimatedRowHeight = 76.0
+        self.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+        
+        self.registerNib(UINib(nibName: cellClass, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+    }
 }

@@ -12,29 +12,33 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBOutlet weak private var tipPercentageTextLabel: UILabel!
     @IBOutlet weak private var totalAmountTextLabel: UILabel!
-    @IBOutlet weak private var billAmountTableView: UITableView!
-    @IBOutlet weak private var tipAmountTableView: UITableView!
+    @IBOutlet weak private var billAmountTableView: GratuitousTableView!
+    @IBOutlet weak private var tipAmountTableView: GratuitousTableView!
     @IBOutlet weak private var tipPercentageTextLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak private var totalAmountTextLabelBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak private var billAmountTableViewTitleTextLabel: UILabel!
-    //@IBOutlet weak private var billAmountTableViewTitleTextLabelView: UIView!
+    @IBOutlet weak private var billAmountTableViewTitleTextLabelView: UIView!
     @IBOutlet weak private var tipAmountTableViewTitleTextLabel: UILabel!
     @IBOutlet weak private var tipAmountTableViewTitleTextLabelView: UIView!
     @IBOutlet weak var billAmountSelectedSurroundView: UIView!
     @IBOutlet weak var billAmountLowerGradientView: GratuitousGradientView!
+    @IBOutlet weak var selectedTableViewCellOutlineViewHeightConstraint: NSLayoutConstraint!
     
     private let MAXBILLAMOUNT = 500
     private let MAXTIPAMOUNT = 250
     private let BILLAMOUNTTAG = 0
     private let TIPAMOUNTTAG = 1
     private let IDEALTIPPERCENTAGE = 0.2
+    private let SMALLPHONECELLHEIGHT = CGFloat(50.0)
+    private let TALLPHONECELLHEIGHT = CGFloat(60.0)
+    private let MEDIUMPHONECELLHEIGHT = CGFloat(70.0)
+    private let LARGEPHONECELLHEIGHT = CGFloat(74.0)
     
     private var textSizeAdjustment: NSNumber = NSNumber(double: 0.0)
     private var billAmountsArray: [NSNumber] = []
     private var tipAmountsArray: [NSNumber] = []
     private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
     private var tipPercentageTextLabelAttributes = [NSString(): NSObject()]
-    //private var userIsDraggingBillAmountTableView: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,33 +53,24 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
         
         //prepare the tableviews
-        self.billAmountTableView.delegate = self
-        self.billAmountTableView.dataSource = self
-        self.billAmountTableView.tag = BILLAMOUNTTAG
-        self.billAmountTableView.estimatedRowHeight = 76.0
-        self.billAmountTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        let tableViewCellClass:String! = NSStringFromClass(GratuitousTableViewCell).componentsSeparatedByString(".").last
-        let billTableViewCellString = tableViewCellClass.stringByAppendingString("Bill")
-        self.billAmountTableView.registerNib(UINib(nibName: tableViewCellClass, bundle: nil), forCellReuseIdentifier: billTableViewCellString)
-        
-        self.tipAmountTableView.delegate = self
-        self.tipAmountTableView.dataSource = self
-        self.tipAmountTableView.tag = TIPAMOUNTTAG
-        self.tipAmountTableView.estimatedRowHeight = 76.0
-        self.tipAmountTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        let tipTableViewCellString = tableViewCellClass.stringByAppendingString("Tip")
-        self.tipAmountTableView.registerNib(UINib(nibName: tableViewCellClass, bundle: nil), forCellReuseIdentifier: tipTableViewCellString)
+        if let tableViewCellClass = NSStringFromClass(GratuitousTableViewCell).componentsSeparatedByString(".").last {
+            let billTableViewCellString = tableViewCellClass.stringByAppendingString("Bill")
+            self.billAmountTableView.configureTableViewWithCellType(tableViewCellClass, AndCellIdentifier: billTableViewCellString, AndTag: self.BILLAMOUNTTAG, AndViewControllerDelegate: self)
+            
+            let tipTableViewCellString = tableViewCellClass.stringByAppendingString("Tip")
+            self.tipAmountTableView.configureTableViewWithCellType(tableViewCellClass, AndCellIdentifier: tipTableViewCellString, AndTag: self.TIPAMOUNTTAG, AndViewControllerDelegate: self)
+        } else {
+            println("TipViewController: You should never see this. If you see this the tables were not configured correctly because an optional unwrap failed")
+        }
         
         //configure color of view
         self.view.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
-        self.billAmountTableView.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
-        self.tipAmountTableView.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
         self.tipPercentageTextLabel.textColor = GratuitousColorSelector.lightTextColor()
         self.totalAmountTextLabel.textColor = GratuitousColorSelector.lightTextColor()
         self.tipAmountTableViewTitleTextLabel.textColor = GratuitousColorSelector.darkTextColor()
         self.billAmountTableViewTitleTextLabel.textColor = GratuitousColorSelector.darkTextColor()
         self.tipAmountTableViewTitleTextLabelView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
-        //self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
+        self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
         
         //prepare the cell select surrounds
         self.billAmountSelectedSurroundView.backgroundColor = UIColor.clearColor()
@@ -87,7 +82,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.billAmountLowerGradientView.isUpsideDown = true
         
         //temp timer to find when things are dragging
-        let timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "draggingTimer:", userInfo: nil, repeats: true)
+        let timer = NSTimer.scheduledTimerWithTimeInterval(0.35, target: self, selector: "draggingTimer:", userInfo: nil, repeats: true)
         
         //check screensize and set text side adjustment
         self.textSizeAdjustment = self.checkScreenHeightForTextSizeAdjuster()
@@ -102,12 +97,12 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.billAmountTableView.selectRowAtIndexPath(NSIndexPath(forRow: 19, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+        let indexPath = NSIndexPath(forRow: 19, inSection: 0)
+        self.billAmountTableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
     }
     
     func draggingTimer(timer: NSTimer) {
-        println("BillTableView is dragging: \(self.billAmountTableView.dragging)")
-        println("TipTableView is dragging: \(self.tipAmountTableView.dragging)")
+        //println(self.billAmountTableView.scrollingState())
     }
     
     private func indexPathInCenterOfTable(tableView: UITableView) -> NSIndexPath {
@@ -138,7 +133,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
         
         let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue-1, inSection: 0)
-        self.tipAmountTableView.selectRowAtIndexPath(tipIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+        if !self.tipAmountTableView.scrollingState().isScrolling {
+            self.tipAmountTableView.selectRowAtIndexPath(tipIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+        }
         
         let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
         let totalAmountAttributedString = NSAttributedString(string: NSString(format: "$%.0f", totalAmount), attributes: self.totalAmountTextLabelAttributes)
@@ -170,22 +167,37 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
     }
     
+    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+        let timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "didRotateTimer:", userInfo: nil, repeats: false)
+    }
+    
+    func didRotateTimer(timer: NSTimer) {
+        timer.invalidate()
+        
+        let selectedBillAmountIndexPath = self.billAmountTableView.indexPathForSelectedRow()
+        let selectedTipAmountIndexPath = self.tipAmountTableView.indexPathForSelectedRow()
+        
+        if let indexPath = selectedBillAmountIndexPath {
+            self.billAmountTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+        }
+        
+        if let indexPath = selectedTipAmountIndexPath {
+            self.tipAmountTableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+        }
+    }
+    
+    
+    @IBAction func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
+        self.billAmountTableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Top)
+    }
+    
+    @IBAction func didTapTipAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
+        //self.tipAmountTableView.isScrolling = true
+        self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+    }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch tableView.tag {
         case BILLAMOUNTTAG:
-//            var animated = false
-//            let middleIndexPath = self.indexPathInCenterOfTable(tableView)
-//            if indexPath.row > middleIndexPath.row {
-//                if (indexPath.row - middleIndexPath.row) > 0 {
-//                    self.userIsDraggingBillAmountTableView = true
-//                    animated = true
-//                }
-//            } else {
-//                if (middleIndexPath.row - indexPath.row) > 0 {
-//                    self.userIsDraggingBillAmountTableView = true
-//                    animated = true
-//                }
-//            }
             tableView.selectRowAtIndexPath(indexPath, animated: true /*animated*/, scrollPosition: UITableViewScrollPosition.Middle)
         default:
             tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
@@ -194,7 +206,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
-            let tableView = scrollView as UITableView
+            let tableView = scrollView as GratuitousTableView
+            
+            tableView.isScrolling = false
+            tableView.isUserInitiated = false
+            
             switch tableView.tag {
             case BILLAMOUNTTAG:
                 tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -205,7 +221,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        let tableView = scrollView as UITableView
+        let tableView = scrollView as GratuitousTableView
+        
+        tableView.isScrolling = false
+        tableView.isUserInitiated = false
+        
         switch tableView.tag {
         case BILLAMOUNTTAG:
             tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -214,8 +234,17 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        let tableView = scrollView as GratuitousTableView
+        tableView.isScrolling = true
+        tableView.isUserInitiated = true
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let tableView = scrollView as UITableView
+        let tableView = scrollView as GratuitousTableView
+        
+        tableView.isUserInitiated = false
+        
         switch tableView.tag {
         case BILLAMOUNTTAG:
             let indexPath = self.indexPathInCenterOfTable(tableView)
@@ -231,32 +260,52 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var count = 0
         switch tableView.tag {
         case BILLAMOUNTTAG:
-            return self.billAmountsArray.count
+            count = self.billAmountsArray.count
         default:
-            return self.tipAmountsArray.count
+            count = self.tipAmountsArray.count
         }
+        return count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let tableViewCellClass:String! = NSStringFromClass(GratuitousTableViewCell).componentsSeparatedByString(".").last
-        switch tableView.tag {
-        case BILLAMOUNTTAG:
-            let billTableViewCellString = tableViewCellClass.stringByAppendingString("Bill")
-            let cell = tableView.dequeueReusableCellWithIdentifier(billTableViewCellString) as GratuitousTableViewCell
-            cell.billAmount = self.billAmountsArray[indexPath.row]
-            return cell
-        default:
-            let tipTableViewCellString = tableViewCellClass.stringByAppendingString("Tip")
-            let cell = tableView.dequeueReusableCellWithIdentifier(tipTableViewCellString) as GratuitousTableViewCell
-            cell.billAmount = self.tipAmountsArray[indexPath.row]
-            return cell
+        if let tableViewCellClass = NSStringFromClass(GratuitousTableViewCell).componentsSeparatedByString(".").last {
+            switch tableView.tag {
+            case BILLAMOUNTTAG:
+                let billTableViewCellString = tableViewCellClass.stringByAppendingString("Bill")
+                let cell = tableView.dequeueReusableCellWithIdentifier(billTableViewCellString) as GratuitousTableViewCell
+                if cell.textSizeAdjustment.doubleValue == 1.0 {
+                    cell.textSizeAdjustment = self.textSizeAdjustment
+                }
+                cell.billAmount = self.billAmountsArray[indexPath.row]
+                return cell
+            default:
+                let tipTableViewCellString = tableViewCellClass.stringByAppendingString("Tip")
+                let cell = tableView.dequeueReusableCellWithIdentifier(tipTableViewCellString) as GratuitousTableViewCell
+                if cell.textSizeAdjustment.doubleValue == 1.0 {
+                    cell.textSizeAdjustment = self.textSizeAdjustment
+                }
+                cell.billAmount = self.tipAmountsArray[indexPath.row]
+                return cell
+            }
+        } else {
+            println("TipViewController: This should never print. A new cell blank cell was created for no reason because of an optional unwrap failing")
+            return UITableViewCell()
         }
     }
-    
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 76.0
+        var rowHeight = CGFloat(self.MEDIUMPHONECELLHEIGHT)
+        
+        if self.textSizeAdjustment.doubleValue < 0.8 {
+            rowHeight = self.SMALLPHONECELLHEIGHT
+        } else if self.textSizeAdjustment.doubleValue < 1.0 {
+            rowHeight = self.TALLPHONECELLHEIGHT
+        }
+        
+        return rowHeight
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -278,36 +327,44 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             if UIScreen.mainScreen().bounds.size.height > 735 {
                 self.tipPercentageTextLabelTopConstraint.constant = -25.0
                 self.totalAmountTextLabelBottomConstraint.constant = -5.0
+                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.LARGEPHONECELLHEIGHT
                 textSizeAdjustment = Double(1.1)
             } else if UIScreen.mainScreen().bounds.size.height > 666 {
                 self.tipPercentageTextLabelTopConstraint.constant = -20.0
                 self.totalAmountTextLabelBottomConstraint.constant = -10.0
+                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.MEDIUMPHONECELLHEIGHT
                 textSizeAdjustment = Double(1.0)
             } else if UIScreen.mainScreen().bounds.size.height > 567 {
                 self.tipPercentageTextLabelTopConstraint.constant = -10.0
                 self.totalAmountTextLabelBottomConstraint.constant = -10.0
+                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.TALLPHONECELLHEIGHT
                 textSizeAdjustment = Double(0.85)
             } else if UIScreen.mainScreen().bounds.size.height > 479 {
                 self.tipPercentageTextLabelTopConstraint.constant = -15.0
                 self.totalAmountTextLabelBottomConstraint.constant = -12.0
+                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.SMALLPHONECELLHEIGHT
                 textSizeAdjustment = Double(0.76)
             }
         } else {
             if UIScreen.mainScreen().bounds.size.width > 735 {
                 self.tipPercentageTextLabelTopConstraint.constant = -25.0
                 self.totalAmountTextLabelBottomConstraint.constant = -5.0
+                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.LARGEPHONECELLHEIGHT
                 textSizeAdjustment = Double(1.1)
             } else if UIScreen.mainScreen().bounds.size.width > 666 {
                 self.tipPercentageTextLabelTopConstraint.constant = -20.0
                 self.totalAmountTextLabelBottomConstraint.constant = -10.0
+                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.MEDIUMPHONECELLHEIGHT
                 textSizeAdjustment = Double(1.0)
             } else if UIScreen.mainScreen().bounds.size.width > 567 {
                 self.tipPercentageTextLabelTopConstraint.constant = -10.0
                 self.totalAmountTextLabelBottomConstraint.constant = -10.0
+                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.TALLPHONECELLHEIGHT
                 textSizeAdjustment = Double(0.85)
             } else if UIScreen.mainScreen().bounds.size.width > 479 {
                 self.tipPercentageTextLabelTopConstraint.constant = -15.0
                 self.totalAmountTextLabelBottomConstraint.constant = -12.0
+                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.SMALLPHONECELLHEIGHT
                 textSizeAdjustment = Double(0.76)
             }
         }

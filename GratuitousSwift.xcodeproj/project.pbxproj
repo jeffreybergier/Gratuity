@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7335A18F19FB04DA00BE08E2 /* GratuitousTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */; };
 		734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
 		737233DD19E8B9B70072EDB4 /* GratuitousColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */; };
 		737233DF19E8F19C0072EDB4 /* GratuitousAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DE19E8F19C0072EDB4 /* GratuitousAnimations.swift */; };
@@ -195,6 +196,7 @@
 			files = (
 				7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */,
 				7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */,
+				7335A18F19FB04DA00BE08E2 /* GratuitousTableView.swift in Sources */,
 				737233DD19E8B9B70072EDB4 /* GratuitousColorSelector.swift in Sources */,
 				73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */,
 				7382510719E60EED00CD2B28 /* AppDelegate.swift in Sources */,

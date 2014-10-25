@@ -20,7 +20,7 @@ class GratuitousColorSelector: NSObject {
     }
     
     class func lightTextColor() -> UIColor {
-        return UIColor(red: 200.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        return UIColor(red: 150.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         //return self.lightBackgroundColor()
     }
     
