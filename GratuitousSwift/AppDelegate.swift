@@ -15,6 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //prepare NSUserDefaults
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if userDefaults.objectForKey("billIndexPathRow") == nil {
+            userDefaults.setObject(19, forKey: "billIndexPathRow")
+        }
                 
         //initialize the window and the view controller
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)

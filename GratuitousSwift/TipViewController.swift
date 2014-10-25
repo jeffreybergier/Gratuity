@@ -121,58 +121,67 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     private func updateBillAmountText() {
         let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView)
-        let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as GratuitousTableViewCell
-        let billAmount = billCell.billAmount
-        
-        let tipAmount: NSNumber = billAmount.doubleValue * self.IDEALTIPPERCENTAGE
-        let tipAmountRoundedString = NSString(format: "%.0f", tipAmount.doubleValue)
-        var tipAmountRoundedNumber = NSNumber(double: tipAmountRoundedString.doubleValue)
-        
-        if tipAmountRoundedNumber.integerValue < 1 {
-            tipAmountRoundedNumber = Double(1.0)
+        if let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell {
+            let billAmount = billCell.billAmount
+            let tipAmount: NSNumber = billAmount.doubleValue * self.IDEALTIPPERCENTAGE
+            let tipAmountRoundedString = NSString(format: "%.0f", tipAmount.doubleValue)
+            var tipAmountRoundedNumber = NSNumber(double: tipAmountRoundedString.doubleValue)
+            
+            if tipAmountRoundedNumber.integerValue < 1 {
+                tipAmountRoundedNumber = Double(1.0)
+            }
+            
+            let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue-1, inSection: 0)
+            if !self.tipAmountTableView.scrollingState().isScrolling {
+                self.tipAmountTableView.selectRowAtIndexPath(tipIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            }
+            
+            let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
+            let totalAmountAttributedString = NSAttributedString(string: NSString(format: "$%.0f", totalAmount), attributes: self.totalAmountTextLabelAttributes)
+            let tipPercentageAttributedString = NSAttributedString(string: NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100), attributes: self.tipPercentageTextLabelAttributes)
+            self.totalAmountTextLabel.attributedText = totalAmountAttributedString
+            self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
         }
-        
-        let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue-1, inSection: 0)
-        if !self.tipAmountTableView.scrollingState().isScrolling {
-            self.tipAmountTableView.selectRowAtIndexPath(tipIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
-        }
-        
-        let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
-        let totalAmountAttributedString = NSAttributedString(string: NSString(format: "$%.0f", totalAmount), attributes: self.totalAmountTextLabelAttributes)
-        let tipPercentageAttributedString = NSAttributedString(string: NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100), attributes: self.tipPercentageTextLabelAttributes)
-        self.totalAmountTextLabel.attributedText = totalAmountAttributedString
-        self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
     }
     
     private func updateTipAmountText() {
         let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView)
-        let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as GratuitousTableViewCell
-        let billAmount = billCell.billAmount
-        
-        let tipAmountIndexPath = self.indexPathInCenterOfTable(self.tipAmountTableView)
-        let tipCell = self.tipAmountTableView.cellForRowAtIndexPath(tipAmountIndexPath) as GratuitousTableViewCell
-        let tipAmount = tipCell.billAmount
-        
-        let tipAmountRoundedString = NSString(format: "%.0f", tipAmount.doubleValue)
-        var tipAmountRoundedNumber = NSNumber(double: tipAmountRoundedString.doubleValue)
-        
-        if tipAmountRoundedNumber.integerValue < 1 {
-            tipAmountRoundedNumber = Double(1.0)
+        if let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell {
+            let billAmount = billCell.billAmount
+            
+            let tipAmountIndexPath = self.indexPathInCenterOfTable(self.tipAmountTableView)
+            if let tipCell = self.tipAmountTableView.cellForRowAtIndexPath(tipAmountIndexPath) as? GratuitousTableViewCell {
+                let tipAmount = tipCell.billAmount
+                
+                let tipAmountRoundedString = NSString(format: "%.0f", tipAmount.doubleValue)
+                var tipAmountRoundedNumber = NSNumber(double: tipAmountRoundedString.doubleValue)
+                
+                if tipAmountRoundedNumber.integerValue < 1 {
+                    tipAmountRoundedNumber = Double(1.0)
+                }
+                
+                let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
+                let totalAmountAttributedString = NSAttributedString(string: NSString(format: "$%.0f", totalAmount), attributes: self.totalAmountTextLabelAttributes)
+                let tipPercentageAttributedString = NSAttributedString(string: NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100), attributes: self.tipPercentageTextLabelAttributes)
+                self.totalAmountTextLabel.attributedText = totalAmountAttributedString
+                self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
+            }
         }
-        
-        let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
-        let totalAmountAttributedString = NSAttributedString(string: NSString(format: "$%.0f", totalAmount), attributes: self.totalAmountTextLabelAttributes)
-        let tipPercentageAttributedString = NSAttributedString(string: NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100), attributes: self.tipPercentageTextLabelAttributes)
-        self.totalAmountTextLabel.attributedText = totalAmountAttributedString
-        self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
     }
     
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
         let timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "didRotateTimer:", userInfo: nil, repeats: false)
     }
     
-    func didRotateTimer(timer: NSTimer) {
-        timer.invalidate()
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        //traitcollection did change isn't called on ipads because their size class never changes. This works around that issue.
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            self.didRotateTimer(nil)
+        }
+    }
+    
+    func didRotateTimer(timer: NSTimer?) {
+        timer?.invalidate()
         
         let selectedBillAmountIndexPath = self.billAmountTableView.indexPathForSelectedRow()
         let selectedTipAmountIndexPath = self.tipAmountTableView.indexPathForSelectedRow()
@@ -198,9 +207,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch tableView.tag {
         case BILLAMOUNTTAG:
-            tableView.selectRowAtIndexPath(indexPath, animated: true /*animated*/, scrollPosition: UITableViewScrollPosition.Middle)
+            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
         default:
-            tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
         }
     }
     
