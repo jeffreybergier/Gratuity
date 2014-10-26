@@ -95,25 +95,20 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         //check screensize and set text side adjustment
         self.textSizeAdjustment = self.checkScreenHeightForTextSizeAdjuster()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+        
+        //was previously in viewWillAppear
         self.prepareTotalAmountTextLabel()
         self.prepareTipPercentageTextLabel()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         
+        //was previously in viewDidAppear
         UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
             self.labelContainerView.alpha = 1.0
             self.tableContainerView.alpha = 1.0
-        }, completion: nil)
+            }, completion: nil)
         
-        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.001, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
         
-        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.001, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
     
     func scrollBillTableViewAtLaunch(timer: NSTimer?) {
@@ -130,6 +125,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
         //println("Scrolling BillTableView to Row: \(billIndexPath.row)")
         self.didEndDeceleratingBillTable = true
+        //have to do this ghetto two call method because just doing it once regularly caused things to not line up properly
         self.billAmountTableView.scrollToRowAtIndexPath(billIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         self.billAmountTableView.scrollToRowAtIndexPath(billIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
@@ -146,9 +142,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             self.tipTableCustomValueSet = true
             let tipIndexPathRow = self.userDefaults.integerForKey("tipIndexPathRow")
             tipIndexPath = NSIndexPath(forRow: tipIndexPathRow, inSection: 0)
-            //println("Scrolling TipTableView to Row: \(tipIndexPath.row)")
+            //have to do this ghetto two call method because just doing it once regularly caused things to not line up properly
             self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
             self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+            self.updateTipAmountText()
         }
     }
     
@@ -271,6 +268,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             //println("Writing BillIndexPathRow to Disk: \(self.indexPathInCenterOfTable(tableView).row)")
             self.userDefaults.setInteger(self.indexPathInCenterOfTable(tableView).row, forKey: "billIndexPathRow")
             self.userDefaults.setInteger(0, forKey: "tipIndexPathRow")
+            self.userDefaults.synchronize()
         }
     }
     
@@ -280,6 +278,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         } else {
             //println("Writing TipIndexPathRow to Disk: \(self.indexPathInCenterOfTable(tableView).row)")
             self.userDefaults.setInteger(self.indexPathInCenterOfTable(tableView).row, forKey: "tipIndexPathRow")
+            self.userDefaults.synchronize()
         }
     }
     
