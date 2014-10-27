@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7382510019E60EED00CD2B28"
-               BuildableName = "Tip.app"
+               BuildableName = "Gratuity.app"
                BlueprintName = "GratuitousSwift"
                ReferencedContainer = "container:GratuitousSwift.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7382510019E60EED00CD2B28"
-            BuildableName = "Tip.app"
+            BuildableName = "Gratuity.app"
             BlueprintName = "GratuitousSwift"
             ReferencedContainer = "container:GratuitousSwift.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7382510019E60EED00CD2B28"
-            BuildableName = "Tip.app"
+            BuildableName = "Gratuity.app"
             BlueprintName = "GratuitousSwift"
             ReferencedContainer = "container:GratuitousSwift.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7382510019E60EED00CD2B28"
-            BuildableName = "Tip.app"
+            BuildableName = "Gratuity.app"
             BlueprintName = "GratuitousSwift"
             ReferencedContainer = "container:GratuitousSwift.xcodeproj">
          </BuildableReference>
