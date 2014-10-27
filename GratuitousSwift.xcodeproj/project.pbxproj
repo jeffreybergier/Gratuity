@@ -17,7 +17,7 @@
 		7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512619E60F3900CD2B28 /* TipViewController.swift */; };
 		7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */; };
 		7382512D19E6473A00CD2B28 /* GratuitousTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */; };
-		73B9BFF119FC629100700608 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsViewController.swift */; };
+		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,7 +27,7 @@
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
 		737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousColorSelector.swift; sourceTree = "<group>"; };
 		737233DE19E8F19C0072EDB4 /* GratuitousAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimations.swift; sourceTree = "<group>"; };
-		7382510119E60EED00CD2B28 /* Gratuity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gratuity.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7382510119E60EED00CD2B28 /* GratuityB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuityB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7382510519E60EED00CD2B28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7382510619E60EED00CD2B28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7382510D19E60EED00CD2B28 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -39,7 +39,7 @@
 		7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GratuitousTableViewCell.xib; sourceTree = "<group>"; };
 		7382512E19E6475500CD2B28 /* TipTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipTableViewCell.swift; sourceTree = "<group>"; };
 		7382512F19E6475500CD2B28 /* TipTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipTableViewCell.xib; sourceTree = "<group>"; };
-		73B9BFF019FC629100700608 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 		7382510219E60EED00CD2B28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7382510119E60EED00CD2B28 /* Gratuity.app */,
+				7382510119E60EED00CD2B28 /* GratuityB.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,7 +75,7 @@
 			children = (
 				7382510619E60EED00CD2B28 /* AppDelegate.swift */,
 				7382512619E60F3900CD2B28 /* TipViewController.swift */,
-				73B9BFF019FC629100700608 /* SettingsViewController.swift */,
+				73B9BFF019FC629100700608 /* SettingsTableViewController.swift */,
 				734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */,
 				7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */,
 				7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */,
@@ -142,7 +142,7 @@
 			);
 			name = GratuitousSwift;
 			productName = GratuitousSwift;
-			productReference = 7382510119E60EED00CD2B28 /* Gratuity.app */;
+			productReference = 7382510119E60EED00CD2B28 /* GratuityB.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -204,7 +204,7 @@
 				73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */,
 				7382510719E60EED00CD2B28 /* AppDelegate.swift in Sources */,
 				737233DF19E8F19C0072EDB4 /* GratuitousAnimations.swift in Sources */,
-				73B9BFF119FC629100700608 /* SettingsViewController.swift in Sources */,
+				73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +309,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jeffrey Bergier (V78MM83472)";
 				INFOPLIST_FILE = GratuitousSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "Gratuityβ";
+				PRODUCT_NAME = GratuityB;
 				PROVISIONING_PROFILE = "260949e7-5426-4341-a95d-dd0a8e4b6b4f";
 			};
 			name = Debug;

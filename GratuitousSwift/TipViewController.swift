@@ -99,16 +99,21 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //was previously in viewWillAppear
         self.prepareTotalAmountTextLabel()
         self.prepareTipPercentageTextLabel()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        //was previously in viewDidAppear
+        //on first load we need to load the view to what is written on disk.
+        //also, for some reason, when the viewcontroller reappears after modal dismiss, it is not where I left, so we have to reload then as well.
         UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
             self.labelContainerView.alpha = 1.0
             self.tableContainerView.alpha = 1.0
             }, completion: nil)
         
-        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
         
-        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.09, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
     
     func scrollBillTableViewAtLaunch(timer: NSTimer?) {

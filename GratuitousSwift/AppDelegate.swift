@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println("AppDelegate: TipViewController failed optional unwrapping. You should never receive this warning.")
         }
         self.window?.backgroundColor = GratuitousColorSelector.darkBackgroundColor();
+        self.window?.tintColor = GratuitousColorSelector.lightTextColor()
         self.window?.makeKeyAndVisible()
         
         return true
