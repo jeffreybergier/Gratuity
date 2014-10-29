@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //crashlytics intializer
+        //Crashlytics.sharedInstance().debugMode = true
         Fabric.with([Crashlytics()])
         
         //prepare currency formatter and nsuserdefaults
@@ -83,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        Crashlytics.sharedInstance().crash()
+        //Crashlytics.sharedInstance().crash()
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
