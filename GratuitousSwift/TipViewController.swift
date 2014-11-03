@@ -31,7 +31,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let MAXTIPAMOUNT = 250
     private let BILLAMOUNTTAG = 0
     private let TIPAMOUNTTAG = 1
-    private let IDEALTIPPERCENTAGE = 0.2
     private let SMALLPHONECELLHEIGHT = CGFloat(50.0)
     private let TALLPHONECELLHEIGHT = CGFloat(60.0)
     private let MEDIUMPHONECELLHEIGHT = CGFloat(70.0)
@@ -47,10 +46,17 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var didEndDeceleratingBillTable = false
     private var didEndDeceleratingTipTable = false
     private var tipTableCustomValueSet = false
+    private var suggestedTipPercentage: Double = 0.0 {
+        didSet {
+            self.updateBillAmountText()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "suggestedTipUpdatedOnDisk:", name: "suggestedTipValueUpdated", object: nil)
         
         //prepare the arrays
         for i in 0..<self.MAXBILLAMOUNT {
@@ -106,7 +112,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         //on first load we need to load the view to what is written on disk.
         //also, for some reason, when the viewcontroller reappears after modal dismiss, it is not where I left, so we have to reload then as well.
-        UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+        UIView.animateWithDuration(GratuitousAnimations.duration(), delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
             self.labelContainerView.alpha = 1.0
             self.tableContainerView.alpha = 1.0
             }, completion: nil)
@@ -114,6 +120,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
         
         let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.09, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+    }
+    
+    func suggestedTipUpdatedOnDisk(notification: NSNotification?) {
+        let onDiskTipPercentage: NSNumber = self.userDefaults.doubleForKey("suggestedTipPercentage")
+        self.suggestedTipPercentage = onDiskTipPercentage.doubleValue
     }
     
     func scrollBillTableViewAtLaunch(timer: NSTimer?) {
@@ -125,6 +136,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if billUserDefaults == 0 {
             billIndexPath = NSIndexPath(forRow: 19, inSection: 0)
         } else {
+            self.suggestedTipPercentage = self.userDefaults.doubleForKey("suggestedTipPercentage")
             let billIndexPathRow = self.userDefaults.integerForKey("billIndexPathRow")
             billIndexPath = NSIndexPath(forRow: billIndexPathRow, inSection: 0)
         }
@@ -172,7 +184,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView)
         if let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell {
             let billAmount = billCell.billAmount
-            let tipAmount: NSNumber = billAmount.doubleValue * self.IDEALTIPPERCENTAGE
+            let tipAmount: NSNumber = billAmount.doubleValue * self.suggestedTipPercentage
             let tipAmountRoundedString = NSString(format: "%.0f", tipAmount.doubleValue)
             var tipAmountRoundedNumber = NSNumber(double: tipAmountRoundedString.doubleValue)
             
@@ -189,7 +201,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             
             let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
             var totalAmountAttributedString = NSAttributedString()
-            let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(NSNumber(double: totalAmount))
+            let currencyFormattedString = self.appDelegate.currencyFormattedString(NSNumber(double: totalAmount))
+            //let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(NSNumber(double: totalAmount))
             if let currencyFormattedString = currencyFormattedString {
                 totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
             } else {
@@ -221,7 +234,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
                 
                 var totalAmountAttributedString = NSAttributedString()
-                let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(NSNumber(double: totalAmount))
+                let currencyFormattedString = self.appDelegate.currencyFormattedString(NSNumber(double: totalAmount))
+                //let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(NSNumber(double: totalAmount))
                 if let currencyFormattedString = currencyFormattedString {
                     totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
                 } else {

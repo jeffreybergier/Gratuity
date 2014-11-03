@@ -25,7 +25,8 @@ class GratuitousTableViewCell: UITableViewCell {
     }
     var billAmount: NSNumber = Double(0) {
         didSet {
-            let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(self.billAmount)
+            let currencyFormattedString = self.appDelegate.currencyFormattedString(self.billAmount)
+            //let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(self.billAmount)
             var stringForLabel = NSAttributedString()
             if let currencyFormattedString = currencyFormattedString {
                 stringForLabel = NSAttributedString(string: currencyFormattedString, attributes: self.labelTextAttributes)

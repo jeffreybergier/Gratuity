@@ -10,7 +10,7 @@ import UIKit
 
 class GratuitousAnimations: NSObject {
     
-    class func GratuitousAnimationDuration() -> Double {
+    class func duration() -> Double {
         return 0.3
     }
    

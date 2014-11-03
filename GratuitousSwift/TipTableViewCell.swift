@@ -56,12 +56,12 @@ class TipTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if (selected) {
-            UIView.animateWithDuration(GratuitousAnimations.GratuitousAnimationDuration(), animations: { () -> Void in
+            UIView.animateWithDuration(GratuitousAnimations.duration(), animations: { () -> Void in
                 self.contentView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
                 self.tipAmountTextLabel.textColor = GratuitousColorSelector.darkTextColor()
             })
         } else {
-            UIView.animateWithDuration(GratuitousAnimations.GratuitousAnimationDuration(), animations: { () -> Void in
+            UIView.animateWithDuration(GratuitousAnimations.duration(), animations: { () -> Void in
                 self.contentView.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
                 self.tipAmountTextLabel.textColor = GratuitousColorSelector.lightTextColor()
             })
