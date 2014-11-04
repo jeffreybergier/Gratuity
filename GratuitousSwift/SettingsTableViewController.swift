@@ -13,8 +13,13 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var myPictureImageView: UIImageView!
     @IBOutlet private weak var suggestedTipPercentageSlider: UISlider!
     @IBOutlet private weak var suggestedTipPercentageLabel: UILabel!
+    @IBOutlet private weak var headerLabelTipPercentage: UILabel!
+    @IBOutlet private weak var headerLabelCurencySymbol: UILabel!
+    @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel!
     
-    private var userDefaults = NSUserDefaults.standardUserDefaults()
+    private var headerLabelsArray: [UILabel] = []
+    //private var headerLabelTextAttributes = [NSString() : NSObject()]
+    private let userDefaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +31,8 @@ class SettingsTableViewController: UITableViewController {
         self.tableView.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
         
         //set the colors for the navigation controller
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.barTintColor = GratuitousColorSelector.darkBackgroundColor()
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.BlackTranslucent
         
         //set the text color for the tip percentage
         self.suggestedTipPercentageLabel.textColor = GratuitousColorSelector.lightTextColor()
@@ -43,10 +48,34 @@ class SettingsTableViewController: UITableViewController {
         self.myPictureImageView.layer.borderWidth = 3.0
         self.myPictureImageView.clipsToBounds = true
         
+        //prepare the header text labels
+        self.prepareHeaderLabelsAndCells()
+        
         //lastly, read the defaults from disk and update the UI
         self.readUserDefaultsAndUpdateSlider(nil)
     }
     
+    private func prepareHeaderLabelsAndCells() {
+        
+        //prepare the headerlabels
+        self.headerLabelsArray = [self.headerLabelTipPercentage, self.headerLabelCurencySymbol, self.headerLabelAboutSaturdayApps]
+        for label in self.headerLabelsArray {
+            label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+            label.textColor = UIColor.blackColor()
+            label.superview?.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
+        }
+        
+        self.headerLabelTipPercentage.text = NSLocalizedString("Suggested Tip Percentage", comment: "this text is for a section header where the user can set the default tip percentage when they choose a new bill amount").uppercaseString
+        self.headerLabelCurencySymbol.text = NSLocalizedString("Currency Symbol", comment: "this text is for a section header where the user can override the currency symbol that will be shown in front of the currency amounts in the app").uppercaseString
+        self.headerLabelAboutSaturdayApps.text = NSLocalizedString("About SaturdayApps", comment: "This is a section header. It contains information about my company, saturday apps").uppercaseString
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
+        NSNotificationCenter.defaultCenter().postNotificationName("settingsTableViewControllerDidAppear", object: nil)
+    }
+
     func readUserDefaultsAndUpdateSlider(notification: NSNotification?) {
         let onDiskTipPercentage:NSNumber = self.userDefaults.doubleForKey("suggestedTipPercentage")
         self.suggestedTipPercentageLabel.text = NSString(format: "%.0f%%", onDiskTipPercentage.floatValue*100)
@@ -66,15 +95,14 @@ class SettingsTableViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().postNotificationName("suggestedTipValueUpdated", object: self)
     }
 
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        self.tableView.reloadData()
-    }
-
     @IBAction func didTapDoneButton(sender: UIButton) {
         if let presentingViewController = self.presentingViewController {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -91,5 +119,4 @@ class SettingsTableViewController: UITableViewController {
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-    
 }

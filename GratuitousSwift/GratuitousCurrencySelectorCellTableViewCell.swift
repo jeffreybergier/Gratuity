@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     private let CURRENCYSIGNDEFAULT = 0
@@ -29,7 +30,8 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "readUserDefaultsAndSetCheckmark:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "overrideCurrencySymbolUpdatedOnDisk:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "settingsTableViewControllerDidAppear:", name: "settingsTableViewControllerDidAppear", object: nil)
         
         if let textLabelDefault = self.textLabelDefault {
             self.setTextColorAndFontSize(textLabelDefault)
@@ -61,7 +63,15 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             self.cellIdentity = self.CURRENCYSIGNNONE
         }
         
-        self.readUserDefaultsAndSetCheckmark(nil)
+        self.readUserDefaultsAndSetCheckmarkWithTimer(false)
+    }
+    
+    func settingsTableViewControllerDidAppear(notification: NSNotification?) {
+        self.readUserDefaultsAndSetCheckmarkWithTimer(true)
+    }
+    
+    func overrideCurrencySymbolUpdatedOnDisk(notification: NSNotification?) {
+        self.readUserDefaultsAndSetCheckmarkWithTimer(true)
     }
     
     private func setTextColorAndFontSize(sender: UILabel) {
@@ -69,13 +79,16 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         sender.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     }
     
-    func readUserDefaultsAndSetCheckmark(notification: NSNotification?) {
+    private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {
         let onDiskCurrencySign: NSNumber = self.userDefaults.integerForKey("overrideCurrencySymbol")
         
         if self.cellIdentity == onDiskCurrencySign.integerValue {
             self.accessoryType = UITableViewCellAccessoryType.Checkmark
             self.layer.borderWidth = 2.0
             self.layer.borderColor = GratuitousColorSelector.lightBackgroundColor().CGColor
+            if timer {
+                let slowFadeOutTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "slowFadeOutOfBorderAroundCell:", userInfo: nil, repeats: false)
+            }
         } else {
             self.accessoryType = UITableViewCellAccessoryType.None
             self.layer.borderWidth = 0.0
@@ -84,14 +97,31 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         
         UIView.animateWithDuration(GratuitousAnimations.duration(),
             delay: 0.0,
-            usingSpringWithDamping:
-            1.0, initialSpringVelocity: 1.0,
+            usingSpringWithDamping: 1.0,
+            initialSpringVelocity: 1.0,
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
                 self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
             },
             completion: { finished in })
         
+    }
+    
+    func slowFadeOutOfBorderAroundCell(timer: NSTimer?) {
+        timer?.invalidate()
+        
+        //wow animations in Core Animation are so much harder than UIViewAnimations
+        let colorAnimation = CABasicAnimation(keyPath: "borderColor")
+        colorAnimation.fromValue = GratuitousColorSelector.lightBackgroundColor().CGColor
+        colorAnimation.toValue = GratuitousColorSelector.darkBackgroundColor().CGColor
+        self.layer.borderColor = GratuitousColorSelector.darkBackgroundColor().CGColor
+        
+        let animationGroup = CAAnimationGroup()
+        animationGroup.duration = 2.0
+        animationGroup.animations = [colorAnimation]
+        animationGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        self.layer.addAnimation(animationGroup, forKey: "borderColor")
     }
     
     private func saveUserDefaultToDisk() {
@@ -105,8 +135,8 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         super.touchesBegan(touches, withEvent: event)
         UIView.animateWithDuration(GratuitousAnimations.duration(),
             delay: 0.0,
-            usingSpringWithDamping:
-            1.0, initialSpringVelocity: 1.0,
+            usingSpringWithDamping: 1.0,
+            initialSpringVelocity: 1.0,
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
                 self.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
@@ -118,8 +148,8 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         super.touchesEnded(touches, withEvent: event)
         UIView.animateWithDuration(GratuitousAnimations.duration(),
             delay: 0.0,
-            usingSpringWithDamping:
-            1.0, initialSpringVelocity: 1.0,
+            usingSpringWithDamping: 1.0,
+            initialSpringVelocity: 1.0,
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
                 self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
@@ -132,8 +162,8 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         super.touchesCancelled(touches, withEvent: event)
         UIView.animateWithDuration(GratuitousAnimations.duration(),
             delay: 0.0,
-            usingSpringWithDamping:
-            1.0, initialSpringVelocity: 1.0,
+            usingSpringWithDamping: 1.0,
+            initialSpringVelocity: 1.0,
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
                 self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
@@ -148,8 +178,8 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         if selected {
             UIView.animateWithDuration(GratuitousAnimations.duration(),
                 delay: 0.0,
-                usingSpringWithDamping:
-                1.0, initialSpringVelocity: 1.0,
+                usingSpringWithDamping: 1.0,
+                initialSpringVelocity: 1.0,
                 options: UIViewAnimationOptions.BeginFromCurrentState,
                 animations: {
                     self.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
@@ -158,5 +188,9 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
                     self.saveUserDefaultToDisk()
             })
         }
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

@@ -547,5 +547,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         self.updateBillAmountText()
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }
 
