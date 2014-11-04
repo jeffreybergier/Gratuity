@@ -375,8 +375,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="Uhi-Dr-XsL"/>
                                                     <exclude reference="0C9-Cf-YZs"/>
+                                                    <exclude reference="Uhi-Dr-XsL"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -503,8 +503,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="gUK-oh-bN1"/>
                                                     <exclude reference="Eyb-FH-YlH"/>
+                                                    <exclude reference="gUK-oh-bN1"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

@@ -24,11 +24,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     @IBOutlet private weak var textLabelNone: UILabel?
     
     private var userDefaults = NSUserDefaults.standardUserDefaults()
-    private var cellIdentity:Int = 0 {
-        didSet {
-            println(NSString(format: "%p", self))
-        }
-    }
+    private var cellIdentity:Int = 0 
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -13,7 +13,8 @@ class GratuitousTableViewCell: UITableViewCell {
     @IBOutlet weak private var dollarTextLabel: UILabel!
     
     private var labelTextAttributes = [NSString(): NSObject()]
-    private let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    
+    weak var currencyFormatter: GratuitousCurrencyFormatter?
     var textSizeAdjustment: NSNumber = 1.0 {
         didSet {
             if (self.labelTextAttributes["NSFont"] != nil) {
@@ -25,7 +26,7 @@ class GratuitousTableViewCell: UITableViewCell {
     }
     var billAmount: NSNumber = Double(0) {
         didSet {
-            let currencyFormattedString = self.appDelegate.currencyFormattedString(self.billAmount)
+            let currencyFormattedString = self.currencyFormatter?.currencyFormattedString(self.billAmount)
             //let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(self.billAmount)
             var stringForLabel = NSAttributedString()
             if let currencyFormattedString = currencyFormattedString {

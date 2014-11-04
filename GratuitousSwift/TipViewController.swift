@@ -26,7 +26,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet weak var labelContainerView: UIView!
     @IBOutlet weak var tableContainerView: UIView!
     
-    
     private let MAXBILLAMOUNT = 500
     private let MAXTIPAMOUNT = 250
     private let BILLAMOUNTTAG = 0
@@ -36,7 +35,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let MEDIUMPHONECELLHEIGHT = CGFloat(70.0)
     private let LARGEPHONECELLHEIGHT = CGFloat(74.0)
     
-    private let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    private let currencyFormatter = GratuitousCurrencyFormatter()
+    
     private var userDefaults = NSUserDefaults.standardUserDefaults()
     private var textSizeAdjustment: NSNumber = NSNumber(double: 0.0)
     private var billAmountsArray: [NSNumber] = []
@@ -57,6 +57,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         // Do any additional setup after loading the view.
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "suggestedTipUpdatedOnDisk:", name: "suggestedTipValueUpdated", object: nil)
+        
+        //give the currencyformatted a delegate
+        self.currencyFormatter.tipViewControllerDelegate = self
         
         //prepare the arrays
         for i in 0..<self.MAXBILLAMOUNT {
@@ -201,7 +204,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             
             let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
             var totalAmountAttributedString = NSAttributedString()
-            let currencyFormattedString = self.appDelegate.currencyFormattedString(NSNumber(double: totalAmount))
+            let currencyFormattedString = self.currencyFormatter.currencyFormattedString(NSNumber(double: totalAmount))
             //let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(NSNumber(double: totalAmount))
             if let currencyFormattedString = currencyFormattedString {
                 totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
@@ -234,7 +237,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
                 
                 var totalAmountAttributedString = NSAttributedString()
-                let currencyFormattedString = self.appDelegate.currencyFormattedString(NSNumber(double: totalAmount))
+                let currencyFormattedString = self.currencyFormatter.currencyFormattedString(NSNumber(double: totalAmount))
                 //let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(NSNumber(double: totalAmount))
                 if let currencyFormattedString = currencyFormattedString {
                     totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
@@ -395,6 +398,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 if cell.textSizeAdjustment.doubleValue == 1.0 {
                     cell.textSizeAdjustment = self.textSizeAdjustment
                 }
+                if let cellCurrencyFormatter = cell.currencyFormatter {
+                    // do nothing
+                } else {
+                    cell.currencyFormatter = self.currencyFormatter
+                }
                 cell.billAmount = self.billAmountsArray[indexPath.row]
                 return cell
             default:
@@ -402,6 +410,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 let cell = tableView.dequeueReusableCellWithIdentifier(tipTableViewCellString) as GratuitousTableViewCell
                 if cell.textSizeAdjustment.doubleValue == 1.0 {
                     cell.textSizeAdjustment = self.textSizeAdjustment
+                }
+                if let cellCurrencyFormatter = cell.currencyFormatter {
+                    // do nothing
+                } else {
+                    cell.currencyFormatter = self.currencyFormatter
                 }
                 cell.billAmount = self.tipAmountsArray[indexPath.row]
                 return cell
