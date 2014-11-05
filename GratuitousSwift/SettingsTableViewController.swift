@@ -16,9 +16,9 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var headerLabelTipPercentage: UILabel!
     @IBOutlet private weak var headerLabelCurencySymbol: UILabel!
     @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel!
+    @IBOutlet private weak var aboutSaturdayAppsParagraphLabel: UILabel!
     
     private var headerLabelsArray: [UILabel] = []
-    //private var headerLabelTextAttributes = [NSString() : NSObject()]
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class SettingsTableViewController: UITableViewController {
         
         //set the colors for the navigation controller
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-        self.navigationController?.navigationBar.barTintColor = GratuitousColorSelector.darkBackgroundColor()
+        self.navigationController?.navigationBar.barTintColor = nil
         
         //set the text color for the tip percentage
         self.suggestedTipPercentageLabel.textColor = GratuitousColorSelector.lightTextColor()
@@ -56,7 +56,6 @@ class SettingsTableViewController: UITableViewController {
     }
     
     private func prepareHeaderLabelsAndCells() {
-        
         //prepare the headerlabels
         self.headerLabelsArray = [self.headerLabelTipPercentage, self.headerLabelCurencySymbol, self.headerLabelAboutSaturdayApps]
         for label in self.headerLabelsArray {

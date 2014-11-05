@@ -24,8 +24,10 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     @IBOutlet private weak var textLabelYenSign: UILabel?
     @IBOutlet private weak var textLabelNone: UILabel?
     
+    private weak var instanceTextLabel: UILabel?
+    
     private var userDefaults = NSUserDefaults.standardUserDefaults()
-    private var cellIdentity:Int = 0 
+    private var cellIdentity:Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -75,6 +77,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     }
     
     private func setTextColorAndFontSize(sender: UILabel) {
+        self.instanceTextLabel = sender
         sender.textColor = GratuitousColorSelector.lightTextColor()
         sender.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     }
@@ -102,6 +105,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
                 self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+                self.instanceTextLabel?.textColor = GratuitousColorSelector.lightTextColor()
             },
             completion: { finished in })
         
@@ -140,6 +144,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
                 self.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
+                self.instanceTextLabel?.textColor = GratuitousColorSelector.darkTextColor()
             },
             completion: { finished in })
     }
@@ -153,6 +158,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
                 self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+                self.instanceTextLabel?.textColor = GratuitousColorSelector.lightTextColor()
             },
             completion: { finished in
         })
@@ -167,6 +173,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
                 self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+                self.instanceTextLabel?.textColor = GratuitousColorSelector.lightTextColor()
             },
             completion: { finished in })
     }
@@ -183,6 +190,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
                 options: UIViewAnimationOptions.BeginFromCurrentState,
                 animations: {
                     self.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
+                    self.instanceTextLabel?.textColor = GratuitousColorSelector.darkTextColor()
                 },
                 completion: { finished in
                     self.saveUserDefaultToDisk()
