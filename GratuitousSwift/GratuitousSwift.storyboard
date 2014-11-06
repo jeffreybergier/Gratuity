@@ -427,11 +427,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="textLabelDefault" destination="ghA-h8-HMd" id="JXF-H4-vWC"/>
-                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="QnG-ul-AN1" customClass="GratuitousCurrencySelectorCellTableViewCell" customModule="Gratuity" customModuleProvider="target">
+                                    <tableViewCell tag="1" contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="QnG-ul-AN1" customClass="GratuitousCurrencySelectorCellTableViewCell" customModule="Gratuity" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QnG-ul-AN1" id="xKZ-Yd-U0S">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -451,11 +448,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="textLabelDollarSign" destination="ErU-WB-Bvs" id="t6F-NY-huN"/>
-                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="WgM-wX-FF0" customClass="GratuitousCurrencySelectorCellTableViewCell" customModule="Gratuity" customModuleProvider="target">
+                                    <tableViewCell tag="2" contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="WgM-wX-FF0" customClass="GratuitousCurrencySelectorCellTableViewCell" customModule="Gratuity" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WgM-wX-FF0" id="SPb-pq-sAC">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -475,11 +469,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="textLabelPoundSign" destination="MIg-Ts-mi3" id="gBO-za-Q7y"/>
-                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="05t-6o-Kae" customClass="GratuitousCurrencySelectorCellTableViewCell" customModule="Gratuity" customModuleProvider="target">
+                                    <tableViewCell tag="3" contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="05t-6o-Kae" customClass="GratuitousCurrencySelectorCellTableViewCell" customModule="Gratuity" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="05t-6o-Kae" id="CR2-K8-ZnK">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -499,11 +490,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="textLabelEuroSign" destination="z6p-KP-y7D" id="25h-S8-Z1p"/>
-                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="DUK-0S-sH6" customClass="GratuitousCurrencySelectorCellTableViewCell" customModule="Gratuity" customModuleProvider="target">
+                                    <tableViewCell tag="4" contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="DUK-0S-sH6" customClass="GratuitousCurrencySelectorCellTableViewCell" customModule="Gratuity" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DUK-0S-sH6" id="jUX-mW-Uxo">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -523,11 +511,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="textLabelYenSign" destination="WHu-Po-iut" id="jWh-W3-ccV"/>
-                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="ReE-Nt-475" customClass="GratuitousCurrencySelectorCellTableViewCell" customModule="Gratuity" customModuleProvider="target">
+                                    <tableViewCell tag="5" contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="ReE-Nt-475" customClass="GratuitousCurrencySelectorCellTableViewCell" customModule="Gratuity" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ReE-Nt-475" id="ZsD-KY-Il8">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -547,9 +532,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="textLabelNone" destination="1HI-UY-qGf" id="l7h-iQ-pwb"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="xRH-qC-yKN">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -634,7 +616,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QL2-aC-rQR" id="ZV4-Qm-aN9">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sec-o8-Mzc" customClass="GratuitousContactButtons" customModule="Gratuity" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sec-o8-Mzc">
                                                     <rect key="frame" x="242.5" y="4" width="115" height="36"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <inset key="contentEdgeInsets" minX="24" minY="8" maxX="24" maxY="8"/>
@@ -659,7 +641,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3YW-kN-8BR" id="eVP-cu-OfJ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OwA-MO-K0L" customClass="GratuitousContactButtons" customModule="Gratuity" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OwA-MO-K0L">
                                                     <rect key="frame" x="215" y="4" width="170" height="36"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <inset key="contentEdgeInsets" minX="24" minY="8" maxX="24" maxY="8"/>
@@ -704,6 +686,18 @@
                         <outlet property="myPictureImageView" destination="Qdc-6t-Cq7" id="kEF-5c-vNl"/>
                         <outlet property="suggestedTipPercentageLabel" destination="n9y-uL-XxO" id="h9e-4L-vpG"/>
                         <outlet property="suggestedTipPercentageSlider" destination="aGj-HE-HCm" id="Bp3-fS-mjo"/>
+                        <outlet property="tableViewCellDefault" destination="LDq-IM-rPV" id="sXc-Ms-QIF"/>
+                        <outlet property="tableViewCellDollarSign" destination="QnG-ul-AN1" id="Pdo-ft-cpx"/>
+                        <outlet property="tableViewCellEuroSign" destination="05t-6o-Kae" id="Qyk-0f-jHZ"/>
+                        <outlet property="tableViewCellNone" destination="ReE-Nt-475" id="uWx-kL-6hE"/>
+                        <outlet property="tableViewCellPoundSign" destination="WgM-wX-FF0" id="fo3-Lo-XKK"/>
+                        <outlet property="tableViewCellYenSign" destination="DUK-0S-sH6" id="ffH-v2-vYS"/>
+                        <outlet property="textLabelDefault" destination="ghA-h8-HMd" id="Zbq-Dj-cqF"/>
+                        <outlet property="textLabelDollarSign" destination="ErU-WB-Bvs" id="f3t-fb-RZi"/>
+                        <outlet property="textLabelEuroSign" destination="z6p-KP-y7D" id="Wu1-eb-nhJ"/>
+                        <outlet property="textLabelNone" destination="1HI-UY-qGf" id="6KQ-aB-Kwj"/>
+                        <outlet property="textLabelPoundSign" destination="MIg-Ts-mi3" id="CD6-DQ-Lsn"/>
+                        <outlet property="textLabelYenSign" destination="WHu-Po-iut" id="6Bs-Ew-VDI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ja-zD-HfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

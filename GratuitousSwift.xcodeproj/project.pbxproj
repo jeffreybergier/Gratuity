@@ -11,7 +11,6 @@
 		734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
 		7356AEBE19FF281B00E44A5E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBC19FF281B00E44A5E /* Crashlytics.framework */; };
 		7356AEBF19FF281B00E44A5E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBD19FF281B00E44A5E /* Fabric.framework */; };
-		73595CA81A09C3F400257905 /* GratuitousContactButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73595CA71A09C3F400257905 /* GratuitousContactButtons.swift */; };
 		735C011E1A0878D000A19462 /* GratuitousCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */; };
 		737233DD19E8B9B70072EDB4 /* GratuitousColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */; };
 		737233DF19E8F19C0072EDB4 /* GratuitousAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DE19E8F19C0072EDB4 /* GratuitousAnimations.swift */; };
@@ -30,7 +29,6 @@
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
 		7356AEBC19FF281B00E44A5E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		7356AEBD19FF281B00E44A5E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
-		73595CA71A09C3F400257905 /* GratuitousContactButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousContactButtons.swift; sourceTree = "<group>"; };
 		735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyFormatter.swift; sourceTree = "<group>"; };
 		73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableView.swift; sourceTree = "<group>"; };
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 				737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */,
 				737233DE19E8F19C0072EDB4 /* GratuitousAnimations.swift */,
 				735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */,
-				73595CA71A09C3F400257905 /* GratuitousContactButtons.swift */,
 				73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */,
 				7382510D19E60EED00CD2B28 /* Images.xcassets */,
 				7382510F19E60EED00CD2B28 /* LaunchScreen.xib */,
@@ -240,7 +237,6 @@
 				7382510719E60EED00CD2B28 /* AppDelegate.swift in Sources */,
 				737233DF19E8F19C0072EDB4 /* GratuitousAnimations.swift in Sources */,
 				73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */,
-				73595CA81A09C3F400257905 /* GratuitousContactButtons.swift in Sources */,
 				73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,82 +10,35 @@ import UIKit
 import QuartzCore
 
 class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
-    private let CURRENCYSIGNDEFAULT = 0
-    private let CURRENCYSIGNDOLLAR = 1
-    private let CURRENCYSIGNPOUND = 2
-    private let CURRENCYSIGNEURO = 3
-    private let CURRENCYSIGNYEN = 4
-    private let CURRENCYSIGNNONE = 5
     
-    @IBOutlet private weak var textLabelDefault: UILabel?
-    @IBOutlet private weak var textLabelDollarSign: UILabel?
-    @IBOutlet private weak var textLabelPoundSign: UILabel?
-    @IBOutlet private weak var textLabelEuroSign: UILabel?
-    @IBOutlet private weak var textLabelYenSign: UILabel?
-    @IBOutlet private weak var textLabelNone: UILabel?
-    
-    private weak var instanceTextLabel: UILabel?
-    
-    private var userDefaults = NSUserDefaults.standardUserDefaults()
-    private var cellIdentity:Int = 0
+    weak var instanceTextLabel: UILabel? {
+        didSet {
+            self.prepareTextLabel()
+        }
+    }
+    var cellIsTheSelectedCell: Bool = false {
+        didSet {
+            self.readUserDefaultsAndSetCheckmarkWithTimer(true)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "overrideCurrencySymbolUpdatedOnDisk:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "settingsTableViewControllerDidAppear:", name: "settingsTableViewControllerDidAppear", object: nil)
-        
-        if let textLabelDefault = self.textLabelDefault {
-            self.setTextColorAndFontSize(textLabelDefault)
-            self.cellIdentity = self.CURRENCYSIGNDEFAULT
-        }
-        
-        if let textLabelDollarSign = self.textLabelDollarSign {
-            self.setTextColorAndFontSize(textLabelDollarSign)
-            self.cellIdentity = self.CURRENCYSIGNDOLLAR
-        }
-        
-        if let textLabelPoundSign = self.textLabelPoundSign {
-            self.setTextColorAndFontSize(textLabelPoundSign)
-            self.cellIdentity = self.CURRENCYSIGNPOUND
-        }
-        
-        if let textLabelEuroSign = self.textLabelEuroSign {
-            self.setTextColorAndFontSize(textLabelEuroSign)
-            self.cellIdentity = self.CURRENCYSIGNEURO
-        }
-        
-        if let textLabelYenSign = self.textLabelYenSign {
-            self.setTextColorAndFontSize(textLabelYenSign)
-            self.cellIdentity = self.CURRENCYSIGNYEN
-        }
-        
-        if let textLabelNone = self.textLabelNone {
-            self.setTextColorAndFontSize(textLabelNone)
-            self.cellIdentity = self.CURRENCYSIGNNONE
-        }
-        
-        self.readUserDefaultsAndSetCheckmarkWithTimer(false)
-    }
-    
-    func settingsTableViewControllerDidAppear(notification: NSNotification?) {
-        self.readUserDefaultsAndSetCheckmarkWithTimer(true)
     }
     
     func overrideCurrencySymbolUpdatedOnDisk(notification: NSNotification?) {
         self.readUserDefaultsAndSetCheckmarkWithTimer(true)
     }
     
-    private func setTextColorAndFontSize(sender: UILabel) {
-        self.instanceTextLabel = sender
-        sender.textColor = GratuitousColorSelector.lightTextColor()
-        sender.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    private func prepareTextLabel() {
+        self.instanceTextLabel?.textColor = GratuitousColorSelector.lightTextColor()
+        self.instanceTextLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     }
     
-    private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {
-        let onDiskCurrencySign: NSNumber = self.userDefaults.integerForKey("overrideCurrencySymbol")
-        
-        if self.cellIdentity == onDiskCurrencySign.integerValue {
+    private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {        
+        if self.cellIsTheSelectedCell {
             self.accessoryType = UITableViewCellAccessoryType.Checkmark
             self.layer.borderWidth = 2.0
             self.layer.borderColor = GratuitousColorSelector.lightBackgroundColor().CGColor
@@ -126,13 +79,6 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         animationGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         
         self.layer.addAnimation(animationGroup, forKey: "borderColor")
-    }
-    
-    private func saveUserDefaultToDisk() {
-        self.userDefaults.setInteger(self.cellIdentity, forKey: "overrideCurrencySymbol")
-        self.userDefaults.synchronize()
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self)
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -192,9 +138,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
                     self.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
                     self.instanceTextLabel?.textColor = GratuitousColorSelector.darkTextColor()
                 },
-                completion: { finished in
-                    self.saveUserDefaultToDisk()
-            })
+                completion: { finished in })
         }
     }
     
