@@ -201,7 +201,17 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        println("selected tableview cell index = \(indexPath.row)")
+        switch indexPath.section {
+        case 1:
+            println("selected tableview cell index = \(indexPath.row)")
+            switch indexPath.row {
+            default:
+                println("start checking which cell this is and write to disk.")
+            }
+        default:
+            break;
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
     
     // MARK: Handle About Information
