@@ -179,34 +179,48 @@ class SettingsTableViewController: UITableViewController {
             self.tableViewCellNone.instanceTextLabel = self.textLabelNone
         }
         
-        self.readCurrencyOverrideUserDefaultFromDisk()
+        self.writeCurrencyOverrideUserDefaultToDisk(nil)
     }
     
-    private func readCurrencyOverrideUserDefaultFromDisk() {
-        let currentCurrencySettingOnDisk = self.userDefaults.integerForKey("overrideCurrencySymbol")
-        for cell in self.tableViewCellsArray {
-            if cell.tag == currentCurrencySettingOnDisk {
-                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-            } else {
-                cell.accessoryType = UITableViewCellAccessoryType.None
-            }
+//    private func readCurrencyOverrideUserDefaultFromDisk() {
+//        let currentCurrencySettingOnDisk = self.userDefaults.integerForKey("overrideCurrencySymbol")
+//        for cell in self.tableViewCellsArray {
+//            if cell.tag == currentCurrencySettingOnDisk {
+//                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+//            } else {
+//                cell.accessoryType = UITableViewCellAccessoryType.None
+//            }
+//        }
+//    }
+    
+    private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: Int?) {
+        if let currencyOverride = currencyOverride {
+            self.userDefaults.setInteger(currencyOverride, forKey: "overrideCurrencySymbol")
+            self.userDefaults.synchronize()
         }
-    }
-    
-    private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: Int) {
-        self.userDefaults.setInteger(currencyOverride, forKey: "overrideCurrencySymbol")
-        self.userDefaults.synchronize()
         
         NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self)
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section {
         case 1:
             println("selected tableview cell index = \(indexPath.row)")
             switch indexPath.row {
+            case self.CURRENCYSIGNDEFAULT+1:
+                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNDEFAULT)
+            case self.CURRENCYSIGNDOLLAR+1:
+                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNDOLLAR)
+            case self.CURRENCYSIGNPOUND+1:
+                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNPOUND)
+            case self.CURRENCYSIGNEURO+1:
+                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNEURO)
+            case self.CURRENCYSIGNYEN+1:
+                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNYEN)
+            case self.CURRENCYSIGNNONE+1:
+                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNNONE)
             default:
-                println("start checking which cell this is and write to disk.")
+                break;
             }
         default:
             break;

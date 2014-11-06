@@ -16,11 +16,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             self.prepareTextLabel()
         }
     }
-    var cellIsTheSelectedCell: Bool = false {
-        didSet {
-            self.readUserDefaultsAndSetCheckmarkWithTimer(true)
-        }
-    }
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,11 +33,12 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         self.instanceTextLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     }
     
-    private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {        
-        if self.cellIsTheSelectedCell {
+    private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {
+        if self.userDefaults.integerForKey("overrideCurrencySymbol") == self.tag {
             self.accessoryType = UITableViewCellAccessoryType.Checkmark
             self.layer.borderWidth = 2.0
             self.layer.borderColor = GratuitousColorSelector.lightBackgroundColor().CGColor
+            self.accessoryType = UITableViewCellAccessoryType.Checkmark
             if timer {
                 let slowFadeOutTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "slowFadeOutOfBorderAroundCell:", userInfo: nil, repeats: false)
             }
@@ -49,10 +46,11 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             self.accessoryType = UITableViewCellAccessoryType.None
             self.layer.borderWidth = 0.0
             self.layer.borderColor = GratuitousColorSelector.darkBackgroundColor().CGColor
+            self.accessoryType = UITableViewCellAccessoryType.None
         }
         
         UIView.animateWithDuration(GratuitousAnimations.duration(),
-            delay: 0.0,
+            delay: GratuitousAnimations.duration()+1,
             usingSpringWithDamping: 1.0,
             initialSpringVelocity: 1.0,
             options: UIViewAnimationOptions.BeginFromCurrentState,
@@ -125,8 +123,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
+        super.setSelected(false, animated: animated)
         // Configure the view for the selected state
         if selected {
             UIView.animateWithDuration(GratuitousAnimations.duration(),
