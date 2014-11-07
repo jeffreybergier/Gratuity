@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GratuitousSwift/GratuitousCurrencySelectorCellTableViewCell.swift"
-            timestampString = "436985885.085059"
+            timestampString = "437021745.916852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "setSelected(_:animated:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GratuitousSwift/GratuitousCurrencySelectorCellTableViewCell.swift"
-            timestampString = "436985885.085059"
+            timestampString = "437021745.916852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "touchesCancelled(_:withEvent:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GratuitousSwift/GratuitousCurrencySelectorCellTableViewCell.swift"
-            timestampString = "436985885.085059"
+            timestampString = "437021745.916852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "touchesEnded(_:withEvent:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GratuitousSwift/GratuitousCurrencySelectorCellTableViewCell.swift"
-            timestampString = "436985885.085059"
+            timestampString = "437021745.916852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "touchesBegan(_:withEvent:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,12 +74,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GratuitousSwift/GratuitousCurrencySelectorCellTableViewCell.swift"
-            timestampString = "436985901.693947"
+            timestampString = "437021745.916852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "readUserDefaultsAndSetCheckmarkWithTimer(_:)"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "cgAnimationDidFinish(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GratuitousSwift/GratuitousCurrencySelectorCellTableViewCell.swift"
+            timestampString = "437021745.916852"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "slowFadeOutOfBorderAroundCell(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -23,6 +23,7 @@ class SettingsTableViewController: UITableViewController {
         
         //add necessary notification center observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "readUserDefaultsAndUpdateSlider:", name: "suggestedTipValueUpdated", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
         //set the background color of the view
         self.tableView.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
@@ -42,14 +43,16 @@ class SettingsTableViewController: UITableViewController {
         
         //lastly, read the defaults from disk and update the UI
         self.readUserDefaultsAndUpdateSlider(nil)
-        
-        //prepare the currency override cells
-        self.prepareCurrencyIndicatorCells()
     }
     
     private func prepareHeaderLabelsAndCells() {
         //prepare the headerlabels
-        self.headerLabelsArray = [self.headerLabelTipPercentage, self.headerLabelCurencySymbol, self.headerLabelAboutSaturdayApps]
+        self.headerLabelsArray = [
+            self.headerLabelTipPercentage,
+            self.headerLabelCurencySymbol,
+            self.headerLabelAboutSaturdayApps
+        ]
+        
         for label in self.headerLabelsArray {
             label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
             label.textColor = UIColor.blackColor()
@@ -61,8 +64,16 @@ class SettingsTableViewController: UITableViewController {
         self.headerLabelAboutSaturdayApps.text = NSLocalizedString("About SaturdayApps", comment: "This is a section header. It contains information about my company, saturday apps").uppercaseString
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //prepare the currency override cells
+        self.prepareCurrencyIndicatorCells()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
         self.tableView.reloadData()
         NSNotificationCenter.defaultCenter().postNotificationName("settingsTableViewControllerDidAppear", object: nil)
     }
@@ -71,6 +82,15 @@ class SettingsTableViewController: UITableViewController {
         if let presentingViewController = self.presentingViewController {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
+    }
+    
+    func systemTextSizeDidChange(notification:NSNotification) {
+        //this takes care of the header cells
+        self.prepareHeaderLabelsAndCells()
+        
+        //prepare the tip percentage label that sits on the right of the slider
+        self.suggestedTipPercentageLabel.textColor = GratuitousColorSelector.lightTextColor()
+        self.suggestedTipPercentageLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -118,13 +138,6 @@ class SettingsTableViewController: UITableViewController {
     private let CURRENCYSIGNYEN = 4
     private let CURRENCYSIGNNONE = 5
     
-    @IBOutlet private weak var tableViewCellDefault: GratuitousCurrencySelectorCellTableViewCell!
-    @IBOutlet private weak var tableViewCellDollarSign: GratuitousCurrencySelectorCellTableViewCell!
-    @IBOutlet private weak var tableViewCellPoundSign: GratuitousCurrencySelectorCellTableViewCell!
-    @IBOutlet private weak var tableViewCellEuroSign: GratuitousCurrencySelectorCellTableViewCell!
-    @IBOutlet private weak var tableViewCellYenSign: GratuitousCurrencySelectorCellTableViewCell!
-    @IBOutlet private weak var tableViewCellNone: GratuitousCurrencySelectorCellTableViewCell!
-    
     @IBOutlet private weak var textLabelDefault: UILabel!
     @IBOutlet private weak var textLabelDollarSign: UILabel!
     @IBOutlet private weak var textLabelPoundSign: UILabel!
@@ -133,8 +146,6 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var textLabelNone: UILabel!
     
     private var textLabelsArray: [UILabel] = []
-    private var tableViewCellsArray: [GratuitousCurrencySelectorCellTableViewCell] = []
-    //private var currentCurrencySettingOnDisk = 0
     
     func prepareCurrencyIndicatorCells() {
         self.textLabelsArray = [
@@ -146,52 +157,18 @@ class SettingsTableViewController: UITableViewController {
             self.textLabelNone
         ]
         
-        self.tableViewCellsArray = [
-            self.tableViewCellDefault,
-            self.tableViewCellDollarSign,
-            self.tableViewCellPoundSign,
-            self.tableViewCellEuroSign,
-            self.tableViewCellYenSign,
-            self.tableViewCellNone
-        ]
         
-        if self.tableViewCellDefault.tag == self.CURRENCYSIGNDEFAULT {
-            self.tableViewCellDefault.instanceTextLabel = self.textLabelDefault
+        //this crazy lump fixes a small visual bug having to do with the border of the cell for the selected cell
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        for i in 0..<6 {
+            //uhhhh for some reason just running cellforrowatindexpath fixes this issue. really strange
+            let indexPath = NSIndexPath(forRow: i+1, inSection: 1)
+            let cell = self.tableView.cellForRowAtIndexPath(indexPath)
         }
         
-        if self.tableViewCellDollarSign.tag == self.CURRENCYSIGNDOLLAR {
-            self.tableViewCellDollarSign.instanceTextLabel = self.textLabelDollarSign
-        }
-        
-        if self.tableViewCellPoundSign.tag == self.CURRENCYSIGNPOUND {
-            self.tableViewCellPoundSign.instanceTextLabel = self.textLabelPoundSign
-        }
-        
-        if self.tableViewCellEuroSign.tag == self.CURRENCYSIGNEURO {
-            self.tableViewCellEuroSign.instanceTextLabel = self.textLabelEuroSign
-        }
-        
-        if self.tableViewCellYenSign.tag == self.CURRENCYSIGNYEN {
-            self.tableViewCellYenSign.instanceTextLabel = self.textLabelYenSign
-        }
-        
-        if self.tableViewCellNone.tag == self.CURRENCYSIGNNONE {
-            self.tableViewCellNone.instanceTextLabel = self.textLabelNone
-        }
         
         self.writeCurrencyOverrideUserDefaultToDisk(nil)
     }
-    
-//    private func readCurrencyOverrideUserDefaultFromDisk() {
-//        let currentCurrencySettingOnDisk = self.userDefaults.integerForKey("overrideCurrencySymbol")
-//        for cell in self.tableViewCellsArray {
-//            if cell.tag == currentCurrencySettingOnDisk {
-//                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-//            } else {
-//                cell.accessoryType = UITableViewCellAccessoryType.None
-//            }
-//        }
-//    }
     
     private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: Int?) {
         if let currencyOverride = currencyOverride {
@@ -200,6 +177,35 @@ class SettingsTableViewController: UITableViewController {
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self)
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 {
+            //if this is the type of cell, we need to let it know which UILabel is in it
+            if let cell = cell as? GratuitousCurrencySelectorCellTableViewCell {
+                //this gets called a lot so there is no need to run through the switch unless the cell we're talking to has a nil property.
+                if cell.instanceTextLabel == nil {
+                    switch cell.tag {
+                    case self.CURRENCYSIGNDEFAULT:
+                        self.textLabelDefault.text = NSLocalizedString("Local Currency", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use the local currency symbol based on the Locale set in the iphone")
+                        cell.instanceTextLabel = self.textLabelDefault
+                    case self.CURRENCYSIGNDOLLAR:
+                        cell.instanceTextLabel = self.textLabelDollarSign
+                    case self.CURRENCYSIGNPOUND:
+                        cell.instanceTextLabel = self.textLabelPoundSign
+                    case self.CURRENCYSIGNEURO:
+                        cell.instanceTextLabel = self.textLabelEuroSign
+                    case self.CURRENCYSIGNYEN:
+                        cell.instanceTextLabel = self.textLabelYenSign
+                    case self.CURRENCYSIGNNONE:
+                        self.textLabelNone.text = NSLocalizedString("No Symbol", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use no currency symbol")
+                        cell.instanceTextLabel = self.textLabelNone
+                    default:
+                        break;
+                    }
+                }
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -233,10 +239,18 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet private weak var aboutSaturdayAppsParagraphLabel: UILabel!
     
     func preparePictureButtonsAndParagraph() {
+        //preparing the picture
         self.myPictureImageView.layer.borderColor = GratuitousColorSelector.lightTextColor().CGColor
         self.myPictureImageView.layer.cornerRadius = self.myPictureImageView.frame.size.width/2
         self.myPictureImageView.layer.borderWidth = 3.0
         self.myPictureImageView.clipsToBounds = true
+        
+        //preparing the paragraph text label
+        self.aboutSaturdayAppsParagraphLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.aboutSaturdayAppsParagraphLabel.textColor = GratuitousColorSelector.lightTextColor()
+        self.aboutSaturdayAppsParagraphLabel.text = NSLocalizedString("My name is Jeff. I'm a professional designer. I like making Apps in my spare time. The many examples of tip calculators on the App Store didn't match the tipping paradigm I used in restaurants. So I made Gratuity. If you like it, email me or leave a review on the app store.", comment: "")
+        
+        //prepare the buttons
     }
     
     // MARK: Handle UI Changing
