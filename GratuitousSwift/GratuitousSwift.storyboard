@@ -636,13 +636,17 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QL2-aC-rQR" id="ZV4-Qm-aN9">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sec-o8-Mzc">
-                                                    <rect key="frame" x="242.5" y="4" width="115" height="36"/>
+                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sec-o8-Mzc" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
+                                                    <rect key="frame" x="242" y="4" width="115" height="36"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <inset key="contentEdgeInsets" minX="24" minY="8" maxX="24" maxY="8"/>
                                                     <state key="normal" title="Email Me">
+                                                        <color key="titleColor" red="0.15686274510000001" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="didTapEmailMeButton:" destination="rPE-iu-epa" eventType="touchUpInside" id="PXt-X9-hAW"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -661,13 +665,17 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3YW-kN-8BR" id="eVP-cu-OfJ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OwA-MO-K0L">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OwA-MO-K0L" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
                                                     <rect key="frame" x="215" y="4" width="170" height="36"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <inset key="contentEdgeInsets" minX="24" minY="8" maxX="24" maxY="8"/>
                                                     <state key="normal" title="Review This App">
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="didTapReviewThisAppButton:" destination="rPE-iu-epa" eventType="touchUpInside" id="4yD-Fr-k1X"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -699,11 +707,13 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1200"/>
                     <connections>
+                        <outlet property="aboutEmailMeButton" destination="sec-o8-Mzc" id="bgU-Im-bQS"/>
+                        <outlet property="aboutMyPictureImageView" destination="Qdc-6t-Cq7" id="RwF-Zh-E6l"/>
+                        <outlet property="aboutReviewButton" destination="OwA-MO-K0L" id="amg-Zy-KpP"/>
                         <outlet property="aboutSaturdayAppsParagraphLabel" destination="FOz-DK-eig" id="h01-g5-YdX"/>
                         <outlet property="headerLabelAboutSaturdayApps" destination="CQ4-3s-gcG" id="sA2-QA-yNC"/>
                         <outlet property="headerLabelCurencySymbol" destination="Rhq-zL-B07" id="d6z-aa-JNO"/>
                         <outlet property="headerLabelTipPercentage" destination="nf5-Rb-Dqy" id="eyb-tC-g0U"/>
-                        <outlet property="myPictureImageView" destination="Qdc-6t-Cq7" id="kEF-5c-vNl"/>
                         <outlet property="suggestedTipPercentageLabel" destination="n9y-uL-XxO" id="h9e-4L-vpG"/>
                         <outlet property="suggestedTipPercentageSlider" destination="aGj-HE-HCm" id="Bp3-fS-mjo"/>
                         <outlet property="textLabelDefault" destination="ghA-h8-HMd" id="Zbq-Dj-cqF"/>

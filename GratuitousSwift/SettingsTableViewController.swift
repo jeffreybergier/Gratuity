@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     // MARK: Handle TableViewController
     @IBOutlet private weak var headerLabelTipPercentage: UILabel!
@@ -36,7 +37,7 @@ class SettingsTableViewController: UITableViewController {
         self.prepareTipPercentageSliderAndLabels()
         
         //configure the border color of my picture in the about screen
-        self.preparePictureButtonsAndParagraph()
+        self.prepareAboutPictureButtonsAndParagraph()
         
         //prepare the header text labels
         self.prepareHeaderLabelsAndCells()
@@ -69,12 +70,14 @@ class SettingsTableViewController: UITableViewController {
         
         //prepare the currency override cells
         self.prepareCurrencyIndicatorCells()
+        
+        self.tableView.reloadData()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.tableView.reloadData()
         NSNotificationCenter.defaultCenter().postNotificationName("settingsTableViewControllerDidAppear", object: nil)
     }
     
@@ -91,6 +94,9 @@ class SettingsTableViewController: UITableViewController {
         //prepare the tip percentage label that sits on the right of the slider
         self.suggestedTipPercentageLabel.textColor = GratuitousColorSelector.lightTextColor()
         self.suggestedTipPercentageLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        
+        //prepare the about area of the table
+        self.prepareAboutPictureButtonsAndParagraph()
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -235,15 +241,19 @@ class SettingsTableViewController: UITableViewController {
     }
     
     // MARK: Handle About Information
-    @IBOutlet private weak var myPictureImageView: UIImageView!
+    @IBOutlet private weak var aboutMyPictureImageView: UIImageView!
     @IBOutlet private weak var aboutSaturdayAppsParagraphLabel: UILabel!
+    @IBOutlet private weak var aboutEmailMeButton: UIButton!
+    @IBOutlet private weak var aboutReviewButton: UIButton!
     
-    func preparePictureButtonsAndParagraph() {
+    private let applicationID = 933679671
+    
+    private func prepareAboutPictureButtonsAndParagraph() {
         //preparing the picture
-        self.myPictureImageView.layer.borderColor = GratuitousColorSelector.lightTextColor().CGColor
-        self.myPictureImageView.layer.cornerRadius = self.myPictureImageView.frame.size.width/2
-        self.myPictureImageView.layer.borderWidth = 3.0
-        self.myPictureImageView.clipsToBounds = true
+        self.aboutMyPictureImageView.layer.borderColor = GratuitousColorSelector.lightTextColor().CGColor
+        self.aboutMyPictureImageView.layer.cornerRadius = self.aboutMyPictureImageView.frame.size.width/2
+        self.aboutMyPictureImageView.layer.borderWidth = 3.0
+        self.aboutMyPictureImageView.clipsToBounds = true
         
         //preparing the paragraph text label
         self.aboutSaturdayAppsParagraphLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
@@ -251,6 +261,49 @@ class SettingsTableViewController: UITableViewController {
         self.aboutSaturdayAppsParagraphLabel.text = NSLocalizedString("My name is Jeff. I'm a professional designer. I like making Apps in my spare time. The many examples of tip calculators on the App Store didn't match the tipping paradigm I used in restaurants. So I made Gratuity. If you like it, email me or leave a review on the app store.", comment: "")
         
         //prepare the buttons
+        self.aboutEmailMeButton.setTitle(NSLocalizedString("Email Me", comment: "this is the button that users can use to send me an email."), forState: UIControlState.Normal)
+        self.aboutReviewButton.setTitle(NSLocalizedString("Review This App", comment: "this button takes the user to the app store so they can leave a review"), forState: UIControlState.Normal)
+    }
+    
+    @IBAction func didTapEmailMeButton(sender: UIButton) {
+        let subject = NSLocalizedString("I love Gratuity", comment: "This is the subject line of support requests. It should say something positive about the app but its mostly gonna be used when people are upset")
+        let body = NSLocalizedString("", comment: "this is the body line of support requests, it should be blank, but the possibilies are endless")
+        
+        if MFMailComposeViewController.canSendMail() {
+            let mailer = MFMailComposeViewController()
+            mailer.mailComposeDelegate = self
+            mailer.setSubject(subject)
+            mailer.setToRecipients(["support@saturdayapps.com"])
+            mailer.setMessageBody(body, isHTML: false)
+            
+            self.presentViewController(mailer, animated: true, completion: nil)
+        } else {
+            let mailStringWrongEncoding = NSString(format: "mailto:support@saturdayapps.com?subject=%@&body=%@", subject, body)
+            let mailString = mailStringWrongEncoding.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+            if let mailString = mailString {
+                let mailToURL = NSURL(string: mailString)
+                if let mailToURL = mailToURL {
+                    UIApplication.sharedApplication().openURL(mailToURL)
+                }
+            }
+        }
+    }
+    
+    @IBAction func didTapReviewThisAppButton(sender: UIButton) {
+        let appStoreString = NSString(format: "itms-apps://itunes.apple.com/app/%f", self.applicationID)
+        let appStoreURL = NSURL(string: appStoreString)
+        if let appStoreURL = appStoreURL {
+            UIApplication.sharedApplication().openURL(appStoreURL)
+        }
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        if let presentedViewController = self.presentedViewController {
+            presentedViewController.dismissViewControllerAnimated(true, completion: nil)
+        }
+        if error != nil {
+            println("AboutTableViewController: Error while sending email. Error Description: \(error.description)")
+        }
     }
     
     // MARK: Handle UI Changing
