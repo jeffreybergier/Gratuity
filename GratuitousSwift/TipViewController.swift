@@ -10,21 +10,22 @@ import UIKit
 
 class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak private var tipPercentageTextLabel: UILabel!
-    @IBOutlet weak private var totalAmountTextLabel: UILabel!
-    @IBOutlet weak private var billAmountTableView: GratuitousTableView!
-    @IBOutlet weak private var tipAmountTableView: GratuitousTableView!
-    @IBOutlet weak private var tipPercentageTextLabelTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak private var totalAmountTextLabelBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak private var billAmountTableViewTitleTextLabel: UILabel!
-    @IBOutlet weak private var billAmountTableViewTitleTextLabelView: UIView!
-    @IBOutlet weak private var tipAmountTableViewTitleTextLabel: UILabel!
-    @IBOutlet weak private var tipAmountTableViewTitleTextLabelView: UIView!
-    @IBOutlet weak var billAmountSelectedSurroundView: UIView!
-    @IBOutlet weak var billAmountLowerGradientView: GratuitousGradientView!
-    @IBOutlet weak var selectedTableViewCellOutlineViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var labelContainerView: UIView!
-    @IBOutlet weak var tableContainerView: UIView!
+    @IBOutlet private weak var tipPercentageTextLabel: UILabel!
+    @IBOutlet private weak var totalAmountTextLabel: UILabel!
+    @IBOutlet private weak var billAmountTableView: GratuitousTableView!
+    @IBOutlet private weak var tipAmountTableView: GratuitousTableView!
+    @IBOutlet private weak var tipPercentageTextLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var totalAmountTextLabelBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var billAmountTableViewTitleTextLabel: UILabel!
+    @IBOutlet private weak var billAmountTableViewTitleTextLabelView: UIView!
+    @IBOutlet private weak var tipAmountTableViewTitleTextLabel: UILabel!
+    @IBOutlet private weak var tipAmountTableViewTitleTextLabelView: UIView!
+    @IBOutlet private weak var billAmountSelectedSurroundView: UIView!
+    @IBOutlet private weak var billAmountLowerGradientView: GratuitousGradientView!
+    @IBOutlet private weak var selectedTableViewCellOutlineViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var labelContainerView: UIView!
+    @IBOutlet private weak var tableContainerView: UIView!
+    @IBOutlet private weak var settingsButton: UIButton!
     
     private let MAXBILLAMOUNT = 500
     private let MAXTIPAMOUNT = 250
@@ -274,6 +275,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBAction func didTapTipAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
         self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let point = self.settingsButton.superview?.convertPoint(self.settingsButton.center, toView: self.view)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

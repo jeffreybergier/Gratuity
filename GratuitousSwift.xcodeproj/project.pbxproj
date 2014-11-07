@@ -24,6 +24,8 @@
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
 		73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
+		73E35AF01A0D3251009A2F97 /* GratuitousTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AEF1A0D3251009A2F97 /* GratuitousTransitionDelegate.swift */; };
+		73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
+		73E35AEF1A0D3251009A2F97 /* GratuitousTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTransitionDelegate.swift; sourceTree = "<group>"; };
+		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousEnums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */,
 				73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */,
 				73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */,
+				73E35AEF1A0D3251009A2F97 /* GratuitousTransitionDelegate.swift */,
+				73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */,
 				7382510D19E60EED00CD2B28 /* Images.xcassets */,
 				7382510F19E60EED00CD2B28 /* LaunchScreen.xib */,
 				7356AEBC19FF281B00E44A5E /* Crashlytics.framework */,
@@ -233,8 +239,10 @@
 			files = (
 				7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */,
 				7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */,
+				73E35AF01A0D3251009A2F97 /* GratuitousTransitionDelegate.swift in Sources */,
 				73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */,
 				735C011E1A0878D000A19462 /* GratuitousCurrencyFormatter.swift in Sources */,
+				73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */,
 				7335A18F19FB04DA00BE08E2 /* GratuitousTableView.swift in Sources */,
 				737233DD19E8B9B70072EDB4 /* GratuitousColorSelector.swift in Sources */,
 				73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */,

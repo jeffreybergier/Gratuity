@@ -77,7 +77,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+                
         NSNotificationCenter.defaultCenter().postNotificationName("settingsTableViewControllerDidAppear", object: nil)
     }
     
@@ -93,7 +93,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         //prepare the tip percentage label that sits on the right of the slider
         self.suggestedTipPercentageLabel.textColor = GratuitousColorSelector.lightTextColor()
-        self.suggestedTipPercentageLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        self.suggestedTipPercentageLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         
         //prepare the about area of the table
         self.prepareAboutPictureButtonsAndParagraph()
@@ -137,13 +137,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     // MARK: Handle Currency Indicator
-    private let CURRENCYSIGNDEFAULT = 0
-    private let CURRENCYSIGNDOLLAR = 1
-    private let CURRENCYSIGNPOUND = 2
-    private let CURRENCYSIGNEURO = 3
-    private let CURRENCYSIGNYEN = 4
-    private let CURRENCYSIGNNONE = 5
-    
     @IBOutlet private weak var textLabelDefault: UILabel!
     @IBOutlet private weak var textLabelDollarSign: UILabel!
     @IBOutlet private weak var textLabelPoundSign: UILabel!
@@ -192,18 +185,18 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 //this gets called a lot so there is no need to run through the switch unless the cell we're talking to has a nil property.
                 if cell.instanceTextLabel == nil {
                     switch cell.tag {
-                    case self.CURRENCYSIGNDEFAULT:
+                    case CurrencySign.Default.rawValue:
                         self.textLabelDefault.text = NSLocalizedString("Local Currency", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use the local currency symbol based on the Locale set in the iphone")
                         cell.instanceTextLabel = self.textLabelDefault
-                    case self.CURRENCYSIGNDOLLAR:
+                    case CurrencySign.Dollar.rawValue:
                         cell.instanceTextLabel = self.textLabelDollarSign
-                    case self.CURRENCYSIGNPOUND:
+                    case CurrencySign.Pound.rawValue:
                         cell.instanceTextLabel = self.textLabelPoundSign
-                    case self.CURRENCYSIGNEURO:
+                    case CurrencySign.Euro.rawValue:
                         cell.instanceTextLabel = self.textLabelEuroSign
-                    case self.CURRENCYSIGNYEN:
+                    case CurrencySign.Yen.rawValue:
                         cell.instanceTextLabel = self.textLabelYenSign
-                    case self.CURRENCYSIGNNONE:
+                    case CurrencySign.None.rawValue:
                         self.textLabelNone.text = NSLocalizedString("No Symbol", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use no currency symbol")
                         cell.instanceTextLabel = self.textLabelNone
                     default:
@@ -219,18 +212,18 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         case 1:
             println("selected tableview cell index = \(indexPath.row)")
             switch indexPath.row {
-            case self.CURRENCYSIGNDEFAULT+1:
-                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNDEFAULT)
-            case self.CURRENCYSIGNDOLLAR+1:
-                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNDOLLAR)
-            case self.CURRENCYSIGNPOUND+1:
-                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNPOUND)
-            case self.CURRENCYSIGNEURO+1:
-                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNEURO)
-            case self.CURRENCYSIGNYEN+1:
-                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNYEN)
-            case self.CURRENCYSIGNNONE+1:
-                self.writeCurrencyOverrideUserDefaultToDisk(self.CURRENCYSIGNNONE)
+            case CurrencySign.Default.rawValue + 1:
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Default.rawValue)
+            case CurrencySign.Dollar.rawValue + 1:
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Dollar.rawValue)
+            case CurrencySign.Pound.rawValue + 1:
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Pound.rawValue)
+            case CurrencySign.Euro.rawValue + 1:
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Euro.rawValue)
+            case CurrencySign.Yen.rawValue + 1:
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Yen.rawValue)
+            case CurrencySign.None.rawValue + 1:
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.None.rawValue)
             default:
                 break;
             }

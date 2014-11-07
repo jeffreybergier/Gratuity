@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if userDefaults.integerForKey("billIndexPathRow") == 0 {
             userDefaults.setInteger(19, forKey: "billIndexPathRow")
             userDefaults.setInteger(0, forKey: "tipIndexPathRow")
-            userDefaults.setInteger(0, forKey: "overrideCurrencySymbol")
+            userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: "overrideCurrencySymbol")
             userDefaults.setDouble(0.2, forKey: "suggestedTipPercentage")
             userDefaults.synchronize()
         }
