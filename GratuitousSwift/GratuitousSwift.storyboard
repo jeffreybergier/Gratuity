@@ -160,6 +160,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5O-Qc-eNn">
                                         <rect key="frame" x="547" y="258" width="57" height="30"/>
                                         <state key="normal" title="Settings"/>
+                                        <connections>
+                                            <action selector="didTapSettingsButton:" destination="x3f-eR-MGT" eventType="touchUpInside" id="z4u-1D-H0P"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

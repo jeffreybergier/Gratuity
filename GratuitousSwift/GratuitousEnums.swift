@@ -8,8 +8,12 @@
 
 import Foundation
 
-enum SwatchTransitionMode: Int {
+enum CustomTransitionMode: Int {
     case Present = 0, Dismiss
+}
+
+enum CustomTransitionStyle: Int {
+    case Modal = 0, Popover
 }
 
 enum CurrencySign: Int {

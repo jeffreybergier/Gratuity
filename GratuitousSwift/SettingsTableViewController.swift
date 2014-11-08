@@ -22,6 +22,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //make this view use a custom transition context
+        self.modalPresentationStyle = UIModalPresentationStyle.Custom
+        
         //add necessary notification center observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "readUserDefaultsAndUpdateSlider:", name: "suggestedTipValueUpdated", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
@@ -32,6 +35,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         //set the colors for the navigation controller
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.barTintColor = nil
+        
+        //set up the right Done button in the navigation bar
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "didTapDoneButton:")
+        self.navigationItem.rightBarButtonItem = doneButton
         
         //set the text color for the tip percentage
         self.prepareTipPercentageSliderAndLabels()
@@ -58,6 +65,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
             label.textColor = UIColor.blackColor()
             label.superview?.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
+            label.superview?.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
         }
         
         self.headerLabelTipPercentage.text = NSLocalizedString("Suggested Tip Percentage", comment: "this text is for a section header where the user can set the default tip percentage when they choose a new bill amount").uppercaseString
@@ -115,6 +123,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.suggestedTipPercentageSlider.setThumbImage(self.suggestedTipPercentageSlider.currentThumbImage, forState: UIControlState.Normal) //this is supposed to be help with an ios7 bug where the thumb tint color doesn't change, but its not working in ios8. more research is needed
         self.suggestedTipPercentageSlider.thumbTintColor = GratuitousColorSelector.lightTextColor()
         self.suggestedTipPercentageSlider.maximumTrackTintColor = UIColor.darkGrayColor()
+        
+        //set the background color of the superview of the slider for ipad. For some reason its white on the ipad only
+        self.suggestedTipPercentageSlider.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
     }
     
     func readUserDefaultsAndUpdateSlider(notification: NSNotification?) {
@@ -256,6 +267,12 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         //prepare the buttons
         self.aboutEmailMeButton.setTitle(NSLocalizedString("Email Me", comment: "this is the button that users can use to send me an email."), forState: UIControlState.Normal)
         self.aboutReviewButton.setTitle(NSLocalizedString("Review This App", comment: "this button takes the user to the app store so they can leave a review"), forState: UIControlState.Normal)
+        
+        //set the background color of all of the different cells. For some reason on ipad, its white instead of clear
+        self.aboutMyPictureImageView.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+        self.aboutSaturdayAppsParagraphLabel.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+        self.aboutEmailMeButton.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+        self.aboutReviewButton.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
     }
     
     @IBAction func didTapEmailMeButton(sender: UIButton) {

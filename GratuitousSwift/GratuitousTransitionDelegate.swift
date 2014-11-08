@@ -8,41 +8,70 @@
 
 import UIKit
 
-class GratuitousTransitionDelegate: NSObject {
-    var mode = SwatchTransitionMode.Present
-    private let animationDurationPresent = GratuitousAnimations.duration()*8
-    private let animationDurationDismiss = GratuitousAnimations.duration()*4
+class GratuitousTransitionDelegate: NSObject, UIViewControllerAnimatedTransitioning {
+    var modePresentDismiss = CustomTransitionMode.Present
+    var stylePopoverModal = CustomTransitionStyle.Modal
+    var originPoint = CGPointZero
     
-    func transitionDuration(transitionContext: AnyObject) -> (NSTimeInterval) {
-        return self.mode == SwatchTransitionMode.Present ? self.animationDurationPresent : self.animationDurationDismiss
+    private let animationDurationPresent = GratuitousAnimations.duration()*2
+    private let animationDurationDismiss = GratuitousAnimations.duration()*1
+    
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> (NSTimeInterval) {
+        return self.modePresentDismiss == CustomTransitionMode.Present ? self.animationDurationPresent : self.animationDurationDismiss
     }
     
-    func animateTransition(transitionContext: AnyObject) {
-        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as UIViewController
-        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as UIViewController
+    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
         
         let sourceRect = transitionContext.initialFrameForViewController(fromViewController)
         
-        let transformScale = CGAffineTransformMakeScale(0.05, 0.05)
+        let transformScaleSmall = CGAffineTransformMakeScale(0.05, 0.05)
+        let transformScaleLarge = self.stylePopoverModal == CustomTransitionStyle.Modal ? CGAffineTransformMakeScale(1.00, 1.00) : CGAffineTransformMakeScale(0.80, 0.80)
+        let originalCenter = toViewController.view.center
         let containerView = transitionContext.containerView()
         
-        if self.mode == SwatchTransitionMode.Present {
+        if self.modePresentDismiss == CustomTransitionMode.Present {
             containerView.addSubview(toViewController.view)
-            toViewController.view.layer.anchorPoint = CGPointZero
             toViewController.view.frame = sourceRect
-            toViewController.view.transform = transformScale
+            toViewController.view.center = originPoint
+            toViewController.view.alpha = 0.5
+            toViewController.view.transform = transformScaleSmall
+            if self.stylePopoverModal == .Popover {
+                toViewController.view.layer.borderWidth = 3.0
+                toViewController.view.layer.cornerRadius = 5.0
+                toViewController.view.layer.borderColor = GratuitousColorSelector.lightBackgroundColor().CGColor
+                toViewController.view.clipsToBounds = true
+            }
             
             UIView.animateWithDuration(self.animationDurationPresent,
                 delay: 0.0,
+                usingSpringWithDamping: 0.5,
+                initialSpringVelocity: 1.0,
                 options: UIViewAnimationOptions.BeginFromCurrentState,
                 animations: {
-                    toViewController.view.transform = CGAffineTransformIdentity
+                    toViewController.view.transform = transformScaleLarge
+                    toViewController.view.center = originalCenter
+                    toViewController.view.alpha = 1.0
                 },
                 completion: { finished in
                     transitionContext.completeTransition(true)
             })
         } else {
-            
+            UIView.animateWithDuration(self.animationDurationPresent,
+                delay: 0.0,
+                usingSpringWithDamping: 0.5,
+                initialSpringVelocity: 1.0,
+                options: UIViewAnimationOptions.BeginFromCurrentState,
+                animations: {
+                    fromViewController.view.transform = transformScaleSmall
+                    fromViewController.view.center = self.originPoint
+                    fromViewController.view.alpha = 0.15
+                },
+                completion: { finished in
+                    fromViewController.view.removeFromSuperview()
+                    transitionContext.completeTransition(true)
+            })
         }
     }
 }

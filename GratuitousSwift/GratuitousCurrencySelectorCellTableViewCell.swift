@@ -23,6 +23,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         self.layer.borderWidth = 2.0
+        self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "overrideCurrencySymbolUpdatedOnDisk:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)

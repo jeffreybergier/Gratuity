@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel!
     @IBOutlet private weak var totalAmountTextLabel: UILabel!
@@ -277,8 +277,40 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let point = self.settingsButton.superview?.convertPoint(self.settingsButton.center, toView: self.view)
+    @IBAction func didTapSettingsButton(sender: UIButton) {
+        let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
+        if let viewControllerString = NSStringFromClass(SettingsTableViewController).componentsSeparatedByString(".").last {
+            if let settingsViewController = storyboard.instantiateViewControllerWithIdentifier(viewControllerString) as? UITableViewController {
+                //put the new view controller in a navigation controller
+                let navigationController = UINavigationController(rootViewController: settingsViewController)
+                //set the navigation controller transitioning context
+                navigationController.transitioningDelegate = self
+                navigationController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                //present the navigation controller and its viewcontroller
+                self.presentViewController(navigationController, animated: true, completion: { finished in })
+            }
+        }
+    }
+    
+    
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let transitionDelegate = GratuitousTransitionDelegate()
+        if let originPoint = self.settingsButton.superview?.convertPoint(self.settingsButton.center, toView: self.view) {
+            transitionDelegate.originPoint = originPoint
+        }
+        transitionDelegate.modePresentDismiss = CustomTransitionMode.Present
+        transitionDelegate.stylePopoverModal = CustomTransitionStyle.Popover
+        return transitionDelegate
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let transitionDelegate = GratuitousTransitionDelegate()
+        if let originPoint = self.settingsButton.superview?.convertPoint(self.settingsButton.center, toView: self.view) {
+            transitionDelegate.originPoint = originPoint
+        }
+        transitionDelegate.modePresentDismiss = CustomTransitionMode.Dismiss
+        transitionDelegate.stylePopoverModal = CustomTransitionStyle.Popover
+        return transitionDelegate
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
