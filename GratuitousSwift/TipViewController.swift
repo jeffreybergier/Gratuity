@@ -47,6 +47,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var didEndDeceleratingBillTable = false
     private var didEndDeceleratingTipTable = false
     private var tipTableCustomValueSet = false
+    private var interactiveSwipe: GratuitousInteractiveTransitionAnimation?
     private var suggestedTipPercentage: Double = 0.0 {
         didSet {
             self.updateBillAmountText()
@@ -312,6 +313,17 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         transitionDelegate.stylePopoverModal = CustomTransitionStyle.Popover
         return transitionDelegate
     }
+    
+    func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        if let interactiveSwipe = self.interactiveSwipe {
+            //return interactiveSwipe
+        } else {
+            self.interactiveSwipe = GratuitousInteractiveTransitionAnimation()
+            //return self.interactiveSwipe
+        }
+        return nil
+    }
+
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch tableView.tag {

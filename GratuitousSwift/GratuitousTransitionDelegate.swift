@@ -76,47 +76,61 @@ class GratuitousTransitionDelegate: NSObject, UIViewControllerAnimatedTransition
     }
 }
 
-/*
-- (NSTimeInterval)transitionDuration:(id )transitionContext {
-    return self.mode == SwatchTransitionModePresent ? SWATCH_PRESENT_DURATION : SWATCH_DISMISS_DURATION;
+class GratuitousInteractiveTransitionAnimation: UIPercentDrivenInteractiveTransition {
+    var viewController: UIViewController?
+    var shouldComplete = false
+    let panGestureRecognizer: UIPanGestureRecognizer
+    
+    
+    override init() {
+        //Horrible! I can't call super until the pan gesture recognizer is initialized. But I can't use self until after I call super. Convenience means sacrificing speed and initializing this object twice for no reason. I don't want to have to deal with the optional.
+        //thanks swift! /s
+        self.panGestureRecognizer = UIPanGestureRecognizer()
+        super.init()
+        self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "onPan:")
     }
     
-    - (void)animateTransition:(id )transitionContext {
-        UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-        UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-        
-        CGRect sourceRect = [transitionContext initialFrameForViewController:fromVC];
-        
-        CGAffineTransform rotation = CGAffineTransformMakeRotation(- M_PI / 2);
-        UIView *container = [transitionContext containerView];
-        
-        if (self.mode == SwatchTransitionModePresent) {
-            [container addSubview:toVC.view];
-            
-            toVC.view.layer.anchorPoint = CGPointZero;
-            toVC.view.frame = sourceRect;
-            toVC.view.transform = rotation;
-            
-            [UIView animateWithDuration:SWATCH_PRESENT_DURATION
-                delay:0
-                usingSpringWithDamping:0.25
-                initialSpringVelocity:3
-                options:UIViewAnimationOptionCurveEaseIn
-                animations:^{
-                toVC.view.transform = CGAffineTransformIdentity;
-                } completion:^(BOOL finished) {
-                [transitionContext completeTransition:YES];
-                }];
-        } else if(self.mode == SwatchTransitionModeDismiss) {
-            [UIView animateWithDuration:SWATCH_DISMISS_DURATION
-                delay:0
-                options:UIViewAnimationOptionCurveEaseIn
-                animations:^{
-                fromVC.view.transform = rotation;
-                } completion:^(BOOL finished) {
-                [fromVC.view removeFromSuperview];
-                [transitionContext completeTransition:YES];
-                }];
+    func attachToViewController(viewController: UIViewController) {
+        self.viewController = viewController
+        self.viewController?.view.addGestureRecognizer(self.panGestureRecognizer)
+    }
+    
+    func onPan(pan: UIPanGestureRecognizer) {
+        if let viewController = self.viewController {
+            if let panSuperview = pan.view?.superview {
+                let translation = pan.translationInView(panSuperview)
+                switch pan.state {
+                case .Began:
+                    viewController.dismissViewControllerAnimated(true, completion: nil)
+                case .Changed:
+                    let dragAmount = CGFloat(UIScreen.mainScreen().bounds.width / 2)
+                    let dragThreshold = CGFloat(0.5)
+                    var dragPercent = CGFloat(translation.x / dragAmount)
+                    dragPercent = CGFloat(fmaxf(Float(dragPercent), 0.0))
+                    dragPercent = CGFloat(fminf(Float(dragPercent), 1.0))
+                    self.updateInteractiveTransition(dragPercent)
+                    self.shouldComplete = dragPercent >= dragThreshold
+                case .Cancelled, .Ended:
+                    if (pan.state == .Cancelled) || (self.shouldComplete == false) {
+                        self.cancelInteractiveTransition()
+                    } else {
+                        self.finishInteractiveTransition()
+                    }
+                default:
+                    break
+                }
+            }
+        } else {
+            println("GratuitousInteractiveTransitionAnimation: Panning started but there was no view controller. This should never happen")
         }
     }
-*/
+    
+    func completionSpeed() -> CGFloat {
+        return 1 - self.completionSpeed
+    }
+}
+
+
+
+
+
