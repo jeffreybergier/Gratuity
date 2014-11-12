@@ -10,19 +10,11 @@ import UIKit
 
 class GratuitousCurrencyFormatter: NSObject {
     
-//    private let CURRENCYSIGNDEFAULT = 0
-//    private let CURRENCYSIGNDOLLAR = 1
-//    private let CURRENCYSIGNPOUND = 2
-//    private let CURRENCYSIGNEURO = 3
-//    private let CURRENCYSIGNYEN = 4
-//    private let CURRENCYSIGNNONE = 5
-    
     private let currencyFormatter = NSNumberFormatter()
-    weak var tipViewControllerDelegate: TipViewController?
     
     private var selectedCurrencySymbol: CurrencySign = CurrencySign.Default {
         didSet {
-            self.tipViewControllerDelegate?.localeDidChange()
+            NSNotificationCenter.defaultCenter().postNotificationName("currencyFormatterReadyReloadView", object: nil)
         }
     }
     

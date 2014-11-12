@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //crashlytics intializer
-        Fabric.with([Crashlytics()]) //Crashlytics.sharedInstance().debugMode = true
+        Fabric.with([Crashlytics()])
         
         //prepare nsuserdefaults
         self.prepareUserDefaults()

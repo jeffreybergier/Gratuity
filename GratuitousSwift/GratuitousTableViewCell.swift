@@ -26,22 +26,31 @@ class GratuitousTableViewCell: UITableViewCell {
     }
     var billAmount: NSNumber = Double(0) {
         didSet {
-            let currencyFormattedString = self.currencyFormatter?.currencyFormattedString(self.billAmount)
-            //let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(self.billAmount)
-            var stringForLabel = NSAttributedString()
-            if let currencyFormattedString = currencyFormattedString {
-                stringForLabel = NSAttributedString(string: currencyFormattedString, attributes: self.labelTextAttributes)
-            } else {
-                println("GratuitousTableViewCell: Failure to unwrap optional currentFormattedString. You should never see this warning.")
-                stringForLabel = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes)
-            }
-            self.dollarTextLabel.attributedText = stringForLabel
+            self.didSetBillAmount()
         }
+    }
+    
+    func localeDidChangeUpdateTextField(notification: NSNotification) {
+        self.didSetBillAmount()
+    }
+    
+    private func didSetBillAmount() {
+        let currencyFormattedString = self.currencyFormatter?.currencyFormattedString(self.billAmount)
+        //let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(self.billAmount)
+        var stringForLabel = NSAttributedString()
+        if let currencyFormattedString = currencyFormattedString {
+            stringForLabel = NSAttributedString(string: currencyFormattedString, attributes: self.labelTextAttributes)
+        } else {
+            println("GratuitousTableViewCell: Failure to unwrap optional currentFormattedString. You should never see this warning.")
+            stringForLabel = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes)
+        }
+        self.dollarTextLabel.attributedText = stringForLabel
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateTextField:", name: "currencyFormatterReadyReloadView", object: nil)
         
         //the default selection styles are so fucking shitty
         self.selectionStyle = UITableViewCellSelectionStyle.None
@@ -74,6 +83,10 @@ class GratuitousTableViewCell: UITableViewCell {
         //configure the label to be deselected
         let attributedString = NSAttributedString(string: text!, attributes: self.labelTextAttributes)
         self.dollarTextLabel.attributedText = attributedString
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
 }

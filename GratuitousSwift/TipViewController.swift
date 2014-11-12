@@ -54,14 +54,14 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
+    //MARK: Handle View Loading
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "suggestedTipUpdatedOnDisk:", name: "suggestedTipValueUpdated", object: nil)
-        
-        //give the currencyformatted a delegate
-        self.currencyFormatter.tipViewControllerDelegate = self
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateView:", name: "currencyFormatterReadyReloadView", object: nil)
         
         //prepare the arrays
         for i in 0..<self.MAXBILLAMOUNT {
@@ -127,14 +127,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 self.tableContainerView.alpha = 1.0
             }, completion: nil)
         
-        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.005, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
         
-        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.09, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
-    }
-    
-    func suggestedTipUpdatedOnDisk(notification: NSNotification?) {
-        let onDiskTipPercentage: NSNumber = self.userDefaults.doubleForKey("suggestedTipPercentage")
-        self.suggestedTipPercentage = onDiskTipPercentage.doubleValue
+        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.009, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
     
     func scrollBillTableViewAtLaunch(timer: NSTimer?) {
@@ -176,19 +171,47 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
-    private func indexPathInCenterOfTable(tableView: UITableView) -> NSIndexPath {
-        var indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        
-        var point = tableView.frame.origin
-        point.x += tableView.frame.size.width / 2
-        point.y += tableView.frame.size.height / 2
-        point = tableView.convertPoint(point, fromView: tableView.superview)
-        if let optionalIndexPath = tableView.indexPathForRowAtPoint(point) {
-            indexPath = optionalIndexPath
-        }
-        
-        return indexPath
+    //MARK: Handle User Input
+    
+    @IBAction func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
+        self.billAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
+    
+    @IBAction func didTapTipAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
+        self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+    }
+    
+    @IBAction func willExitFromSegue (sender: UIStoryboardSegue){
+        
+    }
+    
+    //MARK: Handle Writing to Disk
+    
+    func suggestedTipUpdatedOnDisk(notification: NSNotification?) {
+        let onDiskTipPercentage: NSNumber = self.userDefaults.doubleForKey("suggestedTipPercentage")
+        self.suggestedTipPercentage = onDiskTipPercentage.doubleValue
+    }
+    
+    private func writeBillIndexPathRowToDiskWithTableView(tableView: UITableView) {
+        if !self.tipTableCustomValueSet {
+            //println("Writing BillIndexPathRow to Disk: \(self.indexPathInCenterOfTable(tableView).row)")
+            self.userDefaults.setInteger(self.indexPathInCenterOfTable(tableView).row, forKey: "billIndexPathRow")
+            self.userDefaults.setInteger(0, forKey: "tipIndexPathRow")
+            self.userDefaults.synchronize()
+        }
+    }
+    
+    private func writeTipIndexPathRowToDiskWithTableView(tableView: UITableView) {
+        if self.tipTableCustomValueSet {
+            self.tipTableCustomValueSet = false
+        } else {
+            //println("Writing TipIndexPathRow to Disk: \(self.indexPathInCenterOfTable(tableView).row)")
+            self.userDefaults.setInteger(self.indexPathInCenterOfTable(tableView).row, forKey: "tipIndexPathRow")
+            self.userDefaults.synchronize()
+        }
+    }
+    
+    //MARK: Handle Updating the Big Labels
     
     private func updateBillAmountText() {
         let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView)
@@ -261,6 +284,21 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
+    func localeDidChangeUpdateView(notification: NSNotification) {
+        self.updateBillAmountText()
+    }
+    
+    //MARK: Handle View Controller Transitions
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // this gets a reference to the screen that we're about to transition to
+        let toViewController = segue.destinationViewController as UINavigationController
+        
+        // instead of using the default transition animation, we'll ask
+        // the segue to use our custom TransitionManager object to manage the transition animation
+        toViewController.transitioningDelegate = transitionManager
+    }
+    
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         coordinator.animateAlongsideTransition({ context in }, completion: {context in
@@ -277,27 +315,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         })
     }
     
-    @IBAction func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
-        self.billAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
-    }
-    
-    @IBAction func didTapTipAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
-        self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
-    }
-    
-    @IBAction func willExitFromSegue (sender: UIStoryboardSegue){
-        
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // this gets a reference to the screen that we're about to transition to
-        let toViewController = segue.destinationViewController as UINavigationController
-        
-        // instead of using the default transition animation, we'll ask
-        // the segue to use our custom TransitionManager object to manage the transition animation
-        toViewController.transitioningDelegate = transitionManager
-    }
-
+    //MARK: Handle Table View User Input
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch tableView.tag {
@@ -305,25 +323,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
         default:
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-        }
-    }
-    
-    private func writeBillIndexPathRowToDiskWithTableView(tableView: UITableView) {
-        if !self.tipTableCustomValueSet {
-            //println("Writing BillIndexPathRow to Disk: \(self.indexPathInCenterOfTable(tableView).row)")
-            self.userDefaults.setInteger(self.indexPathInCenterOfTable(tableView).row, forKey: "billIndexPathRow")
-            self.userDefaults.setInteger(0, forKey: "tipIndexPathRow")
-            self.userDefaults.synchronize()
-        }
-    }
-    
-    private func writeTipIndexPathRowToDiskWithTableView(tableView: UITableView) {
-        if self.tipTableCustomValueSet {
-            self.tipTableCustomValueSet = false
-        } else {
-            //println("Writing TipIndexPathRow to Disk: \(self.indexPathInCenterOfTable(tableView).row)")
-            self.userDefaults.setInteger(self.indexPathInCenterOfTable(tableView).row, forKey: "tipIndexPathRow")
-            self.userDefaults.synchronize()
         }
     }
     
@@ -401,6 +400,22 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
+    //MARK: Handle Table View Delegate DataSourceStuff
+    
+    private func indexPathInCenterOfTable(tableView: UITableView) -> NSIndexPath {
+        var indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        
+        var point = tableView.frame.origin
+        point.x += tableView.frame.size.width / 2
+        point.y += tableView.frame.size.height / 2
+        point = tableView.convertPoint(point, fromView: tableView.superview)
+        if let optionalIndexPath = tableView.indexPathForRowAtPoint(point) {
+            indexPath = optionalIndexPath
+        }
+        
+        return indexPath
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
         switch tableView.tag {
@@ -460,6 +475,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         return rowHeight
     }
     
+    //MARK: View Controller Preferences
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
@@ -468,10 +485,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         return Int(UIInterfaceOrientationMask.All.rawValue)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    //MARK: Handle Text Size Adjustment and Label Attributed Strings
     
     private func checkScreenHeightForTextSizeAdjuster() -> Double {
         var textSizeAdjustment = 1.0
@@ -564,11 +578,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipPercentageTextLabel.attributedText = attributedString
     }
     
-    func localeDidChange() {
-        self.billAmountTableView.reloadData()
-        self.tipAmountTableView.reloadData()
-        
-        self.updateBillAmountText()
+    //MARK: Handle View Going Away
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     deinit {
