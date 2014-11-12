@@ -120,9 +120,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.suggestedTipPercentageLabel.textColor = GratuitousColorSelector.lightTextColor()
         
         //set the tint color for the tip percentage slider
-        self.suggestedTipPercentageSlider.setThumbImage(self.suggestedTipPercentageSlider.currentThumbImage, forState: UIControlState.Normal) //this is supposed to be help with an ios7 bug where the thumb tint color doesn't change, but its not working in ios8. more research is needed
-        self.suggestedTipPercentageSlider.thumbTintColor = GratuitousColorSelector.lightTextColor()
-        self.suggestedTipPercentageSlider.maximumTrackTintColor = UIColor.darkGrayColor()
+        self.suggestedTipPercentageSlider.maximumTrackTintColor = UIColor.blackColor()
         
         //set the background color of the superview of the slider for ipad. For some reason its white on the ipad only
         self.suggestedTipPercentageSlider.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()

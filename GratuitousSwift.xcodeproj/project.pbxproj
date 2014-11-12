@@ -12,6 +12,7 @@
 		7356AEBE19FF281B00E44A5E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBC19FF281B00E44A5E /* Crashlytics.framework */; };
 		7356AEBF19FF281B00E44A5E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBD19FF281B00E44A5E /* Fabric.framework */; };
 		735C011E1A0878D000A19462 /* GratuitousCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */; };
+		73633BAC1A13B62C00DD705B /* GratuitousTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73633BAB1A13B62C00DD705B /* GratuitousTransitionManager.swift */; };
 		737233DD19E8B9B70072EDB4 /* GratuitousColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */; };
 		737233DF19E8F19C0072EDB4 /* GratuitousAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DE19E8F19C0072EDB4 /* GratuitousAnimations.swift */; };
 		7382510719E60EED00CD2B28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382510619E60EED00CD2B28 /* AppDelegate.swift */; };
@@ -24,7 +25,6 @@
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
 		73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
-		73E35AF01A0D3251009A2F97 /* GratuitousTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AEF1A0D3251009A2F97 /* GratuitousTransitionDelegate.swift */; };
 		73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +33,7 @@
 		7356AEBC19FF281B00E44A5E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		7356AEBD19FF281B00E44A5E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyFormatter.swift; sourceTree = "<group>"; };
+		73633BAB1A13B62C00DD705B /* GratuitousTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTransitionManager.swift; sourceTree = "<group>"; };
 		73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableView.swift; sourceTree = "<group>"; };
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
 		737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousColorSelector.swift; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 				735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */,
 				73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */,
 				73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */,
+				73633BAB1A13B62C00DD705B /* GratuitousTransitionManager.swift */,
 				73E35AEF1A0D3251009A2F97 /* GratuitousTransitionDelegate.swift */,
 				73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */,
 				7382510D19E60EED00CD2B28 /* Images.xcassets */,
@@ -239,9 +241,9 @@
 			files = (
 				7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */,
 				7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */,
-				73E35AF01A0D3251009A2F97 /* GratuitousTransitionDelegate.swift in Sources */,
 				73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */,
 				735C011E1A0878D000A19462 /* GratuitousCurrencyFormatter.swift in Sources */,
+				73633BAC1A13B62C00DD705B /* GratuitousTransitionManager.swift in Sources */,
 				73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */,
 				7335A18F19FB04DA00BE08E2 /* GratuitousTableView.swift in Sources */,
 				737233DD19E8B9B70072EDB4 /* GratuitousColorSelector.swift in Sources */,

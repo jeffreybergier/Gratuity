@@ -18,4 +18,21 @@ enum CustomTransitionStyle: Int {
 
 enum CurrencySign: Int {
     case Default = 0, Dollar, Pound, Euro, Yen, None
+    
+    func string() -> String {
+        switch self {
+        case .Default:
+            return ""
+        case .Dollar:
+            return "$"
+        case .Pound:
+            return "£"
+        case .Euro:
+            return "€"
+        case .Yen:
+            return "¥"
+        case .None:
+            return ""
+        }
+    }
 }

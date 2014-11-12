@@ -37,6 +37,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let LARGEPHONECELLHEIGHT = CGFloat(74.0)
     
     private let currencyFormatter = GratuitousCurrencyFormatter()
+    private let transitionManager = GratuitousTransitionManager()
     
     private var userDefaults = NSUserDefaults.standardUserDefaults()
     private var textSizeAdjustment: NSNumber = NSNumber(double: 0.0)
@@ -47,7 +48,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var didEndDeceleratingBillTable = false
     private var didEndDeceleratingTipTable = false
     private var tipTableCustomValueSet = false
-    private var interactiveSwipe: GratuitousInteractiveTransitionAnimation?
     private var suggestedTipPercentage: Double = 0.0 {
         didSet {
             self.updateBillAmountText()
@@ -117,9 +117,14 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         //on first load we need to load the view to what is written on disk.
         //also, for some reason, when the viewcontroller reappears after modal dismiss, it is not where I left, so we have to reload then as well.
-        UIView.animateWithDuration(GratuitousAnimations.duration(), delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
-            self.labelContainerView.alpha = 1.0
-            self.tableContainerView.alpha = 1.0
+        UIView.animateWithDuration(GratuitousAnimations.duration(),
+            delay: 0.0,
+            usingSpringWithDamping: 1.0,
+            initialSpringVelocity: 1.0,
+            options: UIViewAnimationOptions.AllowUserInteraction,
+            animations: { () -> Void in
+                self.labelContainerView.alpha = 1.0
+                self.tableContainerView.alpha = 1.0
             }, completion: nil)
         
         let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
@@ -200,7 +205,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue-1, inSection: 0)
             if !self.tipTableCustomValueSet {
                 if !self.tipAmountTableView.scrollingState().isScrolling {
-                    self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+                    self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath,
+                        atScrollPosition: UITableViewScrollPosition.Middle,
+                        animated: false)
                 }
             }
             
@@ -278,50 +285,17 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
     
-    @IBAction func didTapSettingsButton(sender: UIButton) {
-        let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
-        if let viewControllerString = NSStringFromClass(SettingsTableViewController).componentsSeparatedByString(".").last {
-            if let settingsViewController = storyboard.instantiateViewControllerWithIdentifier(viewControllerString) as? UITableViewController {
-                //put the new view controller in a navigation controller
-                let navigationController = UINavigationController(rootViewController: settingsViewController)
-                //set the navigation controller transitioning context
-                navigationController.transitioningDelegate = self
-                navigationController.modalPresentationStyle = UIModalPresentationStyle.Custom
-                //present the navigation controller and its viewcontroller
-                self.presentViewController(navigationController, animated: true, completion: { finished in })
-            }
-        }
+    @IBAction func willExitFromSegue (sender: UIStoryboardSegue){
+        
     }
     
-    
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let transitionDelegate = GratuitousTransitionDelegate()
-        if let originPoint = self.settingsButton.superview?.convertPoint(self.settingsButton.center, toView: self.view) {
-            transitionDelegate.originPoint = originPoint
-        }
-        transitionDelegate.modePresentDismiss = CustomTransitionMode.Present
-        transitionDelegate.stylePopoverModal = CustomTransitionStyle.Popover
-        return transitionDelegate
-    }
-    
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let transitionDelegate = GratuitousTransitionDelegate()
-        if let originPoint = self.settingsButton.superview?.convertPoint(self.settingsButton.center, toView: self.view) {
-            transitionDelegate.originPoint = originPoint
-        }
-        transitionDelegate.modePresentDismiss = CustomTransitionMode.Dismiss
-        transitionDelegate.stylePopoverModal = CustomTransitionStyle.Popover
-        return transitionDelegate
-    }
-    
-    func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        if let interactiveSwipe = self.interactiveSwipe {
-            //return interactiveSwipe
-        } else {
-            self.interactiveSwipe = GratuitousInteractiveTransitionAnimation()
-            //return self.interactiveSwipe
-        }
-        return nil
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // this gets a reference to the screen that we're about to transition to
+        let toViewController = segue.destinationViewController as UINavigationController
+        
+        // instead of using the default transition animation, we'll ask
+        // the segue to use our custom TransitionManager object to manage the transition animation
+        toViewController.transitioningDelegate = transitionManager
     }
 
     
