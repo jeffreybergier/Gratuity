@@ -298,7 +298,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             toViewController.view.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
             toViewController.view.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
             popoverPresentationController?.passthroughViews = [self.billAmountTableView, self.tipAmountTableView]
-            popoverPresentationController?.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+            popoverPresentationController?.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(1.0)
             popoverPresentationController?.delegate = self
         } else {
             // instead of using the default transition animation, we'll ask
