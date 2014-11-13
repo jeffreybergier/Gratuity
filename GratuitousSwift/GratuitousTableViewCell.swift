@@ -56,8 +56,8 @@ class GratuitousTableViewCell: UITableViewCell {
         self.selectionStyle = UITableViewCellSelectionStyle.None
         
         //configure the colors
-        self.contentView.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
-        self.dollarTextLabel.textColor = GratuitousColorSelector.lightTextColor()
+        self.contentView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+        self.dollarTextLabel.textColor = GratuitousUIConstant.lightTextColor()
         
         //prepare the text attributes to reused over and over
         self.prepareLabelTextAttributes()
@@ -69,7 +69,7 @@ class GratuitousTableViewCell: UITableViewCell {
         let textColor = self.dollarTextLabel.textColor
         let text = self.dollarTextLabel.text
         let shadow = NSShadow()
-        shadow.shadowColor = GratuitousColorSelector.textShadowColor()
+        shadow.shadowColor = GratuitousUIConstant.textShadowColor()
         shadow.shadowBlurRadius = 1.5
         shadow.shadowOffset = CGSizeMake(0.5, 0.5)
         let attributes = [

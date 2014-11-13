@@ -50,7 +50,7 @@ class GratuitousTableView: UITableView, UITableViewDelegate {
         self.tag = tag
         self.estimatedRowHeight = 76.0
         self.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+        self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
         self.showsVerticalScrollIndicator = false
         self.registerNib(UINib(nibName: cellClass, bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }

@@ -114,10 +114,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cFa-ss-hba">
-                                        <rect key="frame" x="90" y="0.0" width="129" height="33"/>
+                                        <rect key="frame" x="90.5" y="0.0" width="128.5" height="32.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Amount on Bill" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="qGH-24-ssK">
-                                                <rect key="frame" x="8" y="5" width="113" height="23"/>
+                                                <rect key="frame" x="8" y="5" width="112.5" height="22.5"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -136,10 +136,10 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jem-jz-msI">
-                                        <rect key="frame" x="400" y="0.0" width="125" height="33"/>
+                                        <rect key="frame" x="400.5" y="0.0" width="124.5" height="32.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Suggested Tip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="afh-uC-UXK">
-                                                <rect key="frame" x="8" y="5" width="109" height="23"/>
+                                                <rect key="frame" x="8" y="5" width="108.5" height="22.5"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -157,15 +157,6 @@
                                             <outletCollection property="gestureRecognizers" destination="c1J-DN-iPd" appends="YES" id="WU8-Sn-Nrz"/>
                                         </connections>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5O-Qc-eNn">
-                                        <rect key="frame" x="547" y="258" width="57" height="30"/>
-                                        <state key="normal" title="Settings"/>
-                                        <connections>
-                                            <segue destination="Kup-dN-NFx" kind="popoverPresentation" identifier="settingsPopoverSegue" popoverAnchorView="x5O-Qc-eNn" id="VR1-mv-dmy">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -176,7 +167,6 @@
                                     <constraint firstItem="YkV-Bf-bef" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="top" id="430-tS-DUT"/>
                                     <constraint firstItem="jhw-69-tGe" firstAttribute="bottom" secondItem="Xpb-Dz-Chr" secondAttribute="bottom" id="6yW-m1-gZ9"/>
                                     <constraint firstItem="YkV-Bf-bef" firstAttribute="leading" secondItem="Xpb-Dz-Chr" secondAttribute="leading" id="8Al-IP-cgl"/>
-                                    <constraint firstAttribute="trailing" secondItem="x5O-Qc-eNn" secondAttribute="trailing" constant="12" id="8tY-6e-3LN"/>
                                     <constraint firstItem="cFa-ss-hba" firstAttribute="top" secondItem="YkV-Bf-bef" secondAttribute="top" id="Aer-5R-hD5"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="width" secondItem="YkV-Bf-bef" secondAttribute="width" id="Aoi-fS-KiX"/>
                                     <constraint firstItem="Qr8-7O-BPw" firstAttribute="top" secondItem="jhw-69-tGe" secondAttribute="bottom" id="BxK-x7-si0"/>
@@ -194,7 +184,6 @@
                                     <constraint firstItem="jhw-69-tGe" firstAttribute="leading" secondItem="F2W-Pc-eWf" secondAttribute="leading" constant="154" id="aKD-XB-Mxf"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="trailing" secondItem="Qr8-7O-BPw" secondAttribute="trailing" id="bs8-BZ-YTo"/>
                                     <constraint firstItem="cFa-ss-hba" firstAttribute="centerX" secondItem="YkV-Bf-bef" secondAttribute="centerX" id="chg-Jf-qlM"/>
-                                    <constraint firstAttribute="bottom" secondItem="x5O-Qc-eNn" secondAttribute="bottom" constant="8" id="dIj-tf-Aes"/>
                                     <constraint firstItem="V1Q-ia-Gn2" firstAttribute="centerX" secondItem="jem-jz-msI" secondAttribute="centerX" id="dwE-Rm-5nI"/>
                                     <constraint firstAttribute="bottom" secondItem="YkV-Bf-bef" secondAttribute="bottom" id="gqe-YW-KYV"/>
                                     <constraint firstItem="YkV-Bf-bef" firstAttribute="leading" secondItem="jhw-69-tGe" secondAttribute="leading" constant="-8" id="mJz-ZY-fUY">
@@ -224,6 +213,15 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5O-Qc-eNn">
+                                <rect key="frame" x="527" y="562" width="57" height="30"/>
+                                <state key="normal" title="Settings"/>
+                                <connections>
+                                    <segue destination="Kup-dN-NFx" kind="popoverPresentation" identifier="settingsPopoverSegue" popoverAnchorView="x5O-Qc-eNn" id="VR1-mv-dmy">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.11764705882352941" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -237,10 +235,12 @@
                             <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="F2W-Pc-eWf" secondAttribute="trailing" id="NXH-wi-F1K"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="leading" secondItem="Tiu-8h-vjS" secondAttribute="leadingMargin" constant="-24" id="Qwl-pL-kS0"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="height" secondItem="Tiu-8h-vjS" secondAttribute="height" multiplier="1/3.5" id="Ugr-y8-9SS"/>
+                            <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="x5O-Qc-eNn" secondAttribute="bottom" constant="8" symbolic="YES" id="Wbb-ez-0u8"/>
                             <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="bottom" id="YiU-Ec-r5z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sGt-Qz-W1j" secondAttribute="trailing" constant="-16" id="ghx-eO-TWI"/>
                             <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="F2W-Pc-eWf" secondAttribute="trailing" id="iKK-ny-erz"/>
                             <constraint firstAttribute="height" secondItem="sGt-Qz-W1j" secondAttribute="height" id="kyO-qO-aQ3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="x5O-Qc-eNn" secondAttribute="trailing" id="rCu-ms-0HB"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="top" secondItem="sGt-Qz-W1j" secondAttribute="bottom" id="s7t-Bp-vRn"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="height" secondItem="Tiu-8h-vjS" secondAttribute="height" id="zhH-FQ-VKG"/>
                         </constraints>

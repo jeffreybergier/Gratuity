@@ -13,8 +13,7 @@
 		7356AEBF19FF281B00E44A5E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBD19FF281B00E44A5E /* Fabric.framework */; };
 		735C011E1A0878D000A19462 /* GratuitousCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */; };
 		73633BAC1A13B62C00DD705B /* GratuitousTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73633BAB1A13B62C00DD705B /* GratuitousTransitionManager.swift */; };
-		737233DD19E8B9B70072EDB4 /* GratuitousColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */; };
-		737233DF19E8F19C0072EDB4 /* GratuitousAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DE19E8F19C0072EDB4 /* GratuitousAnimations.swift */; };
+		737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */; };
 		7382510719E60EED00CD2B28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382510619E60EED00CD2B28 /* AppDelegate.swift */; };
 		7382510E19E60EED00CD2B28 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7382510D19E60EED00CD2B28 /* Images.xcassets */; };
 		7382511119E60EED00CD2B28 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382510F19E60EED00CD2B28 /* LaunchScreen.xib */; };
@@ -36,8 +35,7 @@
 		73633BAB1A13B62C00DD705B /* GratuitousTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTransitionManager.swift; sourceTree = "<group>"; };
 		73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableView.swift; sourceTree = "<group>"; };
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
-		737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousColorSelector.swift; sourceTree = "<group>"; };
-		737233DE19E8F19C0072EDB4 /* GratuitousAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimations.swift; sourceTree = "<group>"; };
+		737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIConstant.swift; sourceTree = "<group>"; };
 		7382510119E60EED00CD2B28 /* GratuityB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuityB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7382510519E60EED00CD2B28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7382510619E60EED00CD2B28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,8 +96,7 @@
 				7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */,
 				73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */,
 				736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */,
-				737233DC19E8B9B70072EDB4 /* GratuitousColorSelector.swift */,
-				737233DE19E8F19C0072EDB4 /* GratuitousAnimations.swift */,
+				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
 				735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */,
 				73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */,
 				73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */,
@@ -246,10 +243,9 @@
 				73633BAC1A13B62C00DD705B /* GratuitousTransitionManager.swift in Sources */,
 				73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */,
 				7335A18F19FB04DA00BE08E2 /* GratuitousTableView.swift in Sources */,
-				737233DD19E8B9B70072EDB4 /* GratuitousColorSelector.swift in Sources */,
+				737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */,
 				73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */,
 				7382510719E60EED00CD2B28 /* AppDelegate.swift in Sources */,
-				737233DF19E8F19C0072EDB4 /* GratuitousAnimations.swift in Sources */,
 				73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */,
 				73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
 			);

@@ -31,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //configure the window
         self.window?.rootViewController = tipViewController
-        self.window?.backgroundColor = GratuitousColorSelector.darkBackgroundColor();
-        self.window?.tintColor = GratuitousColorSelector.lightTextColor()
+        self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
+        self.window?.tintColor = GratuitousUIConstant.lightTextColor()
         self.window?.makeKeyAndVisible()
         
         return true

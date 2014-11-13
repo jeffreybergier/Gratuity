@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GratuitousColorSelector: NSObject {
+class GratuitousUIConstant: NSObject {
     
     class func lightBackgroundColor() -> UIColor {
         //return UIColor(red: 185.0/255.0, green: 46.0/255.0, blue: 46.0/255.0, alpha: 1.0)
@@ -31,6 +31,18 @@ class GratuitousColorSelector: NSObject {
     
     class func textShadowColor() -> UIColor {
         return UIColor(red: 20.0/255.0, green: 20.0/255.0, blue: 20.0/255.0, alpha: 1.0)
+    }
+    
+    class func thickBorderWidth() -> CGFloat {
+        return 2.0
+    }
+    
+    class func thinBorderWidth() -> CGFloat {
+        return 1.0
+    }
+    
+    class func animationDuration() -> Double {
+        return 0.3
     }
    
 }

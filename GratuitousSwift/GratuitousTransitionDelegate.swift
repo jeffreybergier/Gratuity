@@ -38,7 +38,7 @@ class GratuitousTransitionDelegate: NSObject, UIViewControllerAnimatedTransition
             toViewController.view.alpha = 0.5
             toViewController.view.transform = transformScaleSmall
             if self.stylePopoverModal == .Popover {
-                toViewController.view.layer.borderWidth = 3.0
+                toViewController.view.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
                 toViewController.view.layer.cornerRadius = 5.0
                 toViewController.view.layer.borderColor = GratuitousColorSelector.lightBackgroundColor().CGColor
                 toViewController.view.clipsToBounds = true

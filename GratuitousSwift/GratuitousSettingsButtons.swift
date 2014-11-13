@@ -23,21 +23,21 @@ class GratuitousSettingsButtons: UIButton {
     }
     
     private func prepareButtonAppearance() {
-        self.tintColor = GratuitousColorSelector.lightTextColor()
+        self.tintColor = GratuitousUIConstant.lightTextColor()
         self.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.adjustsImageWhenHighlighted = false
-        self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+        self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
         
-        self.setTitleColor(GratuitousColorSelector.lightTextColor(), forState: UIControlState.Normal)
-        self.setTitleColor(GratuitousColorSelector.darkTextColor(), forState: UIControlState.Highlighted)
+        self.setTitleColor(GratuitousUIConstant.lightTextColor(), forState: UIControlState.Normal)
+        self.setTitleColor(GratuitousUIConstant.darkTextColor(), forState: UIControlState.Highlighted)
         
-        self.layer.borderColor = GratuitousColorSelector.lightTextColor().CGColor
-        self.layer.borderWidth = 2.0
+        self.layer.borderColor = GratuitousUIConstant.lightTextColor().CGColor
+        self.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
         self.layer.cornerRadius = 6.0
     }
     
     func touchDown(sender: GratuitousSettingsButtons) {
-        self.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
+        self.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
     }
     
     func touchUp(sender: GratuitousSettingsButtons) {
@@ -45,14 +45,14 @@ class GratuitousSettingsButtons: UIButton {
             delay: 0.0,
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
-                self.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
+                self.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
             },
             completion: { finished in
-                UIView.animateWithDuration(GratuitousAnimations.duration()*2,
+                UIView.animateWithDuration(GratuitousUIConstant.animationDuration()*2,
                     delay: 0.0,
                     options: UIViewAnimationOptions.BeginFromCurrentState,
                     animations: {
-                        self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+                        self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
                     },
                     completion: { finished in })
         })

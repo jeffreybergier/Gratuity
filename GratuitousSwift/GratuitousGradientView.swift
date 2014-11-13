@@ -13,10 +13,10 @@ class GratuitousGradientView: UIView {
     
     internal let gradient = CAGradientLayer()
     internal let gradientColors = [
-        GratuitousColorSelector.darkBackgroundColor().CGColor, GratuitousColorSelector.darkBackgroundColor().CGColor,
-        GratuitousColorSelector.darkBackgroundColor().colorWithAlphaComponent(0.6).CGColor,
-        GratuitousColorSelector.darkBackgroundColor().colorWithAlphaComponent(0.5).CGColor,
-        GratuitousColorSelector.darkBackgroundColor().colorWithAlphaComponent(0.4).CGColor
+        GratuitousUIConstant.darkBackgroundColor().CGColor, GratuitousUIConstant.darkBackgroundColor().CGColor,
+        GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.6).CGColor,
+        GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.5).CGColor,
+        GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.4).CGColor
     ]
     
     var isUpsideDown:Bool = false {

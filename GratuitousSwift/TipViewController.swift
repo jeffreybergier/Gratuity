@@ -83,19 +83,19 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
         
         //configure color of view
-        self.view.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
-        self.tipPercentageTextLabel.textColor = GratuitousColorSelector.lightTextColor()
-        self.totalAmountTextLabel.textColor = GratuitousColorSelector.lightTextColor()
-        self.tipAmountTableViewTitleTextLabel.textColor = GratuitousColorSelector.darkTextColor()
-        self.billAmountTableViewTitleTextLabel.textColor = GratuitousColorSelector.darkTextColor()
-        self.tipAmountTableViewTitleTextLabelView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
-        self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
+        self.view.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+        self.tipPercentageTextLabel.textColor = GratuitousUIConstant.lightTextColor()
+        self.totalAmountTextLabel.textColor = GratuitousUIConstant.lightTextColor()
+        self.tipAmountTableViewTitleTextLabel.textColor = GratuitousUIConstant.darkTextColor()
+        self.billAmountTableViewTitleTextLabel.textColor = GratuitousUIConstant.darkTextColor()
+        self.tipAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+        self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
         
         //prepare the cell select surrounds
         self.billAmountSelectedSurroundView.backgroundColor = UIColor.clearColor()
-        self.billAmountSelectedSurroundView.layer.borderWidth = 3.0
+        self.billAmountSelectedSurroundView.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
         self.billAmountSelectedSurroundView.layer.cornerRadius = 0.0
-        self.billAmountSelectedSurroundView.layer.borderColor = GratuitousColorSelector.lightBackgroundColor().CGColor
+        self.billAmountSelectedSurroundView.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
         
         //prepare lower gradient view so its upside down
         self.billAmountLowerGradientView.isUpsideDown = true
@@ -117,7 +117,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         //on first load we need to load the view to what is written on disk.
         //also, for some reason, when the viewcontroller reappears after modal dismiss, it is not where I left, so we have to reload then as well.
-        UIView.animateWithDuration(GratuitousAnimations.duration(),
+        UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
             delay: 0.0,
             usingSpringWithDamping: 1.0,
             initialSpringVelocity: 1.0,
@@ -295,7 +295,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         let toViewController = segue.destinationViewController as UINavigationController
         if bigDevice {
             let popoverPresentationController = toViewController.popoverPresentationController
-            popoverPresentationController?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+            toViewController.view.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
+            toViewController.view.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
+            popoverPresentationController?.passthroughViews = [self.billAmountTableView, self.tipAmountTableView]
+            popoverPresentationController?.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
             popoverPresentationController?.delegate = self
         } else {
             // instead of using the default transition animation, we'll ask
@@ -551,7 +554,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         let textColor = self.totalAmountTextLabel.textColor
         let text = self.totalAmountTextLabel.text
         let shadow = NSShadow()
-        shadow.shadowColor = GratuitousColorSelector.textShadowColor()
+        shadow.shadowColor = GratuitousUIConstant.textShadowColor()
         shadow.shadowBlurRadius = 2.0
         shadow.shadowOffset = CGSizeMake(2.0, 2.0)
         let attributes = [
@@ -573,7 +576,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         let textColor = self.tipPercentageTextLabel.textColor
         let text = self.tipPercentageTextLabel.text
         let shadow = NSShadow()
-        shadow.shadowColor = GratuitousColorSelector.textShadowColor()
+        shadow.shadowColor = GratuitousUIConstant.textShadowColor()
         shadow.shadowBlurRadius = 2.0
         shadow.shadowOffset = CGSizeMake(2.0, 2.0)
         let attributes = [
