@@ -23,7 +23,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         self.layer.borderWidth = 2.0
-        self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+        self.backgroundColor = UIColor.blackColor() //GratuitousColorSelector.darkBackgroundColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "overrideCurrencySymbolUpdatedOnDisk:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
@@ -56,7 +56,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         } else {
             self.accessoryType = UITableViewCellAccessoryType.None
             if !self.animatingBorderColor {
-                self.layer.borderColor = GratuitousColorSelector.darkBackgroundColor().CGColor
+                self.layer.borderColor = UIColor.blackColor().CGColor //GratuitousColorSelector.darkBackgroundColor().CGColor
             }
             self.accessoryType = UITableViewCellAccessoryType.None
         }
@@ -70,7 +70,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             let colorAnimation = CABasicAnimation(keyPath: "borderColor")
             colorAnimation.fromValue = GratuitousColorSelector.lightBackgroundColor().CGColor
             colorAnimation.toValue = GratuitousColorSelector.darkBackgroundColor().CGColor
-            self.layer.borderColor = GratuitousColorSelector.darkBackgroundColor().CGColor
+            self.layer.borderColor = UIColor.blackColor().CGColor //GratuitousColorSelector.darkBackgroundColor().CGColor
             
             let animationGroup = CAAnimationGroup()
             animationGroup.duration = 2.0
@@ -93,7 +93,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     
     func cgAnimationDidFinish(timer: NSTimer?) {
         timer?.invalidate()
-
+        
         self.animatingBorderColor = false
     }
     
@@ -119,7 +119,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             initialSpringVelocity: 1.0,
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
-                self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+                self.backgroundColor = UIColor.blackColor() //GratuitousColorSelector.darkBackgroundColor()
                 self.instanceTextLabel?.textColor = GratuitousColorSelector.lightTextColor()
             },
             completion: { finished in
@@ -134,12 +134,12 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             initialSpringVelocity: 1.0,
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
-                self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+                self.backgroundColor = UIColor.blackColor() //GratuitousColorSelector.darkBackgroundColor()
                 self.instanceTextLabel?.textColor = GratuitousColorSelector.lightTextColor()
             },
             completion: { finished in })
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(false, animated: animated)
         // Configure the view for the selected state
@@ -160,7 +160,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
                         initialSpringVelocity: 1.0,
                         options: UIViewAnimationOptions.BeginFromCurrentState,
                         animations: {
-                            self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+                            self.backgroundColor = UIColor.blackColor() //GratuitousColorSelector.darkBackgroundColor()
                             self.instanceTextLabel?.textColor = GratuitousColorSelector.lightTextColor()
                         },
                         completion: { finished in })

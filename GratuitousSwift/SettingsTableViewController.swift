@@ -30,7 +30,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
         //set the background color of the view
-        self.tableView.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+        self.tableView.backgroundColor = UIColor.blackColor() //GratuitousColorSelector.darkBackgroundColor()
         
         //set the colors for the navigation controller
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
@@ -65,7 +65,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
             label.textColor = UIColor.blackColor()
             label.superview?.backgroundColor = GratuitousColorSelector.lightBackgroundColor()
-            label.superview?.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+            label.superview?.superview?.backgroundColor = UIColor.blackColor() //GratuitousColorSelector.darkBackgroundColor()
         }
         
         self.headerLabelTipPercentage.text = NSLocalizedString("Suggested Tip Percentage", comment: "this text is for a section header where the user can set the default tip percentage when they choose a new bill amount").uppercaseString
@@ -85,7 +85,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-                
+        
         NSNotificationCenter.defaultCenter().postNotificationName("settingsTableViewControllerDidAppear", object: nil)
     }
     
@@ -120,10 +120,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.suggestedTipPercentageLabel.textColor = GratuitousColorSelector.lightTextColor()
         
         //set the tint color for the tip percentage slider
-        self.suggestedTipPercentageSlider.maximumTrackTintColor = UIColor.blackColor()
+        self.suggestedTipPercentageSlider.maximumTrackTintColor = GratuitousColorSelector.darkBackgroundColor() //UIColor.blackColor()
         
         //set the background color of the superview of the slider for ipad. For some reason its white on the ipad only
-        self.suggestedTipPercentageSlider.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+        self.suggestedTipPercentageSlider.superview?.backgroundColor = UIColor.blackColor() //GratuitousColorSelector.darkBackgroundColor()
     }
     
     func readUserDefaultsAndUpdateSlider(notification: NSNotification?) {
@@ -267,10 +267,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.aboutReviewButton.setTitle(NSLocalizedString("Review This App", comment: "this button takes the user to the app store so they can leave a review"), forState: UIControlState.Normal)
         
         //set the background color of all of the different cells. For some reason on ipad, its white instead of clear
-        self.aboutMyPictureImageView.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
-        self.aboutSaturdayAppsParagraphLabel.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
-        self.aboutEmailMeButton.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
-        self.aboutReviewButton.superview?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+        self.aboutMyPictureImageView.superview?.backgroundColor = UIColor.blackColor() //GratuitousColorSelector.darkBackgroundColor()
+        self.aboutSaturdayAppsParagraphLabel.superview?.backgroundColor = UIColor.blackColor() //GratuitousColorSelector.darkBackgroundColor()
+        self.aboutEmailMeButton.superview?.backgroundColor = UIColor.blackColor() //GratuitousColorSelector.darkBackgroundColor()
+        self.aboutReviewButton.superview?.backgroundColor = UIColor.blackColor() //GratuitousColorSelector.darkBackgroundColor()
     }
     
     @IBAction func didTapEmailMeButton(sender: UIButton) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
+class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel!
     @IBOutlet private weak var totalAmountTextLabel: UILabel!
@@ -291,12 +291,21 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     //MARK: Handle View Controller Transitions
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // this gets a reference to the screen that we're about to transition to
+        let bigDevice = true
         let toViewController = segue.destinationViewController as UINavigationController
-        
-        // instead of using the default transition animation, we'll ask
-        // the segue to use our custom TransitionManager object to manage the transition animation
-        toViewController.transitioningDelegate = transitionManager
+        if bigDevice {
+            let popoverPresentationController = toViewController.popoverPresentationController
+            popoverPresentationController?.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
+            popoverPresentationController?.delegate = self
+        } else {
+            // instead of using the default transition animation, we'll ask
+            // the segue to use our custom TransitionManager object to manage the transition animation
+            toViewController.transitioningDelegate = transitionManager
+        }
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {

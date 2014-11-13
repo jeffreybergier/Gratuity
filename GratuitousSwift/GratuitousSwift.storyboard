@@ -161,7 +161,7 @@
                                         <rect key="frame" x="547" y="258" width="57" height="30"/>
                                         <state key="normal" title="Settings"/>
                                         <connections>
-                                            <segue destination="Kup-dN-NFx" kind="popoverPresentation" popoverAnchorView="x5O-Qc-eNn" id="VR1-mv-dmy">
+                                            <segue destination="Kup-dN-NFx" kind="popoverPresentation" identifier="settingsPopoverSegue" popoverAnchorView="x5O-Qc-eNn" id="VR1-mv-dmy">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
                                         </connections>

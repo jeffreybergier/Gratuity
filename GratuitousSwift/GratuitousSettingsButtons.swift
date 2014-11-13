@@ -26,6 +26,7 @@ class GratuitousSettingsButtons: UIButton {
         self.tintColor = GratuitousColorSelector.lightTextColor()
         self.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.adjustsImageWhenHighlighted = false
+        self.backgroundColor = GratuitousColorSelector.darkBackgroundColor()
         
         self.setTitleColor(GratuitousColorSelector.lightTextColor(), forState: UIControlState.Normal)
         self.setTitleColor(GratuitousColorSelector.darkTextColor(), forState: UIControlState.Highlighted)
