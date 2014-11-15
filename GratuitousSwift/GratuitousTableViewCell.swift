@@ -36,7 +36,6 @@ class GratuitousTableViewCell: UITableViewCell {
     
     private func didSetBillAmount() {
         let currencyFormattedString = self.currencyFormatter?.currencyFormattedString(self.billAmount)
-        //let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(self.billAmount)
         var stringForLabel = NSAttributedString()
         if let currencyFormattedString = currencyFormattedString {
             stringForLabel = NSAttributedString(string: currencyFormattedString, attributes: self.labelTextAttributes)

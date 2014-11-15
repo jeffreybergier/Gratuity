@@ -37,7 +37,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let LARGEPHONECELLHEIGHT = CGFloat(74.0)
     
     private let currencyFormatter = GratuitousCurrencyFormatter()
-    private let transitionManager = GratuitousTransitionManager()
     
     private var userDefaults = NSUserDefaults.standardUserDefaults()
     private var textSizeAdjustment: NSNumber = NSNumber(double: 0.0)
@@ -181,8 +180,16 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
     
-    @IBAction func willExitFromSegue (sender: UIStoryboardSegue){
-        
+    @IBAction func didTapSettingsButton(sender: UIButton) {
+        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
+            if let settingsViewController = appDelegate.storyboard.instantiateViewControllerWithIdentifier("SettingsTableViewController") as? SettingsTableViewController {
+                let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
+                settingsNavigationController.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+                settingsNavigationController.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
+                
+                self.presentViewController(settingsNavigationController, animated: true, completion: nil)
+            }
+        }
     }
     
     //MARK: Handle Writing to Disk
@@ -237,7 +244,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
             var totalAmountAttributedString = NSAttributedString()
             let currencyFormattedString = self.currencyFormatter.currencyFormattedString(NSNumber(double: totalAmount))
-            //let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(NSNumber(double: totalAmount))
             if let currencyFormattedString = currencyFormattedString {
                 totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
             } else {
@@ -270,7 +276,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 
                 var totalAmountAttributedString = NSAttributedString()
                 let currencyFormattedString = self.currencyFormatter.currencyFormattedString(NSNumber(double: totalAmount))
-                //let currencyFormattedString = self.appDelegate.currencyFormatter.stringFromNumber(NSNumber(double: totalAmount))
                 if let currencyFormattedString = currencyFormattedString {
                     totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
                 } else {
@@ -286,45 +291,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func localeDidChangeUpdateView(notification: NSNotification) {
         self.updateBillAmountText()
-    }
-    
-    //MARK: Handle View Controller Transitions
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let bigDevice = true
-        let toViewController = segue.destinationViewController as UINavigationController
-        if bigDevice {
-            let popoverPresentationController = toViewController.popoverPresentationController
-            toViewController.view.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
-            toViewController.view.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
-            popoverPresentationController?.passthroughViews = [self.billAmountTableView, self.tipAmountTableView]
-            popoverPresentationController?.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(1.0)
-            popoverPresentationController?.delegate = self
-        } else {
-            // instead of using the default transition animation, we'll ask
-            // the segue to use our custom TransitionManager object to manage the transition animation
-            toViewController.transitioningDelegate = transitionManager
-        }
-    }
-    
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.None
-    }
-    
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        coordinator.animateAlongsideTransition({ context in }, completion: {context in
-            let selectedBillAmountIndexPath = self.billAmountTableView.indexPathForSelectedRow()
-            let selectedTipAmountIndexPath = self.tipAmountTableView.indexPathForSelectedRow()
-            
-            if let indexPath = selectedBillAmountIndexPath {
-                self.billAmountTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
-            }
-            
-            if let indexPath = selectedTipAmountIndexPath {
-                self.tipAmountTableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-            }
-        })
     }
     
     //MARK: Handle Table View User Input

@@ -11,9 +11,11 @@ import Fabric
 import Crashlytics
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
-    var window: UIWindow?
+    //initialize the window and the storyboard
+    var window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -24,16 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //prepare nsuserdefaults
         self.prepareUserDefaults()
         
-        //initialize the window and the view controller
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
-        let tipViewController = storyboard.instantiateInitialViewController() as TipViewController
+        //initialize the view controller from the storyboard
+        let tipViewController = self.storyboard.instantiateInitialViewController() as TipViewController
         
         //configure the window
-        self.window?.rootViewController = tipViewController
-        self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
-        self.window?.tintColor = GratuitousUIConstant.lightTextColor()
-        self.window?.makeKeyAndVisible()
+        self.window.rootViewController = tipViewController
+        self.window.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
+        self.window.tintColor = GratuitousUIConstant.lightTextColor()
+        self.window.makeKeyAndVisible()
         
         return true
     }

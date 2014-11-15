@@ -217,9 +217,7 @@
                                 <rect key="frame" x="527" y="562" width="57" height="30"/>
                                 <state key="normal" title="Settings"/>
                                 <connections>
-                                    <segue destination="Kup-dN-NFx" kind="popoverPresentation" identifier="settingsPopoverSegue" popoverAnchorView="x5O-Qc-eNn" id="VR1-mv-dmy">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="didTapSettingsButton:" destination="x3f-eR-MGT" eventType="touchUpInside" id="7eV-7d-12k"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -305,7 +303,7 @@
         <!--Gratuity Settings-->
         <scene sceneID="PNA-as-gbs">
             <objects>
-                <tableViewController storyboardIdentifier="SettingsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rPE-iu-epa" customClass="SettingsTableViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsTableViewController" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rPE-iu-epa" customClass="SettingsTableViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="g6e-jD-7eb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -737,25 +735,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ja-zD-HfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="3Sq-0z-Qfg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2117" y="172"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="AnN-0d-opm">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Kup-dN-NFx" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PWL-a7-ZLB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="rPE-iu-epa" kind="relationship" relationship="rootViewController" id="kEK-Sc-Mjc"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5a5-FL-HeA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1305" y="172"/>
+            <point key="canvasLocation" x="1269" y="520"/>
         </scene>
     </scenes>
     <resources>

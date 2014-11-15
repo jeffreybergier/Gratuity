@@ -89,7 +89,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         NSNotificationCenter.defaultCenter().postNotificationName("settingsTableViewControllerDidAppear", object: nil)
     }
     
-    @IBAction func didTapDoneButton(sender: UIButton) {
+    func didTapDoneButton(sender: UIButton) {
         if let presentingViewController = self.presentingViewController {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
