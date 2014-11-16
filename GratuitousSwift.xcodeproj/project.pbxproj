@@ -24,6 +24,9 @@
 		73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
 		73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
 		73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
+		73EDC4BD1A1807AA006AA72D /* GratuitousPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */; };
+		73EDC4BF1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */; };
+		73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
 		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousEnums.swift; sourceTree = "<group>"; };
+		73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPresentationController.swift; sourceTree = "<group>"; };
+		73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTransitioningDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7353346D1A1803FB008530E1 /* TipViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7382512619E60F3900CD2B28 /* TipViewController.swift */,
+				7353346E1A180438008530E1 /* TipTableView Subclasses */,
+			);
+			name = TipViewController;
+			sourceTree = "<group>";
+		};
+		7353346E1A180438008530E1 /* TipTableView Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */,
+				7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */,
+				73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */,
+				736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */,
+			);
+			name = "TipTableView Subclasses";
+			sourceTree = "<group>";
+		};
+		7353346F1A18047A008530E1 /* Custom Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
+				735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */,
+				73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */,
+			);
+			name = "Custom Subclasses";
+			sourceTree = "<group>";
+		};
+		735334701A18048D008530E1 /* Settings Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */,
+				73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */,
+			);
+			name = "Settings Subclasses";
+			sourceTree = "<group>";
+		};
+		735334711A1804CC008530E1 /* Settings View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				73B9BFF019FC629100700608 /* SettingsTableViewController.swift */,
+				735334701A18048D008530E1 /* Settings Subclasses */,
+			);
+			name = "Settings View Controller";
+			sourceTree = "<group>";
+		};
+		735334721A1804E2008530E1 /* Custom Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */,
+				73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */,
+				73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */,
+			);
+			name = "Custom Presentation";
+			sourceTree = "<group>";
+		};
 		738250F819E60EED00CD2B28 = {
 			isa = PBXGroup;
 			children = (
@@ -86,18 +150,11 @@
 			isa = PBXGroup;
 			children = (
 				7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */,
-				7382512619E60F3900CD2B28 /* TipViewController.swift */,
-				73B9BFF019FC629100700608 /* SettingsTableViewController.swift */,
 				734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */,
-				7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */,
-				7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */,
-				73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */,
-				736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */,
-				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
-				735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */,
-				73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */,
-				73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */,
-				73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */,
+				7353346D1A1803FB008530E1 /* TipViewController */,
+				735334711A1804CC008530E1 /* Settings View Controller */,
+				735334721A1804E2008530E1 /* Custom Presentation */,
+				7353346F1A18047A008530E1 /* Custom Subclasses */,
 				7382510D19E60EED00CD2B28 /* Images.xcassets */,
 				7382510F19E60EED00CD2B28 /* LaunchScreen.xib */,
 				7356AEBC19FF281B00E44A5E /* Crashlytics.framework */,
@@ -234,7 +291,10 @@
 				7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */,
 				7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */,
 				73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */,
+				73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */,
 				735C011E1A0878D000A19462 /* GratuitousCurrencyFormatter.swift in Sources */,
+				73EDC4BD1A1807AA006AA72D /* GratuitousPresentationController.swift in Sources */,
+				73EDC4BF1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift in Sources */,
 				73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */,
 				7335A18F19FB04DA00BE08E2 /* GratuitousTableView.swift in Sources */,
 				737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */,

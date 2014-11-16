@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate {
+class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel!
     @IBOutlet private weak var totalAmountTextLabel: UILabel!
@@ -37,6 +37,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let LARGEPHONECELLHEIGHT = CGFloat(74.0)
     
     private let currencyFormatter = GratuitousCurrencyFormatter()
+    let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
     
     private var userDefaults = NSUserDefaults.standardUserDefaults()
     private var textSizeAdjustment: NSNumber = NSNumber(double: 0.0)
@@ -183,9 +184,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBAction func didTapSettingsButton(sender: UIButton) {
         if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
             if let settingsViewController = appDelegate.storyboard.instantiateViewControllerWithIdentifier("SettingsTableViewController") as? SettingsTableViewController {
+                
                 let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
-                settingsNavigationController.modalPresentationStyle = UIModalPresentationStyle.FullScreen
-                settingsNavigationController.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
+                settingsNavigationController.transitioningDelegate = self.presentationTransitionerDelegate
+                settingsNavigationController.modalPresentationStyle = UIModalPresentationStyle.Custom
                 
                 self.presentViewController(settingsNavigationController, animated: true, completion: nil)
             }
