@@ -37,8 +37,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let LARGEPHONECELLHEIGHT = CGFloat(74.0)
     
     private let currencyFormatter = GratuitousCurrencyFormatter()
-    let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
     
+    var presentationTransitionerDelegate: GratuitousTransitioningDelegate?
     private var userDefaults = NSUserDefaults.standardUserDefaults()
     private var textSizeAdjustment: NSNumber = NSNumber(double: 0.0)
     private var billAmountsArray: [NSNumber] = []
@@ -127,9 +127,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 self.tableContainerView.alpha = 1.0
             }, completion: nil)
         
-        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.005, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
         
-        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.009, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
     
     func scrollBillTableViewAtLaunch(timer: NSTimer?) {
@@ -185,8 +185,12 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
             if let settingsViewController = appDelegate.storyboard.instantiateViewControllerWithIdentifier("SettingsTableViewController") as? SettingsTableViewController {
                 
+                if self.presentationTransitionerDelegate == nil {
+                    self.presentationTransitionerDelegate = GratuitousTransitioningDelegate()
+                }
+                
                 let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
-                settingsNavigationController.transitioningDelegate = self.presentationTransitionerDelegate
+                settingsNavigationController.transitioningDelegate = self.presentationTransitionerDelegate!
                 settingsNavigationController.modalPresentationStyle = UIModalPresentationStyle.Custom
                 
                 self.presentViewController(settingsNavigationController, animated: true, completion: nil)
@@ -466,6 +470,13 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     //MARK: Handle Text Size Adjustment and Label Attributed Strings
+    
+    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
+        
+        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+    }
     
     private func checkScreenHeightForTextSizeAdjuster() -> Double {
         var textSizeAdjustment = 1.0

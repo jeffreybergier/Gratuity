@@ -13,7 +13,7 @@ class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransit
     var isPresentation = true
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        return 20.0 //GratuitousUIConstant.animationDuration()
+        return GratuitousUIConstant.animationDuration() * 10
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
@@ -29,20 +29,21 @@ class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransit
         let animatingVC = self.isPresentation ? toVC : fromVC
         let animatingView = animatingVC.view
         
-        animatingView.frame = transitionContext.finalFrameForViewController(animatingVC)
+        let appearedFrame = transitionContext.finalFrameForViewController(animatingVC)
+        let dismissedFrame = CGRectMake(appearedFrame.origin.x + appearedFrame.size.width, appearedFrame.origin.y, appearedFrame.size.width, appearedFrame.size.height)
         
-        let presentedTransform = CGAffineTransformIdentity
-        let dismissedTransform = CGAffineTransformConcat(CGAffineTransformMakeScale(0.001, 0.001), CGAffineTransformMakeRotation(CGFloat(8 * M_PI)))
+        let initialFrame = isPresentation ? dismissedFrame : appearedFrame
+        let finalFrame = isPresentation ? appearedFrame : dismissedFrame
         
-        animatingView.transform = self.isPresentation ? dismissedTransform : presentedTransform
-        
-        UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
+        animatingView.frame = initialFrame
+
+        UIView.animateWithDuration(self.transitionDuration(transitionContext),
             delay: 0.0,
-            usingSpringWithDamping: 1.01,
-            initialSpringVelocity: 1.0,
+            usingSpringWithDamping: 0.5,
+            initialSpringVelocity: 2.0,
             options: UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
-                animatingView.transform = self.isPresentation ? presentedTransform : dismissedTransform
+                animatingView.frame = finalFrame
             },
             completion: { finished in
                 if !self.isPresentation {

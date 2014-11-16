@@ -51,7 +51,7 @@ class GratuitousPresentationController: UIPresentationController {
     }
     
     override func sizeForChildContentContainer(container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        let floatWidth = Float(parentSize.width / 3.0)
+        let floatWidth = Float(parentSize.width / 2.0)
         let cgWidth = CGFloat(floorf(floatWidth))
         return CGSizeMake(cgWidth, parentSize.height)
     }
