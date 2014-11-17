@@ -214,10 +214,10 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5O-Qc-eNn">
-                                <rect key="frame" x="527" y="562" width="57" height="30"/>
+                                <rect key="frame" x="535" y="558" width="57" height="30"/>
                                 <state key="normal" title="Settings"/>
                                 <connections>
-                                    <action selector="didTapSettingsButton:" destination="x3f-eR-MGT" eventType="touchUpInside" id="7eV-7d-12k"/>
+                                    <segue destination="rPE-iu-epa" kind="custom" id="1c8-NW-YLW"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -233,12 +233,12 @@
                             <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="F2W-Pc-eWf" secondAttribute="trailing" id="NXH-wi-F1K"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="leading" secondItem="Tiu-8h-vjS" secondAttribute="leadingMargin" constant="-24" id="Qwl-pL-kS0"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="height" secondItem="Tiu-8h-vjS" secondAttribute="height" multiplier="1/3.5" id="Ugr-y8-9SS"/>
-                            <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="x5O-Qc-eNn" secondAttribute="bottom" constant="8" symbolic="YES" id="Wbb-ez-0u8"/>
+                            <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="x5O-Qc-eNn" secondAttribute="bottom" constant="12" id="Wbb-ez-0u8"/>
                             <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="bottom" id="YiU-Ec-r5z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sGt-Qz-W1j" secondAttribute="trailing" constant="-16" id="ghx-eO-TWI"/>
                             <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="F2W-Pc-eWf" secondAttribute="trailing" id="iKK-ny-erz"/>
                             <constraint firstAttribute="height" secondItem="sGt-Qz-W1j" secondAttribute="height" id="kyO-qO-aQ3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="x5O-Qc-eNn" secondAttribute="trailing" id="rCu-ms-0HB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="x5O-Qc-eNn" secondAttribute="trailing" constant="-8" id="rCu-ms-0HB"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="top" secondItem="sGt-Qz-W1j" secondAttribute="bottom" id="s7t-Bp-vRn"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="height" secondItem="Tiu-8h-vjS" secondAttribute="height" id="zhH-FQ-VKG"/>
                         </constraints>

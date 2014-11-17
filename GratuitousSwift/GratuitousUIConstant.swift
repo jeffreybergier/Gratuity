@@ -44,5 +44,28 @@ class GratuitousUIConstant: NSObject {
     class func animationDuration() -> Double {
         return 0.3
     }
+    
+    class func deviceScreen() -> (padIdiom: Bool, largeDevice: Bool, largeDeviceLandscape: Bool) {
+        var padIdiom = false
+        var largeDevice = false
+        var largeDeviceLandscape = false
+        
+        if UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width {
+            if UIScreen.mainScreen().bounds.size.width > 321.0 {
+                largeDevice = true
+            }
+        } else {
+            if UIScreen.mainScreen().bounds.size.height > 321.0 {
+                largeDevice = true
+                largeDeviceLandscape = true
+            }
+        }
+        
+        if UIScreen.mainScreen().traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            padIdiom = true
+        }
+        
+        return (padIdiom: padIdiom, largeDevice: largeDevice, largeDeviceLandscape: largeDeviceLandscape)
+    }
    
 }

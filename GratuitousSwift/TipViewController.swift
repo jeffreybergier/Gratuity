@@ -37,8 +37,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let LARGEPHONECELLHEIGHT = CGFloat(74.0)
     
     private let currencyFormatter = GratuitousCurrencyFormatter()
+    private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
     
-    var presentationTransitionerDelegate: GratuitousTransitioningDelegate?
     private var userDefaults = NSUserDefaults.standardUserDefaults()
     private var textSizeAdjustment: NSNumber = NSNumber(double: 0.0)
     private var billAmountsArray: [NSNumber] = []
@@ -62,6 +62,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "suggestedTipUpdatedOnDisk:", name: "suggestedTipValueUpdated", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateView:", name: "currencyFormatterReadyReloadView", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
         //prepare the arrays
         for i in 0..<self.MAXBILLAMOUNT {
@@ -106,6 +107,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         //check screensize and set text side adjustment
         self.textSizeAdjustment = self.checkScreenHeightForTextSizeAdjuster()
+        
+        //prepare the settings button
+        self.prepareSettingsButton()
         
         //was previously in viewWillAppear
         self.prepareTotalAmountTextLabel()
@@ -171,6 +175,19 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
+    private func prepareSettingsButton() {
+        self.settingsButton.setImage(nil, forState: UIControlState.Normal)
+        self.settingsButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.settingsButton.setTitle(NSLocalizedString("Settings", comment: "Settings"), forState: UIControlState.Normal)
+        self.settingsButton.sizeToFit()
+        if let path = NSBundle.mainBundle().pathForResource("settingsIcon", ofType:"pdf") {
+            let image = ImageFromPDFFileWithHeight(path, self.settingsButton.frame.size.height).imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            self.settingsButton.setTitle("", forState: UIControlState.Normal)
+            self.settingsButton.setImage(image, forState: UIControlState.Normal)
+            self.settingsButton.sizeToFit()
+        }
+    }
+    
     //MARK: Handle User Input
     
     @IBAction func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
@@ -181,20 +198,14 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
     
-    @IBAction func didTapSettingsButton(sender: UIButton) {
-        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
-            if let settingsViewController = appDelegate.storyboard.instantiateViewControllerWithIdentifier("SettingsTableViewController") as? SettingsTableViewController {
-                
-                if self.presentationTransitionerDelegate == nil {
-                    self.presentationTransitionerDelegate = GratuitousTransitioningDelegate()
-                }
-                
-                let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
-                settingsNavigationController.transitioningDelegate = self.presentationTransitionerDelegate!
-                settingsNavigationController.modalPresentationStyle = UIModalPresentationStyle.Custom
-                
-                self.presentViewController(settingsNavigationController, animated: true, completion: nil)
-            }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let settingsViewController = segue.destinationViewController as? SettingsTableViewController {
+            let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
+            
+            settingsNavigationController.transitioningDelegate = self.presentationTransitionerDelegate
+            settingsNavigationController.modalPresentationStyle = UIModalPresentationStyle.Custom
+            
+            self.presentViewController(settingsNavigationController, animated: true, completion: nil)
         }
     }
     
@@ -471,11 +482,21 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     //MARK: Handle Text Size Adjustment and Label Attributed Strings
     
-    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
-        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
+    func systemTextSizeDidChange(notification: NSNotification) {
+        self.prepareSettingsButton()
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         
-        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+        //this line stops a bug with the transforms on rotation
+        self.view.transform = CGAffineTransformIdentity
+        
+        coordinator.animateAlongsideTransition(nil, completion: { finished in
+            
+            let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
+            let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+        })
     }
     
     private func checkScreenHeightForTextSizeAdjuster() -> Double {

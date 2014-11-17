@@ -23,7 +23,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         self.layer.borderWidth = GratuitousUIConstant.thinBorderWidth()
-        self.backgroundColor = UIColor.blackColor() //GratuitousUIConstant.darkBackgroundColor()
+        self.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "overrideCurrencySymbolUpdatedOnDisk:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
@@ -56,7 +56,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         } else {
             self.accessoryType = UITableViewCellAccessoryType.None
             if !self.animatingBorderColor {
-                self.layer.borderColor = UIColor.blackColor().CGColor //GratuitousUIConstant.darkBackgroundColor().CGColor
+                self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor //UIColor.blackColor().CGColor
             }
             self.accessoryType = UITableViewCellAccessoryType.None
         }
@@ -70,7 +70,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             let colorAnimation = CABasicAnimation(keyPath: "borderColor")
             colorAnimation.fromValue = GratuitousUIConstant.lightBackgroundColor().CGColor
             colorAnimation.toValue = GratuitousUIConstant.darkBackgroundColor().CGColor
-            self.layer.borderColor = UIColor.blackColor().CGColor //GratuitousUIConstant.darkBackgroundColor().CGColor
+            self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor //UIColor.blackColor().CGColor
             
             let animationGroup = CAAnimationGroup()
             animationGroup.duration = GratuitousUIConstant.animationDuration()
@@ -115,7 +115,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             delay: 0.0,
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
-                self.backgroundColor = UIColor.blackColor() //GratuitousUIConstant.darkBackgroundColor()
+                self.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
                 self.instanceTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
             },
             completion: { finished in })
@@ -127,7 +127,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             delay: 0.0,
             options: UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
-                self.backgroundColor = UIColor.blackColor() //GratuitousUIConstant.darkBackgroundColor()
+                self.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
                 self.instanceTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
             },
             completion: { finished in })
@@ -150,7 +150,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
                             delay: 0.0,
                             options: UIViewAnimationOptions.BeginFromCurrentState,
                             animations: {
-                                self.backgroundColor = UIColor.blackColor() //GratuitousUIConstant.darkBackgroundColor()
+                                self.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
                                 self.instanceTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
                             },
                             completion: { finished in

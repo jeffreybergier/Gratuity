@@ -10,12 +10,16 @@ import UIKit
 
 class GratuitousPresentationController: UIPresentationController {
     
-    var dimmingView = UIView()
-    
-    override init(presentedViewController: UIViewController!, presentingViewController: UIViewController!) {
-        super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
-        self.prepareDimmingView()
-    }
+    lazy var dimmingView :UIView = {
+        let view = UIView()
+        let tap = UITapGestureRecognizer(target:self, action:"dimmingViewTapped:")
+
+        view.backgroundColor = UIColor(white: 0.0, alpha: 0.7)
+        view.alpha = 0.0
+        view.addGestureRecognizer(tap)
+        
+        return view
+        }()
     
     override func presentationTransitionWillBegin() {
         self.dimmingView.frame = self.containerView.bounds
@@ -47,11 +51,50 @@ class GratuitousPresentationController: UIPresentationController {
     }
     
     override func adaptivePresentationStyle() -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.OverFullScreen
+        return UIModalPresentationStyle.Custom
     }
     
     override func sizeForChildContentContainer(container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        let floatWidth = Float(parentSize.width / 2.0)
+        var divisionConstant = CGFloat(1.0)
+        var textSizeAdjustment = CGFloat(0.0)
+        let deviceScreen = GratuitousUIConstant.deviceScreen()
+        
+        if deviceScreen.largeDevice {
+            if deviceScreen.largeDeviceLandscape {
+                divisionConstant = 2.1
+            } else {
+                divisionConstant = 1.2
+            }
+        }
+        
+        if deviceScreen.padIdiom {
+            if deviceScreen.largeDeviceLandscape {
+                divisionConstant = 2.7
+            } else {
+                divisionConstant = 2.3
+            }
+        }
+        
+        switch UIApplication.sharedApplication().preferredContentSizeCategory {
+        case UIContentSizeCategoryExtraExtraExtraLarge:
+            textSizeAdjustment = 0.25
+        case UIContentSizeCategoryAccessibilityMedium:
+            textSizeAdjustment = 0.5
+        case UIContentSizeCategoryAccessibilityLarge:
+            textSizeAdjustment = 0.75
+        case UIContentSizeCategoryAccessibilityExtraLarge:
+            textSizeAdjustment = 1.0
+        case UIContentSizeCategoryAccessibilityExtraExtraLarge:
+            textSizeAdjustment = 1.25
+        case UIContentSizeCategoryAccessibilityExtraExtraExtraLarge:
+            textSizeAdjustment = 1.5
+        default:
+            break
+        }
+        
+        let divisionCalculation = (divisionConstant - textSizeAdjustment < 1.0) ? (1.0) : (divisionConstant - textSizeAdjustment)
+        
+        let floatWidth = Float(parentSize.width / divisionCalculation)
         let cgWidth = CGFloat(floorf(floatWidth))
         return CGSizeMake(cgWidth, parentSize.height)
     }
@@ -72,14 +115,6 @@ class GratuitousPresentationController: UIPresentationController {
         presentedViewFrame.origin.x = self.containerView.bounds.size.width - presentedViewFrame.size.width
         
         return presentedViewFrame
-    }
-    
-    func prepareDimmingView() {
-        self.dimmingView.backgroundColor = UIColor(white: 0.0, alpha: 0.4)
-        self.dimmingView.alpha = 0.0
-        
-        let tap = UITapGestureRecognizer(target:self, action:"dimmingViewTapped:")
-        self.dimmingView.addGestureRecognizer(tap)
     }
     
     func dimmingViewTapped(sender: UITapGestureRecognizer) {
