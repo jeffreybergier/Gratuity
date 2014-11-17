@@ -190,6 +190,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     //MARK: Handle User Input
     
+    @IBAction func didActivateSettingsSwipeGestureRecognizer(sender: UISwipeGestureRecognizer) {
+        println(sender.state.rawValue)
+    }
+    
     @IBAction func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
         self.billAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
@@ -550,6 +554,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func prepareTotalAmountTextLabel() {
+        if let originalFont = GratuitousUIConstant.originalFontForTotalAmountTextLabel() {
+            self.totalAmountTextLabel.font = originalFont
+        }
         let font = self.totalAmountTextLabel.font.fontWithSize(self.totalAmountTextLabel.font.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
         let textColor = self.totalAmountTextLabel.textColor
         let text = self.totalAmountTextLabel.text
@@ -572,6 +579,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func prepareTipPercentageTextLabel() {
+        if let originalFont = GratuitousUIConstant.originalFontForTipPercentageTextLabel() {
+            self.tipPercentageTextLabel.font = originalFont
+        }
         let font = self.tipPercentageTextLabel.font.fontWithSize(self.tipPercentageTextLabel.font.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
         let textColor = self.tipPercentageTextLabel.textColor
         let text = self.tipPercentageTextLabel.text

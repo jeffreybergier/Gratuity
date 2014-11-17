@@ -59,6 +59,10 @@ class GratuitousPresentationController: UIPresentationController {
         var textSizeAdjustment = CGFloat(0.0)
         let deviceScreen = GratuitousUIConstant.deviceScreen()
         
+        if deviceScreen.smallDeviceLandscape {
+            divisionConstant = 1.4
+        }
+        
         if deviceScreen.largeDevice {
             if deviceScreen.largeDeviceLandscape {
                 divisionConstant = 2.1

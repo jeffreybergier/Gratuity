@@ -222,6 +222,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.11764705882352941" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="height" secondItem="sGt-Qz-W1j" secondAttribute="height" multiplier="2/1" id="3ID-H5-Pum"/>
                             <constraint firstAttribute="trailingMargin" secondItem="F2W-Pc-eWf" secondAttribute="trailing" constant="-24" id="AhH-Xr-y9S"/>
@@ -266,6 +267,9 @@
                                 <include reference="zhH-FQ-VKG"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="uJ4-5X-U27" appends="YES" id="RWy-F5-nYg"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="billAmountLowerGradientView" destination="Qr8-7O-BPw" id="kGJ-H6-Pzb"/>
@@ -297,6 +301,11 @@
                         <action selector="didTapTipAmountTableViewScrollToTop:" destination="x3f-eR-MGT" id="Q6c-kG-djw"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="uJ4-5X-U27">
+                    <connections>
+                        <action selector="didActivateSettingsSwipeGestureRecognizer:" destination="x3f-eR-MGT" id="iuf-Xh-oa6"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="497" y="220"/>
         </scene>

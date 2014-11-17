@@ -51,6 +51,11 @@ class GratuitousTableViewCell: UITableViewCell {
         // Initialization code
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateTextField:", name: "currencyFormatterReadyReloadView", object: nil)
         
+        //configure the font
+        if let font = GratuitousUIConstant.originalFontForTableViewCellTextLabels() {
+            self.dollarTextLabel.font = font
+        }
+        
         //the default selection styles are so fucking shitty
         self.selectionStyle = UITableViewCellSelectionStyle.None
         

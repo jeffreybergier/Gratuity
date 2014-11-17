@@ -45,9 +45,22 @@ class GratuitousUIConstant: NSObject {
         return 0.3
     }
     
-    class func deviceScreen() -> (padIdiom: Bool, largeDevice: Bool, largeDeviceLandscape: Bool) {
+    class func originalFontForTableViewCellTextLabels() -> UIFont? {
+        return UIFont(name: "Futura-Medium", size: 35.0)
+    }
+    
+    class func originalFontForTotalAmountTextLabel() -> UIFont? {
+        return UIFont(name: "Futura-Medium", size: 180.0)
+    }
+    
+    class func originalFontForTipPercentageTextLabel() -> UIFont? {
+        return UIFont(name: "Futura-Medium", size: 100.0)
+    }
+    
+    class func deviceScreen() -> (padIdiom: Bool, largeDevice: Bool, smallDeviceLandscape: Bool, largeDeviceLandscape: Bool) {
         var padIdiom = false
         var largeDevice = false
+        var smallDeviceLandscape = false
         var largeDeviceLandscape = false
         
         if UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width {
@@ -58,6 +71,8 @@ class GratuitousUIConstant: NSObject {
             if UIScreen.mainScreen().bounds.size.height > 321.0 {
                 largeDevice = true
                 largeDeviceLandscape = true
+            } else {
+                smallDeviceLandscape = true
             }
         }
         
@@ -65,7 +80,7 @@ class GratuitousUIConstant: NSObject {
             padIdiom = true
         }
         
-        return (padIdiom: padIdiom, largeDevice: largeDevice, largeDeviceLandscape: largeDeviceLandscape)
+        return (padIdiom: padIdiom, largeDevice: largeDevice, smallDeviceLandscape: smallDeviceLandscape, largeDeviceLandscape: largeDeviceLandscape)
     }
    
 }
