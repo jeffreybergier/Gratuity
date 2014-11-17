@@ -17,7 +17,6 @@ class GratuitousTableView: UITableView, UITableViewDelegate {
     private let IDEALTIPPERCENTAGE = 0.2
     
     var isScrolling = false
-    var isUserInitiated = false
     
     override init() {
         super.init()
@@ -33,15 +32,6 @@ class GratuitousTableView: UITableView, UITableViewDelegate {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-    
-    func scrollingState() -> (isScrolling: Bool, isUserInitiated: Bool) {
-        var scrollingState = (isScrolling: false, isUserInitiated: false)
-        
-        scrollingState.isScrolling = self.isScrolling
-        scrollingState.isUserInitiated = self.isUserInitiated
-        
-        return scrollingState
     }
     
     func configureTableViewWithCellType(cellClass: String, AndCellIdentifier cellIdentifier: String, AndTag tag: Int, AndViewControllerDelegate delegate: protocol <UITableViewDataSource, UITableViewDelegate>) {

@@ -27,8 +27,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet private weak var tableContainerView: UIView!
     @IBOutlet private weak var settingsButton: UIButton!
     
-    private let MAXBILLAMOUNT = 500
-    private let MAXTIPAMOUNT = 250
+    private let MAXBILLAMOUNT = 2000
+    private let MAXTIPAMOUNT = 1000
     private let BILLAMOUNTTAG = 0
     private let TIPAMOUNTTAG = 1
     private let SMALLPHONECELLHEIGHT = CGFloat(50.0)
@@ -39,14 +39,13 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let currencyFormatter = GratuitousCurrencyFormatter()
     private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
     
+    private var labelContainerViewOriginalTransform = CGAffineTransformIdentity
     private var userDefaults = NSUserDefaults.standardUserDefaults()
     private var textSizeAdjustment: NSNumber = NSNumber(double: 0.0)
     private var billAmountsArray: [NSNumber] = []
     private var tipAmountsArray: [NSNumber] = []
     private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
     private var tipPercentageTextLabelAttributes = [NSString(): NSObject()]
-    private var didEndDeceleratingBillTable = false
-    private var didEndDeceleratingTipTable = false
     private var tipTableCustomValueSet = false
     private var suggestedTipPercentage: Double = 0.0 {
         didSet {
@@ -82,7 +81,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         } else {
             println("TipViewController: You should never see this. If you see this the tables were not configured correctly because an optional unwrap failed")
         }
-
+        
         //configure color of view
         self.view.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
         self.tipPercentageTextLabel.textColor = GratuitousUIConstant.lightTextColor()
@@ -93,10 +92,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
         
         //prepare the cell select surrounds
-        self.billAmountSelectedSurroundView.backgroundColor = UIColor.clearColor()
-        self.billAmountSelectedSurroundView.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
-        self.billAmountSelectedSurroundView.layer.cornerRadius = 0.0
-        self.billAmountSelectedSurroundView.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
+        self.prepareCellSelectSurroundView()
         
         //prepare lower gradient view so its upside down
         self.billAmountLowerGradientView.isUpsideDown = true
@@ -114,7 +110,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //was previously in viewWillAppear
         self.prepareTotalAmountTextLabel()
         self.prepareTipPercentageTextLabel()
-
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -136,7 +132,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
-
+    
     
     func scrollBillTableViewAtLaunch(timer: NSTimer?) {
         timer?.invalidate()
@@ -151,11 +147,12 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             let billIndexPathRow = self.userDefaults.integerForKey("billIndexPathRow")
             billIndexPath = NSIndexPath(forRow: billIndexPathRow, inSection: 0)
         }
-        //println("Scrolling BillTableView to Row: \(billIndexPath.row)")
-        self.didEndDeceleratingBillTable = true
         //have to do this ghetto two call method because just doing it once regularly caused things to not line up properly
         self.billAmountTableView.scrollToRowAtIndexPath(billIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         self.billAmountTableView.scrollToRowAtIndexPath(billIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        
+        //make sure the big labels are presented
+        self.bigLabelsArePresenting(true)
     }
     
     func scrollTipTableViewAtLaunch(timer: NSTimer?) {
@@ -175,6 +172,29 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
             self.updateTipAmountText()
         }
+        //make sure the big labels are presented
+        self.bigLabelsArePresenting(true)
+    }
+    
+    private func prepareCellSelectSurroundView() {
+        self.billAmountSelectedSurroundView.backgroundColor = UIColor.clearColor()
+        self.billAmountSelectedSurroundView.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
+        self.billAmountSelectedSurroundView.layer.cornerRadius = 0.0
+        self.billAmountSelectedSurroundView.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
+        self.billAmountSelectedSurroundView.clipsToBounds = true
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = self.billAmountSelectedSurroundView.bounds
+        gradient.colors = [
+            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.3).CGColor,
+            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.1).CGColor,
+            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.0).CGColor,
+            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.0).CGColor,
+            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.1).CGColor,
+            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.3).CGColor
+        ]
+        //self.billAmountSelectedSurroundView.layer.
+        self.billAmountSelectedSurroundView.layer.insertSublayer(gradient, atIndex: 0)
     }
     
     private func prepareSettingsButton() {
@@ -215,6 +235,24 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 self.presentViewController(settingsNavigationController, animated: true, completion: nil)
             }
         }
+    }
+    
+    private func bigLabelsArePresenting(presenting: Bool) {
+        let transform = presenting ? self.labelContainerViewOriginalTransform : CGAffineTransformScale(self.labelContainerViewOriginalTransform, 0.8, 0.8)
+        let alpha: CGFloat = presenting ? 1.0 : 0.7
+        
+        UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
+            delay: 0.0,
+            usingSpringWithDamping: 0.6,
+            initialSpringVelocity: 1.9,
+            options: UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState,
+            animations: {
+                self.labelContainerView.transform = transform
+                self.labelContainerView.alpha = alpha
+            },
+            completion: { finished in
+                //do nothing
+        })
     }
     
     //MARK: Handle Writing to Disk
@@ -259,7 +297,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             
             let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue-1, inSection: 0)
             if !self.tipTableCustomValueSet {
-                if !self.tipAmountTableView.scrollingState().isScrolling {
+                if !self.tipAmountTableView.isScrolling {
                     self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath,
                         atScrollPosition: UITableViewScrollPosition.Middle,
                         animated: false)
@@ -332,42 +370,24 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
-            switch scrollView.tag {
-            case self.BILLAMOUNTTAG:
-                self.didEndDeceleratingBillTable = true
-            default:
-                self.didEndDeceleratingTipTable = true
-            }
             self.scrollViewDidStopMovingForWateverReason(scrollView)
         }
     }
-
+    
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        switch scrollView.tag {
-        case self.BILLAMOUNTTAG:
-            self.didEndDeceleratingBillTable = true
-        default:
-            self.didEndDeceleratingTipTable = true
-        }
         self.scrollViewDidStopMovingForWateverReason(scrollView)
     }
     
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        if self.didEndDeceleratingBillTable {
-            self.didEndDeceleratingBillTable = false
-        } else if self.didEndDeceleratingTipTable {
-            self.didEndDeceleratingTipTable = false
-        } else {
-            self.scrollViewDidStopMovingForWateverReason(scrollView)
-        }
+        self.scrollViewDidStopMovingForWateverReason(scrollView)
+        self.bigLabelsArePresenting(true)
     }
     
     private func scrollViewDidStopMovingForWateverReason(scrollView: UIScrollView) {
         let tableView = scrollView as GratuitousTableView
         
         tableView.isScrolling = false
-        tableView.isUserInitiated = false
         
         switch tableView.tag {
         case self.BILLAMOUNTTAG:
@@ -385,11 +405,12 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
         let tableView = scrollView as GratuitousTableView
         tableView.isScrolling = true
-        tableView.isUserInitiated = true
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let tableView = scrollView as GratuitousTableView
+        
+        self.bigLabelsArePresenting(false)
         
         switch tableView.tag {
         case BILLAMOUNTTAG:
@@ -465,7 +486,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             return UITableViewCell()
         }
     }
-
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         var rowHeight = CGFloat(self.MEDIUMPHONECELLHEIGHT)
         
@@ -504,6 +525,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             
             let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
             let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+            self.prepareCellSelectSurroundView()
         })
     }
     
