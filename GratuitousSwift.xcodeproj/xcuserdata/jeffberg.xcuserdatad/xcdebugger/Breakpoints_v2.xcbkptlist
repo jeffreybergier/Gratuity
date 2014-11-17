@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GratuitousSwift/TipViewController.swift"
-            timestampString = "437878127.723164"
+            timestampString = "437890418.946354"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "prepareSettingsButton()"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GratuitousSwift/TipViewController.swift"
-            timestampString = "437880218.017497"
+            timestampString = "437890418.946354"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
+            startingLineNumber = "587"
+            endingLineNumber = "587"
             landmarkName = "prepareTipPercentageTextLabel()"
             landmarkType = "5">
          </BreakpointContent>

@@ -82,7 +82,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         } else {
             println("TipViewController: You should never see this. If you see this the tables were not configured correctly because an optional unwrap failed")
         }
-        
+
         //configure color of view
         self.view.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
         self.tipPercentageTextLabel.textColor = GratuitousUIConstant.lightTextColor()
@@ -114,6 +114,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //was previously in viewWillAppear
         self.prepareTotalAmountTextLabel()
         self.prepareTipPercentageTextLabel()
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -135,6 +136,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
+
     
     func scrollBillTableViewAtLaunch(timer: NSTimer?) {
         timer?.invalidate()
@@ -202,14 +204,16 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let settingsViewController = segue.destinationViewController as? SettingsTableViewController {
-            let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
-            
-            settingsNavigationController.transitioningDelegate = self.presentationTransitionerDelegate
-            settingsNavigationController.modalPresentationStyle = UIModalPresentationStyle.Custom
-            
-            self.presentViewController(settingsNavigationController, animated: true, completion: nil)
+    @IBAction func didTapSettingsButton(sender: UIButton) {
+        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
+            if let settingsViewController = appDelegate.storyboard.instantiateViewControllerWithIdentifier("SettingsTableViewController") as? SettingsTableViewController {
+                
+                let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
+                settingsNavigationController.transitioningDelegate = self.presentationTransitionerDelegate
+                settingsNavigationController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                
+                self.presentViewController(settingsNavigationController, animated: true, completion: nil)
+            }
         }
     }
     
