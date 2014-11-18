@@ -39,7 +39,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let currencyFormatter = GratuitousCurrencyFormatter()
     private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
     
-    private var labelContainerViewOriginalTransform = CGAffineTransformIdentity
     private var userDefaults = NSUserDefaults.standardUserDefaults()
     private var textSizeAdjustment: NSNumber = NSNumber(double: 0.0)
     private var billAmountsArray: [NSNumber] = []
@@ -181,19 +180,25 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.billAmountSelectedSurroundView.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
         self.billAmountSelectedSurroundView.layer.cornerRadius = 0.0
         self.billAmountSelectedSurroundView.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
-        self.billAmountSelectedSurroundView.clipsToBounds = true
+        //self.billAmountSelectedSurroundView.clipsToBounds = true
         
         let gradient = CAGradientLayer()
         gradient.frame = self.billAmountSelectedSurroundView.bounds
         gradient.colors = [
             GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.3).CGColor,
+            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.2).CGColor,
             GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.1).CGColor,
-            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.0).CGColor,
-            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.0).CGColor,
             GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.1).CGColor,
+            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.2).CGColor,
             GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.3).CGColor
         ]
-        //self.billAmountSelectedSurroundView.layer.
+        if let array = self.billAmountSelectedSurroundView.layer.sublayers as [AnyObject]? {
+            for layer in array {
+                if let layer = layer as? CALayer {
+                    layer.removeFromSuperlayer()
+                }
+            }
+        }
         self.billAmountSelectedSurroundView.layer.insertSublayer(gradient, atIndex: 0)
     }
     
@@ -238,8 +243,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func bigLabelsArePresenting(presenting: Bool) {
-        let transform = presenting ? self.labelContainerViewOriginalTransform : CGAffineTransformScale(self.labelContainerViewOriginalTransform, 0.8, 0.8)
-        let alpha: CGFloat = presenting ? 1.0 : 0.7
+        let transform = presenting ? CGAffineTransformIdentity : CGAffineTransformScale(CGAffineTransformIdentity, 0.7, 0.7)
+        let alpha: CGFloat = presenting ? 1.0 : 0.5
         
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
             delay: 0.0,
