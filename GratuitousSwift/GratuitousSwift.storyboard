@@ -54,10 +54,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cFa-ss-hba">
-                                        <rect key="frame" x="90" y="0.0" width="128.5" height="32.5"/>
+                                        <rect key="frame" x="90" y="0.0" width="129" height="33"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Amount on Bill" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="qGH-24-ssK">
-                                                <rect key="frame" x="8" y="5" width="112.5" height="22.5"/>
+                                                <rect key="frame" x="8" y="5" width="113" height="23"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -76,10 +76,10 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jem-jz-msI">
-                                        <rect key="frame" x="400" y="0.0" width="124.5" height="32.5"/>
+                                        <rect key="frame" x="400" y="0.0" width="125" height="33"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Suggested Tip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="afh-uC-UXK">
-                                                <rect key="frame" x="8" y="5" width="108.5" height="22.5"/>
+                                                <rect key="frame" x="8" y="5" width="109" height="23"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -153,13 +153,6 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5O-Qc-eNn">
-                                <rect key="frame" x="535" y="558" width="57" height="30"/>
-                                <state key="normal" title="Settings"/>
-                                <connections>
-                                    <action selector="didTapSettingsButton:" destination="x3f-eR-MGT" eventType="touchUpInside" id="mUs-o4-bIO"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sGt-Qz-W1j">
                                 <rect key="frame" x="0.0" y="4" width="600" height="300"/>
                                 <subviews>
@@ -220,6 +213,13 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5O-Qc-eNn">
+                                <rect key="frame" x="535" y="558" width="57" height="30"/>
+                                <state key="normal" title="Settings"/>
+                                <connections>
+                                    <action selector="didTapSettingsButton:" destination="x3f-eR-MGT" eventType="touchUpInside" id="mUs-o4-bIO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.11764705882352941" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -267,9 +267,6 @@
                                 <include reference="zhH-FQ-VKG"/>
                             </mask>
                         </variation>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="uJ4-5X-U27" appends="YES" id="RWy-F5-nYg"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="billAmountLowerGradientView" destination="Qr8-7O-BPw" id="kGJ-H6-Pzb"/>
@@ -301,11 +298,6 @@
                         <action selector="didTapTipAmountTableViewScrollToTop:" destination="x3f-eR-MGT" id="Q6c-kG-djw"/>
                     </connections>
                 </tapGestureRecognizer>
-                <swipeGestureRecognizer direction="left" id="uJ4-5X-U27">
-                    <connections>
-                        <action selector="didActivateSettingsSwipeGestureRecognizer:" destination="x3f-eR-MGT" id="iuf-Xh-oa6"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="497" y="220"/>
         </scene>

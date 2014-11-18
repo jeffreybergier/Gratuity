@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel!
     @IBOutlet private weak var totalAmountTextLabel: UILabel!
@@ -46,6 +46,12 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
     private var tipPercentageTextLabelAttributes = [NSString(): NSObject()]
     private var tipTableCustomValueSet = false
+    private lazy var settingsScreenPanGestureRecognizer: UIScreenEdgePanGestureRecognizer = {
+        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: "handleSettingsPanGesture:")
+        gesture.edges = UIRectEdge.Right
+        gesture.delegate = self
+        return gesture
+        }()
     private var suggestedTipPercentage: Double = 0.0 {
         didSet {
             self.updateBillAmountText()
@@ -96,6 +102,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //prepare lower gradient view so its upside down
         self.billAmountLowerGradientView.isUpsideDown = true
         
+        //add swipe gesture
+        self.view.addGestureRecognizer(self.settingsScreenPanGestureRecognizer)
+        
         //prepare the primary view for the animation in
         self.labelContainerView.alpha = 0
         self.tableContainerView.alpha = 0
@@ -128,7 +137,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             }, completion: nil)
         
         let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
-        
         let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
     
@@ -180,26 +188,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.billAmountSelectedSurroundView.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
         self.billAmountSelectedSurroundView.layer.cornerRadius = 0.0
         self.billAmountSelectedSurroundView.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
-        //self.billAmountSelectedSurroundView.clipsToBounds = true
-        
-        let gradient = CAGradientLayer()
-        gradient.frame = self.billAmountSelectedSurroundView.bounds
-        gradient.colors = [
-            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.3).CGColor,
-            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.2).CGColor,
-            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.1).CGColor,
-            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.1).CGColor,
-            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.2).CGColor,
-            GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.3).CGColor
-        ]
-        if let array = self.billAmountSelectedSurroundView.layer.sublayers as [AnyObject]? {
-            for layer in array {
-                if let layer = layer as? CALayer {
-                    layer.removeFromSuperlayer()
-                }
-            }
-        }
-        self.billAmountSelectedSurroundView.layer.insertSublayer(gradient, atIndex: 0)
+        self.billAmountSelectedSurroundView.backgroundColor = GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.15)
     }
     
     private func prepareSettingsButton() {
@@ -217,8 +206,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     //MARK: Handle User Input
     
-    @IBAction func didActivateSettingsSwipeGestureRecognizer(sender: UISwipeGestureRecognizer) {
-        println(sender.state.rawValue)
+    func handleSettingsPanGesture(gesture: UIScreenEdgePanGestureRecognizer) {
+        println(gesture.state)
     }
     
     @IBAction func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
@@ -243,7 +232,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func bigLabelsArePresenting(presenting: Bool) {
-        let transform = presenting ? CGAffineTransformIdentity : CGAffineTransformScale(CGAffineTransformIdentity, 0.7, 0.7)
+        let transform = presenting ? CGAffineTransformIdentity : CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.8)
         let alpha: CGFloat = presenting ? 1.0 : 0.5
         
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
@@ -530,7 +519,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             
             let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
             let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
-            self.prepareCellSelectSurroundView()
         })
     }
     
