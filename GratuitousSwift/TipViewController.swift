@@ -136,6 +136,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 self.tableContainerView.alpha = 1.0
             }, completion: nil)
         
+        //prepare the top and bottom edge insets for the tableviews
+        self.prepareTableViewEdgeInsets(false)
+        
         let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
         let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
@@ -204,10 +207,42 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
+    private func prepareTableViewEdgeInsets(removeBool: Bool) {
+        if removeBool {
+            let tableviewHeight = self.billAmountTableView.frame.size.height
+            let surroundViewHeight = self.billAmountSelectedSurroundView.frame.size.height
+            let topOffset = tableviewHeight/2 - surroundViewHeight/2
+            //println("tableviewHeight/2 - surroundViewHeight/2 = \(tableviewHeight/2) - \(surroundViewHeight/2) = \(tableviewHeight/2 - surroundViewHeight/2)")
+            let edgeInsets = UIEdgeInsetsMake(topOffset, 0, topOffset, 0)
+            //println(edgeInsets.top)
+            self.billAmountTableView.contentInset = edgeInsets
+        } else {
+            self.billAmountTableView.contentInset = UIEdgeInsetsZero
+        }
+    }
+    
     //MARK: Handle User Input
     
     func handleSettingsPanGesture(gesture: UIScreenEdgePanGestureRecognizer) {
-        println(gesture.state)
+        
+        switch gesture.state {
+        case UIGestureRecognizerState.Began:
+            println("Gesture Began")
+        case UIGestureRecognizerState.Ended:
+            println("Gesture Ended")
+        case UIGestureRecognizerState.Changed:
+            let percent = (gesture.translationInView(self.view).x / self.view.frame.size.width) * -1
+            let velocity = gesture.velocityInView(self.view).x * -1
+            if percent >= 0.90 {
+                println("Success because its 90%")
+            } else if percent >= 0.50 {
+                if velocity >= 300 {
+                    println("Success because velocity is great enough")
+                }
+            }
+        default:
+            break
+        }
     }
     
     @IBAction func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
@@ -236,7 +271,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         let alpha: CGFloat = presenting ? 1.0 : 0.5
         
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
-            delay: 0.0,
+            delay: 0.05,
             usingSpringWithDamping: 0.6,
             initialSpringVelocity: 1.9,
             options: UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState,
@@ -355,6 +390,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch tableView.tag {
         case BILLAMOUNTTAG:
+            //println("Selected dollar amount $\(indexPath.row+1)")
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
         default:
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -408,12 +444,14 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         switch tableView.tag {
         case BILLAMOUNTTAG:
-            let indexPath = self.indexPathInCenterOfTable(tableView)
-            tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
+            //these lines were needed when the cells needed to do something when the tableview was scrolling, but its no longer needed
+            //let indexPath = self.indexPathInCenterOfTable(tableView)
+            //tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
             self.updateBillAmountText()
         default:
-            let indexPath = self.indexPathInCenterOfTable(tableView)
-            tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
+            //these lines were needed when the cells needed to do something when the tableview was scrolling, but its no longer needed
+            //let indexPath = self.indexPathInCenterOfTable(tableView)
+            //tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
             self.updateTipAmountText()
         }
     }
@@ -430,7 +468,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if let optionalIndexPath = tableView.indexPathForRowAtPoint(point) {
             indexPath = optionalIndexPath
         }
-        
+        if tableView.tag == BILLAMOUNTTAG {
+            //println("Just got a request to retrieve this row dollar amount = $\(indexPath.row+1)")
+        }
         return indexPath
     }
     

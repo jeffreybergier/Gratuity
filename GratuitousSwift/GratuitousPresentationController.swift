@@ -65,7 +65,7 @@ class GratuitousPresentationController: UIPresentationController {
         
         if deviceScreen.largeDevice {
             if deviceScreen.largeDeviceLandscape {
-                divisionConstant = 2.1
+                divisionConstant = 1.9
             } else {
                 divisionConstant = 1.2
             }
