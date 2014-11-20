@@ -46,12 +46,12 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
     private var tipPercentageTextLabelAttributes = [NSString(): NSObject()]
     private var tipTableCustomValueSet = false
-    private lazy var settingsScreenPanGestureRecognizer: UIScreenEdgePanGestureRecognizer = {
-        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: "handleSettingsPanGesture:")
-        gesture.edges = UIRectEdge.Right
-        gesture.delegate = self
-        return gesture
-        }()
+//    private lazy var settingsScreenPanGestureRecognizer: UIScreenEdgePanGestureRecognizer = {
+//        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: "handleSettingsPanGesture:")
+//        gesture.edges = UIRectEdge.Right
+//        gesture.delegate = self
+//        return gesture
+//        }()
     private var suggestedTipPercentage: Double = 0.0 {
         didSet {
             self.updateBillAmountText()
@@ -103,11 +103,14 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.billAmountLowerGradientView.isUpsideDown = true
         
         //add swipe gesture
-        self.view.addGestureRecognizer(self.settingsScreenPanGestureRecognizer)
+        //self.view.addGestureRecognizer(self.settingsScreenPanGestureRecognizer)
         
         //prepare the primary view for the animation in
         self.labelContainerView.alpha = 0
         self.tableContainerView.alpha = 0
+        
+        //add the gesture recognizer to this view and to the transitioning delegate
+        self.presentationTransitionerDelegate.sourceViewController = self
         
         //check screensize and set text side adjustment
         self.textSizeAdjustment = self.checkScreenHeightForTextSizeAdjuster()
@@ -253,7 +256,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
     
-    @IBAction func didTapSettingsButton(sender: UIButton) {
+    @IBAction func didTapSettingsButton(sender: UIButton?) {
         if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
             if let settingsViewController = appDelegate.storyboard.instantiateViewControllerWithIdentifier("SettingsTableViewController") as? SettingsTableViewController {
                 

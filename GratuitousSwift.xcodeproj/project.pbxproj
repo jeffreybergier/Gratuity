@@ -126,8 +126,8 @@
 		735334721A1804E2008530E1 /* Custom Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */,
 				73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */,
+				73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */,
 				73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */,
 			);
 			name = "Custom Presentation";
