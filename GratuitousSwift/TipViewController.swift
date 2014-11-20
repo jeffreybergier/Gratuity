@@ -46,12 +46,12 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
     private var tipPercentageTextLabelAttributes = [NSString(): NSObject()]
     private var tipTableCustomValueSet = false
-//    private lazy var settingsScreenPanGestureRecognizer: UIScreenEdgePanGestureRecognizer = {
-//        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: "handleSettingsPanGesture:")
-//        gesture.edges = UIRectEdge.Right
-//        gesture.delegate = self
-//        return gesture
-//        }()
+    private lazy var settingsScreenPanGestureRecognizer: UIScreenEdgePanGestureRecognizer = {
+        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: "handleSettingsPanGesture:")
+        gesture.edges = UIRectEdge.Right
+        gesture.delegate = self
+        return gesture
+        }()
     private var suggestedTipPercentage: Double = 0.0 {
         didSet {
             self.updateBillAmountText()
@@ -103,14 +103,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.billAmountLowerGradientView.isUpsideDown = true
         
         //add swipe gesture
-        //self.view.addGestureRecognizer(self.settingsScreenPanGestureRecognizer)
+        self.view.addGestureRecognizer(self.settingsScreenPanGestureRecognizer)
         
         //prepare the primary view for the animation in
         self.labelContainerView.alpha = 0
         self.tableContainerView.alpha = 0
-        
-        //add the gesture recognizer to this view and to the transitioning delegate
-        self.presentationTransitionerDelegate.sourceViewController = self
         
         //check screensize and set text side adjustment
         self.textSizeAdjustment = self.checkScreenHeightForTextSizeAdjuster()
@@ -270,8 +267,13 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func bigLabelsArePresenting(presenting: Bool) {
-        let transform = presenting ? CGAffineTransformIdentity : CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.8)
-        let alpha: CGFloat = presenting ? 1.0 : 0.5
+        var transform = presenting ? CGAffineTransformIdentity : CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.8)
+        var alpha: CGFloat = presenting ? 1.0 : 0.5
+        if self.presentedViewController != nil {
+            //if the view controller is presenting something, I want these values to always be big
+            transform = CGAffineTransformIdentity
+            alpha = 1.0
+        }
         
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
             delay: 0.05,

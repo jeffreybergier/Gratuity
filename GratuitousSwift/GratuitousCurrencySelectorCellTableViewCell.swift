@@ -73,7 +73,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor //UIColor.blackColor().CGColor
             
             let animationGroup = CAAnimationGroup()
-            animationGroup.duration = GratuitousUIConstant.animationDuration()
+            animationGroup.duration = GratuitousUIConstant.animationDuration() * 3
             animationGroup.animations = [colorAnimation]
             animationGroup.delegate = self
             animationGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)

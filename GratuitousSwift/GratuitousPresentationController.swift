@@ -10,13 +10,16 @@ import UIKit
 
 class GratuitousPresentationController: UIPresentationController {
     
-    lazy var dimmingView :UIView = {
+    private lazy var dimmingView :UIView = {
         let view = UIView()
         let tap = UITapGestureRecognizer(target:self, action:"dimmingViewTapped:")
+        let swipe = UISwipeGestureRecognizer(target:self, action:"dimmingViewTapped:")
+        swipe.direction = UISwipeGestureRecognizerDirection.Right
 
         view.backgroundColor = UIColor(white: 0.0, alpha: 0.7)
         view.alpha = 0.0
         view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(swipe)
         
         return view
         }()

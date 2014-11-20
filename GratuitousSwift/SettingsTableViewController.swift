@@ -18,6 +18,11 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     private var headerLabelsArray: [UILabel] = []
+    private lazy var swipeToDismiss: UISwipeGestureRecognizer = {
+        let swipe = UISwipeGestureRecognizer(target: self, action: "didSwipeToDismiss:")
+        swipe.direction = UISwipeGestureRecognizerDirection.Right
+        return swipe
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +47,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         //set the text color for the tip percentage
         self.prepareTipPercentageSliderAndLabels()
+        
+        //add the dismiss gesture recognizer to the view
+        self.view.addGestureRecognizer(self.swipeToDismiss)
         
         //configure the border color of my picture in the about screen
         self.prepareAboutPictureButtonsAndParagraph()
@@ -329,6 +337,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     // MARK: Handle View Going Away
+    func didSwipeToDismiss(sender: UISwipeGestureRecognizer) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
