@@ -36,3 +36,13 @@ enum CurrencySign: Int {
         }
     }
 }
+
+enum CorrectedScreenAndTextSize: Int {
+    //this takes into account screen size and text size adjustment. Thats why there are fake screen sizes.
+    case iPhone4or5 = 0, iPhone6, iPhone6Plus, iPad, iPadPlus, iPadPlusPlus
+}
+
+enum ActualScreenSizeBasedOnWidth: Int {
+    //this takes into account screen size and text size adjustment. Thats why there are fake screen sizes.
+    case iPhone4or5 = 0, iPhone6, iPhone6Plus, iPad
+}

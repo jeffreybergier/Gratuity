@@ -34,6 +34,11 @@ class GratuitousTableViewCell: UITableViewCell {
         self.didSetBillAmount()
     }
     
+    func invertColorsDidChange(notification: NSNotification) {
+        self.contentView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+        self.prepareLabelTextAttributes()
+    }
+    
     private func didSetBillAmount() {
         let currencyFormattedString = self.currencyFormatter?.currencyFormattedString(self.billAmount)
         var stringForLabel = NSAttributedString()
@@ -50,6 +55,7 @@ class GratuitousTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateTextField:", name: "currencyFormatterReadyReloadView", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         
         //configure the font
         if let font = GratuitousUIConstant.originalFontForTableViewCellTextLabels() {
@@ -70,7 +76,7 @@ class GratuitousTableViewCell: UITableViewCell {
     private func prepareLabelTextAttributes() {
         //configure the not selected text attributes
         let font = self.dollarTextLabel.font
-        let textColor = self.dollarTextLabel.textColor
+        let textColor = GratuitousUIConstant.lightTextColor()
         let text = self.dollarTextLabel.text
         let shadow = NSShadow()
         shadow.shadowColor = GratuitousUIConstant.textShadowColor()

@@ -231,13 +231,14 @@
                             </constraint>
                             <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="Tiu-8h-vjS" secondAttribute="leadingMargin" constant="-16" id="Ddk-nB-5F2"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="width" secondItem="Tiu-8h-vjS" secondAttribute="width" multiplier="3/7" id="Dpw-Ss-aGw"/>
-                            <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="F2W-Pc-eWf" secondAttribute="trailing" id="NXH-wi-F1K"/>
-                            <constraint firstItem="F2W-Pc-eWf" firstAttribute="leading" secondItem="Tiu-8h-vjS" secondAttribute="leadingMargin" constant="-24" id="Qwl-pL-kS0"/>
+                            <constraint firstItem="F2W-Pc-eWf" firstAttribute="leading" secondItem="Tiu-8h-vjS" secondAttribute="leadingMargin" constant="-20" id="Qwl-pL-kS0"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="height" secondItem="Tiu-8h-vjS" secondAttribute="height" multiplier="1/3.5" id="Ugr-y8-9SS"/>
                             <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="x5O-Qc-eNn" secondAttribute="bottom" constant="12" id="Wbb-ez-0u8"/>
                             <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="bottom" id="YiU-Ec-r5z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sGt-Qz-W1j" secondAttribute="trailing" constant="-16" id="ghx-eO-TWI"/>
-                            <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="F2W-Pc-eWf" secondAttribute="trailing" id="iKK-ny-erz"/>
+                            <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="F2W-Pc-eWf" secondAttribute="trailing" id="iKK-ny-erz">
+                                <variation key="heightClass=compact" constant="24"/>
+                            </constraint>
                             <constraint firstAttribute="height" secondItem="sGt-Qz-W1j" secondAttribute="height" id="kyO-qO-aQ3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="x5O-Qc-eNn" secondAttribute="trailing" constant="-8" id="rCu-ms-0HB"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="top" secondItem="sGt-Qz-W1j" secondAttribute="bottom" id="s7t-Bp-vRn"/>
@@ -245,7 +246,6 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="NXH-wi-F1K"/>
                                 <exclude reference="iKK-ny-erz"/>
                                 <exclude reference="kyO-qO-aQ3"/>
                                 <exclude reference="Dpw-Ss-aGw"/>
@@ -257,7 +257,6 @@
                             <mask key="constraints">
                                 <exclude reference="3ID-H5-Pum"/>
                                 <exclude reference="Ddk-nB-5F2"/>
-                                <include reference="NXH-wi-F1K"/>
                                 <include reference="iKK-ny-erz"/>
                                 <include reference="kyO-qO-aQ3"/>
                                 <exclude reference="AhH-Xr-y9S"/>
@@ -308,7 +307,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="g6e-jD-7eb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="MQC-bV-HhS">
                                 <cells>

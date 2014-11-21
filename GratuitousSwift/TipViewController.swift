@@ -67,6 +67,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "suggestedTipUpdatedOnDisk:", name: "suggestedTipValueUpdated", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateView:", name: "currencyFormatterReadyReloadView", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         
         //prepare the arrays
         for i in 0..<self.MAXBILLAMOUNT {
@@ -110,6 +111,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tableContainerView.alpha = 0
         
         //check screensize and set text side adjustment
+        self.checkForScreenSizeConstraintAdjustments()
         self.textSizeAdjustment = self.checkScreenHeightForTextSizeAdjuster()
         
         //prepare the settings button
@@ -541,7 +543,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     //MARK: View Controller Preferences
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+        if UIAccessibilityIsInvertColorsEnabled() {
+            return UIStatusBarStyle.Default
+        } else {
+            return UIStatusBarStyle.LightContent
+        }
     }
     
     override func supportedInterfaceOrientations() -> Int {
@@ -554,11 +560,36 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.prepareSettingsButton()
     }
     
+    func invertColorsDidChange(notification: NSNotification) {
+        //configure color of view
+        self.view.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+        self.tipPercentageTextLabel.textColor = GratuitousUIConstant.lightTextColor()
+        self.totalAmountTextLabel.textColor = GratuitousUIConstant.lightTextColor()
+        self.tipAmountTableViewTitleTextLabel.textColor = GratuitousUIConstant.darkTextColor()
+        self.billAmountTableViewTitleTextLabel.textColor = GratuitousUIConstant.darkTextColor()
+        self.tipAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+        self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+        
+        //change the status bar
+        //this line of code doesn't actually work, but maybe it will some day?
+        UIApplication.sharedApplication().statusBarStyle = self.preferredStatusBarStyle()
+        
+        //update the surround view
+        self.prepareCellSelectSurroundView()
+        
+        //update the colors for the text attributes
+        self.totalAmountTextLabelAttributes["NSColor"] = GratuitousUIConstant.lightTextColor()
+        self.tipPercentageTextLabelAttributes["NSColor"] = GratuitousUIConstant.lightTextColor()
+    }
+    
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         
         //this line stops a bug with the transforms on rotation
         self.view.transform = CGAffineTransformIdentity
+        
+        //check the screen width again
+        self.checkScreenHeightForTextSizeAdjuster()
         
         coordinator.animateAlongsideTransition(nil, completion: { finished in
             
@@ -567,8 +598,48 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         })
     }
     
+    private func checkForScreenSizeConstraintAdjustments() {
+        let nothing = GratuitousUIConstant.actualScreenSizeBasedOnWidth()
+        switch GratuitousUIConstant.actualScreenSizeBasedOnWidth() {
+        case .iPhone4or5:
+            self.tipPercentageTextLabelTopConstraint.constant = -15.0
+            self.totalAmountTextLabelBottomConstraint.constant = -12.0
+        case .iPhone6:
+            self.tipPercentageTextLabelTopConstraint.constant = -10.0
+            self.totalAmountTextLabelBottomConstraint.constant = -10.0
+        case .iPhone6Plus:
+            self.tipPercentageTextLabelTopConstraint.constant = -20.0
+            self.totalAmountTextLabelBottomConstraint.constant = -10.0
+        case .iPad:
+            self.tipPercentageTextLabelTopConstraint.constant = -25.0
+            self.totalAmountTextLabelBottomConstraint.constant = -5.0
+        }
+    }
+    
     private func checkScreenHeightForTextSizeAdjuster() -> Double {
         var textSizeAdjustment = 1.0
+        var nothing = GratuitousUIConstant.correctCellTextSize()
+        
+        switch GratuitousUIConstant.correctCellTextSize() {
+        case .iPhone4or5:
+            self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.SMALLPHONECELLHEIGHT
+            textSizeAdjustment = Double(0.76)
+        case .iPhone6:
+            self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.TALLPHONECELLHEIGHT
+            textSizeAdjustment = Double(0.85)
+        case .iPhone6Plus:
+            self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.MEDIUMPHONECELLHEIGHT
+            textSizeAdjustment = Double(1.0)
+        case .iPad:
+            self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.LARGEPHONECELLHEIGHT
+            textSizeAdjustment = Double(1.1)
+        case .iPadPlus:
+            textSizeAdjustment = Double(1.3)
+        case .iPadPlusPlus:
+            textSizeAdjustment = Double(1.6)
+
+        }
+        /*
         if UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width {
             if UIScreen.mainScreen().bounds.size.height > 735 {
                 self.tipPercentageTextLabelTopConstraint.constant = -25.0
@@ -591,29 +662,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.SMALLPHONECELLHEIGHT
                 textSizeAdjustment = Double(0.76)
             }
-        } else {
-            if UIScreen.mainScreen().bounds.size.width > 735 {
-                self.tipPercentageTextLabelTopConstraint.constant = -25.0
-                self.totalAmountTextLabelBottomConstraint.constant = -5.0
-                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.LARGEPHONECELLHEIGHT
-                textSizeAdjustment = Double(1.1)
-            } else if UIScreen.mainScreen().bounds.size.width > 666 {
-                self.tipPercentageTextLabelTopConstraint.constant = -20.0
-                self.totalAmountTextLabelBottomConstraint.constant = -10.0
-                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.MEDIUMPHONECELLHEIGHT
-                textSizeAdjustment = Double(1.0)
-            } else if UIScreen.mainScreen().bounds.size.width > 567 {
-                self.tipPercentageTextLabelTopConstraint.constant = -10.0
-                self.totalAmountTextLabelBottomConstraint.constant = -10.0
-                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.TALLPHONECELLHEIGHT
-                textSizeAdjustment = Double(0.85)
-            } else if UIScreen.mainScreen().bounds.size.width > 479 {
-                self.tipPercentageTextLabelTopConstraint.constant = -15.0
-                self.totalAmountTextLabelBottomConstraint.constant = -12.0
-                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.SMALLPHONECELLHEIGHT
-                textSizeAdjustment = Double(0.76)
-            }
-        }
+        } */
         return textSizeAdjustment
     }
     

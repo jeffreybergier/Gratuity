@@ -14,6 +14,7 @@ class GratuitousSettingsButtons: UIButton {
         super.awakeFromNib()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         
         self.addTarget(self, action: "touchDown:", forControlEvents: UIControlEvents.TouchDown)
         self.addTarget(self, action: "touchUp:", forControlEvents: UIControlEvents.TouchUpInside)

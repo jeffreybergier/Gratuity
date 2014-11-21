@@ -33,6 +33,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         //add necessary notification center observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "readUserDefaultsAndUpdateSlider:", name: "suggestedTipValueUpdated", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         
         //set the background color of the view
         self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
@@ -71,7 +72,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         for label in self.headerLabelsArray {
             label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-            label.textColor = UIColor.blackColor()
+            label.textColor = GratuitousUIConstant.darkTextColor()
             label.superview?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
             label.superview?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         }
@@ -107,12 +108,23 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         //this takes care of the header cells
         self.prepareHeaderLabelsAndCells()
         
+        //set the background color of the view
+        self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
+        self.tableView.tintColor = GratuitousUIConstant.lightTextColor()
+        
+        //update the percentage slider
+        self.prepareTipPercentageSliderAndLabels()
+        
         //prepare the tip percentage label that sits on the right of the slider
         self.suggestedTipPercentageLabel.textColor = GratuitousUIConstant.lightTextColor()
         self.suggestedTipPercentageLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.navigationController?.navigationBar.barTintColor = nil
         
         //prepare the about area of the table
         self.prepareAboutPictureButtonsAndParagraph()
+        
+        //prepare the currency override cells
+        self.prepareCurrencyIndicatorCells()
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

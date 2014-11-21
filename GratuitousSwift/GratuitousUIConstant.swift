@@ -10,17 +10,39 @@ import UIKit
 
 class GratuitousUIConstant: NSObject {
     
+    private class func invertColorsIsEnabled() -> Bool {
+        var invertColors = false
+        
+        if UIAccessibilityIsInvertColorsEnabled() {
+            invertColors = true
+        }
+        
+        return invertColors
+    }
+    
     class func lightBackgroundColor() -> UIColor {
         //return UIColor(red: 185.0/255.0, green: 46.0/255.0, blue: 46.0/255.0, alpha: 1.0)
         return self.lightTextColor()
     }
     
     class func darkBackgroundColor() -> UIColor {
-        return UIColor(red: 30.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        var color = UIColor(red: 30.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        
+        if invertColorsIsEnabled() {
+            color = UIColor.whiteColor()
+        }
+        
+        return color
     }
     
     class func lightTextColor() -> UIColor {
-        return UIColor(red: 150.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        var color = UIColor(red: 150.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        
+        if invertColorsIsEnabled() {
+            color = UIColor.blackColor()
+        }
+        
+        return color
         //return self.lightBackgroundColor()
     }
     
@@ -82,5 +104,67 @@ class GratuitousUIConstant: NSObject {
         
         return (padIdiom: padIdiom, largeDevice: largeDevice, smallDeviceLandscape: smallDeviceLandscape, largeDeviceLandscape: largeDeviceLandscape)
     }
-   
+    
+    class func actualScreenSizeBasedOnWidth() -> ActualScreenSizeBasedOnWidth {
+        var actualScreenWidthEnum = ActualScreenSizeBasedOnWidth.iPhone4or5
+        let actualScreenWidth = (UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
+        if actualScreenWidth > 767 {
+            actualScreenWidthEnum = ActualScreenSizeBasedOnWidth.iPad
+        } else if actualScreenWidth > 413 {
+            actualScreenWidthEnum = ActualScreenSizeBasedOnWidth.iPhone6Plus
+        } else if actualScreenWidth > 374 {
+            actualScreenWidthEnum = ActualScreenSizeBasedOnWidth.iPhone6
+        } else if actualScreenWidth > 319 {
+            actualScreenWidthEnum = ActualScreenSizeBasedOnWidth.iPhone4or5
+        }
+        return actualScreenWidthEnum
+    }
+    
+    class func correctCellTextSize() -> CorrectedScreenAndTextSize {
+        var screenEnum = CorrectedScreenAndTextSize.iPhone4or5
+        var textSizeAdjustment = 0
+        let actualScreenWidth = (UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
+        
+        //go through the real screen sizes
+        if actualScreenWidth > 767 {
+            screenEnum = CorrectedScreenAndTextSize.iPad
+        } else if actualScreenWidth > 413 {
+            screenEnum = CorrectedScreenAndTextSize.iPhone6Plus
+        } else if actualScreenWidth > 379 {
+            screenEnum = CorrectedScreenAndTextSize.iPhone6
+        } else if actualScreenWidth > 319 {
+            screenEnum = CorrectedScreenAndTextSize.iPhone4or5
+        }
+        
+        //then adjust for the preferred text size
+        if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryLarge {
+            textSizeAdjustment = 0
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraLarge {
+            textSizeAdjustment = 0
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraExtraLarge {
+            textSizeAdjustment = 1
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraExtraExtraLarge {
+            textSizeAdjustment = 1
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityMedium {
+            textSizeAdjustment = 2
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityLarge {
+            textSizeAdjustment = 2
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraLarge {
+            textSizeAdjustment = 2
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraExtraLarge {
+            textSizeAdjustment = 3
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraExtraExtraLarge {
+            textSizeAdjustment = 3
+        }
+        
+        //do the math to combine screen size and text size
+        let rawAddition = screenEnum.rawValue + textSizeAdjustment
+        if let mathAdjustment = CorrectedScreenAndTextSize(rawValue: rawAddition) {
+            screenEnum = mathAdjustment
+        } else {
+            screenEnum = CorrectedScreenAndTextSize.iPadPlusPlus
+        }
+        
+        return screenEnum
+    }
 }

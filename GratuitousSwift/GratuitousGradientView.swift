@@ -42,6 +42,7 @@ class GratuitousGradientView: UIView {
     }
     
     internal func commonInitializer() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         self.backgroundColor = UIColor.clearColor()
         self.gradient.frame = self.bounds
         self.gradient.colors = self.gradientColors
@@ -53,4 +54,31 @@ class GratuitousGradientView: UIView {
         super.layoutSubviews()
     }
     
+    func invertColorsDidChange(notification: NSNotification) {
+        //I know this is lazy... but it will rarely happen because its only when someone switches to inverted colors.
+        //we can waste the extra ram for that one rare session.
+        if UIAccessibilityIsInvertColorsEnabled() {
+            var unusualGradientColors = [
+                GratuitousUIConstant.darkBackgroundColor().CGColor, GratuitousUIConstant.darkBackgroundColor().CGColor,
+                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.6).CGColor,
+                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.5).CGColor,
+                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.4).CGColor
+            ]
+            if self.isUpsideDown {
+                unusualGradientColors = unusualGradientColors.reverse()
+            }
+            self.gradient.colors = unusualGradientColors
+        } else {
+            var unusualGradientColors = [
+                GratuitousUIConstant.darkBackgroundColor().CGColor, GratuitousUIConstant.darkBackgroundColor().CGColor,
+                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.6).CGColor,
+                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.5).CGColor,
+                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.4).CGColor
+            ]
+            if self.isUpsideDown {
+                unusualGradientColors = unusualGradientColors.reverse()
+            }
+            self.gradient.colors = unusualGradientColors
+        }
+    }
 }
