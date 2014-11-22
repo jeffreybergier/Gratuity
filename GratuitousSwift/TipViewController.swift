@@ -257,19 +257,18 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
     
-    @IBAction func didTapSettingsButton(sender: UIButton?) {
-        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
-            if let settingsViewController = appDelegate.storyboard.instantiateViewControllerWithIdentifier("SettingsTableViewController") as? SettingsTableViewController {
-                
-                let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
-                settingsNavigationController.transitioningDelegate = self.presentationTransitionerDelegate
-                settingsNavigationController.modalPresentationStyle = UIModalPresentationStyle.Custom
-                
-                self.presentViewController(settingsNavigationController, animated: true, completion: nil)
-            }
-        }
+    @IBAction func unwindToViewController (sender: UIStoryboardSegue){
+        
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let settingsViewController = segue.destinationViewController as? UINavigationController
+        if let settingsViewController = settingsViewController {
+            settingsViewController.transitioningDelegate = self.presentationTransitionerDelegate
+            settingsViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+        }
+    }
+
     private func bigTextLabelsShouldPresent(presenting: Bool) {
         var transform = presenting ? CGAffineTransformIdentity : CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.8)
         var alpha: CGFloat = presenting ? 1.0 : 0.5

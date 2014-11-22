@@ -42,9 +42,12 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.barTintColor = nil
         
+        //these lines are not needed because I switched to segues. But I do like this code because its more adaptable.
+        /*
         //set up the right Done button in the navigation bar
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "didTapDoneButton:")
         self.navigationItem.rightBarButtonItem = doneButton
+        */
         
         //set the text color for the tip percentage
         self.prepareTipPercentageSliderAndLabels()

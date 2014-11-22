@@ -15,7 +15,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     //initialize the window and the storyboard
     var window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
+    private let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
