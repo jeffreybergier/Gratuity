@@ -29,8 +29,12 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         //initialize the view controller from the storyboard
         let tipViewController = self.storyboard.instantiateInitialViewController() as TipViewController
         
+        //fake view controller to present real viewcontroller modally
+        let fakeViewController = FakeViewController()
+        fakeViewController.realViewController = tipViewController
+        
         //configure the window
-        self.window.rootViewController = tipViewController
+        self.window.rootViewController = fakeViewController
         self.window.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         self.window.tintColor = GratuitousUIConstant.lightTextColor()
         self.window.makeKeyAndVisible()
@@ -70,6 +74,36 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+}
+
+class FakeViewController: UIViewController {
+    //
+    //
+    //this entire class is needed just to fix the bug where launching in landscape breaks autolayout
+    //
+    //
+    
+    var realViewController: TipViewController?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if let realViewController = self.realViewController {
+            self.presentViewController(realViewController, animated: false, completion: nil)
+        }
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return UIInterfaceOrientation.Portrait.rawValue
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
     }
 }
 

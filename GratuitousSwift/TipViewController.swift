@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
+class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel!
     @IBOutlet private weak var totalAmountTextLabel: UILabel!
@@ -31,6 +31,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let MAXTIPAMOUNT = 1000
     private let BILLAMOUNTTAG = 0
     private let TIPAMOUNTTAG = 1
+    private let EXTRACELLS = 2
     
     private let currencyFormatter = GratuitousCurrencyFormatter()
     private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
@@ -43,12 +44,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
     private var tipPercentageTextLabelAttributes = [NSString(): NSObject()]
     private var tipTableCustomValueSet = false
-    private lazy var settingsScreenPanGestureRecognizer: UIScreenEdgePanGestureRecognizer = {
-        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: "handleSettingsPanGesture:")
-        gesture.edges = UIRectEdge.Right
-        gesture.delegate = self
-        return gesture
-        }()
     private var suggestedTipPercentage: Double = 0.0 {
         didSet {
             self.updateBillAmountText()
@@ -68,10 +63,18 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         //prepare the arrays
         for i in 0..<self.MAXBILLAMOUNT {
-            self.billAmountsArray.append(NSNumber(double: Double(i+1)))
+            if i < EXTRACELLS {
+                self.billAmountsArray.append(NSNumber(double: Double(0)))
+            } else {
+                self.billAmountsArray.append(NSNumber(double: Double(i-EXTRACELLS)))
+            }
         }
         for i in 0..<self.MAXTIPAMOUNT {
-            self.tipAmountsArray.append(NSNumber(double: Double(i+1)))
+            if i < EXTRACELLS {
+                self.tipAmountsArray.append(NSNumber(double: Double(0)))
+            } else {
+                self.tipAmountsArray.append(NSNumber(double: Double(i-EXTRACELLS)))
+            }
         }
         
         //prepare the tableviews
@@ -103,9 +106,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         //prepare lower gradient view so its upside down
         self.billAmountLowerGradientView.isUpsideDown = true
-        
-        //add swipe gesture
-        self.view.addGestureRecognizer(self.settingsScreenPanGestureRecognizer)
         
         //prepare the primary view for the animation in
         self.labelContainerView.alpha = 0
@@ -227,28 +227,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     //MARK: Handle User Input
     
-    func handleSettingsPanGesture(gesture: UIScreenEdgePanGestureRecognizer) {
-        
-        switch gesture.state {
-        case UIGestureRecognizerState.Began:
-            println("Gesture Began")
-        case UIGestureRecognizerState.Ended:
-            println("Gesture Ended")
-        case UIGestureRecognizerState.Changed:
-            let percent = (gesture.translationInView(self.view).x / self.view.frame.size.width) * -1
-            let velocity = gesture.velocityInView(self.view).x * -1
-            if percent >= 0.90 {
-                println("Success because its 90%")
-            } else if percent >= 0.50 {
-                if velocity >= 300 {
-                    println("Success because velocity is great enough")
-                }
-            }
-        default:
-            break
-        }
-    }
-    
     @IBAction func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
         self.billAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
@@ -332,7 +310,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 tipAmountRoundedNumber = Double(1.0)
             }
             
-            let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue-1, inSection: 0)
+            let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue+EXTRACELLS, inSection: 0)
             if !self.tipTableCustomValueSet {
                 if !self.tipAmountTableView.isScrolling {
                     self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath,
@@ -350,7 +328,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 println("TipViewController: Failure to unwrap optional currencyFormattedString. You should never see this warning.")
                 totalAmountAttributedString = NSAttributedString(string: NSString(format: "$%.0f", totalAmount), attributes: self.totalAmountTextLabelAttributes)
             }
-            let tipPercentageAttributedString = NSAttributedString(string: NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100), attributes: self.tipPercentageTextLabelAttributes)
+            let tipPercentageString = NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100)
+            let tipPercentageAttributedString = tipPercentageString == "inf%" ? NSAttributedString(string: "100%", attributes: self.tipPercentageTextLabelAttributes) : NSAttributedString(string: tipPercentageString, attributes: self.tipPercentageTextLabelAttributes)
             self.totalAmountTextLabel.attributedText = totalAmountAttributedString
             self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
         }
@@ -430,13 +409,22 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         switch tableView.tag {
         //both of these have to be false to animate because if the rowheight is over 63, the animation doesn't work right and stops the tableviewfrom scrolling.
         case self.BILLAMOUNTTAG:
-            self.writeBillIndexPathRowToDiskWithTableView(tableView)
-            tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            let indexPath = self.indexPathInCenterOfTable(tableView)
+            if indexPath.row > EXTRACELLS {
+                self.writeBillIndexPathRowToDiskWithTableView(tableView)
+                tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            } else {
+                tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS+1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            }
         default:
+            let indexPath = self.indexPathInCenterOfTable(tableView)
+            if indexPath.row > EXTRACELLS {
             self.writeTipIndexPathRowToDiskWithTableView(tableView)
-            tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+                tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            } else {
+                tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS+1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            }
         }
-        
         self.bigTextLabelsShouldPresent(true)
     }
     
@@ -546,6 +534,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func supportedInterfaceOrientations() -> Int {
         return Int(UIInterfaceOrientationMask.All.rawValue)
+    }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return UIInterfaceOrientation.Portrait
     }
     
     //MARK: Handle Text Size Adjustment and Label Attributed Strings

@@ -36,15 +36,15 @@ class GratuitousTableViewCell: UITableViewCell {
     }
     
     private func didSetBillAmount() {
-        let currencyFormattedString = self.currencyFormatter?.currencyFormattedString(self.billAmount)
-        var stringForLabel = NSAttributedString()
-        if let currencyFormattedString = currencyFormattedString {
-            stringForLabel = NSAttributedString(string: currencyFormattedString, attributes: self.labelTextAttributes)
-        } else {
-            println("GratuitousTableViewCell: Failure to unwrap optional currentFormattedString. You should never see this warning.")
-            stringForLabel = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes)
-        }
-        self.dollarTextLabel.attributedText = stringForLabel
+        let currencyFormattedString = self.billAmount.doubleValue != 0 ? self.currencyFormatter?.currencyFormattedString(self.billAmount) : ""
+            var stringForLabel = NSAttributedString()
+            if let currencyFormattedString = currencyFormattedString {
+                stringForLabel = NSAttributedString(string: currencyFormattedString, attributes: self.labelTextAttributes)
+            } else {
+                println("GratuitousTableViewCell: Failure to unwrap optional currentFormattedString. You should never see this warning.")
+                stringForLabel = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes)
+            }
+            self.dollarTextLabel.attributedText = stringForLabel
     }
     
     override func awakeFromNib() {
