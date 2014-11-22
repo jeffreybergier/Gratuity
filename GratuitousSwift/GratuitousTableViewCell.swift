@@ -11,24 +11,20 @@ import UIKit
 class GratuitousTableViewCell: UITableViewCell {
 
     @IBOutlet weak private var dollarTextLabel: UILabel!
-    
     private var labelTextAttributes = [NSString(): NSObject()]
-    
+    private let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
     weak var currencyFormatter: GratuitousCurrencyFormatter?
     var textSizeAdjustment: NSNumber = 1.0 {
         didSet {
             if (self.labelTextAttributes["NSFont"] != nil) {
-                let originalFont = self.labelTextAttributes["NSFont"] as UIFont
-                let updatedFont = originalFont.fontWithSize(originalFont.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
-                self.labelTextAttributes["NSFont"] = updatedFont
-            }
-        }
-    }
+                if let originalFont = self.originalFont {
+                    let updatedFont = originalFont.fontWithSize(originalFont.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
+                    self.labelTextAttributes["NSFont"] = updatedFont
+                }}}}
     var billAmount: NSNumber = Double(0) {
         didSet {
             self.didSetBillAmount()
-        }
-    }
+        }}
     
     func localeDidChangeUpdateTextField(notification: NSNotification) {
         self.didSetBillAmount()
@@ -75,24 +71,25 @@ class GratuitousTableViewCell: UITableViewCell {
     
     private func prepareLabelTextAttributes() {
         //configure the not selected text attributes
-        let font = self.dollarTextLabel.font
         let textColor = GratuitousUIConstant.lightTextColor()
         let text = self.dollarTextLabel.text
         let shadow = NSShadow()
         shadow.shadowColor = GratuitousUIConstant.textShadowColor()
         shadow.shadowBlurRadius = 1.5
         shadow.shadowOffset = CGSizeMake(0.5, 0.5)
-        let attributes = [
-            NSForegroundColorAttributeName : textColor,
-            NSFontAttributeName : font,
-            //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
-            NSShadowAttributeName : shadow
-        ]
-        self.labelTextAttributes = attributes
-        
-        //configure the label to be deselected
-        let attributedString = NSAttributedString(string: text!, attributes: self.labelTextAttributes)
-        self.dollarTextLabel.attributedText = attributedString
+        if let font = self.originalFont {
+            let attributes = [
+                NSForegroundColorAttributeName : textColor,
+                NSFontAttributeName : font,
+                //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
+                NSShadowAttributeName : shadow
+            ]
+            self.labelTextAttributes = attributes
+            
+            //configure the label to be deselected
+            let attributedString = NSAttributedString(string: text!, attributes: self.labelTextAttributes)
+            self.dollarTextLabel.attributedText = attributedString
+        }
     }
     
     deinit {

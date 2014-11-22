@@ -120,20 +120,20 @@ class GratuitousUIConstant: NSObject {
         return actualScreenWidthEnum
     }
     
-    class func correctCellTextSize() -> CorrectedScreenAndTextSize {
-        var screenEnum = CorrectedScreenAndTextSize.iPhone4or5
+    class func correctCellTextSize() -> TableViewTextSizeAdjustedForDynamicType {
+        var screenEnum = TableViewTextSizeAdjustedForDynamicType.iPhone4or5
         var textSizeAdjustment = 0
         let actualScreenWidth = (UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
         
         //go through the real screen sizes
         if actualScreenWidth > 767 {
-            screenEnum = CorrectedScreenAndTextSize.iPad
+            screenEnum = TableViewTextSizeAdjustedForDynamicType.iPad
         } else if actualScreenWidth > 413 {
-            screenEnum = CorrectedScreenAndTextSize.iPhone6Plus
-        } else if actualScreenWidth > 379 {
-            screenEnum = CorrectedScreenAndTextSize.iPhone6
+            screenEnum = TableViewTextSizeAdjustedForDynamicType.iPhone6Plus
+        } else if actualScreenWidth > 374 {
+            screenEnum = TableViewTextSizeAdjustedForDynamicType.iPhone6
         } else if actualScreenWidth > 319 {
-            screenEnum = CorrectedScreenAndTextSize.iPhone4or5
+            screenEnum = TableViewTextSizeAdjustedForDynamicType.iPhone4or5
         }
         
         //then adjust for the preferred text size
@@ -159,10 +159,10 @@ class GratuitousUIConstant: NSObject {
         
         //do the math to combine screen size and text size
         let rawAddition = screenEnum.rawValue + textSizeAdjustment
-        if let mathAdjustment = CorrectedScreenAndTextSize(rawValue: rawAddition) {
+        if let mathAdjustment = TableViewTextSizeAdjustedForDynamicType(rawValue: rawAddition) {
             screenEnum = mathAdjustment
         } else {
-            screenEnum = CorrectedScreenAndTextSize.iPadPlusPlus
+            screenEnum = TableViewTextSizeAdjustedForDynamicType.iPadPlusPlus
         }
         
         return screenEnum

@@ -31,16 +31,13 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let MAXTIPAMOUNT = 1000
     private let BILLAMOUNTTAG = 0
     private let TIPAMOUNTTAG = 1
-    private let SMALLPHONECELLHEIGHT = CGFloat(50.0)
-    private let TALLPHONECELLHEIGHT = CGFloat(60.0)
-    private let MEDIUMPHONECELLHEIGHT = CGFloat(70.0)
-    private let LARGEPHONECELLHEIGHT = CGFloat(74.0)
     
     private let currencyFormatter = GratuitousCurrencyFormatter()
     private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
     
     private var userDefaults = NSUserDefaults.standardUserDefaults()
-    private var textSizeAdjustment: NSNumber = NSNumber(double: 0.0)
+    private var upperTextSizeAdjustment: NSNumber = NSNumber(double: 0.0)
+    private var lowerTextSizeAdjustment: NSNumber = NSNumber(double: 0.0)
     private var billAmountsArray: [NSNumber] = []
     private var tipAmountsArray: [NSNumber] = []
     private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
@@ -97,6 +94,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tipAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
         self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
         
+        //estimated row height
+        self.billAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        self.tipAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        
         //prepare the cell select surrounds
         self.prepareCellSelectSurroundView()
         
@@ -112,7 +113,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         //check screensize and set text side adjustment
         self.checkForScreenSizeConstraintAdjustments()
-        self.textSizeAdjustment = self.checkScreenHeightForTextSizeAdjuster()
+        self.lowerTextSizeAdjustment = GratuitousUIConstant.correctCellTextSize().textSizeAdjustment()
+        self.selectedTableViewCellOutlineViewHeightConstraint.constant = GratuitousUIConstant.correctCellTextSize().rowHeight()
         
         //prepare the settings button
         self.prepareSettingsButton()
@@ -164,7 +166,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.billAmountTableView.scrollToRowAtIndexPath(billIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
         
         //make sure the big labels are presented
-        self.bigLabelsArePresenting(true)
+        self.bigTextLabelsShouldPresent(true)
     }
     
     func scrollTipTableViewAtLaunch(timer: NSTimer?) {
@@ -185,7 +187,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             self.updateTipAmountText()
         }
         //make sure the big labels are presented
-        self.bigLabelsArePresenting(true)
+        self.bigTextLabelsShouldPresent(true)
     }
     
     private func prepareCellSelectSurroundView() {
@@ -268,7 +270,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
-    private func bigLabelsArePresenting(presenting: Bool) {
+    private func bigTextLabelsShouldPresent(presenting: Bool) {
         var transform = presenting ? CGAffineTransformIdentity : CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.8)
         var alpha: CGFloat = presenting ? 1.0 : 0.5
         if self.presentedViewController != nil {
@@ -278,7 +280,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
         
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
-            delay: 0.05,
+            delay: presenting ? 0.05 : 0.05,
             usingSpringWithDamping: 0.6,
             initialSpringVelocity: 1.9,
             options: UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState,
@@ -353,6 +355,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             self.totalAmountTextLabel.attributedText = totalAmountAttributedString
             self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
         }
+//        println("Upper: \(self.upperTextSizeAdjustment)")
+//        println("Lower: \(self.lowerTextSizeAdjustment)")
     }
     
     private func updateTipAmountText() {
@@ -397,7 +401,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch tableView.tag {
         case BILLAMOUNTTAG:
-            //println("Selected dollar amount $\(indexPath.row+1)")
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
         default:
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -407,33 +410,35 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
-            self.scrollViewDidStopMovingForWateverReason(scrollView)
+            self.scrollViewDidStopMovingForWhateverReason(scrollView)
         }
     }
     
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        self.scrollViewDidStopMovingForWateverReason(scrollView)
+        self.scrollViewDidStopMovingForWhateverReason(scrollView)
     }
     
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        self.scrollViewDidStopMovingForWateverReason(scrollView)
-        self.bigLabelsArePresenting(true)
+        self.scrollViewDidStopMovingForWhateverReason(scrollView)
     }
     
-    private func scrollViewDidStopMovingForWateverReason(scrollView: UIScrollView) {
+    private func scrollViewDidStopMovingForWhateverReason(scrollView: UIScrollView) {
         let tableView = scrollView as GratuitousTableView
         
         tableView.isScrolling = false
         
         switch tableView.tag {
+        //both of these have to be false to animate because if the rowheight is over 63, the animation doesn't work right and stops the tableviewfrom scrolling.
         case self.BILLAMOUNTTAG:
             self.writeBillIndexPathRowToDiskWithTableView(tableView)
-            tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
         default:
             self.writeTipIndexPathRowToDiskWithTableView(tableView)
-            tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            tableView.selectRowAtIndexPath(self.indexPathInCenterOfTable(tableView), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
         }
+        
+        self.bigTextLabelsShouldPresent(true)
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -447,7 +452,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let tableView = scrollView as GratuitousTableView
         
-        self.bigLabelsArePresenting(false)
+        self.bigTextLabelsShouldPresent(false)
         
         switch tableView.tag {
         case BILLAMOUNTTAG:
@@ -498,9 +503,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             case BILLAMOUNTTAG:
                 let billTableViewCellString = tableViewCellClass.stringByAppendingString("Bill")
                 let cell = tableView.dequeueReusableCellWithIdentifier(billTableViewCellString) as GratuitousTableViewCell
-                if cell.textSizeAdjustment.doubleValue == 1.0 {
-                    cell.textSizeAdjustment = self.textSizeAdjustment
-                }
+                cell.textSizeAdjustment = self.lowerTextSizeAdjustment
                 if let cellCurrencyFormatter = cell.currencyFormatter {
                     // do nothing
                 } else {
@@ -511,9 +514,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             default:
                 let tipTableViewCellString = tableViewCellClass.stringByAppendingString("Tip")
                 let cell = tableView.dequeueReusableCellWithIdentifier(tipTableViewCellString) as GratuitousTableViewCell
-                if cell.textSizeAdjustment.doubleValue == 1.0 {
-                    cell.textSizeAdjustment = self.textSizeAdjustment
-                }
+                cell.textSizeAdjustment = self.lowerTextSizeAdjustment
                 if let cellCurrencyFormatter = cell.currencyFormatter {
                     // do nothing
                 } else {
@@ -529,13 +530,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var rowHeight = CGFloat(self.MEDIUMPHONECELLHEIGHT)
-        
-        if self.textSizeAdjustment.doubleValue < 0.8 {
-            rowHeight = self.SMALLPHONECELLHEIGHT
-        } else if self.textSizeAdjustment.doubleValue < 1.0 {
-            rowHeight = self.TALLPHONECELLHEIGHT
-        }
+        var rowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
         
         return rowHeight
     }
@@ -557,7 +552,18 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     //MARK: Handle Text Size Adjustment and Label Attributed Strings
     
     func systemTextSizeDidChange(notification: NSNotification) {
+        //adjust text size
+        self.lowerTextSizeAdjustment = GratuitousUIConstant.correctCellTextSize().textSizeAdjustment()
+        self.selectedTableViewCellOutlineViewHeightConstraint.constant = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        
+        //estimated row height
+        self.billAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        self.tipAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        
+        //update the view
         self.prepareSettingsButton()
+        self.billAmountTableView.reloadData()
+        self.tipAmountTableView.reloadData()
     }
     
     func invertColorsDidChange(notification: NSNotification) {
@@ -588,9 +594,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //this line stops a bug with the transforms on rotation
         self.view.transform = CGAffineTransformIdentity
         
-        //check the screen width again
-        self.checkScreenHeightForTextSizeAdjuster()
-        
         coordinator.animateAlongsideTransition(nil, completion: { finished in
             
             let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
@@ -604,73 +607,27 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         case .iPhone4or5:
             self.tipPercentageTextLabelTopConstraint.constant = -15.0
             self.totalAmountTextLabelBottomConstraint.constant = -12.0
+            self.upperTextSizeAdjustment = Double(0.76)
         case .iPhone6:
             self.tipPercentageTextLabelTopConstraint.constant = -10.0
             self.totalAmountTextLabelBottomConstraint.constant = -10.0
+            self.upperTextSizeAdjustment = Double(0.85)
         case .iPhone6Plus:
             self.tipPercentageTextLabelTopConstraint.constant = -20.0
             self.totalAmountTextLabelBottomConstraint.constant = -10.0
+            self.upperTextSizeAdjustment = Double(1.0)
         case .iPad:
             self.tipPercentageTextLabelTopConstraint.constant = -25.0
             self.totalAmountTextLabelBottomConstraint.constant = -5.0
+            self.upperTextSizeAdjustment = Double(1.3)
         }
-    }
-    
-    private func checkScreenHeightForTextSizeAdjuster() -> Double {
-        var textSizeAdjustment = 1.0
-        var nothing = GratuitousUIConstant.correctCellTextSize()
-        
-        switch GratuitousUIConstant.correctCellTextSize() {
-        case .iPhone4or5:
-            self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.SMALLPHONECELLHEIGHT
-            textSizeAdjustment = Double(0.76)
-        case .iPhone6:
-            self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.TALLPHONECELLHEIGHT
-            textSizeAdjustment = Double(0.85)
-        case .iPhone6Plus:
-            self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.MEDIUMPHONECELLHEIGHT
-            textSizeAdjustment = Double(1.0)
-        case .iPad:
-            self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.LARGEPHONECELLHEIGHT
-            textSizeAdjustment = Double(1.1)
-        case .iPadPlus:
-            textSizeAdjustment = Double(1.3)
-        case .iPadPlusPlus:
-            textSizeAdjustment = Double(1.6)
-
-        }
-        /*
-        if UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width {
-            if UIScreen.mainScreen().bounds.size.height > 735 {
-                self.tipPercentageTextLabelTopConstraint.constant = -25.0
-                self.totalAmountTextLabelBottomConstraint.constant = -5.0
-                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.LARGEPHONECELLHEIGHT
-                textSizeAdjustment = Double(1.1)
-            } else if UIScreen.mainScreen().bounds.size.height > 666 {
-                self.tipPercentageTextLabelTopConstraint.constant = -20.0
-                self.totalAmountTextLabelBottomConstraint.constant = -10.0
-                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.MEDIUMPHONECELLHEIGHT
-                textSizeAdjustment = Double(1.0)
-            } else if UIScreen.mainScreen().bounds.size.height > 567 {
-                self.tipPercentageTextLabelTopConstraint.constant = -10.0
-                self.totalAmountTextLabelBottomConstraint.constant = -10.0
-                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.TALLPHONECELLHEIGHT
-                textSizeAdjustment = Double(0.85)
-            } else if UIScreen.mainScreen().bounds.size.height > 479 {
-                self.tipPercentageTextLabelTopConstraint.constant = -15.0
-                self.totalAmountTextLabelBottomConstraint.constant = -12.0
-                self.selectedTableViewCellOutlineViewHeightConstraint.constant = self.SMALLPHONECELLHEIGHT
-                textSizeAdjustment = Double(0.76)
-            }
-        } */
-        return textSizeAdjustment
     }
     
     private func prepareTotalAmountTextLabel() {
         if let originalFont = GratuitousUIConstant.originalFontForTotalAmountTextLabel() {
             self.totalAmountTextLabel.font = originalFont
         }
-        let font = self.totalAmountTextLabel.font.fontWithSize(self.totalAmountTextLabel.font.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
+        let font = self.totalAmountTextLabel.font.fontWithSize(self.totalAmountTextLabel.font.pointSize * CGFloat(self.upperTextSizeAdjustment.floatValue))
         let textColor = self.totalAmountTextLabel.textColor
         let text = self.totalAmountTextLabel.text
         let shadow = NSShadow()
@@ -695,7 +652,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if let originalFont = GratuitousUIConstant.originalFontForTipPercentageTextLabel() {
             self.tipPercentageTextLabel.font = originalFont
         }
-        let font = self.tipPercentageTextLabel.font.fontWithSize(self.tipPercentageTextLabel.font.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
+        let font = self.tipPercentageTextLabel.font.fontWithSize(self.tipPercentageTextLabel.font.pointSize * CGFloat(self.upperTextSizeAdjustment.floatValue))
         let textColor = self.tipPercentageTextLabel.textColor
         let text = self.tipPercentageTextLabel.text
         let shadow = NSShadow()
