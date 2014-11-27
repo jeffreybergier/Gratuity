@@ -394,30 +394,39 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func scrollViewDidStopMovingForWhateverReason(scrollView: UIScrollView) {
-        let tableView = scrollView as GratuitousTableView
+        let tableView = scrollView as? GratuitousTableView
         
-        tableView.isScrolling = false
-        
-        switch tableView.tag {
-        //both of these have to be false to animate because if the rowheight is over 63, the animation doesn't work right and stops the tableviewfrom scrolling.
-        case self.BILLAMOUNTTAG:
-            let indexPath = self.indexPathInCenterOfTable(tableView)
-            if indexPath.row > EXTRACELLS - 1 {
-                self.writeBillIndexPathRowToDiskWithTableView(tableView)
-                tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
-            } else {
-                tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+        if let tableView = tableView {
+            tableView.isScrolling = false
+            switch tableView.tag {
+                //both of these have to be false to animate because if the rowheight is over 63, the animation doesn't work right and stops the tableviewfrom scrolling.
+            case self.BILLAMOUNTTAG:
+                let indexPath = self.indexPathInCenterOfTable(tableView)
+                if indexPath.row > EXTRACELLS - 1 {
+                    if indexPath.row > MAXBILLAMOUNT + EXTRACELLS - 1 {
+                        tableView.selectRowAtIndexPath(NSIndexPath(forRow: MAXBILLAMOUNT + EXTRACELLS - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                    } else {
+                        self.writeBillIndexPathRowToDiskWithTableView(tableView)
+                        tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+                    }
+                } else {
+                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                }
+            default:
+                let indexPath = self.indexPathInCenterOfTable(tableView)
+                if indexPath.row > EXTRACELLS - 1 {
+                    if indexPath.row > MAXTIPAMOUNT + EXTRACELLS - 1 {
+                        tableView.selectRowAtIndexPath(NSIndexPath(forRow: MAXTIPAMOUNT + EXTRACELLS - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                    } else {
+                        self.writeTipIndexPathRowToDiskWithTableView(tableView)
+                        tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+                    }
+                } else {
+                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                }
             }
-        default:
-            let indexPath = self.indexPathInCenterOfTable(tableView)
-            if indexPath.row > EXTRACELLS - 1 {
-            self.writeTipIndexPathRowToDiskWithTableView(tableView)
-                tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
-            } else {
-                tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-            }
+            self.bigTextLabelsShouldPresent(true)
         }
-        self.bigTextLabelsShouldPresent(true)
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {

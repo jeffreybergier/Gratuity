@@ -90,15 +90,12 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         //prepare the currency override cells
         self.prepareCurrencyIndicatorCells()
-        
-        self.tableView.reloadData()
-        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        NSNotificationCenter.defaultCenter().postNotificationName("settingsTableViewControllerDidAppear", object: nil)
+        self.tableView.reloadData()
     }
     
     func didTapDoneButton(sender: UIButton) {
