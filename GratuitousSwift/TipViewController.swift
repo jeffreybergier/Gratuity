@@ -30,9 +30,15 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     private let MAXBILLAMOUNT = 2000
     private let MAXTIPAMOUNT = 1000
+    private let EXTRACELLS: Int = {
+        if UIScreen.mainScreen().traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            return 3
+        } else {
+            return 2
+        }
+    }()
     private let BILLAMOUNTTAG = 0
     private let TIPAMOUNTTAG = 1
-    private let EXTRACELLS = 3
     private let LARGETEXTWIDTH: CGFloat = 60
     
     private let currencyFormatter = GratuitousCurrencyFormatter()
@@ -43,14 +49,14 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var lowerTextSizeAdjustment: NSNumber = NSNumber(double: 0.0)
     private var billAmountsArray: [NSNumber] = []
     private var tipAmountsArray: [NSNumber] = []
-    private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
-    private var tipPercentageTextLabelAttributes = [NSString(): NSObject()]
-    private var tipTableCustomValueSet = false
     private var suggestedTipPercentage: Double = 0.0 {
         didSet {
             self.updateBillAmountText()
         }
     }
+    private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
+    private var tipPercentageTextLabelAttributes = [NSString(): NSObject()]
+    private var tipTableCustomValueSet = false
     
     //MARK: Handle View Loading
     
@@ -105,6 +111,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.billAmountTableViewTitleTextLabel.textColor = GratuitousUIConstant.darkTextColor()
         self.tipAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
         self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+        
+        //configure the text
+        self.billAmountTableViewTitleTextLabel.text = NSLocalizedString("Amount on Bill", comment: "this is a text label displayed on the main page of the UI above the dollar amounts that user is supposed to select from for the cost of their restaurant bill.")
+        self.tipAmountTableViewTitleTextLabel.text = NSLocalizedString("Suggested Tip", comment: "this is a text label displayed on the main page of the UI above the tip amounts. The app suggests a tip amount, but they can also override it. This should be text that describes this suggestion is just a suggestion.")
         
         //estimated row height
         self.billAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()

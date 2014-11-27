@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GratuitousSwift/TipViewController.swift"
-            timestampString = "438750394.723813"
+            timestampString = "438756231.905722"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "425"
-            endingLineNumber = "425"
+            startingLineNumber = "435"
+            endingLineNumber = "435"
             landmarkName = "scrollViewDidStopMovingForWhateverReason(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GratuitousSwift/TipViewController.swift"
-            timestampString = "438750394.723813"
+            timestampString = "438756231.905722"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "427"
-            endingLineNumber = "427"
+            startingLineNumber = "437"
+            endingLineNumber = "437"
             landmarkName = "scrollViewDidStopMovingForWhateverReason(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GratuitousSwift/TipViewController.swift"
-            timestampString = "438750394.723813"
+            timestampString = "438756231.905722"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
+            startingLineNumber = "417"
+            endingLineNumber = "417"
             landmarkName = "scrollViewDidStopMovingForWhateverReason(_:)"
             landmarkType = "5">
          </BreakpointContent>
