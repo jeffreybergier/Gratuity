@@ -23,6 +23,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet private weak var billAmountSelectedSurroundView: UIView!
     @IBOutlet private weak var billAmountLowerGradientView: GratuitousGradientView!
     @IBOutlet private weak var selectedTableViewCellOutlineViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var largeTextWidthLandscapeOnlyConstraint: NSLayoutConstraint!
     @IBOutlet private weak var labelContainerView: UIView!
     @IBOutlet private weak var tableContainerView: UIView!
     @IBOutlet private weak var settingsButton: UIButton!
@@ -31,7 +32,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let MAXTIPAMOUNT = 1000
     private let BILLAMOUNTTAG = 0
     private let TIPAMOUNTTAG = 1
-    private let EXTRACELLS = 2
+    private let EXTRACELLS = 3
+    private let LARGETEXTWIDTH: CGFloat = 60
     
     private let currencyFormatter = GratuitousCurrencyFormatter()
     private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
@@ -62,15 +64,22 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         
         //prepare the arrays
-        for i in 0..<self.MAXBILLAMOUNT {
+        //the weird if statements add a couple extra 0's at the top and bottom of the array
+        //this gives the tableview some padding as ContentInset doesn't work as expected
+        //Once content inset is set (even when the top and bottom insets match) the tableview doesn't know where the "middle" is anymore.
+        for i in 1 ... MAXBILLAMOUNT + (EXTRACELLS * 2) {
             if i < EXTRACELLS {
+                self.billAmountsArray.append(NSNumber(double: Double(0)))
+            } else if i > MAXBILLAMOUNT + EXTRACELLS {
                 self.billAmountsArray.append(NSNumber(double: Double(0)))
             } else {
                 self.billAmountsArray.append(NSNumber(double: Double(i-EXTRACELLS)))
             }
         }
-        for i in 0..<self.MAXTIPAMOUNT {
+        for i in 1 ... self.MAXTIPAMOUNT + (EXTRACELLS * 2) {
             if i < EXTRACELLS {
+                self.tipAmountsArray.append(NSNumber(double: Double(0)))
+            } else if i > MAXTIPAMOUNT + EXTRACELLS {
                 self.tipAmountsArray.append(NSNumber(double: Double(0)))
             } else {
                 self.tipAmountsArray.append(NSNumber(double: Double(i-EXTRACELLS)))
@@ -115,6 +124,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.checkForScreenSizeConstraintAdjustments()
         self.lowerTextSizeAdjustment = GratuitousUIConstant.correctCellTextSize().textSizeAdjustment()
         self.selectedTableViewCellOutlineViewHeightConstraint.constant = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        self.largeTextWidthLandscapeOnlyConstraint.constant = GratuitousUIConstant.largeTextLandscapeConstant()
         
         //prepare the settings button
         self.prepareSettingsButton()
@@ -139,9 +149,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 self.labelContainerView.alpha = 1.0
                 self.tableContainerView.alpha = 1.0
             }, completion: nil)
-        
-        //prepare the top and bottom edge insets for the tableviews
-        self.prepareTableViewEdgeInsets(false)
         
         let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
         let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
@@ -211,20 +218,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
-    private func prepareTableViewEdgeInsets(removeBool: Bool) {
-        if removeBool {
-            let tableviewHeight = self.billAmountTableView.frame.size.height
-            let surroundViewHeight = self.billAmountSelectedSurroundView.frame.size.height
-            let topOffset = tableviewHeight/2 - surroundViewHeight/2
-            //println("tableviewHeight/2 - surroundViewHeight/2 = \(tableviewHeight/2) - \(surroundViewHeight/2) = \(tableviewHeight/2 - surroundViewHeight/2)")
-            let edgeInsets = UIEdgeInsetsMake(topOffset, 0, topOffset, 0)
-            //println(edgeInsets.top)
-            self.billAmountTableView.contentInset = edgeInsets
-        } else {
-            self.billAmountTableView.contentInset = UIEdgeInsetsZero
-        }
-    }
-    
     //MARK: Handle User Input
     
     @IBAction func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
@@ -236,7 +229,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     @IBAction func unwindToViewController (sender: UIStoryboardSegue){
-        
+        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -313,9 +307,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue+EXTRACELLS, inSection: 0)
             if !self.tipTableCustomValueSet {
                 if !self.tipAmountTableView.isScrolling {
-                    self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath,
-                        atScrollPosition: UITableViewScrollPosition.Middle,
-                        animated: false)
+                    self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
                 }
             }
             
@@ -410,19 +402,19 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //both of these have to be false to animate because if the rowheight is over 63, the animation doesn't work right and stops the tableviewfrom scrolling.
         case self.BILLAMOUNTTAG:
             let indexPath = self.indexPathInCenterOfTable(tableView)
-            if indexPath.row > EXTRACELLS {
+            if indexPath.row > EXTRACELLS - 1 {
                 self.writeBillIndexPathRowToDiskWithTableView(tableView)
                 tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
             } else {
-                tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS+1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             }
         default:
             let indexPath = self.indexPathInCenterOfTable(tableView)
-            if indexPath.row > EXTRACELLS {
+            if indexPath.row > EXTRACELLS - 1 {
             self.writeTipIndexPathRowToDiskWithTableView(tableView)
                 tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
             } else {
-                tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS+1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             }
         }
         self.bigTextLabelsShouldPresent(true)
@@ -546,6 +538,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //adjust text size
         self.lowerTextSizeAdjustment = GratuitousUIConstant.correctCellTextSize().textSizeAdjustment()
         self.selectedTableViewCellOutlineViewHeightConstraint.constant = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        self.largeTextWidthLandscapeOnlyConstraint.constant = GratuitousUIConstant.largeTextLandscapeConstant()
         
         //estimated row height
         self.billAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()

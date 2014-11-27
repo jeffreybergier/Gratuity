@@ -75,9 +75,6 @@
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="heightClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="9" y="5" width="108.5" height="22.5"/>
-                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.23548005759999999" blue="0.24434621710000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -198,24 +195,24 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="6Xg-LP-mPD"/>
+                                <exclude reference="V2B-iS-X4u"/>
                                 <exclude reference="DkL-g7-myv"/>
                                 <exclude reference="HR0-LO-i2X"/>
                                 <exclude reference="dLp-g9-Eue"/>
-                                <exclude reference="6Xg-LP-mPD"/>
-                                <exclude reference="V2B-iS-X4u"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
+                                <exclude reference="2AQ-5R-nkv"/>
+                                <include reference="6Xg-LP-mPD"/>
+                                <exclude reference="FaC-fR-bZY"/>
+                                <include reference="V2B-iS-X4u"/>
                                 <exclude reference="BuD-8c-UWl"/>
                                 <exclude reference="DkL-g7-myv"/>
                                 <include reference="HR0-LO-i2X"/>
                                 <exclude reference="eVl-Jb-BFN"/>
                                 <include reference="dLp-g9-Eue"/>
-                                <exclude reference="2AQ-5R-nkv"/>
-                                <include reference="6Xg-LP-mPD"/>
-                                <exclude reference="FaC-fR-bZY"/>
-                                <include reference="V2B-iS-X4u"/>
                             </mask>
                         </variation>
                     </view>
@@ -226,6 +223,7 @@
                         <outlet property="billAmountTableViewTitleTextLabel" destination="qGH-24-ssK" id="ViN-Ve-1sT"/>
                         <outlet property="billAmountTableViewTitleTextLabelView" destination="cFa-ss-hba" id="KKJ-x4-Np0"/>
                         <outlet property="labelContainerView" destination="sGt-Qz-W1j" id="ras-jG-tge"/>
+                        <outlet property="largeTextWidthLandscapeOnlyConstraint" destination="6Xg-LP-mPD" id="1P7-Xx-DR1"/>
                         <outlet property="selectedTableViewCellOutlineViewHeightConstraint" destination="6OR-Wa-ftF" id="Dp9-hW-g63"/>
                         <outlet property="settingsButton" destination="x5O-Qc-eNn" id="2sX-nd-Sre"/>
                         <outlet property="tableContainerView" destination="F2W-Pc-eWf" id="CgB-oD-Y9o"/>

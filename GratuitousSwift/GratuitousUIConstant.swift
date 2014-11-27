@@ -105,6 +105,34 @@ class GratuitousUIConstant: NSObject {
         return (padIdiom: padIdiom, largeDevice: largeDevice, smallDeviceLandscape: smallDeviceLandscape, largeDeviceLandscape: largeDeviceLandscape)
     }
     
+    class func largeTextLandscapeConstant() -> CGFloat {
+        var constant: CGFloat = 0
+        
+        //then adjust for the preferred text size
+        if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryLarge {
+            constant = 0
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraLarge {
+            constant = 0
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraExtraLarge {
+            constant = 50
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraExtraExtraLarge {
+            constant = 50
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityMedium {
+            constant = 100
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityLarge {
+            constant = 100
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraLarge {
+            constant = 100
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraExtraLarge {
+            constant = 150
+        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraExtraExtraLarge {
+            constant = 150
+        }
+        
+        return constant
+    }
+
+    
     class func actualScreenSizeBasedOnWidth() -> ActualScreenSizeBasedOnWidth {
         var actualScreenWidthEnum = ActualScreenSizeBasedOnWidth.iPhone4or5
         let actualScreenWidth = (UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height

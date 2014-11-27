@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -9,7 +10,46 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="50" translatesAutoresizingMaskIntoConstraints="NO" id="X8W-9w-ZxO">
+                    <rect key="frame" x="20" y="39" width="560" height="260"/>
+                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="200"/>
+                    <color key="textColor" red="0.58823529411764708" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y33-xf-vus">
+                    <rect key="frame" x="20" y="289" width="560" height="1"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="f5e-L9-RWx"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gratuity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="50" translatesAutoresizingMaskIntoConstraints="NO" id="AaY-yh-I6j">
+                    <rect key="frame" x="20" y="290" width="580" height="65"/>
+                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="50"/>
+                    <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" red="0.11764705882352941" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="X8W-9w-ZxO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="2MO-SB-Saq"/>
+                <constraint firstAttribute="trailing" secondItem="X8W-9w-ZxO" secondAttribute="trailing" constant="20" symbolic="YES" id="2ew-uT-4Xa"/>
+                <constraint firstItem="AaY-yh-I6j" firstAttribute="top" secondItem="Y33-xf-vus" secondAttribute="bottom" id="ATz-Wa-br9"/>
+                <constraint firstItem="Y33-xf-vus" firstAttribute="top" secondItem="X8W-9w-ZxO" secondAttribute="bottom" constant="-10" id="MZB-Ac-Nsa"/>
+                <constraint firstItem="X8W-9w-ZxO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" symbolic="YES" id="YHT-4a-s3E"/>
+                <constraint firstAttribute="trailing" secondItem="AaY-yh-I6j" secondAttribute="trailing" id="aEE-gl-Wyz"/>
+                <constraint firstItem="AaY-yh-I6j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="g1A-iZ-6KA"/>
+                <constraint firstAttribute="bottom" secondItem="AaY-yh-I6j" secondAttribute="bottom" constant="146" id="hmE-Tt-Way"/>
+                <constraint firstAttribute="trailing" secondItem="Y33-xf-vus" secondAttribute="trailing" constant="20" symbolic="YES" id="iVd-Vo-d63"/>
+                <constraint firstAttribute="centerY" secondItem="Y33-xf-vus" secondAttribute="centerY" multiplier="30/29" id="sI0-X3-xRj"/>
+                <constraint firstItem="Y33-xf-vus" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="vem-Ws-To8"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="hmE-Tt-Way"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
