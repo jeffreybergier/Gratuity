@@ -161,7 +161,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             }, completion: nil)
         
         let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
-        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
     
     
@@ -240,7 +240,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBAction func unwindToViewController (sender: UIStoryboardSegue){
         let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
-        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -314,7 +314,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 tipAmountRoundedNumber = Double(1.0)
             }
             
-            let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue+EXTRACELLS, inSection: 0)
+            let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue + EXTRACELLS - 1, inSection: 0)
             if !self.tipTableCustomValueSet {
                 if !self.tipAmountTableView.isScrolling {
                     self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
@@ -600,7 +600,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         coordinator.animateAlongsideTransition(nil, completion: { finished in
             
             let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
-            let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+            let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
         })
     }
     
