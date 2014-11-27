@@ -294,7 +294,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     @IBAction func didTapEmailMeButton(sender: UIButton) {
         let subject = NSLocalizedString("I love Gratuity", comment: "This is the subject line of support requests. It should say something positive about the app but its mostly gonna be used when people are upset")
-        let body = NSLocalizedString("", comment: "this is the body line of support requests, it should be blank, but the possibilies are endless")
+        let body = NSLocalizedString("THISSHOULDBEBLANK", comment: "this is the body line of support requests, it should be blank, but the possibilies are endless")
         
         if MFMailComposeViewController.canSendMail() {
             let mailer = MFMailComposeViewController()

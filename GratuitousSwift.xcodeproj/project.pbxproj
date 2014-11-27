@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7334770F1A26E85000513F1F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
 		7335A18F19FB04DA00BE08E2 /* GratuitousTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */; };
 		734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
 		73556E651A19711F0079A37D /* UIImage+PDFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 73556E641A19711F0079A37D /* UIImage+PDFUtility.m */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7334770E1A26E85000513F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
 		73556E621A19711E0079A37D /* GratuitousSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GratuitousSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		73556E631A19711F0079A37D /* UIImage+PDFUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PDFUtility.h"; sourceTree = "<group>"; };
@@ -111,6 +113,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7334770C1A26E85000513F1F /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				7334770D1A26E85000513F1F /* Localizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 		7353346D1A1803FB008530E1 /* TipViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +222,7 @@
 				7382510F19E60EED00CD2B28 /* LaunchScreen.xib */,
 				7382510519E60EED00CD2B28 /* Info.plist */,
 				73556E621A19711E0079A37D /* GratuitousSwift-Bridging-Header.h */,
+				7334770C1A26E85000513F1F /* en.lproj */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -338,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7382512D19E6473A00CD2B28 /* GratuitousTableViewCell.xib in Resources */,
+				7334770F1A26E85000513F1F /* Localizable.strings in Resources */,
 				734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */,
 				7382511119E60EED00CD2B28 /* LaunchScreen.xib in Resources */,
 				7382510E19E60EED00CD2B28 /* Images.xcassets in Resources */,
@@ -426,6 +438,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		7334770D1A26E85000513F1F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7334770E1A26E85000513F1F /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		7382510F19E60EED00CD2B28 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
