@@ -239,7 +239,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section {
         case 1:
-            println("selected tableview cell index = \(indexPath.row)")
             switch indexPath.row {
             case CurrencySign.Default.rawValue + 1:
                 self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Default.rawValue)
