@@ -48,6 +48,30 @@
 		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
+		73C7B4951A2A92E400536D86 /* UIImage+PDFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 73556E641A19711F0079A37D /* UIImage+PDFUtility.m */; };
+		73C7B4961A2A92E400536D86 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512619E60F3900CD2B28 /* TipViewController.swift */; };
+		73C7B4971A2A92E400536D86 /* GratuitousTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */; };
+		73C7B4981A2A92E400536D86 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
+		73C7B4991A2A92E400536D86 /* GratuitousTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */; };
+		73C7B49A1A2A92E400536D86 /* GratuitousCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */; };
+		73C7B49B1A2A92E400536D86 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
+		73C7B49C1A2A92E400536D86 /* GratuitousTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */; };
+		73C7B49D1A2A92E400536D86 /* GratuitousUIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */; };
+		73C7B49E1A2A92E400536D86 /* FakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC50AE1A21477100572EFF /* FakeViewController.swift */; };
+		73C7B49F1A2A92E400536D86 /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
+		73C7B4A01A2A92E400536D86 /* GratuitousPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */; };
+		73C7B4A11A2A92E400536D86 /* GratuitousAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */; };
+		73C7B4A21A2A92E400536D86 /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */; };
+		73C7B4A31A2A92E400536D86 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
+		73C7B4A41A2A92E400536D86 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
+		73C7B4A61A2A92E400536D86 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBC19FF281B00E44A5E /* Crashlytics.framework */; };
+		73C7B4A71A2A92E400536D86 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBD19FF281B00E44A5E /* Fabric.framework */; };
+		73C7B4A91A2A92E400536D86 /* GratuitousTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */; };
+		73C7B4AA1A2A92E400536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
+		73C7B4AB1A2A92E400536D86 /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
+		73C7B4AC1A2A92E400536D86 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382510F19E60EED00CD2B28 /* LaunchScreen.xib */; };
+		73C7B4AD1A2A92E400536D86 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7382510D19E60EED00CD2B28 /* Images.xcassets */; };
+		73C7B4AE1A2A92E400536D86 /* settingsIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */; };
 		73CC50AF1A21477100572EFF /* FakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC50AE1A21477100572EFF /* FakeViewController.swift */; };
 		73D11C491A1DB2A3003D238C /* GratuitousPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */; };
 		73D11C4A1A1DB2A6003D238C /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */; };
@@ -83,6 +107,8 @@
 		7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableViewCell.swift; sourceTree = "<group>"; };
 		7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GratuitousTableViewCell.xib; sourceTree = "<group>"; };
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		73C7B4B31A2A92E400536D86 /* GratuitousSwift Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GratuitousSwift Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		73C7B4B41A2A92E500536D86 /* GratuitousSwift Local copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GratuitousSwift Local copy-Info.plist"; path = "/Users/jeffberg/Documents/SaturdayApps/GratuitousSwift/GratuitousSwift Local copy-Info.plist"; sourceTree = "<absolute>"; };
 		73CC50AE1A21477100572EFF /* FakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeViewController.swift; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -108,6 +134,15 @@
 			files = (
 				7356AEBE19FF281B00E44A5E /* Crashlytics.framework in Frameworks */,
 				7356AEBF19FF281B00E44A5E /* Fabric.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73C7B4A51A2A92E400536D86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73C7B4A61A2A92E400536D86 /* Crashlytics.framework in Frameworks */,
+				73C7B4A71A2A92E400536D86 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +223,7 @@
 				7382511919E60EED00CD2B28 /* GratuitousSwiftTests */,
 				7382510219E60EED00CD2B28 /* Products */,
 				736568F91A26DD1500603602 /* GratuitousSwift copy-Info.plist */,
+				73C7B4B41A2A92E500536D86 /* GratuitousSwift Local copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,6 +232,7 @@
 			children = (
 				7382510119E60EED00CD2B28 /* Gratuityδ.app */,
 				736568F81A26DD1400603602 /* Gratuityλδ.app */,
+				73C7B4B31A2A92E400536D86 /* GratuitousSwift Watch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -295,6 +332,24 @@
 			productReference = 7382510119E60EED00CD2B28 /* Gratuityδ.app */;
 			productType = "com.apple.product-type.application";
 		};
+		73C7B4931A2A92E400536D86 /* GratuitousSwift Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73C7B4B01A2A92E400536D86 /* Build configuration list for PBXNativeTarget "GratuitousSwift Watch" */;
+			buildPhases = (
+				73C7B4941A2A92E400536D86 /* Sources */,
+				73C7B4A51A2A92E400536D86 /* Frameworks */,
+				73C7B4A81A2A92E400536D86 /* Resources */,
+				73C7B4AF1A2A92E400536D86 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GratuitousSwift Watch";
+			productName = GratuitousSwift;
+			productReference = 73C7B4B31A2A92E400536D86 /* GratuitousSwift Watch.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -309,6 +364,9 @@
 					};
 					7382510019E60EED00CD2B28 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = V6ESYGU6CV;
+					};
+					73C7B4931A2A92E400536D86 = {
 						DevelopmentTeam = V6ESYGU6CV;
 					};
 				};
@@ -328,6 +386,7 @@
 			targets = (
 				7382510019E60EED00CD2B28 /* GratuitousSwift Store */,
 				736568D91A26DD1400603602 /* GratuitousSwift Local */,
+				73C7B4931A2A92E400536D86 /* GratuitousSwift Watch */,
 			);
 		};
 /* End PBXProject section */
@@ -359,6 +418,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		73C7B4A81A2A92E400536D86 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73C7B4A91A2A92E400536D86 /* GratuitousTableViewCell.xib in Resources */,
+				73C7B4AA1A2A92E400536D86 /* Localizable.strings in Resources */,
+				73C7B4AB1A2A92E400536D86 /* GratuitousSwift.storyboard in Resources */,
+				73C7B4AC1A2A92E400536D86 /* LaunchScreen.xib in Resources */,
+				73C7B4AD1A2A92E400536D86 /* Images.xcassets in Resources */,
+				73C7B4AE1A2A92E400536D86 /* settingsIcon.pdf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -376,6 +448,19 @@
 			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24";
 		};
 		736568F41A26DD1400603602 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24";
+		};
+		73C7B4AF1A2A92E400536D86 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -434,6 +519,29 @@
 				73D11C4A1A1DB2A6003D238C /* GratuitousAnimatedTransitioning.swift in Sources */,
 				73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */,
 				73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73C7B4941A2A92E400536D86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73C7B4951A2A92E400536D86 /* UIImage+PDFUtility.m in Sources */,
+				73C7B4961A2A92E400536D86 /* TipViewController.swift in Sources */,
+				73C7B4971A2A92E400536D86 /* GratuitousTableViewCell.swift in Sources */,
+				73C7B4981A2A92E400536D86 /* GratuitousSettingsButtons.swift in Sources */,
+				73C7B4991A2A92E400536D86 /* GratuitousTransitioningDelegate.swift in Sources */,
+				73C7B49A1A2A92E400536D86 /* GratuitousCurrencyFormatter.swift in Sources */,
+				73C7B49B1A2A92E400536D86 /* GratuitousEnums.swift in Sources */,
+				73C7B49C1A2A92E400536D86 /* GratuitousTableView.swift in Sources */,
+				73C7B49D1A2A92E400536D86 /* GratuitousUIConstant.swift in Sources */,
+				73C7B49E1A2A92E400536D86 /* FakeViewController.swift in Sources */,
+				73C7B49F1A2A92E400536D86 /* GratuitousGradientView.swift in Sources */,
+				73C7B4A01A2A92E400536D86 /* GratuitousPresentationController.swift in Sources */,
+				73C7B4A11A2A92E400536D86 /* GratuitousAppDelegate.swift in Sources */,
+				73C7B4A21A2A92E400536D86 /* GratuitousAnimatedTransitioning.swift in Sources */,
+				73C7B4A31A2A92E400536D86 /* SettingsTableViewController.swift in Sources */,
+				73C7B4A41A2A92E400536D86 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +724,45 @@
 			};
 			name = Release;
 		};
+		73C7B4B11A2A92E400536D86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "GratuitousSwift Local copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GratuitousSwift/GratuitousSwift-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		73C7B4B21A2A92E400536D86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "GratuitousSwift Local copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GratuitousSwift/GratuitousSwift-Bridging-Header.h";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -642,6 +789,15 @@
 			buildConfigurations = (
 				7382512119E60EED00CD2B28 /* Debug */,
 				7382512219E60EED00CD2B28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73C7B4B01A2A92E400536D86 /* Build configuration list for PBXNativeTarget "GratuitousSwift Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73C7B4B11A2A92E400536D86 /* Debug */,
+				73C7B4B21A2A92E400536D86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
