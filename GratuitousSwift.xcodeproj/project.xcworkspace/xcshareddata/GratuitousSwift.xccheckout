@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>750EA210-5210-4618-9564-5380E9BBD248</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GratuitousSwift</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>bd13cce4-38e5-42be-9df0-bbfa65dd9970</key>
+		<string>https://www.jeffburg.com/saturdayappssvn</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GratuitousSwift/GratuitousSwift.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>bd13cce4-38e5-42be-9df0-bbfa65dd9970</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>bd13cce4-38e5-42be-9df0-bbfa65dd9970</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>bd13cce4-38e5-42be-9df0-bbfa65dd9970</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SaturdayApps</string>
+		</dict>
+	</array>
+</dict>
+</plist>

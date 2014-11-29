@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "736568D91A26DD1400603602"
-               BuildableName = "GratuityL.app"
+               BuildableName = "Gratuity&#x3bb;.app"
                BlueprintName = "GratuitousSwift Local"
                ReferencedContainer = "container:GratuitousSwift.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "736568D91A26DD1400603602"
-            BuildableName = "GratuityL.app"
+            BuildableName = "Gratuity&#x3bb;.app"
             BlueprintName = "GratuitousSwift Local"
             ReferencedContainer = "container:GratuitousSwift.xcodeproj">
          </BuildableReference>
@@ -48,11 +48,12 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "736568D91A26DD1400603602"
-            BuildableName = "GratuityL.app"
+            BuildableName = "Gratuity&#x3bb;.app"
             BlueprintName = "GratuitousSwift Local"
             ReferencedContainer = "container:GratuitousSwift.xcodeproj">
          </BuildableReference>
@@ -66,11 +67,12 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "736568D91A26DD1400603602"
-            BuildableName = "GratuityL.app"
+            BuildableName = "Gratuity&#x3bb;.app"
             BlueprintName = "GratuitousSwift Local"
             ReferencedContainer = "container:GratuitousSwift.xcodeproj">
          </BuildableReference>

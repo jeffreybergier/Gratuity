@@ -27,9 +27,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //make this view use a custom transition context
-        self.modalPresentationStyle = UIModalPresentationStyle.Custom
-        
         //add necessary notification center observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "readUserDefaultsAndUpdateSlider:", name: "suggestedTipValueUpdated", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
@@ -135,15 +132,53 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     @IBOutlet private weak var suggestedTipPercentageSlider: UISlider!
     @IBOutlet private weak var suggestedTipPercentageLabel: UILabel!
     
+    private let customThumbImage: UIImage? = {
+        // Get the size
+        var canvasSize = CGSizeMake(30,30)
+        let scale = UIScreen.mainScreen().scale
+        
+        // Resize for retina with the scale factor
+        canvasSize.width *= scale
+        canvasSize.height *= scale
+        
+        // Create the context
+        UIGraphicsBeginImageContext(canvasSize)
+        let currentContext = UIGraphicsGetCurrentContext()
+        
+        // setup drawing attributes
+        CGContextSetLineWidth(currentContext, GratuitousUIConstant.thickBorderWidth() * scale);
+        CGContextSetStrokeColorWithColor(currentContext, GratuitousUIConstant.lightBackgroundColor().CGColor);
+        CGContextSetFillColorWithColor(currentContext, GratuitousUIConstant.darkBackgroundColor().CGColor)
+        
+        // setup the circle size
+        var circleRect = CGRectMake( 0, 0, canvasSize.width, canvasSize.height )
+        circleRect = CGRectInset(circleRect, 5, 5)
+        
+        // Draw the Circle
+        CGContextFillEllipseInRect(currentContext, circleRect)
+        CGContextStrokeEllipseInRect(currentContext, circleRect)
+        
+        // Create Image
+        let cgImage = CGBitmapContextCreateImage(currentContext)
+        let image = UIImage(CGImage: cgImage, scale: scale, orientation: UIImageOrientation.Up)
+        
+        return image
+    }()
+    
     func prepareTipPercentageSliderAndLabels() {
         //set the text color for the tip percentage
         self.suggestedTipPercentageLabel.textColor = GratuitousUIConstant.lightTextColor()
         
         //set the tint color for the tip percentage slider
-        self.suggestedTipPercentageSlider.maximumTrackTintColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
+        self.suggestedTipPercentageSlider.maximumTrackTintColor = GratuitousUIConstant.lightBackgroundColor()
+        
+        //set the custom thumb image slider
+        if let customThumbImage = self.customThumbImage {
+            self.suggestedTipPercentageSlider.setThumbImage(customThumbImage, forState: UIControlState.Normal)
+        }
         
         //set the background color of the superview of the slider for ipad. For some reason its white on the ipad only
-        self.suggestedTipPercentageSlider.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
+        self.suggestedTipPercentageSlider.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
     }
     
     func readUserDefaultsAndUpdateSlider(notification: NSNotification?) {

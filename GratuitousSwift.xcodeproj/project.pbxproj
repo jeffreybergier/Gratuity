@@ -47,6 +47,7 @@
 		7382512D19E6473A00CD2B28 /* GratuitousTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */; };
 		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
+		73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
 		73CC50AF1A21477100572EFF /* FakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC50AE1A21477100572EFF /* FakeViewController.swift */; };
 		73D11C491A1DB2A3003D238C /* GratuitousPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */; };
 		73D11C4A1A1DB2A6003D238C /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */; };
@@ -65,13 +66,13 @@
 		7356AEBC19FF281B00E44A5E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		7356AEBD19FF281B00E44A5E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyFormatter.swift; sourceTree = "<group>"; };
-		736568F81A26DD1400603602 /* GratuityLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuityLD.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		736568F81A26DD1400603602 /* Gratuityλδ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gratuityλδ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		736568F91A26DD1500603602 /* GratuitousSwift copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GratuitousSwift copy-Info.plist"; path = "/Users/jeffberg/Documents/SaturdayApps/GratuitousSwift/GratuitousSwift copy-Info.plist"; sourceTree = "<absolute>"; };
 		73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableView.swift; sourceTree = "<group>"; };
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
 		737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIConstant.swift; sourceTree = "<group>"; };
 		737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = settingsIcon.pdf; sourceTree = "<group>"; };
-		7382510119E60EED00CD2B28 /* GratuitySD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuitySD.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7382510119E60EED00CD2B28 /* Gratuityδ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gratuityδ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7382510519E60EED00CD2B28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratuitousAppDelegate.swift; sourceTree = "<group>"; };
 		7382510D19E60EED00CD2B28 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -193,8 +194,8 @@
 		7382510219E60EED00CD2B28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7382510119E60EED00CD2B28 /* GratuitySD.app */,
-				736568F81A26DD1400603602 /* GratuityLD.app */,
+				7382510119E60EED00CD2B28 /* Gratuityδ.app */,
+				736568F81A26DD1400603602 /* Gratuityλδ.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,7 +274,7 @@
 			);
 			name = "GratuitousSwift Local";
 			productName = GratuitousSwift;
-			productReference = 736568F81A26DD1400603602 /* GratuityLD.app */;
+			productReference = 736568F81A26DD1400603602 /* Gratuityλδ.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7382510019E60EED00CD2B28 /* GratuitousSwift Store */ = {
@@ -291,7 +292,7 @@
 			);
 			name = "GratuitousSwift Store";
 			productName = GratuitousSwift;
-			productReference = 7382510119E60EED00CD2B28 /* GratuitySD.app */;
+			productReference = 7382510119E60EED00CD2B28 /* Gratuityδ.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -337,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				736568EF1A26DD1400603602 /* GratuitousTableViewCell.xib in Resources */,
+				73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */,
 				736568F01A26DD1400603602 /* GratuitousSwift.storyboard in Resources */,
 				736568F11A26DD1400603602 /* LaunchScreen.xib in Resources */,
 				736568F21A26DD1400603602 /* Images.xcassets in Resources */,
@@ -470,7 +472,7 @@
 				);
 				INFOPLIST_FILE = "GratuitousSwift copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = GratuityLD;
+				PRODUCT_NAME = "Gratuityλδ";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GratuitousSwift/GratuitousSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -490,7 +492,7 @@
 				);
 				INFOPLIST_FILE = "GratuitousSwift copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = GratuityL;
+				PRODUCT_NAME = "Gratuityλ";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GratuitousSwift/GratuitousSwift-Bridging-Header.h";
 			};
@@ -588,7 +590,7 @@
 				);
 				INFOPLIST_FILE = GratuitousSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = GratuitySD;
+				PRODUCT_NAME = "Gratuityδ";
 				PROVISIONING_PROFILE = "260949e7-5426-4341-a95d-dd0a8e4b6b4f";
 				SWIFT_OBJC_BRIDGING_HEADER = "GratuitousSwift/GratuitousSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
