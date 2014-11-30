@@ -8,18 +8,81 @@
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GratuitousSwift_Watch_Watch_App" customModuleProvider="target">
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <slider width="1" alignment="left" value="0.5" maximum="4" steps="9" id="2f8-dP-7cU"/>
+                        <label width="136" height="44.5" alignment="left" text="$20" textAlignment="center" id="SSB-gk-2KL">
+                            <color key="textColor" red="1" green="0.23548005759999999" blue="0.24434621710000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="25"/>
+                        </label>
+                        <slider width="1" alignment="left" continuous="YES" value="0.20000000000000001" steps="100" id="dvR-e1-wat">
+                            <connections>
+                                <action selector="didChangeBillAmountSliderValue:" destination="AgC-eL-Hgc" id="MLR-TU-YSU"/>
+                            </connections>
+                        </slider>
+                        <button width="1" alignment="left" title="Next" id="lKt-o4-VaJ">
+                            <connections>
+                                <segue destination="8IR-xW-80A" kind="push" id="MNV-zD-41u"/>
+                            </connections>
+                        </button>
                     </items>
+                    <connections>
+                        <outlet property="billAmountLabel" destination="SSB-gk-2KL" id="XI6-jr-9BO"/>
+                        <outlet property="billAmountNextButton" destination="lKt-o4-VaJ" id="5Aa-5t-a11"/>
+                        <outlet property="billAmountSlider" destination="dvR-e1-wat" id="agq-CU-L3p"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="235" y="347"/>
         </scene>
+        <!--TipAmountInterfaceController-->
+        <scene sceneID="OO6-lu-qsI">
+            <objects>
+                <controller identifier="TipAmountInterfaceController" id="8IR-xW-80A" customClass="TipAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Bill Amount" id="ECZ-ve-5Wo">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <label alignment="left" text="$xx" id="jsb-3t-j3T">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="Tip Amount" id="f1C-cB-5T2">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <label alignment="left" text="$xx" id="53F-fa-jAZ">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="Tip Percentage" id="H0c-vi-ssT">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <label alignment="left" text="xx%" id="z6Y-TX-k41">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="Total Amount" id="T1R-Ha-bWZ">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <label alignment="left" text="$xx" id="fjl-4Z-z8E">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <slider width="1" alignment="left" continuous="YES" value="0.20000000000000001" steps="100" id="IFr-JS-Bl1">
+                            <connections>
+                                <action selector="tipAmountDidChange:" destination="8IR-xW-80A" id="oFy-IY-H5j"/>
+                            </connections>
+                        </slider>
+                    </items>
+                    <connections>
+                        <outlet property="billAmountLabel" destination="jsb-3t-j3T" id="aV0-iz-Bpz"/>
+                        <outlet property="tipAmountLabel" destination="53F-fa-jAZ" id="IAb-AV-tqo"/>
+                        <outlet property="tipPercentageLabel" destination="z6Y-TX-k41" id="CKe-5e-sjH"/>
+                        <outlet property="totalAmountLabel" destination="fjl-4Z-z8E" id="4pz-2i-DKf"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="461" y="347"/>
+        </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
             <objects>
-                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="GratuitousSwift_Watch_Watch_App" customModuleProvider="target">
+                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="GratuitousSwift_Local_Watch_Extension">
                     <items>
                         <group alignment="left" id="t8f-Gd-c4y"/>
                         <group alignment="left" id="uCw-4Q-Ouw"/>
@@ -48,7 +111,7 @@
         <!--Notification Controller-->
         <scene sceneID="KIl-fV-djm">
             <objects>
-                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="GratuitousSwift_Watch_Watch_App" customModuleProvider="target"/>
+                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="GratuitousSwift_Local_Watch_Extension"/>
             </objects>
             <point key="canvasLocation" x="553" y="1001"/>
         </scene>

@@ -54,6 +54,8 @@
 		73A18D721A2A9525002180DD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D711A2A9525002180DD /* Interface.storyboard */; };
 		73A18D741A2A9525002180DD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D731A2A9525002180DD /* Images.xcassets */; };
 		73A18D771A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73A18D581A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		73A18D801A2A9661002180DD /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; };
+		73A18D821A2A966B002180DD /* TipAmountInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D811A2A966B002180DD /* TipAmountInterfaceController.swift */; };
 		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
@@ -158,6 +160,8 @@
 		73A18D701A2A9525002180DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73A18D711A2A9525002180DD /* Interface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
 		73A18D731A2A9525002180DD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousWatchDataSource.swift; path = "../../../../Downloads/GratuitousSwift WatchKit Extension/GratuitousWatchDataSource.swift"; sourceTree = "<group>"; };
+		73A18D811A2A966B002180DD /* TipAmountInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipAmountInterfaceController.swift; path = "../../../../Downloads/GratuitousSwift WatchKit Extension/TipAmountInterfaceController.swift"; sourceTree = "<group>"; };
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		73C7B4B31A2A92E400536D86 /* GratuitousSwift Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GratuitousSwift Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C7B4B41A2A92E500536D86 /* GratuitousSwift Local copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GratuitousSwift Local copy-Info.plist"; path = "/Users/jeffberg/Documents/SaturdayApps/GratuitousSwift/GratuitousSwift Local copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -359,8 +363,10 @@
 			isa = PBXGroup;
 			children = (
 				73A18D601A2A9525002180DD /* InterfaceController.swift */,
+				73A18D811A2A966B002180DD /* TipAmountInterfaceController.swift */,
 				73A18D621A2A9525002180DD /* NotificationController.swift */,
 				73A18D641A2A9525002180DD /* GlanceController.swift */,
+				73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */,
 				73A18D661A2A9525002180DD /* Images.xcassets */,
 				73A18D5D1A2A9525002180DD /* Supporting Files */,
 			);
@@ -703,6 +709,8 @@
 				73A18D631A2A9525002180DD /* NotificationController.swift in Sources */,
 				73A18D611A2A9525002180DD /* InterfaceController.swift in Sources */,
 				73A18D651A2A9525002180DD /* GlanceController.swift in Sources */,
+				73A18D821A2A966B002180DD /* TipAmountInterfaceController.swift in Sources */,
+				73A18D801A2A9661002180DD /* GratuitousWatchDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1063,6 +1071,7 @@
 				73A18D7B1A2A9525002180DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		73A18D7D1A2A9525002180DD /* Build configuration list for PBXNativeTarget "GratuitousSwift Watch WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -1071,6 +1080,7 @@
 				73A18D791A2A9525002180DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		73C7B4B01A2A92E400536D86 /* Build configuration list for PBXNativeTarget "GratuitousSwift Watch" */ = {
 			isa = XCConfigurationList;
