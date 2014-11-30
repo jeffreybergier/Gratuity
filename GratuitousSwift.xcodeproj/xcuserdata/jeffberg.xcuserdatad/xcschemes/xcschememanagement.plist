@@ -29,6 +29,11 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>GratuitousSwift Watch Watch App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -43,6 +48,11 @@
 			<true/>
 		</dict>
 		<key>7382511519E60EED00CD2B28</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>73A18D691A2A9525002180DD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
