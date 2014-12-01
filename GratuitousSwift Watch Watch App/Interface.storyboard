@@ -16,7 +16,7 @@
                         </label>
                         <slider width="1" alignment="left" continuous="YES" value="0.20000000000000001" steps="100" id="dvR-e1-wat">
                             <connections>
-                                <action selector="didChangeBillAmountSliderValue:" destination="AgC-eL-Hgc" id="MLR-TU-YSU"/>
+                                <action selector="didChangeBillAmountSliderValue:" destination="AgC-eL-Hgc" id="oIq-qr-UeA"/>
                             </connections>
                         </slider>
                         <button width="1" alignment="left" title="Next" id="lKt-o4-VaJ">

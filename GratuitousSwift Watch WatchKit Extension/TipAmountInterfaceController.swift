@@ -23,16 +23,14 @@ class TipAmountInterfaceController: WKInterfaceController {
         super.init(context: context)
     }
     
-    @IBAction func tipAmountDidChange(value: AnyObject) {
-        if let floatValue = value as? Float {
-            //update the data source
-            self.dataSource.tipAmount = floatValue * 100
-            
-            //update the text
-            self.tipAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.tipAmount))
-            self.tipPercentageLabel.setText(self.dataSource.percentStringFromFloat(self.dataSource.tipPercentage * 100))
-            self.totalAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount + self.dataSource.tipAmount))
-        }
+    /*@IBAction*/ func tipAmountDidChange(value: Float) {
+        //update the data source
+        self.dataSource.tipAmount = value * 100
+        
+        //update the text
+        self.tipAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.tipAmount))
+        self.tipPercentageLabel.setText(self.dataSource.percentStringFromFloat(self.dataSource.tipPercentage * 100))
+        self.totalAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount + self.dataSource.tipAmount))
     }
     
     override func willActivate() {

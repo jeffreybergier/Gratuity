@@ -23,9 +23,9 @@ class InterfaceController: WKInterfaceController {
         super.init(context: context)
     }
     
-    @IBAction func didChangeBillAmountSliderValue(value: AnyObject) {
-        self.dataSource.billAmount = value as Float * 100
-        self.billAmountLabel.setText(self.dataSource.dollarStringFromFloat(value as Float * 100))
+    /*@IBAction*/ func didChangeBillAmountSliderValue(value: Float) {
+        self.dataSource.billAmount = value * 100
+        self.billAmountLabel.setText(self.dataSource.dollarStringFromFloat(value * 100))
     }
     
     override func willActivate() {
