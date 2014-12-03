@@ -15,6 +15,7 @@ class TipAmountInterfaceController: WKInterfaceController {
     @IBOutlet private weak var tipAmountLabel: WKInterfaceLabel!
     @IBOutlet weak var tipPercentageLabel: WKInterfaceLabel!
     @IBOutlet weak var totalAmountLabel: WKInterfaceLabel!
+    @IBOutlet weak var tipAmountSlider: WKInterfaceSlider!
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     
@@ -40,6 +41,8 @@ class TipAmountInterfaceController: WKInterfaceController {
         self.tipAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.tipAmount))
         self.tipPercentageLabel.setText(self.dataSource.percentStringFromFloat(self.dataSource.tipPercentage * 100))
         self.totalAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount + self.dataSource.tipAmount))
+        println(self.dataSource.tipAmount)
+        self.tipAmountSlider.setValue(self.dataSource.tipAmount / 100)
     }
     
     override func didDeactivate() {

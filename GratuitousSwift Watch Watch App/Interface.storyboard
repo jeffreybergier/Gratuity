@@ -11,8 +11,8 @@
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
                         <label width="136" height="44.5" alignment="left" text="$20" textAlignment="center" id="SSB-gk-2KL">
-                            <color key="textColor" red="1" green="0.23548005759999999" blue="0.24434621710000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="25"/>
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="30"/>
                         </label>
                         <slider width="1" alignment="left" continuous="YES" value="0.20000000000000001" steps="100" id="dvR-e1-wat">
                             <connections>
@@ -21,7 +21,7 @@
                         </slider>
                         <button width="1" alignment="left" title="Next" id="lKt-o4-VaJ">
                             <connections>
-                                <segue destination="8IR-xW-80A" kind="push" id="MNV-zD-41u"/>
+                                <segue destination="fWF-XE-SiR" kind="push" id="FSa-kk-eSC"/>
                             </connections>
                         </button>
                     </items>
@@ -35,49 +35,57 @@
             <point key="canvasLocation" x="235" y="347"/>
         </scene>
         <!--TipAmountInterfaceController-->
-        <scene sceneID="OO6-lu-qsI">
+        <scene sceneID="5gM-Rb-aY7">
             <objects>
-                <controller identifier="TipAmountInterfaceController" id="8IR-xW-80A" customClass="TipAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller identifier="TipAmountInterfaceController" id="fWF-XE-SiR" customClass="TipAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <label alignment="left" text="Bill Amount" id="ECZ-ve-5Wo">
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        <label width="1" alignment="left" text="$Total" textAlignment="center" id="Qc9-6d-dmA">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="34"/>
                         </label>
-                        <label alignment="left" text="$xx" id="jsb-3t-j3T">
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        <label width="1" alignment="left" text="20%" textAlignment="center" id="HdB-Qk-obm">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="25"/>
                         </label>
-                        <label alignment="left" text="Tip Amount" id="f1C-cB-5T2">
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                        </label>
-                        <label alignment="left" text="$xx" id="53F-fa-jAZ">
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                        </label>
-                        <label alignment="left" text="Tip Percentage" id="H0c-vi-ssT">
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                        </label>
-                        <label alignment="left" text="xx%" id="z6Y-TX-k41">
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                        </label>
-                        <label alignment="left" text="Total Amount" id="T1R-Ha-bWZ">
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                        </label>
-                        <label alignment="left" text="$xx" id="fjl-4Z-z8E">
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                        </label>
-                        <slider width="1" alignment="left" continuous="YES" value="0.20000000000000001" steps="100" id="IFr-JS-Bl1">
+                        <group width="1" alignment="left" id="rbp-El-bfr">
+                            <items>
+                                <group width="50" height="40" alignment="center" verticalAlignment="center" id="jv4-4V-W2V">
+                                    <items>
+                                        <label width="1" height="1" alignment="left" text="$Bill" textAlignment="center" id="8nJ-Nf-Wyw">
+                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </group>
+                                <group width="13" alignment="center" id="kfL-mc-8Cz"/>
+                                <group width="50" height="40" alignment="center" radius="7" id="nHo-dm-Gkw">
+                                    <items>
+                                        <label width="1" height="1" alignment="center" verticalAlignment="center" text="$Tip" textAlignment="center" id="mao-GD-yPj">
+                                            <color key="textColor" red="0.1176470588" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </group>
+                            </items>
+                        </group>
+                        <slider width="1" alignment="left" continuous="YES" value="0.02" steps="100" id="spW-GZ-qvm">
                             <connections>
-                                <action selector="tipAmountDidChange:" destination="8IR-xW-80A" id="oFy-IY-H5j"/>
+                                <action selector="tipAmountDidChange:" destination="fWF-XE-SiR" id="7mx-at-m6c"/>
                             </connections>
                         </slider>
                     </items>
                     <connections>
-                        <outlet property="billAmountLabel" destination="jsb-3t-j3T" id="aV0-iz-Bpz"/>
-                        <outlet property="tipAmountLabel" destination="53F-fa-jAZ" id="IAb-AV-tqo"/>
-                        <outlet property="tipPercentageLabel" destination="z6Y-TX-k41" id="CKe-5e-sjH"/>
-                        <outlet property="totalAmountLabel" destination="fjl-4Z-z8E" id="4pz-2i-DKf"/>
+                        <outlet property="billAmountLabel" destination="8nJ-Nf-Wyw" id="nBI-rM-V3U"/>
+                        <outlet property="tipAmountLabel" destination="mao-GD-yPj" id="pd2-9J-wcq"/>
+                        <outlet property="tipAmountSlider" destination="spW-GZ-qvm" id="xiY-Lf-myD"/>
+                        <outlet property="tipPercentageLabel" destination="HdB-Qk-obm" id="yqV-qU-Ly6"/>
+                        <outlet property="totalAmountLabel" destination="Qc9-6d-dmA" id="Vbp-Ah-7bH"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="461" y="347"/>
+            <point key="canvasLocation" x="520" y="187"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">

@@ -34,6 +34,7 @@ class InterfaceController: WKInterfaceController {
         
         //load the bill amount from the data source and populate the label
         self.billAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount))
+        self.billAmountSlider.setValue(self.dataSource.billAmount / 100)
     }
 
     override func didDeactivate() {

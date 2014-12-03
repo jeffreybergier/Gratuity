@@ -24,15 +24,20 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>GratuitousSwift Watch Debug.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>GratuitousSwift Watch Watch App.xcscheme</key>
+		<key>GratuitousSwift Watch App Glance.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
+		</dict>
+		<key>GratuitousSwift Watch App Notification.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>GratuitousSwift Watch App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
