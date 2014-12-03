@@ -10,7 +10,11 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <label width="136" height="44.5" alignment="left" text="$20" textAlignment="center" id="SSB-gk-2KL">
+                        <label alignment="left" text="Amount on Bill" id="unF-Y0-J6x">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label width="136" alignment="left" text="$20" textAlignment="left" id="SSB-gk-2KL">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="30"/>
                         </label>
@@ -21,7 +25,7 @@
                         </slider>
                         <button width="1" alignment="left" title="Next" id="lKt-o4-VaJ">
                             <connections>
-                                <segue destination="fWF-XE-SiR" kind="push" id="FSa-kk-eSC"/>
+                                <segue destination="Ve3-WM-nN4" kind="push" id="v6X-r7-UK8"/>
                             </connections>
                         </button>
                     </items>
@@ -34,10 +38,10 @@
             </objects>
             <point key="canvasLocation" x="235" y="347"/>
         </scene>
-        <!--TipAmountInterfaceController-->
+        <!--Tip Amount Interface Controller-->
         <scene sceneID="5gM-Rb-aY7">
             <objects>
-                <controller identifier="TipAmountInterfaceController" id="fWF-XE-SiR" customClass="TipAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller id="fWF-XE-SiR" customClass="TipAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
                         <label width="1" alignment="left" text="$Total" textAlignment="center" id="Qc9-6d-dmA">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -122,6 +126,58 @@
                 <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="GratuitousSwift_Local_Watch_Extension"/>
             </objects>
             <point key="canvasLocation" x="553" y="1001"/>
+        </scene>
+        <!--TipAmountInterfaceController-->
+        <scene sceneID="ekv-EZ-Hau">
+            <objects>
+                <controller identifier="TipAmountInterfaceController" id="Ve3-WM-nN4" customClass="TipAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Suggested Tip" id="Nrg-Px-rx2">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <group width="1" alignment="left" id="eMP-Qi-ZOr">
+                            <items>
+                                <label alignment="left" text="$Tip" textAlignment="center" id="1i6-ot-7Nj">
+                                    <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="30"/>
+                                </label>
+                            </items>
+                        </group>
+                        <label alignment="left" text="Percentage" id="a2c-JI-xM2">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="20%" textAlignment="left" id="Pms-NQ-rdK">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
+                        </label>
+                        <slider width="1" alignment="left" continuous="YES" value="0.02" steps="100" id="hXV-4O-Nha">
+                            <connections>
+                                <action selector="tipAmountDidChange:" destination="Ve3-WM-nN4" id="V9y-jq-3RZ"/>
+                            </connections>
+                        </slider>
+                        <button width="1" alignment="left" title="Next" id="Ztn-zy-FLm">
+                            <connections>
+                                <segue destination="nvd-V9-Fdu" kind="push" id="HsZ-yf-obs"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="tipAmountLabel" destination="1i6-ot-7Nj" id="mCX-2Y-KZ0"/>
+                        <outlet property="tipAmountSlider" destination="hXV-4O-Nha" id="j5S-ca-ZjM"/>
+                        <outlet property="tipPercentageLabel" destination="Pms-NQ-rdK" id="OU4-hj-eA2"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="520" y="454"/>
+        </scene>
+        <!--Interface Controller-->
+        <scene sceneID="hAM-e5-UL7">
+            <objects>
+                <controller id="nvd-V9-Fdu"/>
+            </objects>
+            <point key="canvasLocation" x="813" y="347"/>
         </scene>
     </scenes>
 </document>

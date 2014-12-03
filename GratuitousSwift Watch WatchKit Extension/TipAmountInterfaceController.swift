@@ -11,11 +11,11 @@ import Foundation
 
 class TipAmountInterfaceController: WKInterfaceController {
     
-    @IBOutlet weak var billAmountLabel: WKInterfaceLabel!
-    @IBOutlet private weak var tipAmountLabel: WKInterfaceLabel!
-    @IBOutlet weak var tipPercentageLabel: WKInterfaceLabel!
-    @IBOutlet weak var totalAmountLabel: WKInterfaceLabel!
-    @IBOutlet weak var tipAmountSlider: WKInterfaceSlider!
+    @IBOutlet weak var billAmountLabel: WKInterfaceLabel?
+    @IBOutlet private weak var tipAmountLabel: WKInterfaceLabel?
+    @IBOutlet weak var tipPercentageLabel: WKInterfaceLabel?
+    @IBOutlet weak var totalAmountLabel: WKInterfaceLabel?
+    @IBOutlet weak var tipAmountSlider: WKInterfaceSlider?
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     
@@ -29,20 +29,19 @@ class TipAmountInterfaceController: WKInterfaceController {
         self.dataSource.tipAmount = value * 100
         
         //update the text
-        self.tipAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.tipAmount))
-        self.tipPercentageLabel.setText(self.dataSource.percentStringFromFloat(self.dataSource.tipPercentage * 100))
-        self.totalAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount + self.dataSource.tipAmount))
+        self.tipAmountLabel?.setText(self.dataSource.dollarStringFromFloat(self.dataSource.tipAmount))
+        self.tipPercentageLabel?.setText(self.dataSource.percentStringFromFloat(self.dataSource.tipPercentage * 100))
+        self.totalAmountLabel?.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount + self.dataSource.tipAmount))
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        self.billAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount))
-        self.tipAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.tipAmount))
-        self.tipPercentageLabel.setText(self.dataSource.percentStringFromFloat(self.dataSource.tipPercentage * 100))
-        self.totalAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount + self.dataSource.tipAmount))
-        println(self.dataSource.tipAmount)
-        self.tipAmountSlider.setValue(self.dataSource.tipAmount / 100)
+        self.billAmountLabel?.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount))
+        self.tipAmountLabel?.setText(self.dataSource.dollarStringFromFloat(self.dataSource.tipAmount))
+        self.tipPercentageLabel?.setText(self.dataSource.percentStringFromFloat(self.dataSource.tipPercentage * 100))
+        self.totalAmountLabel?.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount + self.dataSource.tipAmount))
+        self.tipAmountSlider?.setValue(self.dataSource.tipAmount / 100)
     }
     
     override func didDeactivate() {
