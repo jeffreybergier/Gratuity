@@ -25,7 +25,7 @@
                         </slider>
                         <button width="1" alignment="left" title="Next" id="lKt-o4-VaJ">
                             <connections>
-                                <segue destination="Ve3-WM-nN4" kind="push" id="v6X-r7-UK8"/>
+                                <segue destination="u5g-Ym-TkM" kind="push" id="P1Q-ki-MX5"/>
                             </connections>
                         </button>
                     </items>
@@ -89,7 +89,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="520" y="187"/>
+            <point key="canvasLocation" x="411" y="9.75"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
@@ -127,10 +127,10 @@
             </objects>
             <point key="canvasLocation" x="553" y="1001"/>
         </scene>
-        <!--TipAmountInterfaceController-->
+        <!--Tip Amount Interface Controller-->
         <scene sceneID="ekv-EZ-Hau">
             <objects>
-                <controller identifier="TipAmountInterfaceController" id="Ve3-WM-nN4" customClass="TipAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller id="Ve3-WM-nN4" customClass="TipAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
                         <label alignment="left" text="Suggested Tip" id="Nrg-Px-rx2">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -170,14 +170,122 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="520" y="454"/>
+            <point key="canvasLocation" x="599" y="142.75"/>
         </scene>
-        <!--Interface Controller-->
+        <!--Total Amount Interface Controller-->
         <scene sceneID="hAM-e5-UL7">
             <objects>
-                <controller id="nvd-V9-Fdu"/>
+                <controller id="nvd-V9-Fdu" customClass="TotalAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="ldR-O3-q4K">
+                            <items>
+                                <group alignment="left" layout="vertical" id="mxl-06-X73">
+                                    <items>
+                                        <label alignment="left" text="Total Amount" id="mAY-BU-uTI">
+                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="left" text="$Total" textAlignment="center" id="gYQ-zI-OTl">
+                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="35"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="7ce-Ep-T4N">
+                            <items>
+                                <group alignment="left" verticalAlignment="bottom" layout="vertical" radius="9" id="20c-bd-pF2">
+                                    <items>
+                                        <label alignment="left" text="Tip %" id="o7Z-3t-V3I">
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="left" verticalAlignment="bottom" text="Per%" textAlignment="left" id="zvA-vY-tHc">
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <edgeInsets key="margins" left="2" right="4" top="4" bottom="4"/>
+                                </group>
+                                <group alignment="left" layout="vertical" radius="9" id="auo-q4-ari">
+                                    <items>
+                                        <label alignment="left" text="Bill" id="hkI-Mk-err">
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="left" verticalAlignment="center" text="$Bill" textAlignment="left" id="d0D-Tm-Y5M">
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <edgeInsets key="margins" left="2" right="4" top="4" bottom="4"/>
+                                </group>
+                                <group alignment="left" layout="vertical" radius="9" id="OhM-FL-aKF">
+                                    <items>
+                                        <label alignment="left" text="Tip" id="qfA-w1-SAI">
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="left" text="$Tip" textAlignment="left" id="enr-ml-elF">
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <edgeInsets key="margins" left="2" right="4" top="4" bottom="4"/>
+                                </group>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="7" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="billAmountLabel" destination="d0D-Tm-Y5M" id="oCB-BT-9aQ"/>
+                        <outlet property="tipAmountLabel" destination="enr-ml-elF" id="xZa-57-eNN"/>
+                        <outlet property="tipPercentageLabel" destination="zvA-vY-tHc" id="1DZ-kN-jjr"/>
+                        <outlet property="totalAmountLabel" destination="gYQ-zI-OTl" id="TDt-O2-Us5"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="813" y="347"/>
+            <point key="canvasLocation" x="909" y="347"/>
+        </scene>
+        <!--Tip Amount Interface Controller-->
+        <scene sceneID="0z9-jd-MwI">
+            <objects>
+                <controller id="u5g-Ym-TkM" customClass="TipAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Suggested Tip" id="8KY-Hu-OyF">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="$Tip" textAlignment="center" id="RD2-AG-mKy">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="30"/>
+                        </label>
+                        <slider width="1" alignment="left" continuous="YES" value="0.02" steps="100" id="9TL-uz-OfZ">
+                            <connections>
+                                <action selector="tipAmountDidChange:" destination="u5g-Ym-TkM" id="ovt-ku-ioO"/>
+                            </connections>
+                        </slider>
+                        <button width="1" alignment="left" title="Next" id="CAo-7v-l06">
+                            <connections>
+                                <segue destination="nvd-V9-Fdu" kind="push" id="2LV-DQ-XtA"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="suggestedTipTitleLabel" destination="8KY-Hu-OyF" id="1wp-mI-eYU"/>
+                        <outlet property="tipAmountLabel" destination="RD2-AG-mKy" id="Hwc-9g-jqF"/>
+                        <outlet property="tipAmountSlider" destination="9TL-uz-OfZ" id="SOU-4h-Dxd"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="531" y="482.75"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="2LV-DQ-XtA"/>
+    </inferredMetricsTieBreakers>
 </document>

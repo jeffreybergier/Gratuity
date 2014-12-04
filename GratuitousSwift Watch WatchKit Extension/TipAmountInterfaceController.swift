@@ -11,11 +11,12 @@ import Foundation
 
 class TipAmountInterfaceController: WKInterfaceController {
     
-    @IBOutlet weak var billAmountLabel: WKInterfaceLabel?
+    @IBOutlet private weak var billAmountLabel: WKInterfaceLabel?
     @IBOutlet private weak var tipAmountLabel: WKInterfaceLabel?
-    @IBOutlet weak var tipPercentageLabel: WKInterfaceLabel?
-    @IBOutlet weak var totalAmountLabel: WKInterfaceLabel?
-    @IBOutlet weak var tipAmountSlider: WKInterfaceSlider?
+    @IBOutlet private weak var tipPercentageLabel: WKInterfaceLabel?
+    @IBOutlet private weak var totalAmountLabel: WKInterfaceLabel?
+    @IBOutlet private weak var tipAmountSlider: WKInterfaceSlider?
+    @IBOutlet weak var suggestedTipTitleLabel: WKInterfaceLabel?
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     
@@ -29,6 +30,7 @@ class TipAmountInterfaceController: WKInterfaceController {
         self.dataSource.tipAmount = value * 100
         
         //update the text
+        self.suggestedTipTitleLabel?.setText(NSLocalizedString("Desired Tip", comment: "This text is when the user is manually selecting a tip. It should say that its a tip he overrode from the suggested tip."))
         self.tipAmountLabel?.setText(self.dataSource.dollarStringFromFloat(self.dataSource.tipAmount))
         self.tipPercentageLabel?.setText(self.dataSource.percentStringFromFloat(self.dataSource.tipPercentage * 100))
         self.totalAmountLabel?.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount + self.dataSource.tipAmount))
