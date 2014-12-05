@@ -177,68 +177,50 @@
             <objects>
                 <controller id="nvd-V9-Fdu" customClass="TotalAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <group width="1" alignment="left" id="ldR-O3-q4K">
+                        <label alignment="left" text="Total Amount" id="mAY-BU-uTI">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="$Total" textAlignment="center" id="gYQ-zI-OTl">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="35"/>
+                        </label>
+                        <label alignment="left" text="Percentage" id="wxg-QM-GPH">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="Per%" textAlignment="left" id="zvA-vY-tHc">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
+                        </label>
+                        <group alignment="left" id="7ce-Ep-T4N">
                             <items>
-                                <group alignment="left" layout="vertical" id="mxl-06-X73">
-                                    <items>
-                                        <label alignment="left" text="Total Amount" id="mAY-BU-uTI">
-                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                        </label>
-                                        <label alignment="left" text="$Total" textAlignment="center" id="gYQ-zI-OTl">
-                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="35"/>
-                                        </label>
-                                    </items>
-                                </group>
-                            </items>
-                        </group>
-                        <group width="1" alignment="left" id="7ce-Ep-T4N">
-                            <items>
-                                <group alignment="left" verticalAlignment="bottom" layout="vertical" radius="9" id="20c-bd-pF2">
-                                    <items>
-                                        <label alignment="left" text="Tip %" id="o7Z-3t-V3I">
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                        </label>
-                                        <label alignment="left" verticalAlignment="bottom" text="Per%" textAlignment="left" id="zvA-vY-tHc">
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
-                                        </label>
-                                    </items>
-                                    <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <edgeInsets key="margins" left="2" right="4" top="4" bottom="4"/>
-                                </group>
-                                <group alignment="left" layout="vertical" radius="9" id="auo-q4-ari">
+                                <group alignment="left" layout="vertical" id="auo-q4-ari">
                                     <items>
                                         <label alignment="left" text="Bill" id="hkI-Mk-err">
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                         </label>
                                         <label alignment="left" verticalAlignment="center" text="$Bill" textAlignment="left" id="d0D-Tm-Y5M">
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
                                         </label>
                                     </items>
-                                    <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <edgeInsets key="margins" left="2" right="4" top="4" bottom="4"/>
                                 </group>
-                                <group alignment="left" layout="vertical" radius="9" id="OhM-FL-aKF">
+                                <group alignment="left" layout="vertical" id="OhM-FL-aKF">
                                     <items>
                                         <label alignment="left" text="Tip" id="qfA-w1-SAI">
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                         </label>
                                         <label alignment="left" text="$Tip" textAlignment="left" id="enr-ml-elF">
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
                                         </label>
                                     </items>
-                                    <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <edgeInsets key="margins" left="2" right="4" top="4" bottom="4"/>
+                                    <edgeInsets key="margins" left="8" right="0.0" top="0.0" bottom="0.0"/>
                                 </group>
                             </items>
-                            <edgeInsets key="margins" left="0.0" right="0.0" top="7" bottom="0.0"/>
                         </group>
                     </items>
                     <connections>

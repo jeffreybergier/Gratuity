@@ -25,9 +25,9 @@ class GratuitousWatchDataSource: NSObject {
     }
     
     //properties
-    private var tipAmountStorage: Float = 10
-    private var billAmountStorage: Float = 15
-    private var tipPercentageStorage: Float = 0.1
+    private var tipAmountStorage: Float?
+    private var billAmountStorage: Float = 50
+    private var tipPercentageStorage: Float = 0.2
     var billAmount: Float {
         get {
             return self.billAmountStorage
@@ -40,11 +40,17 @@ class GratuitousWatchDataSource: NSObject {
     
     var tipAmount: Float {
         get {
-            return self.tipAmountStorage
+            if let tipAmount = self.tipAmountStorage {
+                return tipAmount
+            } else {
+                return (self.tipPercentageStorage * self.billAmountStorage)
+            }
         }
         set {
             self.tipAmountStorage = newValue
-            self.tipPercentageStorage = self.tipAmountStorage / self.billAmountStorage
+            if let tipAmount = self.tipAmountStorage {
+                self.tipPercentageStorage = tipAmount / self.billAmountStorage
+            }
         }
     }
     
