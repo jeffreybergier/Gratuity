@@ -352,7 +352,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     @IBAction func didTapReviewThisAppButton(sender: UIButton) {
-        let appStoreString = NSString(format: "itms-apps://itunes.apple.com/app/%d", self.applicationID)
+        let appStoreString = NSString(format: "itms-apps://itunes.apple.com/app/id%d", self.applicationID)
         let appStoreURL = NSURL(string: appStoreString)
         if let appStoreURL = appStoreURL {
             UIApplication.sharedApplication().openURL(appStoreURL)
