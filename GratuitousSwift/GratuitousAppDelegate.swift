@@ -14,7 +14,7 @@ import Crashlytics
 class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     //initialize the window and the storyboard
-    var window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    var window: UIWindow?
     private let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -29,15 +29,15 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         //initialize the view controller from the storyboard
         let tipViewController = self.storyboard.instantiateInitialViewController() as TipViewController
         
-        //fake view controller to present real viewcontroller modally
-        let fakeViewController = FakeViewController()
-        fakeViewController.realViewController = tipViewController
-        
         //configure the window
-        self.window.rootViewController = fakeViewController
-        self.window.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
-        self.window.tintColor = GratuitousUIConstant.lightTextColor()
-        self.window.makeKeyAndVisible()
+        if self.window == nil {
+            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        }
+        
+        self.window!.rootViewController = tipViewController
+        self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
+        self.window!.tintColor = GratuitousUIConstant.lightTextColor()
+        self.window!.makeKeyAndVisible()
         
         return true
     }

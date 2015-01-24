@@ -24,7 +24,6 @@
 		736568E11A26DD1400603602 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 		736568E21A26DD1400603602 /* GratuitousTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */; };
 		736568E31A26DD1400603602 /* GratuitousUIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */; };
-		736568E41A26DD1400603602 /* FakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC50AE1A21477100572EFF /* FakeViewController.swift */; };
 		736568E51A26DD1400603602 /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		736568E61A26DD1400603602 /* GratuitousPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */; };
 		736568E71A26DD1400603602 /* GratuitousAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */; };
@@ -69,7 +68,6 @@
 		73C7B49B1A2A92E400536D86 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 		73C7B49C1A2A92E400536D86 /* GratuitousTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */; };
 		73C7B49D1A2A92E400536D86 /* GratuitousUIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */; };
-		73C7B49E1A2A92E400536D86 /* FakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC50AE1A21477100572EFF /* FakeViewController.swift */; };
 		73C7B49F1A2A92E400536D86 /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73C7B4A01A2A92E400536D86 /* GratuitousPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */; };
 		73C7B4A11A2A92E400536D86 /* GratuitousAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */; };
@@ -84,7 +82,6 @@
 		73C7B4AC1A2A92E400536D86 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382510F19E60EED00CD2B28 /* LaunchScreen.xib */; };
 		73C7B4AD1A2A92E400536D86 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7382510D19E60EED00CD2B28 /* Images.xcassets */; };
 		73C7B4AE1A2A92E400536D86 /* settingsIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */; };
-		73CC50AF1A21477100572EFF /* FakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC50AE1A21477100572EFF /* FakeViewController.swift */; };
 		73D11C491A1DB2A3003D238C /* GratuitousPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */; };
 		73D11C4A1A1DB2A6003D238C /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */; };
 		73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
@@ -167,7 +164,6 @@
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		73C7B4B31A2A92E400536D86 /* GratuitousSwift Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GratuitousSwift Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C7B4B41A2A92E500536D86 /* GratuitousSwift Local copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GratuitousSwift Local copy-Info.plist"; path = "/Users/jeffberg/Documents/SaturdayApps/GratuitousSwift/GratuitousSwift Local copy-Info.plist"; sourceTree = "<absolute>"; };
-		73CC50AE1A21477100572EFF /* FakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeViewController.swift; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
 		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousEnums.swift; sourceTree = "<group>"; };
@@ -249,7 +245,6 @@
 				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
 				735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */,
 				73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */,
-				73CC50AE1A21477100572EFF /* FakeViewController.swift */,
 			);
 			name = "Custom Subclasses";
 			sourceTree = "<group>";
@@ -672,7 +667,6 @@
 				736568E11A26DD1400603602 /* GratuitousEnums.swift in Sources */,
 				736568E21A26DD1400603602 /* GratuitousTableView.swift in Sources */,
 				736568E31A26DD1400603602 /* GratuitousUIConstant.swift in Sources */,
-				736568E41A26DD1400603602 /* FakeViewController.swift in Sources */,
 				736568E51A26DD1400603602 /* GratuitousGradientView.swift in Sources */,
 				736568E61A26DD1400603602 /* GratuitousPresentationController.swift in Sources */,
 				736568E71A26DD1400603602 /* GratuitousAppDelegate.swift in Sources */,
@@ -695,7 +689,6 @@
 				73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */,
 				7335A18F19FB04DA00BE08E2 /* GratuitousTableView.swift in Sources */,
 				737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */,
-				73CC50AF1A21477100572EFF /* FakeViewController.swift in Sources */,
 				73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */,
 				73D11C491A1DB2A3003D238C /* GratuitousPresentationController.swift in Sources */,
 				7382510719E60EED00CD2B28 /* GratuitousAppDelegate.swift in Sources */,
@@ -731,7 +724,6 @@
 				73C7B49B1A2A92E400536D86 /* GratuitousEnums.swift in Sources */,
 				73C7B49C1A2A92E400536D86 /* GratuitousTableView.swift in Sources */,
 				73C7B49D1A2A92E400536D86 /* GratuitousUIConstant.swift in Sources */,
-				73C7B49E1A2A92E400536D86 /* FakeViewController.swift in Sources */,
 				73C7B49F1A2A92E400536D86 /* GratuitousGradientView.swift in Sources */,
 				73C7B4A01A2A92E400536D86 /* GratuitousPresentationController.swift in Sources */,
 				73C7B4A11A2A92E400536D86 /* GratuitousAppDelegate.swift in Sources */,
