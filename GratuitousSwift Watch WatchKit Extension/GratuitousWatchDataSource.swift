@@ -38,76 +38,88 @@ class GratuitousWatchDataSource {
     private var _billAmount: Float?
     private var _tipPercentage: Float?
     
-    func totalAmount() -> Float? {
-        if _billAmount != nil && _tipAmount != nil {
-            return _billAmount! + _tipAmount!
-        } else if _billAmount != nil && _tipPercentage != nil {
-            return (_billAmount! * _tipPercentage!) + _billAmount!
-        } else if _tipPercentage != nil && _tipAmount != nil {
-            return self.optionalDivision(top: _tipAmount!, bottom: _tipPercentage!)
-        }
-        return nil
-    }
-    
-    func setBillAmount(newBillAmount: Float) {
-        self.tipAmountSetLast = false
-        self.configureTimer()
-        
-        _billAmount = newBillAmount
-        if let tipPercentage = _tipPercentage {
-            _tipAmount = newBillAmount * tipPercentage
+    var totalAmount: Float? {
+        get {
+            if _billAmount != nil && _tipAmount != nil {
+                return _billAmount! + _tipAmount!
+            } else if _billAmount != nil && _tipPercentage != nil {
+                return (_billAmount! * _tipPercentage!) + _billAmount!
+            } else if _tipPercentage != nil && _tipAmount != nil {
+                return self.optionalDivision(top: _tipAmount!, bottom: _tipPercentage!)
+            }
+            return nil
         }
     }
     
-    func billAmount() -> Float? {
-        if let billAmount = _billAmount {
-            return billAmount
-        } else {
-            if let tipAmount = _tipAmount {
+    var billAmount: Float? {
+        set {
+            self.tipAmountSetLast = false
+            self.configureTimer()
+            
+            _billAmount = newValue
+            if let newValue = newValue {
                 if let tipPercentage = _tipPercentage {
-                    _billAmount = self.optionalDivision(top: tipAmount, bottom: tipPercentage)
-                    return _billAmount
+                    _tipAmount = newValue * tipPercentage
                 }
             }
         }
-        return nil
-    }
-    
-    func setTipAmount(newTipAmount: Float) {
-        self.tipAmountSetLast = true
-        self.configureTimer()
-        
-        _tipAmount = newTipAmount
-        if let billAmount = _billAmount {
-            _tipPercentage = self.optionalDivision(top: newTipAmount, bottom: billAmount)
-        }
-    }
-    
-    func tipAmount() -> Float? {
-        if let tipAmount = _tipAmount {
-            return tipAmount
-        } else {
+        get {
             if let billAmount = _billAmount {
-                if let tipPercentage = _tipPercentage {
-                    _tipAmount = billAmount * tipPercentage
-                    return _tipAmount
+                return billAmount
+            } else {
+                if let tipAmount = _tipAmount {
+                    if let tipPercentage = _tipPercentage {
+                        _billAmount = self.optionalDivision(top: tipAmount, bottom: tipPercentage)
+                        return _billAmount
+                    }
+                }
+            }
+            return nil
+        }
+    }
+    
+    var tipAmount: Float? {
+        set {
+            self.tipAmountSetLast = true
+            self.configureTimer()
+            
+            _tipAmount = newValue
+            if let newValue = newValue {
+                if let billAmount = _billAmount {
+                    _tipPercentage = self.optionalDivision(top: newValue, bottom: billAmount)
                 }
             }
         }
-        return nil
-    }
-    
-    func tipPercentage() -> Float? {
-        if let tipPercentage = _tipPercentage {
-            return tipPercentage
+        get {
+            if let tipAmount = _tipAmount {
+                return tipAmount
+            } else {
+                if let billAmount = _billAmount {
+                    if let tipPercentage = _tipPercentage {
+                        _tipAmount = billAmount * tipPercentage
+                        return _tipAmount
+                    }
+                }
+            }
+            return nil
         }
-        return nil
     }
     
-    func setTipPercentage(newTipPercentage: Float) {
-        _tipPercentage = newTipPercentage
-        if let billAmount = _billAmount {
-            _tipAmount = newTipPercentage * billAmount
+    var tipPercentage: Float? {
+        set {
+            _tipPercentage = newValue
+            if let newValue = newValue {
+                if let billAmount = _billAmount {
+                    _tipAmount = newValue * billAmount
+                }
+            }
+            
+        }
+        get {
+            if let tipPercentage = _tipPercentage {
+                return tipPercentage
+            }
+            return nil
         }
     }
     
@@ -140,10 +152,10 @@ class GratuitousWatchDataSource {
         
         if self.tipAmountSetLast == true {
             let tipAmount = _tipAmount !! 25
-            self.defaultsManager.tipIndexPathRow = Int(tipAmount) + 1
+            self.defaultsManager.tipIndexPathRow = Int(round(tipAmount)) + 1
         } else {
             let billAmount = _billAmount !! 25
-            self.defaultsManager.billIndexPathRow = Int(billAmount) + 1
+            self.defaultsManager.billIndexPathRow = Int(round(billAmount)) + 1
             self.defaultsManager.tipIndexPathRow = 0 //every time the bill amount get set, this gets set to 0 which means that we need to calculate our own tipAmount
         }
     }
@@ -156,40 +168,4 @@ class GratuitousWatchDataSource {
         return nil
     }
     
-    //    var billAmount: Float {
-    //        get {
-    //            return self.billAmountStorage
-    //        }
-    //        set {
-    //            self.billAmountStorage = newValue
-    //            self.tipAmountStorage = self.billAmountStorage * self.tipPercentageStorage
-    //        }
-    //    }
-    //
-    //    var tipAmount: Float {
-    //        get {
-    //            if let tipAmount = self.tipAmountStorage {
-    //                return tipAmount
-    //            } else {
-    //                return (self.tipPercentageStorage * self.billAmountStorage)
-    //            }
-    //        }
-    //        set {
-    //            self.tipAmountStorage = newValue
-    //            if let tipAmount = self.tipAmountStorage {
-    //                self.tipPercentageStorage = tipAmount / self.billAmountStorage
-    //            }
-    //        }
-    //    }
-    //
-    //    var tipPercentage: Float {
-    //        get {
-    //            return self.tipPercentageStorage
-    //        }
-    //        set {
-    //            self.tipPercentageStorage = newValue
-    //            self.tipAmountStorage = self.billAmountStorage * self.tipPercentageStorage
-    //        }
-    //    }
-
 }

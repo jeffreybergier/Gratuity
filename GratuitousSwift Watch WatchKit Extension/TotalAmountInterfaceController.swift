@@ -22,10 +22,10 @@ class TotalAmountInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        let currentBillAmount = self.dataSource.billAmount()!
-        let currentTipAmount = self.dataSource.tipAmount()!
-        let currentTipPercentage = self.dataSource.tipPercentage()!
-        let currentTotalAmount = self.dataSource.totalAmount()!
+        let currentBillAmount = self.dataSource.billAmount
+        let currentTipAmount = self.dataSource.tipAmount
+        let currentTipPercentage = self.dataSource.tipPercentage!
+        let currentTotalAmount = self.dataSource.totalAmount
         
         self.billAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentBillAmount))
         self.tipAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentTipAmount))

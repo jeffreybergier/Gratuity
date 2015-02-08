@@ -10,7 +10,7 @@ import Foundation
 
 class GratuitousUserDefaults {
     
-    private let userDefaults = NSUserDefaults.standardUserDefaults()
+    private let userDefaults = NSUserDefaults(suiteName: "group.com.saturdayapps.Gratuity.storageGroup") !! NSUserDefaults.standardUserDefaults()
     
     init() {
         if self.userDefaults.integerForKey("billIndexPathRow") == 0 {

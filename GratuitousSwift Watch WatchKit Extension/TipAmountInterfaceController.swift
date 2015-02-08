@@ -22,13 +22,13 @@ class TipAmountInterfaceController: WKInterfaceController {
     
     @IBAction func tipAmountDidChange(value: Float) {
         // update the data source
-        self.dataSource.setTipAmount(value * 100)
+        self.dataSource.tipAmount = value * 100
         
         // get the current values from the data source
-        let currentTipAmount = self.dataSource.tipAmount()
-        let currentTipPercentage = self.dataSource.tipPercentage()!
-        let currentBillAmount = self.dataSource.billAmount()
-        let currentTotalAmount = self.dataSource.totalAmount()
+        let currentTipAmount = self.dataSource.tipAmount
+        let currentTipPercentage = self.dataSource.tipPercentage!
+        let currentBillAmount = self.dataSource.billAmount
+        let currentTotalAmount = self.dataSource.totalAmount
         
         // update the text
         self.suggestedTipTitleLabel?.setText(NSLocalizedString("Desired Tip", comment: "This text is when the user is manually selecting a tip. It should say that its a tip he overrode from the suggested tip."))
@@ -42,10 +42,10 @@ class TipAmountInterfaceController: WKInterfaceController {
         super.willActivate()
         
         // get the current values from the data source
-        let currentTipAmount = self.dataSource.tipAmount()!
-        let currentTipPercentage = self.dataSource.tipPercentage()!
-        let currentBillAmount = self.dataSource.billAmount()
-        let currentTotalAmount = self.dataSource.totalAmount()
+        let currentTipAmount = self.dataSource.tipAmount!
+        let currentTipPercentage = self.dataSource.tipPercentage!
+        let currentBillAmount = self.dataSource.billAmount
+        let currentTotalAmount = self.dataSource.totalAmount
         
         self.billAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentBillAmount))
         self.tipAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentTipAmount))

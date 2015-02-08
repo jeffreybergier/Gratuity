@@ -19,7 +19,7 @@ class InterfaceController: WKInterfaceController {
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     
     @IBAction func didChangeBillAmountSliderValue(value: Float) {
-        self.dataSource.setBillAmount(value * 100)
+        self.dataSource.billAmount = value * 100
         self.billAmountLabel.setText(self.dataSource.dollarStringFromFloat(value * 100))
     }
     
@@ -28,7 +28,7 @@ class InterfaceController: WKInterfaceController {
         super.willActivate()
         
         //load the bill amount from the data source and populate the label
-        let currentBillAmount = self.dataSource.billAmount()
+        let currentBillAmount = self.dataSource.billAmount
         self.billAmountLabel.setText(self.dataSource.dollarStringFromFloat(currentBillAmount))
         if let currentBillAmount = currentBillAmount {
             self.billAmountSlider.setValue(currentBillAmount / 100)
