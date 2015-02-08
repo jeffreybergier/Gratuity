@@ -52,8 +52,6 @@
 		7382512D19E6473A00CD2B28 /* GratuitousTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */; };
 		73A18D5B1A2A9525002180DD /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A18D5A1A2A9525002180DD /* WatchKit.framework */; };
 		73A18D611A2A9525002180DD /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D601A2A9525002180DD /* InterfaceController.swift */; };
-		73A18D631A2A9525002180DD /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D621A2A9525002180DD /* NotificationController.swift */; };
-		73A18D651A2A9525002180DD /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D641A2A9525002180DD /* GlanceController.swift */; };
 		73A18D671A2A9525002180DD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D661A2A9525002180DD /* Images.xcassets */; };
 		73A18D6B1A2A9525002180DD /* GratuitousSwift Watch Watch App.app in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D6A1A2A9525002180DD /* GratuitousSwift Watch Watch App.app */; };
 		73A18D721A2A9525002180DD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D711A2A9525002180DD /* Interface.storyboard */; };
@@ -61,6 +59,8 @@
 		73A18D771A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73A18D581A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		73A18D801A2A9661002180DD /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; };
 		73A18D821A2A966B002180DD /* TipAmountInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D811A2A966B002180DD /* TipAmountInterfaceController.swift */; };
+		73A755A91A87DABA0038E023 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBD19FF281B00E44A5E /* Fabric.framework */; };
+		73A755AA1A87DABE0038E023 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBC19FF281B00E44A5E /* Crashlytics.framework */; };
 		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
@@ -130,7 +130,7 @@
 		730530C91A871A3200DC08A6 /* Gratuityδ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuityδ.entitlements"; sourceTree = "<group>"; };
 		730530CA1A871A4700DC08A6 /* Gratuityλδ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuityλδ.entitlements"; sourceTree = "<group>"; };
 		730530CB1A871A5200DC08A6 /* GratuitousSwift Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuitousSwift Watch.entitlements"; sourceTree = "<group>"; };
-		730530CC1A871A5F00DC08A6 /* GratuitousSwift Watch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuitousSwift Watch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		730530CC1A871A5F00DC08A6 /* GratuitousSwift Watch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuitousSwift Watch WatchKit Extension.entitlements"; path = "GratuitousSwift Watch WatchKit Extension/GratuitousSwift Watch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		7334770E1A26E85000513F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUserDefaults.swift; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
@@ -162,8 +162,6 @@
 		73A18D5E1A2A9525002180DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73A18D5F1A2A9525002180DD /* PushNotificationPayload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PushNotificationPayload.json; sourceTree = "<group>"; };
 		73A18D601A2A9525002180DD /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		73A18D621A2A9525002180DD /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		73A18D641A2A9525002180DD /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
 		73A18D661A2A9525002180DD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		73A18D6A1A2A9525002180DD /* GratuitousSwift Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GratuitousSwift Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73A18D701A2A9525002180DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -206,6 +204,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				73A18D5B1A2A9525002180DD /* WatchKit.framework in Frameworks */,
+				73A755AA1A87DABE0038E023 /* Crashlytics.framework in Frameworks */,
+				73A755A91A87DABA0038E023 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,11 +292,12 @@
 			isa = PBXGroup;
 			children = (
 				7382510319E60EED00CD2B28 /* GratuitousSwift */,
-				7382511919E60EED00CD2B28 /* GratuitousSwiftTests */,
 				73A18D5C1A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension */,
 				73A18D6E1A2A9525002180DD /* GratuitousSwift Watch Watch App */,
 				73A18D591A2A9525002180DD /* Frameworks */,
 				7382510219E60EED00CD2B28 /* Products */,
+				7382511919E60EED00CD2B28 /* GratuitousSwiftTests */,
+				730530CC1A871A5F00DC08A6 /* GratuitousSwift Watch WatchKit Extension.entitlements */,
 				730530CB1A871A5200DC08A6 /* GratuitousSwift Watch.entitlements */,
 				730530CA1A871A4700DC08A6 /* Gratuityλδ.entitlements */,
 				730530C91A871A3200DC08A6 /* Gratuityδ.entitlements */,
@@ -373,12 +374,7 @@
 		73A18D5C1A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				730530CC1A871A5F00DC08A6 /* GratuitousSwift Watch WatchKit Extension.entitlements */,
-				73A18D601A2A9525002180DD /* InterfaceController.swift */,
-				73A18D811A2A966B002180DD /* TipAmountInterfaceController.swift */,
-				734C1D8A1A2FF4ED00581E2A /* TotalAmountInterfaceController.swift */,
-				73A18D621A2A9525002180DD /* NotificationController.swift */,
-				73A18D641A2A9525002180DD /* GlanceController.swift */,
+				73A755AB1A87EF310038E023 /* Step By Step Interface */,
 				73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */,
 				73A18D661A2A9525002180DD /* Images.xcassets */,
 				73A18D5D1A2A9525002180DD /* Supporting Files */,
@@ -411,6 +407,16 @@
 				73A18D701A2A9525002180DD /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		73A755AB1A87EF310038E023 /* Step By Step Interface */ = {
+			isa = PBXGroup;
+			children = (
+				73A18D601A2A9525002180DD /* InterfaceController.swift */,
+				73A18D811A2A966B002180DD /* TipAmountInterfaceController.swift */,
+				734C1D8A1A2FF4ED00581E2A /* TotalAmountInterfaceController.swift */,
+			);
+			name = "Step By Step Interface";
 			sourceTree = "<group>";
 		};
 		73E7E60F1A19A9FB004F9F5C /* Frameworks */ = {
@@ -470,6 +476,7 @@
 				73A18D541A2A9525002180DD /* Sources */,
 				73A18D551A2A9525002180DD /* Frameworks */,
 				73A18D561A2A9525002180DD /* Resources */,
+				73A755A81A87DA7F0038E023 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -673,6 +680,19 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24";
 		};
+		73A755A81A87DA7F0038E023 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24";
+		};
 		73C7B4AF1A2A92E400536D86 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -739,11 +759,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73A18D631A2A9525002180DD /* NotificationController.swift in Sources */,
 				73A18D611A2A9525002180DD /* InterfaceController.swift in Sources */,
 				734C1D8B1A2FF4ED00581E2A /* TotalAmountInterfaceController.swift in Sources */,
 				733E8CB71A87054E00B228CB /* GratuitousUserDefaults.swift in Sources */,
-				73A18D651A2A9525002180DD /* GlanceController.swift in Sources */,
 				73A18D821A2A966B002180DD /* TipAmountInterfaceController.swift in Sources */,
 				73A18D801A2A9661002180DD /* GratuitousWatchDataSource.swift in Sources */,
 				733E8CB81A8705CA00B228CB /* GratuitousEnums.swift in Sources */,
@@ -822,6 +840,8 @@
 				);
 				INFOPLIST_FILE = "GratuitousSwift copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
 				PRODUCT_NAME = "Gratuityλδ";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GratuitousSwift/GratuitousSwift-Bridging-Header.h";
@@ -942,6 +962,7 @@
 				);
 				INFOPLIST_FILE = GratuitousSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_NAME = "Gratuityδ";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GratuitousSwift/GratuitousSwift-Bridging-Header.h";
@@ -975,6 +996,10 @@
 				CODE_SIGN_ENTITLEMENTS = "GratuitousSwift Watch WatchKit Extension/GratuitousSwift Watch WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -994,6 +1019,10 @@
 				CODE_SIGN_ENTITLEMENTS = "GratuitousSwift Watch WatchKit Extension/GratuitousSwift Watch WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "GratuitousSwift Watch WatchKit Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

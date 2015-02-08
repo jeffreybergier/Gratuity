@@ -64,6 +64,17 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        #if DEBUG
+            // add a crash button to the view to test crashlytics
+            let crashButton = UIButton(frame: CGRect(x: 12, y: 20, width: 10, height: 10))
+            let viewDictionary = ["crashButton" : crashButton]
+            crashButton.setTitle("Cause Crash", forState: UIControlState.Normal)
+            crashButton.addTarget(self, action: "causeCrash: InTipViewController:", forControlEvents: UIControlEvents.TouchUpInside)
+            crashButton.sizeToFit()
+            self.view.addSubview(crashButton)
+        #endif
+        
+        // configure notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "suggestedTipUpdatedOnDisk:", name: "suggestedTipValueUpdated", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateView:", name: "currencyFormatterReadyReloadView", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
