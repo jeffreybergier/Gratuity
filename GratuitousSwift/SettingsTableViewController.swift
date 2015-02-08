@@ -35,6 +35,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         //set the background color of the view
         self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         
+        //tell the tableview to have dynamic height
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
         //set the colors for the navigation controller
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.barTintColor = nil

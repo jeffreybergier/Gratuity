@@ -176,7 +176,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.suggestedTipPercentage = suggestedTipPercentage
 
         //have to do this ghetto two call method because just doing it once regularly caused things to not line up properly
-        self.billAmountTableView.scrollToRowAtIndexPath(billIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         self.billAmountTableView.scrollToRowAtIndexPath(billIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
         
         //make sure the big labels are presented
@@ -192,7 +191,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if tipIndexPath.row != 0 {
             self.tipTableCustomValueSet = true
             //have to do this ghetto two call method because just doing it once regularly caused things to not line up properly
-            self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
             self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
             self.updateTipAmountText()
         }
@@ -232,8 +230,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     @IBAction func unwindToViewController (sender: UIStoryboardSegue){
-        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
-        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
+        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -324,8 +322,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             self.totalAmountTextLabel.attributedText = totalAmountAttributedString
             self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
         }
-//        println("Upper: \(self.upperTextSizeAdjustment)")
-//        println("Lower: \(self.lowerTextSizeAdjustment)")
     }
     
     private func updateTipAmountText() {
@@ -388,17 +384,12 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.scrollViewDidStopMovingForWhateverReason(scrollView)
     }
     
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        self.scrollViewDidStopMovingForWhateverReason(scrollView)
-    }
-    
     private func scrollViewDidStopMovingForWhateverReason(scrollView: UIScrollView) {
         let tableView = scrollView as? GratuitousTableView
         
         if let tableView = tableView {
             tableView.isScrolling = false
             switch tableView.tag {
-                //both of these have to be false to animate because if the rowheight is over 63, the animation doesn't work right and stops the tableviewfrom scrolling.
             case self.BILLAMOUNTTAG:
                 let indexPath = self.indexPathInCenterOfTable(tableView)
                 if indexPath.row > EXTRACELLS - 1 {
@@ -406,7 +397,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                         tableView.selectRowAtIndexPath(NSIndexPath(forRow: MAXBILLAMOUNT + EXTRACELLS - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                     } else {
                         self.writeBillIndexPathRowToDiskWithTableView(tableView)
-                        tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+                        tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                     }
                 } else {
                     tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -418,7 +409,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                         tableView.selectRowAtIndexPath(NSIndexPath(forRow: MAXTIPAMOUNT + EXTRACELLS - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                     } else {
                         self.writeTipIndexPathRowToDiskWithTableView(tableView)
-                        tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+                        tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                     }
                 } else {
                     tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -432,25 +423,20 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if self.tipTableCustomValueSet {
             self.tipTableCustomValueSet = false
         }
-        let tableView = scrollView as GratuitousTableView
-        tableView.isScrolling = true
+        if let tableView = scrollView as? GratuitousTableView {
+            tableView.isScrolling = true
+        }
+        self.bigTextLabelsShouldPresent(false)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let tableView = scrollView as GratuitousTableView
         
-        self.bigTextLabelsShouldPresent(false)
         
         switch tableView.tag {
         case BILLAMOUNTTAG:
-            //these lines were needed when the cells needed to do something when the tableview was scrolling, but its no longer needed
-            //let indexPath = self.indexPathInCenterOfTable(tableView)
-            //tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
             self.updateBillAmountText()
         default:
-            //these lines were needed when the cells needed to do something when the tableview was scrolling, but its no longer needed
-            //let indexPath = self.indexPathInCenterOfTable(tableView)
-            //tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
             self.updateTipAmountText()
         }
     }
