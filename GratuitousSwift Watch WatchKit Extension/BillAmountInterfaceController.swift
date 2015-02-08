@@ -10,7 +10,7 @@ import WatchKit
 import Foundation
 
 
-class InterfaceController: WKInterfaceController {
+class BillAmountInterfaceController: WKInterfaceController {
 
     @IBOutlet private weak var billAmountLabel: WKInterfaceLabel!
     @IBOutlet private weak var billAmountSlider: WKInterfaceSlider!
