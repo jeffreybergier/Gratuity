@@ -34,10 +34,4 @@ class BillAmountInterfaceController: WKInterfaceController {
             self.billAmountSlider.setValue(currentBillAmount / 100)
         }
     }
-
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        NSLog("%@ did deactivate", self)
-        super.didDeactivate()
-    }
 }

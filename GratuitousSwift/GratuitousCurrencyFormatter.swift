@@ -44,7 +44,9 @@ class GratuitousCurrencyFormatter: NSObject {
     }
     
     func localeWasOverridenByUser(notification: NSNotification?) {
-        self.selectedCurrencySymbol = (UIApplication.sharedApplication().delegate as GratuitousAppDelegate).defaultsManager.overrideCurrencySymbol
+        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
+            self.selectedCurrencySymbol = appDelegate.defaultsManager.overrideCurrencySymbol
+        }
     }
 
     func currencyFormattedString(number: NSNumber) -> String? {

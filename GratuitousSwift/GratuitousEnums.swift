@@ -16,7 +16,7 @@ enum CustomTransitionStyle: Int {
     case Modal = 0, Popover
 }
 
-enum CurrencySign: Int {
+enum CurrencySign: Int, Printable {
     case Default = 0, Dollar, Pound, Euro, Yen, None
     
     func string() -> String {
@@ -33,6 +33,25 @@ enum CurrencySign: Int {
             return "¥"
         case .None:
             return ""
+        }
+    }
+    
+    var description: String {
+        get {
+            switch self {
+            case .Default:
+                return "Currency Sign: Default"
+            case .Dollar:
+                return "Currency Sign: Dollar"
+            case .Pound:
+                return "Currency Sign: Pound"
+            case .Euro:
+                return "Currency Sign: Euro"
+            case .Yen:
+                return "Currency Sign: Yen"
+            case .None:
+                return "Currency Sign: None"
+            }
         }
     }
 }
@@ -78,6 +97,23 @@ enum TableViewTextSizeAdjustedForDynamicType: Int {
 enum ActualScreenSizeBasedOnWidth: Int {
     //this takes into account screen size and text size adjustment. Thats why there are fake screen sizes.
     case iPhone4or5 = 0, iPhone6, iPhone6Plus, iPad
+}
+
+enum CorrectInterface: Int, Printable {
+    case Unknown = 0, CrownScroll, StepByStep
+    
+    var description: String {
+        get {
+            switch self {
+            case .Unknown:
+                return "CorrectInterface Enum: Unknown"
+            case .CrownScroll:
+                return "CorrectInterface Enum: CrownScroll"
+            case .StepByStep:
+                return "CorrectInterface Enum: StepByStep"
+            }
+        }
+    }
 }
 
 // Operator Overloading!!

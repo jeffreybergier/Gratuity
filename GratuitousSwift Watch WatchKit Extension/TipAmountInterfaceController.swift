@@ -53,11 +53,4 @@ class TipAmountInterfaceController: WKInterfaceController {
         self.totalAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentTotalAmount))
         self.tipAmountSlider?.setValue(currentTipAmount / 100)
     }
-    
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        NSLog("%@ did deactivate", self)
-        super.didDeactivate()
-    }
-   
 }

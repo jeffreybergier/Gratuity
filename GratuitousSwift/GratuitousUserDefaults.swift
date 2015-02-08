@@ -18,6 +18,7 @@ class GratuitousUserDefaults {
             self.userDefaults.setInteger(0, forKey: "tipIndexPathRow")
             self.userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: "overrideCurrencySymbol")
             self.userDefaults.setDouble(0.2, forKey: "suggestedTipPercentage")
+            self.userDefaults.setInteger(CorrectInterface.Unknown.rawValue, forKey: "correctInterface")
             self.userDefaults.synchronize()
         }
     }
@@ -49,6 +50,18 @@ class GratuitousUserDefaults {
         }
         get {
             return CurrencySign(rawValue: self.userDefaults.integerForKey("overrideCurrencySymbol")) !! CurrencySign.Default
+        }
+    }
+    
+    var correctInterface: CorrectInterface {
+        get {
+            if let correctInterface = CorrectInterface(rawValue: self.userDefaults.integerForKey("correctInterface")) {
+                return correctInterface
+            }
+            return CorrectInterface.Unknown
+        }
+        set {
+            self.userDefaults.setInteger(newValue.rawValue, forKey: "correctInterface")
         }
     }
     

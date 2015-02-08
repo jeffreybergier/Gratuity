@@ -1,14 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6750" systemVersion="14C109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6750" systemVersion="14C109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cdi-qG-zGI">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6735"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
-        <!--Bill Amount Interface Controller-->
+        <!--App Delegate Interface Controller-->
+        <scene sceneID="MVV-xz-nNc">
+            <objects>
+                <controller id="Cdi-qG-zGI" customClass="AppDelegateInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <button width="1" alignment="left" title="Crown Scroll" id="Xz9-wL-Imh">
+                            <connections>
+                                <segue destination="IIJ-PF-wKy" kind="push" id="xR0-UZ-n9T"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Step by Step" id="vqC-Ag-P5Z">
+                            <connections>
+                                <segue destination="AgC-eL-Hgc" kind="push" id="kDX-fl-Tv1"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="crownScrollButton" destination="Xz9-wL-Imh" id="4CN-tp-9MW"/>
+                        <outlet property="stepByStepButton" destination="vqC-Ag-P5Z" id="eFC-wS-pXz"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-243" y="334"/>
+        </scene>
+        <!--CrownScrollInterfaceController-->
+        <scene sceneID="amq-Dv-ePJ">
+            <objects>
+                <controller identifier="CrownScrollInterfaceController" id="IIJ-PF-wKy" customClass="CrownScrollInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label height="19.5" alignment="left" text="Bill Amount" id="Oss-b1-Ch2">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <table alignment="left" id="wBg-kT-CdX">
+                            <items>
+                                <tableRow id="Ze9-4k-gR6">
+                                    <group key="rootItem" width="1" alignment="left" id="OJX-hb-TH4"/>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="billAmountTable" destination="wBg-kT-CdX" id="8Zm-r1-bqe"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="170" y="146"/>
+        </scene>
+        <!--BillAmountInterfaceController-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="BillAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller identifier="BillAmountInterfaceController" id="AgC-eL-Hgc" customClass="BillAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
                         <label alignment="left" text="Amount on Bill" id="unF-Y0-J6x">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -36,7 +84,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="196" y="482"/>
+            <point key="canvasLocation" x="162" y="482"/>
         </scene>
         <!--Total Amount Interface Controller-->
         <scene sceneID="hAM-e5-UL7">

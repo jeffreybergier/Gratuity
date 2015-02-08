@@ -7,16 +7,38 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
 
 class GratuitousWatchDataSource {
     
+    private let currencyFormatter = NSNumberFormatter()
     private let defaultsManager = GratuitousUserDefaults()
+    
     private var writeDefaultsTimer: NSTimer?
     private var tipAmountSetLast: Bool = false
+    private var currentCurrencyFormat: CurrencySign?
     
     init() {
+        // configure crashlytics in an instance that won't disappear
+        Fabric.with([Crashlytics()])
+        
+        // configure instance variables from disk
         _billAmount = Float(self.defaultsManager.billIndexPathRow) - 1
         _tipPercentage = Float(self.defaultsManager.suggestedTipPercentage)
+        
+        // read nsuserdefaults to configure the currency symbol
+        self.updateCurrencySymbolFromDisk()
+        
+        // configure currency formatter
+        self.currencyFormatter.locale = NSLocale.currentLocale()
+        self.currencyFormatter.maximumFractionDigits = 0
+        self.currencyFormatter.minimumFractionDigits = 0
+        self.currencyFormatter.alwaysShowsDecimalSeparator = false
+        self.currencyFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        
+        // configure a timer to check if things change on disk
+        let userDefaultsTimer = NSTimer.scheduledTimerWithTimeInterval(30.0, target: self, selector: "updateCurrencySymbolFromDisk:", userInfo: nil, repeats: true)
     }
     
     //this code allows this object to be a singleton
@@ -123,9 +145,28 @@ class GratuitousWatchDataSource {
         }
     }
     
+    var correctInterface: CorrectInterface {
+        get {
+            return self.defaultsManager.correctInterface
+        }
+    }
+    
     func dollarStringFromFloat(floatValue: Float?) -> String {
         if let floatValue = floatValue {
-            return NSString(format: "$%.0f", floatValue)
+            var currencyString: NSString?
+            if let currentCurrencyFormat = self.currentCurrencyFormat {
+                switch currentCurrencyFormat {
+                case .Default:
+                    currencyString = self.currencyFormatter.stringFromNumber(floatValue)
+                case .None:
+                    currencyString = NSString(format: "%.0f", floatValue)
+                default:
+                    currencyString = NSString(format: "%@%.0f", currentCurrencyFormat.string(), floatValue)
+                }
+            } else {
+                currencyString = self.currencyFormatter.stringFromNumber(floatValue)
+            }
+            return currencyString !! "nil"
         }
         return "nil"
     }
@@ -144,6 +185,10 @@ class GratuitousWatchDataSource {
         } else {
             self.writeDefaultsTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "writeDefaultsToDiskTimerFired:", userInfo: nil, repeats: false)
         }
+    }
+    
+    @objc private func updateCurrencySymbolFromDisk(_ timer: NSTimer? = nil) {
+        self.currentCurrencyFormat = self.defaultsManager.overrideCurrencySymbol
     }
     
     @objc private func writeDefaultsToDiskTimerFired(timer: NSTimer) {
