@@ -15,6 +15,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     //initialize the window and the storyboard
     var window: UIWindow?
+    let defaultsManager = GratuitousUserDefaults()
     private let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -22,9 +23,6 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         
         //crashlytics intializer
         Fabric.with([Crashlytics()])
-        
-        //prepare nsuserdefaults
-        self.prepareUserDefaults()
         
         //initialize the view controller from the storyboard
         let tipViewController = self.storyboard.instantiateInitialViewController() as TipViewController
@@ -34,23 +32,12 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         }
         
-        self.window!.rootViewController = tipViewController
-        self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
-        self.window!.tintColor = GratuitousUIConstant.lightTextColor()
-        self.window!.makeKeyAndVisible()
+        self.window?.rootViewController = tipViewController
+        self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
+        self.window?.tintColor = GratuitousUIConstant.lightTextColor()
+        self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
         
         return true
-    }
-    
-    func prepareUserDefaults() {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if userDefaults.integerForKey("billIndexPathRow") == 0 {
-            userDefaults.setInteger(26, forKey: "billIndexPathRow")
-            userDefaults.setInteger(0, forKey: "tipIndexPathRow")
-            userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: "overrideCurrencySymbol")
-            userDefaults.setDouble(0.2, forKey: "suggestedTipPercentage")
-            userDefaults.synchronize()
-        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

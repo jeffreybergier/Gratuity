@@ -16,7 +16,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     @IBOutlet private weak var headerLabelCurencySymbol: UILabel!
     @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel!
     
-    private let userDefaults = NSUserDefaults.standardUserDefaults()
+    private weak var defaultsManager = (UIApplication.sharedApplication().delegate as GratuitousAppDelegate).defaultsManager
     private var headerLabelsArray: [UILabel] = []
     private lazy var swipeToDismiss: UISwipeGestureRecognizer = {
         let swipe = UISwipeGestureRecognizer(target: self, action: "didSwipeToDismiss:")
@@ -182,7 +182,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     func readUserDefaultsAndUpdateSlider(notification: NSNotification?) {
-        let onDiskTipPercentage:NSNumber = self.userDefaults.doubleForKey("suggestedTipPercentage")
+        let onDiskTipPercentage:NSNumber = self.defaultsManager!.suggestedTipPercentage
         self.suggestedTipPercentageLabel.text = NSString(format: "%.0f%%", onDiskTipPercentage.floatValue*100)
         self.suggestedTipPercentageSlider.setValue(onDiskTipPercentage.floatValue, animated: false)
     }
@@ -195,8 +195,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     @IBAction func didChangeSuggestedTipPercentageSlider(sender: UISlider) {
         //this is only called when the user lets go of the slider
         let newTipPercentage: NSNumber = sender.value
-        self.userDefaults.setDouble(newTipPercentage.doubleValue, forKey: "suggestedTipPercentage")
-        self.userDefaults.synchronize()
+        self.defaultsManager!.suggestedTipPercentage = newTipPercentage.doubleValue
         NSNotificationCenter.defaultCenter().postNotificationName("suggestedTipValueUpdated", object: self)
     }
     
@@ -222,7 +221,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         
         //this crazy lump fixes a small visual bug having to do with the border of the cell for the selected cell
-        let userDefaults = NSUserDefaults.standardUserDefaults()
         for i in 0..<6 {
             //uhhhh for some reason just running cellforrowatindexpath fixes this issue. really strange
             let indexPath = NSIndexPath(forRow: i+1, inSection: 1)
@@ -230,13 +228,12 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         }
         
         
-        self.writeCurrencyOverrideUserDefaultToDisk(nil)
+        self.writeCurrencyOverrideUserDefaultToDisk()
     }
     
-    private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: Int?) {
+    private func writeCurrencyOverrideUserDefaultToDisk(_ currencyOverride: CurrencySign? = nil) {
         if let currencyOverride = currencyOverride {
-            self.userDefaults.setInteger(currencyOverride, forKey: "overrideCurrencySymbol")
-            self.userDefaults.synchronize()
+            self.defaultsManager!.overrideCurrencySymbol = currencyOverride
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self)
@@ -276,17 +273,17 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         case 1:
             switch indexPath.row {
             case CurrencySign.Default.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Default.rawValue)
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Default)
             case CurrencySign.Dollar.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Dollar.rawValue)
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Dollar)
             case CurrencySign.Pound.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Pound.rawValue)
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Pound)
             case CurrencySign.Euro.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Euro.rawValue)
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Euro)
             case CurrencySign.Yen.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Yen.rawValue)
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Yen)
             case CurrencySign.None.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.None.rawValue)
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.None)
             default:
                 break;
             }

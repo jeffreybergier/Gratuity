@@ -16,7 +16,6 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             self.prepareTextLabel()
         }
     }
-    let userDefaults = NSUserDefaults.standardUserDefaults()
     var animatingBorderColor = false
     
     override func awakeFromNib() {
@@ -47,7 +46,8 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     }
     
     private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {
-        if self.userDefaults.integerForKey("overrideCurrencySymbol") == self.tag {
+        let defaultsManager = (UIApplication.sharedApplication().delegate as GratuitousAppDelegate).defaultsManager
+        if defaultsManager.overrideCurrencySymbol.rawValue == self.tag {
             self.accessoryType = UITableViewCellAccessoryType.Checkmark
             if !self.animatingBorderColor {
                 //if this property is being animated, don't change it

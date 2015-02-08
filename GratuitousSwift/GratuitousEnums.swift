@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum CustomTransitionMode: Int {
     case Present = 0, Dismiss
@@ -78,4 +78,15 @@ enum TableViewTextSizeAdjustedForDynamicType: Int {
 enum ActualScreenSizeBasedOnWidth: Int {
     //this takes into account screen size and text size adjustment. Thats why there are fake screen sizes.
     case iPhone4or5 = 0, iPhone6, iPhone6Plus, iPad
+}
+
+// Operator Overloading!!
+// AssertingNilCoalescing operator crashes when LHS is nil when App is in Debug Build.
+// When App is in release build, it performs ?? operator
+// Crediting http://blog.human-friendly.com/theanswer-equals-maybeanswer-or-a-good-alternative
+
+infix operator !! { associativity right precedence 110 }
+public func !!<A>(lhs:A?, rhs:@autoclosure()->A)->A {
+    assert(lhs != nil)
+    return lhs ?? rhs()
 }

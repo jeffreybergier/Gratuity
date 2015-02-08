@@ -44,7 +44,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let currencyFormatter = GratuitousCurrencyFormatter()
     private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
     
-    private var userDefaults = NSUserDefaults.standardUserDefaults()
+    private weak var defaultsManager = (UIApplication.sharedApplication().delegate as GratuitousAppDelegate).defaultsManager
     private var upperTextSizeAdjustment: NSNumber = NSNumber(double: 0.0)
     private var lowerTextSizeAdjustment: NSNumber = NSNumber(double: 0.0)
     private var billAmountsArray: [NSNumber] = []
@@ -169,15 +169,12 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         timer?.invalidate()
         
         //read the defaults off disk and move the bill amount to there
-        let billUserDefaults = self.userDefaults.integerForKey("billIndexPathRow")
-        var billIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-        if billUserDefaults == 0 {
-            billIndexPath = NSIndexPath(forRow: 19, inSection: 0)
-        } else {
-            self.suggestedTipPercentage = self.userDefaults.doubleForKey("suggestedTipPercentage")
-            let billIndexPathRow = self.userDefaults.integerForKey("billIndexPathRow")
-            billIndexPath = NSIndexPath(forRow: billIndexPathRow, inSection: 0)
-        }
+        let billUserDefaults = self.defaultsManager!.billIndexPathRow
+        let suggestedTipPercentage = self.defaultsManager!.suggestedTipPercentage
+        
+        let billIndexPath = NSIndexPath(forRow: billUserDefaults, inSection: 0)
+        self.suggestedTipPercentage = suggestedTipPercentage
+
         //have to do this ghetto two call method because just doing it once regularly caused things to not line up properly
         self.billAmountTableView.scrollToRowAtIndexPath(billIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         self.billAmountTableView.scrollToRowAtIndexPath(billIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
@@ -190,14 +187,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         timer?.invalidate()
         
         //if there is a preference for tip table, move the tip table to that
-        let tipUserDefaults = self.userDefaults.integerForKey("tipIndexPathRow")
-        var tipIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-        if tipUserDefaults == 0 {
-            tipIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-        } else {
+        let tipUserDefaults = self.defaultsManager!.tipIndexPathRow //self.userDefaults.integerForKey("tipIndexPathRow")
+        let tipIndexPath = NSIndexPath(forRow: tipUserDefaults, inSection: 0)
+        if tipIndexPath.row != 0 {
             self.tipTableCustomValueSet = true
-            let tipIndexPathRow = self.userDefaults.integerForKey("tipIndexPathRow")
-            tipIndexPath = NSIndexPath(forRow: tipIndexPathRow, inSection: 0)
             //have to do this ghetto two call method because just doing it once regularly caused things to not line up properly
             self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
             self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
@@ -277,16 +270,14 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     //MARK: Handle Writing to Disk
     
     func suggestedTipUpdatedOnDisk(notification: NSNotification?) {
-        let onDiskTipPercentage: NSNumber = self.userDefaults.doubleForKey("suggestedTipPercentage")
+        let onDiskTipPercentage: NSNumber = self.defaultsManager!.suggestedTipPercentage
         self.suggestedTipPercentage = onDiskTipPercentage.doubleValue
     }
     
     private func writeBillIndexPathRowToDiskWithTableView(tableView: UITableView) {
         if !self.tipTableCustomValueSet {
-            //println("Writing BillIndexPathRow to Disk: \(self.indexPathInCenterOfTable(tableView).row)")
-            self.userDefaults.setInteger(self.indexPathInCenterOfTable(tableView).row, forKey: "billIndexPathRow")
-            self.userDefaults.setInteger(0, forKey: "tipIndexPathRow")
-            self.userDefaults.synchronize()
+            self.defaultsManager!.billIndexPathRow = self.indexPathInCenterOfTable(tableView).row
+            self.defaultsManager!.tipIndexPathRow = 0
         }
     }
     
@@ -294,9 +285,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if self.tipTableCustomValueSet {
             self.tipTableCustomValueSet = false
         } else {
-            //println("Writing TipIndexPathRow to Disk: \(self.indexPathInCenterOfTable(tableView).row)")
-            self.userDefaults.setInteger(self.indexPathInCenterOfTable(tableView).row, forKey: "tipIndexPathRow")
-            self.userDefaults.synchronize()
+            self.defaultsManager!.tipIndexPathRow = self.indexPathInCenterOfTable(tableView).row
         }
     }
     

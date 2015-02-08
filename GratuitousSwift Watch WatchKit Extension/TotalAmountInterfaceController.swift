@@ -21,9 +21,15 @@ class TotalAmountInterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        self.billAmountLabel?.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount))
-        self.tipAmountLabel?.setText(self.dataSource.dollarStringFromFloat(self.dataSource.tipAmount))
-        self.tipPercentageLabel?.setText(self.dataSource.percentStringFromFloat(self.dataSource.tipPercentage * 100))
-        self.totalAmountLabel?.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount + self.dataSource.tipAmount))
+        
+        let currentBillAmount = self.dataSource.billAmount()!
+        let currentTipAmount = self.dataSource.tipAmount()!
+        let currentTipPercentage = self.dataSource.tipPercentage()!
+        let currentTotalAmount = self.dataSource.totalAmount()!
+        
+        self.billAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentBillAmount))
+        self.tipAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentTipAmount))
+        self.tipPercentageLabel?.setText(self.dataSource.percentStringFromFloat(currentTipPercentage * 100))
+        self.totalAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentTotalAmount))
     }
 }

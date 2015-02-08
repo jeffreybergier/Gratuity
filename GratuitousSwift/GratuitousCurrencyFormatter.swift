@@ -44,14 +44,7 @@ class GratuitousCurrencyFormatter: NSObject {
     }
     
     func localeWasOverridenByUser(notification: NSNotification?) {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        let currencyOverrideOnDisk = userDefaults.integerForKey("overrideCurrencySymbol")
-        if let currencySign = CurrencySign(rawValue: currencyOverrideOnDisk) {
-            self.selectedCurrencySymbol = currencySign
-        } else {
-            println("GratuitousCurrencyFormatter: Locale Was Override By User: Switch Case Defaulted. This should not happen. Resetting to default")
-            self.selectedCurrencySymbol = CurrencySign.Default
-        }
+        self.selectedCurrencySymbol = (UIApplication.sharedApplication().delegate as GratuitousAppDelegate).defaultsManager.overrideCurrencySymbol
     }
 
     func currencyFormattedString(number: NSNumber) -> String? {

@@ -18,13 +18,8 @@ class InterfaceController: WKInterfaceController {
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     
-    override init(context: AnyObject?) {
-        // Initialize variables here.
-        super.init(context: context)
-    }
-    
-    /*@IBAction*/ func didChangeBillAmountSliderValue(value: Float) {
-        self.dataSource.billAmount = value * 100
+    @IBAction func didChangeBillAmountSliderValue(value: Float) {
+        self.dataSource.setBillAmount(value * 100)
         self.billAmountLabel.setText(self.dataSource.dollarStringFromFloat(value * 100))
     }
     
@@ -33,8 +28,11 @@ class InterfaceController: WKInterfaceController {
         super.willActivate()
         
         //load the bill amount from the data source and populate the label
-        self.billAmountLabel.setText(self.dataSource.dollarStringFromFloat(self.dataSource.billAmount))
-        self.billAmountSlider.setValue(self.dataSource.billAmount / 100)
+        let currentBillAmount = self.dataSource.billAmount()
+        self.billAmountLabel.setText(self.dataSource.dollarStringFromFloat(currentBillAmount))
+        if let currentBillAmount = currentBillAmount {
+            self.billAmountSlider.setValue(currentBillAmount / 100)
+        }
     }
 
     override func didDeactivate() {
