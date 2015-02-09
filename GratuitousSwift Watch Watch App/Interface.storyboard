@@ -105,10 +105,10 @@
             </objects>
             <point key="canvasLocation" x="396" y="146"/>
         </scene>
-        <!--Tip Amount Crown Interface Controller-->
+        <!--Tip-->
         <scene sceneID="78G-0Q-yhq">
             <objects>
-                <controller id="MG6-Rc-6gm" customClass="TipAmountCrownInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller identifier="TipAmountCrownInterfaceController" title="Tip" id="MG6-Rc-6gm" customClass="TipAmountCrownInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
                         <label alignment="left" text="Scroll to Select a Desired Tip Amount" numberOfLines="0" id="16H-Na-QYZ">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -116,12 +116,20 @@
                         </label>
                         <table alignment="left" id="tB5-hY-60g">
                             <items>
-                                <tableRow identifier="BillAmountTableRowController" id="zLE-6D-uMM" customClass="MoneyTableRowController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                                <tableRow identifier="TipTableRowController" id="zLE-6D-uMM" customClass="TipTableRowController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="33" alignment="left" id="YqW-vp-tok">
                                         <items>
                                             <label alignment="left" verticalAlignment="center" text="$20" id="pnz-CS-07I">
                                                 <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="font" type="system" pointSize="30"/>
+                                            </label>
+                                            <label alignment="right" verticalAlignment="bottom" text="20%" id="Xs1-vo-Jh4">
+                                                <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="18"/>
+                                            </label>
+                                            <label alignment="right" verticalAlignment="bottom" text="☆" id="Hhh-AO-axL">
+                                                <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="20"/>
                                             </label>
                                         </items>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -129,6 +137,7 @@
                                     </group>
                                     <connections>
                                         <outlet property="moneyAmountLabel" destination="pnz-CS-07I" id="M7q-9H-iEO"/>
+                                        <outlet property="starLabel" destination="Hhh-AO-axL" id="LVo-5q-5mH"/>
                                     </connections>
                                 </tableRow>
                             </items>

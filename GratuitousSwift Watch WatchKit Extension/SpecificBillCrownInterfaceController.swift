@@ -47,4 +47,10 @@ class SpecificBillCrownInterfaceController: WKInterfaceController {
         }
     }
     
+    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+        let newBillAmount = self.data[rowIndex]
+        self.dataSource.billAmount = newBillAmount
+        self.pushControllerWithName("TipAmountCrownInterfaceController", context: nil)
+    }
+    
 }
