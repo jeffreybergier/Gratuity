@@ -10,10 +10,43 @@ import WatchKit
 
 class CrownScrollInterfaceController: WKInterfaceController {
     
-    @IBOutlet weak var billAmountTable: WKInterfaceTable?
+    @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
+    @IBOutlet private weak var billAmountTable: WKInterfaceTable?
+    
+    private var data = [Float]()
+    private let dataSource = GratuitousWatchDataSource.sharedInstance
     
     override func willActivate() {
         super.willActivate()
+        
+        self.data = []
+        for index in 0..<50 {
+            self.data.append(Float(index + 1))
+        }
+        
+        self.clearBillDataTable()
+        self.reloadBillTableData()
     }
+    
+    private func reloadBillTableData() {
+        self.billAmountTable?.setNumberOfRows(self.data.count, withRowType: "BillAmountTableRowController")
+        
+        for (index, value) in enumerate(self.data) {
+            if let row = self.billAmountTable?.rowControllerAtIndex(index) as? MoneyTableRowController {
+                row.setMoneyAmountLabel(value * 10)
+            }
+        }
+    }
+    
+    private func clearBillDataTable() {
+        self.billAmountTable?.setNumberOfRows(0, withRowType: "BillAmountTableRowController")
+    }
+    
+    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+        let newBillAmount = self.data[rowIndex] * 10
+        self.dataSource.billAmount = newBillAmount
+        self.pushControllerWithName("SpecificBillCrownInterfaceController", context: nil)
+    }
+    
     
 }

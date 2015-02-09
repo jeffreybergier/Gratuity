@@ -29,29 +29,114 @@
             </objects>
             <point key="canvasLocation" x="-243" y="334"/>
         </scene>
-        <!--CrownScrollInterfaceController-->
+        <!--Bill-->
         <scene sceneID="amq-Dv-ePJ">
             <objects>
-                <controller identifier="CrownScrollInterfaceController" id="IIJ-PF-wKy" customClass="CrownScrollInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller identifier="CrownScrollInterfaceController" title="Bill" id="IIJ-PF-wKy" customClass="CrownScrollInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <label height="19.5" alignment="left" text="Bill Amount" id="Oss-b1-Ch2">
+                        <label alignment="left" text="Scroll to Select Closest Bill Amount" numberOfLines="0" id="WJA-pQ-znp">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <table alignment="left" id="wBg-kT-CdX">
+                        <table alignment="left" id="v3c-hK-3W5">
                             <items>
-                                <tableRow id="Ze9-4k-gR6">
-                                    <group key="rootItem" width="1" alignment="left" id="OJX-hb-TH4"/>
+                                <tableRow identifier="BillAmountTableRowController" id="eQ1-DP-YIc" customClass="MoneyTableRowController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="33" alignment="left" id="3Cj-dK-kwW">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="$20" id="qiI-Um-Bqt">
+                                                <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="30"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="moneyAmountLabel" destination="qiI-Um-Bqt" id="Kwq-7X-xpb"/>
+                                    </connections>
                                 </tableRow>
                             </items>
                         </table>
                     </items>
                     <connections>
-                        <outlet property="billAmountTable" destination="wBg-kT-CdX" id="8Zm-r1-bqe"/>
+                        <outlet property="billAmountTable" destination="v3c-hK-3W5" id="2ib-FT-r0O"/>
+                        <outlet property="instructionalTextLabel" destination="WJA-pQ-znp" id="nWq-YV-S4M"/>
+                        <segue destination="dK8-7a-qsZ" kind="relationship" relationship="nextPage" id="ZE9-e6-ckF"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="170" y="146"/>
+        </scene>
+        <!--Refine-->
+        <scene sceneID="IuY-rk-8Bz">
+            <objects>
+                <controller identifier="SpecificBillCrownInterfaceController" title="Refine" id="dK8-7a-qsZ" customClass="SpecificBillCrownInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Scroll to Refine the Bill Amount" numberOfLines="0" id="UZm-1W-PBA">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <table alignment="left" id="Bcf-Ka-Fdx">
+                            <items>
+                                <tableRow identifier="BillAmountTableRowController" id="dta-YB-ufi" customClass="MoneyTableRowController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="33" alignment="left" id="I4U-1T-Gt8">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="$20" id="22H-2O-e9v">
+                                                <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="30"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="moneyAmountLabel" destination="22H-2O-e9v" id="oOg-FF-nG1"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="billAmountTable" destination="Bcf-Ka-Fdx" id="dIf-jJ-aRi"/>
+                        <outlet property="instructionalTextLabel" destination="UZm-1W-PBA" id="u9B-Tk-w84"/>
+                        <segue destination="MG6-Rc-6gm" kind="relationship" relationship="nextPage" id="Ofs-fF-4I4"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="396" y="146"/>
+        </scene>
+        <!--Tip Amount Crown Interface Controller-->
+        <scene sceneID="78G-0Q-yhq">
+            <objects>
+                <controller id="MG6-Rc-6gm" customClass="TipAmountCrownInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Scroll to Select a Desired Tip Amount" numberOfLines="0" id="16H-Na-QYZ">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <table alignment="left" id="tB5-hY-60g">
+                            <items>
+                                <tableRow identifier="BillAmountTableRowController" id="zLE-6D-uMM" customClass="MoneyTableRowController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="33" alignment="left" id="YqW-vp-tok">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="$20" id="pnz-CS-07I">
+                                                <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="30"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="moneyAmountLabel" destination="pnz-CS-07I" id="M7q-9H-iEO"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="632" y="146"/>
         </scene>
         <!--BillAmountInterfaceController-->
         <scene sceneID="aou-V4-d1y">
@@ -181,4 +266,5 @@
             <point key="canvasLocation" x="531" y="482.75"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
