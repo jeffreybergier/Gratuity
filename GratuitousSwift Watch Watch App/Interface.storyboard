@@ -134,6 +134,10 @@
                             </items>
                         </table>
                     </items>
+                    <connections>
+                        <outlet property="instructionalTextLabel" destination="16H-Na-QYZ" id="sM6-O2-8BJ"/>
+                        <outlet property="tipAmountTable" destination="tB5-hY-60g" id="gmj-t5-WbS"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="632" y="146"/>
