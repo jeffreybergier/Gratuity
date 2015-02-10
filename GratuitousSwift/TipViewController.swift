@@ -44,11 +44,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let currencyFormatter = GratuitousCurrencyFormatter()
     private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
     
-    private weak var defaultsManager = (UIApplication.sharedApplication().delegate as GratuitousAppDelegate).defaultsManager
-    private var upperTextSizeAdjustment: NSNumber = NSNumber(double: 0.0)
-    private var lowerTextSizeAdjustment: NSNumber = NSNumber(double: 0.0)
-    private var billAmountsArray: [NSNumber] = []
-    private var tipAmountsArray: [NSNumber] = []
+    private weak var defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
+    private var upperTextSizeAdjustment: CGFloat = 0.0
+    private var lowerTextSizeAdjustment: CGFloat = 0.0
+    private var billAmountsArray: [Int] = []
+    private var tipAmountsArray: [Int] = []
     private var suggestedTipPercentage: Double = 0.0 {
         didSet {
             self.updateBillAmountText()
@@ -86,20 +86,20 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //Once content inset is set (even when the top and bottom insets match) the tableview doesn't know where the "middle" is anymore.
         for i in 1 ... MAXBILLAMOUNT + (EXTRACELLS * 2) {
             if i < EXTRACELLS {
-                self.billAmountsArray.append(NSNumber(double: Double(0)))
+                self.billAmountsArray.append(0)
             } else if i > MAXBILLAMOUNT + EXTRACELLS {
-                self.billAmountsArray.append(NSNumber(double: Double(0)))
+                self.billAmountsArray.append(0)
             } else {
-                self.billAmountsArray.append(NSNumber(double: Double(i-EXTRACELLS)))
+                self.billAmountsArray.append(i-EXTRACELLS)
             }
         }
         for i in 1 ... self.MAXTIPAMOUNT + (EXTRACELLS * 2) {
             if i < EXTRACELLS {
-                self.tipAmountsArray.append(NSNumber(double: Double(0)))
+                self.tipAmountsArray.append(0)
             } else if i > MAXTIPAMOUNT + EXTRACELLS {
-                self.tipAmountsArray.append(NSNumber(double: Double(0)))
+                self.tipAmountsArray.append(0)
             } else {
-                self.tipAmountsArray.append(NSNumber(double: Double(i-EXTRACELLS)))
+                self.tipAmountsArray.append(i-EXTRACELLS)
             }
         }
         
@@ -303,65 +303,47 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private func updateBillAmountText() {
         let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView)
         if let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell {
-            let billAmount = billCell.billAmount
-            let tipAmount: NSNumber = billAmount.doubleValue * self.suggestedTipPercentage
-            let tipAmountRoundedString = NSString(format: "%.0f", tipAmount.doubleValue)
-            var tipAmountRoundedNumber = NSNumber(double: tipAmountRoundedString.doubleValue)
-            
-            if tipAmountRoundedNumber.integerValue < 1 {
-                tipAmountRoundedNumber = Double(1.0)
-            }
-            
-            let tipIndexPath = NSIndexPath(forRow: tipAmountRoundedNumber.integerValue + EXTRACELLS - 1, inSection: 0)
-            if !self.tipTableCustomValueSet {
-                if !self.tipAmountTableView.isScrolling {
-                    self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+            if billCell.billAmount > 0 {
+                let billAmount = billCell.billAmount
+                let tipAmount = Int(round((Double(billAmount) * self.suggestedTipPercentage)))
+                let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
+                
+                let tipIndexPath = NSIndexPath(forRow: tipAmount + EXTRACELLS - 1, inSection: 0)
+                if !self.tipTableCustomValueSet {
+                    if !self.tipAmountTableView.isScrolling {
+                        self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+                    }
                 }
-            }
-            
-            let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
-            var totalAmountAttributedString = NSAttributedString()
-            let currencyFormattedString = self.currencyFormatter.currencyFormattedString(NSNumber(double: totalAmount))
-            if let currencyFormattedString = currencyFormattedString {
+                
+                let totalAmount = billAmount + tipAmount
+                var totalAmountAttributedString = NSAttributedString()
+                let currencyFormattedString = self.currencyFormatter.currencyFormattedString(totalAmount)
                 totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
-            } else {
-                println("TipViewController: Failure to unwrap optional currencyFormattedString. You should never see this warning.")
-                totalAmountAttributedString = NSAttributedString(string: NSString(format: "$%.0f", totalAmount), attributes: self.totalAmountTextLabelAttributes)
+                
+                let tipPercentageString = "\(tipPercentage)%"
+                let tipPercentageAttributedString = tipPercentageString == "inf%" ? NSAttributedString(string: "100%", attributes: self.tipPercentageTextLabelAttributes) : NSAttributedString(string: tipPercentageString, attributes: self.tipPercentageTextLabelAttributes)
+                
+                self.totalAmountTextLabel.attributedText = totalAmountAttributedString
+                self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
             }
-            let tipPercentageString = NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100)
-            let tipPercentageAttributedString = tipPercentageString == "inf%" ? NSAttributedString(string: "100%", attributes: self.tipPercentageTextLabelAttributes) : NSAttributedString(string: tipPercentageString, attributes: self.tipPercentageTextLabelAttributes)
-            self.totalAmountTextLabel.attributedText = totalAmountAttributedString
-            self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
         }
     }
     
     private func updateTipAmountText() {
         let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView)
-        if let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell {
-            let billAmount = billCell.billAmount
-            
-            let tipAmountIndexPath = self.indexPathInCenterOfTable(self.tipAmountTableView)
-            if let tipCell = self.tipAmountTableView.cellForRowAtIndexPath(tipAmountIndexPath) as? GratuitousTableViewCell {
+        let tipAmountIndexPath = self.indexPathInCenterOfTable(self.tipAmountTableView)
+        
+        if let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell, tipCell = self.tipAmountTableView.cellForRowAtIndexPath(tipAmountIndexPath) as? GratuitousTableViewCell {
+            if billCell.billAmount > 0 {
+                let billAmount = billCell.billAmount
                 let tipAmount = tipCell.billAmount
+                let totalAmount = billAmount + tipAmount
+                let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
                 
-                let tipAmountRoundedString = NSString(format: "%.0f", tipAmount.doubleValue)
-                var tipAmountRoundedNumber = NSNumber(double: tipAmountRoundedString.doubleValue)
+                let currencyFormattedString = self.currencyFormatter.currencyFormattedString(totalAmount)
+                let totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
+                let tipPercentageAttributedString = NSAttributedString(string: "\(tipPercentage)%", attributes: self.tipPercentageTextLabelAttributes)
                 
-                if tipAmountRoundedNumber.integerValue < 1 {
-                    tipAmountRoundedNumber = Double(1.0)
-                }
-                
-                let totalAmount = billAmount.doubleValue + tipAmountRoundedNumber.doubleValue
-                
-                var totalAmountAttributedString = NSAttributedString()
-                let currencyFormattedString = self.currencyFormatter.currencyFormattedString(NSNumber(double: totalAmount))
-                if let currencyFormattedString = currencyFormattedString {
-                    totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
-                } else {
-                    println("TipViewController: Failure to unwrap optional currencyFormattedString. You should never see this warning.")
-                    totalAmountAttributedString = NSAttributedString(string: NSString(format: "$%.0f", totalAmount), attributes: self.totalAmountTextLabelAttributes)
-                }
-                let tipPercentageAttributedString = NSAttributedString(string: NSString(format: "%.0f%%", (tipAmountRoundedNumber.doubleValue/billAmount.doubleValue)*100), attributes: self.tipPercentageTextLabelAttributes)
                 self.totalAmountTextLabel.attributedText = totalAmountAttributedString
                 self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
             }
@@ -441,7 +423,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let tableView = scrollView as GratuitousTableView
+        let tableView = scrollView as! GratuitousTableView
         
         
         switch tableView.tag {
@@ -486,7 +468,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             switch tableView.tag {
             case BILLAMOUNTTAG:
                 let billTableViewCellString = tableViewCellClass.stringByAppendingString("Bill")
-                let cell = tableView.dequeueReusableCellWithIdentifier(billTableViewCellString) as GratuitousTableViewCell
+                let cell = tableView.dequeueReusableCellWithIdentifier(billTableViewCellString) as! GratuitousTableViewCell
                 cell.textSizeAdjustment = self.lowerTextSizeAdjustment
                 if let cellCurrencyFormatter = cell.currencyFormatter {
                     // do nothing
@@ -497,7 +479,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 return cell
             default:
                 let tipTableViewCellString = tableViewCellClass.stringByAppendingString("Tip")
-                let cell = tableView.dequeueReusableCellWithIdentifier(tipTableViewCellString) as GratuitousTableViewCell
+                let cell = tableView.dequeueReusableCellWithIdentifier(tipTableViewCellString) as! GratuitousTableViewCell
                 cell.textSizeAdjustment = self.lowerTextSizeAdjustment
                 if let cellCurrencyFormatter = cell.currencyFormatter {
                     // do nothing
@@ -596,19 +578,19 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         case .iPhone4or5:
             self.tipPercentageTextLabelTopConstraint.constant = -15.0
             self.totalAmountTextLabelBottomConstraint.constant = -12.0
-            self.upperTextSizeAdjustment = Double(0.76)
+            self.upperTextSizeAdjustment = 0.76
         case .iPhone6:
             self.tipPercentageTextLabelTopConstraint.constant = -10.0
             self.totalAmountTextLabelBottomConstraint.constant = -10.0
-            self.upperTextSizeAdjustment = Double(0.85)
+            self.upperTextSizeAdjustment = 0.85
         case .iPhone6Plus:
             self.tipPercentageTextLabelTopConstraint.constant = -20.0
             self.totalAmountTextLabelBottomConstraint.constant = -10.0
-            self.upperTextSizeAdjustment = Double(1.0)
+            self.upperTextSizeAdjustment = 1.0
         case .iPad:
             self.tipPercentageTextLabelTopConstraint.constant = -25.0
             self.totalAmountTextLabelBottomConstraint.constant = -5.0
-            self.upperTextSizeAdjustment = Double(1.3)
+            self.upperTextSizeAdjustment = 1.3
         }
     }
     
@@ -616,7 +598,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if let originalFont = GratuitousUIConstant.originalFontForTotalAmountTextLabel() {
             self.totalAmountTextLabel.font = originalFont
         }
-        let font = self.totalAmountTextLabel.font.fontWithSize(self.totalAmountTextLabel.font.pointSize * CGFloat(self.upperTextSizeAdjustment.floatValue))
+        let font = self.totalAmountTextLabel.font.fontWithSize(self.totalAmountTextLabel.font.pointSize * self.upperTextSizeAdjustment)
         let textColor = self.totalAmountTextLabel.textColor
         let text = self.totalAmountTextLabel.text
         let shadow = NSShadow()
@@ -641,7 +623,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if let originalFont = GratuitousUIConstant.originalFontForTipPercentageTextLabel() {
             self.tipPercentageTextLabel.font = originalFont
         }
-        let font = self.tipPercentageTextLabel.font.fontWithSize(self.tipPercentageTextLabel.font.pointSize * CGFloat(self.upperTextSizeAdjustment.floatValue))
+        let font = self.tipPercentageTextLabel.font.fontWithSize(self.tipPercentageTextLabel.font.pointSize * self.upperTextSizeAdjustment)
         let textColor = self.tipPercentageTextLabel.textColor
         let text = self.tipPercentageTextLabel.text
         let shadow = NSShadow()

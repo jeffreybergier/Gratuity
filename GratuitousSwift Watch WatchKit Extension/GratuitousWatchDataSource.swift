@@ -153,15 +153,15 @@ class GratuitousWatchDataSource {
     
     func dollarStringFromFloat(floatValue: Float?) -> String {
         if let floatValue = floatValue {
-            var currencyString: NSString?
+            let currencyString: String?
             if let currentCurrencyFormat = self.currentCurrencyFormat {
                 switch currentCurrencyFormat {
                 case .Default:
                     currencyString = self.currencyFormatter.stringFromNumber(floatValue)
                 case .None:
-                    currencyString = NSString(format: "%.0f", floatValue)
+                    currencyString = String(format: "%.0f", floatValue)
                 default:
-                    currencyString = NSString(format: "%@%.0f", currentCurrencyFormat.string(), floatValue)
+                    currencyString = String(format: "%@%.0f", currentCurrencyFormat.string(), floatValue)
                 }
             } else {
                 currencyString = self.currencyFormatter.stringFromNumber(floatValue)
@@ -173,7 +173,7 @@ class GratuitousWatchDataSource {
     
     func percentStringFromFloat(floatValue: Float?) -> String {
         if let floatValue = floatValue {
-            return NSString(format: "%.0f%%", floatValue)
+            return String(format: "%.0f%%", floatValue)
         }
         return "nil"
     }

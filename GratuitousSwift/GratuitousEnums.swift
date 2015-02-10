@@ -76,7 +76,7 @@ enum TableViewTextSizeAdjustedForDynamicType: Int {
             return 117.0
         }
     }
-    func textSizeAdjustment() -> Double {
+    func textSizeAdjustment() -> CGFloat {
         switch self {
         case .iPhone4or5:
             return 1.0
@@ -122,7 +122,7 @@ enum CorrectInterface: Int, Printable {
 // Crediting http://blog.human-friendly.com/theanswer-equals-maybeanswer-or-a-good-alternative
 
 infix operator !! { associativity right precedence 110 }
-public func !!<A>(lhs:A?, rhs:@autoclosure()->A)->A {
+public func !!<A>(lhs:A?, @autoclosure rhs:()->A)->A {
     assert(lhs != nil)
     return lhs ?? rhs()
 }

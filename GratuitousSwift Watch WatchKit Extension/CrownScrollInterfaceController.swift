@@ -33,7 +33,7 @@ class CrownScrollInterfaceController: WKInterfaceController {
         
         for (index, value) in enumerate(self.data) {
             if let row = self.billAmountTable?.rowControllerAtIndex(index) as? MoneyTableRowController {
-                row.setMoneyAmountLabel(value * 10)
+                row.updateMoneyAmountLabel(value * 10)
             }
         }
     }

@@ -56,6 +56,9 @@ class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransit
         let springDamping: CGFloat = self.isPresentation ? 0.8 : 0.6
         let springVelocity: CGFloat = self.isPresentation ? 1.0 : 1.8
         
+        toVC.viewWillAppear(true)
+        fromVC.viewWillDisappear(true)
+        
         UIView.animateWithDuration(self.transitionDuration(transitionContext),
             delay: 0.0,
             usingSpringWithDamping: springDamping,
@@ -67,6 +70,8 @@ class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransit
                 animatingOutView.transform = animatingOutTransform
             },
             completion: { finished in
+                toVC.viewDidAppear(true)
+                fromVC.viewDidDisappear(true)
                 if !self.isPresentation {
                     fromView.removeFromSuperview()
                 }

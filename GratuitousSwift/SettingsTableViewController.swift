@@ -16,7 +16,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     @IBOutlet private weak var headerLabelCurencySymbol: UILabel!
     @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel!
     
-    private weak var defaultsManager = (UIApplication.sharedApplication().delegate as GratuitousAppDelegate).defaultsManager
+    private weak var defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
     private var headerLabelsArray: [UILabel] = []
     private lazy var swipeToDismiss: UISwipeGestureRecognizer = {
         let swipe = UISwipeGestureRecognizer(target: self, action: "didSwipeToDismiss:")
@@ -186,13 +186,13 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     func readUserDefaultsAndUpdateSlider(notification: NSNotification?) {
         let onDiskTipPercentage:NSNumber = self.defaultsManager!.suggestedTipPercentage
-        self.suggestedTipPercentageLabel.text = NSString(format: "%.0f%%", onDiskTipPercentage.floatValue*100)
+        self.suggestedTipPercentageLabel.text = String(format: "%.0f%%", onDiskTipPercentage.floatValue*100)
         self.suggestedTipPercentageSlider.setValue(onDiskTipPercentage.floatValue, animated: false)
     }
     
     @IBAction func tipPercentageSliderDidSlide(sender: UISlider) {
         //this is called when the value changes... which is all the time
-        self.suggestedTipPercentageLabel.text = NSString(format: "%.0f%%", sender.value*100)
+        self.suggestedTipPercentageLabel.text = String(format: "%.0f%%", sender.value*100)
     }
     
     @IBAction func didChangeSuggestedTipPercentageSlider(sender: UISlider) {
@@ -352,7 +352,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     @IBAction func didTapReviewThisAppButton(sender: UIButton) {
-        let appStoreString = NSString(format: "itms-apps://itunes.apple.com/app/id%d", self.applicationID)
+        let appStoreString = String(format: "itms-apps://itunes.apple.com/app/id%d", self.applicationID)
         let appStoreURL = NSURL(string: appStoreString)
         if let appStoreURL = appStoreURL {
             UIApplication.sharedApplication().openURL(appStoreURL)

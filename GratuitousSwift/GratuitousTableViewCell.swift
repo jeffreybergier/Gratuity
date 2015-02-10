@@ -14,14 +14,14 @@ class GratuitousTableViewCell: UITableViewCell {
     private var labelTextAttributes = [NSString(): NSObject()]
     private let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
     weak var currencyFormatter: GratuitousCurrencyFormatter?
-    var textSizeAdjustment: NSNumber = 1.0 {
+    var textSizeAdjustment: CGFloat = 1.0 {
         didSet {
             if (self.labelTextAttributes["NSFont"] != nil) {
                 if let originalFont = self.originalFont {
-                    let updatedFont = originalFont.fontWithSize(originalFont.pointSize * CGFloat(self.textSizeAdjustment.floatValue))
+                    let updatedFont = originalFont.fontWithSize(originalFont.pointSize * self.textSizeAdjustment)
                     self.labelTextAttributes["NSFont"] = updatedFont
                 }}}}
-    var billAmount: NSNumber = Double(0) {
+    var billAmount: Int = 0 {
         didSet {
             self.didSetBillAmount()
         }}
@@ -36,13 +36,13 @@ class GratuitousTableViewCell: UITableViewCell {
     }
     
     private func didSetBillAmount() {
-        let currencyFormattedString = self.billAmount.doubleValue != 0 ? self.currencyFormatter?.currencyFormattedString(self.billAmount) : ""
-            var stringForLabel = NSAttributedString()
+        let currencyFormattedString = self.billAmount != 0 ? self.currencyFormatter?.currencyFormattedString(self.billAmount) : ""
+        let stringForLabel: NSAttributedString
             if let currencyFormattedString = currencyFormattedString {
                 stringForLabel = NSAttributedString(string: currencyFormattedString, attributes: self.labelTextAttributes)
             } else {
                 println("GratuitousTableViewCell: Failure to unwrap optional currentFormattedString. You should never see this warning.")
-                stringForLabel = NSAttributedString(string: NSString(format: "$%.0f", self.billAmount.doubleValue), attributes: self.labelTextAttributes)
+                stringForLabel = NSAttributedString(string: "$\(self.billAmount)"/*String(format: "$%.0f", self.billAmount)*/, attributes: self.labelTextAttributes)
             }
             self.dollarTextLabel.attributedText = stringForLabel
     }

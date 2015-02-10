@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GratuitousCurrencyFormatter: NSObject {
+class GratuitousCurrencyFormatter {
     
     private let currencyFormatter = NSNumberFormatter()
     
@@ -18,12 +18,11 @@ class GratuitousCurrencyFormatter: NSObject {
         }
     }
     
-    override init() {
-        super.init()
+    init() {
         self.prepareCurrencyFormatter()
     }
     
-    func prepareCurrencyFormatter() {
+    private func prepareCurrencyFormatter() {
         //prepare NSNotificationCenter
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeWasOverridenByUser:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
@@ -37,32 +36,29 @@ class GratuitousCurrencyFormatter: NSObject {
         self.currencyFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
     }
     
-    func localeDidChangeInSystem(notification: NSNotification?) {
+    @objc private func localeDidChangeInSystem(notification: NSNotification?) {
         let tempVariable = NSLocale.currentLocale()
         self.currencyFormatter.locale = NSLocale.currentLocale()
         self.selectedCurrencySymbol = CurrencySign.Default
     }
     
-    func localeWasOverridenByUser(notification: NSNotification?) {
+    @objc private func localeWasOverridenByUser(notification: NSNotification?) {
         if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
             self.selectedCurrencySymbol = appDelegate.defaultsManager.overrideCurrencySymbol
         }
     }
-
-    func currencyFormattedString(number: NSNumber) -> String? {
-        var currencyFormattedString = "!"
-        
-        if self.selectedCurrencySymbol == CurrencySign.Default {
-            if let localeString = self.currencyFormatter.stringFromNumber(number){
-                currencyFormattedString = localeString
-            } else {
-                println("GratuitousCurrencyFormatter: Currency Formatter did not return a string. This should not happen.")
-            }
-        } else {
-            currencyFormattedString = NSString(format: "%@%.0f", self.selectedCurrencySymbol.string(), number.doubleValue)
+    
+    func currencyFormattedString(number: Int) -> String {
+        let currencyString: String
+        switch self.selectedCurrencySymbol {
+        case .Default:
+            currencyString = self.currencyFormatter.stringFromNumber(number) !! "\(number)"
+        case .None:
+            currencyString = "\(number)"
+        default:
+            currencyString = "\(self.selectedCurrencySymbol.string())\(number)"
         }
-        
-        return currencyFormattedString
+        return currencyString
     }
     
     deinit {
