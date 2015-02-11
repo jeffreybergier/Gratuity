@@ -41,7 +41,7 @@ class GratuitousTableViewCell: UITableViewCell {
             if let currencyFormattedString = currencyFormattedString {
                 stringForLabel = NSAttributedString(string: currencyFormattedString, attributes: self.labelTextAttributes)
             } else {
-                println("GratuitousTableViewCell: Failure to unwrap optional currentFormattedString. You should never see this warning.")
+                println("GratuitousTableViewCell: Failure to unwrap optional currencyFormattedString  . You should never see this warning.")
                 stringForLabel = NSAttributedString(string: "$\(self.billAmount)"/*String(format: "$%.0f", self.billAmount)*/, attributes: self.labelTextAttributes)
             }
             self.dollarTextLabel.attributedText = stringForLabel

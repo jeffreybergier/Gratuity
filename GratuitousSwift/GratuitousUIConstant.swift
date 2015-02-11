@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GratuitousUIConstant: NSObject {
+class GratuitousUIConstant {
     
     private class func invertColorsIsEnabled() -> Bool {
         var invertColors = false

@@ -12,8 +12,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel!
     @IBOutlet private weak var totalAmountTextLabel: UILabel!
-    @IBOutlet private weak var billAmountTableView: GratuitousTableView!
-    @IBOutlet private weak var tipAmountTableView: GratuitousTableView!
+    @IBOutlet private weak var billAmountTableView: UITableView!
+    @IBOutlet private weak var tipAmountTableView: UITableView!
     @IBOutlet private weak var tipPercentageTextLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var totalAmountTextLabelBottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var billAmountTableViewTitleTextLabel: UILabel!
@@ -28,18 +28,27 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet private weak var tableContainerView: UIView!
     @IBOutlet private weak var settingsButton: UIButton!
     
-    private let MAXBILLAMOUNT = 2000
-    private let MAXTIPAMOUNT = 1000
-    private let EXTRACELLS: Int = {
-        if UIScreen.mainScreen().traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            return 3
-        } else {
-            return 2
-        }
-    }()
-    private let BILLAMOUNTTAG = 0
-    private let TIPAMOUNTTAG = 1
-    private let LARGETEXTWIDTH: CGFloat = 60
+    private struct PrivateConstants {
+        static let MaxBillAmount = 2000
+        static let MaxTipAmount = 1000
+        static let ExtraCells: Int = {
+            if UIScreen.mainScreen().traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+                return 3
+            } else {
+                return 2
+            }
+        }()
+    }
+    
+    private enum TableTag: Int {
+        case BillAmount = 0, TipAmount
+    }
+
+    //private let LARGETEXTWIDTH: CGFloat = 60
+    
+    private let tableViewCellClass = GratuitousTableViewCell.description().componentsSeparatedByString(".").last! //should crash if this is nil
+    private let billTableViewCellString = GratuitousTableViewCell.description().componentsSeparatedByString(".").last! + "Bill"
+    private let tipTableViewCellString = GratuitousTableViewCell.description().componentsSeparatedByString(".").last! + "Tip"
     
     private let currencyFormatter = GratuitousCurrencyFormatter()
     private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
@@ -84,35 +93,44 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //the weird if statements add a couple extra 0's at the top and bottom of the array
         //this gives the tableview some padding as ContentInset doesn't work as expected
         //Once content inset is set (even when the top and bottom insets match) the tableview doesn't know where the "middle" is anymore.
-        for i in 1 ... MAXBILLAMOUNT + (EXTRACELLS * 2) {
-            if i < EXTRACELLS {
+        for i in 1 ... PrivateConstants.MaxBillAmount + (PrivateConstants.ExtraCells * 2) {
+            if i < PrivateConstants.ExtraCells {
                 self.billAmountsArray.append(0)
-            } else if i > MAXBILLAMOUNT + EXTRACELLS {
+            } else if i > PrivateConstants.MaxBillAmount + PrivateConstants.ExtraCells {
                 self.billAmountsArray.append(0)
             } else {
-                self.billAmountsArray.append(i-EXTRACELLS)
+                self.billAmountsArray.append(i - PrivateConstants.ExtraCells)
             }
         }
-        for i in 1 ... self.MAXTIPAMOUNT + (EXTRACELLS * 2) {
-            if i < EXTRACELLS {
+        for i in 1 ... PrivateConstants.MaxTipAmount + (PrivateConstants.ExtraCells * 2) {
+            if i < PrivateConstants.ExtraCells {
                 self.tipAmountsArray.append(0)
-            } else if i > MAXTIPAMOUNT + EXTRACELLS {
+            } else if i > PrivateConstants.MaxTipAmount + PrivateConstants.ExtraCells {
                 self.tipAmountsArray.append(0)
             } else {
-                self.tipAmountsArray.append(i-EXTRACELLS)
+                self.tipAmountsArray.append(i - PrivateConstants.ExtraCells)
             }
         }
         
         //prepare the tableviews
-        if let tableViewCellClass = NSStringFromClass(GratuitousTableViewCell).componentsSeparatedByString(".").last {
-            let billTableViewCellString = tableViewCellClass.stringByAppendingString("Bill")
-            self.billAmountTableView.configureTableViewWithCellType(tableViewCellClass, AndCellIdentifier: billTableViewCellString, AndTag: self.BILLAMOUNTTAG, AndViewControllerDelegate: self)
-            
-            let tipTableViewCellString = tableViewCellClass.stringByAppendingString("Tip")
-            self.tipAmountTableView.configureTableViewWithCellType(tableViewCellClass, AndCellIdentifier: tipTableViewCellString, AndTag: self.TIPAMOUNTTAG, AndViewControllerDelegate: self)
-        } else {
-            println("TipViewController: You should never see this. If you see this the tables were not configured correctly because an optional unwrap failed")
-        }
+        
+        self.billAmountTableView.delegate = self
+        self.billAmountTableView.dataSource = self
+        self.billAmountTableView.tag = TableTag.BillAmount.rawValue
+        self.billAmountTableView.estimatedRowHeight = 76.0
+        self.billAmountTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.billAmountTableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+        self.billAmountTableView.showsVerticalScrollIndicator = false
+        self.billAmountTableView.registerNib(UINib(nibName: self.tableViewCellClass, bundle: nil), forCellReuseIdentifier: billTableViewCellString)
+        
+        self.tipAmountTableView.delegate = self
+        self.tipAmountTableView.dataSource = self
+        self.tipAmountTableView.tag = TableTag.TipAmount.rawValue
+        self.tipAmountTableView.estimatedRowHeight = 76.0
+        self.tipAmountTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tipAmountTableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+        self.tipAmountTableView.showsVerticalScrollIndicator = false
+        self.tipAmountTableView.registerNib(UINib(nibName: self.tableViewCellClass, bundle: nil), forCellReuseIdentifier: tipTableViewCellString)
         
         //configure color of view
         self.view.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
@@ -308,12 +326,12 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 let tipAmount = Int(round((Double(billAmount) * self.suggestedTipPercentage)))
                 let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
                 
-                let tipIndexPath = NSIndexPath(forRow: tipAmount + EXTRACELLS - 1, inSection: 0)
-                if !self.tipTableCustomValueSet {
-                    if !self.tipAmountTableView.isScrolling {
+                let tipIndexPath = NSIndexPath(forRow: tipAmount + PrivateConstants.ExtraCells - 1, inSection: 0)
+//                if !self.tipTableCustomValueSet {
+//                    if !self.tipAmountTableView.isScrolling {
                         self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
-                    }
-                }
+//                    }
+//                }
                 
                 let totalAmount = billAmount + tipAmount
                 var totalAmountAttributedString = NSAttributedString()
@@ -357,11 +375,13 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     //MARK: Handle Table View User Input
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch tableView.tag {
-        case BILLAMOUNTTAG:
-            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-        default:
-            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+        if let tableTagEnum = TableTag(rawValue: tableView.tag) {
+            switch tableTagEnum {
+            case .BillAmount:
+                tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            case .TipAmount:
+                tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            }
         }
     }
     
@@ -378,34 +398,34 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func scrollViewDidStopMovingForWhateverReason(scrollView: UIScrollView) {
-        let tableView = scrollView as? GratuitousTableView
+        let tableView = scrollView as? UITableView
         
-        if let tableView = tableView {
-            tableView.isScrolling = false
-            switch tableView.tag {
-            case self.BILLAMOUNTTAG:
+        if let tableView = tableView, let tableTagEnum = TableTag(rawValue: tableView.tag) {
+            //tableView.isScrolling = false
+            switch tableTagEnum {
+            case .BillAmount:
                 let indexPath = self.indexPathInCenterOfTable(tableView)
-                if indexPath.row > EXTRACELLS - 1 {
-                    if indexPath.row > MAXBILLAMOUNT + EXTRACELLS - 1 {
-                        tableView.selectRowAtIndexPath(NSIndexPath(forRow: MAXBILLAMOUNT + EXTRACELLS - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                if indexPath.row > PrivateConstants.ExtraCells - 1 {
+                    if indexPath.row > PrivateConstants.MaxBillAmount + PrivateConstants.ExtraCells - 1 {
+                        tableView.selectRowAtIndexPath(NSIndexPath(forRow: PrivateConstants.MaxBillAmount + PrivateConstants.ExtraCells - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                     } else {
                         self.writeBillIndexPathRowToDiskWithTableView(tableView)
                         tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                     }
                 } else {
-                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: PrivateConstants.ExtraCells, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                 }
-            default:
+            case .TipAmount:
                 let indexPath = self.indexPathInCenterOfTable(tableView)
-                if indexPath.row > EXTRACELLS - 1 {
-                    if indexPath.row > MAXTIPAMOUNT + EXTRACELLS - 1 {
-                        tableView.selectRowAtIndexPath(NSIndexPath(forRow: MAXTIPAMOUNT + EXTRACELLS - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                if indexPath.row > PrivateConstants.ExtraCells - 1 {
+                    if indexPath.row > PrivateConstants.MaxTipAmount + PrivateConstants.ExtraCells - 1 {
+                        tableView.selectRowAtIndexPath(NSIndexPath(forRow: PrivateConstants.MaxTipAmount + PrivateConstants.ExtraCells - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                     } else {
                         self.writeTipIndexPathRowToDiskWithTableView(tableView)
                         tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                     }
                 } else {
-                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: EXTRACELLS, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: PrivateConstants.ExtraCells, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                 }
             }
             self.bigTextLabelsShouldPresent(true)
@@ -416,21 +436,20 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if self.tipTableCustomValueSet {
             self.tipTableCustomValueSet = false
         }
-        if let tableView = scrollView as? GratuitousTableView {
-            tableView.isScrolling = true
+        if let tableView = scrollView as? UITableView {
+            //tableView.isScrolling = true
         }
         self.bigTextLabelsShouldPresent(false)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let tableView = scrollView as! GratuitousTableView
-        
-        
-        switch tableView.tag {
-        case BILLAMOUNTTAG:
-            self.updateBillAmountText()
-        default:
-            self.updateTipAmountText()
+        if let tableView = scrollView as? UITableView, let tableTagEnum = TableTag(rawValue: tableView.tag) {
+            switch tableTagEnum {
+            case .BillAmount:
+                self.updateBillAmountText()
+            case .TipAmount:
+                self.updateTipAmountText()
+            }
         }
     }
     
@@ -446,53 +465,53 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if let optionalIndexPath = tableView.indexPathForRowAtPoint(point) {
             indexPath = optionalIndexPath
         }
-        if tableView.tag == BILLAMOUNTTAG {
-            //println("Just got a request to retrieve this row dollar amount = $\(indexPath.row+1)")
-        }
+        
         return indexPath
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 0
-        switch tableView.tag {
-        case BILLAMOUNTTAG:
-            count = self.billAmountsArray.count
-        default:
-            count = self.tipAmountsArray.count
+        let count: Int?
+        if let tableTagEnum = TableTag(rawValue: tableView.tag) {
+            switch tableTagEnum {
+            case .BillAmount:
+                count = self.billAmountsArray.count
+            case .TipAmount:
+                count = self.tipAmountsArray.count
+            }
+        } else {
+            count = nil
         }
-        return count
+        return count !! 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let tableViewCellClass = NSStringFromClass(GratuitousTableViewCell).componentsSeparatedByString(".").last {
-            switch tableView.tag {
-            case BILLAMOUNTTAG:
-                let billTableViewCellString = tableViewCellClass.stringByAppendingString("Bill")
-                let cell = tableView.dequeueReusableCellWithIdentifier(billTableViewCellString) as! GratuitousTableViewCell
-                cell.textSizeAdjustment = self.lowerTextSizeAdjustment
-                if let cellCurrencyFormatter = cell.currencyFormatter {
-                    // do nothing
-                } else {
-                    cell.currencyFormatter = self.currencyFormatter
-                }
-                cell.billAmount = self.billAmountsArray[indexPath.row]
-                return cell
-            default:
-                let tipTableViewCellString = tableViewCellClass.stringByAppendingString("Tip")
-                let cell = tableView.dequeueReusableCellWithIdentifier(tipTableViewCellString) as! GratuitousTableViewCell
-                cell.textSizeAdjustment = self.lowerTextSizeAdjustment
-                if let cellCurrencyFormatter = cell.currencyFormatter {
-                    // do nothing
-                } else {
-                    cell.currencyFormatter = self.currencyFormatter
-                }
-                cell.billAmount = self.tipAmountsArray[indexPath.row]
-                return cell
+        let cell: GratuitousTableViewCell?
+        
+        if let tableTagEnum = TableTag(rawValue: tableView.tag) {
+            switch tableTagEnum {
+            case .BillAmount:
+                cell = tableView.dequeueReusableCellWithIdentifier(self.billTableViewCellString) as? GratuitousTableViewCell
+            case .TipAmount:
+                cell = tableView.dequeueReusableCellWithIdentifier(self.tipTableViewCellString) as? GratuitousTableViewCell
+            }
+            
+            cell?.textSizeAdjustment = self.lowerTextSizeAdjustment
+            if cell?.currencyFormatter == nil {
+                cell?.currencyFormatter = self.currencyFormatter
+            }
+            
+            // Need to set the billamount after setting the currency formatter, or else there are bugs.
+            switch tableTagEnum {
+            case .BillAmount:
+                cell?.billAmount = self.billAmountsArray[indexPath.row]
+            case .TipAmount:
+                cell?.billAmount = self.tipAmountsArray[indexPath.row]
             }
         } else {
-            println("TipViewController: This should never print. A new cell blank cell was created for no reason because of an optional unwrap failing")
-            return UITableViewCell()
+            cell = nil
         }
+        
+        return cell !! UITableViewCell()
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
