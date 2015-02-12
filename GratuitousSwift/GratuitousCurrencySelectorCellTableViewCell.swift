@@ -29,11 +29,11 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
     }
     
-    func overrideCurrencySymbolUpdatedOnDisk(notification: NSNotification?) {
+    @objc private func overrideCurrencySymbolUpdatedOnDisk(notification: NSNotification?) {
         self.readUserDefaultsAndSetCheckmarkWithTimer(true)
     }
     
-    func systemTextSizeDidChange(notification:NSNotification) {
+    @objc private func systemTextSizeDidChange(notification:NSNotification) {
         self.prepareTextLabel()
         self.layer.borderWidth = GratuitousUIConstant.thinBorderWidth()
         self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()

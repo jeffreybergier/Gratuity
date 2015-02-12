@@ -21,7 +21,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet private weak var tipAmountTableViewTitleTextLabel: UILabel!
     @IBOutlet private weak var tipAmountTableViewTitleTextLabelView: UIView!
     @IBOutlet private weak var billAmountSelectedSurroundView: UIView!
-    @IBOutlet private weak var billAmountLowerGradientView: GratuitousGradientView!
+    @IBOutlet private weak var billAmountLowerGradientView: GratuitousGradientView?
     @IBOutlet private weak var selectedTableViewCellOutlineViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var largeTextWidthLandscapeOnlyConstraint: NSLayoutConstraint!
     @IBOutlet private weak var labelContainerView: UIView!
@@ -40,32 +40,33 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }()
     }
     
-    private enum TableTag: Int {
+    private enum TableTagIdentifier: Int {
         case BillAmount = 0, TipAmount
     }
-
-    //private let LARGETEXTWIDTH: CGFloat = 60
-    
-    private let tableViewCellClass = GratuitousTableViewCell.description().componentsSeparatedByString(".").last! //should crash if this is nil
-    private let billTableViewCellString = GratuitousTableViewCell.description().componentsSeparatedByString(".").last! + "Bill"
-    private let tipTableViewCellString = GratuitousTableViewCell.description().componentsSeparatedByString(".").last! + "Tip"
     
     private let currencyFormatter = GratuitousCurrencyFormatter()
     private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
+    private var totalAmountTextLabelAttributes = [String : NSObject]()
+    private var tipPercentageTextLabelAttributes = [String : NSObject]()
+    private weak var defaultsManager: GratuitousUserDefaults? = {
+        let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
+        return appDelegate?.defaultsManager
+        }()
     
-    private weak var defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
+    private let tableViewCellClass = GratuitousTableViewCell.description().componentsSeparatedByString(".").last !! "GratuitousTableViewCell"
+    private let billTableViewCellString = GratuitousTableViewCell.description().componentsSeparatedByString(".").last! + "Bill" !! "GratuitousTableViewCellBill"
+    private let tipTableViewCellString = GratuitousTableViewCell.description().componentsSeparatedByString(".").last! + "Tip" !! "GratuitousTableViewCellTip"
+    
     private var upperTextSizeAdjustment: CGFloat = 0.0
     private var lowerTextSizeAdjustment: CGFloat = 0.0
-    private var billAmountsArray: [Int] = []
-    private var tipAmountsArray: [Int] = []
+    private var billAmountsArray = [Int]()
+    private var tipAmountsArray = [Int]()
+    private var viewIsInForeground = true
     private var suggestedTipPercentage: Double = 0.0 {
         didSet {
             self.updateBillAmountText()
         }
     }
-    private var totalAmountTextLabelAttributes = [NSString(): NSObject()]
-    private var tipPercentageTextLabelAttributes = [NSString(): NSObject()]
-    private var tipTableCustomValueSet = false
     
     //MARK: Handle View Loading
     
@@ -113,11 +114,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
         
         //prepare the tableviews
-        
         self.billAmountTableView.delegate = self
         self.billAmountTableView.dataSource = self
-        self.billAmountTableView.tag = TableTag.BillAmount.rawValue
-        self.billAmountTableView.estimatedRowHeight = 76.0
+        self.billAmountTableView.tag = TableTagIdentifier.BillAmount.rawValue
+        self.billAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
         self.billAmountTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.billAmountTableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
         self.billAmountTableView.showsVerticalScrollIndicator = false
@@ -125,8 +125,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         self.tipAmountTableView.delegate = self
         self.tipAmountTableView.dataSource = self
-        self.tipAmountTableView.tag = TableTag.TipAmount.rawValue
-        self.tipAmountTableView.estimatedRowHeight = 76.0
+        self.tipAmountTableView.tag = TableTagIdentifier.TipAmount.rawValue
+        self.tipAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
         self.tipAmountTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tipAmountTableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
         self.tipAmountTableView.showsVerticalScrollIndicator = false
@@ -145,15 +145,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.billAmountTableViewTitleTextLabel.text = NSLocalizedString("Amount on Bill", comment: "this is a text label displayed on the main page of the UI above the dollar amounts that user is supposed to select from for the cost of their restaurant bill.")
         self.tipAmountTableViewTitleTextLabel.text = NSLocalizedString("Suggested Tip", comment: "this is a text label displayed on the main page of the UI above the tip amounts. The app suggests a tip amount, but they can also override it. This should be text that describes this suggestion is just a suggestion.")
         
-        //estimated row height
-        self.billAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
-        self.tipAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
-        
         //prepare the cell select surrounds
         self.prepareCellSelectSurroundView()
         
         //prepare lower gradient view so its upside down
-        self.billAmountLowerGradientView.isUpsideDown = true
+        self.billAmountLowerGradientView?.isUpsideDown = true
         
         //prepare the primary view for the animation in
         self.labelContainerView.alpha = 0
@@ -189,43 +185,51 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 self.tableContainerView.alpha = 1.0
             }, completion: nil)
         
-        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
-        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
-    }
-    
-    
-    func scrollBillTableViewAtLaunch(timer: NSTimer?) {
-        timer?.invalidate()
-        
-        //read the defaults off disk and move the bill amount to there
-        let billUserDefaults = self.defaultsManager!.billIndexPathRow
-        let suggestedTipPercentage = self.defaultsManager!.suggestedTipPercentage
-        
-        let billIndexPath = NSIndexPath(forRow: billUserDefaults, inSection: 0)
-        self.suggestedTipPercentage = suggestedTipPercentage
-
-        //have to do this ghetto two call method because just doing it once regularly caused things to not line up properly
-        self.billAmountTableView.scrollToRowAtIndexPath(billIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
-        
-        //make sure the big labels are presented
-        self.bigTextLabelsShouldPresent(true)
-    }
-    
-    func scrollTipTableViewAtLaunch(timer: NSTimer?) {
-        timer?.invalidate()
-        
-        //if there is a preference for tip table, move the tip table to that
-        let tipUserDefaults = self.defaultsManager!.tipIndexPathRow //self.userDefaults.integerForKey("tipIndexPathRow")
-        let tipIndexPath = NSIndexPath(forRow: tipUserDefaults, inSection: 0)
-        if tipIndexPath.row != 0 {
-            self.tipTableCustomValueSet = true
-            //have to do this ghetto two call method because just doing it once regularly caused things to not line up properly
-            self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
-            self.updateTipAmountText()
+        if self.viewIsInForeground == true {
+            self.updateTableViewsFromDisk(animated: false)
         }
-        //make sure the big labels are presented
-        self.bigTextLabelsShouldPresent(true)
+        
+        self.viewIsInForeground = true
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.viewIsInForeground = false
+    }
+    
+    private func updateTableViewsFromDisk(#animated: Bool) {
+        if let defaultsManager = self.defaultsManager {
+            let billUserDefaults = defaultsManager.billIndexPathRow
+            let tipUserDefaults = defaultsManager.tipIndexPathRow
+            let suggestedTipPercentage = defaultsManager.suggestedTipPercentage
+            self.suggestedTipPercentage = suggestedTipPercentage
+            
+            self.billAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: billUserDefaults, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: animated)
+            
+            if tipUserDefaults > 0 {
+                self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: tipUserDefaults, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: animated)
+                self.updateTipAmountText()
+            }
+            self.bigTextLabelsShouldPresent(true)
+        }
+    }
+    
+//    @objc private func scrollTipTableViewAtLaunch(timer: NSTimer?) {
+//        timer?.invalidate()
+//        
+//        //if there is a preference for tip table, move the tip table to that
+//        if let tipUserDefaults = self.defaultsManager?.tipIndexPathRow { //self.userDefaults.integerForKey("tipIndexPathRow")
+//            let tipIndexPath = NSIndexPath(forRow: tipUserDefaults, inSection: 0)
+//            if tipIndexPath.row != 0 {
+//                //self.tipTableCustomValueSet = true
+//                //have to do this ghetto two call method because just doing it once regularly caused things to not line up properly
+//                self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+//                self.updateTipAmountText()
+//            }
+//            //make sure the big labels are presented
+//            self.bigTextLabelsShouldPresent(true)
+//        }
+//    }
     
     private func prepareCellSelectSurroundView() {
         self.billAmountSelectedSurroundView.backgroundColor = UIColor.clearColor()
@@ -259,8 +263,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     @IBAction func unwindToViewController (sender: UIStoryboardSegue){
-        let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
-        let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -302,80 +304,90 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func writeBillIndexPathRowToDiskWithTableView(tableView: UITableView) {
-        if !self.tipTableCustomValueSet {
-            self.defaultsManager!.billIndexPathRow = self.indexPathInCenterOfTable(tableView).row
-            self.defaultsManager!.tipIndexPathRow = 0
+        if let indexPath = self.indexPathInCenterOfTable(tableView) {
+            self.defaultsManager?.billIndexPathRow = indexPath.row
+            self.defaultsManager?.tipIndexPathRow = 0
         }
     }
     
     private func writeTipIndexPathRowToDiskWithTableView(tableView: UITableView) {
-        if self.tipTableCustomValueSet {
-            self.tipTableCustomValueSet = false
-        } else {
-            self.defaultsManager!.tipIndexPathRow = self.indexPathInCenterOfTable(tableView).row
+        if let indexPath = self.indexPathInCenterOfTable(tableView) {
+            self.defaultsManager?.tipIndexPathRow = indexPath.row
         }
     }
     
     //MARK: Handle Updating the Big Labels
     
     private func updateBillAmountText() {
-        let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView)
-        if let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell {
-            if billCell.billAmount > 0 {
-                let billAmount = billCell.billAmount
-                let tipAmount = Int(round((Double(billAmount) * self.suggestedTipPercentage)))
-                let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
-                
-                let tipIndexPath = NSIndexPath(forRow: tipAmount + PrivateConstants.ExtraCells - 1, inSection: 0)
-//                if !self.tipTableCustomValueSet {
-//                    if !self.tipAmountTableView.isScrolling {
-                        self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
-//                    }
-//                }
-                
-                let totalAmount = billAmount + tipAmount
-                var totalAmountAttributedString = NSAttributedString()
-                let currencyFormattedString = self.currencyFormatter.currencyFormattedString(totalAmount)
-                totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
-                
-                let tipPercentageString = "\(tipPercentage)%"
-                let tipPercentageAttributedString = tipPercentageString == "inf%" ? NSAttributedString(string: "100%", attributes: self.tipPercentageTextLabelAttributes) : NSAttributedString(string: tipPercentageString, attributes: self.tipPercentageTextLabelAttributes)
-                
-                self.totalAmountTextLabel.attributedText = totalAmountAttributedString
-                self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
-            }
+        if let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView),
+            let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell {
+                if billCell.billAmount > 0 { //this protects from divide by 0 crashes
+                    let billAmount = billCell.billAmount
+                    let tipAmount = Int(round((Double(billAmount) * self.suggestedTipPercentage)))
+                    let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
+                    
+                    let tipIndexPath = NSIndexPath(forRow: tipAmount + PrivateConstants.ExtraCells - 1, inSection: 0)
+                    self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+                    
+                    let totalAmount = billAmount + tipAmount
+                    let currencyFormattedString = self.currencyFormatter.currencyFormattedString(totalAmount)
+                    let totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
+                    
+                    let tipPercentageString = "\(tipPercentage)%"
+                    let tipPercentageAttributedString = tipPercentageString == "inf%" ? NSAttributedString(string: "100%", attributes: self.tipPercentageTextLabelAttributes) : NSAttributedString(string: tipPercentageString, attributes: self.tipPercentageTextLabelAttributes)
+                    
+                    self.totalAmountTextLabel.attributedText = totalAmountAttributedString
+                    self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
+                }
         }
     }
     
     private func updateTipAmountText() {
-        let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView)
-        let tipAmountIndexPath = self.indexPathInCenterOfTable(self.tipAmountTableView)
-        
-        if let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell, tipCell = self.tipAmountTableView.cellForRowAtIndexPath(tipAmountIndexPath) as? GratuitousTableViewCell {
-            if billCell.billAmount > 0 {
-                let billAmount = billCell.billAmount
-                let tipAmount = tipCell.billAmount
-                let totalAmount = billAmount + tipAmount
-                let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
-                
-                let currencyFormattedString = self.currencyFormatter.currencyFormattedString(totalAmount)
-                let totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
-                let tipPercentageAttributedString = NSAttributedString(string: "\(tipPercentage)%", attributes: self.tipPercentageTextLabelAttributes)
-                
-                self.totalAmountTextLabel.attributedText = totalAmountAttributedString
-                self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
-            }
+        if let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView),
+            let tipAmountIndexPath = self.indexPathInCenterOfTable(self.tipAmountTableView),
+            let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell,
+            let tipCell = self.tipAmountTableView.cellForRowAtIndexPath(tipAmountIndexPath) as? GratuitousTableViewCell {
+                if billCell.billAmount > 0 { //this protects from divide by 0 crashes
+                    let billAmount = billCell.billAmount
+                    let tipAmount = tipCell.billAmount
+                    let totalAmount = billAmount + tipAmount
+                    let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
+                    
+                    let currencyFormattedString = self.currencyFormatter.currencyFormattedString(totalAmount)
+                    let totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
+                    let tipPercentageAttributedString = NSAttributedString(string: "\(tipPercentage)%", attributes: self.tipPercentageTextLabelAttributes)
+                    
+                    self.totalAmountTextLabel.attributedText = totalAmountAttributedString
+                    self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
+                }
         }
     }
     
     func localeDidChangeUpdateView(notification: NSNotification) {
-        self.updateBillAmountText()
+        if let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView),
+            let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell {
+            if billCell.billAmount > 0 {
+                let billAmount = billCell.billAmount
+                let tipAmount: Int
+                if let tipUserDefaults = self.defaultsManager?.tipIndexPathRow where tipUserDefaults != 0 {
+                    tipAmount = tipUserDefaults - 1
+                } else {
+                    tipAmount = Int(round((Double(billAmount) * self.suggestedTipPercentage)))
+                }
+
+                let totalAmount = billAmount + tipAmount
+                let currencyFormattedString = self.currencyFormatter.currencyFormattedString(totalAmount)
+                let totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
+                
+                self.totalAmountTextLabel.attributedText = totalAmountAttributedString
+            }
+        }
     }
     
     //MARK: Handle Table View User Input
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let tableTagEnum = TableTag(rawValue: tableView.tag) {
+        if let tableTagEnum = TableTagIdentifier(rawValue: tableView.tag) {
             switch tableTagEnum {
             case .BillAmount:
                 tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -398,52 +410,27 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func scrollViewDidStopMovingForWhateverReason(scrollView: UIScrollView) {
-        let tableView = scrollView as? UITableView
-        
-        if let tableView = tableView, let tableTagEnum = TableTag(rawValue: tableView.tag) {
-            //tableView.isScrolling = false
-            switch tableTagEnum {
-            case .BillAmount:
-                let indexPath = self.indexPathInCenterOfTable(tableView)
-                if indexPath.row > PrivateConstants.ExtraCells - 1 {
-                    if indexPath.row > PrivateConstants.MaxBillAmount + PrivateConstants.ExtraCells - 1 {
-                        tableView.selectRowAtIndexPath(NSIndexPath(forRow: PrivateConstants.MaxBillAmount + PrivateConstants.ExtraCells - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-                    } else {
-                        self.writeBillIndexPathRowToDiskWithTableView(tableView)
-                        tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-                    }
-                } else {
-                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: PrivateConstants.ExtraCells, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+        if let tableView = scrollView as? UITableView,
+            let tableTagEnum = TableTagIdentifier(rawValue: tableView.tag),
+            let indexPath = self.indexPathInCenterOfTable(tableView) {
+                switch tableTagEnum {
+                case .BillAmount:
+                    self.writeBillIndexPathRowToDiskWithTableView(tableView)
+                    tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                case .TipAmount:
+                    self.writeTipIndexPathRowToDiskWithTableView(tableView)
+                    tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                 }
-            case .TipAmount:
-                let indexPath = self.indexPathInCenterOfTable(tableView)
-                if indexPath.row > PrivateConstants.ExtraCells - 1 {
-                    if indexPath.row > PrivateConstants.MaxTipAmount + PrivateConstants.ExtraCells - 1 {
-                        tableView.selectRowAtIndexPath(NSIndexPath(forRow: PrivateConstants.MaxTipAmount + PrivateConstants.ExtraCells - 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-                    } else {
-                        self.writeTipIndexPathRowToDiskWithTableView(tableView)
-                        tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-                    }
-                } else {
-                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: PrivateConstants.ExtraCells, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-                }
-            }
-            self.bigTextLabelsShouldPresent(true)
+                self.bigTextLabelsShouldPresent(true)
         }
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        if self.tipTableCustomValueSet {
-            self.tipTableCustomValueSet = false
-        }
-        if let tableView = scrollView as? UITableView {
-            //tableView.isScrolling = true
-        }
         self.bigTextLabelsShouldPresent(false)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if let tableView = scrollView as? UITableView, let tableTagEnum = TableTag(rawValue: tableView.tag) {
+        if let tableView = scrollView as? UITableView, let tableTagEnum = TableTagIdentifier(rawValue: tableView.tag) where self.viewIsInForeground == true {
             switch tableTagEnum {
             case .BillAmount:
                 self.updateBillAmountText()
@@ -455,8 +442,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     //MARK: Handle Table View Delegate DataSourceStuff
     
-    private func indexPathInCenterOfTable(tableView: UITableView) -> NSIndexPath {
-        var indexPath = NSIndexPath(forRow: 0, inSection: 0)
+    private func indexPathInCenterOfTable(tableView: UITableView) -> NSIndexPath? {
+        let indexPath: NSIndexPath?
         
         var point = tableView.frame.origin
         point.x += tableView.frame.size.width / 2
@@ -464,14 +451,16 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         point = tableView.convertPoint(point, fromView: tableView.superview)
         if let optionalIndexPath = tableView.indexPathForRowAtPoint(point) {
             indexPath = optionalIndexPath
+        } else {
+            indexPath = nil
         }
         
-        return indexPath
+        return indexPath !! NSIndexPath(forRow: 0, inSection: 0)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count: Int?
-        if let tableTagEnum = TableTag(rawValue: tableView.tag) {
+        if let tableTagEnum = TableTagIdentifier(rawValue: tableView.tag) {
             switch tableTagEnum {
             case .BillAmount:
                 count = self.billAmountsArray.count
@@ -487,7 +476,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: GratuitousTableViewCell?
         
-        if let tableTagEnum = TableTag(rawValue: tableView.tag) {
+        if let tableTagEnum = TableTagIdentifier(rawValue: tableView.tag) {
             switch tableTagEnum {
             case .BillAmount:
                 cell = tableView.dequeueReusableCellWithIdentifier(self.billTableViewCellString) as? GratuitousTableViewCell
@@ -585,9 +574,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.view.transform = CGAffineTransformIdentity
         
         coordinator.animateAlongsideTransition(nil, completion: { finished in
-            
-            let billScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "scrollBillTableViewAtLaunch:", userInfo: nil, repeats: false)
-            let tipScrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "scrollTipTableViewAtLaunch:", userInfo: nil, repeats: false)
+            self.updateTableViewsFromDisk(animated: false)
         })
     }
     
