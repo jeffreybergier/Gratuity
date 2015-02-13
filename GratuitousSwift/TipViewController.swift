@@ -10,23 +10,23 @@ import UIKit
 
 class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet private weak var tipPercentageTextLabel: UILabel!
-    @IBOutlet private weak var totalAmountTextLabel: UILabel!
-    @IBOutlet private weak var billAmountTableView: UITableView!
-    @IBOutlet private weak var tipAmountTableView: UITableView!
-    @IBOutlet private weak var tipPercentageTextLabelTopConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var totalAmountTextLabelBottomConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var billAmountTableViewTitleTextLabel: UILabel!
-    @IBOutlet private weak var billAmountTableViewTitleTextLabelView: UIView!
-    @IBOutlet private weak var tipAmountTableViewTitleTextLabel: UILabel!
-    @IBOutlet private weak var tipAmountTableViewTitleTextLabelView: UIView!
-    @IBOutlet private weak var billAmountSelectedSurroundView: UIView!
+    @IBOutlet private weak var tipPercentageTextLabel: UILabel?
+    @IBOutlet private weak var totalAmountTextLabel: UILabel?
+    @IBOutlet private weak var billAmountTableView: UITableView?
+    @IBOutlet private weak var tipAmountTableView: UITableView?
+    @IBOutlet private weak var tipPercentageTextLabelTopConstraint: NSLayoutConstraint?
+    @IBOutlet private weak var totalAmountTextLabelBottomConstraint: NSLayoutConstraint?
+    @IBOutlet private weak var billAmountTableViewTitleTextLabel: UILabel?
+    @IBOutlet private weak var billAmountTableViewTitleTextLabelView: UIView?
+    @IBOutlet private weak var tipAmountTableViewTitleTextLabel: UILabel?
+    @IBOutlet private weak var tipAmountTableViewTitleTextLabelView: UIView?
+    @IBOutlet private weak var billAmountSelectedSurroundView: UIView?
     @IBOutlet private weak var billAmountLowerGradientView: GratuitousGradientView?
-    @IBOutlet private weak var selectedTableViewCellOutlineViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var largeTextWidthLandscapeOnlyConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var labelContainerView: UIView!
-    @IBOutlet private weak var tableContainerView: UIView!
-    @IBOutlet private weak var settingsButton: UIButton!
+    @IBOutlet private weak var selectedTableViewCellOutlineViewHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private weak var largeTextWidthLandscapeOnlyConstraint: NSLayoutConstraint?
+    @IBOutlet private weak var labelContainerView: UIView?
+    @IBOutlet private weak var tableContainerView: UIView?
+    @IBOutlet private weak var settingsButton: UIButton?
     
     private struct PrivateConstants {
         static let MaxBillAmount = 2000
@@ -73,8 +73,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var lowerTextSizeAdjustment: CGFloat = 0.0
     private var billAmountsArray = [Int]()
     private var tipAmountsArray = [Int]()
-    private var currentlyScrolling: (billAmountTableView: Bool, tipAmountTableView: Bool) = (false, false)
-    private var customTipAmountSet = false
     private var suggestedTipPercentage = 0.0
     
     //MARK: Handle View Loading
@@ -126,36 +124,36 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         let suggestedTipPercentage = self.defaultsManager?.suggestedTipPercentage !! 0.20
         
         //prepare the tableviews
-        self.billAmountTableView.delegate = self
-        self.billAmountTableView.dataSource = self
-        self.billAmountTableView.tag = TableTagIdentifier.BillAmount.rawValue
-        self.billAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
-        self.billAmountTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.billAmountTableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-        self.billAmountTableView.showsVerticalScrollIndicator = false
-        self.billAmountTableView.registerNib(UINib(nibName: self.tableViewCellClass, bundle: nil), forCellReuseIdentifier: billTableViewCellString)
+        self.billAmountTableView?.delegate = self
+        self.billAmountTableView?.dataSource = self
+        self.billAmountTableView?.tag = TableTagIdentifier.BillAmount.rawValue
+        self.billAmountTableView?.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        self.billAmountTableView?.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.billAmountTableView?.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+        self.billAmountTableView?.showsVerticalScrollIndicator = false
+        self.billAmountTableView?.registerNib(UINib(nibName: self.tableViewCellClass, bundle: nil), forCellReuseIdentifier: billTableViewCellString)
         
-        self.tipAmountTableView.delegate = self
-        self.tipAmountTableView.dataSource = self
-        self.tipAmountTableView.tag = TableTagIdentifier.TipAmount.rawValue
-        self.tipAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
-        self.tipAmountTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.tipAmountTableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-        self.tipAmountTableView.showsVerticalScrollIndicator = false
-        self.tipAmountTableView.registerNib(UINib(nibName: self.tableViewCellClass, bundle: nil), forCellReuseIdentifier: tipTableViewCellString)
+        self.tipAmountTableView?.delegate = self
+        self.tipAmountTableView?.dataSource = self
+        self.tipAmountTableView?.tag = TableTagIdentifier.TipAmount.rawValue
+        self.tipAmountTableView?.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        self.tipAmountTableView?.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tipAmountTableView?.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+        self.tipAmountTableView?.showsVerticalScrollIndicator = false
+        self.tipAmountTableView?.registerNib(UINib(nibName: self.tableViewCellClass, bundle: nil), forCellReuseIdentifier: tipTableViewCellString)
         
         //configure color of view
         self.view.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-        self.tipPercentageTextLabel.textColor = GratuitousUIConstant.lightTextColor()
-        self.totalAmountTextLabel.textColor = GratuitousUIConstant.lightTextColor()
-        self.tipAmountTableViewTitleTextLabel.textColor = GratuitousUIConstant.darkTextColor()
-        self.billAmountTableViewTitleTextLabel.textColor = GratuitousUIConstant.darkTextColor()
-        self.tipAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
-        self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+        self.tipPercentageTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.totalAmountTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.tipAmountTableViewTitleTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
+        self.billAmountTableViewTitleTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
+        self.tipAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+        self.billAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
         
         //configure the text
-        self.billAmountTableViewTitleTextLabel.text = NSLocalizedString("Amount on Bill", comment: "this is a text label displayed on the main page of the UI above the dollar amounts that user is supposed to select from for the cost of their restaurant bill.")
-        self.tipAmountTableViewTitleTextLabel.text = NSLocalizedString("Suggested Tip", comment: "this is a text label displayed on the main page of the UI above the tip amounts. The app suggests a tip amount, but they can also override it. This should be text that describes this suggestion is just a suggestion.")
+        self.billAmountTableViewTitleTextLabel?.text = NSLocalizedString("Amount on Bill", comment: "this is a text label displayed on the main page of the UI above the dollar amounts that user is supposed to select from for the cost of their restaurant bill.")
+        self.tipAmountTableViewTitleTextLabel?.text = NSLocalizedString("Suggested Tip", comment: "this is a text label displayed on the main page of the UI above the tip amounts. The app suggests a tip amount, but they can also override it. This should be text that describes this suggestion is just a suggestion.")
         
         //prepare the cell select surrounds
         self.prepareCellSelectSurroundView()
@@ -164,14 +162,14 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.billAmountLowerGradientView?.isUpsideDown = true
         
         //prepare the primary view for the animation in
-        self.labelContainerView.alpha = 0
-        self.tableContainerView.alpha = 0
+        self.labelContainerView?.alpha = 0
+        self.tableContainerView?.alpha = 0
         
         //check screensize and set text side adjustment
         self.checkForScreenSizeConstraintAdjustments()
         self.lowerTextSizeAdjustment = GratuitousUIConstant.correctCellTextSize().textSizeAdjustment()
-        self.selectedTableViewCellOutlineViewHeightConstraint.constant = GratuitousUIConstant.correctCellTextSize().rowHeight()
-        self.largeTextWidthLandscapeOnlyConstraint.constant = GratuitousUIConstant.largeTextLandscapeConstant()
+        self.selectedTableViewCellOutlineViewHeightConstraint?.constant = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        self.largeTextWidthLandscapeOnlyConstraint?.constant = GratuitousUIConstant.largeTextLandscapeConstant()
         
         //prepare the settings button
         self.prepareSettingsButton()
@@ -192,8 +190,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             initialSpringVelocity: 1.0,
             options: UIViewAnimationOptions.AllowUserInteraction,
             animations: { () -> Void in
-                self.labelContainerView.alpha = 1.0
-                self.tableContainerView.alpha = 1.0
+                self.labelContainerView?.alpha = 1.0
+                self.tableContainerView?.alpha = 1.0
             }, completion: nil)
     }
 
@@ -202,26 +200,28 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             let billAmount = defaultsManager.billIndexPathRow
             self.suggestedTipPercentage = defaultsManager.suggestedTipPercentage
             
-            self.billAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: billAmount, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+            self.billAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: billAmount, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
             
             let tipAmount: Int
             if defaultsManager.tipIndexPathRow > 0 {
                 tipAmount = defaultsManager.tipIndexPathRow
-                self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: tipAmount, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+                self.tipAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: tipAmount, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
             } else {
                 //
                 // This big block of code tries to calculate the actual tip and adjust the UI
                 // This is needed because unless a custom tip is set, the tip on disk == 0
                 //
-                if let billIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView),
-                    let tipIndexPath = self.indexPathInCenterOfTable(self.tipAmountTableView),
-                    let billCell = self.billAmountTableView.cellForRowAtIndexPath(billIndexPath) as? GratuitousTableViewCell,
-                    let tipCell = self.tipAmountTableView.cellForRowAtIndexPath(tipIndexPath) as? GratuitousTableViewCell {
+                if let billAmountTableView = self.billAmountTableView,
+                    let tipAmountTableView = self.tipAmountTableView,
+                    let billIndexPath = self.indexPathInCenterOfTable(billAmountTableView),
+                    let tipIndexPath = self.indexPathInCenterOfTable(tipAmountTableView),
+                    let billCell = billAmountTableView.cellForRowAtIndexPath(billIndexPath) as? GratuitousTableViewCell,
+                    let tipCell = tipAmountTableView.cellForRowAtIndexPath(tipIndexPath) as? GratuitousTableViewCell {
                         let actualBillCellAmount = billCell.billAmount
                         let tipDifference = billAmount - actualBillCellAmount
                         let tipAmount = tipCell.billAmount
                         let adjustedTipIndexPathRow = tipAmount + tipDifference
-                        self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: adjustedTipIndexPathRow, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+                        tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: adjustedTipIndexPathRow, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
                         self.updateLargeTextLabels(billAmount: actualBillCellAmount, tipAmount: tipAmount)
                 }
             }
@@ -229,34 +229,35 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func prepareCellSelectSurroundView() {
-        self.billAmountSelectedSurroundView.backgroundColor = UIColor.clearColor()
-        self.billAmountSelectedSurroundView.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
-        self.billAmountSelectedSurroundView.layer.cornerRadius = 0.0
-        self.billAmountSelectedSurroundView.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
-        self.billAmountSelectedSurroundView.backgroundColor = GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.15)
+        self.billAmountSelectedSurroundView?.backgroundColor = UIColor.clearColor()
+        self.billAmountSelectedSurroundView?.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
+        self.billAmountSelectedSurroundView?.layer.cornerRadius = 0.0
+        self.billAmountSelectedSurroundView?.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
+        self.billAmountSelectedSurroundView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor().colorWithAlphaComponent(0.15)
     }
     
     private func prepareSettingsButton() {
-        self.settingsButton.setImage(nil, forState: UIControlState.Normal)
-        self.settingsButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        self.settingsButton.setTitle(NSLocalizedString("Settings", comment: "Settings"), forState: UIControlState.Normal)
-        self.settingsButton.sizeToFit()
-        if let path = NSBundle.mainBundle().pathForResource("settingsIcon", ofType:"pdf") {
-            let image = ImageFromPDFFileWithHeight(path, self.settingsButton.frame.size.height).imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            self.settingsButton.setTitle("", forState: UIControlState.Normal)
-            self.settingsButton.setImage(image, forState: UIControlState.Normal)
-            self.settingsButton.sizeToFit()
+        self.settingsButton?.setImage(nil, forState: UIControlState.Normal)
+        self.settingsButton?.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.settingsButton?.setTitle(NSLocalizedString("Settings", comment: "Settings"), forState: UIControlState.Normal)
+        self.settingsButton?.sizeToFit()
+        if let path = NSBundle.mainBundle().pathForResource("settingsIcon", ofType:"pdf"),
+            let settingsButton = self.settingsButton {
+            let image = ImageFromPDFFileWithHeight(path, settingsButton.frame.size.height).imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            settingsButton.setTitle("", forState: UIControlState.Normal)
+            settingsButton.setImage(image, forState: UIControlState.Normal)
+            settingsButton.sizeToFit()
         }
     }
     
     //MARK: Handle User Input
     
     @IBAction func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
-        self.billAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0 + PrivateConstants.ExtraCells, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        self.billAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: 0 + PrivateConstants.ExtraCells, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
     
     @IBAction func didTapTipAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
-        self.tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0 + PrivateConstants.ExtraCells, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        self.tipAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: 0 + PrivateConstants.ExtraCells, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
     
     @IBAction func unwindToViewController (sender: UIStoryboardSegue){
@@ -285,8 +286,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             initialSpringVelocity: 1.9,
             options: UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
-                self.labelContainerView.transform = transform
-                self.labelContainerView.alpha = alpha
+                self.labelContainerView?.transform = transform
+                self.labelContainerView?.alpha = alpha
             },
             completion: { finished in
                 //do nothing
@@ -322,20 +323,22 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             let totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
             let tipPercentageAttributedString = NSAttributedString(string: "\(tipPercentage)%", attributes: self.tipPercentageTextLabelAttributes)
             
-            self.totalAmountTextLabel.attributedText = totalAmountAttributedString
-            self.tipPercentageTextLabel.attributedText = tipPercentageAttributedString
+            self.totalAmountTextLabel?.attributedText = totalAmountAttributedString
+            self.tipPercentageTextLabel?.attributedText = tipPercentageAttributedString
         }
     }
     
     func localeDidChangeUpdateView(notification: NSNotification) {
-        if let billIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView),
-            let billCell = self.billAmountTableView.cellForRowAtIndexPath(billIndexPath) as? GratuitousTableViewCell,
+        if let billAmountTableView = self.billAmountTableView,
+            let tipAmountTableView = self.tipAmountTableView,
+            let billIndexPath = self.indexPathInCenterOfTable(billAmountTableView),
+            let billCell = billAmountTableView.cellForRowAtIndexPath(billIndexPath) as? GratuitousTableViewCell,
             let billAmount = Optional(billCell.billAmount)
             where billAmount > 0 {
                 let tipAmount: Int
                 if let tipUserDefaults = self.defaultsManager?.tipIndexPathRow,
-                    let tipIndexPath = self.indexPathInCenterOfTable(self.tipAmountTableView),
-                    let tipCell = self.tipAmountTableView.cellForRowAtIndexPath(tipIndexPath) as? GratuitousTableViewCell
+                    let tipIndexPath = self.indexPathInCenterOfTable(tipAmountTableView),
+                    let tipCell = tipAmountTableView.cellForRowAtIndexPath(tipIndexPath) as? GratuitousTableViewCell
                     where tipUserDefaults != 0
                 {
                     tipAmount = tipCell.billAmount
@@ -375,15 +378,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        if let tag = TableTagIdentifier(rawValue: scrollView.tag) {
-            switch tag {
-            case .BillAmount:
-                self.currentlyScrolling = (false, false)
-            case .TipAmount:
-                self.currentlyScrolling.tipAmountTableView = false
-            }
             self.bigTextLabelsShouldPresent(true)
-        }
     }
     
     private func scrollViewDidStopMovingForWhateverReason(scrollView: UIScrollView) {
@@ -405,44 +400,43 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         self.bigTextLabelsShouldPresent(false)
         if let tag = TableTagIdentifier(rawValue: scrollView.tag) {
+            // these defaults writes keep track of whether a custom tip amount is set
+            // without using an instance variable
             switch tag {
             case .BillAmount:
-                self.currentlyScrolling = (true, true)
-                self.customTipAmountSet = false
+                self.writeToDiskTipTableIndexPath(NSIndexPath(forRow: 0, inSection: 0))
             case .TipAmount:
-                self.currentlyScrolling.tipAmountTableView = true
-                self.customTipAmountSet = true
+                self.writeToDiskTipTableIndexPath(NSIndexPath(forRow: 1, inSection: 0))
             }
         }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if let tableTagEnum = TableTagIdentifier(rawValue: scrollView.tag),
-            let billAmountIndexPath = self.indexPathInCenterOfTable(self.billAmountTableView),
-            let tipAmountIndexPath = self.indexPathInCenterOfTable(self.tipAmountTableView),
-            let billCell = self.billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell,
-            let tipCell = self.tipAmountTableView.cellForRowAtIndexPath(tipAmountIndexPath) as? GratuitousTableViewCell
+            let defaultsManager = self.defaultsManager,
+            let billAmountTableView = self.billAmountTableView,
+            let tipAmountTableView = self.tipAmountTableView,
+            let billAmountIndexPath = self.indexPathInCenterOfTable(billAmountTableView),
+            let tipAmountIndexPath = self.indexPathInCenterOfTable(tipAmountTableView),
+            let billCell = billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell,
+            let tipCell = tipAmountTableView.cellForRowAtIndexPath(tipAmountIndexPath) as? GratuitousTableViewCell
         {
-                let billAmount = billCell.billAmount
-                let tipAmount = tipCell.billAmount
-                switch tableTagEnum {
-                case .BillAmount:
-                    if self.customTipAmountSet == false {
-                        let calculatedTipAmount = Int(round((Double(billAmount) * self.suggestedTipPercentage)))
-                        let adjustment: Int
-                        if calculatedTipAmount > 0 {
-                            adjustment = 0
-                        } else {
-                            adjustment = 1
-                        }
-                        let tipAmountAdjustedForExtraCells = calculatedTipAmount + PrivateConstants.ExtraCells - 1 + adjustment
-                        let tipIndexPath = NSIndexPath(forRow: tipAmountAdjustedForExtraCells, inSection: 0)
-                        self.tipAmountTableView.scrollToRowAtIndexPath(tipIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
+            let billAmount = billCell.billAmount
+            let tipAmount = Int(round((Double(billAmount) * self.suggestedTipPercentage)))
+            switch tableTagEnum {
+            case .BillAmount:
+                if defaultsManager.tipIndexPathRow == 0 {
+                    let cellOffset = billAmountIndexPath.row - billAmount
+                    let adjustedTipIndexPathRow = tipAmount + cellOffset
+                    if billAmount > 0 { // this stops a crash when the user scrolls past the end of the billtable
+                    tipAmountTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: adjustedTipIndexPathRow, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
                     }
-                    self.updateLargeTextLabels(billAmount: billAmount, tipAmount: tipAmount)
-                case .TipAmount:
-                    self.updateLargeTextLabels(billAmount: billAmount, tipAmount: tipAmount)
                 }
+                self.updateLargeTextLabels(billAmount: billAmount, tipAmount: tipAmount)
+            case .TipAmount:
+                let tipAmount = tipCell.billAmount
+                self.updateLargeTextLabels(billAmount: billAmount, tipAmount: tipAmount)
+            }
         }
     }
     
@@ -529,37 +523,36 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         return Int(UIInterfaceOrientationMask.All.rawValue)
     }
     
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return UIInterfaceOrientation.Portrait
-    }
-    
     //MARK: Handle Text Size Adjustment and Label Attributed Strings
     
-    func systemTextSizeDidChange(notification: NSNotification) {
+    @objc private func systemTextSizeDidChange(notification: NSNotification) {
         //adjust text size
         self.lowerTextSizeAdjustment = GratuitousUIConstant.correctCellTextSize().textSizeAdjustment()
-        self.selectedTableViewCellOutlineViewHeightConstraint.constant = GratuitousUIConstant.correctCellTextSize().rowHeight()
-        self.largeTextWidthLandscapeOnlyConstraint.constant = GratuitousUIConstant.largeTextLandscapeConstant()
+        self.selectedTableViewCellOutlineViewHeightConstraint?.constant = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        self.largeTextWidthLandscapeOnlyConstraint?.constant = GratuitousUIConstant.largeTextLandscapeConstant()
         
         //estimated row height
-        self.billAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
-        self.tipAmountTableView.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        self.billAmountTableView?.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        self.tipAmountTableView?.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
         
         //update the view
         self.prepareSettingsButton()
-        self.billAmountTableView.reloadData()
-        self.tipAmountTableView.reloadData()
+        self.billAmountTableView?.reloadData()
+        self.tipAmountTableView?.reloadData()
+        
+        //reload the tables
+        self.updateTableViewsFromDisk()
     }
     
-    func invertColorsDidChange(notification: NSNotification) {
+    @objc private func invertColorsDidChange(notification: NSNotification) {
         //configure color of view
         self.view.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-        self.tipPercentageTextLabel.textColor = GratuitousUIConstant.lightTextColor()
-        self.totalAmountTextLabel.textColor = GratuitousUIConstant.lightTextColor()
-        self.tipAmountTableViewTitleTextLabel.textColor = GratuitousUIConstant.darkTextColor()
-        self.billAmountTableViewTitleTextLabel.textColor = GratuitousUIConstant.darkTextColor()
-        self.tipAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
-        self.billAmountTableViewTitleTextLabelView.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+        self.tipPercentageTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.totalAmountTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.tipAmountTableViewTitleTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
+        self.billAmountTableViewTitleTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
+        self.tipAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+        self.billAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
         
         //change the status bar
         //this line of code doesn't actually work, but maybe it will some day?
@@ -588,71 +581,75 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         let nothing = GratuitousUIConstant.actualScreenSizeBasedOnWidth()
         switch GratuitousUIConstant.actualScreenSizeBasedOnWidth() {
         case .iPhone4or5:
-            self.tipPercentageTextLabelTopConstraint.constant = -15.0
-            self.totalAmountTextLabelBottomConstraint.constant = -12.0
+            self.tipPercentageTextLabelTopConstraint?.constant = -15.0
+            self.totalAmountTextLabelBottomConstraint?.constant = -12.0
             self.upperTextSizeAdjustment = 0.76
         case .iPhone6:
-            self.tipPercentageTextLabelTopConstraint.constant = -10.0
-            self.totalAmountTextLabelBottomConstraint.constant = -10.0
+            self.tipPercentageTextLabelTopConstraint?.constant = -10.0
+            self.totalAmountTextLabelBottomConstraint?.constant = -10.0
             self.upperTextSizeAdjustment = 0.85
         case .iPhone6Plus:
-            self.tipPercentageTextLabelTopConstraint.constant = -20.0
-            self.totalAmountTextLabelBottomConstraint.constant = -10.0
+            self.tipPercentageTextLabelTopConstraint?.constant = -20.0
+            self.totalAmountTextLabelBottomConstraint?.constant = -10.0
             self.upperTextSizeAdjustment = 1.0
         case .iPad:
-            self.tipPercentageTextLabelTopConstraint.constant = -25.0
-            self.totalAmountTextLabelBottomConstraint.constant = -5.0
+            self.tipPercentageTextLabelTopConstraint?.constant = -25.0
+            self.totalAmountTextLabelBottomConstraint?.constant = -5.0
             self.upperTextSizeAdjustment = 1.3
         }
     }
     
     private func prepareTotalAmountTextLabel() {
-        if let originalFont = GratuitousUIConstant.originalFontForTotalAmountTextLabel() {
-            self.totalAmountTextLabel.font = originalFont
+        if let totalAmountTextLabel = self.totalAmountTextLabel {
+            if let originalFont = GratuitousUIConstant.originalFontForTotalAmountTextLabel() {
+                totalAmountTextLabel.font = originalFont
+            }
+            let font = totalAmountTextLabel.font.fontWithSize(totalAmountTextLabel.font.pointSize * self.upperTextSizeAdjustment)
+            let textColor = totalAmountTextLabel.textColor
+            let text = totalAmountTextLabel.text
+            let shadow = NSShadow()
+            shadow.shadowColor = GratuitousUIConstant.textShadowColor()
+            shadow.shadowBlurRadius = 2.0
+            shadow.shadowOffset = CGSizeMake(2.0, 2.0)
+            let attributes = [
+                NSForegroundColorAttributeName : textColor,
+                NSFontAttributeName : font,
+                //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
+                NSShadowAttributeName : shadow
+            ]
+            self.totalAmountTextLabelAttributes = attributes
+            let attributedString: NSAttributedString
+            if let text = text {
+                attributedString = NSAttributedString(string: text, attributes: self.totalAmountTextLabelAttributes)
+            } else {
+                attributedString = NSAttributedString(string: "", attributes: self.totalAmountTextLabelAttributes)
+            }
+            totalAmountTextLabel.attributedText = attributedString
         }
-        let font = self.totalAmountTextLabel.font.fontWithSize(self.totalAmountTextLabel.font.pointSize * self.upperTextSizeAdjustment)
-        let textColor = self.totalAmountTextLabel.textColor
-        let text = self.totalAmountTextLabel.text
-        let shadow = NSShadow()
-        shadow.shadowColor = GratuitousUIConstant.textShadowColor()
-        shadow.shadowBlurRadius = 2.0
-        shadow.shadowOffset = CGSizeMake(2.0, 2.0)
-        let attributes = [
-            NSForegroundColorAttributeName : textColor,
-            NSFontAttributeName : font,
-            //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
-            NSShadowAttributeName : shadow
-        ]
-        self.totalAmountTextLabelAttributes = attributes
-        let attributedString: NSAttributedString
-        if let text = text {
-            attributedString = NSAttributedString(string: text, attributes: self.totalAmountTextLabelAttributes)
-        } else {
-            attributedString = NSAttributedString(string: "", attributes: self.totalAmountTextLabelAttributes)
-        }
-        self.totalAmountTextLabel.attributedText = attributedString
     }
     
     private func prepareTipPercentageTextLabel() {
-        if let originalFont = GratuitousUIConstant.originalFontForTipPercentageTextLabel() {
-            self.tipPercentageTextLabel.font = originalFont
+        if let tipPercentageTextLabel = self.tipPercentageTextLabel {
+            if let originalFont = GratuitousUIConstant.originalFontForTipPercentageTextLabel() {
+                tipPercentageTextLabel.font = originalFont
+            }
+            let font = tipPercentageTextLabel.font.fontWithSize(tipPercentageTextLabel.font.pointSize * self.upperTextSizeAdjustment)
+            let textColor = tipPercentageTextLabel.textColor
+            let text = tipPercentageTextLabel.text
+            let shadow = NSShadow()
+            shadow.shadowColor = GratuitousUIConstant.textShadowColor()
+            shadow.shadowBlurRadius = 2.0
+            shadow.shadowOffset = CGSizeMake(2.0, 2.0)
+            let attributes = [
+                NSForegroundColorAttributeName : textColor,
+                NSFontAttributeName : font,
+                //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
+                NSShadowAttributeName : shadow
+            ]
+            self.tipPercentageTextLabelAttributes = attributes
+            let attributedString = NSAttributedString(string: text!, attributes: self.tipPercentageTextLabelAttributes)
+            tipPercentageTextLabel.attributedText = attributedString
         }
-        let font = self.tipPercentageTextLabel.font.fontWithSize(self.tipPercentageTextLabel.font.pointSize * self.upperTextSizeAdjustment)
-        let textColor = self.tipPercentageTextLabel.textColor
-        let text = self.tipPercentageTextLabel.text
-        let shadow = NSShadow()
-        shadow.shadowColor = GratuitousUIConstant.textShadowColor()
-        shadow.shadowBlurRadius = 2.0
-        shadow.shadowOffset = CGSizeMake(2.0, 2.0)
-        let attributes = [
-            NSForegroundColorAttributeName : textColor,
-            NSFontAttributeName : font,
-            //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
-            NSShadowAttributeName : shadow
-        ]
-        self.tipPercentageTextLabelAttributes = attributes
-        let attributedString = NSAttributedString(string: text!, attributes: self.tipPercentageTextLabelAttributes)
-        self.tipPercentageTextLabel.attributedText = attributedString
     }
     
     //MARK: Handle View Going Away
