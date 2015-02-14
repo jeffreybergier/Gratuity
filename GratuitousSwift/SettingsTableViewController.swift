@@ -12,12 +12,12 @@ import MessageUI
 class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     // MARK: Handle TableViewController
-    @IBOutlet private weak var headerLabelTipPercentage: UILabel!
-    @IBOutlet private weak var headerLabelCurencySymbol: UILabel!
-    @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel!
+    @IBOutlet private weak var headerLabelTipPercentage: UILabel?
+    @IBOutlet private weak var headerLabelCurencySymbol: UILabel?
+    @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel?
     
-    private weak var defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
-    private var headerLabelsArray: [UILabel] = []
+    private weak var defaultsManager = (UIApplication.sharedApplication().delegate as? GratuitousAppDelegate)?.defaultsManager
+    private var headerLabelsArray: [UILabel?] = []
     private lazy var swipeToDismiss: UISwipeGestureRecognizer = {
         let swipe = UISwipeGestureRecognizer(target: self, action: "didSwipeToDismiss:")
         swipe.direction = UISwipeGestureRecognizerDirection.Right
@@ -74,15 +74,15 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         ]
         
         for label in self.headerLabelsArray {
-            label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-            label.textColor = GratuitousUIConstant.darkTextColor()
-            label.superview?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
-            label.superview?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
+            label?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+            label?.textColor = GratuitousUIConstant.darkTextColor()
+            label?.superview?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+            label?.superview?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         }
         
-        self.headerLabelTipPercentage.text = NSLocalizedString("Suggested Tip Percentage", comment: "this text is for a section header where the user can set the default tip percentage when they choose a new bill amount").uppercaseString
-        self.headerLabelCurencySymbol.text = NSLocalizedString("Currency Symbol", comment: "this text is for a section header where the user can override the currency symbol that will be shown in front of the currency amounts in the app").uppercaseString
-        self.headerLabelAboutSaturdayApps.text = NSLocalizedString("About SaturdayApps", comment: "This is a section header. It contains information about my company, saturday apps").uppercaseString
+        self.headerLabelTipPercentage?.text = NSLocalizedString("Suggested Tip Percentage", comment: "this text is for a section header where the user can set the default tip percentage when they choose a new bill amount").uppercaseString
+        self.headerLabelCurencySymbol?.text = NSLocalizedString("Currency Symbol", comment: "this text is for a section header where the user can override the currency symbol that will be shown in front of the currency amounts in the app").uppercaseString
+        self.headerLabelAboutSaturdayApps?.text = NSLocalizedString("About SaturdayApps", comment: "This is a section header. It contains information about my company, saturday apps").uppercaseString
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -116,8 +116,8 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.prepareTipPercentageSliderAndLabels()
         
         //prepare the tip percentage label that sits on the right of the slider
-        self.suggestedTipPercentageLabel.textColor = GratuitousUIConstant.lightTextColor()
-        self.suggestedTipPercentageLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.suggestedTipPercentageLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.suggestedTipPercentageLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.navigationController?.navigationBar.barTintColor = nil
         
         //prepare the about area of the table
@@ -132,8 +132,8 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     // MARK: Handle Percentage Slider
-    @IBOutlet private weak var suggestedTipPercentageSlider: UISlider!
-    @IBOutlet private weak var suggestedTipPercentageLabel: UILabel!
+    @IBOutlet private weak var suggestedTipPercentageSlider: UISlider?
+    @IBOutlet private weak var suggestedTipPercentageLabel: UILabel?
     
     private let customThumbImage: UIImage? = {
         // Get the size
@@ -170,73 +170,54 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     func prepareTipPercentageSliderAndLabels() {
         //set the text color for the tip percentage
-        self.suggestedTipPercentageLabel.textColor = GratuitousUIConstant.lightTextColor()
+        self.suggestedTipPercentageLabel?.textColor = GratuitousUIConstant.lightTextColor()
         
         //set the tint color for the tip percentage slider
-        self.suggestedTipPercentageSlider.maximumTrackTintColor = GratuitousUIConstant.lightBackgroundColor()
+        self.suggestedTipPercentageSlider?.maximumTrackTintColor = GratuitousUIConstant.lightBackgroundColor()
         
         //set the custom thumb image slider
         if let customThumbImage = self.customThumbImage {
-            self.suggestedTipPercentageSlider.setThumbImage(customThumbImage, forState: UIControlState.Normal)
+            self.suggestedTipPercentageSlider?.setThumbImage(customThumbImage, forState: UIControlState.Normal)
         }
         
         //set the background color of the superview of the slider for ipad. For some reason its white on the ipad only
-        self.suggestedTipPercentageSlider.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+        self.suggestedTipPercentageSlider?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
     }
     
     func readUserDefaultsAndUpdateSlider(notification: NSNotification?) {
-        let onDiskTipPercentage:NSNumber = self.defaultsManager!.suggestedTipPercentage
-        self.suggestedTipPercentageLabel.text = String(format: "%.0f%%", onDiskTipPercentage.floatValue*100)
-        self.suggestedTipPercentageSlider.setValue(onDiskTipPercentage.floatValue, animated: false)
+        let onDiskTipPercentage = self.defaultsManager?.suggestedTipPercentage !! 0.20
+        self.suggestedTipPercentageLabel?.text = "\(Int(round(onDiskTipPercentage * 100)))"
+        self.suggestedTipPercentageSlider?.setValue(Float(onDiskTipPercentage), animated: false)
     }
     
     @IBAction func tipPercentageSliderDidSlide(sender: UISlider) {
         //this is called when the value changes... which is all the time
-        self.suggestedTipPercentageLabel.text = String(format: "%.0f%%", sender.value*100)
+        self.suggestedTipPercentageLabel?.text = String(format: "%.0f%%", sender.value*100)
     }
     
     @IBAction func didChangeSuggestedTipPercentageSlider(sender: UISlider) {
         //this is only called when the user lets go of the slider
-        let newTipPercentage: NSNumber = sender.value
-        self.defaultsManager!.suggestedTipPercentage = newTipPercentage.doubleValue
+        let newTipPercentage = sender.value
+        self.defaultsManager?.suggestedTipPercentage = Double(newTipPercentage)
         NSNotificationCenter.defaultCenter().postNotificationName("suggestedTipValueUpdated", object: self)
     }
     
     // MARK: Handle Currency Indicator
-    @IBOutlet private weak var textLabelDefault: UILabel!
-    @IBOutlet private weak var textLabelDollarSign: UILabel!
-    @IBOutlet private weak var textLabelPoundSign: UILabel!
-    @IBOutlet private weak var textLabelEuroSign: UILabel!
-    @IBOutlet private weak var textLabelYenSign: UILabel!
-    @IBOutlet private weak var textLabelNone: UILabel!
-    
-    private var textLabelsArray: [UILabel] = []
+    @IBOutlet private weak var textLabelDefault: UILabel?
+    @IBOutlet private weak var textLabelDollarSign: UILabel?
+    @IBOutlet private weak var textLabelPoundSign: UILabel?
+    @IBOutlet private weak var textLabelEuroSign: UILabel?
+    @IBOutlet private weak var textLabelYenSign: UILabel?
+    @IBOutlet private weak var textLabelNone: UILabel?
     
     func prepareCurrencyIndicatorCells() {
-        self.textLabelsArray = [
-            self.textLabelDefault,
-            self.textLabelDollarSign,
-            self.textLabelPoundSign,
-            self.textLabelEuroSign,
-            self.textLabelYenSign,
-            self.textLabelNone
-        ]
-        
-        
-        //this crazy lump fixes a small visual bug having to do with the border of the cell for the selected cell
-        for i in 0..<6 {
-            //uhhhh for some reason just running cellforrowatindexpath fixes this issue. really strange
-            let indexPath = NSIndexPath(forRow: i+1, inSection: 1)
-            let cell = self.tableView.cellForRowAtIndexPath(indexPath)
-        }
-        
-        
         self.writeCurrencyOverrideUserDefaultToDisk()
     }
     
     private func writeCurrencyOverrideUserDefaultToDisk(_ currencyOverride: CurrencySign? = nil) {
-        if let currencyOverride = currencyOverride {
-            self.defaultsManager!.overrideCurrencySymbol = currencyOverride
+        if let currencyOverride = currencyOverride,
+        let defaultsManager = self.defaultsManager {
+            defaultsManager.overrideCurrencySymbol = currencyOverride
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self)
@@ -250,7 +231,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 if cell.instanceTextLabel == nil {
                     switch cell.tag {
                     case CurrencySign.Default.rawValue:
-                        self.textLabelDefault.text = NSLocalizedString("Local Currency", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use the local currency symbol based on the Locale set in the iphone")
+                        self.textLabelDefault?.text = NSLocalizedString("Local Currency", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use the local currency symbol based on the Locale set in the iphone")
                         cell.instanceTextLabel = self.textLabelDefault
                     case CurrencySign.Dollar.rawValue:
                         cell.instanceTextLabel = self.textLabelDollarSign
@@ -261,7 +242,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                     case CurrencySign.Yen.rawValue:
                         cell.instanceTextLabel = self.textLabelYenSign
                     case CurrencySign.None.rawValue:
-                        self.textLabelNone.text = NSLocalizedString("No Symbol", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use no currency symbol")
+                        self.textLabelNone?.text = NSLocalizedString("No Symbol", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use no currency symbol")
                         cell.instanceTextLabel = self.textLabelNone
                     default:
                         break;
@@ -297,34 +278,35 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     // MARK: Handle About Information
-    @IBOutlet private weak var aboutMyPictureImageView: UIImageView!
-    @IBOutlet private weak var aboutSaturdayAppsParagraphLabel: UILabel!
-    @IBOutlet private weak var aboutEmailMeButton: UIButton!
-    @IBOutlet private weak var aboutReviewButton: UIButton!
+    @IBOutlet private weak var aboutMyPictureImageView: UIImageView?
+    @IBOutlet private weak var aboutSaturdayAppsParagraphLabel: UILabel?
+    @IBOutlet private weak var aboutEmailMeButton: UIButton?
+    @IBOutlet private weak var aboutReviewButton: UIButton?
     
     private let applicationID = 933679671
     
     private func prepareAboutPictureButtonsAndParagraph() {
         //preparing the picture
-        self.aboutMyPictureImageView.layer.borderColor = GratuitousUIConstant.lightTextColor().CGColor
-        self.aboutMyPictureImageView.layer.cornerRadius = self.aboutMyPictureImageView.frame.size.width/2
-        self.aboutMyPictureImageView.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
-        self.aboutMyPictureImageView.clipsToBounds = true
+        self.aboutMyPictureImageView?.layer.borderColor = GratuitousUIConstant.lightTextColor().CGColor
+        let cornerRadius = self.aboutMyPictureImageView?.frame.size.width !! 150.0
+        self.aboutMyPictureImageView?.layer.cornerRadius = cornerRadius / 2.0
+        self.aboutMyPictureImageView?.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
+        self.aboutMyPictureImageView?.clipsToBounds = true
         
         //preparing the paragraph text label
-        self.aboutSaturdayAppsParagraphLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        self.aboutSaturdayAppsParagraphLabel.textColor = GratuitousUIConstant.lightTextColor()
-        self.aboutSaturdayAppsParagraphLabel.text = NSLocalizedString("My name is Jeff. I'm a professional designer. I like making Apps in my spare time. The many examples of tip calculators on the App Store didn't match the tipping paradigm I used in restaurants. So I made Gratuity. If you like it, email me or leave a review on the app store.", comment: "")
+        self.aboutSaturdayAppsParagraphLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.aboutSaturdayAppsParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.aboutSaturdayAppsParagraphLabel?.text = NSLocalizedString("My name is Jeff. I'm a professional designer. I like making Apps in my spare time. The many examples of tip calculators on the App Store didn't match the tipping paradigm I used in restaurants. So I made Gratuity. If you like it, email me or leave a review on the app store.", comment: "")
         
         //prepare the buttons
-        self.aboutEmailMeButton.setTitle(NSLocalizedString("Email Me", comment: "this is the button that users can use to send me an email."), forState: UIControlState.Normal)
-        self.aboutReviewButton.setTitle(NSLocalizedString("Review This App", comment: "this button takes the user to the app store so they can leave a review"), forState: UIControlState.Normal)
+        self.aboutEmailMeButton?.setTitle(NSLocalizedString("Email Me", comment: "this is the button that users can use to send me an email."), forState: UIControlState.Normal)
+        self.aboutReviewButton?.setTitle(NSLocalizedString("Review This App", comment: "this button takes the user to the app store so they can leave a review"), forState: UIControlState.Normal)
         
         //set the background color of all of the different cells. For some reason on ipad, its white instead of clear
-        self.aboutMyPictureImageView.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        self.aboutSaturdayAppsParagraphLabel.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        self.aboutEmailMeButton.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        self.aboutReviewButton.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
+        self.aboutMyPictureImageView?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
+        self.aboutSaturdayAppsParagraphLabel?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
+        self.aboutEmailMeButton?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
+        self.aboutReviewButton?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
     }
     
     @IBAction func didTapEmailMeButton(sender: UIButton) {
@@ -359,11 +341,11 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         }
     }
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController?, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         if let presentedViewController = self.presentedViewController {
             presentedViewController.dismissViewControllerAnimated(true, completion: nil)
         }
-        if error != nil {
+        if let error = error {
             println("AboutTableViewController: Error while sending email. Error Description: \(error.description)")
         }
     }

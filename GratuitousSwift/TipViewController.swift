@@ -86,7 +86,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             let crashButton = UIButton(frame: CGRect(x: 12, y: 20, width: 10, height: 10))
             let viewDictionary = ["crashButton" : crashButton]
             crashButton.setTitle("Cause Crash", forState: UIControlState.Normal)
-            crashButton.addTarget(self, action: "causeCrash: InTipViewController:", forControlEvents: UIControlEvents.TouchUpInside)
+            let crashDate = NSDate(timeIntervalSinceNow: 0)
+            let crashSelector = Selector("causeCrash: InTipViewController: Date: \(crashDate)")
+            crashButton.addTarget(self, action: crashSelector, forControlEvents: UIControlEvents.TouchUpInside)
             crashButton.sizeToFit()
             self.view.addSubview(crashButton)
         #endif
@@ -367,7 +369,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
+        if decelerate == false {
             self.scrollViewDidStopMovingForWhateverReason(scrollView)
         }
     }
@@ -635,7 +637,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             }
             let font = tipPercentageTextLabel.font.fontWithSize(tipPercentageTextLabel.font.pointSize * self.upperTextSizeAdjustment)
             let textColor = tipPercentageTextLabel.textColor
-            let text = tipPercentageTextLabel.text
+            let text = tipPercentageTextLabel.text !! ""
             let shadow = NSShadow()
             shadow.shadowColor = GratuitousUIConstant.textShadowColor()
             shadow.shadowBlurRadius = 2.0
@@ -647,7 +649,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 NSShadowAttributeName : shadow
             ]
             self.tipPercentageTextLabelAttributes = attributes
-            let attributedString = NSAttributedString(string: text!, attributes: self.tipPercentageTextLabelAttributes)
+            let attributedString = NSAttributedString(string: text, attributes: self.tipPercentageTextLabelAttributes)
             tipPercentageTextLabel.attributedText = attributedString
         }
     }

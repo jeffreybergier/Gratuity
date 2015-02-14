@@ -51,7 +51,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
         if defaultsManager.overrideCurrencySymbol.rawValue == self.tag {
             self.accessoryType = UITableViewCellAccessoryType.Checkmark
-            if !self.animatingBorderColor {
+            if self.animatingBorderColor == false {
                 //if this property is being animated, don't change it
                 self.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
             }
@@ -61,7 +61,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             }
         } else {
             self.accessoryType = UITableViewCellAccessoryType.None
-            if !self.animatingBorderColor {
+            if self.animatingBorderColor == false {
                 self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor //UIColor.blackColor().CGColor
             }
             self.accessoryType = UITableViewCellAccessoryType.None
@@ -72,7 +72,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     func slowFadeOutOfBorderAroundCell(timer: NSTimer?) {
         timer?.invalidate()
         
-        if !self.animatingBorderColor {
+        if self.animatingBorderColor == false {
             //wow animations in Core Animation are so much harder than UIViewAnimations
             let colorAnimation = CABasicAnimation(keyPath: "borderColor")
             colorAnimation.fromValue = GratuitousUIConstant.lightBackgroundColor().CGColor
@@ -89,11 +89,11 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         }
     }
     
-    override func animationDidStart(anim: CAAnimation!) {
+    override func animationDidStart(anim: CAAnimation?) {
         self.animatingBorderColor = true
     }
     
-    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+    override func animationDidStop(anim: CAAnimation?, finished flag: Bool) {
         //this timer was needed because this seems to get called slightly too soon and if the user touched the same cell again it would repeat the animation and it was jarring.
         let timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "cgAnimationDidFinish:", userInfo: nil, repeats: false)
     }
@@ -128,7 +128,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             completion: { finished in })
     }
 
-    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent!) {
+    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent?) {
         super.touchesCancelled(touches, withEvent: event)
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
             delay: 0.0,

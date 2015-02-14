@@ -8,7 +8,9 @@
 
 import Foundation
 
-class GratuitousUserDefaults {
+class GratuitousUserDefaults: Printable {
+    
+    var description: String { return "GratuitousUserDefaults Manager: SuiteName: group.com.saturdayapps.Gratuity.storageGroup" }
     
     private let userDefaults = NSUserDefaults(suiteName: "group.com.saturdayapps.Gratuity.storageGroup") !! NSUserDefaults.standardUserDefaults()
     

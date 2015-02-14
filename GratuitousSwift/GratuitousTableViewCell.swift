@@ -10,7 +10,7 @@ import UIKit
 
 class GratuitousTableViewCell: UITableViewCell {
 
-    @IBOutlet weak private var dollarTextLabel: UILabel!
+    @IBOutlet weak private var dollarTextLabel: UILabel?
     private var labelTextAttributes = [NSString(): NSObject()]
     private let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
     weak var currencyFormatter: GratuitousCurrencyFormatter?
@@ -36,15 +36,14 @@ class GratuitousTableViewCell: UITableViewCell {
     }
     
     private func didSetBillAmount() {
-        let currencyFormattedString = self.billAmount != 0 ? self.currencyFormatter?.currencyFormattedString(self.billAmount) : ""
-        let stringForLabel: NSAttributedString
-            if let currencyFormattedString = currencyFormattedString {
-                stringForLabel = NSAttributedString(string: currencyFormattedString, attributes: self.labelTextAttributes)
-            } else {
-                println("GratuitousTableViewCell: Failure to unwrap optional currencyFormattedString  . You should never see this warning.")
-                stringForLabel = NSAttributedString(string: "$\(self.billAmount)"/*String(format: "$%.0f", self.billAmount)*/, attributes: self.labelTextAttributes)
-            }
-            self.dollarTextLabel.attributedText = stringForLabel
+        let currencyFormattedString: String
+        if self.billAmount != 0 {
+            currencyFormattedString = self.currencyFormatter?.currencyFormattedString(self.billAmount) !! ""
+        } else {
+            currencyFormattedString = ""
+        }
+        let stringForLabel = NSAttributedString(string: currencyFormattedString, attributes: self.labelTextAttributes)
+        self.dollarTextLabel?.attributedText = stringForLabel
     }
     
     override func awakeFromNib() {
@@ -55,7 +54,7 @@ class GratuitousTableViewCell: UITableViewCell {
         
         //configure the font
         if let font = GratuitousUIConstant.originalFontForTableViewCellTextLabels() {
-            self.dollarTextLabel.font = font
+            self.dollarTextLabel?.font = font
         }
         
         //the default selection styles are so fucking shitty
@@ -63,7 +62,7 @@ class GratuitousTableViewCell: UITableViewCell {
         
         //configure the colors
         self.contentView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-        self.dollarTextLabel.textColor = GratuitousUIConstant.lightTextColor()
+        self.dollarTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
         
         //prepare the text attributes to reused over and over
         self.prepareLabelTextAttributes()
@@ -72,7 +71,7 @@ class GratuitousTableViewCell: UITableViewCell {
     private func prepareLabelTextAttributes() {
         //configure the not selected text attributes
         let textColor = GratuitousUIConstant.lightTextColor()
-        let text = self.dollarTextLabel.text
+        let text = self.dollarTextLabel?.text !! "Label" //Label string is what comes out of the NIB
         let shadow = NSShadow()
         shadow.shadowColor = GratuitousUIConstant.textShadowColor()
         shadow.shadowBlurRadius = 1.5
@@ -87,8 +86,8 @@ class GratuitousTableViewCell: UITableViewCell {
             self.labelTextAttributes = attributes
             
             //configure the label to be deselected
-            let attributedString = NSAttributedString(string: text!, attributes: self.labelTextAttributes)
-            self.dollarTextLabel.attributedText = attributedString
+            let attributedString = NSAttributedString(string: text, attributes: self.labelTextAttributes)
+            self.dollarTextLabel?.attributedText = attributedString
         }
     }
     
