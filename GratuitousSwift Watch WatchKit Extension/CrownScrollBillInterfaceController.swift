@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class CrownScrollInterfaceController: WKInterfaceController {
+class CrownScrollBillInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
     @IBOutlet private weak var billAmountTable: WKInterfaceTable?
