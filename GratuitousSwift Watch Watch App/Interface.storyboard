@@ -41,7 +41,6 @@
                     <connections>
                         <outlet property="billAmountTable" destination="QFo-p1-L9c" id="ovV-xA-H9D"/>
                         <outlet property="instructionalTextLabel" destination="LVO-xL-ovz" id="QGp-Cu-93a"/>
-                        <segue destination="MTQ-3J-Qib" kind="relationship" relationship="nextPage" id="bBm-aX-LYn"/>
                     </connections>
                 </controller>
             </objects>
@@ -85,66 +84,27 @@
             </objects>
             <point key="canvasLocation" x="349" y="125"/>
         </scene>
-        <!--Total Amount Interface Controller-->
-        <scene sceneID="hAM-e5-UL7">
+        <!--TotalAmountInterfaceController-->
+        <scene sceneID="QVZ-uk-9u4">
             <objects>
-                <controller id="nvd-V9-Fdu" customClass="TotalAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller identifier="TotalAmountInterfaceController" id="2tI-Ya-wiK" customClass="TotalAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <label alignment="left" text="Total Amount" id="mAY-BU-uTI">
-                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <label alignment="left" text="$10" id="y4y-fj-5JE">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <label alignment="left" text="$Total" textAlignment="center" id="gYQ-zI-OTl">
-                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="35"/>
-                        </label>
-                        <label alignment="left" text="Percentage" id="wxg-QM-GPH">
-                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                        </label>
-                        <label alignment="left" text="Per%" textAlignment="left" id="zvA-vY-tHc">
-                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
-                        </label>
-                        <group alignment="left" id="7ce-Ep-T4N">
-                            <items>
-                                <group alignment="left" layout="vertical" id="auo-q4-ari">
-                                    <items>
-                                        <label alignment="left" text="Bill" id="hkI-Mk-err">
-                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                        </label>
-                                        <label alignment="left" verticalAlignment="center" text="$Bill" textAlignment="left" id="d0D-Tm-Y5M">
-                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
-                                        </label>
-                                    </items>
-                                </group>
-                                <group alignment="left" layout="vertical" id="OhM-FL-aKF">
-                                    <items>
-                                        <label alignment="left" text="Tip" id="qfA-w1-SAI">
-                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                        </label>
-                                        <label alignment="left" text="$Tip" textAlignment="left" id="enr-ml-elF">
-                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="font" name="Futura-Medium" family="Futura" pointSize="18"/>
-                                        </label>
-                                    </items>
-                                    <edgeInsets key="margins" left="8" right="0.0" top="0.0" bottom="0.0"/>
-                                </group>
-                            </items>
-                        </group>
+                        <label alignment="left" text="$100" id="w2I-WK-JbS"/>
+                        <label alignment="left" text="20%" id="VHk-tl-0f2"/>
+                        <label alignment="left" text="$90" id="8Gv-iz-8Wx"/>
                     </items>
                     <connections>
-                        <outlet property="billAmountLabel" destination="d0D-Tm-Y5M" id="oCB-BT-9aQ"/>
-                        <outlet property="tipAmountLabel" destination="enr-ml-elF" id="xZa-57-eNN"/>
-                        <outlet property="tipPercentageLabel" destination="zvA-vY-tHc" id="1DZ-kN-jjr"/>
-                        <outlet property="totalAmountLabel" destination="gYQ-zI-OTl" id="TDt-O2-Us5"/>
+                        <outlet property="billAmountLabel" destination="8Gv-iz-8Wx" id="SXd-WM-co2"/>
+                        <outlet property="tipAmountLabel" destination="y4y-fj-5JE" id="wFE-ts-THe"/>
+                        <outlet property="tipPercentageLabel" destination="VHk-tl-0f2" id="4GR-AE-ldG"/>
+                        <outlet property="totalAmountLabel" destination="w2I-WK-JbS" id="AKW-Yu-Z1n"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="643" y="300.5"/>
+            <point key="canvasLocation" x="610" y="316"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

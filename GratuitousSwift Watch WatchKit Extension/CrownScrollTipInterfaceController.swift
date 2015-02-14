@@ -14,7 +14,7 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private var data = [Int]()
-    private var currentContext: InterfaceControllerContext?
+    private var currentContext = InterfaceControllerContext.NotSet
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -31,8 +31,7 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        let currentContext = self.currentContext !! InterfaceControllerContext.CrownScrollTipChooser
-        switch currentContext {
+        switch self.currentContext {
         case .CrownScrollTipChooser:
             self.setTitle(NSLocalizedString("Tip", comment: ""))
             self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""))
@@ -70,4 +69,16 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
             }
         }
     }
+    
+    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+        let newTipAmount = self.data[rowIndex]
+        self.dataSource.tipAmount = newTipAmount
+        switch self.currentContext {
+        case .CrownScrollTipChooser:
+            self.pushControllerWithName("TotalAmountInterfaceController", context: InterfaceControllerContext.TotalAmountInterfaceController.rawValue)
+        default:
+            break
+        }
+    }
+    
 }

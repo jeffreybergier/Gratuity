@@ -134,15 +134,15 @@ class GratuitousWatchDataSource {
     }
     
     var tipPercentage: Double? {
-        set {
-            _tipPercentage = newValue
-            if let newValue = newValue {
-                if let billAmount = _billAmount {
-                    _tipAmount = Int(round(newValue * Double(billAmount)))
-                }
-            }
-            
-        }
+//        set {
+//            _tipPercentage = newValue
+//            if let newValue = newValue {
+//                if let billAmount = _billAmount {
+//                    _tipAmount = Int(round(newValue * Double(billAmount)))
+//                }
+//            }
+//            
+//        }
         get {
             if let tipPercentage = _tipPercentage {
                 return tipPercentage
@@ -212,7 +212,7 @@ class GratuitousWatchDataSource {
         }
     }
     
-    private func optionalDivision(#top: Double, bottom: Double) -> Double? {
+    func optionalDivision(#top: Double, bottom: Double) -> Double? {
         let division = top/bottom
         if division != 1/0 {
             return division

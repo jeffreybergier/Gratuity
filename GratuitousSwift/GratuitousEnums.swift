@@ -108,6 +108,8 @@ enum InterfaceControllerContext: String, Printable {
     case StepperPagedTens = "StepperPagedTens"
     case StepperPagedOnes = "StepperPagedOnes"
     case StepperTipChooser = "StepperTipChooser"
+    case TotalAmountInterfaceController = "TotalAmountInterfaceController"
+    case NotSet = "NotSet"
     
     var description: String {
         return "InterfaceControllerContext Enum: \(self.rawValue)"

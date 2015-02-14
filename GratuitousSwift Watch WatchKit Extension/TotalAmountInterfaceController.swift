@@ -2,34 +2,51 @@
 //  TotalAmountInterfaceController.swift
 //  GratuitousSwift
 //
-//  Created by Jeffrey Bergier on 12/3/14.
-//  Copyright (c) 2014 SaturdayApps. All rights reserved.
+//  Created by Jeffrey Bergier on 2/14/15.
+//  Copyright (c) 2015 SaturdayApps. All rights reserved.
 //
 
 import WatchKit
-import Foundation
 
 class TotalAmountInterfaceController: WKInterfaceController {
-   
+    
+    @IBOutlet private weak var tipPercentageLabel: WKInterfaceLabel?
     @IBOutlet private weak var totalAmountLabel: WKInterfaceLabel?
     @IBOutlet private weak var tipAmountLabel: WKInterfaceLabel?
     @IBOutlet private weak var billAmountLabel: WKInterfaceLabel?
-    @IBOutlet private weak var tipPercentageLabel: WKInterfaceLabel?
+    private var currentContext = InterfaceControllerContext.NotSet
+    private var dataSource = GratuitousWatchDataSource.sharedInstance
     
-    private let dataSource = GratuitousWatchDataSource.sharedInstance
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        let currentContext: InterfaceControllerContext
+        if let contextString = context as? String {
+            currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.TotalAmountInterfaceController
+        } else {
+            currentContext = Optional.None !! InterfaceControllerContext.TotalAmountInterfaceController
+        }
+        
+        self.currentContext = currentContext
+    }
     
     override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        let currentBillAmount = self.dataSource.billAmount
-        let currentTipAmount = self.dataSource.tipAmount
-        let currentTipPercentage = self.dataSource.tipPercentage!
-        let currentTotalAmount = self.dataSource.totalAmount
+        self.tipPercentageLabel?.setText("– %")
+        self.tipAmountLabel?.setText("$ –")
+        self.totalAmountLabel?.setText("$ –")
+        self.billAmountLabel?.setText("$ –")
         
-        self.billAmountLabel?.setText(self.dataSource.currencyStringFromInteger(currentBillAmount))
-        self.tipAmountLabel?.setText(self.dataSource.currencyStringFromInteger(currentTipAmount))
-        self.tipPercentageLabel?.setText(self.dataSource.percentStringFromRawDouble(currentTipPercentage))
-        self.totalAmountLabel?.setText(self.dataSource.currencyStringFromInteger(currentTotalAmount))
+        let billAmount = self.dataSource.billAmount !! 0
+        let tipAmount = self.dataSource.tipAmount !! 0
+        let tipPercentage = self.dataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount)) !! 0.2
+        let tipPercentageInt = Int(round(tipPercentage * 100))
+        
+        self.tipPercentageLabel?.setText("\(tipPercentageInt)%")
+        self.tipAmountLabel?.setText(self.dataSource.currencyStringFromInteger(tipAmount))
+        self.totalAmountLabel?.setText(self.dataSource.currencyStringFromInteger(tipAmount + billAmount))
+        self.billAmountLabel?.setText(self.dataSource.currencyStringFromInteger(billAmount))
     }
+    
 }
