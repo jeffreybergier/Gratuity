@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class TipTableRowController: NSObject {
+class CrownScrollTipTableRowController: NSObject {
     
     @IBOutlet private weak var moneyAmountLabel: WKInterfaceLabel?
     @IBOutlet private weak var starLabel: WKInterfaceLabel?

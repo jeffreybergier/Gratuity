@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class MoneyTableRowController: NSObject {
+class CrownScrollBillTableRowController: NSObject {
     
     @IBOutlet private weak var moneyAmountLabel: WKInterfaceLabel?
     private let dataSource = GratuitousWatchDataSource.sharedInstance
