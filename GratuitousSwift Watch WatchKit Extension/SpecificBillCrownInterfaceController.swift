@@ -14,23 +14,22 @@ class SpecificBillCrownInterfaceController: WKInterfaceController {
     @IBOutlet private weak var billAmountTable: WKInterfaceTable?
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
-    private var data = [Float]()
+    private var data = [Int]()
     
     override func willActivate() {
         super.willActivate()
         
-        if let billAmountFloat = self.dataSource.billAmount {
-            let billAmountInt = Int(roundf(billAmountFloat))
-            var minusAmount: Int = 4
-            if billAmountInt < minusAmount {
-                minusAmount = billAmountInt
+        if let billAmount = self.dataSource.billAmount {
+            var lowerTableViewValue: Int = 4
+            if billAmount < lowerTableViewValue {
+                lowerTableViewValue = billAmount
             }
-            let min = billAmountInt - minusAmount
-            let max = billAmountInt + 11
+            let min = billAmount - lowerTableViewValue
+            let max = billAmount + 11
             let range = max - min
             for index in 0..<range {
                 let math = min + index
-                self.data.append(Float(math))
+                self.data.append(math)
             }
         }
         
@@ -42,7 +41,7 @@ class SpecificBillCrownInterfaceController: WKInterfaceController {
         
         for (index, value) in enumerate(self.data) {
             if let row = self.billAmountTable?.rowControllerAtIndex(index) as? MoneyTableRowController {
-                row.updateMoneyAmountLabel(value)
+                row.updateCurrencyAmountLabel(value)
             }
         }
     }

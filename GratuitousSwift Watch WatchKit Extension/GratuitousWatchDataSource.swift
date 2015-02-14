@@ -24,8 +24,8 @@ class GratuitousWatchDataSource {
         Fabric.with([Crashlytics()])
         
         // configure instance variables from disk
-        _billAmount = Float(self.defaultsManager.billIndexPathRow) - 1
-        _tipPercentage = Float(self.defaultsManager.suggestedTipPercentage)
+        _billAmount = self.defaultsManager.billIndexPathRow
+        _tipPercentage = self.defaultsManager.suggestedTipPercentage
         
         // read nsuserdefaults to configure the currency symbol
         self.updateCurrencySymbolFromDisk()
@@ -56,24 +56,26 @@ class GratuitousWatchDataSource {
     }
     
     //properties
-    private var _tipAmount: Float?
-    private var _billAmount: Float?
-    private var _tipPercentage: Float?
+    private var _tipAmount: Int?
+    private var _billAmount: Int?
+    private var _tipPercentage: Double?
     
-    var totalAmount: Float? {
+    var totalAmount: Int? {
         get {
             if _billAmount != nil && _tipAmount != nil {
                 return _billAmount! + _tipAmount!
             } else if _billAmount != nil && _tipPercentage != nil {
-                return (_billAmount! * _tipPercentage!) + _billAmount!
+                return Int(round((Double(_billAmount!) * _tipPercentage!) + Double(_billAmount!)))
             } else if _tipPercentage != nil && _tipAmount != nil {
-                return self.optionalDivision(top: _tipAmount!, bottom: _tipPercentage!)
+                if let division = self.optionalDivision(top: Double(_tipAmount!), bottom: Double(_tipPercentage!)) {
+                    return Int(round(division))
+                }
             }
             return nil
         }
     }
     
-    var billAmount: Float? {
+    var billAmount: Int? {
         set {
             self.tipAmountSetLast = false
             self.configureTimer()
@@ -81,7 +83,7 @@ class GratuitousWatchDataSource {
             _billAmount = newValue
             if let newValue = newValue {
                 if let tipPercentage = _tipPercentage {
-                    _tipAmount = newValue * tipPercentage
+                    _tipAmount = Int(round(Double(newValue) * tipPercentage))
                 }
             }
         }
@@ -91,8 +93,10 @@ class GratuitousWatchDataSource {
             } else {
                 if let tipAmount = _tipAmount {
                     if let tipPercentage = _tipPercentage {
-                        _billAmount = self.optionalDivision(top: tipAmount, bottom: tipPercentage)
-                        return _billAmount
+                        if let division = self.optionalDivision(top: Double(tipAmount), bottom: Double(tipPercentage)) {
+                            _billAmount = Int(round(division))
+                            return _billAmount
+                        }
                     }
                 }
             }
@@ -100,7 +104,7 @@ class GratuitousWatchDataSource {
         }
     }
     
-    var tipAmount: Float? {
+    var tipAmount: Int? {
         set {
             self.tipAmountSetLast = true
             self.configureTimer()
@@ -108,7 +112,9 @@ class GratuitousWatchDataSource {
             _tipAmount = newValue
             if let newValue = newValue {
                 if let billAmount = _billAmount {
-                    _tipPercentage = self.optionalDivision(top: newValue, bottom: billAmount)
+                    if let division = self.optionalDivision(top: Double(newValue), bottom: Double(billAmount)) {
+                        _tipPercentage = division
+                    }
                 }
             }
         }
@@ -118,7 +124,7 @@ class GratuitousWatchDataSource {
             } else {
                 if let billAmount = _billAmount {
                     if let tipPercentage = _tipPercentage {
-                        _tipAmount = billAmount * tipPercentage
+                        _tipAmount = Int(round(Double(billAmount) * tipPercentage))
                         return _tipAmount
                     }
                 }
@@ -127,12 +133,12 @@ class GratuitousWatchDataSource {
         }
     }
     
-    var tipPercentage: Float? {
+    var tipPercentage: Double? {
         set {
             _tipPercentage = newValue
             if let newValue = newValue {
                 if let billAmount = _billAmount {
-                    _tipAmount = newValue * billAmount
+                    _tipAmount = Int(round(newValue * Double(billAmount)))
                 }
             }
             
@@ -151,29 +157,29 @@ class GratuitousWatchDataSource {
         }
     }
     
-    func dollarStringFromFloat(floatValue: Float?) -> String {
-        if let floatValue = floatValue {
+    func currencyStringFromInteger(integerValue: Int?) -> String {
+        if let integerValue = integerValue {
             let currencyString: String?
             if let currentCurrencyFormat = self.currentCurrencyFormat {
                 switch currentCurrencyFormat {
                 case .Default:
-                    currencyString = self.currencyFormatter.stringFromNumber(floatValue)
+                    currencyString = self.currencyFormatter.stringFromNumber(integerValue)
                 case .None:
-                    currencyString = String(format: "%.0f", floatValue)
+                    currencyString = "\(integerValue)"//String(format: "%.0f", integerValue)
                 default:
-                    currencyString = String(format: "%@%.0f", currentCurrencyFormat.string(), floatValue)
+                    currencyString = "\(currentCurrencyFormat.string())\(integerValue)" //String(format: "%@%.0f", currentCurrencyFormat.string(), integerValue)
                 }
             } else {
-                currencyString = self.currencyFormatter.stringFromNumber(floatValue)
+                currencyString = self.currencyFormatter.stringFromNumber(integerValue)
             }
             return currencyString !! "nil"
         }
         return "nil"
     }
     
-    func percentStringFromFloat(floatValue: Float?) -> String {
-        if let floatValue = floatValue {
-            return String(format: "%.0f%%", floatValue)
+    func percentStringFromRawDouble(doubleValue: Double?) -> String {
+        if let doubleValue = doubleValue {
+            return "\(Int(round(doubleValue * 100)))%"
         }
         return "nil"
     }
@@ -197,15 +203,15 @@ class GratuitousWatchDataSource {
         
         if self.tipAmountSetLast == true {
             let tipAmount = _tipAmount !! 25
-            self.defaultsManager.tipIndexPathRow = Int(round(tipAmount)) + 1
+            self.defaultsManager.tipIndexPathRow = tipAmount
         } else {
             let billAmount = _billAmount !! 25
-            self.defaultsManager.billIndexPathRow = Int(round(billAmount)) + 1
+            self.defaultsManager.billIndexPathRow = billAmount
             self.defaultsManager.tipIndexPathRow = 0 //every time the bill amount get set, this gets set to 0 which means that we need to calculate our own tipAmount
         }
     }
     
-    private func optionalDivision(#top: Float, bottom: Float) -> Float? {
+    private func optionalDivision(#top: Double, bottom: Double) -> Double? {
         let division = top/bottom
         if division != 1/0 {
             return division

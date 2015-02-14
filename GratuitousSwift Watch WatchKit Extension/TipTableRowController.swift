@@ -12,12 +12,15 @@ class TipTableRowController: NSObject {
     
     @IBOutlet private weak var moneyAmountLabel: WKInterfaceLabel?
     @IBOutlet private weak var starLabel: WKInterfaceLabel?
+    @IBOutlet private weak var tipPercentageLabelSmall: WKInterfaceLabel?
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     
-    func setMoneyAmountLabel(newAmount: Int, WithStarFlag star: Bool) {
-        self.starLabel?.setHidden(star)
-        let dollarString = self.dataSource.dollarStringFromFloat(Float(newAmount))
+    func setMoneyAmountLabel(#tipAmount: Int, billAmount: Int, starFlag: Bool) {
+        self.starLabel?.setHidden(starFlag)
+        let dollarString = self.dataSource.currencyStringFromInteger(tipAmount)
+        let tipAmount = Int(round((Double(tipAmount) / Double(billAmount)) * 100))
+        self.tipPercentageLabelSmall?.setText("\(tipAmount)%")
         self.moneyAmountLabel?.setText(dollarString)
     }
 }

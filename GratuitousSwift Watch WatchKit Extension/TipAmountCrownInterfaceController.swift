@@ -18,35 +18,34 @@ class TipAmountCrownInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        if let billAmountFloat = self.dataSource.billAmount {
-            if let suggestedTipPercentage = self.dataSource.tipPercentage {
-                let idealTipAmount = billAmountFloat * suggestedTipPercentage
-                let idealTipAmountInt = Int(roundf(idealTipAmount))
-                var minusAmount: Int = 10
-                if idealTipAmountInt < minusAmount {
-                    minusAmount = idealTipAmountInt
-                }
-                let min = idealTipAmountInt - minusAmount
-                let max = idealTipAmountInt + 11
-                let range = max - min
-                self.data = []
-                for index in 0..<range {
-                    let math = min + index
-                    self.data.append(math)
-                }
-                self.reloadBillTableDataWithIdealTip(idealTipAmountInt)
+        if let billAmount = self.dataSource.billAmount,
+           let suggestedTipPercentage = self.dataSource.tipPercentage
+        {
+            let tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
+            var minusAmount: Int = 10
+            if tipAmount < minusAmount {
+                minusAmount = tipAmount
             }
+            let min = tipAmount - minusAmount
+            let max = tipAmount + 11
+            let range = max - min
+            self.data = []
+            for index in 0..<range {
+                let math = min + index
+                self.data.append(math)
+            }
+            self.reloadBillTableDataWithIdealTip(tipAmount, billAmount: billAmount)
         }
         
     }
     
-    private func reloadBillTableDataWithIdealTip(idealTip: Int) {
+    private func reloadBillTableDataWithIdealTip(idealTip: Int, billAmount: Int) {
         self.tipAmountTable?.setNumberOfRows(self.data.count, withRowType: "TipTableRowController")
         
         for (index, value) in enumerate(self.data) {
             let star = idealTip == value ? false : true
             if let row = self.tipAmountTable?.rowControllerAtIndex(index) as? TipTableRowController {
-                row.setMoneyAmountLabel(value, WithStarFlag: star)
+                row.setMoneyAmountLabel(tipAmount: value, billAmount: billAmount, starFlag: star)
             }
         }
     }

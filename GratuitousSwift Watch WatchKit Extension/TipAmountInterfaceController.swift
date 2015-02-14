@@ -22,7 +22,7 @@ class TipAmountInterfaceController: WKInterfaceController {
     
     @IBAction func tipAmountDidChange(value: Float) {
         // update the data source
-        self.dataSource.tipAmount = value * 100
+        self.dataSource.tipAmount = Int(round(value * 100))
         
         // get the current values from the data source
         let currentTipAmount = self.dataSource.tipAmount
@@ -32,9 +32,9 @@ class TipAmountInterfaceController: WKInterfaceController {
         
         // update the text
         self.suggestedTipTitleLabel?.setText(NSLocalizedString("Desired Tip", comment: "This text is when the user is manually selecting a tip. It should say that its a tip he overrode from the suggested tip."))
-        self.tipAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentTipAmount))
-        self.tipPercentageLabel?.setText(self.dataSource.percentStringFromFloat(currentTipPercentage * 100))
-        self.totalAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentTotalAmount))
+        self.tipAmountLabel?.setText(self.dataSource.currencyStringFromInteger(currentTipAmount))
+        self.tipPercentageLabel?.setText(self.dataSource.percentStringFromRawDouble(currentTipPercentage))
+        self.totalAmountLabel?.setText(self.dataSource.currencyStringFromInteger(currentTotalAmount))
     }
     
     override func willActivate() {
@@ -47,10 +47,10 @@ class TipAmountInterfaceController: WKInterfaceController {
         let currentBillAmount = self.dataSource.billAmount
         let currentTotalAmount = self.dataSource.totalAmount
         
-        self.billAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentBillAmount))
-        self.tipAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentTipAmount))
-        self.tipPercentageLabel?.setText(self.dataSource.percentStringFromFloat(currentTipPercentage * 100))
-        self.totalAmountLabel?.setText(self.dataSource.dollarStringFromFloat(currentTotalAmount))
-        self.tipAmountSlider?.setValue(currentTipAmount / 100)
+        self.billAmountLabel?.setText(self.dataSource.currencyStringFromInteger(currentBillAmount))
+        self.tipAmountLabel?.setText(self.dataSource.currencyStringFromInteger(currentTipAmount))
+        self.tipPercentageLabel?.setText(self.dataSource.percentStringFromRawDouble(currentTipPercentage * 100))
+        self.totalAmountLabel?.setText(self.dataSource.currencyStringFromInteger(currentTotalAmount))
+        self.tipAmountSlider?.setValue(Float(currentTipAmount) / 100)
     }
 }

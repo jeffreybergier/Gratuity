@@ -13,8 +13,8 @@ class MoneyTableRowController: NSObject {
     @IBOutlet private weak var moneyAmountLabel: WKInterfaceLabel?
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     
-    func updateMoneyAmountLabel(newAmount: Float) {
-        let dollarString = self.dataSource.dollarStringFromFloat(newAmount)
+    func updateCurrencyAmountLabel(newAmount: Int) {
+        let dollarString = self.dataSource.currencyStringFromInteger(newAmount)
         self.moneyAmountLabel?.setText(dollarString)
     }
 }

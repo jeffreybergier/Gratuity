@@ -13,7 +13,7 @@ class CrownScrollInterfaceController: WKInterfaceController {
     @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
     @IBOutlet private weak var billAmountTable: WKInterfaceTable?
     
-    private var data = [Float]()
+    private var data = [Int]()
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     
     override func willActivate() {
@@ -21,7 +21,7 @@ class CrownScrollInterfaceController: WKInterfaceController {
         
         self.data = []
         for index in 0..<50 {
-            self.data.append(Float(index + 1))
+            self.data.append(index)
         }
         
         self.clearBillDataTable()
@@ -33,7 +33,7 @@ class CrownScrollInterfaceController: WKInterfaceController {
         
         for (index, value) in enumerate(self.data) {
             if let row = self.billAmountTable?.rowControllerAtIndex(index) as? MoneyTableRowController {
-                row.updateMoneyAmountLabel(value * 10)
+                row.updateCurrencyAmountLabel(value * 10)
             }
         }
     }
