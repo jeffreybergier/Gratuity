@@ -99,19 +99,34 @@ enum ActualScreenSizeBasedOnWidth: Int {
     case iPhone4or5 = 0, iPhone6, iPhone6Plus, iPad
 }
 
-enum CorrectInterface: Int, Printable {
-    case Unknown = 0, CrownScroll, StepByStep
+enum InterfaceControllerContext: String, Printable {
+    case CrownScrollInfinite = "CrownScrollInfinite"
+    case CrownScrollPagedTens = "CrownScrollPagedTens"
+    case CrownScrollPagedOnes = "CrownScrollPagedOnes"
+    case CrownScrollTipChooser = "CrownScrollTipChooser"
+    case StepperInfinite = "StepperInfinite"
+    case StepperPagedTens = "StepperPagedTens"
+    case StepperPagedOnes = "StepperPagedOnes"
+    case StepperTipChooser = "StepperTipChooser"
     
     var description: String {
-        get {
-            switch self {
-            case .Unknown:
-                return "CorrectInterface Enum: Unknown"
-            case .CrownScroll:
-                return "CorrectInterface Enum: CrownScroll"
-            case .StepByStep:
-                return "CorrectInterface Enum: StepByStep"
-            }
+        return "InterfaceControllerContext Enum: \(self.rawValue)"
+    }
+}
+
+enum InterfaceState: Int, Printable {
+    case CrownScrollInfinite = 0, CrownScrollPaged, StepperInfinite, StepperPaged
+    
+    var description: String {
+        switch self {
+        case .CrownScrollInfinite:
+            return "InterfaceState Enum: CrownScrollInfinite"
+        case .CrownScrollPaged:
+            return "InterfaceState Enum: CrownScrollPaged"
+        case .StepperInfinite:
+            return "InterfaceState Enum: StepperInfinite"
+        case .StepperPaged:
+            return "InterfaceState Enum: StepperPaged"
         }
     }
 }

@@ -10,7 +10,7 @@ import WatchKit
 
 class CrownScrollTipTableRowController: NSObject {
     
-    @IBOutlet private weak var moneyAmountLabel: WKInterfaceLabel?
+    @IBOutlet private weak var tipAmountLabel: WKInterfaceLabel?
     @IBOutlet private weak var starLabel: WKInterfaceLabel?
     @IBOutlet private weak var tipPercentageLabelSmall: WKInterfaceLabel?
     
@@ -21,6 +21,6 @@ class CrownScrollTipTableRowController: NSObject {
         let dollarString = self.dataSource.currencyStringFromInteger(tipAmount)
         let tipAmount = Int(round((Double(tipAmount) / Double(billAmount)) * 100))
         self.tipPercentageLabelSmall?.setText("\(tipAmount)%")
-        self.moneyAmountLabel?.setText(dollarString)
+        self.tipAmountLabel?.setText(dollarString)
     }
 }

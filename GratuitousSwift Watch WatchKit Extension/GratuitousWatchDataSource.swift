@@ -151,9 +151,10 @@ class GratuitousWatchDataSource {
         }
     }
     
-    var correctInterface: CorrectInterface {
+    var interfaceState: InterfaceState {
         get {
-            return self.defaultsManager.correctInterface
+            return InterfaceState.CrownScrollPaged
+            //return self.defaultsManager.correctInterface
         }
     }
     
@@ -165,9 +166,9 @@ class GratuitousWatchDataSource {
                 case .Default:
                     currencyString = self.currencyFormatter.stringFromNumber(integerValue)
                 case .None:
-                    currencyString = "\(integerValue)"//String(format: "%.0f", integerValue)
+                    currencyString = "\(integerValue)"
                 default:
-                    currencyString = "\(currentCurrencyFormat.string())\(integerValue)" //String(format: "%@%.0f", currentCurrencyFormat.string(), integerValue)
+                    currencyString = "\(currentCurrencyFormat.string())\(integerValue)"
                 }
             } else {
                 currencyString = self.currencyFormatter.stringFromNumber(integerValue)

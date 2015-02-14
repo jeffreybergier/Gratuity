@@ -14,38 +14,57 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private var data = [Int]()
+    private var currentContext: InterfaceControllerContext?
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        if let contextString = context as? String,
+        let context = InterfaceControllerContext(rawValue: contextString) {
+            self.currentContext = context
+        }
+    }
     
     override func willActivate() {
         super.willActivate()
         
-        if let billAmount = self.dataSource.billAmount,
-           let suggestedTipPercentage = self.dataSource.tipPercentage
-        {
-            let tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
-            var minusAmount: Int = 10
-            if tipAmount < minusAmount {
-                minusAmount = tipAmount
+        if let currentContext = self.currentContext {
+            switch currentContext {
+            case .CrownScrollTipChooser:
+                self.setTitle(NSLocalizedString("Tip", comment: ""))
+                self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""))
+                let billAmount = self.dataSource.billAmount !! 0
+                let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
+                let tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
+                let offset = 5
+                let cellBeginIndex: Int
+                if tipAmount >= offset {
+                    cellBeginIndex = tipAmount - offset
+                } else {
+                    cellBeginIndex = tipAmount
+                }
+                let numberOfRowsInTable = cellBeginIndex + offset * 3
+                
+                self.data = []
+                for index in cellBeginIndex ..< numberOfRowsInTable {
+                    self.data.append(index)
+                }
+                self.reloadTipTableData(idealTip: tipAmount, billAmount: billAmount)
+            default:
+                break
             }
-            let min = tipAmount - minusAmount
-            let max = tipAmount + 11
-            let range = max - min
-            self.data = []
-            for index in 0..<range {
-                let math = min + index
-                self.data.append(math)
-            }
-            self.reloadBillTableDataWithIdealTip(tipAmount, billAmount: billAmount)
         }
-        
     }
     
-    private func reloadBillTableDataWithIdealTip(idealTip: Int, billAmount: Int) {
-        self.tipAmountTable?.setNumberOfRows(self.data.count, withRowType: "TipTableRowController")
-        
-        for (index, value) in enumerate(self.data) {
-            let star = idealTip == value ? false : true
-            if let row = self.tipAmountTable?.rowControllerAtIndex(index) as? TipTableRowController {
-                row.setMoneyAmountLabel(tipAmount: value, billAmount: billAmount, starFlag: star)
+    private func reloadTipTableData(#idealTip: Int, billAmount: Int) {
+        if let tableView = self.tipAmountTable {
+            tableView.setNumberOfRows(self.data.count, withRowType: "CrownScrollTipTableRowController")
+            
+            for (index, value) in enumerate(self.data) {
+                let star = idealTip == value ? false : true
+                if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTipTableRowController {
+                    row.setMoneyAmountLabel(tipAmount: value, billAmount: billAmount, starFlag: star)
+                }
             }
         }
     }

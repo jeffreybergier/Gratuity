@@ -20,7 +20,7 @@ class GratuitousUserDefaults: Printable {
             self.userDefaults.setInteger(0, forKey: "tipIndexPathRow")
             self.userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: "overrideCurrencySymbol")
             self.userDefaults.setDouble(0.2, forKey: "suggestedTipPercentage")
-            self.userDefaults.setInteger(CorrectInterface.Unknown.rawValue, forKey: "correctInterface")
+            self.userDefaults.setInteger(InterfaceState.CrownScrollInfinite.rawValue, forKey: "correctInterface")
             self.userDefaults.synchronize()
         }
     }
@@ -55,12 +55,13 @@ class GratuitousUserDefaults: Printable {
         }
     }
     
-    var correctInterface: CorrectInterface {
+    var correctInterface: InterfaceState {
         get {
-            if let correctInterface = CorrectInterface(rawValue: self.userDefaults.integerForKey("correctInterface")) {
+            if let correctInterface = InterfaceState(rawValue: self.userDefaults.integerForKey("correctInterface")) {
                 return correctInterface
+            } else {
+                return InterfaceState.CrownScrollInfinite
             }
-            return CorrectInterface.Unknown
         }
         set {
             self.userDefaults.setInteger(newValue.rawValue, forKey: "correctInterface")

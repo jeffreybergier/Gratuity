@@ -133,7 +133,6 @@
 		730530CA1A871A4700DC08A6 /* Gratuityλδ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuityλδ.entitlements"; sourceTree = "<group>"; };
 		730530CB1A871A5200DC08A6 /* GratuitousSwift Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuitousSwift Watch.entitlements"; sourceTree = "<group>"; };
 		730530CC1A871A5F00DC08A6 /* GratuitousSwift Watch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuitousSwift Watch WatchKit Extension.entitlements"; path = "GratuitousSwift Watch WatchKit Extension/GratuitousSwift Watch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
-		7311CB0E1A88399D00ACF1A9 /* SpecificBillCrownInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecificBillCrownInterfaceController.swift; sourceTree = "<group>"; };
 		7334770E1A26E85000513F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousUserDefaults.swift; path = ../GratuitousSwift/GratuitousUserDefaults.swift; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
@@ -423,7 +422,6 @@
 			isa = PBXGroup;
 			children = (
 				737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */,
-				7311CB0E1A88399D00ACF1A9 /* SpecificBillCrownInterfaceController.swift */,
 				73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */,
 				73A755B81A882BB10038E023 /* CrownScrollBillTableRowController.swift */,
 				73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */,

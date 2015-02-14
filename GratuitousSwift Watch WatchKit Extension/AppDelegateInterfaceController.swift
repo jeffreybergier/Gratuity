@@ -18,15 +18,18 @@ class AppDelegateInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-//        self.crownScrollButton?.setHidden(true)
-//        self.stepByStepButton?.setHidden(true)
-//        
-//        let corectInterface = self.dataSource.correctInterface
-//        switch self.dataSource.correctInterface {
-//        case .CrownScroll:
-//            self.pushControllerWithName("CrownScrollInterfaceController", context: nil)
-//        default:
-//            self.pushControllerWithName("BillAmountInterfaceController", context: nil)
-//        }
+        self.crownScrollButton?.setHidden(true)
+        self.stepByStepButton?.setHidden(true)
+        
+        switch self.dataSource.interfaceState {
+        case .CrownScrollInfinite:
+            self.pushControllerWithName("CrownScrollBillInterfaceController", context: InterfaceControllerContext.CrownScrollInfinite.rawValue)
+        case .CrownScrollPaged:
+            self.pushControllerWithName("CrownScrollBillInterfaceController", context: InterfaceControllerContext.CrownScrollPagedTens.rawValue)
+        case .StepperInfinite:
+            break
+        case .StepperPaged:
+            break
+        }
     }
 }
