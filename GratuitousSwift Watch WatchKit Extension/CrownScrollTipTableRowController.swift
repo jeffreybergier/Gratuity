@@ -18,9 +18,12 @@ class CrownScrollTipTableRowController: NSObject {
     
     func setMoneyAmountLabel(#tipAmount: Int, billAmount: Int, starFlag: Bool) {
         self.starLabel?.setHidden(starFlag)
-        let dollarString = self.dataSource.currencyStringFromInteger(tipAmount)
-        let tipAmount = Int(round((Double(tipAmount) / Double(billAmount)) * 100))
-        self.tipPercentageLabelSmall?.setText("\(tipAmount)%")
-        self.tipAmountLabel?.setText(dollarString)
+        if billAmount != 0 {
+            self.tipPercentageLabelSmall?.setText("\(Int(round((Double(tipAmount) / Double(billAmount)) * 100)))%")
+            self.tipAmountLabel?.setText(self.dataSource.currencyStringFromInteger(tipAmount))
+        } else {
+            self.tipAmountLabel?.setText("$–")
+            self.tipPercentageLabelSmall?.setText("–%")
+        }
     }
 }

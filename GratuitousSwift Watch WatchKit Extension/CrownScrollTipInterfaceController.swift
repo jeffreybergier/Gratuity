@@ -19,40 +19,42 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        if let contextString = context as? String,
-        let context = InterfaceControllerContext(rawValue: contextString) {
-            self.currentContext = context
+        let currentContext: InterfaceControllerContext
+        if let contextString = context as? String {
+            currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.CrownScrollTipChooser
+        } else {
+            currentContext = Optional.None !! InterfaceControllerContext.CrownScrollTipChooser
         }
+        self.currentContext = currentContext
     }
     
     override func willActivate() {
         super.willActivate()
         
-        if let currentContext = self.currentContext {
-            switch currentContext {
-            case .CrownScrollTipChooser:
-                self.setTitle(NSLocalizedString("Tip", comment: ""))
-                self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""))
-                let billAmount = self.dataSource.billAmount !! 0
-                let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
-                let tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
-                let offset = 5
-                let cellBeginIndex: Int
-                if tipAmount >= offset {
-                    cellBeginIndex = tipAmount - offset
-                } else {
-                    cellBeginIndex = tipAmount
-                }
-                let numberOfRowsInTable = cellBeginIndex + offset * 3
-                
-                self.data = []
-                for index in cellBeginIndex ..< numberOfRowsInTable {
-                    self.data.append(index)
-                }
-                self.reloadTipTableData(idealTip: tipAmount, billAmount: billAmount)
-            default:
-                break
+        let currentContext = self.currentContext !! InterfaceControllerContext.CrownScrollTipChooser
+        switch currentContext {
+        case .CrownScrollTipChooser:
+            self.setTitle(NSLocalizedString("Tip", comment: ""))
+            self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""))
+            let billAmount = self.dataSource.billAmount !! 0
+            let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
+            let tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
+            let offset = 5
+            let cellBeginIndex: Int
+            if tipAmount >= offset {
+                cellBeginIndex = tipAmount - offset
+            } else {
+                cellBeginIndex = tipAmount
             }
+            let numberOfRowsInTable = cellBeginIndex + offset * 3
+            
+            self.data = []
+            for index in cellBeginIndex ..< numberOfRowsInTable {
+                self.data.append(index)
+            }
+            self.reloadTipTableData(idealTip: tipAmount, billAmount: billAmount)
+        default:
+            break
         }
     }
     

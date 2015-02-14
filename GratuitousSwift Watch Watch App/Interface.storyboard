@@ -83,7 +83,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="312" y="125"/>
+            <point key="canvasLocation" x="349" y="125"/>
         </scene>
         <!--Total Amount Interface Controller-->
         <scene sceneID="hAM-e5-UL7">
@@ -144,7 +144,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="827" y="481.25"/>
+            <point key="canvasLocation" x="643" y="300.5"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
