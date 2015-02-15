@@ -16,63 +16,52 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private var data = [Int]()
     private var cellValueMultiplier = 1
-    private var numberOfRowsInTable = 50
-    private var cellBeginIndex = 0
-    private var currentContext: InterfaceControllerContext = .NotSet {
-        didSet {
-            switch self.currentContext {
-            case .CrownScrollInfinite:
-                self.setTitle(NSLocalizedString("Bill", comment: ""))
-                self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to choose the Bill Amount", comment: ""))
-                self.cellBeginIndex = 1
-                self.cellValueMultiplier = 1
-                self.numberOfRowsInTable = 500
-            case .CrownScrollPagedOnes:
-                self.setTitle(NSLocalizedString("Refine", comment: ""))
-                self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to refine the Bill Amount", comment: ""))
-                let billAmount = self.dataSource.billAmount !! 0
-                let offset = 3
-                self.cellBeginIndex = billAmount >= offset ? billAmount - offset : billAmount
-                self.cellValueMultiplier = 1
-                self.numberOfRowsInTable = billAmount + 10
-            case .CrownScrollPagedTens:
-                self.setTitle(NSLocalizedString("Bill", comment: ""))
-                self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to the number closest to the Bill Amount", comment: ""))
-                self.cellBeginIndex = 1
-                self.cellValueMultiplier = 10
-                self.numberOfRowsInTable = 50
-            default:
-                break
-            }
-        }
-    }
+    private var currentContext: InterfaceControllerContext = .NotSet
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        if let contextString = context as? String,
-        let context = InterfaceControllerContext(rawValue: contextString)
-        {
-            self.currentContext = context
+        let currentContext: InterfaceControllerContext
+        if let contextString = context as? String {
+            currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.CrownScrollTipChooser
+        } else {
+            fatalError("CrownScrollBillInterfaceController: Context not present during awakeWithContext:")
         }
+        self.currentContext = currentContext
     }
     
     override func willActivate() {
         super.willActivate()
         
-        if self.currentContext == .NotSet {
-            switch self.dataSource.interfaceState {
-            case .CrownScrollInfinite:
-                self.currentContext = InterfaceControllerContext.CrownScrollInfinite
-            case .CrownScrollPaged:
-                self.currentContext = InterfaceControllerContext.CrownScrollPagedTens
-            default:
-                break
-            }
+        let numberOfRowsInTable: Int
+        let cellBeginIndex: Int
+        switch self.currentContext {
+        case .CrownScrollInfinite:
+            self.setTitle(NSLocalizedString("Bill", comment: ""))
+            self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to choose the Bill Amount", comment: ""))
+            cellBeginIndex = 1
+            numberOfRowsInTable = 500
+            self.cellValueMultiplier = 1
+        case .CrownScrollPagedOnes:
+            self.setTitle(NSLocalizedString("Refine", comment: ""))
+            self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to refine the Bill Amount", comment: ""))
+            let billAmount = self.dataSource.billAmount !! 0
+            let offset = 3
+            cellBeginIndex = billAmount >= offset ? billAmount - offset : billAmount
+            numberOfRowsInTable = billAmount + 10
+            self.cellValueMultiplier = 1
+        case .CrownScrollPagedTens:
+            self.setTitle(NSLocalizedString("Bill", comment: ""))
+            self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to the number closest to the Bill Amount", comment: ""))
+            cellBeginIndex = 1
+            numberOfRowsInTable = 50
+            self.cellValueMultiplier = 10
+        default:
+            fatalError("CrownScrollBillInterfaceController: Context not set")
         }
         
         self.data = []
-        for index in self.cellBeginIndex..<self.numberOfRowsInTable {
+        for index in cellBeginIndex ..< numberOfRowsInTable {
             self.data.append(index)
         }
         

@@ -23,7 +23,7 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
         if let contextString = context as? String {
             currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.CrownScrollTipChooser
         } else {
-            currentContext = Optional.None !! InterfaceControllerContext.CrownScrollTipChooser
+            fatalError("CrownScrollTipInterfaceController: Context not present during awakeWithContext:")
         }
         self.currentContext = currentContext
     }

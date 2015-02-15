@@ -142,7 +142,6 @@
 		735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyFormatter.swift; sourceTree = "<group>"; };
 		736568F81A26DD1400603602 /* Gratuityλδ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gratuityλδ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		736568F91A26DD1500603602 /* GratuitousSwift copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GratuitousSwift copy-Info.plist"; path = "/Users/jeffberg/Documents/SaturdayApps/GratuitousSwift/GratuitousSwift copy-Info.plist"; sourceTree = "<absolute>"; };
-		73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableView.swift; sourceTree = "<group>"; };
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
 		737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIConstant.swift; sourceTree = "<group>"; };
 		737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownScrollBillInterfaceController.swift; sourceTree = "<group>"; };
@@ -246,7 +245,6 @@
 			children = (
 				7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */,
 				7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */,
-				73661B7019F89DA6001FD1B7 /* GratuitousTableView.swift */,
 				736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */,
 			);
 			name = "TipTableView Subclasses";

@@ -12,6 +12,13 @@
             </objects>
             <point key="canvasLocation" x="-231" y="316.5"/>
         </scene>
+        <!--Interface Controller-->
+        <scene sceneID="Mxj-A3-7vI">
+            <objects>
+                <controller id="eOc-Vg-ANl"/>
+            </objects>
+            <point key="canvasLocation" x="54" y="514"/>
+        </scene>
         <!--Bill-->
         <scene sceneID="t1K-MZ-tcM">
             <objects>
