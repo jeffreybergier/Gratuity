@@ -12,10 +12,29 @@
             </objects>
             <point key="canvasLocation" x="-231" y="316.5"/>
         </scene>
-        <!--Interface Controller-->
+        <!--Bill-->
         <scene sceneID="Mxj-A3-7vI">
             <objects>
-                <controller id="eOc-Vg-ANl"/>
+                <controller identifier="StepperInterfaceController" title="Bill" id="eOc-Vg-ANl" customClass="StepperInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Label" numberOfLines="0" id="a2e-xb-wa9"/>
+                        <label alignment="left" text="$10" id="My9-by-3be">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="20%" id="1UT-D0-QBP">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="0pf-FU-XFs"/>
+                        <button width="1" alignment="left" title="Button" id="QCy-hF-A9x"/>
+                    </items>
+                    <connections>
+                        <outlet property="currencyAmountTextLabel" destination="My9-by-3be" id="Znp-q6-IoJ"/>
+                        <outlet property="currencySlider" destination="0pf-FU-XFs" id="R9o-ey-MH3"/>
+                        <outlet property="instructionTextLabel" destination="a2e-xb-wa9" id="gMf-hE-7iY"/>
+                        <outlet property="nextButton" destination="QCy-hF-A9x" id="Ajn-6R-YIM"/>
+                        <outlet property="tipPercentageLabel" destination="1UT-D0-QBP" id="c5A-ac-f2s"/>
+                    </connections>
+                </controller>
             </objects>
             <point key="canvasLocation" x="54" y="514"/>
         </scene>

@@ -153,7 +153,7 @@ class GratuitousWatchDataSource {
     
     var interfaceState: InterfaceState {
         get {
-            return InterfaceState.CrownScrollPaged
+            return InterfaceState.StepperInfinite
             //return self.defaultsManager.correctInterface
         }
     }
