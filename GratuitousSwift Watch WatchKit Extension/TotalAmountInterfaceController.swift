@@ -20,7 +20,8 @@ class TotalAmountInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        let currentContext: InterfaceControllerContext
+        var currentContext: InterfaceControllerContext
+        //let currentContext: InterfaceControllerContext
         if let contextString = context as? String {
             currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.TotalAmountInterfaceController
         } else {
