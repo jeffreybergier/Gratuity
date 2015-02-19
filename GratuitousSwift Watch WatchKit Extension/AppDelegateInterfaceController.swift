@@ -27,9 +27,9 @@ class AppDelegateInterfaceController: WKInterfaceController {
         case .CrownScrollPaged:
             self.pushControllerWithName("CrownScrollBillInterfaceController", context: InterfaceControllerContext.CrownScrollPagedTens.rawValue)
         case .StepperInfinite:
-            self.pushControllerWithName("StepperInterfaceController", context: InterfaceControllerContext.StepperInfinite.rawValue)
+            self.pushControllerWithName("StepperInfiniteInterfaceController", context: InterfaceControllerContext.StepperInfinite.rawValue)
         case .StepperPaged:
-            self.pushControllerWithName("StepperInterfaceController", context: InterfaceControllerContext.StepperPagedTens.rawValue)
+            self.pushControllerWithName("StepperTensInterfaceController", context: InterfaceControllerContext.StepperPagedTens.rawValue)
         }
     }
 }

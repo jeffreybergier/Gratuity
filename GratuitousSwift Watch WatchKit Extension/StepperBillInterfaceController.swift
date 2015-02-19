@@ -14,7 +14,7 @@ class StepperInterfaceController: WKInterfaceController {
     @IBOutlet private weak var currencyAmountTextLabel: WKInterfaceLabel?
     @IBOutlet private weak var currencySlider: WKInterfaceSlider?
     @IBOutlet private weak var nextButton: WKInterfaceButton?
-    @IBOutlet weak var tipPercentageLabel: WKInterfaceLabel?
+    @IBOutlet private weak var tipPercentageLabel: WKInterfaceLabel?
     
     private var currentContext = InterfaceControllerContext.NotSet
     
@@ -50,5 +50,9 @@ class StepperInterfaceController: WKInterfaceController {
         default:
             fatalError("StepperInterfaceController: Context was invalid while switching.")
         }
+    }
+    
+    @IBAction @objc private func didChangeSlider(value: Float) {
+        
     }
 }

@@ -15,28 +15,84 @@
         <!--Bill-->
         <scene sceneID="Mxj-A3-7vI">
             <objects>
-                <controller identifier="StepperInterfaceController" title="Bill" id="eOc-Vg-ANl" customClass="StepperInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller identifier="StepperTensInterfaceController" title="Bill" id="eOc-Vg-ANl" customClass="StepperInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
                         <label alignment="left" text="Label" numberOfLines="0" id="a2e-xb-wa9"/>
                         <label alignment="left" text="$10" id="My9-by-3be">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <label alignment="left" text="20%" id="1UT-D0-QBP">
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                        </label>
-                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="0pf-FU-XFs"/>
+                        <slider width="1" alignment="left" value="1" minimum="1" maximum="100" steps="1" id="0pf-FU-XFs">
+                            <connections>
+                                <action selector="didChangeSlider:" destination="eOc-Vg-ANl" id="v8P-rv-aNa"/>
+                            </connections>
+                        </slider>
                         <button width="1" alignment="left" title="Button" id="QCy-hF-A9x"/>
                     </items>
                     <connections>
                         <outlet property="currencyAmountTextLabel" destination="My9-by-3be" id="Znp-q6-IoJ"/>
-                        <outlet property="currencySlider" destination="0pf-FU-XFs" id="R9o-ey-MH3"/>
+                        <outlet property="currencySlider" destination="0pf-FU-XFs" id="YJU-Lo-jqA"/>
                         <outlet property="instructionTextLabel" destination="a2e-xb-wa9" id="gMf-hE-7iY"/>
                         <outlet property="nextButton" destination="QCy-hF-A9x" id="Ajn-6R-YIM"/>
-                        <outlet property="tipPercentageLabel" destination="1UT-D0-QBP" id="c5A-ac-f2s"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="54" y="514"/>
+            <point key="canvasLocation" x="196" y="514"/>
+        </scene>
+        <!--Bill-->
+        <scene sceneID="Poc-IY-jT3">
+            <objects>
+                <controller identifier="StepperInfiniteInterfaceController" title="Bill" id="PgJ-aM-1HX" customClass="StepperInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Label" numberOfLines="0" id="3f8-1C-Uob"/>
+                        <label alignment="left" text="$10" id="39p-yj-Gfg">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <slider width="1" alignment="left" value="20" maximum="1000" steps="1" id="n3d-TR-IXB">
+                            <connections>
+                                <action selector="didChangeSlider:" destination="PgJ-aM-1HX" id="SIb-z6-QP4"/>
+                            </connections>
+                        </slider>
+                        <button width="1" alignment="left" title="Button" id="Xef-7N-fof"/>
+                    </items>
+                    <connections>
+                        <outlet property="currencyAmountTextLabel" destination="39p-yj-Gfg" id="4WI-b4-VNB"/>
+                        <outlet property="currencySlider" destination="n3d-TR-IXB" id="QQR-aV-qIY"/>
+                        <outlet property="instructionTextLabel" destination="3f8-1C-Uob" id="VJy-89-udC"/>
+                        <outlet property="nextButton" destination="Xef-7N-fof" id="AKN-MW-slO"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-25" y="514"/>
+        </scene>
+        <!--Tip-->
+        <scene sceneID="g8w-Hz-0CA">
+            <objects>
+                <controller identifier="StepperTipInterfaceController" title="Tip" id="r1F-T9-7Uj" customClass="StepperInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Label" numberOfLines="0" id="oXO-0e-g0J"/>
+                        <label alignment="left" text="$10" id="2fP-pi-r5Y">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="20%" id="wlo-Ih-GRd">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <slider width="1" alignment="left" value="1" maximum="15" steps="1" id="rGK-wA-IwG">
+                            <connections>
+                                <action selector="didChangeSlider:" destination="r1F-T9-7Uj" id="Snd-g8-VY0"/>
+                            </connections>
+                        </slider>
+                        <button width="1" alignment="left" title="Button" id="dYW-SE-Kmz"/>
+                    </items>
+                    <connections>
+                        <outlet property="currencyAmountTextLabel" destination="2fP-pi-r5Y" id="KuQ-w1-lwz"/>
+                        <outlet property="currencySlider" destination="rGK-wA-IwG" id="nEd-sd-dnn"/>
+                        <outlet property="instructionTextLabel" destination="oXO-0e-g0J" id="YXM-Th-CVi"/>
+                        <outlet property="nextButton" destination="dYW-SE-Kmz" id="3Nz-cS-6PA"/>
+                        <outlet property="tipPercentageLabel" destination="wlo-Ih-GRd" id="mTk-rU-fc8"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="421" y="514"/>
         </scene>
         <!--Bill-->
         <scene sceneID="t1K-MZ-tcM">
