@@ -160,7 +160,8 @@ class GratuitousWatchDataSource {
     
     func currencyStringFromInteger(integerValue: Int?) -> String {
         if let integerValue = integerValue {
-            let currencyString: String?
+            var currencyString: String?
+            //let currencyString: String?
             if let currentCurrencyFormat = self.currentCurrencyFormat {
                 switch currentCurrencyFormat {
                 case .Default:

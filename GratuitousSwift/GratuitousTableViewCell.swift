@@ -36,7 +36,8 @@ class GratuitousTableViewCell: UITableViewCell {
     }
     
     private func didSetBillAmount() {
-        let currencyFormattedString: String
+        var currencyFormattedString: String
+        //let currencyFormattedString: String
         if self.billAmount != 0 {
             currencyFormattedString = self.currencyFormatter?.currencyFormattedString(self.billAmount) !! ""
         } else {

@@ -21,7 +21,8 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        let currentContext: InterfaceControllerContext
+        //let currentContext: InterfaceControllerContext
+        var currentContext: InterfaceControllerContext
         if let contextString = context as? String {
             currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.CrownScrollTipChooser
         } else {
@@ -33,8 +34,10 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        let numberOfRowsInTable: Int
-        let cellBeginIndex: Int
+        var numberOfRowsInTable: Int
+        var cellBeginIndex: Int
+        //let numberOfRowsInTable: Int
+        //let cellBeginIndex: Int
         switch self.currentContext {
         case .CrownScrollInfinite:
             self.setTitle(NSLocalizedString("Bill", comment: ""))
@@ -87,7 +90,8 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
         let newBillAmount = self.data[rowIndex] * self.cellValueMultiplier
         self.dataSource.billAmount = newBillAmount
         
-        let nextContext: InterfaceControllerContext
+        var nextContext: InterfaceControllerContext
+        //let nextContext: InterfaceControllerContext
         switch self.currentContext {
         case .CrownScrollPagedOnes:
             nextContext = .CrownScrollTipChooser

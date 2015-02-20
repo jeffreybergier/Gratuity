@@ -22,7 +22,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         let swipe = UISwipeGestureRecognizer(target: self, action: "didSwipeToDismiss:")
         swipe.direction = UISwipeGestureRecognizerDirection.Right
         return swipe
-    }()
+        }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,7 +166,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         let image = UIImage(CGImage: cgImage, scale: scale, orientation: UIImageOrientation.Up)
         
         return image
-    }()
+        }()
     
     func prepareTipPercentageSliderAndLabels() {
         //set the text color for the tip percentage
@@ -186,7 +186,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     func readUserDefaultsAndUpdateSlider(notification: NSNotification?) {
         let onDiskTipPercentage = self.defaultsManager?.suggestedTipPercentage !! 0.20
-        self.suggestedTipPercentageLabel?.text = "\(Int(round(onDiskTipPercentage * 100)))"
+        self.suggestedTipPercentageLabel?.text = "\(Int(round(onDiskTipPercentage * 100)))%"
         self.suggestedTipPercentageSlider?.setValue(Float(onDiskTipPercentage), animated: false)
     }
     
@@ -215,9 +215,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     private func writeCurrencyOverrideUserDefaultToDisk(_ currencyOverride: CurrencySign? = nil) {
-        if let currencyOverride = currencyOverride,
-        let defaultsManager = self.defaultsManager {
-            defaultsManager.overrideCurrencySymbol = currencyOverride
+        if let currencyOverride = currencyOverride {
+            if let defaultsManager = self.defaultsManager {
+                defaultsManager.overrideCurrencySymbol = currencyOverride
+            }
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self)
