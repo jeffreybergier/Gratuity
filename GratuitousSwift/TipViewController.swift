@@ -73,6 +73,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var lowerTextSizeAdjustment: CGFloat = 0.0
     private var billAmountsArray = [Int]()
     private var tipAmountsArray = [Int]()
+    // consider deleting this property later. I tried but didn't want to cause bugs
+    // Also, it might help performance. Otherwise this value needs to be continually read from disk when scrolling
     private var suggestedTipPercentage = 0.0
     
     //MARK: Handle View Loading
@@ -123,7 +125,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
         
         // set the suggested tip percentage from disk
-        let suggestedTipPercentage = self.defaultsManager?.suggestedTipPercentage !! 0.20
+        self.suggestedTipPercentage = self.defaultsManager?.suggestedTipPercentage !! 0.20
         
         //prepare the tableviews
         self.billAmountTableView?.delegate = self
@@ -199,15 +201,14 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
 
     private func updateTableViewsFromDisk() {
         if let defaultsManager = self.defaultsManager {
-            let billAmount = defaultsManager.billIndexPathRow
-            self.suggestedTipPercentage = defaultsManager.suggestedTipPercentage
+            let billAmount = defaultsManager.billIndexPathRow + PrivateConstants.ExtraCells - 1
             
             self.billAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: billAmount, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
             
             var tipAmount: Int
             //let tipAmount: Int
             if defaultsManager.tipIndexPathRow > 0 {
-                tipAmount = defaultsManager.tipIndexPathRow
+                tipAmount = defaultsManager.tipIndexPathRow + PrivateConstants.ExtraCells - 1
                 self.tipAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: tipAmount, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
             } else {
                 //
@@ -320,12 +321,17 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func writeToDiskBillTableIndexPath(indexPath: NSIndexPath) {
-        self.defaultsManager?.billIndexPathRow = indexPath.row
+        self.defaultsManager?.billIndexPathRow = indexPath.row - PrivateConstants.ExtraCells + 1
         self.defaultsManager?.tipIndexPathRow = 0
     }
     
-    private func writeToDiskTipTableIndexPath(indexPath: NSIndexPath) {
-        self.defaultsManager?.tipIndexPathRow = indexPath.row
+    private func writeToDiskTipTableIndexPath(indexPath: NSIndexPath, WithAutoAdjustment autoAdjustment: Bool) {
+        // Auto adjustment lets me know when we are saving an actual value of tip vs just setting the tipamount to 0 or 1 for logic reasons.
+        if autoAdjustment == true {
+            self.defaultsManager?.tipIndexPathRow = indexPath.row - PrivateConstants.ExtraCells + 1
+        } else {
+            self.defaultsManager?.tipIndexPathRow = indexPath.row
+        }
     }
     
     //MARK: Handle Updating the Big Labels
@@ -392,7 +398,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 self.writeToDiskBillTableIndexPath(indexPath)
                 tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             case .TipAmount:
-                self.writeToDiskTipTableIndexPath(indexPath)
+                self.writeToDiskTipTableIndexPath(indexPath, WithAutoAdjustment: true)
                 tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             }
             self.bigTextLabelsShouldPresent(false)
@@ -427,7 +433,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                         self.writeToDiskBillTableIndexPath(indexPath)
                         tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                     case .TipAmount:
-                        self.writeToDiskTipTableIndexPath(indexPath)
+                        self.writeToDiskTipTableIndexPath(indexPath, WithAutoAdjustment: true)
                         tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                     }
                     self.bigTextLabelsShouldPresent(true)
@@ -443,9 +449,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             // without using an instance variable
             switch tag {
             case .BillAmount:
-                self.writeToDiskTipTableIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+                self.writeToDiskTipTableIndexPath(NSIndexPath(forRow: 0, inSection: 0), WithAutoAdjustment: false)
             case .TipAmount:
-                self.writeToDiskTipTableIndexPath(NSIndexPath(forRow: 1, inSection: 0))
+                self.writeToDiskTipTableIndexPath(NSIndexPath(forRow: 1, inSection: 0), WithAutoAdjustment: false)
             }
         }
     }

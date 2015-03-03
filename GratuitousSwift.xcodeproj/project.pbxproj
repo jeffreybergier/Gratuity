@@ -64,6 +64,7 @@
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73C0FD521A884789003ED951 /* CrownScrollTipInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */; };
 		73C0FD541A884BFB003ED951 /* CrownScrollTipTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */; };
+		73C1F4D31AA58F3400F6C116 /* ExperimentalStepperBillInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1F4D21AA58F3400F6C116 /* ExperimentalStepperBillInterfaceController.swift */; };
 		73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
 		73C7B4951A2A92E400536D86 /* UIImage+PDFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 73556E641A19711F0079A37D /* UIImage+PDFUtility.m */; };
 		73C7B4961A2A92E400536D86 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512619E60F3900CD2B28 /* TipViewController.swift */; };
@@ -173,6 +174,7 @@
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownScrollTipInterfaceController.swift; sourceTree = "<group>"; };
 		73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownScrollTipTableRowController.swift; sourceTree = "<group>"; };
+		73C1F4D21AA58F3400F6C116 /* ExperimentalStepperBillInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentalStepperBillInterfaceController.swift; sourceTree = "<group>"; };
 		73C7B4B31A2A92E400536D86 /* GratuitousSwift Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GratuitousSwift Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C7B4B41A2A92E500536D86 /* GratuitousSwift Local copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GratuitousSwift Local copy-Info.plist"; path = "/Users/jeffberg/Documents/SaturdayApps/GratuitousSwift/GratuitousSwift Local copy-Info.plist"; sourceTree = "<absolute>"; };
 		73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperBillInterfaceController.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */,
+				73C1F4D21AA58F3400F6C116 /* ExperimentalStepperBillInterfaceController.swift */,
 			);
 			name = "Stepper Interface";
 			sourceTree = "<group>";
@@ -788,6 +791,7 @@
 				73C0FD521A884789003ED951 /* CrownScrollTipInterfaceController.swift in Sources */,
 				73A18D801A2A9661002180DD /* GratuitousWatchDataSource.swift in Sources */,
 				73D179281A90532E003D9DEE /* StepperBillInterfaceController.swift in Sources */,
+				73C1F4D31AA58F3400F6C116 /* ExperimentalStepperBillInterfaceController.swift in Sources */,
 				733E8CB81A8705CA00B228CB /* GratuitousEnums.swift in Sources */,
 				73C0FD541A884BFB003ED951 /* CrownScrollTipTableRowController.swift in Sources */,
 				737C87291A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift in Sources */,

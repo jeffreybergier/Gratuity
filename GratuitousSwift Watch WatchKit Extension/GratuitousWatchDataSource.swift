@@ -77,19 +77,20 @@ class GratuitousWatchDataSource {
     
     var billAmount: Int? {
         set {
+            _billAmount = newValue //!! 0 + 1 //Adjust for the fact that this is an indexpathrow from the ios app
+                if let tipPercentage = _tipPercentage {
+                    _tipAmount = Int(round(Double(newValue !! 0) * tipPercentage))
+            }
             self.tipAmountSetLast = false
             self.configureTimer()
-            
-            _billAmount = newValue
-            if let newValue = newValue {
-                if let tipPercentage = _tipPercentage {
-                    _tipAmount = Int(round(Double(newValue) * tipPercentage))
-                }
-            }
         }
         get {
             if let billAmount = _billAmount {
-                return billAmount
+                if billAmount > 0 {
+                    return billAmount //- 1 //Adjust for the fact that this is an indexpathrow from the ios app
+                } else {
+                    return billAmount
+                }
             } else {
                 if let tipAmount = _tipAmount {
                     if let tipPercentage = _tipPercentage {

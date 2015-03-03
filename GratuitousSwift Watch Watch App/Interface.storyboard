@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7515.2" systemVersion="14C109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cdi-qG-zGI">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6750" systemVersion="14C109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cdi-qG-zGI">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7512"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6735"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
@@ -21,12 +21,17 @@
                         <label alignment="left" text="$10" id="My9-by-3be">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <slider width="1" alignment="left" value="1" minimum="1" maximum="100" steps="1" id="0pf-FU-XFs">
+                        <slider width="1" alignment="left" value="1" minimum="1" maximum="100" steps="99" id="0pf-FU-XFs">
+                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="didChangeSlider:" destination="eOc-Vg-ANl" id="v8P-rv-aNa"/>
                             </connections>
                         </slider>
-                        <button width="1" alignment="left" title="Button" id="QCy-hF-A9x"/>
+                        <button width="1" alignment="left" title="Button" id="QCy-hF-A9x">
+                            <connections>
+                                <action selector="didTapNextButton" destination="eOc-Vg-ANl" id="3eq-9U-hKC"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="currencyAmountTextLabel" destination="My9-by-3be" id="Znp-q6-IoJ"/>
@@ -47,12 +52,17 @@
                         <label alignment="left" text="$10" id="39p-yj-Gfg">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <slider width="1" alignment="left" value="20" maximum="1000" steps="1" id="n3d-TR-IXB">
+                        <slider width="1" alignment="left" continuous="YES" value="20" minimum="1" maximum="1000" steps="999" id="n3d-TR-IXB">
+                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="didChangeSlider:" destination="PgJ-aM-1HX" id="SIb-z6-QP4"/>
                             </connections>
                         </slider>
-                        <button width="1" alignment="left" title="Button" id="Xef-7N-fof"/>
+                        <button width="1" alignment="left" title="Button" id="Xef-7N-fof">
+                            <connections>
+                                <action selector="didTapNextButton" destination="PgJ-aM-1HX" id="5i2-kg-ct0"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="currencyAmountTextLabel" destination="39p-yj-Gfg" id="4WI-b4-VNB"/>
@@ -76,12 +86,17 @@
                         <label alignment="left" text="20%" id="wlo-Ih-GRd">
                             <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                         </label>
-                        <slider width="1" alignment="left" value="1" maximum="15" steps="1" id="rGK-wA-IwG">
+                        <slider width="1" alignment="left" value="1" minimum="1" maximum="15" steps="14" id="rGK-wA-IwG">
+                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="didChangeSlider:" destination="r1F-T9-7Uj" id="Snd-g8-VY0"/>
                             </connections>
                         </slider>
-                        <button width="1" alignment="left" title="Button" id="dYW-SE-Kmz"/>
+                        <button width="1" alignment="left" title="Button" id="dYW-SE-Kmz">
+                            <connections>
+                                <action selector="didTapNextButton" destination="r1F-T9-7Uj" id="jV0-6P-IMM"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="currencyAmountTextLabel" destination="2fP-pi-r5Y" id="KuQ-w1-lwz"/>
@@ -187,6 +202,76 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="610" y="316"/>
+        </scene>
+        <!--Bill-->
+        <scene sceneID="dEq-bm-f4H">
+            <objects>
+                <controller identifier="ExperimentalStepperInfiniteInterfaceController" title="Bill" id="vbv-Xr-8bf" customClass="ExperimentalStepperBillInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="bza-Jp-x2l">
+                            <items>
+                                <label height="50" alignment="left" verticalAlignment="center" text="$" id="i6s-sR-8E2"/>
+                                <group width="0.29999999999999999" height="1" alignment="left" radius="7" id="Obv-Vb-WtO">
+                                    <items>
+                                        <button width="0.93000000000000005" height="0.93000000000000005" alignment="center" verticalAlignment="center" title="0" id="ije-qV-9yS">
+                                            <color key="backgroundColor" red="0.1176470588" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="hundredButtonSelected" destination="vbv-Xr-8bf" id="MBV-OW-fFf"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </group>
+                                <group width="0.29999999999999999" height="1" alignment="left" radius="7" id="Nhx-sz-1W7">
+                                    <items>
+                                        <button width="0.93000000000000005" height="0.93000000000000005" alignment="center" verticalAlignment="center" title="0" id="Muf-ed-4x0">
+                                            <color key="backgroundColor" red="0.1176470588" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="tensButtonSelected" destination="vbv-Xr-8bf" id="8IS-vx-QP6"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </group>
+                                <group width="0.29999999999999999" height="1" alignment="left" radius="7" id="Bfk-kY-eFE">
+                                    <items>
+                                        <button width="0.93000000000000005" height="0.93000000000000005" alignment="center" verticalAlignment="center" title="0" id="6cK-GH-hOW">
+                                            <color key="backgroundColor" red="0.1176470588" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="onesButtonSelected" destination="vbv-Xr-8bf" id="LQC-Px-vrZ"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </group>
+                            </items>
+                        </group>
+                        <slider width="1" alignment="left" maximum="9" steps="10" id="9M8-bu-rEq">
+                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="sliderDidChange:" destination="vbv-Xr-8bf" id="aXW-id-gwP"/>
+                            </connections>
+                        </slider>
+                        <button width="1" alignment="left" title="Button" id="Ar8-BW-IYq">
+                            <connections>
+                                <action selector="didTapNextButton" destination="vbv-Xr-8bf" id="gWb-ww-i4g"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="currencyLabel" destination="i6s-sR-8E2" id="NcJ-vb-bh5"/>
+                        <outlet property="currencySlider" destination="9M8-bu-rEq" id="6Jr-UI-Ksc"/>
+                        <outlet property="hundredsButton" destination="ije-qV-9yS" id="oGx-5F-z76"/>
+                        <outlet property="hundredsGroup" destination="Obv-Vb-WtO" id="tyo-R3-Am3"/>
+                        <outlet property="nextButton" destination="Ar8-BW-IYq" id="kd2-FD-mYn"/>
+                        <outlet property="onesButton" destination="6cK-GH-hOW" id="Kzh-vS-Vhf"/>
+                        <outlet property="onesGroup" destination="Bfk-kY-eFE" id="Vvb-hN-8wu"/>
+                        <outlet property="tensButton" destination="Muf-ed-4x0" id="MEe-hw-sRv"/>
+                        <outlet property="tensGroup" destination="Nhx-sz-1W7" id="XJI-D3-8Co"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-25" y="763"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
