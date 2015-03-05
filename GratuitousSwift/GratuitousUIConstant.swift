@@ -8,78 +8,54 @@
 
 import UIKit
 
-class GratuitousUIConstant {
+struct GratuitousUIConstant {
     
-    private class func invertColorsIsEnabled() -> Bool {
-        var invertColors = false
-        
-        if UIAccessibilityIsInvertColorsEnabled() {
-            invertColors = true
-        }
-        
-        return invertColors
+    // bridging to another class that the watch app can use in order to reduce refactoring
+    static func lightBackgroundColor() -> UIColor {
+        return GratuitousUIColor.lightTextColor()
     }
     
-    class func lightBackgroundColor() -> UIColor {
-        //return UIColor(red: 185.0/255.0, green: 46.0/255.0, blue: 46.0/255.0, alpha: 1.0)
-        return self.lightTextColor()
+    static func darkBackgroundColor() -> UIColor {
+        return GratuitousUIColor.darkBackgroundColor()
     }
     
-    class func darkBackgroundColor() -> UIColor {
-        var color = UIColor(red: 30.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
-        
-        if invertColorsIsEnabled() {
-            color = UIColor.whiteColor()
-        }
-        
-        return color
+    static func lightTextColor() -> UIColor {
+        return GratuitousUIColor.lightTextColor()
     }
     
-    class func lightTextColor() -> UIColor {
-        var color = UIColor(red: 150.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
-        
-        if invertColorsIsEnabled() {
-            color = UIColor.blackColor()
-        }
-        
-        return color
-        //return self.lightBackgroundColor()
+    static func darkTextColor() -> UIColor {
+        return GratuitousUIColor.darkTextColor()
     }
     
-    class func darkTextColor() -> UIColor {
-        //return UIColor(red: 104.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
-        return self.darkBackgroundColor()
+    static func textShadowColor() -> UIColor {
+        return GratuitousUIColor.textShadowColor()
     }
     
-    class func textShadowColor() -> UIColor {
-        return UIColor(red: 20.0/255.0, green: 20.0/255.0, blue: 20.0/255.0, alpha: 1.0)
-    }
-    
-    class func thickBorderWidth() -> CGFloat {
+    static func thickBorderWidth() -> CGFloat {
         return 2.0
     }
     
-    class func thinBorderWidth() -> CGFloat {
+    static func thinBorderWidth() -> CGFloat {
         return 1.0
     }
     
-    class func animationDuration() -> Double {
+    static func animationDuration() -> Double {
         return 0.3
     }
     
-    class func originalFontForTableViewCellTextLabels() -> UIFont? {
+    static func originalFontForTableViewCellTextLabels() -> UIFont? {
         return UIFont(name: "Futura-Medium", size: 35.0)
     }
     
-    class func originalFontForTotalAmountTextLabel() -> UIFont? {
+    static func originalFontForTotalAmountTextLabel() -> UIFont? {
         return UIFont(name: "Futura-Medium", size: 180.0)
     }
     
-    class func originalFontForTipPercentageTextLabel() -> UIFont? {
+    static func originalFontForTipPercentageTextLabel() -> UIFont? {
         return UIFont(name: "Futura-Medium", size: 100.0)
     }
     
-    class func deviceScreen() -> (padIdiom: Bool, largeDevice: Bool, smallDeviceLandscape: Bool, largeDeviceLandscape: Bool) {
+    static func deviceScreen() -> (padIdiom: Bool, largeDevice: Bool, smallDeviceLandscape: Bool, largeDeviceLandscape: Bool) {
         var padIdiom = false
         var largeDevice = false
         var smallDeviceLandscape = false
@@ -105,7 +81,7 @@ class GratuitousUIConstant {
         return (padIdiom: padIdiom, largeDevice: largeDevice, smallDeviceLandscape: smallDeviceLandscape, largeDeviceLandscape: largeDeviceLandscape)
     }
     
-    class func largeTextLandscapeConstant() -> CGFloat {
+    static func largeTextLandscapeConstant() -> CGFloat {
         var constant: CGFloat = 0
         
         //then adjust for the preferred text size
@@ -133,7 +109,7 @@ class GratuitousUIConstant {
     }
 
     
-    class func actualScreenSizeBasedOnWidth() -> ActualScreenSizeBasedOnWidth {
+    static func actualScreenSizeBasedOnWidth() -> ActualScreenSizeBasedOnWidth {
         var actualScreenWidthEnum = ActualScreenSizeBasedOnWidth.iPhone4or5
         let actualScreenWidth = (UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
         if actualScreenWidth > 767 {
@@ -148,7 +124,7 @@ class GratuitousUIConstant {
         return actualScreenWidthEnum
     }
     
-    class func correctCellTextSize() -> TableViewTextSizeAdjustedForDynamicType {
+    static func correctCellTextSize() -> TableViewTextSizeAdjustedForDynamicType {
         var screenEnum = TableViewTextSizeAdjustedForDynamicType.iPhone4or5
         var textSizeAdjustment = 0
         let actualScreenWidth = (UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height

@@ -83,7 +83,6 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
         self.nextButton?.setTitle(NSLocalizedString("Next", comment: ""))
         self.instructionalTextLabel?.setText("")
         self.tipPercentageLabel?.setText("-%")
-        self.selectedButton = .Ones
         
         switch self.currentContext {
         case .ThreeButtonStepperBill:
@@ -92,9 +91,17 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
             self.updateUIWithCurrencyAmount(self.dataSource.billAmount)
         case .ThreeButtonStepperTip:
             self.instructionalTextLabel?.setText(NSLocalizedString("Choose Tip Amount", comment: ""))
+            let billAmount = self.dataSource.billAmount !! 0
+            let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
+            let calculatedTip = Double(billAmount) * suggestedTipPercentage
+            let actualTipPercentage = calculatedTip / Double(billAmount)
+            self.updateUIWithCurrencyAmount(Int(round(calculatedTip)))
+            self.tipPercentageLabel?.setText(self.dataSource.percentStringFromRawDouble(actualTipPercentage))
         default:
             fatalError("StepperInterfaceController: Context was invalid while switching.")
         }
+        
+        self.selectedButton = .Ones
     }
     
     private func updateUIWithCurrencyAmount(currencyAmount: Int?) {
@@ -143,19 +150,19 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
         case .ThreeButtonStepperBill:
             self.dataSource.billAmount = value
         case .ThreeButtonStepperTip:
-            break
+            self.dataSource.tipAmount = value
         default:
             break
         }
     }
     
     @IBAction private func didTapNextButton() {
+        self.writeValueToDisk(self.calculateValueFromUI())
         switch self.currentContext {
         case .ThreeButtonStepperBill:
-            self.writeValueToDisk(self.calculateValueFromUI())
             self.pushControllerWithName("ThreeButtonStepperTipInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperTip.rawValue)
         case .ThreeButtonStepperTip:
-            break
+            self.pushControllerWithName("TotalAmountInterfaceController", context: InterfaceControllerContext.TotalAmountInterfaceController.rawValue)
         default:
             break
         }
@@ -190,6 +197,13 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
             } else {
                 self.buttonValues.ones = Int(round(value))
             }
+        }
+        if let tipPercentageLabel = self.tipPercentageLabel {
+            // if this outlet is set, we are tip controller and we need to update the tip percentage label
+            let billAmount = self.dataSource.billAmount !! 0
+            let tipAmount = self.calculateValueFromUI()
+            let calculatedTipPercentage = Double(tipAmount) / Double(billAmount)
+            tipPercentageLabel.setText(self.dataSource.percentStringFromRawDouble(calculatedTipPercentage))
         }
         self.writeValueToDisk(self.calculateValueFromUI())
     }

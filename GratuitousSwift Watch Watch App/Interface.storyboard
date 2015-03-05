@@ -161,7 +161,7 @@
                                 </group>
                             </items>
                         </group>
-                        <slider width="1" alignment="left" maximum="9" steps="10" id="9M8-bu-rEq">
+                        <slider width="1" alignment="left" value="4" maximum="9" steps="9" id="9M8-bu-rEq">
                             <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="sliderDidChange:" destination="vbv-Xr-8bf" id="aXW-id-gwP"/>
@@ -247,7 +247,7 @@
                         <label alignment="right" text="20%" id="OQ1-cH-EdO">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <slider width="1" alignment="left" maximum="9" steps="10" id="ILt-Uv-IEs">
+                        <slider width="1" alignment="left" maximum="9" steps="9" id="ILt-Uv-IEs">
                             <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="sliderDidChange:" destination="K8B-2v-XSa" id="fsK-L7-w1Z"/>

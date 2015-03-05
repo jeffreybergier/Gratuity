@@ -14,6 +14,10 @@
 		733E8CB71A87054E00B228CB /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
 		733E8CB81A8705CA00B228CB /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 		734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
+		734A7C5A1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
+		734A7C5B1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
+		734A7C5C1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
+		734A7C5D1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
 		73556E651A19711F0079A37D /* UIImage+PDFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 73556E641A19711F0079A37D /* UIImage+PDFUtility.m */; };
 		7356AEBE19FF281B00E44A5E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBC19FF281B00E44A5E /* Crashlytics.framework */; };
 		7356AEBF19FF281B00E44A5E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBD19FF281B00E44A5E /* Fabric.framework */; };
@@ -136,6 +140,7 @@
 		7334770E1A26E85000513F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousUserDefaults.swift; path = ../GratuitousSwift/GratuitousUserDefaults.swift; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
+		734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIColor.swift; sourceTree = "<group>"; };
 		73556E621A19711E0079A37D /* GratuitousSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GratuitousSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		73556E631A19711F0079A37D /* UIImage+PDFUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PDFUtility.h"; sourceTree = "<group>"; };
 		73556E641A19711F0079A37D /* UIImage+PDFUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PDFUtility.m"; sourceTree = "<group>"; };
@@ -443,6 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
+				734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */,
 				735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */,
 			);
 			name = "Custom Files";
@@ -749,6 +755,7 @@
 				736568DE1A26DD1400603602 /* GratuitousSettingsButtons.swift in Sources */,
 				736568DF1A26DD1400603602 /* GratuitousTransitioningDelegate.swift in Sources */,
 				733E8CB51A86FBA200B228CB /* GratuitousUserDefaults.swift in Sources */,
+				734A7C5B1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
 				736568E01A26DD1400603602 /* GratuitousCurrencyFormatter.swift in Sources */,
 				736568E11A26DD1400603602 /* GratuitousEnums.swift in Sources */,
 				736568E31A26DD1400603602 /* GratuitousUIConstant.swift in Sources */,
@@ -771,6 +778,7 @@
 				73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */,
 				73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */,
 				733E8CB41A86F83100B228CB /* GratuitousUserDefaults.swift in Sources */,
+				734A7C5A1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
 				735C011E1A0878D000A19462 /* GratuitousCurrencyFormatter.swift in Sources */,
 				73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */,
 				737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */,
@@ -788,6 +796,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73A755B91A882BB10038E023 /* CrownScrollBillTableRowController.swift in Sources */,
+				734A7C5D1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
 				73A755B21A87F2770038E023 /* AppDelegateInterfaceController.swift in Sources */,
 				73A0B5681A8FC56A00D17943 /* TotalAmountInterfaceController.swift in Sources */,
 				733E8CB71A87054E00B228CB /* GratuitousUserDefaults.swift in Sources */,
@@ -810,6 +819,7 @@
 				73C7B4981A2A92E400536D86 /* GratuitousSettingsButtons.swift in Sources */,
 				73C7B4991A2A92E400536D86 /* GratuitousTransitioningDelegate.swift in Sources */,
 				733E8CB61A86FBA200B228CB /* GratuitousUserDefaults.swift in Sources */,
+				734A7C5C1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
 				73C7B49A1A2A92E400536D86 /* GratuitousCurrencyFormatter.swift in Sources */,
 				73C7B49B1A2A92E400536D86 /* GratuitousEnums.swift in Sources */,
 				73C7B49D1A2A92E400536D86 /* GratuitousUIConstant.swift in Sources */,
