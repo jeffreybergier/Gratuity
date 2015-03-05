@@ -104,10 +104,10 @@ enum InterfaceControllerContext: String, Printable {
     case CrownScrollPagedTens = "CrownScrollPagedTens"
     case CrownScrollPagedOnes = "CrownScrollPagedOnes"
     case CrownScrollTipChooser = "CrownScrollTipChooser"
-    case StepperInfinite = "StepperInfinite"
-    case StepperPagedTens = "StepperPagedTens"
-    case StepperPagedOnes = "StepperPagedOnes"
-    case StepperTipChooser = "StepperTipChooser"
+    case ThreeButtonStepperBill = "ThreeButtonStepperBill"
+    case ThreeButtonStepperTip = "ThreeButtonStepperTip"
+//    case StepperPagedOnes = "StepperPagedOnes"
+//    case StepperTipChooser = "StepperTipChooser"
     case TotalAmountInterfaceController = "TotalAmountInterfaceController"
     case NotSet = "NotSet"
     
@@ -117,7 +117,7 @@ enum InterfaceControllerContext: String, Printable {
 }
 
 enum InterfaceState: Int, Printable {
-    case CrownScrollInfinite = 0, CrownScrollPaged, StepperInfinite, StepperPaged
+    case CrownScrollInfinite = 0, CrownScrollPaged, ThreeButtonStepper//StepperInfinite, StepperPaged
     
     var description: String {
         switch self {
@@ -125,10 +125,12 @@ enum InterfaceState: Int, Printable {
             return "InterfaceState Enum: CrownScrollInfinite"
         case .CrownScrollPaged:
             return "InterfaceState Enum: CrownScrollPaged"
-        case .StepperInfinite:
-            return "InterfaceState Enum: StepperInfinite"
-        case .StepperPaged:
-            return "InterfaceState Enum: StepperPaged"
+        case .ThreeButtonStepper:
+            return "InterfaceState Enum: ThreeButtonStepper"
+//        case .StepperInfinite:
+//            return "InterfaceState Enum: StepperInfinite"
+//        case .StepperPaged:
+//            return "InterfaceState Enum: StepperPaged"
         }
     }
 }

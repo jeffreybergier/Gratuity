@@ -1,5 +1,5 @@
 //
-//  ExperimentalStepperBillInterfaceController.swift
+//  ThreeButtonStepperInterfaceController.swift
 //  GratuitousSwift
 //
 //  Created by Jeffrey Bergier on 3/2/15.
@@ -8,9 +8,11 @@
 
 import WatchKit
 
-class ExperimentalStepperBillInterfaceController: WKInterfaceController {
+class ThreeButtonStepperInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var currencyLabel: WKInterfaceLabel?
+    @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
+    @IBOutlet private weak var tipPercentageLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var hundredsButton: WKInterfaceButton?
     @IBOutlet private weak var tensButton: WKInterfaceButton?
@@ -68,7 +70,7 @@ class ExperimentalStepperBillInterfaceController: WKInterfaceController {
         var currentContext: InterfaceControllerContext
         //let currentContext: InterfaceControllerContext
         if let contextString = context as? String {
-            currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.StepperPagedTens
+            currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.ThreeButtonStepperBill
         } else {
             fatalError("StepperInterfaceController: Context not present during awakeWithContext:")
         }
@@ -79,8 +81,20 @@ class ExperimentalStepperBillInterfaceController: WKInterfaceController {
         super.willActivate()
         
         self.nextButton?.setTitle(NSLocalizedString("Next", comment: ""))
-        self.updateUIWithCurrencyAmount(self.dataSource.billAmount)
+        self.instructionalTextLabel?.setText("")
+        self.tipPercentageLabel?.setText("-%")
         self.selectedButton = .Ones
+        
+        switch self.currentContext {
+        case .ThreeButtonStepperBill:
+            self.instructionalTextLabel?.setText(NSLocalizedString("Choose Bill Amount", comment: ""))
+            self.tipPercentageLabel?.setHidden(true)
+            self.updateUIWithCurrencyAmount(self.dataSource.billAmount)
+        case .ThreeButtonStepperTip:
+            self.instructionalTextLabel?.setText(NSLocalizedString("Choose Tip Amount", comment: ""))
+        default:
+            fatalError("StepperInterfaceController: Context was invalid while switching.")
+        }
     }
     
     private func updateUIWithCurrencyAmount(currencyAmount: Int?) {
@@ -106,23 +120,45 @@ class ExperimentalStepperBillInterfaceController: WKInterfaceController {
         }
     }
     
-    private func writeCurrencyValueToDisk(currencyArray: [Int]) {
-        println("Saving Array to disk \(currencyArray)")
+    private func calculateValueFromUI() -> Int {
+        let UIArray = [self.buttonValues.hundreds, self.buttonValues.tens, self.buttonValues.ones]
         var compiledInt = 0
-        for (index, integer) in enumerate(currencyArray.reverse()) {
+        for (index, integer) in enumerate(UIArray.reverse()) {
             // for index 0 the integer needs to be multiplied by 1.
             // For index 1, it needs to be multiplied by 10
             // for index 2, it needs to be multipled by 100
             // the index == the number of zeros needed after the 1.
             // this for loop accomplishes that.
-            var zeroString = "1"
+            var multiplier = 1
             for i in 0..<index {
-                zeroString += "0"
+                multiplier *= 10
             }
-            let multiplier = zeroString.toInt() !! 1
             compiledInt += integer * multiplier
         }
-        self.dataSource.billAmount = compiledInt
+        return compiledInt
+    }
+    
+    private func writeValueToDisk(value: Int) {
+        switch self.currentContext {
+        case .ThreeButtonStepperBill:
+            self.dataSource.billAmount = value
+        case .ThreeButtonStepperTip:
+            break
+        default:
+            break
+        }
+    }
+    
+    @IBAction private func didTapNextButton() {
+        switch self.currentContext {
+        case .ThreeButtonStepperBill:
+            self.writeValueToDisk(self.calculateValueFromUI())
+            self.pushControllerWithName("ThreeButtonStepperTipInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperTip.rawValue)
+        case .ThreeButtonStepperTip:
+            break
+        default:
+            break
+        }
     }
 
     @IBAction private func sliderDidChange(value: Float) {
@@ -155,7 +191,7 @@ class ExperimentalStepperBillInterfaceController: WKInterfaceController {
                 self.buttonValues.ones = Int(round(value))
             }
         }
-        self.writeCurrencyValueToDisk([self.buttonValues.hundreds, self.buttonValues.tens, self.buttonValues.ones])
+        self.writeValueToDisk(self.calculateValueFromUI())
     }
     
     private func carryValueUp(#valuePlace: SelectedButton) {

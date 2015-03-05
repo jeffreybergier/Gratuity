@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6750" systemVersion="14C109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6735"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
+    </dependencies>
+    <scenes>
+        <!--Bill-->
+        <scene sceneID="VKO-96-6hI">
+            <objects>
+                <controller identifier="StepperTensInterfaceController" title="Bill" id="uNo-ba-0d2" customClass="StepperInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Label" numberOfLines="0" id="3vJ-WB-T1F"/>
+                        <label alignment="left" text="$10" id="tSs-yd-usP">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <slider width="1" alignment="left" value="1" minimum="1" maximum="100" steps="99" id="OUc-dw-ay7">
+                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="didChangeSlider:" destination="uNo-ba-0d2" id="5Fj-9m-c8T"/>
+                            </connections>
+                        </slider>
+                        <button width="1" alignment="left" title="Button" id="ObM-yw-Mfj">
+                            <connections>
+                                <action selector="didTapNextButton" destination="uNo-ba-0d2" id="8YA-6l-HLc"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="currencyAmountTextLabel" destination="tSs-yd-usP" id="pzf-79-2K0"/>
+                        <outlet property="currencySlider" destination="OUc-dw-ay7" id="7oF-ja-7g7"/>
+                        <outlet property="instructionTextLabel" destination="3vJ-WB-T1F" id="Lfv-gk-Ods"/>
+                        <outlet property="nextButton" destination="ObM-yw-Mfj" id="fyQ-sc-7JP"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="759" y="484"/>
+        </scene>
+        <!--Bill-->
+        <scene sceneID="tV2-ub-PxA">
+            <objects>
+                <controller identifier="StepperInfiniteInterfaceController" title="Bill" id="fmP-89-RGh" customClass="StepperInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Label" numberOfLines="0" id="Fgp-Se-zxQ"/>
+                        <label alignment="left" text="$10" id="9Kc-mI-Dny">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <slider width="1" alignment="left" continuous="YES" value="20" minimum="1" maximum="1000" steps="999" id="eVm-Ub-LZR">
+                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="didChangeSlider:" destination="fmP-89-RGh" id="fNf-T3-VwH"/>
+                            </connections>
+                        </slider>
+                        <button width="1" alignment="left" title="Button" id="9Gd-ov-v2R">
+                            <connections>
+                                <action selector="didTapNextButton" destination="fmP-89-RGh" id="Lbq-Tx-Vb7"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="currencyAmountTextLabel" destination="9Kc-mI-Dny" id="zEQ-oy-cDE"/>
+                        <outlet property="currencySlider" destination="eVm-Ub-LZR" id="Rl2-cf-7Mi"/>
+                        <outlet property="instructionTextLabel" destination="Fgp-Se-zxQ" id="aE0-QB-D83"/>
+                        <outlet property="nextButton" destination="9Gd-ov-v2R" id="axJ-hn-svG"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="538" y="484"/>
+        </scene>
+        <!--Tip-->
+        <scene sceneID="KXi-hW-1nV">
+            <objects>
+                <controller identifier="StepperTipInterfaceController" title="Tip" id="RoV-Ls-Kgg" customClass="StepperInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Label" numberOfLines="0" id="TFb-p1-GrD"/>
+                        <label alignment="left" text="$10" id="p6w-mN-KyT">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="20%" id="joJ-cj-88b">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <slider width="1" alignment="left" value="1" minimum="1" maximum="15" steps="14" id="RPI-Ki-mcO">
+                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="didChangeSlider:" destination="RoV-Ls-Kgg" id="DGI-F4-gl9"/>
+                            </connections>
+                        </slider>
+                        <button width="1" alignment="left" title="Button" id="ItD-Yb-rqW">
+                            <connections>
+                                <action selector="didTapNextButton" destination="RoV-Ls-Kgg" id="6NB-26-ApI"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="currencyAmountTextLabel" destination="p6w-mN-KyT" id="3xW-s2-W4a"/>
+                        <outlet property="currencySlider" destination="RPI-Ki-mcO" id="j2o-r6-Bah"/>
+                        <outlet property="instructionTextLabel" destination="TFb-p1-GrD" id="8ii-ek-XnY"/>
+                        <outlet property="nextButton" destination="ItD-Yb-rqW" id="NAn-wV-tF7"/>
+                        <outlet property="tipPercentageLabel" destination="joJ-cj-88b" id="enB-ym-jPa"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="984" y="484"/>
+        </scene>
+    </scenes>
+</document>
