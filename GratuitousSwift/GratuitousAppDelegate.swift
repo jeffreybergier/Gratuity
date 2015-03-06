@@ -24,6 +24,9 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         //crashlytics intializer
         Fabric.with([Crashlytics()])
         
+        //check my server for which UI the watch should use
+        self.checkWatchUIJSON()
+        
         //initialize the view controller from the storyboard
         let tipViewController = self.storyboard.instantiateInitialViewController() as? UIViewController
         
@@ -38,6 +41,33 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
         
         return true
+    }
+    
+    private func checkWatchUIJSON() {
+        let session = NSURLSession.sharedSession()
+        let url = NSURL(string: "http://www.jeffburg.com/gratuity/watchUI.json")!
+        let task = session.dataTaskWithURL(url, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            if error == nil {
+                if let response = response as? NSHTTPURLResponse {
+                    if response.statusCode == 200 {
+                        self.extractCorrectInterfaceFromData(data)
+                    }
+                }
+            }
+        })
+        task.resume()
+    }
+    
+    private func extractCorrectInterfaceFromData(data: NSData?) {
+        if let data = data {
+            if let jsonDictionaryArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? [NSDictionary] {
+                if let watchStyleString = jsonDictionaryArray.first?["watchUIStyle"] as? String {
+                    if let interfaceState = InterfaceState.interfaceStateFromString(watchStyleString) {
+                        self.defaultsManager.correctWatchInterface = interfaceState
+                    }
+                }
+            }
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

@@ -61,7 +61,7 @@ class GratuitousUserDefaults: Printable {
         }
     }
     
-    var correctInterface: InterfaceState {
+    var correctWatchInterface: InterfaceState {
         get {
             if let correctInterface = InterfaceState(rawValue: self.userDefaults.integerForKey("correctInterface")) {
                 return correctInterface

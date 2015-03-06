@@ -133,6 +133,19 @@ enum InterfaceState: Int, Printable {
 //            return "InterfaceState Enum: StepperPaged"
         }
     }
+    
+    static func interfaceStateFromString(string: String) -> InterfaceState? {
+        switch string {
+        case "CrownScrollInfinite":
+            return InterfaceState.CrownScrollInfinite
+        case "CrownScrollPaged":
+            return InterfaceState.CrownScrollPaged
+        case "ThreeButtonStepper":
+            return InterfaceState.ThreeButtonStepper
+        default:
+            return nil
+        }
+    }
 }
 
 // Operator Overloading!!
