@@ -46,7 +46,8 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     private func checkWatchUIJSON() {
         let session = NSURLSession.sharedSession()
         let url = NSURL(string: "http://www.jeffburg.com/gratuity/watchUI.json")!
-        let task = session.dataTaskWithURL(url, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let request = NSURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+        let task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             if error == nil {
                 if let response = response as? NSHTTPURLResponse {
                     if response.statusCode == 200 {
@@ -62,7 +63,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         if let data = data {
             if let jsonDictionaryArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? [NSDictionary] {
                 if let watchStyleString = jsonDictionaryArray.first?["watchUIStyle"] as? String {
-                    if let interfaceState = InterfaceState.interfaceStateFromString(watchStyleString) {
+                    if let interfaceState = CorrectWatchInterface.interfaceStateFromString(watchStyleString) {
                         self.defaultsManager.correctWatchInterface = interfaceState
                     }
                 }

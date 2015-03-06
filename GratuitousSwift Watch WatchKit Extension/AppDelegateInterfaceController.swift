@@ -10,18 +10,15 @@ import WatchKit
 
 class AppDelegateInterfaceController: WKInterfaceController {
     
-    @IBOutlet weak var crownScrollButton: WKInterfaceButton?
-    @IBOutlet weak var stepByStepButton: WKInterfaceButton?
-    
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     
     override func willActivate() {
         super.willActivate()
         
-        self.crownScrollButton?.setHidden(true)
-        self.stepByStepButton?.setHidden(true)
+        //check my server for which UI the watch should use
+        self.checkWatchUIJSON()
         
-        switch self.dataSource.interfaceState {
+        switch self.dataSource.correctWatchInterface {
         case .CrownScrollInfinite:
             self.pushControllerWithName("CrownScrollBillInterfaceController", context: InterfaceControllerContext.CrownScrollInfinite.rawValue)
         case .CrownScrollPaged:
@@ -32,6 +29,34 @@ class AppDelegateInterfaceController: WKInterfaceController {
 //            self.pushControllerWithName("StepperInfiniteInterfaceController", context: InterfaceControllerContext.StepperInfinite.rawValue)
 //        case .StepperPaged:
 //            self.pushControllerWithName("StepperTensInterfaceController", context: InterfaceControllerContext.StepperPagedTens.rawValue)
+        }
+    }
+    
+    private func checkWatchUIJSON() {
+        let session = NSURLSession.sharedSession()
+        let url = NSURL(string: "http://www.jeffburg.com/gratuity/watchUI.json")!
+        let request = NSURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+        let task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            if error == nil {
+                if let response = response as? NSHTTPURLResponse {
+                    if response.statusCode == 200 {
+                        self.extractCorrectInterfaceFromData(data)
+                    }
+                }
+            }
+        })
+        task.resume()
+    }
+    
+    private func extractCorrectInterfaceFromData(data: NSData?) {
+        if let data = data {
+            if let jsonDictionaryArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? [NSDictionary] {
+                if let watchStyleString = jsonDictionaryArray.first?["watchUIStyle"] as? String {
+                    if let interfaceState = CorrectWatchInterface.interfaceStateFromString(watchStyleString) {
+                        self.dataSource.correctWatchInterface = interfaceState
+                    }
+                }
+            }
         }
     }
 }

@@ -149,10 +149,13 @@ class GratuitousWatchDataSource {
         }
     }
     
-    var interfaceState: InterfaceState {
+    var correctWatchInterface: CorrectWatchInterface {
         get {
             //return InterfaceState.ThreeButtonStepper
             return self.defaultsManager.correctWatchInterface
+        }
+        set {
+            self.defaultsManager.correctWatchInterface = newValue
         }
     }
     

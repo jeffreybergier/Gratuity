@@ -116,7 +116,7 @@ enum InterfaceControllerContext: String, Printable {
     }
 }
 
-enum InterfaceState: Int, Printable {
+enum CorrectWatchInterface: Int, Printable {
     case CrownScrollInfinite = 0, CrownScrollPaged, ThreeButtonStepper//StepperInfinite, StepperPaged
     
     var description: String {
@@ -134,14 +134,14 @@ enum InterfaceState: Int, Printable {
         }
     }
     
-    static func interfaceStateFromString(string: String) -> InterfaceState? {
+    static func interfaceStateFromString(string: String) -> CorrectWatchInterface? {
         switch string {
         case "CrownScrollInfinite":
-            return InterfaceState.CrownScrollInfinite
+            return CorrectWatchInterface.CrownScrollInfinite
         case "CrownScrollPaged":
-            return InterfaceState.CrownScrollPaged
+            return CorrectWatchInterface.CrownScrollPaged
         case "ThreeButtonStepper":
-            return InterfaceState.ThreeButtonStepper
+            return CorrectWatchInterface.ThreeButtonStepper
         default:
             return nil
         }
