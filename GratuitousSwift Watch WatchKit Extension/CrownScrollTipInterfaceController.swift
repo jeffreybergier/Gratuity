@@ -36,6 +36,7 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
         case .CrownScrollTipChooser:
             self.setTitle(NSLocalizedString("Tip", comment: ""))
             self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""))
+            self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
             let billAmount = self.dataSource.billAmount !! 0
             let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
             let tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
@@ -66,6 +67,9 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
             for (index, value) in enumerate(self.data) {
                 let star = idealTip == value ? false : true
                 if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTipTableRowController {
+                    if row.interfaceIsConfigured == false {
+                        row.configureInterface()
+                    }
                     row.setMoneyAmountLabel(tipAmount: value, billAmount: billAmount, starFlag: star)
                 }
             }

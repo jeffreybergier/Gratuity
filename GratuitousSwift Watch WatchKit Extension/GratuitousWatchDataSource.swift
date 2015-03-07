@@ -221,5 +221,4 @@ class GratuitousWatchDataSource {
         }
         return nil
     }
-    
 }

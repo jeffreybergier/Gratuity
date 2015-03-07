@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7334770F1A26E85000513F1F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
+		73368D121AAB9B7F001C1CC3 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 73368D111AAB9B7F001C1CC3 /* Futura.ttc */; };
+		73368D131AAB9B7F001C1CC3 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 73368D111AAB9B7F001C1CC3 /* Futura.ttc */; };
 		733E8CB41A86F83100B228CB /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
 		733E8CB51A86FBA200B228CB /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
 		733E8CB61A86FBA200B228CB /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
@@ -43,7 +45,6 @@
 		736568F11A26DD1400603602 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382510F19E60EED00CD2B28 /* LaunchScreen.xib */; };
 		736568F21A26DD1400603602 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7382510D19E60EED00CD2B28 /* Images.xcassets */; };
 		736568F31A26DD1400603602 /* settingsIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */; };
-		736719C61AA7F11600EF0FD3 /* UnusedInterfaces.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 736719C51AA7F11600EF0FD3 /* UnusedInterfaces.storyboard */; };
 		737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */; };
 		737C87291A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */; };
 		737E5DE71A1AFD1C00F0A8C7 /* settingsIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */; };
@@ -138,6 +139,7 @@
 		730530CB1A871A5200DC08A6 /* GratuitousSwift Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuitousSwift Watch.entitlements"; sourceTree = "<group>"; };
 		730530CC1A871A5F00DC08A6 /* GratuitousSwift Watch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuitousSwift Watch WatchKit Extension.entitlements"; path = "GratuitousSwift Watch WatchKit Extension/GratuitousSwift Watch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		7334770E1A26E85000513F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		73368D111AAB9B7F001C1CC3 /* Futura.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Futura.ttc; sourceTree = "<group>"; };
 		733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousUserDefaults.swift; path = ../GratuitousSwift/GratuitousUserDefaults.swift; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
 		734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIColor.swift; sourceTree = "<group>"; };
@@ -183,7 +185,7 @@
 		73C1F4D21AA58F3400F6C116 /* ThreeButtonStepperInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeButtonStepperInterfaceController.swift; sourceTree = "<group>"; };
 		73C7B4B31A2A92E400536D86 /* GratuitousSwift Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GratuitousSwift Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C7B4B41A2A92E500536D86 /* GratuitousSwift Local copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GratuitousSwift Local copy-Info.plist"; path = "/Users/jeffberg/Documents/SaturdayApps/GratuitousSwift/GratuitousSwift Local copy-Info.plist"; sourceTree = "<absolute>"; };
-		73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperBillInterfaceController.swift; sourceTree = "<group>"; };
+		73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepperBillInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/StepperBillInterfaceController.swift"; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
 		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousEnums.swift; path = ../GratuitousSwift/GratuitousEnums.swift; sourceTree = "<group>"; };
@@ -239,6 +241,15 @@
 				7334770D1A26E85000513F1F /* Localizable.strings */,
 			);
 			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		733A9C851AAB850700BFBACE /* Unused Files */ = {
+			isa = PBXGroup;
+			children = (
+				73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */,
+				736719C51AA7F11600EF0FD3 /* UnusedInterfaces.storyboard */,
+			);
+			name = "Unused Files";
 			sourceTree = "<group>";
 		};
 		7353346D1A1803FB008530E1 /* TipViewController */ = {
@@ -399,7 +410,6 @@
 			isa = PBXGroup;
 			children = (
 				73A18D711A2A9525002180DD /* Interface.storyboard */,
-				736719C51AA7F11600EF0FD3 /* UnusedInterfaces.storyboard */,
 				73A18D731A2A9525002180DD /* Images.xcassets */,
 				73A18D6F1A2A9525002180DD /* Supporting Files */,
 			);
@@ -418,7 +428,6 @@
 			isa = PBXGroup;
 			children = (
 				73C1F4D21AA58F3400F6C116 /* ThreeButtonStepperInterfaceController.swift */,
-				73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */,
 			);
 			name = "Stepper Interface";
 			sourceTree = "<group>";
@@ -437,8 +446,10 @@
 		73A755B31A87F8E80038E023 /* Common Files */ = {
 			isa = PBXGroup;
 			children = (
+				73368D111AAB9B7F001C1CC3 /* Futura.ttc */,
 				733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */,
 				73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */,
+				733A9C851AAB850700BFBACE /* Unused Files */,
 			);
 			name = "Common Files";
 			path = "GratuitousSwift Watch Watch App";
@@ -659,6 +670,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73368D121AAB9B7F001C1CC3 /* Futura.ttc in Resources */,
 				73A18D671A2A9525002180DD /* Images.xcassets in Resources */,
 				73A18D6B1A2A9525002180DD /* GratuitousSwift Watch Watch App.app in Resources */,
 			);
@@ -668,8 +680,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73368D131AAB9B7F001C1CC3 /* Futura.ttc in Resources */,
 				73A18D721A2A9525002180DD /* Interface.storyboard in Resources */,
-				736719C61AA7F11600EF0FD3 /* UnusedInterfaces.storyboard in Resources */,
 				73A18D741A2A9525002180DD /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

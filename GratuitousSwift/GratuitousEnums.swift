@@ -158,3 +158,67 @@ public func !!<A>(lhs:A?, rhs:@autoclosure()->A)->A {
     assert(lhs != nil)
     return lhs ?? rhs()
 }
+
+enum Futura: String, Printable, Hashable {
+    case Medium = "Futura-Medium"
+    case MediumItalic = "Futura-MediumItalic"
+    case CondensedMedium = "Futura-CondensedMedium"
+    case CondensedExtraBold = "Futura-CondensedExtraBold"
+    
+    var description: String {
+        switch self {
+        case Medium:
+            return "Futura-Medium"
+        case MediumItalic:
+            return "Futura-MediumItalic"
+        case CondensedMedium:
+            return "Futura-CondensedMedium"
+        case CondensedExtraBold:
+            return"Futura-CondensedExtraBold"
+        }
+    }
+    
+    var hashValue: Int {
+        return self.description.hashValue
+    }
+}
+
+enum UIFontStyle: Printable, Hashable {
+    case Headline
+    case Body
+    case Caption1
+    case Caption2
+    case Footnote
+    case Subheadline
+    
+    var description: String {
+        switch self {
+        case .Headline:
+            return UIFontTextStyleHeadline.description
+        case Body:
+            return UIFontTextStyleBody.description
+        case Caption1:
+            return UIFontTextStyleCaption1.description
+        case Caption2:
+            return UIFontTextStyleCaption2.description
+        case Footnote:
+            return UIFontTextStyleFootnote.description
+        case Subheadline:
+            return UIFontTextStyleSubheadline.description
+        }
+    }
+    
+    var hashValue: Int {
+        return self.description.hashValue
+    }
+}
+
+extension UIFont {
+    convenience init?(futuraStyle: Futura, size: CGFloat) {
+        self.init(name: futuraStyle.rawValue, size: size)
+    }
+    
+    class func futura(#style: Futura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
+        return UIFont(futuraStyle: style, size: size) !! UIFont.preferredFontForTextStyle(fallbackStyle.description)
+    }
+}

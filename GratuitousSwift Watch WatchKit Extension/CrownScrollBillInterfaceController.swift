@@ -34,6 +34,8 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
+        self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+        
         var numberOfRowsInTable: Int
         var cellBeginIndex: Int
         //let numberOfRowsInTable: Int
@@ -77,6 +79,9 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
         
         for (index, value) in enumerate(self.data) {
             if let row = self.billAmountTable?.rowControllerAtIndex(index) as? CrownScrollBillTableRowController {
+                if row.interfaceIsConfigured == false {
+                    row.configureInterface()
+                }
                 row.updateCurrencyAmountLabel(value * self.cellValueMultiplier)
             }
         }
