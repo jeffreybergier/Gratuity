@@ -124,23 +124,47 @@
             </objects>
             <point key="canvasLocation" x="349" y="125"/>
         </scene>
-        <!--TotalAmountInterfaceController-->
+        <!--Total-->
         <scene sceneID="QVZ-uk-9u4">
             <objects>
-                <controller identifier="TotalAmountInterfaceController" id="2tI-Ya-wiK" customClass="TotalAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller identifier="TotalAmountInterfaceController" title="Total" id="2tI-Ya-wiK" customClass="TotalAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <label alignment="left" text="$10" id="y4y-fj-5JE">
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                        </label>
-                        <label alignment="left" text="$100" id="w2I-WK-JbS"/>
-                        <label alignment="left" text="20%" id="VHk-tl-0f2"/>
-                        <label alignment="left" text="$90" id="8Gv-iz-8Wx"/>
+                        <group width="1" alignment="left" layout="vertical" id="Pl4-NM-Q89">
+                            <items>
+                                <label alignment="left" text="Total" id="JyE-3w-DEm"/>
+                                <label alignment="left" text="$100" id="w2I-WK-JbS"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="ya1-on-kUD">
+                            <items>
+                                <label alignment="left" text="Tip" id="TQQ-zr-Rgf"/>
+                                <label alignment="left" text="$10" id="y4y-fj-5JE">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="gPA-jD-aNu">
+                            <items>
+                                <label alignment="left" text="Percentage" id="N1q-Tk-w8R"/>
+                                <label alignment="left" text="20%" id="VHk-tl-0f2"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" hidden="YES" layout="vertical" id="Gdz-VK-zaV">
+                            <items>
+                                <label alignment="left" text="Bill" id="xMr-5S-VhS"/>
+                                <label alignment="left" text="$90" id="8Gv-iz-8Wx"/>
+                            </items>
+                        </group>
                     </items>
                     <connections>
                         <outlet property="billAmountLabel" destination="8Gv-iz-8Wx" id="SXd-WM-co2"/>
+                        <outlet property="billAmountTitleLabel" destination="xMr-5S-VhS" id="rFs-eY-wIY"/>
                         <outlet property="tipAmountLabel" destination="y4y-fj-5JE" id="wFE-ts-THe"/>
+                        <outlet property="tipAmountTitleLabel" destination="TQQ-zr-Rgf" id="afL-dr-gfr"/>
                         <outlet property="tipPercentageLabel" destination="VHk-tl-0f2" id="4GR-AE-ldG"/>
+                        <outlet property="tipPercentageTitleLabel" destination="N1q-Tk-w8R" id="1sO-Er-33h"/>
                         <outlet property="totalAmountLabel" destination="w2I-WK-JbS" id="AKW-Yu-Z1n"/>
+                        <outlet property="totalAmountTitleLabel" destination="JyE-3w-DEm" id="c9b-zT-L0K"/>
                     </connections>
                 </controller>
             </objects>

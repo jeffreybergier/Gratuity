@@ -18,6 +18,8 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     private var cellValueMultiplier = 1
     private var currentContext: InterfaceControllerContext = .NotSet
     
+    private var interfaceControllerIsConfigured = false
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
@@ -33,6 +35,14 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     
     override func willActivate() {
         super.willActivate()
+        
+        if self.interfaceControllerIsConfigured == false {
+            self.configureInterfaceController()
+            self.interfaceControllerIsConfigured = true
+        }
+    }
+    
+    private func configureInterfaceController() {
         
         self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
         
