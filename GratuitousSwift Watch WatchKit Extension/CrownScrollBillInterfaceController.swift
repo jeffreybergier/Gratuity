@@ -12,6 +12,7 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
     @IBOutlet private weak var billAmountTable: WKInterfaceTable?
+    @IBOutlet private weak var loadingImageGroup: WKInterfaceGroup?
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private var data = [Int]()
@@ -19,6 +20,8 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     private var currentContext: InterfaceControllerContext = .NotSet
     
     private var interfaceControllerIsConfigured = false
+    
+    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -52,22 +55,22 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
         //let cellBeginIndex: Int
         switch self.currentContext {
         case .CrownScrollInfinite:
-            self.setTitle(NSLocalizedString("Bill", comment: ""))
-            self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to choose the Bill Amount", comment: ""))
+            self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
+            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to choose the Bill Amount", comment: ""), attributes: self.titleTextAttributes))
             cellBeginIndex = 1
             numberOfRowsInTable = 500
             self.cellValueMultiplier = 1
         case .CrownScrollPagedOnes:
-            self.setTitle(NSLocalizedString("Refine", comment: ""))
-            self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to refine the Bill Amount", comment: ""))
+            self.setTitle(NSLocalizedString("Refine Bill", comment: ""))
+            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to refine the Bill Amount", comment: ""), attributes: self.titleTextAttributes))
             let billAmount = self.dataSource.billAmount !! 0
             let offset = 3
             cellBeginIndex = billAmount >= offset ? billAmount - offset : billAmount
             numberOfRowsInTable = billAmount + 10
             self.cellValueMultiplier = 1
         case .CrownScrollPagedTens:
-            self.setTitle(NSLocalizedString("Bill", comment: ""))
-            self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to the number closest to the Bill Amount", comment: ""))
+            self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
+            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to the number closest to the Bill Amount", comment: ""), attributes: self.titleTextAttributes))
             cellBeginIndex = 1
             numberOfRowsInTable = 50
             self.cellValueMultiplier = 10
@@ -82,6 +85,9 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
         
         self.clearBillDataTable()
         self.reloadBillTableData()
+        self.loadingImageGroup?.setHidden(true)
+        self.instructionalTextLabel?.setHidden(false)
+        self.billAmountTable?.setHidden(false)
     }
     
     private func reloadBillTableData() {

@@ -11,11 +11,14 @@ import WatchKit
 class CrownScrollTipInterfaceController: WKInterfaceController {
     @IBOutlet private weak var tipAmountTable: WKInterfaceTable?
     @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
+    @IBOutlet private weak var loadingImageGroup: WKInterfaceGroup?
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private var data = [Int]()
     private var currentContext = InterfaceControllerContext.NotSet
     private var interfaceControllerIsConfigured = false
+    
+    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -42,13 +45,15 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
     private func configureInterfaceController() {
         switch self.currentContext {
         case .CrownScrollTipChooser:
-            self.setTitle(NSLocalizedString("Tip", comment: ""))
-            self.instructionalTextLabel?.setText(NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""))
+            self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
+            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""), attributes: self.titleTextAttributes))
             self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+            
             let billAmount = self.dataSource.billAmount !! 0
             let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
             let tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
             let offset = 5
+            
             var cellBeginIndex: Int
             //let cellBeginIndex: Int
             if tipAmount >= offset {
@@ -62,10 +67,14 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
             for index in cellBeginIndex ..< numberOfRowsInTable {
                 self.data.append(index)
             }
+            
             self.reloadTipTableData(idealTip: tipAmount, billAmount: billAmount)
         default:
             break
         }
+        self.loadingImageGroup?.setHidden(true)
+        self.instructionalTextLabel?.setHidden(false)
+        self.tipAmountTable?.setHidden(false)
     }
     
     private func reloadTipTableData(#idealTip: Int, billAmount: Int) {

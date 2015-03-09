@@ -19,42 +19,35 @@
         <!--Bill-->
         <scene sceneID="t1K-MZ-tcM">
             <objects>
-                <controller identifier="CrownScrollBillInterfaceController" title="Bill" id="tMv-1L-nCj" customClass="CrownScrollBillInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller identifier="CrownScrollBillInterfaceController" title="Bill" hidesWhenLoading="NO" id="tMv-1L-nCj" customClass="CrownScrollBillInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <label alignment="left" text="Label" numberOfLines="0" id="LVO-xL-ovz">
-                            <color key="textColor" red="1" green="0.23548005759999999" blue="0.24434621710000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <group width="1" height="1" alignment="left" backgroundImage="BillBG" contentMode="scaleAspectFit" id="GEE-Dl-zTy"/>
+                        <label alignment="left" hidden="YES" text="Label" numberOfLines="0" id="LVO-xL-ovz">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="font" style="UICTFontTextStyleBody"/>
                         </label>
                         <table alignment="left" id="QFo-p1-L9c">
                             <items>
                                 <tableRow identifier="CrownScrollBillTableRowController" id="f8C-yj-lVF" customClass="CrownScrollBillTableRowController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" radius="0.0" id="dyi-Yc-WY6">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="dyi-Yc-WY6">
                                         <items>
-                                            <group width="2" height="2" alignment="left" id="eqr-Bc-f6W"/>
-                                            <group width="2" height="2" alignment="left" verticalAlignment="bottom" id="Rd8-kq-v6a"/>
-                                            <group width="1" height="0.0" alignment="left" radius="0.0" id="OgS-Og-GmX">
+                                            <group width="1" height="1" alignment="left" radius="7" id="PM8-Zg-BFX">
                                                 <items>
-                                                    <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="mWS-F1-h7E">
-                                                        <items>
-                                                            <label alignment="left" verticalAlignment="center" text="$10" id="bl9-mQ-OlF">
-                                                                <color key="textColor" red="1" green="0.23548005759999999" blue="0.24434621710000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                                            </label>
-                                                        </items>
-                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <edgeInsets key="margins" left="3" right="0.0" top="0.0" bottom="0.0"/>
-                                                    </group>
+                                                    <label alignment="left" verticalAlignment="center" text="$10" id="bl9-mQ-OlF">
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                                    </label>
                                                 </items>
-                                                <color key="backgroundColor" red="1" green="0.23548005759999999" blue="0.24434621710000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <edgeInsets key="margins" left="0.0" right="0.0" top="1" bottom="1"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <edgeInsets key="margins" left="2" right="2" top="1" bottom="1"/>
                                             </group>
                                         </items>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                                     </group>
                                     <connections>
-                                        <outlet property="lineFormingGroup" destination="OgS-Og-GmX" id="cv2-dk-0Bt"/>
                                         <outlet property="moneyAmountLabel" destination="bl9-mQ-OlF" id="ypr-PV-tdU"/>
+                                        <outlet property="outlineGroup" destination="dyi-Yc-WY6" id="6ly-SA-Xjf"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -63,70 +56,11 @@
                     <connections>
                         <outlet property="billAmountTable" destination="QFo-p1-L9c" id="ovV-xA-H9D"/>
                         <outlet property="instructionalTextLabel" destination="LVO-xL-ovz" id="QGp-Cu-93a"/>
+                        <outlet property="loadingImageGroup" destination="GEE-Dl-zTy" id="g3t-88-Hzi"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="54" y="125"/>
-        </scene>
-        <!--Tip-->
-        <scene sceneID="W2Y-31-qer">
-            <objects>
-                <controller identifier="CrownScrollTipInterfaceController" title="Tip" id="MTQ-3J-Qib" customClass="CrownScrollTipInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
-                    <items>
-                        <label alignment="left" text="Label" numberOfLines="0" id="4Ji-TM-Zyu">
-                            <color key="textColor" red="1" green="0.23548005759999999" blue="0.24434621710000001" alpha="1" colorSpace="calibratedRGB"/>
-                        </label>
-                        <table alignment="left" id="0Lg-Ii-ZXW">
-                            <items>
-                                <tableRow identifier="CrownScrollTipTableRowController" id="aat-Xj-wHX" customClass="CrownScrollTipTableRowController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" radius="0.0" id="Qza-kx-dWW">
-                                        <items>
-                                            <group width="2" height="2" alignment="left" id="BZZ-6J-se9"/>
-                                            <group width="2" height="2" alignment="left" verticalAlignment="bottom" id="kq7-y6-hi0"/>
-                                            <group width="1" height="0.0" alignment="left" radius="0.0" id="kDG-5L-iCW">
-                                                <items>
-                                                    <group width="1" alignment="left" id="Hv7-Ct-led">
-                                                        <items>
-                                                            <label alignment="left" verticalAlignment="center" text="$10" id="FGu-O7-nVf">
-                                                                <color key="textColor" red="1" green="0.23548005759999999" blue="0.24434621710000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                                            </label>
-                                                            <label alignment="left" verticalAlignment="center" text="★" id="Ugj-am-fF7">
-                                                                <color key="textColor" red="1" green="0.23548005759999999" blue="0.24434621710000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                            </label>
-                                                            <label alignment="right" verticalAlignment="center" text="20%" id="5Hl-aO-k21">
-                                                                <color key="textColor" red="1" green="0.23548005759999999" blue="0.24434621710000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                                                            </label>
-                                                        </items>
-                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <edgeInsets key="margins" left="3" right="0.0" top="0.0" bottom="0.0"/>
-                                                    </group>
-                                                </items>
-                                                <color key="backgroundColor" red="1" green="0.23548005759999999" blue="0.24434621710000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <edgeInsets key="margins" left="0.0" right="0.0" top="1" bottom="1"/>
-                                            </group>
-                                        </items>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
-                                    </group>
-                                    <connections>
-                                        <outlet property="lineFormingGroup" destination="kDG-5L-iCW" id="tNg-uy-S2t"/>
-                                        <outlet property="starLabel" destination="Ugj-am-fF7" id="Fon-t7-IAe"/>
-                                        <outlet property="tipAmountLabel" destination="FGu-O7-nVf" id="pei-xk-Ojr"/>
-                                        <outlet property="tipPercentageLabelSmall" destination="5Hl-aO-k21" id="nsX-FS-U2D"/>
-                                    </connections>
-                                </tableRow>
-                            </items>
-                        </table>
-                    </items>
-                    <connections>
-                        <outlet property="instructionalTextLabel" destination="4Ji-TM-Zyu" id="4Ns-Oc-U8C"/>
-                        <outlet property="tipAmountTable" destination="0Lg-Ii-ZXW" id="hge-Qj-ePt"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="349" y="125"/>
         </scene>
         <!--Total-->
         <scene sceneID="QVZ-uk-9u4">
@@ -500,6 +434,61 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="349" y="565"/>
+        </scene>
+        <!--Tip Amount-->
+        <scene sceneID="0cJ-h1-wjI">
+            <objects>
+                <controller identifier="CrownScrollTipInterfaceController" title="Tip Amount" hidesWhenLoading="NO" id="Pb6-uB-8lW" customClass="CrownScrollTipInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" backgroundImage="TipBG" contentMode="scaleAspectFit" id="nhI-hL-BUT"/>
+                        <label alignment="left" hidden="YES" text="Label" numberOfLines="0" id="5h3-HD-e0b">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                        <table alignment="left" id="vYB-zM-w3c">
+                            <items>
+                                <tableRow identifier="CrownScrollTipTableRowController" id="BF0-AS-4us" customClass="CrownScrollTipTableRowController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="XeW-gt-RW7">
+                                        <items>
+                                            <group width="1" height="1" alignment="left" radius="7" id="Nzq-VL-dEN">
+                                                <items>
+                                                    <label alignment="left" verticalAlignment="center" text="$10" id="iBT-Vj-YJq">
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                                    </label>
+                                                    <label alignment="left" verticalAlignment="center" text="★" id="zfx-6K-BaT">
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </label>
+                                                    <label alignment="right" verticalAlignment="center" text="20%" id="GaG-7f-ROu">
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                                    </label>
+                                                </items>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <edgeInsets key="margins" left="2" right="2" top="1" bottom="1"/>
+                                            </group>
+                                        </items>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="outlineGroup" destination="XeW-gt-RW7" id="1iB-rz-H80"/>
+                                        <outlet property="starLabel" destination="zfx-6K-BaT" id="tGe-9D-qWY"/>
+                                        <outlet property="tipAmountLabel" destination="iBT-Vj-YJq" id="sbX-oe-G56"/>
+                                        <outlet property="tipPercentageLabelSmall" destination="GaG-7f-ROu" id="fBd-R1-fga"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="instructionalTextLabel" destination="5h3-HD-e0b" id="png-OT-9wF"/>
+                        <outlet property="loadingImageGroup" destination="nhI-hL-BUT" id="bX1-T7-ETN"/>
+                        <outlet property="tipAmountTable" destination="vYB-zM-w3c" id="H7A-2O-Qwd"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="383" y="125"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.70588235294117641" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
