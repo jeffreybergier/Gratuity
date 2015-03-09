@@ -14,6 +14,10 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
     @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
     @IBOutlet private weak var tipPercentageLabel: WKInterfaceLabel?
     
+    @IBOutlet private weak var hundredsButtonTextLabel: WKInterfaceLabel?
+    @IBOutlet private weak var tensButtonTextLabel: WKInterfaceLabel?
+    @IBOutlet private weak var onesButtonTextLabel: WKInterfaceLabel?
+    
     @IBOutlet private weak var hundredsButton: WKInterfaceButton?
     @IBOutlet private weak var tensButton: WKInterfaceButton?
     @IBOutlet private weak var onesButton: WKInterfaceButton?
@@ -22,43 +26,51 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
     @IBOutlet private weak var tensGroup: WKInterfaceGroup?
     @IBOutlet private weak var onesGroup: WKInterfaceGroup?
     
+    @IBOutlet private weak var currencyValuesGroup: WKInterfaceGroup?
     @IBOutlet private weak var currencySlider: WKInterfaceSlider?
+    @IBOutlet private weak var currencySliderGroup: WKInterfaceGroup?
     @IBOutlet private weak var nextButton: WKInterfaceButton?
+    @IBOutlet private weak var nextButtonTextLabel: WKInterfaceLabel?
+    @IBOutlet private weak var nextButtonGroup: WKInterfaceGroup?
+    @IBOutlet private weak var backgroundImageGroup: WKInterfaceGroup?
     
     private var currentContext = InterfaceControllerContext.NotSet
+    private var interfaceControllerIsConfigured = false
+    
     private let dataSource = GratuitousWatchDataSource.sharedInstance
+    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
+    private let valueTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 25, fallbackStyle: UIFontStyle.Headline)]
+    private let nextButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
     
     private var buttonValues: (hundreds: Int, tens: Int, ones: Int) = (0,0,0) {
         didSet {
-            self.hundredsButton?.setTitle("\(self.buttonValues.hundreds)")
-            self.tensButton?.setTitle("\(self.buttonValues.tens)")
-            self.onesButton?.setTitle("\(self.buttonValues.ones)")
+            self.hundredsButtonTextLabel?.setAttributedText(NSAttributedString(string: "\(self.buttonValues.hundreds)", attributes: self.valueTextAttributes))
+            self.tensButtonTextLabel?.setAttributedText(NSAttributedString(string: "\(self.buttonValues.tens)", attributes: self.valueTextAttributes))
+            self.onesButtonTextLabel?.setAttributedText(NSAttributedString(string: "\(self.buttonValues.ones)", attributes: self.valueTextAttributes))
         }
     }
     private var selectedButton: SelectedButton = .None {
         didSet {
-            let unselectedColor = UIColor.grayColor()
-            let selectedColor = UIColor.whiteColor()
             self.currencySlider?.setValue(-1) // this fixes a bug where the slider was not setting itself to 0 on ocassion
             switch self.selectedButton {
             case .None:
-                self.hundredsGroup?.setBackgroundColor(unselectedColor)
-                self.tensGroup?.setBackgroundColor(unselectedColor)
-                self.onesGroup?.setBackgroundColor(unselectedColor)
+                self.hundredsGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+                self.tensGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+                self.onesGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             case .Hundreds:
-                self.hundredsGroup?.setBackgroundColor(selectedColor)
-                self.tensGroup?.setBackgroundColor(unselectedColor)
-                self.onesGroup?.setBackgroundColor(unselectedColor)
+                self.hundredsGroup?.setBackgroundColor(GratuitousUIColor.lightBackgroundColor())
+                self.tensGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+                self.onesGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
                 self.currencySlider?.setValue(Float(self.buttonValues.hundreds))
             case .Tens:
-                self.hundredsGroup?.setBackgroundColor(unselectedColor)
-                self.tensGroup?.setBackgroundColor(selectedColor)
-                self.onesGroup?.setBackgroundColor(unselectedColor)
+                self.hundredsGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+                self.tensGroup?.setBackgroundColor(GratuitousUIColor.lightBackgroundColor())
+                self.onesGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
                 self.currencySlider?.setValue(Float(self.buttonValues.tens))
             case .Ones:
-                self.hundredsGroup?.setBackgroundColor(unselectedColor)
-                self.tensGroup?.setBackgroundColor(unselectedColor)
-                self.onesGroup?.setBackgroundColor(selectedColor)
+                self.hundredsGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+                self.tensGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+                self.onesGroup?.setBackgroundColor(GratuitousUIColor.lightBackgroundColor())
                 self.currencySlider?.setValue(Float(self.buttonValues.ones))
             }
         }
@@ -80,27 +92,65 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        self.nextButton?.setTitle(NSLocalizedString("Next", comment: ""))
+        if self.interfaceControllerIsConfigured == false {
+            self.configureInterfaceController()
+            self.interfaceControllerIsConfigured = true
+        }
+    }
+    
+    private func configureInterfaceController() {
+        var currencySymbolString = "$"
+        if let currencySymbolCharacter = Array(self.dataSource.currencyStringFromInteger(0)).first {
+            currencySymbolString = String(currencySymbolCharacter)
+        }
+        self.currencyLabel?.setAttributedText(NSAttributedString(string: currencySymbolString, attributes: self.valueTextAttributes))
+        self.currencyLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+        
+        self.nextButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+        self.nextButtonTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Next", comment: ""), attributes: self.nextButtonTextAttributes))
+        
         self.instructionalTextLabel?.setText("")
+        self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+        
         self.tipPercentageLabel?.setText("-%")
+        self.tipPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+        
+        self.hundredsButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+        self.tensButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+        self.onesButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+        
+        self.nextButtonGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+        self.currencySliderGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+        
+        self.backgroundImageGroup?.setHidden(true)
+        self.currencyValuesGroup?.setHidden(false)
+        self.nextButtonGroup?.setHidden(false)
+        self.currencySliderGroup?.setHidden(false)
         
         switch self.currentContext {
         case .ThreeButtonStepperBill:
-            self.instructionalTextLabel?.setText(NSLocalizedString("Choose Bill Amount", comment: ""))
+            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Bill Amount", comment: ""), attributes: self.titleTextAttributes))
+            self.instructionalTextLabel?.setHidden(true)
+            self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
             self.tipPercentageLabel?.setHidden(true)
+            
             self.updateUIWithCurrencyAmount(self.dataSource.billAmount)
         case .ThreeButtonStepperTip:
-            self.instructionalTextLabel?.setText(NSLocalizedString("Choose Tip Amount", comment: ""))
+            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Tip Amount", comment: ""), attributes: self.titleTextAttributes))
+            self.instructionalTextLabel?.setHidden(true)
+            self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
+            
             let billAmount = self.dataSource.billAmount !! 0
             let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
             let calculatedTip = Double(billAmount) * suggestedTipPercentage
             let actualTipPercentage = calculatedTip / Double(billAmount)
+            
             self.updateUIWithCurrencyAmount(Int(round(calculatedTip)))
-            self.tipPercentageLabel?.setText(self.dataSource.percentStringFromRawDouble(actualTipPercentage))
+            self.tipPercentageLabel?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(actualTipPercentage), attributes: self.nextButtonTextAttributes))
+            self.tipPercentageLabel?.setHidden(false)
         default:
             fatalError("StepperInterfaceController: Context was invalid while switching.")
         }
-        
         self.selectedButton = .Ones
     }
     
@@ -203,7 +253,7 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
             let billAmount = self.dataSource.billAmount !! 0
             let tipAmount = self.calculateValueFromUI()
             let calculatedTipPercentage = Double(tipAmount) / Double(billAmount)
-            tipPercentageLabel.setText(self.dataSource.percentStringFromRawDouble(calculatedTipPercentage))
+            tipPercentageLabel.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(calculatedTipPercentage), attributes: self.nextButtonTextAttributes))
         }
         self.writeValueToDisk(self.calculateValueFromUI())
     }

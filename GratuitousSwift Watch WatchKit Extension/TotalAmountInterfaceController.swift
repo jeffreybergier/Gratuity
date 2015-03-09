@@ -20,11 +20,19 @@ class TotalAmountInterfaceController: WKInterfaceController {
     @IBOutlet private weak var tipPercentageTitleLabel: WKInterfaceLabel?
     @IBOutlet private weak var billAmountTitleLabel: WKInterfaceLabel?
     
+    @IBOutlet private weak var startOverButtonLabel: WKInterfaceLabel?
+    @IBOutlet private weak var backgroundImageGroup: WKInterfaceGroup?
+    @IBOutlet private weak var totalAmountGroup: WKInterfaceGroup?
+    @IBOutlet private weak var tipAmountGroup: WKInterfaceGroup?
+    @IBOutlet private weak var tipPercentageGroup: WKInterfaceGroup?
+    @IBOutlet private weak var billAmountGroup: WKInterfaceGroup?
+    @IBOutlet private weak var startOverButtonGroup: WKInterfaceGroup?
+    
     private var currentContext = InterfaceControllerContext.NotSet
     private var dataSource = GratuitousWatchDataSource.sharedInstance
     
-    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 12, fallbackStyle: UIFontStyle.Headline)]
-    private let valueTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 20, fallbackStyle: UIFontStyle.Headline)]
+    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 17, fallbackStyle: UIFontStyle.Headline)]
+    private let valueTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 25, fallbackStyle: UIFontStyle.Headline)]
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -44,20 +52,23 @@ class TotalAmountInterfaceController: WKInterfaceController {
         super.willActivate()
         
         // set the text color of the labels
-        self.tipPercentageLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-        self.tipAmountLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-        self.totalAmountLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-        self.billAmountLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+        self.tipPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+        self.tipAmountLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+        self.totalAmountLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+        self.billAmountLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
         self.tipPercentageTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
         self.tipAmountTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
         self.totalAmountTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
         self.billAmountTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+        self.startOverButtonGroup?.setBackgroundColor(GratuitousUIColor.lightBackgroundColor())
+        self.startOverButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
         
         // set the static text of the labels
         self.tipPercentageTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Percentage", comment: ""), attributes: self.titleTextAttributes))
         self.tipAmountTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Tip Amount", comment: ""), attributes: self.titleTextAttributes))
         self.totalAmountTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Total Amount", comment: ""), attributes: self.titleTextAttributes))
         self.billAmountTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Bill Amount", comment: ""), attributes: self.titleTextAttributes))
+        self.startOverButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Start Over", comment: ""), attributes: self.titleTextAttributes))
 
         // clear strings from nib
         self.tipPercentageLabel?.setText("– %")
@@ -81,6 +92,16 @@ class TotalAmountInterfaceController: WKInterfaceController {
         self.tipAmountLabel?.setAttributedText(tipAmountString)
         self.totalAmountLabel?.setAttributedText(totalAmountString)
         self.billAmountLabel?.setAttributedText(billAmountString)
+        
+        self.backgroundImageGroup?.setHidden(true)
+        self.totalAmountGroup?.setHidden(false)
+        self.tipAmountGroup?.setHidden(false)
+        self.tipPercentageGroup?.setHidden(false)
+        self.billAmountGroup?.setHidden(true)
+        self.startOverButtonGroup?.setHidden(false)
     }
     
+    @IBAction func didTapStartOverButton() {
+        self.popToRootController()
+    }
 }
