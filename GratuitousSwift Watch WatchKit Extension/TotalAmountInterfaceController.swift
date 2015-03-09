@@ -60,7 +60,6 @@ class TotalAmountInterfaceController: WKInterfaceController {
         self.tipAmountTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
         self.totalAmountTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
         self.billAmountTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-        self.startOverButtonGroup?.setBackgroundColor(GratuitousUIColor.lightBackgroundColor())
         self.startOverButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
         
         // set the static text of the labels
@@ -92,6 +91,13 @@ class TotalAmountInterfaceController: WKInterfaceController {
         self.tipAmountLabel?.setAttributedText(tipAmountString)
         self.totalAmountLabel?.setAttributedText(totalAmountString)
         self.billAmountLabel?.setAttributedText(billAmountString)
+        
+        // set color for the group rings
+        self.startOverButtonGroup?.setBackgroundColor(GratuitousUIColor.lightBackgroundColor())
+        self.totalAmountGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+        self.tipAmountGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+        self.tipPercentageGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+        self.billAmountGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
         
         self.backgroundImageGroup?.setHidden(true)
         self.totalAmountGroup?.setHidden(false)
