@@ -143,7 +143,8 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
             let billAmount = self.dataSource.billAmount !! 0
             let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
             let calculatedTip = Double(billAmount) * suggestedTipPercentage
-            let actualTipPercentage = calculatedTip / Double(billAmount)
+            let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: calculatedTip, bottom: Double(billAmount))
+            //let actualTipPercentage = calculatedTip / Double(billAmount)
             
             self.updateUIWithCurrencyAmount(Int(round(calculatedTip)))
             self.tipPercentageLabel?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(actualTipPercentage), attributes: self.nextButtonTextAttributes))
@@ -279,12 +280,14 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
         // may remove this function before release
         switch valuePlace {
         case .Tens:
-            self.buttonValues.ones = 9
-            self.selectedButton = .Ones
+            self.buttonValues.tens = 0
+            //self.buttonValues.ones = 9
+            //self.selectedButton = .Ones
         case .Hundreds:
-            self.buttonValues.tens = 9
-            self.buttonValues.ones = 9
-            self.selectedButton = .Tens
+            self.buttonValues.hundreds = 0
+//            self.buttonValues.tens = 9
+//            self.buttonValues.ones = 9
+//            self.selectedButton = .Tens
         default:
             break
         }

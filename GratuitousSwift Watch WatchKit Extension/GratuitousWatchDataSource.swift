@@ -67,7 +67,7 @@ class GratuitousWatchDataSource {
             } else if _billAmount != nil && _tipPercentage != nil {
                 return Int(round((Double(_billAmount!) * _tipPercentage!) + Double(_billAmount!)))
             } else if _tipPercentage != nil && _tipAmount != nil {
-                if let division = self.optionalDivision(top: Double(_tipAmount!), bottom: Double(_tipPercentage!)) {
+                if let division = GratuitousWatchDataSource.optionalDivision(top: Double(_tipAmount!), bottom: Double(_tipPercentage!)) {
                     return Int(round(division))
                 }
             }
@@ -95,7 +95,7 @@ class GratuitousWatchDataSource {
             } else {
                 if let tipAmount = _tipAmount {
                     if let tipPercentage = _tipPercentage {
-                        if let division = self.optionalDivision(top: Double(tipAmount), bottom: Double(tipPercentage)) {
+                        if let division = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(tipPercentage)) {
                             _billAmount = Int(round(division))
                             return _billAmount
                         }
@@ -111,7 +111,7 @@ class GratuitousWatchDataSource {
             _tipAmount = newValue
             if let newValue = newValue {
                 if let billAmount = _billAmount {
-                    if let division = self.optionalDivision(top: Double(newValue), bottom: Double(billAmount)) {
+                    if let division = GratuitousWatchDataSource.optionalDivision(top: Double(newValue), bottom: Double(billAmount)) {
                         _tipPercentage = division
                     }
                 }
@@ -177,12 +177,14 @@ class GratuitousWatchDataSource {
             }
             return currencyString !! "nil"
         }
-        return "nil"
+        return "–%"
     }
     
     func percentStringFromRawDouble(doubleValue: Double?) -> String {
         if let doubleValue = doubleValue {
-            return "\(Int(round(doubleValue * 100)))%"
+            if doubleValue != Double.NaN && doubleValue != Double.infinity {
+                return "\(Int(round(doubleValue * 100)))%"
+            }
         }
         return "nil"
     }
@@ -214,7 +216,7 @@ class GratuitousWatchDataSource {
 //        }
 //    }
     
-    func optionalDivision(#top: Double, bottom: Double) -> Double? {
+    class func optionalDivision(#top: Double, bottom: Double) -> Double? {
         let division = top/bottom
         if division != 1/0 {
             return division

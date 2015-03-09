@@ -1,4 +1,4 @@
-//
+    //
 //  GratuitousUserDefaults.swift
 //  GratuitousSwift
 //
@@ -10,17 +10,28 @@ import Foundation
 
 class GratuitousUserDefaults: Printable {
     
+    class func watchUIURL() -> NSURL {
+        return NSURL(string: "http://www.saturdayapps.com/gratuity/watchUI.json")!
+    }
     var description: String { return "GratuitousUserDefaults Manager: SuiteName: group.com.saturdayapps.Gratuity.storageGroup" }
-    
     private let userDefaults = NSUserDefaults(suiteName: "group.com.saturdayapps.Gratuity.storageGroup") !! NSUserDefaults.standardUserDefaults()
     
     init() {
-        if self.userDefaults.integerForKey("billIndexPathRow") == 0 {
-            self.userDefaults.setInteger(26, forKey: "billIndexPathRow")
+        var currentAppVersionEqualsDataVersionOnDisk = false
+        let appVersionCurrent = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as? String !! "1.0"
+        let appVersionOnDisk = self.userDefaults.objectForKey("appVersionString") as? String
+        if let appVersionOnDisk = appVersionOnDisk {
+            if appVersionOnDisk == appVersionCurrent {
+                currentAppVersionEqualsDataVersionOnDisk = true
+            }
+        }
+        if currentAppVersionEqualsDataVersionOnDisk == false {
+            self.userDefaults.setObject(appVersionCurrent, forKey: "appVersionString")
+            self.userDefaults.setInteger(25, forKey: "billIndexPathRow")
             self.userDefaults.setInteger(0, forKey: "tipIndexPathRow")
             self.userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: "overrideCurrencySymbol")
             self.userDefaults.setDouble(0.2, forKey: "suggestedTipPercentage")
-            self.userDefaults.setInteger(CorrectWatchInterface.CrownScrollInfinite.rawValue, forKey: "correctInterface")
+            self.userDefaults.setInteger(CorrectWatchInterface.ThreeButtonStepper.rawValue, forKey: "correctInterface")
             self.userDefaults.synchronize()
         }
     }

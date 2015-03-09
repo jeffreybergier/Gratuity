@@ -34,7 +34,7 @@ class AppDelegateInterfaceController: WKInterfaceController {
     
     private func checkWatchUIJSON() {
         let session = NSURLSession.sharedSession()
-        let url = NSURL(string: "http://www.saturdayapps.com/gratuity/watchUI.json")!
+        let url = GratuitousUserDefaults.watchUIURL()
         let request = NSURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 10.0)
         let task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             if error == nil {
