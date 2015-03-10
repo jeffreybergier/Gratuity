@@ -58,7 +58,7 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
             self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
             self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to choose the Bill Amount", comment: ""), attributes: self.titleTextAttributes))
             cellBeginIndex = 1
-            numberOfRowsInTable = 500
+            numberOfRowsInTable = self.dataSource.numberOfRowsInBillTableForWatch
             self.cellValueMultiplier = 1
         case .CrownScrollPagedOnes:
             self.setTitle(NSLocalizedString("Refine Bill", comment: ""))

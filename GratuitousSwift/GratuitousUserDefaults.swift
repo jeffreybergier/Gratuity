@@ -31,6 +31,7 @@ class GratuitousUserDefaults: Printable {
             self.userDefaults.setInteger(0, forKey: "tipIndexPathRow")
             self.userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: "overrideCurrencySymbol")
             self.userDefaults.setDouble(0.2, forKey: "suggestedTipPercentage")
+            self.userDefaults.setInteger(201, forKey: "numberOfRowsInBillTableForWatch")
             self.userDefaults.setInteger(CorrectWatchInterface.ThreeButtonStepper.rawValue, forKey: "correctInterface")
             self.userDefaults.synchronize()
         }
@@ -46,6 +47,16 @@ class GratuitousUserDefaults: Printable {
             let diskValue = self.userDefaults.integerForKey("billIndexPathRow") !! 26
             println("Reading Bill \(diskValue) from Disk")
             return self.userDefaults.integerForKey("billIndexPathRow") !! 26
+        }
+    }
+    
+    var numberOfRowsInBillTableForWatch: Int {
+        set {
+            self.userDefaults.setInteger(newValue, forKey: "numberOfRowsInBillTableForWatch")
+            self.userDefaults.synchronize()
+        }
+        get {
+            return self.userDefaults.integerForKey("numberOfRowsInBillTableForWatch") !! 201
         }
     }
     

@@ -159,6 +159,15 @@ class GratuitousWatchDataSource {
         }
     }
     
+    var numberOfRowsInBillTableForWatch: Int {
+        set {
+            self.defaultsManager.numberOfRowsInBillTableForWatch = newValue
+        }
+        get {
+            return self.defaultsManager.numberOfRowsInBillTableForWatch
+        }
+    }
+    
     func currencyStringFromInteger(integerValue: Int?) -> String {
         if let integerValue = integerValue {
             var currencyString: String?
@@ -175,9 +184,9 @@ class GratuitousWatchDataSource {
             } else {
                 currencyString = self.currencyFormatter.stringFromNumber(integerValue)
             }
-            return currencyString !! "nil"
+            return currencyString !! "$–"
         }
-        return "–%"
+        return "$–"
     }
     
     func percentStringFromRawDouble(doubleValue: Double?) -> String {
