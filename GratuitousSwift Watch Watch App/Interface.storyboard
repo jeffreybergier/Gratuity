@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6750" systemVersion="14C109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cdi-qG-zGI">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cdi-qG-zGI">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6735"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
@@ -10,18 +10,19 @@
             <objects>
                 <controller id="Cdi-qG-zGI" customClass="AppDelegateInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" backgroundImage="LaunchBG" contentMode="scaleAspectFit" id="t03-dB-IhZ"/>
+                        <group width="1" height="1" alignment="left" hidden="YES" backgroundImage="LaunchBG" contentMode="scaleAspectFit" id="t03-dB-IhZ"/>
                     </items>
                 </controller>
             </objects>
             <point key="canvasLocation" x="-231" y="316.5"/>
         </scene>
-        <!--Bill-->
+        <!--Bill Amount-->
         <scene sceneID="t1K-MZ-tcM">
             <objects>
-                <controller identifier="CrownScrollBillInterfaceController" title="Bill" hidesWhenLoading="NO" id="tMv-1L-nCj" customClass="CrownScrollBillInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller identifier="CrownScrollBillInterfaceController" title="Bill Amount" id="tMv-1L-nCj" customClass="CrownScrollBillInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" backgroundImage="BillBG" contentMode="scaleAspectFit" id="GEE-Dl-zTy"/>
+                        <imageView width="1" height="1" alignment="left" image="gratuity-0" contentMode="center" id="jeF-mM-Hp0"/>
+                        <group width="1" height="1" alignment="left" hidden="YES" backgroundImage="BillBG" contentMode="scaleAspectFit" id="GEE-Dl-zTy"/>
                         <label alignment="left" hidden="YES" text="Label" numberOfLines="0" id="LVO-xL-ovz">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="font" style="UICTFontTextStyleBody"/>
@@ -54,6 +55,7 @@
                         </table>
                     </items>
                     <connections>
+                        <outlet property="animationImageView" destination="jeF-mM-Hp0" id="a0Z-hj-O9q"/>
                         <outlet property="billAmountTable" destination="QFo-p1-L9c" id="ovV-xA-H9D"/>
                         <outlet property="instructionalTextLabel" destination="LVO-xL-ovz" id="QGp-Cu-93a"/>
                         <outlet property="loadingImageGroup" destination="GEE-Dl-zTy" id="g3t-88-Hzi"/>

@@ -13,6 +13,7 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
     @IBOutlet private weak var billAmountTable: WKInterfaceTable?
     @IBOutlet private weak var loadingImageGroup: WKInterfaceGroup?
+    @IBOutlet weak var animationImageView: WKInterfaceImage?
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private var data = [Int]()
@@ -38,6 +39,9 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     
     override func willActivate() {
         super.willActivate()
+        
+        self.animationImageView?.setImageNamed("gratuity-")
+        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 248), duration: 4.4, repeatCount: Int.max)
         
         if self.interfaceControllerIsConfigured == false {
             self.configureInterfaceController()
