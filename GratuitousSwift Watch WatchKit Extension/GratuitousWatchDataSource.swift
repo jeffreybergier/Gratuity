@@ -15,17 +15,11 @@ class GratuitousWatchDataSource {
     private let currencyFormatter = NSNumberFormatter()
     private let defaultsManager = GratuitousUserDefaults()
     
-//    private var writeDefaultsTimer: NSTimer?
-//    private var tipAmountSetLast: Bool = false
     private var currentCurrencyFormat: CurrencySign?
     
     init() {
         // configure crashlytics in an instance that won't disappear
         Fabric.with([Crashlytics()])
-        
-        // configure instance variables from disk
-        _billAmount = self.defaultsManager.billIndexPathRow
-        _tipPercentage = self.defaultsManager.suggestedTipPercentage
         
         // read nsuserdefaults to configure the currency symbol
         self.updateCurrencySymbolFromDisk()
@@ -55,103 +49,37 @@ class GratuitousWatchDataSource {
         return Static.instance!
     }
     
-    //properties
-    private var _tipAmount: Int?
-    private var _billAmount: Int?
-    private var _tipPercentage: Double?
-    
-    var totalAmount: Int? {
-        get {
-            if _billAmount != nil && _tipAmount != nil {
-                return _billAmount! + _tipAmount!
-            } else if _billAmount != nil && _tipPercentage != nil {
-                return Int(round((Double(_billAmount!) * _tipPercentage!) + Double(_billAmount!)))
-            } else if _tipPercentage != nil && _tipAmount != nil {
-                if let division = GratuitousWatchDataSource.optionalDivision(top: Double(_tipAmount!), bottom: Double(_tipPercentage!)) {
-                    return Int(round(division))
-                }
-            }
-            return nil
-        }
-    }
-    
-    var billAmount: Int? {
+    var billAmount: Int {
         set {
-            _billAmount = newValue
-                if let tipPercentage = _tipPercentage {
-                    _tipAmount = Int(round(Double(newValue !! 0) * tipPercentage))
-            }
-            let billAmount = newValue !! 25
-            self.defaultsManager.billIndexPathRow = billAmount
+            self.defaultsManager.billIndexPathRow = newValue
             self.defaultsManager.tipIndexPathRow = 0 //every time the bill amount get set, this gets set to 0 which means that we need to calculate our own tipAmount
         }
         get {
-            if let billAmount = _billAmount {
-                if billAmount > 0 {
-                    return billAmount //- 1 //Adjust for the fact that this is an indexpathrow from the ios app
-                } else {
-                    return billAmount
-                }
-            } else {
-                if let tipAmount = _tipAmount {
-                    if let tipPercentage = _tipPercentage {
-                        if let division = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(tipPercentage)) {
-                            _billAmount = Int(round(division))
-                            return _billAmount
-                        }
-                    }
-                }
-            }
-            return nil
+            return self.defaultsManager.billIndexPathRow
         }
     }
     
-    var tipAmount: Int? {
+    var tipAmount: Int {
         set {
-            _tipAmount = newValue
-            if let newValue = newValue {
-                if let billAmount = _billAmount {
-                    if let division = GratuitousWatchDataSource.optionalDivision(top: Double(newValue), bottom: Double(billAmount)) {
-                        _tipPercentage = division
-                    }
-                }
-            }
-            let tipAmount = newValue !! 25
-            self.defaultsManager.tipIndexPathRow = tipAmount
+            self.defaultsManager.tipIndexPathRow = newValue
         }
         get {
-            if let tipAmount = _tipAmount {
-                return tipAmount
-            } else {
-                if let billAmount = _billAmount {
-                    if let tipPercentage = _tipPercentage {
-                        _tipAmount = Int(round(Double(billAmount) * tipPercentage))
-                        return _tipAmount
-                    }
-                }
-            }
-            return nil
+            return self.defaultsManager.tipIndexPathRow
         }
     }
     
-    var tipPercentage: Double? {
-//        set {
-//            _tipPercentage = newValue
-//            if let newValue = newValue {
-//                if let billAmount = _billAmount {
-//                    _tipAmount = Int(round(newValue * Double(billAmount)))
-//                }
-//            }
-//            
-//        }
+    var tipPercentage: Double {
+        set {
+            self.defaultsManager.suggestedTipPercentage = newValue
+        }
         get {
-            return _tipPercentage !! 0.20
+            return self.defaultsManager.suggestedTipPercentage
         }
     }
     
     var correctWatchInterface: CorrectWatchInterface {
         get {
-            //return CorrectWatchInterface.CrownScrollPaged
+            return CorrectWatchInterface.ThreeButtonStepper
             return self.defaultsManager.correctWatchInterface
         }
         set {
@@ -209,43 +137,20 @@ class GratuitousWatchDataSource {
     
     func percentStringFromRawDouble(doubleValue: Double?) -> String {
         if let doubleValue = doubleValue {
-            if doubleValue != Double.NaN && doubleValue != Double.infinity {
+            if isnan(doubleValue) == false && isinf(doubleValue) == false {
                 return "\(Int(round(doubleValue * 100)))%"
             }
         }
-        return "nil"
+        return "– %"
     }
-    
-//    private func configureTimer() {
-//        if self.writeDefaultsTimer != nil {
-//            self.writeDefaultsTimer!.invalidate()
-//            self.writeDefaultsTimer = nil
-//        } else {
-//            self.writeDefaultsTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "writeDefaultsToDiskTimerFired:", userInfo: nil, repeats: false)
-//        }
-//    }
     
     @objc private func updateCurrencySymbolFromDisk(_ timer: NSTimer? = nil) {
         self.currentCurrencyFormat = self.defaultsManager.overrideCurrencySymbol
     }
     
-//    @objc private func writeDefaultsToDiskTimerFired(timer: NSTimer) {
-//        timer.invalidate()
-//        self.writeDefaultsTimer = nil
-//        
-//        if self.tipAmountSetLast == true {
-//            let tipAmount = _tipAmount !! 25
-//            self.defaultsManager.tipIndexPathRow = tipAmount
-//        } else {
-//            let billAmount = _billAmount !! 25
-//            self.defaultsManager.billIndexPathRow = billAmount
-//            self.defaultsManager.tipIndexPathRow = 0 //every time the bill amount get set, this gets set to 0 which means that we need to calculate our own tipAmount
-//        }
-//    }
-    
     class func optionalDivision(#top: Double, bottom: Double) -> Double? {
         let division = top/bottom
-        if division != 1/0 {
+        if isinf(division) == false && isnan(division) == false {
             return division
         }
         return nil

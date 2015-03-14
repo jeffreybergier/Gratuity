@@ -221,7 +221,7 @@
                         </label>
                         <group width="1" alignment="left" hidden="YES" id="bza-Jp-x2l">
                             <items>
-                                <group height="39" alignment="left" id="xWg-US-c1U">
+                                <group height="43" alignment="left" id="xWg-US-c1U">
                                     <items>
                                         <label alignment="center" verticalAlignment="center" text="$" textAlignment="center" minimumScaleFactor="0.30000000000000016" id="i6s-sR-8E2">
                                             <fontDescription key="font" type="system" pointSize="20"/>
@@ -362,7 +362,7 @@
                         </label>
                         <group width="1" alignment="left" hidden="YES" id="ZnC-MQ-ldX">
                             <items>
-                                <group height="39" alignment="left" id="tj2-66-Tlu">
+                                <group height="43" alignment="left" id="tj2-66-Tlu">
                                     <items>
                                         <label alignment="center" verticalAlignment="center" text="$" textAlignment="center" minimumScaleFactor="0.30000000000000016" id="lgS-NX-8as">
                                             <fontDescription key="font" type="system" pointSize="20"/>
@@ -431,7 +431,7 @@
                             <items>
                                 <group width="1" alignment="left" radius="7" id="j6n-PE-gGL">
                                     <items>
-                                        <slider width="1" alignment="left" value="4" maximum="9" steps="9" id="3ju-nT-DKg">
+                                        <slider width="1" alignment="left" value="4" maximum="9" steps="9" minimumImage="SliderMinus" maximumImage="SliderPlus" id="3ju-nT-DKg">
                                             <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="sliderDidChange:" destination="cWQ-rw-7fp" id="hli-H0-uXp"/>

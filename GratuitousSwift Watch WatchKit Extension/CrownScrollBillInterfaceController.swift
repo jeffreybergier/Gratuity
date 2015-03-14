@@ -56,11 +56,11 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     }
     
     private func configureInterfaceController() {
-        // 
+        //
         // This is always executed on a background queue
         // All UI changes must be done at the end
         // All UI changes must call back to the main queue
-        // 
+        //
         
         // variables needed for UI changes at the end
         var localizedTitled: String
@@ -129,7 +129,7 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     
     private func reloadBillTableData() {
         self.billAmountTable?.setNumberOfRows(self.data.count, withRowType: "CrownScrollBillTableRowController")
-                
+        
         for (index, value) in enumerate(self.data) {
             if let row = self.billAmountTable?.rowControllerAtIndex(index) as? CrownScrollBillTableRowController {
                 if row.interfaceIsConfigured == false {
@@ -170,12 +170,11 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     @objc private func scrollToCorrectRowIfNeeded(timer: NSTimer?) {
         timer?.invalidate()
         if self.dataSource.watchAppRunCount > 3 {
-            if let billAmount = self.dataSource.billAmount {
-                if self.cellValueMultiplier > 0 {
-                    self.instructionalTextLabel?.setHidden(true)
-                    let tableIndex = Int(round(Float(billAmount) / Float(self.cellValueMultiplier))) + 1
-                    self.billAmountTable?.scrollToRowAtIndex(tableIndex)
-                }
+            let billAmount = self.dataSource.billAmount
+            if self.cellValueMultiplier > 0 {
+                self.instructionalTextLabel?.setHidden(true)
+                let tableIndex = Int(round(Float(billAmount) / Float(self.cellValueMultiplier))) + 1
+                self.billAmountTable?.scrollToRowAtIndex(tableIndex)
             }
         }
     }

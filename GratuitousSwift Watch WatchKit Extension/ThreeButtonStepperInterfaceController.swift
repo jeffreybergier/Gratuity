@@ -146,11 +146,9 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
                 let billAmount = self.dataSource.billAmount !! 0
                 let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
                 let calculatedTip = Double(billAmount) * suggestedTipPercentage
-                let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: calculatedTip, bottom: Double(billAmount))
-                //let actualTipPercentage = calculatedTip / Double(billAmount)
                 
                 self.updateUIWithCurrencyAmount(Int(round(calculatedTip)))
-                self.tipPercentageLabel?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(actualTipPercentage), attributes: self.nextButtonTextAttributes))
+                self.tipPercentageLabel?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(suggestedTipPercentage), attributes: self.nextButtonTextAttributes))
                 self.tipPercentageLabel?.setHidden(false)
             default:
                 fatalError("StepperInterfaceController: Context was invalid while switching.")

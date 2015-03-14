@@ -46,6 +46,7 @@ class GratuitousUserDefaults: Printable {
         set {
             println("wrote should be incremented to disk: \(newValue)")
             self.userDefaults.setBool(newValue, forKey: "watchAppRunCountShouldBeIncremented")
+            self.userDefaults.synchronize()
         }
         get {
             let shouldBeIncremented = self.userDefaults.boolForKey("watchAppRunCountShouldBeIncremented") !! true
@@ -58,6 +59,7 @@ class GratuitousUserDefaults: Printable {
         set {
             println("wrote runcount to disk: \(newValue)")
             self.userDefaults.setInteger(newValue, forKey: "watchAppRunCount")
+            self.userDefaults.synchronize()
         }
         get {
             let runcount = self.userDefaults.integerForKey("watchAppRunCount") !! 0
@@ -123,10 +125,13 @@ class GratuitousUserDefaults: Printable {
     
     var suggestedTipPercentage: Double {
         set {
+            println("writing suggested tip percentage to disk \(newValue)")
             self.userDefaults.setDouble(newValue, forKey: "suggestedTipPercentage")
             self.userDefaults.synchronize()
         }
         get {
+            let value = self.userDefaults.doubleForKey("suggestedTipPercentage") !! 0.2
+            println("reading suggested tip percentage from disk \(value)")
             return self.userDefaults.doubleForKey("suggestedTipPercentage") !! 0.2
         }
     }

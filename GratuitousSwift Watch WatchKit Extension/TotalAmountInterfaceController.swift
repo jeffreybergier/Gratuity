@@ -92,7 +92,7 @@ class TotalAmountInterfaceController: WKInterfaceController {
             // prepare data
             let billAmount = self.dataSource.billAmount !! 0
             let tipAmount = self.dataSource.tipAmount !! 0
-            let tipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount)) !! 0.2
+            let tipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
             
             // prepare attributed text from data
             let tipPercentageString = NSAttributedString(string: self.dataSource.percentStringFromRawDouble(tipPercentage), attributes: self.valueTextAttributes)
