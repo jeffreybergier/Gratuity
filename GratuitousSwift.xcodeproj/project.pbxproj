@@ -21,8 +21,6 @@
 		734A7C5C1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
 		734A7C5D1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
 		73556E651A19711F0079A37D /* UIImage+PDFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 73556E641A19711F0079A37D /* UIImage+PDFUtility.m */; };
-		7356AEBE19FF281B00E44A5E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBC19FF281B00E44A5E /* Crashlytics.framework */; };
-		7356AEBF19FF281B00E44A5E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBD19FF281B00E44A5E /* Fabric.framework */; };
 		735C011E1A0878D000A19462 /* GratuitousCurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */; };
 		736568DB1A26DD1400603602 /* UIImage+PDFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 73556E641A19711F0079A37D /* UIImage+PDFUtility.m */; };
 		736568DC1A26DD1400603602 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512619E60F3900CD2B28 /* TipViewController.swift */; };
@@ -38,8 +36,6 @@
 		736568E81A26DD1400603602 /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */; };
 		736568E91A26DD1400603602 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		736568EA1A26DD1400603602 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
-		736568EC1A26DD1400603602 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBC19FF281B00E44A5E /* Crashlytics.framework */; };
-		736568ED1A26DD1400603602 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBD19FF281B00E44A5E /* Fabric.framework */; };
 		736568EF1A26DD1400603602 /* GratuitousTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */; };
 		736568F01A26DD1400603602 /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
 		736568F11A26DD1400603602 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382510F19E60EED00CD2B28 /* LaunchScreen.xib */; };
@@ -62,8 +58,6 @@
 		73A18D741A2A9525002180DD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D731A2A9525002180DD /* Images.xcassets */; };
 		73A18D771A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73A18D581A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		73A18D801A2A9661002180DD /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; };
-		73A755A91A87DABA0038E023 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBD19FF281B00E44A5E /* Fabric.framework */; };
-		73A755AA1A87DABE0038E023 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBC19FF281B00E44A5E /* Crashlytics.framework */; };
 		73A755B21A87F2770038E023 /* AppDelegateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */; };
 		73A755B91A882BB10038E023 /* CrownScrollBillTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B81A882BB10038E023 /* CrownScrollBillTableRowController.swift */; };
 		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
@@ -86,8 +80,6 @@
 		73C7B4A21A2A92E400536D86 /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */; };
 		73C7B4A31A2A92E400536D86 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		73C7B4A41A2A92E400536D86 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
-		73C7B4A61A2A92E400536D86 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBC19FF281B00E44A5E /* Crashlytics.framework */; };
-		73C7B4A71A2A92E400536D86 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7356AEBD19FF281B00E44A5E /* Fabric.framework */; };
 		73C7B4A91A2A92E400536D86 /* GratuitousTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */; };
 		73C7B4AA1A2A92E400536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
 		73C7B4AB1A2A92E400536D86 /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
@@ -98,6 +90,14 @@
 		73D11C4A1A1DB2A6003D238C /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */; };
 		73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
 		73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
+		73D730D21AB49E4D00172397 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D01AB49E4D00172397 /* Crashlytics.framework */; };
+		73D730D31AB49E4D00172397 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D01AB49E4D00172397 /* Crashlytics.framework */; };
+		73D730D41AB49E4D00172397 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D01AB49E4D00172397 /* Crashlytics.framework */; };
+		73D730D51AB49E4D00172397 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D01AB49E4D00172397 /* Crashlytics.framework */; };
+		73D730D61AB49E4D00172397 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
+		73D730D71AB49E4D00172397 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
+		73D730D81AB49E4D00172397 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
+		73D730D91AB49E4D00172397 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
 		73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 		73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -146,8 +146,6 @@
 		73556E621A19711E0079A37D /* GratuitousSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GratuitousSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		73556E631A19711F0079A37D /* UIImage+PDFUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PDFUtility.h"; sourceTree = "<group>"; };
 		73556E641A19711F0079A37D /* UIImage+PDFUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PDFUtility.m"; sourceTree = "<group>"; };
-		7356AEBC19FF281B00E44A5E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
-		7356AEBD19FF281B00E44A5E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyFormatter.swift; sourceTree = "<group>"; };
 		736568F81A26DD1400603602 /* Gratuityλδ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gratuityλδ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		736568F91A26DD1500603602 /* GratuitousSwift copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GratuitousSwift copy-Info.plist"; path = "/Users/jeffberg/Documents/SaturdayApps/GratuitousSwift/GratuitousSwift copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -188,6 +186,8 @@
 		73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepperBillInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/StepperBillInterfaceController.swift"; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
+		73D730D01AB49E4D00172397 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
+		73D730D11AB49E4D00172397 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousEnums.swift; path = ../GratuitousSwift/GratuitousEnums.swift; sourceTree = "<group>"; };
 		73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPresentationController.swift; sourceTree = "<group>"; };
 		73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimatedTransitioning.swift; sourceTree = "<group>"; };
@@ -199,8 +199,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				736568EC1A26DD1400603602 /* Crashlytics.framework in Frameworks */,
-				736568ED1A26DD1400603602 /* Fabric.framework in Frameworks */,
+				73D730D31AB49E4D00172397 /* Crashlytics.framework in Frameworks */,
+				73D730D71AB49E4D00172397 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,8 +208,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7356AEBE19FF281B00E44A5E /* Crashlytics.framework in Frameworks */,
-				7356AEBF19FF281B00E44A5E /* Fabric.framework in Frameworks */,
+				73D730D21AB49E4D00172397 /* Crashlytics.framework in Frameworks */,
+				73D730D61AB49E4D00172397 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,9 +217,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73D730D51AB49E4D00172397 /* Crashlytics.framework in Frameworks */,
 				73A18D5B1A2A9525002180DD /* WatchKit.framework in Frameworks */,
-				73A755AA1A87DABE0038E023 /* Crashlytics.framework in Frameworks */,
-				73A755A91A87DABA0038E023 /* Fabric.framework in Frameworks */,
+				73D730D91AB49E4D00172397 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,8 +227,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73C7B4A61A2A92E400536D86 /* Crashlytics.framework in Frameworks */,
-				73C7B4A71A2A92E400536D86 /* Fabric.framework in Frameworks */,
+				73D730D41AB49E4D00172397 /* Crashlytics.framework in Frameworks */,
+				73D730D81AB49E4D00172397 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,8 +470,8 @@
 			children = (
 				73556E631A19711F0079A37D /* UIImage+PDFUtility.h */,
 				73556E641A19711F0079A37D /* UIImage+PDFUtility.m */,
-				7356AEBC19FF281B00E44A5E /* Crashlytics.framework */,
-				7356AEBD19FF281B00E44A5E /* Fabric.framework */,
+				73D730D01AB49E4D00172397 /* Crashlytics.framework */,
+				73D730D11AB49E4D00172397 /* Fabric.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -486,7 +486,7 @@
 				736568DA1A26DD1400603602 /* Sources */,
 				736568EB1A26DD1400603602 /* Frameworks */,
 				736568EE1A26DD1400603602 /* Resources */,
-				736568F41A26DD1400603602 /* ShellScript */,
+				73D730CF1AB49E2F00172397 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -504,7 +504,7 @@
 				738250FD19E60EED00CD2B28 /* Sources */,
 				738250FE19E60EED00CD2B28 /* Frameworks */,
 				738250FF19E60EED00CD2B28 /* Resources */,
-				7356AEBB19FF27A400E44A5E /* ShellScript */,
+				73D730DA1AB49ED800172397 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -522,7 +522,7 @@
 				73A18D541A2A9525002180DD /* Sources */,
 				73A18D551A2A9525002180DD /* Frameworks */,
 				73A18D561A2A9525002180DD /* Resources */,
-				73A755A81A87DA7F0038E023 /* ShellScript */,
+				73D730DB1AB49F4F00172397 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -556,8 +556,8 @@
 				73C7B4941A2A92E400536D86 /* Sources */,
 				73C7B4A51A2A92E400536D86 /* Frameworks */,
 				73C7B4A81A2A92E400536D86 /* Resources */,
-				73C7B4AF1A2A92E400536D86 /* ShellScript */,
 				73A18D7E1A2A9525002180DD /* Embed App Extensions */,
+				73D730DC1AB4A1A400172397 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -702,7 +702,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7356AEBB19FF27A400E44A5E /* ShellScript */ = {
+		73D730CF1AB49E2F00172397 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -715,7 +715,20 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24";
 		};
-		736568F41A26DD1400603602 /* ShellScript */ = {
+		73D730DA1AB49ED800172397 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24    ";
+		};
+		73D730DB1AB49F4F00172397 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -728,20 +741,7 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24";
 		};
-		73A755A81A87DA7F0038E023 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24";
-		};
-		73C7B4AF1A2A92E400536D86 /* ShellScript */ = {
+		73D730DC1AB4A1A400172397 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
