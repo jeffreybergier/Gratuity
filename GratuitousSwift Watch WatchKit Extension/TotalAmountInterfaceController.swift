@@ -113,6 +113,12 @@ class TotalAmountInterfaceController: WKInterfaceController {
             self.tipPercentageGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             self.billAmountGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             
+            // we made it to the final step. time to increment the runcount
+            if self.dataSource.watchAppRunCountShouldBeIncremented == true {
+                self.dataSource.watchAppRunCount++
+                self.dataSource.watchAppRunCountShouldBeIncremented = false // don't want to increment this more than once per runtime.
+            }
+            
             self.backgroundImageGroup?.setHidden(true)
             self.totalAmountGroup?.setHidden(false)
             self.tipAmountGroup?.setHidden(false)

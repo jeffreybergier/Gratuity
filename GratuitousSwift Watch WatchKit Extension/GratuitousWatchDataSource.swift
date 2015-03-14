@@ -159,6 +159,24 @@ class GratuitousWatchDataSource {
         }
     }
     
+    var watchAppRunCount: Int {
+        set {
+            self.defaultsManager.watchAppRunCount = newValue
+        }
+        get {
+            return self.defaultsManager.watchAppRunCount
+        }
+    }
+    
+    var watchAppRunCountShouldBeIncremented: Bool {
+        set {
+            self.defaultsManager.watchAppRunCountShouldBeIncremented = newValue
+        }
+        get {
+            return self.defaultsManager.watchAppRunCountShouldBeIncremented
+        }
+    }
+    
     var numberOfRowsInBillTableForWatch: Int {
         set {
             self.defaultsManager.numberOfRowsInBillTableForWatch = newValue

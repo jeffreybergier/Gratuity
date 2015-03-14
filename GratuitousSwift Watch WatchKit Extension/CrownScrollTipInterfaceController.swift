@@ -16,11 +16,13 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
     @IBOutlet private weak var largerButtonGroup: WKInterfaceGroup?
     @IBOutlet private weak var largerButtonLabel: WKInterfaceLabel?
     
-    private let dataSource = GratuitousWatchDataSource.sharedInstance
     private var data = [Int]()
     private var currentContext = InterfaceControllerContext.NotSet
     private var interfaceControllerIsConfigured = false
+    private var idealTipIndex = 0
     
+    private let tipOffset = 5
+    private let dataSource = GratuitousWatchDataSource.sharedInstance
     private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
     private let largerButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
     
@@ -63,16 +65,17 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
                 let billAmount = self.dataSource.billAmount !! 0
                 let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
                 let tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
-                let offset = 5
                 
                 var cellBeginIndex: Int
                 //let cellBeginIndex: Int
-                if tipAmount >= offset {
-                    cellBeginIndex = tipAmount - offset
+                if tipAmount >= self.tipOffset {
+                    cellBeginIndex = tipAmount - self.tipOffset
+                    self.idealTipIndex = 6
                 } else {
                     cellBeginIndex = tipAmount
+                    self.idealTipIndex = 0
                 }
-                let numberOfRowsInTable = cellBeginIndex + offset * 3
+                let numberOfRowsInTable = cellBeginIndex + self.tipOffset * 3
                 
                 self.data = []
                 for index in cellBeginIndex ..< numberOfRowsInTable {
@@ -97,6 +100,7 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
             self.instructionalTextLabel?.setHidden(false)
             self.tipAmountTable?.setHidden(false)
             self.interfaceControllerIsConfigured = true
+            let timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "scrollToCorrectRowIfNeeded:", userInfo: nil, repeats: false)
         }
     }
     
@@ -124,6 +128,18 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
             self.pushControllerWithName("TotalAmountInterfaceController", context: InterfaceControllerContext.TotalAmountInterfaceController.rawValue)
         default:
             break
+        }
+    }
+    
+    @objc private func scrollToCorrectRowIfNeeded(timer: NSTimer?) {
+        timer?.invalidate()
+        if self.dataSource.watchAppRunCount > 3 {
+            if self.idealTipIndex > 0 {
+                let tableIndex = self.idealTipIndex - 1
+                let cell = self.tipAmountTable?.rowControllerAtIndex(tableIndex) as? CrownScrollTipTableRowController
+                let tipAmount = cell?.tipAmount
+                self.tipAmountTable?.scrollToRowAtIndex(tableIndex)
+            }
         }
     }
     

@@ -19,11 +19,14 @@ class CrownScrollTipTableRowController: NSObject {
     private let valueTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 25, fallbackStyle: UIFontStyle.Headline)]
     private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
     
+    var tipAmount = 0
+    
     func setMoneyAmountLabel(#tipAmount: Int, billAmount: Int, starFlag: Bool) {
         self.starLabel?.setHidden(starFlag)
         if billAmount != 0 {
             self.tipPercentageLabelSmall?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(Double(tipAmount) / Double(billAmount)), attributes: self.titleTextAttributes))
             self.tipAmountLabel?.setAttributedText(NSAttributedString(string: self.dataSource.currencyStringFromInteger(tipAmount), attributes: self.valueTextAttributes))
+            self.tipAmount = tipAmount
         } else {
             self.tipAmountLabel?.setAttributedText(NSAttributedString(string: "$–", attributes: self.valueTextAttributes))
             self.tipPercentageLabelSmall?.setAttributedText(NSAttributedString(string: "–%", attributes: self.titleTextAttributes))

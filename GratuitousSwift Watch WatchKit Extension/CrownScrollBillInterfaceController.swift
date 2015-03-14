@@ -123,6 +123,7 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
             self.instructionalTextLabel?.setHidden(false)
             self.billAmountTable?.setHidden(false)
             self.interfaceControllerIsConfigured = true
+            NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "scrollToCorrectRowIfNeeded:", userInfo: nil, repeats: false) // this fixes a bug where scrolling didn't work properly
         }
     }
     
@@ -163,6 +164,19 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
             self.pushControllerWithName("CrownScrollTipInterfaceController", context: nextContext.rawValue)
         default:
             self.pushControllerWithName("CrownScrollBillInterfaceController", context: nextContext.rawValue)
+        }
+    }
+    
+    @objc private func scrollToCorrectRowIfNeeded(timer: NSTimer?) {
+        timer?.invalidate()
+        if self.dataSource.watchAppRunCount > 3 {
+            if let billAmount = self.dataSource.billAmount {
+                if self.cellValueMultiplier > 0 {
+                    self.instructionalTextLabel?.setHidden(true)
+                    let tableIndex = Int(round(Float(billAmount) / Float(self.cellValueMultiplier))) + 1
+                    self.billAmountTable?.scrollToRowAtIndex(tableIndex)
+                }
+            }
         }
     }
     

@@ -26,14 +26,43 @@ class GratuitousUserDefaults: Printable {
             }
         }
         if currentAppVersionEqualsDataVersionOnDisk == false {
+            NSLog("\(self): Looks like a first run or a new version: Writing defaults to disk.")
             self.userDefaults.setObject(appVersionCurrent, forKey: "appVersionString")
             self.userDefaults.setInteger(25, forKey: "billIndexPathRow")
             self.userDefaults.setInteger(0, forKey: "tipIndexPathRow")
             self.userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: "overrideCurrencySymbol")
             self.userDefaults.setDouble(0.2, forKey: "suggestedTipPercentage")
             self.userDefaults.setInteger(201, forKey: "numberOfRowsInBillTableForWatch")
+            self.userDefaults.setInteger(0, forKey: "watchAppRunCount")
+            self.userDefaults.setBool(true, forKey: "watchAppRunCountShouldBeIncremented")
             self.userDefaults.setInteger(CorrectWatchInterface.ThreeButtonStepper.rawValue, forKey: "correctInterface")
             self.userDefaults.synchronize()
+        } else {
+            self.userDefaults.setBool(true, forKey: "watchAppRunCountShouldBeIncremented")
+        }
+    }
+    
+    var watchAppRunCountShouldBeIncremented: Bool {
+        set {
+            println("wrote should be incremented to disk: \(newValue)")
+            self.userDefaults.setBool(newValue, forKey: "watchAppRunCountShouldBeIncremented")
+        }
+        get {
+            let shouldBeIncremented = self.userDefaults.boolForKey("watchAppRunCountShouldBeIncremented") !! true
+            println("read should be incremented: \(shouldBeIncremented) from disk")
+            return self.userDefaults.boolForKey("watchAppRunCountShouldBeIncremented") !! true
+        }
+    }
+    
+    var watchAppRunCount: Int {
+        set {
+            println("wrote runcount to disk: \(newValue)")
+            self.userDefaults.setInteger(newValue, forKey: "watchAppRunCount")
+        }
+        get {
+            let runcount = self.userDefaults.integerForKey("watchAppRunCount") !! 0
+            println("read runcount \(runcount) from disk")
+            return self.userDefaults.integerForKey("watchAppRunCount") !! 0
         }
     }
     
