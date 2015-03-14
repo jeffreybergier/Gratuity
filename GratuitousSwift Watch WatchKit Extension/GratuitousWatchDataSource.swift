@@ -151,7 +151,7 @@ class GratuitousWatchDataSource {
     
     var correctWatchInterface: CorrectWatchInterface {
         get {
-            //return InterfaceState.ThreeButtonStepper
+            //return CorrectWatchInterface.CrownScrollPaged
             return self.defaultsManager.correctWatchInterface
         }
         set {

@@ -13,7 +13,9 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
     @IBOutlet private weak var billAmountTable: WKInterfaceTable?
     @IBOutlet private weak var loadingImageGroup: WKInterfaceGroup?
-    @IBOutlet weak var animationImageView: WKInterfaceImage?
+    @IBOutlet private weak var animationImageView: WKInterfaceImage?
+    @IBOutlet private weak var largerButtonGroup: WKInterfaceGroup?
+    @IBOutlet private weak var largerButtonLabel: WKInterfaceLabel?
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private var data = [Int]()
@@ -23,6 +25,7 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     private var interfaceControllerIsConfigured = false
     
     private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
+    private let largerButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -40,63 +43,92 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        self.animationImageView?.setImageNamed("gratuity-")
-        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 248), duration: 4.4, repeatCount: Int.max)
+        self.animationImageView?.setImageNamed("gratuityCap4-")
+        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
         
         if self.interfaceControllerIsConfigured == false {
-            self.configureInterfaceController()
-            self.interfaceControllerIsConfigured = true
+            // putting this in a background queue allows willActivate to finish, the animation to start.
+            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
+            dispatch_async(backgroundQueue) {
+                self.configureInterfaceController()
+            }
         }
     }
     
     private func configureInterfaceController() {
+        // 
+        // This is always executed on a background queue
+        // All UI changes must be done at the end
+        // All UI changes must call back to the main queue
+        // 
         
-        self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-        
+        // variables needed for UI changes at the end
+        var localizedTitled: String
+        var instructionalText: NSAttributedString
         var numberOfRowsInTable: Int
         var cellBeginIndex: Int
+        var cellValueMultiplier: Int
         //let numberOfRowsInTable: Int
         //let cellBeginIndex: Int
         switch self.currentContext {
         case .CrownScrollInfinite:
-            self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
-            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to choose the Bill Amount", comment: ""), attributes: self.titleTextAttributes))
+            localizedTitled = NSLocalizedString("Bill Amount", comment: "")
+            instructionalText = NSAttributedString(string: NSLocalizedString("Scroll to choose the Bill Amount", comment: ""), attributes: self.titleTextAttributes)
             cellBeginIndex = 1
             numberOfRowsInTable = self.dataSource.numberOfRowsInBillTableForWatch
-            self.cellValueMultiplier = 1
+            cellValueMultiplier = 1
         case .CrownScrollPagedOnes:
-            self.setTitle(NSLocalizedString("Refine Bill", comment: ""))
-            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to refine the Bill Amount", comment: ""), attributes: self.titleTextAttributes))
+            localizedTitled = NSLocalizedString("Refine Bill", comment: "")
+            instructionalText = NSAttributedString(string: NSLocalizedString("Scroll to refine the Bill Amount", comment: ""), attributes: self.titleTextAttributes)
             let billAmount = self.dataSource.billAmount !! 0
             let offset = 3
             cellBeginIndex = billAmount >= offset ? billAmount - offset : billAmount
             numberOfRowsInTable = billAmount + 10
-            self.cellValueMultiplier = 1
+            cellValueMultiplier = 1
         case .CrownScrollPagedTens:
-            self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
-            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to the number closest to the Bill Amount", comment: ""), attributes: self.titleTextAttributes))
+            localizedTitled = NSLocalizedString("Bill Amount", comment: "")
+            instructionalText = NSAttributedString(string: NSLocalizedString("Scroll to the number closest to the Bill Amount", comment: ""), attributes: self.titleTextAttributes)
             cellBeginIndex = 1
             numberOfRowsInTable = 50
-            self.cellValueMultiplier = 10
+            cellValueMultiplier = 10
         default:
             fatalError("CrownScrollBillInterfaceController: Context not set")
         }
         
+        // prepare the tables
+        self.cellValueMultiplier = cellValueMultiplier
         self.data = []
         for index in cellBeginIndex ..< numberOfRowsInTable {
             self.data.append(index)
         }
         
-        self.clearBillDataTable()
-        self.reloadBillTableData()
-        self.loadingImageGroup?.setHidden(true)
-        self.instructionalTextLabel?.setHidden(false)
-        self.billAmountTable?.setHidden(false)
+        dispatch_async(dispatch_get_main_queue()) {
+            // set the text
+            self.setTitle(localizedTitled)
+            self.instructionalTextLabel?.setAttributedText(instructionalText)
+            self.largerButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Larger", comment: ""), attributes: self.largerButtonTextAttributes))
+            
+            // set colors
+            self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+            self.largerButtonGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.largerButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            
+            // configure the tables
+            self.clearBillDataTable() // not sure if it is safe to call these on background thread
+            self.reloadBillTableData()
+            
+            // show the UI
+            self.loadingImageGroup?.setHidden(true)
+            self.largerButtonGroup?.setHidden(false)
+            self.instructionalTextLabel?.setHidden(false)
+            self.billAmountTable?.setHidden(false)
+            self.interfaceControllerIsConfigured = true
+        }
     }
     
     private func reloadBillTableData() {
         self.billAmountTable?.setNumberOfRows(self.data.count, withRowType: "CrownScrollBillTableRowController")
-        
+                
         for (index, value) in enumerate(self.data) {
             if let row = self.billAmountTable?.rowControllerAtIndex(index) as? CrownScrollBillTableRowController {
                 if row.interfaceIsConfigured == false {
@@ -134,5 +166,8 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
         }
     }
     
+    @IBAction private func didTapLargerAmountButton() {
+        println("did tap larger amount button in bill view")
+    }
     
 }

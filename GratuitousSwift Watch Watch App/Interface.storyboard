@@ -8,9 +8,15 @@
         <!--App Delegate Interface Controller-->
         <scene sceneID="MVV-xz-nNc">
             <objects>
-                <controller id="Cdi-qG-zGI" customClass="AppDelegateInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller hidesWhenLoading="NO" id="Cdi-qG-zGI" customClass="AppDelegateInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" hidden="YES" backgroundImage="LaunchBG" contentMode="scaleAspectFit" id="t03-dB-IhZ"/>
+                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="34i-YQ-4j8">
+                            <items>
+                                <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="oOu-x6-Qgs"/>
+                                <imageView alignment="center" image="LaunchBG" contentMode="top" id="nP9-sl-cZK"/>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
+                        </group>
                     </items>
                 </controller>
             </objects>
@@ -19,10 +25,15 @@
         <!--Bill Amount-->
         <scene sceneID="t1K-MZ-tcM">
             <objects>
-                <controller identifier="CrownScrollBillInterfaceController" title="Bill Amount" id="tMv-1L-nCj" customClass="CrownScrollBillInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller identifier="CrownScrollBillInterfaceController" title="Bill Amount" hidesWhenLoading="NO" id="tMv-1L-nCj" customClass="CrownScrollBillInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <imageView width="1" height="1" alignment="left" image="gratuity-0" contentMode="center" id="jeF-mM-Hp0"/>
-                        <group width="1" height="1" alignment="left" hidden="YES" backgroundImage="BillBG" contentMode="scaleAspectFit" id="GEE-Dl-zTy"/>
+                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="GEE-Dl-zTy">
+                            <items>
+                                <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="dqO-kO-8gE"/>
+                                <imageView alignment="center" image="BillBG" contentMode="top" id="I5y-bh-B29"/>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
+                        </group>
                         <label alignment="left" hidden="YES" text="Label" numberOfLines="0" id="LVO-xL-ovz">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="font" style="UICTFontTextStyleBody"/>
@@ -53,11 +64,30 @@
                                 </tableRow>
                             </items>
                         </table>
+                        <group alignment="left" hidden="YES" id="1hR-DE-TdZ">
+                            <items>
+                                <button alignment="left" id="CGx-Gh-QuV">
+                                    <group key="contentGroup" width="1" alignment="left" id="LfC-u7-DgO">
+                                        <items>
+                                            <label height="35" alignment="center" verticalAlignment="center" text="Larger" textAlignment="center" id="x3K-Uv-KGd"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="didTapLargerAmountButton" destination="tMv-1L-nCj" id="lX6-7n-ys0"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
                     </items>
                     <connections>
-                        <outlet property="animationImageView" destination="jeF-mM-Hp0" id="a0Z-hj-O9q"/>
+                        <outlet property="animationImageView" destination="dqO-kO-8gE" id="Tbm-hm-JnF"/>
                         <outlet property="billAmountTable" destination="QFo-p1-L9c" id="ovV-xA-H9D"/>
                         <outlet property="instructionalTextLabel" destination="LVO-xL-ovz" id="QGp-Cu-93a"/>
+                        <outlet property="largerButtonGroup" destination="1hR-DE-TdZ" id="TzT-aW-wal"/>
+                        <outlet property="largerButtonLabel" destination="x3K-Uv-KGd" id="cep-Vm-Vll"/>
                         <outlet property="loadingImageGroup" destination="GEE-Dl-zTy" id="g3t-88-Hzi"/>
                     </connections>
                 </controller>
@@ -69,7 +99,13 @@
             <objects>
                 <controller identifier="TotalAmountInterfaceController" title="Total" hidesWhenLoading="NO" id="2tI-Ya-wiK" customClass="TotalAmountInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" backgroundImage="TotalBG" contentMode="scaleAspectFit" id="gGF-bx-Mqp"/>
+                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="deS-nb-JU9">
+                            <items>
+                                <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="F5z-Cy-bYe"/>
+                                <imageView alignment="center" image="TotalBG" contentMode="top" id="igd-9V-8Uh"/>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
+                        </group>
                         <group width="1" alignment="left" hidden="YES" layout="vertical" id="b6x-uh-6We">
                             <items>
                                 <group width="1" alignment="left" layout="vertical" radius="7" id="Pl4-NM-Q89">
@@ -147,7 +183,8 @@
                         </group>
                     </items>
                     <connections>
-                        <outlet property="backgroundImageGroup" destination="gGF-bx-Mqp" id="9Kz-CO-wDN"/>
+                        <outlet property="animationImageView" destination="F5z-Cy-bYe" id="hAn-2K-ovA"/>
+                        <outlet property="backgroundImageGroup" destination="deS-nb-JU9" id="OCS-cV-4Y3"/>
                         <outlet property="billAmountGroup" destination="Gdz-VK-zaV" id="HbU-VF-0nS"/>
                         <outlet property="billAmountLabel" destination="8Gv-iz-8Wx" id="SXd-WM-co2"/>
                         <outlet property="billAmountTitleLabel" destination="xMr-5S-VhS" id="rFs-eY-wIY"/>
@@ -172,10 +209,16 @@
             <objects>
                 <controller identifier="ThreeButtonStepperBillInterfaceController" title="Bill Amount" contentMode="scaleAspectFill" hidesWhenLoading="NO" id="vbv-Xr-8bf" customClass="ThreeButtonStepperInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
+                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="MQ8-7f-81e">
+                            <items>
+                                <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="shS-yM-gel"/>
+                                <imageView alignment="center" image="BillBG" contentMode="top" id="469-bM-Typ"/>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
+                        </group>
                         <label alignment="left" hidden="YES" text="Choose Bill Amount" id="xIC-Iu-wcF">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <group width="1" height="1" alignment="left" backgroundImage="BillBG" contentMode="scaleAspectFit" id="BxF-Km-hsl"/>
                         <group width="1" alignment="left" hidden="YES" id="bza-Jp-x2l">
                             <items>
                                 <group height="39" alignment="left" id="xWg-US-c1U">
@@ -278,7 +321,8 @@
                         </group>
                     </items>
                     <connections>
-                        <outlet property="backgroundImageGroup" destination="BxF-Km-hsl" id="NZq-nt-LVZ"/>
+                        <outlet property="animationImageView" destination="shS-yM-gel" id="TaU-Ap-JDn"/>
+                        <outlet property="backgroundImageGroup" destination="MQ8-7f-81e" id="7uP-rO-3bu"/>
                         <outlet property="currencyLabel" destination="i6s-sR-8E2" id="NcJ-vb-bh5"/>
                         <outlet property="currencySlider" destination="9M8-bu-rEq" id="6Jr-UI-Ksc"/>
                         <outlet property="currencySliderGroup" destination="6k9-jz-wD4" id="YfI-sZ-xdN"/>
@@ -306,10 +350,16 @@
             <objects>
                 <controller identifier="ThreeButtonStepperTipInterfaceController" title="Tip Amount" contentMode="scaleAspectFill" hidesWhenLoading="NO" id="cWQ-rw-7fp" customClass="ThreeButtonStepperInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
+                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="jQt-EO-csQ">
+                            <items>
+                                <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="cFL-ok-Lbz"/>
+                                <imageView alignment="center" image="TipBG" contentMode="top" id="RxD-uk-h4L"/>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
+                        </group>
                         <label alignment="left" hidden="YES" text="Choose Bill Amount" id="CeT-jS-z2n">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <group width="1" height="1" alignment="left" backgroundImage="TipBG" contentMode="scaleAspectFit" id="N82-p7-ndV"/>
                         <group width="1" alignment="left" hidden="YES" id="ZnC-MQ-ldX">
                             <items>
                                 <group height="39" alignment="left" id="tj2-66-Tlu">
@@ -413,7 +463,8 @@
                         </group>
                     </items>
                     <connections>
-                        <outlet property="backgroundImageGroup" destination="N82-p7-ndV" id="XHx-7S-4vS"/>
+                        <outlet property="animationImageView" destination="cFL-ok-Lbz" id="a60-hR-yma"/>
+                        <outlet property="backgroundImageGroup" destination="jQt-EO-csQ" id="qJi-lM-Pw0"/>
                         <outlet property="currencyLabel" destination="lgS-NX-8as" id="HBJ-st-ows"/>
                         <outlet property="currencySlider" destination="3ju-nT-DKg" id="yxl-NC-TGu"/>
                         <outlet property="currencySliderGroup" destination="JMo-Oi-hCQ" id="PEk-e9-dKE"/>
@@ -442,7 +493,13 @@
             <objects>
                 <controller identifier="CrownScrollTipInterfaceController" title="Tip Amount" hidesWhenLoading="NO" id="Pb6-uB-8lW" customClass="CrownScrollTipInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" backgroundImage="TipBG" contentMode="scaleAspectFit" id="nhI-hL-BUT"/>
+                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="emx-kG-GDj">
+                            <items>
+                                <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="55K-Hx-IpZ"/>
+                                <imageView alignment="center" image="TipBG" contentMode="top" id="qu8-t3-BGJ"/>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
+                        </group>
                         <label alignment="left" hidden="YES" text="Label" numberOfLines="0" id="5h3-HD-e0b">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="font" style="UICTFontTextStyleBody"/>
@@ -482,10 +539,30 @@
                                 </tableRow>
                             </items>
                         </table>
+                        <group alignment="left" hidden="YES" id="4tV-D0-LTy">
+                            <items>
+                                <button alignment="left" id="mjG-OC-zfe">
+                                    <group key="contentGroup" width="1" alignment="left" id="LkW-9b-pq1">
+                                        <items>
+                                            <label height="35" alignment="center" verticalAlignment="center" text="Larger" textAlignment="center" id="qCs-rR-7f9"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="didTapLargerAmountButton" destination="Pb6-uB-8lW" id="qXS-WG-8Y2"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
                     </items>
                     <connections>
+                        <outlet property="animationImageView" destination="55K-Hx-IpZ" id="nMs-AL-WZI"/>
                         <outlet property="instructionalTextLabel" destination="5h3-HD-e0b" id="png-OT-9wF"/>
-                        <outlet property="loadingImageGroup" destination="nhI-hL-BUT" id="bX1-T7-ETN"/>
+                        <outlet property="largerButtonGroup" destination="4tV-D0-LTy" id="wLk-dK-eQn"/>
+                        <outlet property="largerButtonLabel" destination="qCs-rR-7f9" id="cJp-5o-1a8"/>
+                        <outlet property="loadingImageGroup" destination="emx-kG-GDj" id="Bwn-bM-Oyx"/>
                         <outlet property="tipAmountTable" destination="vYB-zM-w3c" id="H7A-2O-Qwd"/>
                     </connections>
                 </controller>

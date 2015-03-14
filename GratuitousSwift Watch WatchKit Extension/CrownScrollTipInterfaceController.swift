@@ -12,6 +12,9 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
     @IBOutlet private weak var tipAmountTable: WKInterfaceTable?
     @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
     @IBOutlet private weak var loadingImageGroup: WKInterfaceGroup?
+    @IBOutlet private weak var animationImageView: WKInterfaceImage?
+    @IBOutlet private weak var largerButtonGroup: WKInterfaceGroup?
+    @IBOutlet private weak var largerButtonLabel: WKInterfaceLabel?
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private var data = [Int]()
@@ -19,6 +22,7 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
     private var interfaceControllerIsConfigured = false
     
     private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
+    private let largerButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -36,45 +40,64 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
+        self.animationImageView?.setImageNamed("gratuityCap4-")
+        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
+        
         if self.interfaceControllerIsConfigured == false {
-            self.configureInterfaceController()
-            self.interfaceControllerIsConfigured = true
+            // putting this in a background queue allows willActivate to finish, the animation to start.
+            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
+            dispatch_async(backgroundQueue) {
+                self.configureInterfaceController()
+            }
         }
     }
     
     private func configureInterfaceController() {
-        switch self.currentContext {
-        case .CrownScrollTipChooser:
-            self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
-            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""), attributes: self.titleTextAttributes))
-            self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-            
-            let billAmount = self.dataSource.billAmount !! 0
-            let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
-            let tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
-            let offset = 5
-            
-            var cellBeginIndex: Int
-            //let cellBeginIndex: Int
-            if tipAmount >= offset {
-                cellBeginIndex = tipAmount - offset
-            } else {
-                cellBeginIndex = tipAmount
+        dispatch_async(dispatch_get_main_queue()) {
+            switch self.currentContext {
+            case .CrownScrollTipChooser:
+                self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
+                self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""), attributes: self.titleTextAttributes))
+                self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+                
+                let billAmount = self.dataSource.billAmount !! 0
+                let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
+                let tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
+                let offset = 5
+                
+                var cellBeginIndex: Int
+                //let cellBeginIndex: Int
+                if tipAmount >= offset {
+                    cellBeginIndex = tipAmount - offset
+                } else {
+                    cellBeginIndex = tipAmount
+                }
+                let numberOfRowsInTable = cellBeginIndex + offset * 3
+                
+                self.data = []
+                for index in cellBeginIndex ..< numberOfRowsInTable {
+                    self.data.append(index)
+                }
+                
+                self.reloadTipTableData(idealTip: tipAmount, billAmount: billAmount)
+            default:
+                break
             }
-            let numberOfRowsInTable = cellBeginIndex + offset * 3
             
-            self.data = []
-            for index in cellBeginIndex ..< numberOfRowsInTable {
-                self.data.append(index)
-            }
+            // set the text
+            self.largerButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Larger", comment: ""), attributes: self.largerButtonTextAttributes))
             
-            self.reloadTipTableData(idealTip: tipAmount, billAmount: billAmount)
-        default:
-            break
+            // set colors
+            self.largerButtonGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.largerButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            
+            // show the view
+            self.loadingImageGroup?.setHidden(true)
+            self.largerButtonGroup?.setHidden(false)
+            self.instructionalTextLabel?.setHidden(false)
+            self.tipAmountTable?.setHidden(false)
+            self.interfaceControllerIsConfigured = true
         }
-        self.loadingImageGroup?.setHidden(true)
-        self.instructionalTextLabel?.setHidden(false)
-        self.tipAmountTable?.setHidden(false)
     }
     
     private func reloadTipTableData(#idealTip: Int, billAmount: Int) {
@@ -102,6 +125,10 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
         default:
             break
         }
+    }
+    
+    @IBAction private func didTapLargerAmountButton() {
+        println("did tap larger amount button in tip view")
     }
     
 }

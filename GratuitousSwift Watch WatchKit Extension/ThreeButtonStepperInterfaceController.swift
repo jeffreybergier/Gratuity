@@ -33,6 +33,7 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
     @IBOutlet private weak var nextButtonTextLabel: WKInterfaceLabel?
     @IBOutlet private weak var nextButtonGroup: WKInterfaceGroup?
     @IBOutlet private weak var backgroundImageGroup: WKInterfaceGroup?
+    @IBOutlet private weak var animationImageView: WKInterfaceImage?
     
     private var currentContext = InterfaceControllerContext.NotSet
     private var interfaceControllerIsConfigured = false
@@ -92,67 +93,76 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
+        self.animationImageView?.setImageNamed("gratuityCap4-")
+        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
+        
         if self.interfaceControllerIsConfigured == false {
-            self.configureInterfaceController()
-            self.interfaceControllerIsConfigured = true
+            // putting this in a background queue allows willActivate to finish, the animation to start.
+            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
+            dispatch_async(backgroundQueue) {
+                self.configureInterfaceController()
+            }
         }
     }
     
     private func configureInterfaceController() {
-        var currencySymbolString = "$"
-        if let currencySymbolCharacter = Array(self.dataSource.currencyStringFromInteger(0)).first {
-            currencySymbolString = String(currencySymbolCharacter)
+        dispatch_async(dispatch_get_main_queue()) {
+            var currencySymbolString = "$"
+            if let currencySymbolCharacter = Array(self.dataSource.currencyStringFromInteger(0)).first {
+                currencySymbolString = String(currencySymbolCharacter)
+            }
+            self.currencyLabel?.setAttributedText(NSAttributedString(string: currencySymbolString, attributes: self.valueTextAttributes))
+            self.currencyLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+            
+            self.nextButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.nextButtonTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Next", comment: ""), attributes: self.nextButtonTextAttributes))
+            
+            self.instructionalTextLabel?.setText("")
+            self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+            
+            self.tipPercentageLabel?.setText("-%")
+            self.tipPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            
+            self.hundredsButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.tensButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.onesButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            
+            self.nextButtonGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.currencySliderGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            
+            switch self.currentContext {
+            case .ThreeButtonStepperBill:
+                self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Bill Amount", comment: ""), attributes: self.titleTextAttributes))
+                self.instructionalTextLabel?.setHidden(true)
+                self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
+                self.tipPercentageLabel?.setHidden(true)
+                
+                self.updateUIWithCurrencyAmount(self.dataSource.billAmount)
+            case .ThreeButtonStepperTip:
+                self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Tip Amount", comment: ""), attributes: self.titleTextAttributes))
+                self.instructionalTextLabel?.setHidden(true)
+                self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
+                
+                let billAmount = self.dataSource.billAmount !! 0
+                let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
+                let calculatedTip = Double(billAmount) * suggestedTipPercentage
+                let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: calculatedTip, bottom: Double(billAmount))
+                //let actualTipPercentage = calculatedTip / Double(billAmount)
+                
+                self.updateUIWithCurrencyAmount(Int(round(calculatedTip)))
+                self.tipPercentageLabel?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(actualTipPercentage), attributes: self.nextButtonTextAttributes))
+                self.tipPercentageLabel?.setHidden(false)
+            default:
+                fatalError("StepperInterfaceController: Context was invalid while switching.")
+            }
+            self.selectedButton = .Ones
+            
+            self.backgroundImageGroup?.setHidden(true)
+            self.currencyValuesGroup?.setHidden(false)
+            self.nextButtonGroup?.setHidden(false)
+            self.currencySliderGroup?.setHidden(false)
+            self.interfaceControllerIsConfigured = true
         }
-        self.currencyLabel?.setAttributedText(NSAttributedString(string: currencySymbolString, attributes: self.valueTextAttributes))
-        self.currencyLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-        
-        self.nextButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-        self.nextButtonTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Next", comment: ""), attributes: self.nextButtonTextAttributes))
-        
-        self.instructionalTextLabel?.setText("")
-        self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-        
-        self.tipPercentageLabel?.setText("-%")
-        self.tipPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-        
-        self.hundredsButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-        self.tensButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-        self.onesButtonTextLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-        
-        self.nextButtonGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
-        self.currencySliderGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
-        
-        self.backgroundImageGroup?.setHidden(true)
-        self.currencyValuesGroup?.setHidden(false)
-        self.nextButtonGroup?.setHidden(false)
-        self.currencySliderGroup?.setHidden(false)
-        
-        switch self.currentContext {
-        case .ThreeButtonStepperBill:
-            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Bill Amount", comment: ""), attributes: self.titleTextAttributes))
-            self.instructionalTextLabel?.setHidden(true)
-            self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
-            self.tipPercentageLabel?.setHidden(true)
-            
-            self.updateUIWithCurrencyAmount(self.dataSource.billAmount)
-        case .ThreeButtonStepperTip:
-            self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Tip Amount", comment: ""), attributes: self.titleTextAttributes))
-            self.instructionalTextLabel?.setHidden(true)
-            self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
-            
-            let billAmount = self.dataSource.billAmount !! 0
-            let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
-            let calculatedTip = Double(billAmount) * suggestedTipPercentage
-            let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: calculatedTip, bottom: Double(billAmount))
-            //let actualTipPercentage = calculatedTip / Double(billAmount)
-            
-            self.updateUIWithCurrencyAmount(Int(round(calculatedTip)))
-            self.tipPercentageLabel?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(actualTipPercentage), attributes: self.nextButtonTextAttributes))
-            self.tipPercentageLabel?.setHidden(false)
-        default:
-            fatalError("StepperInterfaceController: Context was invalid while switching.")
-        }
-        self.selectedButton = .Ones
     }
     
     private func updateUIWithCurrencyAmount(currencyAmount: Int?) {
@@ -218,7 +228,7 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
             break
         }
     }
-
+    
     @IBAction private func sliderDidChange(value: Float) {
         switch self.selectedButton {
         case .None:
@@ -285,9 +295,9 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
             //self.selectedButton = .Ones
         case .Hundreds:
             self.buttonValues.hundreds = 0
-//            self.buttonValues.tens = 9
-//            self.buttonValues.ones = 9
-//            self.selectedButton = .Tens
+            //            self.buttonValues.tens = 9
+            //            self.buttonValues.ones = 9
+            //            self.selectedButton = .Tens
         default:
             break
         }
