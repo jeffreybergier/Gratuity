@@ -82,6 +82,7 @@
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
                     </items>
+                    <menu key="menu" id="yBW-0H-2jO"/>
                     <connections>
                         <outlet property="animationImageView" destination="dqO-kO-8gE" id="Tbm-hm-JnF"/>
                         <outlet property="billAmountTable" destination="QFo-p1-L9c" id="ovV-xA-H9D"/>
@@ -487,6 +488,176 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="349" y="565"/>
+        </scene>
+        <!--Dismiss Settings-->
+        <scene sceneID="N6L-dJ-mY2">
+            <objects>
+                <controller identifier="SettingsInterfaceController" title="Dismiss Settings" hidesWhenLoading="NO" id="ffT-6F-euT" customClass="SettingsInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Suggest Tip Percentage" numberOfLines="0" id="nRC-5a-8ct"/>
+                        <group width="1" alignment="left" id="EcG-wP-xkF">
+                            <items>
+                                <group alignment="left" radius="7" id="pZT-oz-Y33">
+                                    <items>
+                                        <slider width="1" alignment="left" continuous="YES" value="20" maximum="50" steps="50" minimumImage="SliderMinus" maximumImage="SliderPlus" id="6PC-nq-DwX">
+                                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="suggestedTipSliderDidChange:" destination="ffT-6F-euT" id="PGR-Uy-M1Q"/>
+                                            </connections>
+                                        </slider>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </group>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
+                        <label alignment="left" text="Maximum Bill Amount" numberOfLines="0" id="aaX-8t-d4o"/>
+                        <group width="1" alignment="left" id="ALq-zB-gQI">
+                            <items>
+                                <group alignment="left" radius="7" id="RP5-G6-3Oe">
+                                    <items>
+                                        <slider width="1" alignment="left" continuous="YES" value="200" minimum="100" maximum="800" steps="700" minimumImage="SliderMinus" maximumImage="SliderPlus" id="ecV-6b-7jN">
+                                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="maximumBillSliderDidChange:" destination="ffT-6F-euT" id="YZG-0U-3Al"/>
+                                            </connections>
+                                        </slider>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </group>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
+                        <label alignment="left" text="Currency Symbol" numberOfLines="0" id="MCm-nN-GLi"/>
+                        <group alignment="left" id="tDl-Kq-9qy">
+                            <items>
+                                <button alignment="left" id="Nfu-aV-Rvo">
+                                    <group key="contentGroup" width="1" alignment="left" id="NCo-hy-MML">
+                                        <items>
+                                            <label height="35" alignment="center" verticalAlignment="center" text="Local Currency" textAlignment="center" id="mnK-Ws-IhH"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="currencySymbolButtonLocalTapped" destination="ffT-6F-euT" id="Yzy-bg-wPv"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
+                        <group alignment="left" id="L24-oQ-Y5W">
+                            <items>
+                                <button alignment="left" id="wSy-xE-5Ud">
+                                    <group key="contentGroup" width="1" alignment="left" id="LLM-bb-dNG">
+                                        <items>
+                                            <label height="35" alignment="center" verticalAlignment="center" text="$" textAlignment="center" id="s2Q-zU-SDp"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="currencySymbolButtonDollarTapped" destination="ffT-6F-euT" id="agt-ek-ueZ"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
+                        <group alignment="left" id="N2Z-SX-3vI">
+                            <items>
+                                <button alignment="left" id="BtP-Gp-3Dp">
+                                    <group key="contentGroup" width="1" alignment="left" id="Yfj-68-6ZC">
+                                        <items>
+                                            <label height="35" alignment="center" verticalAlignment="center" text="£" textAlignment="center" id="3qZ-4S-LId"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="currencySymbolButtonPoundTapped" destination="ffT-6F-euT" id="GzM-qu-fkF"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
+                        <group alignment="left" id="Rc9-Ue-Rkd">
+                            <items>
+                                <button alignment="left" id="jrE-Ee-IZs">
+                                    <group key="contentGroup" width="1" alignment="left" id="Qlu-eg-wPu">
+                                        <items>
+                                            <label height="35" alignment="center" verticalAlignment="center" text="€" textAlignment="center" id="HXA-pQ-4Dc"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="currencySymbolButtonEuroTapped" destination="ffT-6F-euT" id="mxR-Aq-ERQ"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
+                        <group alignment="left" id="87e-ws-3v4">
+                            <items>
+                                <button alignment="left" id="8bR-es-lKT">
+                                    <group key="contentGroup" width="1" alignment="left" id="eib-1d-PIU">
+                                        <items>
+                                            <label height="35" alignment="center" verticalAlignment="center" text="¥" textAlignment="center" id="TuF-7m-oCw"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="currencySymbolButtonYenTapped" destination="ffT-6F-euT" id="qis-FY-iwW"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
+                        <group alignment="left" id="6T3-Lz-wFT">
+                            <items>
+                                <button alignment="left" id="1rb-JF-41J">
+                                    <group key="contentGroup" width="1" alignment="left" id="drV-s5-wvM">
+                                        <items>
+                                            <label height="35" alignment="center" verticalAlignment="center" text="None" textAlignment="center" id="dCe-zf-0fa"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="currencySymbolButtonNoneTapped" destination="ffT-6F-euT" id="PiC-gG-fDj"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="currencySymbolDollarGroup" destination="L24-oQ-Y5W" id="qvh-uB-4VP"/>
+                        <outlet property="currencySymbolDollarLabel" destination="s2Q-zU-SDp" id="u0G-3U-2tn"/>
+                        <outlet property="currencySymbolEuroGroup" destination="Rc9-Ue-Rkd" id="4r2-B8-xuj"/>
+                        <outlet property="currencySymbolEuroLabel" destination="HXA-pQ-4Dc" id="nuO-3W-aYu"/>
+                        <outlet property="currencySymbolLocalGroup" destination="tDl-Kq-9qy" id="tgq-dv-Z6h"/>
+                        <outlet property="currencySymbolLocalLabel" destination="mnK-Ws-IhH" id="bYb-SZ-CXr"/>
+                        <outlet property="currencySymbolNoneGroup" destination="6T3-Lz-wFT" id="ALu-4s-dPS"/>
+                        <outlet property="currencySymbolNoneLabel" destination="dCe-zf-0fa" id="UcM-0D-5bt"/>
+                        <outlet property="currencySymbolPoundGroup" destination="N2Z-SX-3vI" id="TCF-dx-xeF"/>
+                        <outlet property="currencySymbolPoundLabel" destination="3qZ-4S-LId" id="wHG-MJ-xBT"/>
+                        <outlet property="currencySymbolTitleLabel" destination="MCm-nN-GLi" id="FFL-Ww-d6M"/>
+                        <outlet property="currencySymbolYenGroup" destination="87e-ws-3v4" id="55y-1y-G8W"/>
+                        <outlet property="currencySymbolYenLabel" destination="TuF-7m-oCw" id="GuV-7t-RHL"/>
+                        <outlet property="maximumBillGroup" destination="ALq-zB-gQI" id="lzX-TN-FJR"/>
+                        <outlet property="maximumBillSlider" destination="ecV-6b-7jN" id="UWJ-FG-GOn"/>
+                        <outlet property="maximumBillTitleLabel" destination="aaX-8t-d4o" id="M0w-HD-7qS"/>
+                        <outlet property="suggestedTipGroup" destination="EcG-wP-xkF" id="9e1-Fn-w5p"/>
+                        <outlet property="suggestedTipSlider" destination="6PC-nq-DwX" id="5xV-8j-qzh"/>
+                        <outlet property="suggestedTipTitleLabel" destination="nRC-5a-8ct" id="FIc-3q-TSk"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="885" y="316"/>
         </scene>
         <!--Tip Amount-->
         <scene sceneID="0cJ-h1-wjI">

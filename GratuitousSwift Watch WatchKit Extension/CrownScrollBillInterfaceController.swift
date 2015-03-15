@@ -104,6 +104,11 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
         }
         
         dispatch_async(dispatch_get_main_queue()) {
+            // configure the menu
+            self.addMenuItemWithItemIcon(WKMenuItemIcon.Shuffle, title: NSLocalizedString("Switch", comment: ""), action: "menuSwitchUIButtonChosen")
+            self.addMenuItemWithItemIcon(WKMenuItemIcon.Repeat, title: NSLocalizedString("Start Over", comment: ""), action: "menuStartOverButtonChosen")
+            self.addMenuItemWithItemIcon(WKMenuItemIcon.More, title: NSLocalizedString("Settings", comment: ""), action: "menuSettingsButtonChosen")
+            
             // set the text
             self.setTitle(localizedTitled)
             self.instructionalTextLabel?.setAttributedText(instructionalText)
@@ -205,6 +210,19 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
             }
         }
         self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
+    }
+    
+    @objc private func menuSwitchUIButtonChosen() {
+        self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
+    }
+    
+    @objc private func menuStartOverButtonChosen() {
+        self.popToRootController()
+    }
+    
+    @objc private func menuSettingsButtonChosen() {
+        self.presentControllerWithName("SettingsInterfaceController", context: nil)
+        //self.pushControllerWithName("SettingsInterfaceController", context: nil)
     }
     
 }
