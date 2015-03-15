@@ -35,6 +35,9 @@ class SettingsInterfaceController: WKInterfaceController {
     
     private var interfaceControllerIsConfigured = false
     
+    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
+    private let largerButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
+    
     override func willActivate() {
         super.willActivate()
         
@@ -49,7 +52,30 @@ class SettingsInterfaceController: WKInterfaceController {
     
     private func configureInterfaceController() {
         dispatch_async(dispatch_get_main_queue()) {
+            self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: "Suggested Tip Percentage", attributes: self.titleTextAttributes))
+            self.maximumBillTitleLabel?.setAttributedText(NSAttributedString(string: "Maximum Bill Amount", attributes: self.titleTextAttributes))
+            self.currencySymbolTitleLabel?.setAttributedText(NSAttributedString(string: "Currency Symbol", attributes: self.titleTextAttributes))
             
+//            self.suggestedTipSlider
+//            self.maximumBillSlider
+            
+            self.currencySymbolLocalLabel?.setAttributedText(NSAttributedString(string: "Local", attributes: self.titleTextAttributes))
+            self.currencySymbolDollarLabel?.setAttributedText(NSAttributedString(string: "$", attributes: self.titleTextAttributes))
+            self.currencySymbolPoundLabel?.setAttributedText(NSAttributedString(string: "£", attributes: self.titleTextAttributes))
+            self.currencySymbolEuroLabel?.setAttributedText(NSAttributedString(string: "€", attributes: self.titleTextAttributes))
+            self.currencySymbolYenLabel?.setAttributedText(NSAttributedString(string: "¥", attributes: self.titleTextAttributes))
+            self.currencySymbolNoneLabel?.setAttributedText(NSAttributedString(string: "None", attributes: self.titleTextAttributes))
+            
+            self.suggestedTipGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.maximumBillGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.currencySymbolLocalGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.currencySymbolDollarGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.currencySymbolPoundGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.currencySymbolEuroGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.currencySymbolYenGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            
+            self.interfaceControllerIsConfigured = true
         }
     }
     
