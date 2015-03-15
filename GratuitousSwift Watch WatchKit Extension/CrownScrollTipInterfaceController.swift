@@ -136,15 +136,18 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
         if self.dataSource.watchAppRunCount > 3 {
             if self.idealTipIndex > 0 {
                 let tableIndex = self.idealTipIndex - 1
-                let cell = self.tipAmountTable?.rowControllerAtIndex(tableIndex) as? CrownScrollTipTableRowController
-                let tipAmount = cell?.tipAmount
                 self.tipAmountTable?.scrollToRowAtIndex(tableIndex)
             }
         }
     }
     
     @IBAction private func didTapLargerAmountButton() {
-        println("did tap larger amount button in tip view")
+        if let numberOfRows = self.tipAmountTable?.numberOfRows {
+            if let highestTipAmount = self.data.last {
+                self.dataSource.tipAmount = highestTipAmount
+            }
+        }
+        self.pushControllerWithName("ThreeButtonStepperTipInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperTip.rawValue)
     }
     
 }

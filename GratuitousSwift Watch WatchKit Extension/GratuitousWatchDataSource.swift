@@ -79,7 +79,7 @@ class GratuitousWatchDataSource {
     
     var correctWatchInterface: CorrectWatchInterface {
         get {
-            return CorrectWatchInterface.ThreeButtonStepper
+            //return CorrectWatchInterface.ThreeButtonStepper
             return self.defaultsManager.correctWatchInterface
         }
         set {

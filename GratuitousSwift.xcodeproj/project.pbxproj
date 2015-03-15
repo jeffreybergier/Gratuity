@@ -147,14 +147,14 @@
 		73556E631A19711F0079A37D /* UIImage+PDFUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PDFUtility.h"; sourceTree = "<group>"; };
 		73556E641A19711F0079A37D /* UIImage+PDFUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PDFUtility.m"; sourceTree = "<group>"; };
 		735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyFormatter.swift; sourceTree = "<group>"; };
-		736568F81A26DD1400603602 /* Gratuityλδ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gratuityλδ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		736568F81A26DD1400603602 /* GratuityLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuityLD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		736568F91A26DD1500603602 /* GratuitousSwift copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GratuitousSwift copy-Info.plist"; path = "/Users/jeffberg/Documents/SaturdayApps/GratuitousSwift/GratuitousSwift copy-Info.plist"; sourceTree = "<absolute>"; };
 		736719C51AA7F11600EF0FD3 /* UnusedInterfaces.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UnusedInterfaces.storyboard; sourceTree = "<group>"; };
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
 		737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIConstant.swift; sourceTree = "<group>"; };
 		737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownScrollBillInterfaceController.swift; sourceTree = "<group>"; };
 		737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = settingsIcon.pdf; sourceTree = "<group>"; };
-		7382510119E60EED00CD2B28 /* Gratuityδ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gratuityδ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7382510119E60EED00CD2B28 /* GratuitySD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuitySD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7382510519E60EED00CD2B28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratuitousAppDelegate.swift; sourceTree = "<group>"; };
 		7382510D19E60EED00CD2B28 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -321,8 +321,8 @@
 		7382510219E60EED00CD2B28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7382510119E60EED00CD2B28 /* Gratuityδ.app */,
-				736568F81A26DD1400603602 /* Gratuityλδ.app */,
+				7382510119E60EED00CD2B28 /* GratuitySD.app */,
+				736568F81A26DD1400603602 /* GratuityLD.app */,
 				73C7B4B31A2A92E400536D86 /* GratuitousSwift Watch.app */,
 				73A18D581A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension.appex */,
 				73A18D6A1A2A9525002180DD /* GratuitousSwift Watch Watch App.app */,
@@ -494,7 +494,7 @@
 			);
 			name = "GratuitousSwift Local";
 			productName = GratuitousSwift;
-			productReference = 736568F81A26DD1400603602 /* Gratuityλδ.app */;
+			productReference = 736568F81A26DD1400603602 /* GratuityLD.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7382510019E60EED00CD2B28 /* GratuitousSwift Store */ = {
@@ -512,7 +512,7 @@
 			);
 			name = "GratuitousSwift Store";
 			productName = GratuitousSwift;
-			productReference = 7382510119E60EED00CD2B28 /* Gratuityδ.app */;
+			productReference = 7382510119E60EED00CD2B28 /* GratuitySD.app */;
 			productType = "com.apple.product-type.application";
 		};
 		73A18D571A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension */ = {
@@ -895,7 +895,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
-				PRODUCT_NAME = "Gratuityλδ";
+				PRODUCT_NAME = GratuityLD;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GratuitousSwift/GratuitousSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -916,7 +916,7 @@
 				);
 				INFOPLIST_FILE = "GratuitousSwift copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "Gratuityλ";
+				PRODUCT_NAME = GratuityL;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GratuitousSwift/GratuitousSwift-Bridging-Header.h";
 			};
@@ -1016,7 +1016,7 @@
 				INFOPLIST_FILE = GratuitousSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_NAME = "Gratuityδ";
+				PRODUCT_NAME = GratuitySD;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GratuitousSwift/GratuitousSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

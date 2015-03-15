@@ -35,7 +35,7 @@ class GratuitousUserDefaults: Printable {
             self.userDefaults.setInteger(201, forKey: "numberOfRowsInBillTableForWatch")
             self.userDefaults.setInteger(0, forKey: "watchAppRunCount")
             self.userDefaults.setBool(true, forKey: "watchAppRunCountShouldBeIncremented")
-            self.userDefaults.setInteger(CorrectWatchInterface.ThreeButtonStepper.rawValue, forKey: "correctInterface")
+            self.userDefaults.setInteger(CorrectWatchInterface.CrownScrollInfinite.rawValue, forKey: "correctInterface")
             self.userDefaults.synchronize()
         } else {
             self.userDefaults.setBool(true, forKey: "watchAppRunCountShouldBeIncremented")

@@ -17,13 +17,13 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     @IBOutlet private weak var largerButtonGroup: WKInterfaceGroup?
     @IBOutlet private weak var largerButtonLabel: WKInterfaceLabel?
     
-    private let dataSource = GratuitousWatchDataSource.sharedInstance
     private var data = [Int]()
     private var cellValueMultiplier = 1
     private var currentContext: InterfaceControllerContext = .NotSet
-    
+    private var billAmountOffset: Int? // This property is only set when context is CrownScrollPagedOnes
     private var interfaceControllerIsConfigured = false
     
+    private let dataSource = GratuitousWatchDataSource.sharedInstance
     private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
     private let largerButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
     
@@ -83,13 +83,14 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
             let billAmount = self.dataSource.billAmount !! 0
             let offset = 3
             cellBeginIndex = billAmount >= offset ? billAmount - offset : billAmount
-            numberOfRowsInTable = billAmount + 10
+            self.billAmountOffset = cellBeginIndex
+            numberOfRowsInTable = billAmount + 11
             cellValueMultiplier = 1
         case .CrownScrollPagedTens:
             localizedTitled = NSLocalizedString("Bill Amount", comment: "")
             instructionalText = NSAttributedString(string: NSLocalizedString("Scroll to the number closest to the Bill Amount", comment: ""), attributes: self.titleTextAttributes)
             cellBeginIndex = 1
-            numberOfRowsInTable = 50
+            numberOfRowsInTable = 51
             cellValueMultiplier = 10
         default:
             fatalError("CrownScrollBillInterfaceController: Context not set")
@@ -171,16 +172,39 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
         timer?.invalidate()
         if self.dataSource.watchAppRunCount > 3 {
             let billAmount = self.dataSource.billAmount
-            if self.cellValueMultiplier > 0 {
-                self.instructionalTextLabel?.setHidden(true)
-                let tableIndex = Int(round(Float(billAmount) / Float(self.cellValueMultiplier))) + 1
-                self.billAmountTable?.scrollToRowAtIndex(tableIndex)
+            switch self.currentContext {
+            case .CrownScrollPagedOnes:
+                if let offset = self.billAmountOffset {
+                    let tableIndex = billAmount - offset
+                    self.billAmountTable?.scrollToRowAtIndex(tableIndex)
+                    break
+                }
+            case .CrownScrollPagedTens:
+                fallthrough
+            case .CrownScrollInfinite:
+                if let division = GratuitousWatchDataSource.optionalDivision(top: Double(billAmount), bottom: Double(self.cellValueMultiplier)) {
+                    let tableIndex = Int(round(division)) - 1
+                    if let numberOfRows = self.billAmountTable?.numberOfRows {
+                        if numberOfRows > tableIndex {
+                            self.billAmountTable?.scrollToRowAtIndex(tableIndex)
+                        } else {
+                            self.billAmountTable?.scrollToRowAtIndex(numberOfRows - 1)
+                        }
+                    }
+                }
+            default:
+                fatalError("CrownScrollBillInterfaceController: Invalid context found when attempting to scroll to desired row.")
             }
         }
     }
     
     @IBAction private func didTapLargerAmountButton() {
-        println("did tap larger amount button in bill view")
+        if let numberOfRows = self.billAmountTable?.numberOfRows {
+            if let highestBillAmount = self.data.last {
+                self.dataSource.billAmount = highestBillAmount * self.cellValueMultiplier//numberOfRows * self.cellValueMultiplier
+            }
+        }
+        self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
     }
     
 }
