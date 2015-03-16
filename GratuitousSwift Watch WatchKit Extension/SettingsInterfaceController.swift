@@ -17,6 +17,9 @@ class SettingsInterfaceController: WKInterfaceController {
     @IBOutlet private weak var suggestedTipSlider: WKInterfaceSlider?
     @IBOutlet private weak var maximumBillSlider: WKInterfaceSlider?
     
+    @IBOutlet private weak var suggestedTipPercentageLabel: WKInterfaceLabel?
+    @IBOutlet private weak var maximumBillAmountLabel: WKInterfaceLabel?
+    
     @IBOutlet private weak var currencySymbolLocalLabel: WKInterfaceLabel?
     @IBOutlet private weak var currencySymbolDollarLabel: WKInterfaceLabel?
     @IBOutlet private weak var currencySymbolPoundLabel: WKInterfaceLabel?
@@ -35,11 +38,15 @@ class SettingsInterfaceController: WKInterfaceController {
     
     private var interfaceControllerIsConfigured = false
     
+    private let dataSource = GratuitousWatchDataSource.sharedInstance
     private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
     private let largerButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
     
     override func willActivate() {
         super.willActivate()
+        
+        //self.animationImageView?.setImageNamed("gratuityCap4-")
+        //self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
         
         if self.interfaceControllerIsConfigured == false {
             // putting this in a background queue allows willActivate to finish, the animation to start.
@@ -52,6 +59,20 @@ class SettingsInterfaceController: WKInterfaceController {
     
     private func configureInterfaceController() {
         dispatch_async(dispatch_get_main_queue()) {
+            // set the color of all the labels
+            self.suggestedTipTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+            self.maximumBillTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
+            self.suggestedTipPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.maximumBillAmountLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.currencySymbolTitleLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.currencySymbolLocalLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.currencySymbolDollarLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.currencySymbolPoundLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.currencySymbolEuroLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.currencySymbolYenLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.currencySymbolNoneLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            
+            // configure the titles
             self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: "Suggested Tip Percentage", attributes: self.titleTextAttributes))
             self.maximumBillTitleLabel?.setAttributedText(NSAttributedString(string: "Maximum Bill Amount", attributes: self.titleTextAttributes))
             self.currencySymbolTitleLabel?.setAttributedText(NSAttributedString(string: "Currency Symbol", attributes: self.titleTextAttributes))
@@ -59,13 +80,15 @@ class SettingsInterfaceController: WKInterfaceController {
 //            self.suggestedTipSlider
 //            self.maximumBillSlider
             
-            self.currencySymbolLocalLabel?.setAttributedText(NSAttributedString(string: "Local", attributes: self.titleTextAttributes))
-            self.currencySymbolDollarLabel?.setAttributedText(NSAttributedString(string: "$", attributes: self.titleTextAttributes))
-            self.currencySymbolPoundLabel?.setAttributedText(NSAttributedString(string: "£", attributes: self.titleTextAttributes))
-            self.currencySymbolEuroLabel?.setAttributedText(NSAttributedString(string: "€", attributes: self.titleTextAttributes))
-            self.currencySymbolYenLabel?.setAttributedText(NSAttributedString(string: "¥", attributes: self.titleTextAttributes))
-            self.currencySymbolNoneLabel?.setAttributedText(NSAttributedString(string: "None", attributes: self.titleTextAttributes))
+            // configure the currency selection titles
+            self.currencySymbolLocalLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Local", comment: ""), attributes: self.largerButtonTextAttributes))
+            self.currencySymbolDollarLabel?.setAttributedText(NSAttributedString(string: "$", attributes: self.largerButtonTextAttributes))
+            self.currencySymbolPoundLabel?.setAttributedText(NSAttributedString(string: "£", attributes: self.largerButtonTextAttributes))
+            self.currencySymbolEuroLabel?.setAttributedText(NSAttributedString(string: "€", attributes: self.largerButtonTextAttributes))
+            self.currencySymbolYenLabel?.setAttributedText(NSAttributedString(string: "¥", attributes: self.largerButtonTextAttributes))
+            self.currencySymbolNoneLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("None", comment: ""), attributes: self.largerButtonTextAttributes))
             
+            // set the color of the groups that surround the buttons and sliders
             self.suggestedTipGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             self.maximumBillGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             self.currencySymbolLocalGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
@@ -75,16 +98,27 @@ class SettingsInterfaceController: WKInterfaceController {
             self.currencySymbolYenGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             
+            // configure the values that change
+            self.suggestedTipSlider?.setValue(Float(round(self.dataSource.tipPercentage * 100)))
+            self.maximumBillSlider?.setValue(Float(self.dataSource.numberOfRowsInBillTableForWatch))
+            self.updateMaximumBillAmountUI()
+            self.updateSuggestedTipPercentageUI()
+            
+            // this probably isn't needed, but no need to run this code a second time.
             self.interfaceControllerIsConfigured = true
         }
     }
     
     @IBAction func suggestedTipSliderDidChange(value: Float) {
-        
+        let adjustedValue = value / 100
+        self.dataSource.tipPercentage = Double(adjustedValue)
+        self.updateSuggestedTipPercentageUI()
     }
     
     @IBAction func maximumBillSliderDidChange(value: Float) {
-        
+        let integerValue = Int(round(value))
+        self.dataSource.numberOfRowsInBillTableForWatch = integerValue
+        self.updateMaximumBillAmountUI()
     }
     
     @IBAction func currencySymbolButtonLocalTapped() {
@@ -109,5 +143,17 @@ class SettingsInterfaceController: WKInterfaceController {
     
     @IBAction func currencySymbolButtonNoneTapped() {
         
+    }
+    
+    private func updateMaximumBillAmountUI() {
+        let maximumBillAmount = self.dataSource.numberOfRowsInBillTableForWatch - 1
+        let maximumBillAmountCurrencyString = self.dataSource.currencyStringFromInteger(maximumBillAmount)
+        self.maximumBillAmountLabel?.setAttributedText(NSAttributedString(string: maximumBillAmountCurrencyString, attributes: self.largerButtonTextAttributes))
+    }
+    
+    private func updateSuggestedTipPercentageUI() {
+        let suggestedTipPercentage = self.dataSource.tipPercentage
+        let suggestedTipPercentageString = self.dataSource.percentStringFromRawDouble(suggestedTipPercentage)
+        self.suggestedTipPercentageLabel?.setAttributedText(NSAttributedString(string: suggestedTipPercentageString, attributes: self.largerButtonTextAttributes))
     }
 }
