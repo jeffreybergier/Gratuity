@@ -391,9 +391,9 @@
 				73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */,
 				73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */,
 				7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */,
+				73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */,
 				73A755AE1A87F1E60038E023 /* Crown Scroll Interface */,
 				73A755AB1A87EF310038E023 /* Stepper Interface */,
-				73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */,
 				73A18D661A2A9525002180DD /* Images.xcassets */,
 				73A18D5D1A2A9525002180DD /* Supporting Files */,
 			);

@@ -33,6 +33,7 @@ class GratuitousWatchDataSource {
         
         // configure a timer to check if things change on disk
         let userDefaultsTimer = NSTimer.scheduledTimerWithTimeInterval(30.0, target: self, selector: "updateCurrencySymbolFromDisk:", userInfo: nil, repeats: true)
+        userDefaultsTimer.fire()
     }
     
     //this code allows this object to be a singleton
@@ -111,6 +112,16 @@ class GratuitousWatchDataSource {
         }
         get {
             return self.defaultsManager.numberOfRowsInBillTableForWatch
+        }
+    }
+    
+    var overrideCurrencySymbol: CurrencySign {
+        get {
+            return self.defaultsManager.overrideCurrencySymbol
+        }
+        set {
+            self.currentCurrencyFormat = newValue
+            self.defaultsManager.overrideCurrencySymbol = newValue
         }
     }
     

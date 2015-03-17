@@ -109,7 +109,12 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
         dispatch_async(dispatch_get_main_queue()) {
             var currencySymbolString = "$"
             if let currencySymbolCharacter = Array(self.dataSource.currencyStringFromInteger(0)).first {
-                currencySymbolString = String(currencySymbolCharacter)
+                let stringFromCharacter = String(currencySymbolCharacter)
+                if stringFromCharacter == "0" { // if the preference is set to none, a 0 was showing in the UI instead of blank
+                    currencySymbolString = ""
+                } else {
+                    currencySymbolString = stringFromCharacter
+                }
             }
             self.currencyLabel?.setAttributedText(NSAttributedString(string: currencySymbolString, attributes: self.valueTextAttributes))
             self.currencyLabel?.setTextColor(GratuitousUIColor.lightTextColor())

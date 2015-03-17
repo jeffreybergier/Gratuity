@@ -36,6 +36,9 @@ class SettingsInterfaceController: WKInterfaceController {
     @IBOutlet private weak var currencySymbolYenGroup: WKInterfaceGroup?
     @IBOutlet private weak var currencySymbolNoneGroup: WKInterfaceGroup?
     
+    @IBOutlet private weak var animationGroup: WKInterfaceGroup?
+    @IBOutlet private weak var animationImageView: WKInterfaceImage?
+
     private var interfaceControllerIsConfigured = false
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
@@ -45,8 +48,10 @@ class SettingsInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        //self.animationImageView?.setImageNamed("gratuityCap4-")
-        //self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
+        self.animationImageView?.setImageNamed("gratuityCap4-")
+        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
+        
+        self.setTitle(NSLocalizedString("Dismiss Settings", comment: ""))
         
         if self.interfaceControllerIsConfigured == false {
             // putting this in a background queue allows willActivate to finish, the animation to start.
@@ -73,12 +78,9 @@ class SettingsInterfaceController: WKInterfaceController {
             self.currencySymbolNoneLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
             
             // configure the titles
-            self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: "Suggested Tip Percentage", attributes: self.titleTextAttributes))
-            self.maximumBillTitleLabel?.setAttributedText(NSAttributedString(string: "Maximum Bill Amount", attributes: self.titleTextAttributes))
-            self.currencySymbolTitleLabel?.setAttributedText(NSAttributedString(string: "Currency Symbol", attributes: self.titleTextAttributes))
-            
-//            self.suggestedTipSlider
-//            self.maximumBillSlider
+            self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Suggested Tip Percentage", comment: ""), attributes: self.titleTextAttributes))
+            self.maximumBillTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Maximum Bill Amount", comment: ""), attributes: self.titleTextAttributes))
+            self.currencySymbolTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Currency Symbol", comment: ""), attributes: self.titleTextAttributes))
             
             // configure the currency selection titles
             self.currencySymbolLocalLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Local", comment: ""), attributes: self.largerButtonTextAttributes))
@@ -91,12 +93,7 @@ class SettingsInterfaceController: WKInterfaceController {
             // set the color of the groups that surround the buttons and sliders
             self.suggestedTipGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             self.maximumBillGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
-            self.currencySymbolLocalGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
-            self.currencySymbolDollarGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
-            self.currencySymbolPoundGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
-            self.currencySymbolEuroGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
-            self.currencySymbolYenGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
-            self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.updateCurrencySymbolUI()
             
             // configure the values that change
             self.suggestedTipSlider?.setValue(Float(round(self.dataSource.tipPercentage * 100)))
@@ -106,6 +103,22 @@ class SettingsInterfaceController: WKInterfaceController {
             
             // this probably isn't needed, but no need to run this code a second time.
             self.interfaceControllerIsConfigured = true
+            
+            // unhide the UI
+            self.suggestedTipTitleLabel?.setHidden(false)
+            self.suggestedTipPercentageLabel?.setHidden(false)
+            self.suggestedTipGroup?.setHidden(false)
+            self.maximumBillTitleLabel?.setHidden(false)
+            self.maximumBillAmountLabel?.setHidden(false)
+            self.maximumBillGroup?.setHidden(false)
+            self.currencySymbolTitleLabel?.setHidden(false)
+            self.currencySymbolLocalGroup?.setHidden(false)
+            self.currencySymbolDollarGroup?.setHidden(false)
+            self.currencySymbolPoundGroup?.setHidden(false)
+            self.currencySymbolEuroGroup?.setHidden(false)
+            self.currencySymbolYenGroup?.setHidden(false)
+            self.currencySymbolNoneGroup?.setHidden(false)
+            self.animationGroup?.setHidden(true)
         }
     }
     
@@ -122,27 +135,33 @@ class SettingsInterfaceController: WKInterfaceController {
     }
     
     @IBAction func currencySymbolButtonLocalTapped() {
-        
+        self.dataSource.overrideCurrencySymbol = CurrencySign.Default
+        self.updateCurrencySymbolUI()
     }
     
     @IBAction func currencySymbolButtonDollarTapped() {
-        
+        self.dataSource.overrideCurrencySymbol = CurrencySign.Dollar
+        self.updateCurrencySymbolUI()
     }
     
     @IBAction func currencySymbolButtonPoundTapped() {
-        
+        self.dataSource.overrideCurrencySymbol = CurrencySign.Pound
+        self.updateCurrencySymbolUI()
     }
     
     @IBAction func currencySymbolButtonEuroTapped() {
-        
+        self.dataSource.overrideCurrencySymbol = CurrencySign.Euro
+        self.updateCurrencySymbolUI()
     }
     
     @IBAction func currencySymbolButtonYenTapped() {
-        
+        self.dataSource.overrideCurrencySymbol = CurrencySign.Yen
+        self.updateCurrencySymbolUI()
     }
     
     @IBAction func currencySymbolButtonNoneTapped() {
-        
+        self.dataSource.overrideCurrencySymbol = CurrencySign.None
+        self.updateCurrencySymbolUI()
     }
     
     private func updateMaximumBillAmountUI() {
@@ -155,5 +174,31 @@ class SettingsInterfaceController: WKInterfaceController {
         let suggestedTipPercentage = self.dataSource.tipPercentage
         let suggestedTipPercentageString = self.dataSource.percentStringFromRawDouble(suggestedTipPercentage)
         self.suggestedTipPercentageLabel?.setAttributedText(NSAttributedString(string: suggestedTipPercentageString, attributes: self.largerButtonTextAttributes))
+    }
+    
+    private func updateCurrencySymbolUI() {
+        // set the colors all to the defaults
+        self.currencySymbolLocalGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+        self.currencySymbolDollarGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+        self.currencySymbolPoundGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+        self.currencySymbolEuroGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+        self.currencySymbolYenGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+        self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+        
+        let currencySymbolOnDisk = self.dataSource.overrideCurrencySymbol
+        switch currencySymbolOnDisk {
+        case .Default:
+            self.currencySymbolLocalGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+        case .Dollar:
+            self.currencySymbolDollarGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+        case .Pound:
+            self.currencySymbolPoundGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+        case .Euro:
+            self.currencySymbolEuroGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+        case .Yen:
+            self.currencySymbolYenGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+        case .None:
+            self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+        }
     }
 }

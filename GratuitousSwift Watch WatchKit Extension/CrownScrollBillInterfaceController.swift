@@ -222,7 +222,6 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     
     @objc private func menuSettingsButtonChosen() {
         self.presentControllerWithName("SettingsInterfaceController", context: nil)
-        //self.pushControllerWithName("SettingsInterfaceController", context: nil)
     }
     
 }
