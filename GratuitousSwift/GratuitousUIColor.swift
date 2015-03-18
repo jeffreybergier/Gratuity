@@ -74,4 +74,14 @@ struct GratuitousUIColor {
     static func textShadowColor() -> UIColor {
         return UIColor(red: 20.0/255.0, green: 20.0/255.0, blue: 20.0/255.0, alpha: 1.0)
     }
+    
+    struct WatchFonts {
+        static let titleText = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
+        static let buttonText = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 26, fallbackStyle: UIFontStyle.Headline)]
+        static let valueText = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 32, fallbackStyle: UIFontStyle.Headline)]
+    }
+    
+    struct WatchColors {
+        
+    }
 }

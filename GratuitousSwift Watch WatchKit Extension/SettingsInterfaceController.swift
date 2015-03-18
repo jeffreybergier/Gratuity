@@ -42,8 +42,8 @@ class SettingsInterfaceController: WKInterfaceController {
     private var interfaceControllerIsConfigured = false
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
-    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
-    private let largerButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
+    private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
+    private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     
     override func willActivate() {
         super.willActivate()
@@ -83,12 +83,12 @@ class SettingsInterfaceController: WKInterfaceController {
             self.currencySymbolTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Currency Symbol", comment: ""), attributes: self.titleTextAttributes))
             
             // configure the currency selection titles
-            self.currencySymbolLocalLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Local", comment: ""), attributes: self.largerButtonTextAttributes))
-            self.currencySymbolDollarLabel?.setAttributedText(NSAttributedString(string: "$", attributes: self.largerButtonTextAttributes))
-            self.currencySymbolPoundLabel?.setAttributedText(NSAttributedString(string: "£", attributes: self.largerButtonTextAttributes))
-            self.currencySymbolEuroLabel?.setAttributedText(NSAttributedString(string: "€", attributes: self.largerButtonTextAttributes))
-            self.currencySymbolYenLabel?.setAttributedText(NSAttributedString(string: "¥", attributes: self.largerButtonTextAttributes))
-            self.currencySymbolNoneLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("None", comment: ""), attributes: self.largerButtonTextAttributes))
+            self.currencySymbolLocalLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Local", comment: ""), attributes: self.valueTextAttributes))
+            self.currencySymbolDollarLabel?.setAttributedText(NSAttributedString(string: "$", attributes: self.valueTextAttributes))
+            self.currencySymbolPoundLabel?.setAttributedText(NSAttributedString(string: "£", attributes: self.valueTextAttributes))
+            self.currencySymbolEuroLabel?.setAttributedText(NSAttributedString(string: "€", attributes: self.valueTextAttributes))
+            self.currencySymbolYenLabel?.setAttributedText(NSAttributedString(string: "¥", attributes: self.valueTextAttributes))
+            self.currencySymbolNoneLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("None", comment: ""), attributes: self.valueTextAttributes))
             
             // set the color of the groups that surround the buttons and sliders
             self.suggestedTipGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
@@ -167,13 +167,13 @@ class SettingsInterfaceController: WKInterfaceController {
     private func updateMaximumBillAmountUI() {
         let maximumBillAmount = self.dataSource.numberOfRowsInBillTableForWatch - 1
         let maximumBillAmountCurrencyString = self.dataSource.currencyStringFromInteger(maximumBillAmount)
-        self.maximumBillAmountLabel?.setAttributedText(NSAttributedString(string: maximumBillAmountCurrencyString, attributes: self.largerButtonTextAttributes))
+        self.maximumBillAmountLabel?.setAttributedText(NSAttributedString(string: maximumBillAmountCurrencyString, attributes: self.valueTextAttributes))
     }
     
     private func updateSuggestedTipPercentageUI() {
         let suggestedTipPercentage = self.dataSource.tipPercentage
         let suggestedTipPercentageString = self.dataSource.percentStringFromRawDouble(suggestedTipPercentage)
-        self.suggestedTipPercentageLabel?.setAttributedText(NSAttributedString(string: suggestedTipPercentageString, attributes: self.largerButtonTextAttributes))
+        self.suggestedTipPercentageLabel?.setAttributedText(NSAttributedString(string: suggestedTipPercentageString, attributes: self.valueTextAttributes))
     }
     
     private func updateCurrencySymbolUI() {

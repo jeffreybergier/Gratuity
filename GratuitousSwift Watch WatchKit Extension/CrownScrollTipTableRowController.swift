@@ -16,8 +16,9 @@ class CrownScrollTipTableRowController: NSObject {
     @IBOutlet private weak var tipPercentageLabelSmall: WKInterfaceLabel?
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
-    private let valueTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 25, fallbackStyle: UIFontStyle.Headline)]
-    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
+    private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+    private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
+
     
     func setMoneyAmountLabel(#tipAmount: Int, billAmount: Int, starFlag: Bool) {
         self.starLabel?.setHidden(starFlag)

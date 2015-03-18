@@ -13,7 +13,7 @@ class CrownScrollBillTableRowController: NSObject {
     @IBOutlet private weak var moneyAmountLabel: WKInterfaceLabel?
     @IBOutlet private weak var outlineGroup: WKInterfaceGroup?
     private let dataSource = GratuitousWatchDataSource.sharedInstance
-    private let valueTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 25, fallbackStyle: UIFontStyle.Headline)]
+    private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     
     func updateCurrencyAmountLabel(newAmount: Int) {
         let dollarString = NSAttributedString(string: self.dataSource.currencyStringFromInteger(newAmount), attributes: self.valueTextAttributes)

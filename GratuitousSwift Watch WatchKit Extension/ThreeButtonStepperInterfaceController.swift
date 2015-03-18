@@ -39,9 +39,9 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     private var interfaceControllerIsConfigured = false
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
-    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
-    private let valueTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 25, fallbackStyle: UIFontStyle.Headline)]
-    private let nextButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
+    private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
+    private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+    private let nextButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
     
     override var menuType: GratuitousMenuInterfaceController.MenuType {
         switch self.currentContext {
@@ -61,6 +61,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
             self.onesButtonTextLabel?.setAttributedText(NSAttributedString(string: "\(self.buttonValues.ones)", attributes: self.valueTextAttributes))
         }
     }
+    
     private var selectedButton: SelectedButton = .None {
         didSet {
             self.currencySlider?.setValue(-1) // this fixes a bug where the slider was not setting itself to 0 on ocassion

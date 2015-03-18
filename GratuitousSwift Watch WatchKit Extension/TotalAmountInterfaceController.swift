@@ -33,8 +33,8 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
     private var currentContext = InterfaceControllerContext.NotSet
     private var dataSource = GratuitousWatchDataSource.sharedInstance
     
-    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 17, fallbackStyle: UIFontStyle.Headline)]
-    private let valueTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 25, fallbackStyle: UIFontStyle.Headline)]
+    private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
+    private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -55,6 +55,8 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
         
         self.animationImageView?.setImageNamed("gratuityCap4-")
         self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
+        
+        self.setTitle(NSLocalizedString("Total Amount", comment: ""))
         
         // putting this in a background queue allows willActivate to finish, the animation to start.
         let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)

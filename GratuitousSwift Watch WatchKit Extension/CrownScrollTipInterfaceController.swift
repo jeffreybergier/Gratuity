@@ -23,8 +23,8 @@ class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
     
     private let tipOffset = 5
     private let dataSource = GratuitousWatchDataSource.sharedInstance
-    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
-    private let largerButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
+    private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
+    private let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
     
     override var menuType: GratuitousMenuInterfaceController.MenuType {
         return GratuitousMenuInterfaceController.MenuType.SwitchTipFromScrollingToThreeButton
@@ -50,6 +50,7 @@ class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
         self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
         
         if self.interfaceControllerIsConfigured == false {
+            self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
             // putting this in a background queue allows willActivate to finish, the animation to start.
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
             dispatch_async(backgroundQueue) {
@@ -62,7 +63,6 @@ class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
         dispatch_async(dispatch_get_main_queue()) {
             switch self.currentContext {
             case .CrownScrollTipChooser:
-                self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
                 self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""), attributes: self.titleTextAttributes))
                 self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
                 

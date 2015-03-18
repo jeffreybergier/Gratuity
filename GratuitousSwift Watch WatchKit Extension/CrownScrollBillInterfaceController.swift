@@ -24,8 +24,8 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     private var interfaceControllerIsConfigured = false
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
-    private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
-    private let largerButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
+    private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
+    private let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
     
     override var menuType: GratuitousMenuInterfaceController.MenuType {
         return GratuitousMenuInterfaceController.MenuType.SwitchBillFromScrollingToThreeButton
@@ -51,6 +51,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
         self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
         
         if self.interfaceControllerIsConfigured == false {
+            self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
             // putting this in a background queue allows willActivate to finish, the animation to start.
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
             dispatch_async(backgroundQueue) {
@@ -67,7 +68,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
         //
         
         // variables needed for UI changes at the end
-        var localizedTitled: String
+        var localizedTitle: String?
         var instructionalText: NSAttributedString
         var numberOfRowsInTable: Int
         var cellBeginIndex: Int
@@ -76,13 +77,13 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
         //let cellBeginIndex: Int
         switch self.currentContext {
         case .CrownScrollInfinite:
-            localizedTitled = NSLocalizedString("Bill Amount", comment: "")
+            //localizedTitle = NSLocalizedString("Bill Amount", comment: "")
             instructionalText = NSAttributedString(string: NSLocalizedString("Scroll to choose the Bill Amount", comment: ""), attributes: self.titleTextAttributes)
             cellBeginIndex = 1
             numberOfRowsInTable = self.dataSource.numberOfRowsInBillTableForWatch
             cellValueMultiplier = 1
         case .CrownScrollPagedOnes:
-            localizedTitled = NSLocalizedString("Refine Bill", comment: "")
+            localizedTitle = NSLocalizedString("Refine Bill", comment: "")
             instructionalText = NSAttributedString(string: NSLocalizedString("Scroll to refine the Bill Amount", comment: ""), attributes: self.titleTextAttributes)
             let billAmount = self.dataSource.billAmount !! 0
             let offset = 3
@@ -91,7 +92,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
             numberOfRowsInTable = billAmount + 11
             cellValueMultiplier = 1
         case .CrownScrollPagedTens:
-            localizedTitled = NSLocalizedString("Bill Amount", comment: "")
+            //localizedTitle = NSLocalizedString("Bill Amount", comment: "")
             instructionalText = NSAttributedString(string: NSLocalizedString("Scroll to the number closest to the Bill Amount", comment: ""), attributes: self.titleTextAttributes)
             cellBeginIndex = 1
             numberOfRowsInTable = 51
@@ -109,7 +110,9 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
         
         dispatch_async(dispatch_get_main_queue()) {
             // set the text
-            self.setTitle(localizedTitled)
+            if let localizedTitle = localizedTitle {
+                self.setTitle(localizedTitle) // causes the title to flicker when its set outside of willactivate
+            }
             self.instructionalTextLabel?.setAttributedText(instructionalText)
             self.largerButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Larger", comment: ""), attributes: self.largerButtonTextAttributes))
             
@@ -174,7 +177,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     
     @objc private func scrollToCorrectRowIfNeeded(timer: NSTimer?) {
         timer?.invalidate()
-        if self.dataSource.watchAppRunCount > 3 {
+        if self.dataSource.watchAppRunCount > 1 {
             let billAmount = self.dataSource.billAmount
             switch self.currentContext {
             case .CrownScrollPagedOnes:
