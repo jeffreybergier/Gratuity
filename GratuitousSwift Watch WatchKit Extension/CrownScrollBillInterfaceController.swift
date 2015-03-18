@@ -23,13 +23,11 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     private var billAmountOffset: Int? // This property is only set when context is CrownScrollPagedOnes
     private var interfaceControllerIsConfigured = false
     
+    private var numberOfRowsLoadedAlready = 0
+    
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
     private let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
-    
-    override var menuType: GratuitousMenuInterfaceController.MenuType {
-        return GratuitousMenuInterfaceController.MenuType.SwitchBillFromScrollingToThreeButton
-    }
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -123,29 +121,38 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
             
             // configure the tables
             self.clearBillDataTable() // not sure if it is safe to call these on background thread
-            self.reloadBillTableData()
+            self.tableRowInsertNumber(100)
             
             // show the UI
-            self.loadingImageGroup?.setHidden(true)
             self.largerButtonGroup?.setHidden(false)
             self.instructionalTextLabel?.setHidden(false)
             self.billAmountTable?.setHidden(false)
+            self.loadingImageGroup?.setHidden(true)
             self.interfaceControllerIsConfigured = true
-            NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "scrollToCorrectRowIfNeeded:", userInfo: nil, repeats: false) // this fixes a bug where scrolling didn't work properly
+            
+            //NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "scrollToCorrectRowIfNeeded:", userInfo: nil, repeats: false) // this fixes a bug where scrolling didn't work properly
         }
     }
     
-    private func reloadBillTableData() {
-        self.billAmountTable?.setNumberOfRows(self.data.count, withRowType: "CrownScrollBillTableRowController")
+    @objc private func tableRowInsertNumber(newNumberOfRows: Int) {
+        let range = NSRange(location: self.numberOfRowsLoadedAlready, length: self.numberOfRowsLoadedAlready + newNumberOfRows)
         
-        for (index, value) in enumerate(self.data) {
-            if let row = self.billAmountTable?.rowControllerAtIndex(index) as? CrownScrollBillTableRowController {
-                if row.interfaceIsConfigured == false {
-                    row.configureInterface()
+        for index in self.numberOfRowsLoadedAlready ..< newNumberOfRows + self.numberOfRowsLoadedAlready {
+            if index < self.data.count {
+                self.billAmountTable?.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
+                if let row = self.billAmountTable?.rowControllerAtIndex(index) as? CrownScrollBillTableRowController {
+                    if row.interfaceIsConfigured == false {
+                        row.configureInterface()
+                    }
+                    let value = self.data[index]
+                    row.updateCurrencyAmountLabel(value * self.cellValueMultiplier)
                 }
-                row.updateCurrencyAmountLabel(value * self.cellValueMultiplier)
+            } else {
+                break
             }
         }
+        
+        self.numberOfRowsLoadedAlready += newNumberOfRows
     }
     
     private func clearBillDataTable() {
@@ -211,6 +218,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
                 self.dataSource.billAmount = highestBillAmount * self.cellValueMultiplier//numberOfRows * self.cellValueMultiplier
             }
         }
-        self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
+        self.tableRowInsertNumber(30)
+        //self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
     }
 }

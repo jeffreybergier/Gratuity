@@ -122,6 +122,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		73467BB81ABA0127006C3DFC /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		73A18D7E1A2A9525002180DD /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -493,6 +503,7 @@
 				736568EB1A26DD1400603602 /* Frameworks */,
 				736568EE1A26DD1400603602 /* Resources */,
 				73D730CF1AB49E2F00172397 /* ShellScript */,
+				73467BB81ABA0127006C3DFC /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -896,6 +907,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Gratuityλδ.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -919,6 +931,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Gratuityλδ.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

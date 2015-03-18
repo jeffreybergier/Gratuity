@@ -11,13 +11,6 @@ import WatchKit
 class GratuitousMenuInterfaceController: WKInterfaceController {
     
     private var interfaceControllerIsConfigured = false
-    var menuType: MenuType {
-        return MenuType.Unknown
-    }
-    
-    enum MenuType {
-        case Unknown, SwitchBillFromScrollingToThreeButton, SwitchTipFromScrollingToThreeButton, SwitchBillFromThreeButtonToScrolling, SwitchTipFromThreeButtonToScrolling
-    }
     
     override func willActivate() {
         super.willActivate()
@@ -26,10 +19,10 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
             dispatch_async(backgroundQueue) {
                 // configure the menu
-                self.addMenuItemWithItemIcon(WKMenuItemIcon.Shuffle, title: NSLocalizedString("Switch", comment: ""), action: "menuSwitchUIButtonChosen")
-                self.addMenuItemWithItemIcon(WKMenuItemIcon.Repeat, title: NSLocalizedString("Start Over", comment: ""), action: "menuStartOverButtonChosen")
-                self.addMenuItemWithItemIcon(WKMenuItemIcon.More, title: NSLocalizedString("Settings", comment: ""), action: "menuSettingsButtonChosen")
-                
+                self.configureMenuItem1()
+                self.configureMenuItem2()
+                self.configureMenuItem3()
+                self.configureMenuItem4()
                 dispatch_async(dispatch_get_main_queue()) {
                     self.interfaceControllerIsConfigured = true
                 }
@@ -37,26 +30,41 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
         }
     }
     
-    @objc private func menuSwitchUIButtonChosen() {
-        switch self.menuType {
-        case .SwitchBillFromScrollingToThreeButton:
-            self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
-        case .SwitchBillFromThreeButtonToScrolling:
-            self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
-        case .SwitchTipFromScrollingToThreeButton:
-            self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
-        case .SwitchTipFromThreeButtonToScrolling:
-            self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
-        case .Unknown:
-            break
-        }
+    func configureMenuItem1() {
+        // defaults to switch UI to three button stepper bill
+        self.addMenuItemWithItemIcon(WKMenuItemIcon.Shuffle, title: NSLocalizedString("Switch", comment: ""), action: "menuSwitchUIButtonChosen")
     }
     
-    @objc private func menuStartOverButtonChosen() {
+    func configureMenuItem2() {
+        // defaults to start over button
+        self.addMenuItemWithItemIcon(WKMenuItemIcon.Repeat, title: NSLocalizedString("Start Over", comment: ""), action: "menuStartOverButtonChosen")
+    }
+    
+    func configureMenuItem3() {
+        // presents a modal display of settings screen by default.
+        self.addMenuItemWithItemIcon(WKMenuItemIcon.More, title: NSLocalizedString("Settings", comment: ""), action: "menuSettingsButtonChosen")
+    }
+    
+    func configureMenuItem4() {
+        // does nothing by default
+    }
+    
+    func userChoseMenuItem1() {
+        // defaults to switch UI to three button stepper bill
+        self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
+    }
+    
+    func userChoseMenuItem2() {
+        // defaults to start over button
         self.popToRootController()
     }
     
-    @objc private func menuSettingsButtonChosen() {
+    func userChoseMenuItem3() {
+        // presents a modal display of settings screen by default.
         self.presentControllerWithName("SettingsInterfaceController", context: nil)
+    }
+    
+    func userChoseMenuItem4() {
+        // does nothing by default
     }
 }

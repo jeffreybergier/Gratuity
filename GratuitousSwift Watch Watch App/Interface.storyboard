@@ -205,6 +205,87 @@
             </objects>
             <point key="canvasLocation" x="610" y="316"/>
         </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="Aap-Bu-NZC">
+            <objects>
+                <glanceController id="vsV-SE-Uf4">
+                    <items>
+                        <group alignment="left" id="3ko-u3-H84"/>
+                        <group alignment="left" layout="vertical" id="0zE-x5-Aru">
+                            <items>
+                                <group width="1" alignment="left" id="Wyh-VX-0iG">
+                                    <items>
+                                        <group width="0.5" alignment="left" layout="vertical" id="ppZ-S4-9tG">
+                                            <items>
+                                                <group width="1" alignment="left" layout="vertical" radius="7" id="HsJ-f0-eF0">
+                                                    <items>
+                                                        <label alignment="left" text="$100" id="dYi-vS-rLc"/>
+                                                        <label alignment="left" text="Total" id="qma-V4-utu"/>
+                                                    </items>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <edgeInsets key="margins" left="3" right="3" top="1" bottom="2"/>
+                                                </group>
+                                            </items>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                                        </group>
+                                        <group width="0.5" alignment="left" layout="vertical" id="uXR-ME-4b2">
+                                            <items>
+                                                <group width="1" alignment="left" layout="vertical" radius="7" id="rlP-es-hhd">
+                                                    <items>
+                                                        <label alignment="left" text="$90" id="T7e-wD-Ghp"/>
+                                                        <label alignment="left" text="Bill" id="hj7-tL-k3l"/>
+                                                    </items>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <edgeInsets key="margins" left="3" right="3" top="1" bottom="2"/>
+                                                </group>
+                                            </items>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                                        </group>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="lak-Ck-aNB">
+                                    <items>
+                                        <group width="0.5" alignment="left" layout="vertical" id="iaB-7C-DdC">
+                                            <items>
+                                                <group width="1" alignment="left" layout="vertical" radius="7" id="DQQ-Wy-Ejf">
+                                                    <items>
+                                                        <label alignment="left" text="$10" id="CFb-1W-g97">
+                                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                                        </label>
+                                                        <label alignment="left" text="Tip" id="ESi-x7-1bn"/>
+                                                    </items>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <edgeInsets key="margins" left="3" right="3" top="1" bottom="2"/>
+                                                </group>
+                                            </items>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                                        </group>
+                                        <group width="0.5" alignment="left" layout="vertical" id="ed6-tx-zgd">
+                                            <items>
+                                                <group width="1" alignment="left" layout="vertical" radius="7" id="JQl-IC-Stm">
+                                                    <items>
+                                                        <label alignment="left" text="20%" id="Ywf-uA-6n9"/>
+                                                        <label alignment="left" text="Percentage" id="RCy-bG-bvw"/>
+                                                    </items>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <edgeInsets key="margins" left="3" right="3" top="1" bottom="2"/>
+                                                </group>
+                                            </items>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                                        </group>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="-189" y="839"/>
+        </scene>
         <!--Bill Amount-->
         <scene sceneID="dEq-bm-f4H">
             <objects>

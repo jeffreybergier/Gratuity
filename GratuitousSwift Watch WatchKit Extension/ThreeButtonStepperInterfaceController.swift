@@ -43,16 +43,16 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     private let nextButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
     
-    override var menuType: GratuitousMenuInterfaceController.MenuType {
-        switch self.currentContext {
-        case .ThreeButtonStepperBill:
-            return GratuitousMenuInterfaceController.MenuType.SwitchBillFromThreeButtonToScrolling
-        case .ThreeButtonStepperTip:
-            return GratuitousMenuInterfaceController.MenuType.SwitchTipFromThreeButtonToScrolling
-        default:
-            return GratuitousMenuInterfaceController.MenuType.Unknown
-        }
-    }
+//    override var menuType: GratuitousMenuInterfaceController.MenuType {
+//        switch self.currentContext {
+//        case .ThreeButtonStepperBill:
+//            return GratuitousMenuInterfaceController.MenuType.SwitchBillFromThreeButtonToScrolling
+//        case .ThreeButtonStepperTip:
+//            return GratuitousMenuInterfaceController.MenuType.SwitchTipFromThreeButtonToScrolling
+//        default:
+//            return GratuitousMenuInterfaceController.MenuType.Unknown
+//        }
+//    }
     
     private var buttonValues: (hundreds: Int, tens: Int, ones: Int) = (0,0,0) {
         didSet {

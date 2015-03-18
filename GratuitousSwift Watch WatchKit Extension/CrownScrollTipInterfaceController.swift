@@ -26,10 +26,6 @@ class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
     private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
     private let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
     
-    override var menuType: GratuitousMenuInterfaceController.MenuType {
-        return GratuitousMenuInterfaceController.MenuType.SwitchTipFromScrollingToThreeButton
-    }
-    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
