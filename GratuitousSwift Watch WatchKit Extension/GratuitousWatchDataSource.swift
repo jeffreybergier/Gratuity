@@ -52,7 +52,7 @@ class GratuitousWatchDataSource {
         return Static.instance!
     }
     
-    var _billAmount: Int?
+    private var _billAmount: Int?
     
     var billAmount: Int {
         set {
@@ -72,7 +72,7 @@ class GratuitousWatchDataSource {
         }
     }
     
-    var _tipAmount: Int?
+    private var _tipAmount: Int?
     
     var tipAmount: Int {
         set {
@@ -91,7 +91,7 @@ class GratuitousWatchDataSource {
         }
     }
     
-    var _tipPercentage: Double?
+    private var _tipPercentage: Double?
     
     var tipPercentage: Double {
         set {
@@ -110,7 +110,7 @@ class GratuitousWatchDataSource {
         }
     }
     
-    var _correctWatchInterface: CorrectWatchInterface?
+    private var _correctWatchInterface: CorrectWatchInterface?
     
     var correctWatchInterface: CorrectWatchInterface {
         set {
@@ -129,7 +129,7 @@ class GratuitousWatchDataSource {
         }
     }
     
-    var _watchAppRunCount: Int?
+    private var _watchAppRunCount: Int?
     
     var watchAppRunCount: Int {
         set {
@@ -148,7 +148,7 @@ class GratuitousWatchDataSource {
         }
     }
     
-    var _watchAppRunCountShouldBeIncremented: Bool?
+    private var _watchAppRunCountShouldBeIncremented: Bool?
     
     var watchAppRunCountShouldBeIncremented: Bool {
         set {
@@ -167,7 +167,7 @@ class GratuitousWatchDataSource {
         }
     }
     
-    var _numberOfRowsInBillTableForWatch: Int?
+    private var _numberOfRowsInBillTableForWatch: Int?
     
     var numberOfRowsInBillTableForWatch: Int {
         set {
@@ -186,7 +186,7 @@ class GratuitousWatchDataSource {
         }
     }
     
-    var _overrideCurrencySymbol: CurrencySign?
+    private var _overrideCurrencySymbol: CurrencySign?
     
     var overrideCurrencySymbol: CurrencySign {
         set {
