@@ -11,11 +11,13 @@ import Fabric
 import Crashlytics
 
 class GratuitousWatchDataSource {
+    // This class mostly exists to reduce the number of times the app has to read and write NSUserDefaults.
+    // Reads are saved into Instance Variables in this class
+    // If a value is requested and the isntance variable has never been set, the value is read from NSUserDefaults.
+    
     
     private let currencyFormatter = NSNumberFormatter()
     private let defaultsManager = GratuitousUserDefaults()
-    
-    private var currentCurrencyFormat: CurrencySign?
     
     init() {
         // configure crashlytics in an instance that won't disappear
@@ -50,100 +52,178 @@ class GratuitousWatchDataSource {
         return Static.instance!
     }
     
+    var _billAmount: Int?
+    
     var billAmount: Int {
         set {
+            _billAmount = newValue
+            self.tipAmount = 0 //every time the bill amount get set, this gets set to 0 which means that we need to calculate our own tipAmount
             self.defaultsManager.billIndexPathRow = newValue
-            self.defaultsManager.tipIndexPathRow = 0 //every time the bill amount get set, this gets set to 0 which means that we need to calculate our own tipAmount
         }
         get {
-            return self.defaultsManager.billIndexPathRow
+            switch _billAmount {
+            case .Some:
+                return _billAmount!
+            case .None:
+                let valueOnDisk = self.defaultsManager.billIndexPathRow
+                _billAmount = valueOnDisk
+                return valueOnDisk
+            }
         }
     }
+    
+    var _tipAmount: Int?
     
     var tipAmount: Int {
         set {
+            _tipAmount = newValue
             self.defaultsManager.tipIndexPathRow = newValue
         }
         get {
-            return self.defaultsManager.tipIndexPathRow
+            switch _tipAmount {
+            case .Some:
+                return _tipAmount!
+            case .None:
+                let valueOnDisk = self.defaultsManager.tipIndexPathRow
+                _tipAmount = valueOnDisk
+                return valueOnDisk
+            }
         }
     }
+    
+    var _tipPercentage: Double?
     
     var tipPercentage: Double {
         set {
+            _tipPercentage = newValue
             self.defaultsManager.suggestedTipPercentage = newValue
         }
         get {
-            return self.defaultsManager.suggestedTipPercentage
+            switch _tipPercentage {
+            case .Some:
+                return _tipPercentage!
+            case .None:
+                let valueOnDisk = self.defaultsManager.suggestedTipPercentage
+                _tipPercentage = valueOnDisk
+                return valueOnDisk
+            }
         }
     }
     
+    var _correctWatchInterface: CorrectWatchInterface?
+    
     var correctWatchInterface: CorrectWatchInterface {
-        get {
-            //return CorrectWatchInterface.ThreeButtonStepper
-            return self.defaultsManager.correctWatchInterface
-        }
         set {
+            _correctWatchInterface = newValue
             self.defaultsManager.correctWatchInterface = newValue
         }
+        get {
+            switch _correctWatchInterface {
+            case .Some:
+                return _correctWatchInterface!
+            case .None:
+                let valueOnDisk = self.defaultsManager.correctWatchInterface
+                _correctWatchInterface = valueOnDisk
+                return valueOnDisk
+            }
+        }
     }
+    
+    var _watchAppRunCount: Int?
     
     var watchAppRunCount: Int {
         set {
+            _watchAppRunCount = newValue
             self.defaultsManager.watchAppRunCount = newValue
         }
         get {
-            return self.defaultsManager.watchAppRunCount
+            switch _watchAppRunCount {
+            case .Some:
+                return _watchAppRunCount!
+            case .None:
+                let valueOnDisk = self.defaultsManager.watchAppRunCount
+                _watchAppRunCount = valueOnDisk
+                return valueOnDisk
+            }
         }
     }
+    
+    var _watchAppRunCountShouldBeIncremented: Bool?
     
     var watchAppRunCountShouldBeIncremented: Bool {
         set {
+            _watchAppRunCountShouldBeIncremented = newValue
             self.defaultsManager.watchAppRunCountShouldBeIncremented = newValue
         }
         get {
-            return self.defaultsManager.watchAppRunCountShouldBeIncremented
+            switch _watchAppRunCountShouldBeIncremented {
+            case .Some:
+                return _watchAppRunCountShouldBeIncremented!
+            case .None:
+                let valueOnDisk = self.defaultsManager.watchAppRunCountShouldBeIncremented
+                _watchAppRunCountShouldBeIncremented = valueOnDisk
+                return valueOnDisk
+            }
         }
     }
+    
+    var _numberOfRowsInBillTableForWatch: Int?
     
     var numberOfRowsInBillTableForWatch: Int {
         set {
+            _numberOfRowsInBillTableForWatch = newValue
             self.defaultsManager.numberOfRowsInBillTableForWatch = newValue
         }
         get {
-            return self.defaultsManager.numberOfRowsInBillTableForWatch
+            switch _numberOfRowsInBillTableForWatch {
+            case .Some:
+                return _numberOfRowsInBillTableForWatch!
+            case .None:
+                let valueOnDisk = self.defaultsManager.numberOfRowsInBillTableForWatch
+                _numberOfRowsInBillTableForWatch = valueOnDisk
+                return valueOnDisk
+            }
         }
     }
     
+    var _overrideCurrencySymbol: CurrencySign?
+    
     var overrideCurrencySymbol: CurrencySign {
-        get {
-            return self.defaultsManager.overrideCurrencySymbol
-        }
         set {
-            self.currentCurrencyFormat = newValue
+            _overrideCurrencySymbol = newValue
             self.defaultsManager.overrideCurrencySymbol = newValue
+        }
+        get {
+            switch _overrideCurrencySymbol {
+            case .Some:
+                return _overrideCurrencySymbol!
+            case .None:
+                let valueOnDisk = self.defaultsManager.overrideCurrencySymbol
+                _overrideCurrencySymbol = valueOnDisk
+                return valueOnDisk
+            }
         }
     }
     
     func currencyStringFromInteger(integerValue: Int?) -> String {
+        var currencyString = "$–"
         if let integerValue = integerValue {
-            var currencyString: String?
             //let currencyString: String?
-            if let currentCurrencyFormat = self.currentCurrencyFormat {
-                switch currentCurrencyFormat {
-                case .Default:
-                    currencyString = self.currencyFormatter.stringFromNumber(integerValue)
-                case .None:
-                    currencyString = "\(integerValue)"
-                default:
-                    currencyString = "\(currentCurrencyFormat.string())\(integerValue)"
+            let currentCurrencyFormat = self.overrideCurrencySymbol
+            switch currentCurrencyFormat {
+            case .Default:
+                if let defaultString = self.currencyFormatter.stringFromNumber(integerValue) {
+                    currencyString = defaultString
+                } else {
+                    fallthrough
                 }
-            } else {
-                currencyString = self.currencyFormatter.stringFromNumber(integerValue)
+            case .None:
+                currencyString = "\(integerValue)"
+            default:
+                currencyString = "\(currentCurrencyFormat.string())\(integerValue)"
             }
-            return currencyString !! "$–"
         }
-        return "$–"
+        return currencyString
     }
     
     func percentStringFromRawDouble(doubleValue: Double?) -> String {
@@ -156,7 +236,7 @@ class GratuitousWatchDataSource {
     }
     
     @objc private func updateCurrencySymbolFromDisk(_ timer: NSTimer? = nil) {
-        self.currentCurrencyFormat = self.defaultsManager.overrideCurrencySymbol
+        self.overrideCurrencySymbol = self.defaultsManager.overrideCurrencySymbol
     }
     
     class func optionalDivision(#top: Double, bottom: Double) -> Double? {
