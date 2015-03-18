@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class CrownScrollBillInterfaceController: WKInterfaceController {
+class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     
     @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
     @IBOutlet private weak var billAmountTable: WKInterfaceTable?
@@ -26,6 +26,10 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
     private let largerButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
+    
+    override var menuType: GratuitousMenuInterfaceController.MenuType {
+        return GratuitousMenuInterfaceController.MenuType.SwitchBillFromScrollingToThreeButton
+    }
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -104,11 +108,6 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
         }
         
         dispatch_async(dispatch_get_main_queue()) {
-            // configure the menu
-            self.addMenuItemWithItemIcon(WKMenuItemIcon.Shuffle, title: NSLocalizedString("Switch", comment: ""), action: "menuSwitchUIButtonChosen")
-            self.addMenuItemWithItemIcon(WKMenuItemIcon.Repeat, title: NSLocalizedString("Start Over", comment: ""), action: "menuStartOverButtonChosen")
-            self.addMenuItemWithItemIcon(WKMenuItemIcon.More, title: NSLocalizedString("Settings", comment: ""), action: "menuSettingsButtonChosen")
-            
             // set the text
             self.setTitle(localizedTitled)
             self.instructionalTextLabel?.setAttributedText(instructionalText)
@@ -211,17 +210,4 @@ class CrownScrollBillInterfaceController: WKInterfaceController {
         }
         self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
     }
-    
-    @objc private func menuSwitchUIButtonChosen() {
-        self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
-    }
-    
-    @objc private func menuStartOverButtonChosen() {
-        self.popToRootController()
-    }
-    
-    @objc private func menuSettingsButtonChosen() {
-        self.presentControllerWithName("SettingsInterfaceController", context: nil)
-    }
-    
 }

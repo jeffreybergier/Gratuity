@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class ThreeButtonStepperInterfaceController: WKInterfaceController {
+class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     
     @IBOutlet private weak var currencyLabel: WKInterfaceLabel?
     @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
@@ -42,6 +42,17 @@ class ThreeButtonStepperInterfaceController: WKInterfaceController {
     private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
     private let valueTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 25, fallbackStyle: UIFontStyle.Headline)]
     private let nextButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
+    
+    override var menuType: GratuitousMenuInterfaceController.MenuType {
+        switch self.currentContext {
+        case .ThreeButtonStepperBill:
+            return GratuitousMenuInterfaceController.MenuType.SwitchBillFromThreeButtonToScrolling
+        case .ThreeButtonStepperTip:
+            return GratuitousMenuInterfaceController.MenuType.SwitchTipFromThreeButtonToScrolling
+        default:
+            return GratuitousMenuInterfaceController.MenuType.Unknown
+        }
+    }
     
     private var buttonValues: (hundreds: Int, tens: Int, ones: Int) = (0,0,0) {
         didSet {

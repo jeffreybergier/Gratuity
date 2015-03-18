@@ -99,6 +99,7 @@
 		73D730D71AB49E4D00172397 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
 		73D730D81AB49E4D00172397 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
 		73D730D91AB49E4D00172397 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
+		73DE026E1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */; };
 		73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 		73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -190,6 +191,7 @@
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
 		73D730D01AB49E4D00172397 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		73D730D11AB49E4D00172397 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
+		73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousMenuInterfaceController.swift; sourceTree = "<group>"; };
 		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousEnums.swift; path = ../GratuitousSwift/GratuitousEnums.swift; sourceTree = "<group>"; };
 		73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPresentationController.swift; sourceTree = "<group>"; };
 		73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimatedTransitioning.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */,
 				7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */,
 				73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */,
+				73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */,
 				73A755AE1A87F1E60038E023 /* Crown Scroll Interface */,
 				73A755AB1A87EF310038E023 /* Stepper Interface */,
 				73A18D661A2A9525002180DD /* Images.xcassets */,
@@ -812,6 +815,7 @@
 			files = (
 				73A755B91A882BB10038E023 /* CrownScrollBillTableRowController.swift in Sources */,
 				734A7C5D1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
+				73DE026E1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift in Sources */,
 				73A755B21A87F2770038E023 /* AppDelegateInterfaceController.swift in Sources */,
 				73A0B5681A8FC56A00D17943 /* TotalAmountInterfaceController.swift in Sources */,
 				733E8CB71A87054E00B228CB /* GratuitousUserDefaults.swift in Sources */,

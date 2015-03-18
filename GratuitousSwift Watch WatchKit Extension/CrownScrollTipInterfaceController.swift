@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class CrownScrollTipInterfaceController: WKInterfaceController {
+class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
     @IBOutlet private weak var tipAmountTable: WKInterfaceTable?
     @IBOutlet private weak var instructionalTextLabel: WKInterfaceLabel?
     @IBOutlet private weak var loadingImageGroup: WKInterfaceGroup?
@@ -25,6 +25,10 @@ class CrownScrollTipInterfaceController: WKInterfaceController {
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private let titleTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 14, fallbackStyle: UIFontStyle.Headline)]
     private let largerButtonTextAttributes = [NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Headline)]
+    
+    override var menuType: GratuitousMenuInterfaceController.MenuType {
+        return GratuitousMenuInterfaceController.MenuType.SwitchTipFromScrollingToThreeButton
+    }
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
