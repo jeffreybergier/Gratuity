@@ -11,6 +11,9 @@ import WatchKit
 class GratuitousMenuInterfaceController: WKInterfaceController {
     
     private var interfaceControllerIsConfigured = false
+    enum MenuItemTarget: Selector {
+        case UserChoseMenuItem1 = "userChoseMenuItem1", UserChoseMenuItem2 = "userChoseMenuItem2", UserChoseMenuItem3 = "userChoseMenuItem3", UserChoseMenuItem4 = "userChoseMenuItem4"
+    }
     
     override func willActivate() {
         super.willActivate()
@@ -32,17 +35,17 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
     
     func configureMenuItem1() {
         // defaults to switch UI to three button stepper bill
-        self.addMenuItemWithItemIcon(WKMenuItemIcon.Shuffle, title: NSLocalizedString("Switch", comment: ""), action: "menuSwitchUIButtonChosen")
+        self.addMenuItemWithItemIcon(WKMenuItemIcon.Shuffle, title: NSLocalizedString("Switch", comment: ""), action: MenuItemTarget.UserChoseMenuItem1.rawValue)
     }
     
     func configureMenuItem2() {
         // defaults to start over button
-        self.addMenuItemWithItemIcon(WKMenuItemIcon.Repeat, title: NSLocalizedString("Start Over", comment: ""), action: "menuStartOverButtonChosen")
+        self.addMenuItemWithItemIcon(WKMenuItemIcon.Repeat, title: NSLocalizedString("Start Over", comment: ""), action: MenuItemTarget.UserChoseMenuItem2.rawValue)
     }
     
     func configureMenuItem3() {
         // presents a modal display of settings screen by default.
-        self.addMenuItemWithItemIcon(WKMenuItemIcon.More, title: NSLocalizedString("Settings", comment: ""), action: "menuSettingsButtonChosen")
+        self.addMenuItemWithItemIcon(WKMenuItemIcon.More, title: NSLocalizedString("Settings", comment: ""), action: MenuItemTarget.UserChoseMenuItem3.rawValue)
     }
     
     func configureMenuItem4() {

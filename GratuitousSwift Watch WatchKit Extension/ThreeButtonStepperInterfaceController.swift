@@ -62,6 +62,10 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
         }
     }
     
+    override func userChoseMenuItem1() {
+        self.pushControllerWithName("CrownScrollBillInterfaceController", context: InterfaceControllerContext.CrownScrollInfinite.rawValue)
+    }
+    
     private var selectedButton: SelectedButton = .None {
         didSet {
             self.currencySlider?.setValue(-1) // this fixes a bug where the slider was not setting itself to 0 on ocassion
