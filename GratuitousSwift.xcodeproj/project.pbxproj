@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		731375551ABF2FA50074E2F2 /* AppDelegateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */; };
 		7334770F1A26E85000513F1F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
 		73368D121AAB9B7F001C1CC3 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 73368D111AAB9B7F001C1CC3 /* Futura.ttc */; };
 		73368D131AAB9B7F001C1CC3 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 73368D111AAB9B7F001C1CC3 /* Futura.ttc */; };
@@ -18,7 +19,6 @@
 		734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
 		73450E791ABF2926005927F1 /* GratuityL WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 73450E781ABF2926005927F1 /* GratuityL WatchKit App.app */; };
 		73450E861ABF2926005927F1 /* GratuityL WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		73450E8D1ABF2A50005927F1 /* AppDelegateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */; };
 		73450E8E1ABF2A50005927F1 /* TotalAmountInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */; };
 		73450E8F1ABF2A50005927F1 /* SettingsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */; };
 		73450E901ABF2A50005927F1 /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; };
@@ -195,7 +195,7 @@
 		73450E6F1ABF2926005927F1 /* GratuityLocalWatchExtensionInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GratuityLocalWatchExtensionInfo.plist; sourceTree = "<group>"; };
 		73450E781ABF2926005927F1 /* GratuityL WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GratuityL WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73450E7E1ABF2926005927F1 /* GratuityLocalWatchExtensionAppInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GratuityLocalWatchExtensionAppInfo.plist; sourceTree = "<group>"; };
-		73450EA11ABF2BF1005927F1 /* GratuityL WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuityL WatchKit Extension.entitlements"; path = "GratuityL WatchKit Extension/GratuityL WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		73450EA11ABF2BF1005927F1 /* GratuityL WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuityL WatchKit Extension.entitlements"; path = "GratuitousSwift Watch WatchKit Extension/GratuityL WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIColor.swift; sourceTree = "<group>"; };
 		73556E621A19711E0079A37D /* GratuitousSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GratuitousSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		73556E631A19711F0079A37D /* UIImage+PDFUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PDFUtility.h"; sourceTree = "<group>"; };
@@ -368,7 +368,6 @@
 		738250F819E60EED00CD2B28 = {
 			isa = PBXGroup;
 			children = (
-				73450EA11ABF2BF1005927F1 /* GratuityL WatchKit Extension.entitlements */,
 				7382510319E60EED00CD2B28 /* GratuitousSwift */,
 				73A18D5C1A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension */,
 				73A18D6E1A2A9525002180DD /* GratuitousSwift Watch Watch App */,
@@ -380,6 +379,7 @@
 				730530CB1A871A5200DC08A6 /* GratuitousSwift Watch.entitlements */,
 				730530CA1A871A4700DC08A6 /* Gratuityλδ.entitlements */,
 				730530C91A871A3200DC08A6 /* Gratuityδ.entitlements */,
+				73450EA11ABF2BF1005927F1 /* GratuityL WatchKit Extension.entitlements */,
 				736568F91A26DD1500603602 /* GratuitousSwift copy-Info.plist */,
 				73C7B4B41A2A92E500536D86 /* GratuitousSwift Local copy-Info.plist */,
 			);
@@ -918,6 +918,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				731375551ABF2FA50074E2F2 /* AppDelegateInterfaceController.swift in Sources */,
 				73450E9B1ABF2A97005927F1 /* GratuitousUserDefaults.swift in Sources */,
 				73450E8E1ABF2A50005927F1 /* TotalAmountInterfaceController.swift in Sources */,
 				73450E941ABF2A5F005927F1 /* CrownScrollBillTableRowController.swift in Sources */,
@@ -926,7 +927,6 @@
 				73450E961ABF2A64005927F1 /* ThreeButtonStepperInterfaceController.swift in Sources */,
 				73450E9F1ABF2B25005927F1 /* GratuitousUIColor.swift in Sources */,
 				73450E911ABF2A50005927F1 /* GratuitousMenuInterfaceController.swift in Sources */,
-				73450E8D1ABF2A50005927F1 /* AppDelegateInterfaceController.swift in Sources */,
 				73450E901ABF2A50005927F1 /* GratuitousWatchDataSource.swift in Sources */,
 				73450E921ABF2A5F005927F1 /* CrownScrollBillInterfaceController.swift in Sources */,
 				73450E931ABF2A5F005927F1 /* CrownScrollTipInterfaceController.swift in Sources */,
@@ -1071,7 +1071,7 @@
 		73450E871ABF2926005927F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "GratuityL WatchKit Extension/GratuityL WatchKit Extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "GratuitousSwift Watch WatchKit Extension/GratuityL WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1085,6 +1085,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch WatchKit Extension/GratuityLocalWatchExtensionInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_MODULE_NAME = Gratuity_WatchKit_Extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -1094,7 +1095,7 @@
 		73450E881ABF2926005927F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "GratuityL WatchKit Extension/GratuityL WatchKit Extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "GratuitousSwift Watch WatchKit Extension/GratuityL WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1105,6 +1106,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch WatchKit Extension/GratuityLocalWatchExtensionInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_MODULE_NAME = Gratuity_WatchKit_Extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -1447,6 +1449,7 @@
 				73450E8A1ABF2926005927F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		73450E8C1ABF2926005927F1 /* Build configuration list for PBXNativeTarget "GratuityL WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -1455,6 +1458,7 @@
 				73450E881ABF2926005927F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		736568F51A26DD1400603602 /* Build configuration list for PBXNativeTarget "GratuitousSwift Local" */ = {
 			isa = XCConfigurationList;

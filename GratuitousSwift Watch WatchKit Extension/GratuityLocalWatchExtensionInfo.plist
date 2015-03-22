@@ -38,5 +38,19 @@
 	<array>
 		<string>Futura.ttc</string>
 	</array>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>eb82450d442b0f7ab592d59388ece084ee77d7ce</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 </dict>
 </plist>
