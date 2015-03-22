@@ -85,7 +85,7 @@
                     <menu key="menu" id="yBW-0H-2jO"/>
                     <connections>
                         <outlet property="animationImageView" destination="dqO-kO-8gE" id="Tbm-hm-JnF"/>
-                        <outlet property="billAmountTable" destination="QFo-p1-L9c" id="ovV-xA-H9D"/>
+                        <outlet property="currencyAmountTable" destination="QFo-p1-L9c" id="eYO-Sd-IAg"/>
                         <outlet property="instructionalTextLabel" destination="LVO-xL-ovz" id="QGp-Cu-93a"/>
                         <outlet property="largerButtonGroup" destination="1hR-DE-TdZ" id="TzT-aW-wal"/>
                         <outlet property="largerButtonLabel" destination="x3K-Uv-KGd" id="cep-Vm-Vll"/>
@@ -762,7 +762,7 @@
         <!--Tip Amount-->
         <scene sceneID="0cJ-h1-wjI">
             <objects>
-                <controller identifier="CrownScrollTipInterfaceController" title="Tip Amount" hidesWhenLoading="NO" id="Pb6-uB-8lW" customClass="CrownScrollTipInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                <controller identifier="CrownScrollTipInterfaceController" title="Tip Amount" hidesWhenLoading="NO" id="Pb6-uB-8lW" customClass="CrownScrollBillInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
                         <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="emx-kG-GDj">
                             <items>
@@ -820,7 +820,7 @@
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </group>
                                     <connections>
-                                        <action selector="didTapLargerAmountButton" destination="Pb6-uB-8lW" id="qXS-WG-8Y2"/>
+                                        <action selector="didTapLargerAmountButton" destination="Pb6-uB-8lW" id="fI7-aC-L5r"/>
                                     </connections>
                                 </button>
                             </items>
@@ -829,12 +829,12 @@
                         </group>
                     </items>
                     <connections>
-                        <outlet property="animationImageView" destination="55K-Hx-IpZ" id="nMs-AL-WZI"/>
-                        <outlet property="instructionalTextLabel" destination="5h3-HD-e0b" id="png-OT-9wF"/>
-                        <outlet property="largerButtonGroup" destination="4tV-D0-LTy" id="wLk-dK-eQn"/>
-                        <outlet property="largerButtonLabel" destination="qCs-rR-7f9" id="cJp-5o-1a8"/>
-                        <outlet property="loadingImageGroup" destination="emx-kG-GDj" id="Bwn-bM-Oyx"/>
-                        <outlet property="tipAmountTable" destination="vYB-zM-w3c" id="H7A-2O-Qwd"/>
+                        <outlet property="animationImageView" destination="55K-Hx-IpZ" id="5xc-fU-HXi"/>
+                        <outlet property="currencyAmountTable" destination="vYB-zM-w3c" id="llM-wc-Uc6"/>
+                        <outlet property="instructionalTextLabel" destination="5h3-HD-e0b" id="OpD-SX-cZ2"/>
+                        <outlet property="largerButtonGroup" destination="4tV-D0-LTy" id="spo-ev-3SW"/>
+                        <outlet property="largerButtonLabel" destination="qCs-rR-7f9" id="fOa-OC-Ycg"/>
+                        <outlet property="loadingImageGroup" destination="emx-kG-GDj" id="g6Z-WG-hKs"/>
                     </connections>
                 </controller>
             </objects>

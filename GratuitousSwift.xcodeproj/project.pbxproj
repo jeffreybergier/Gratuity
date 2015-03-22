@@ -20,7 +20,6 @@
 		731375871ABF3FC00074E2F2 /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; };
 		731375881ABF3FC00074E2F2 /* GratuitousMenuInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */; };
 		731375891ABF3FC40074E2F2 /* CrownScrollBillInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */; };
-		7313758A1ABF3FC40074E2F2 /* CrownScrollTipInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */; };
 		7313758B1ABF3FC40074E2F2 /* CrownScrollBillTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B81A882BB10038E023 /* CrownScrollBillTableRowController.swift */; };
 		7313758C1ABF3FC40074E2F2 /* CrownScrollTipTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */; };
 		7313758D1ABF3FCF0074E2F2 /* ThreeButtonStepperInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1F4D21AA58F3400F6C116 /* ThreeButtonStepperInterfaceController.swift */; };
@@ -44,7 +43,6 @@
 		73450E901ABF2A50005927F1 /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; };
 		73450E911ABF2A50005927F1 /* GratuitousMenuInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */; };
 		73450E921ABF2A5F005927F1 /* CrownScrollBillInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */; };
-		73450E931ABF2A5F005927F1 /* CrownScrollTipInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */; };
 		73450E941ABF2A5F005927F1 /* CrownScrollBillTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B81A882BB10038E023 /* CrownScrollBillTableRowController.swift */; };
 		73450E951ABF2A5F005927F1 /* CrownScrollTipTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */; };
 		73450E961ABF2A64005927F1 /* ThreeButtonStepperInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1F4D21AA58F3400F6C116 /* ThreeButtonStepperInterfaceController.swift */; };
@@ -214,7 +212,7 @@
 		73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateInterfaceController.swift; sourceTree = "<group>"; };
 		73A755B81A882BB10038E023 /* CrownScrollBillTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownScrollBillTableRowController.swift; sourceTree = "<group>"; };
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownScrollTipInterfaceController.swift; sourceTree = "<group>"; };
+		73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CrownScrollTipInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/CrownScrollTipInterfaceController.swift"; sourceTree = "<group>"; };
 		73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownScrollTipTableRowController.swift; sourceTree = "<group>"; };
 		73C1F4D21AA58F3400F6C116 /* ThreeButtonStepperInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeButtonStepperInterfaceController.swift; sourceTree = "<group>"; };
 		73C7B4B41A2A92E500536D86 /* GratuitousSwift Local copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GratuitousSwift Local copy-Info.plist"; path = "/Users/jeffberg/Documents/SaturdayApps/GratuitousSwift/GratuitousSwift Local copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -283,6 +281,7 @@
 		733A9C851AAB850700BFBACE /* Unused Files */ = {
 			isa = PBXGroup;
 			children = (
+				73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */,
 				73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */,
 				736719C51AA7F11600EF0FD3 /* UnusedInterfaces.storyboard */,
 			);
@@ -482,7 +481,6 @@
 			isa = PBXGroup;
 			children = (
 				737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */,
-				73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */,
 				73A755B81A882BB10038E023 /* CrownScrollBillTableRowController.swift */,
 				73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */,
 			);
@@ -851,7 +849,6 @@
 				731375841ABF3FC00074E2F2 /* AppDelegateInterfaceController.swift in Sources */,
 				731375871ABF3FC00074E2F2 /* GratuitousWatchDataSource.swift in Sources */,
 				731375891ABF3FC40074E2F2 /* CrownScrollBillInterfaceController.swift in Sources */,
-				7313758A1ABF3FC40074E2F2 /* CrownScrollTipInterfaceController.swift in Sources */,
 				731375911ABF3FEA0074E2F2 /* GratuitousEnums.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -871,7 +868,6 @@
 				73450E911ABF2A50005927F1 /* GratuitousMenuInterfaceController.swift in Sources */,
 				73450E901ABF2A50005927F1 /* GratuitousWatchDataSource.swift in Sources */,
 				73450E921ABF2A5F005927F1 /* CrownScrollBillInterfaceController.swift in Sources */,
-				73450E931ABF2A5F005927F1 /* CrownScrollTipInterfaceController.swift in Sources */,
 				73450E9C1ABF2A9C005927F1 /* GratuitousEnums.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1308,6 +1304,7 @@
 				731375771ABF3D930074E2F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		731375781ABF3D930074E2F2 /* Build configuration list for PBXNativeTarget "Gratuity WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -1316,6 +1313,7 @@
 				7313757A1ABF3D930074E2F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		73450E8B1ABF2926005927F1 /* Build configuration list for PBXNativeTarget "GratuityL WatchKit App" */ = {
 			isa = XCConfigurationList;
