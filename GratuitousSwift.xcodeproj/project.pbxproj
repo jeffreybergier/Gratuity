@@ -16,6 +16,28 @@
 		733E8CB71A87054E00B228CB /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
 		733E8CB81A8705CA00B228CB /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 		734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
+		73450E791ABF2926005927F1 /* GratuityL WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 73450E781ABF2926005927F1 /* GratuityL WatchKit App.app */; };
+		73450E861ABF2926005927F1 /* GratuityL WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		73450E8D1ABF2A50005927F1 /* AppDelegateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */; };
+		73450E8E1ABF2A50005927F1 /* TotalAmountInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */; };
+		73450E8F1ABF2A50005927F1 /* SettingsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */; };
+		73450E901ABF2A50005927F1 /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; };
+		73450E911ABF2A50005927F1 /* GratuitousMenuInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */; };
+		73450E921ABF2A5F005927F1 /* CrownScrollBillInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */; };
+		73450E931ABF2A5F005927F1 /* CrownScrollTipInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */; };
+		73450E941ABF2A5F005927F1 /* CrownScrollBillTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B81A882BB10038E023 /* CrownScrollBillTableRowController.swift */; };
+		73450E951ABF2A5F005927F1 /* CrownScrollTipTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */; };
+		73450E961ABF2A64005927F1 /* ThreeButtonStepperInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1F4D21AA58F3400F6C116 /* ThreeButtonStepperInterfaceController.swift */; };
+		73450E971ABF2A71005927F1 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D711A2A9525002180DD /* Interface.storyboard */; };
+		73450E981ABF2A7E005927F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D731A2A9525002180DD /* Images.xcassets */; };
+		73450E991ABF2A91005927F1 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 73368D111AAB9B7F001C1CC3 /* Futura.ttc */; };
+		73450E9A1ABF2A92005927F1 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 73368D111AAB9B7F001C1CC3 /* Futura.ttc */; };
+		73450E9B1ABF2A97005927F1 /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
+		73450E9C1ABF2A9C005927F1 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
+		73450E9D1ABF2B05005927F1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
+		73450E9E1ABF2B09005927F1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D01AB49E4D00172397 /* Crashlytics.framework */; };
+		73450E9F1ABF2B25005927F1 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
+		73450EA21ABF2C0A005927F1 /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A18D5A1A2A9525002180DD /* WatchKit.framework */; };
 		734A7C5A1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
 		734A7C5B1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
 		734A7C5C1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
@@ -105,6 +127,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		73450E7A1ABF2926005927F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 738250F919E60EED00CD2B28 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 73450E771ABF2926005927F1;
+			remoteInfo = "GratuityL WatchKit App";
+		};
+		73450E841ABF2926005927F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 738250F919E60EED00CD2B28 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 73450E6B1ABF2926005927F1;
+			remoteInfo = "GratuityL WatchKit Extension";
+		};
 		73A18D6C1A2A9525002180DD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 738250F919E60EED00CD2B28 /* Project object */;
@@ -128,6 +164,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				73450E861ABF2926005927F1 /* GratuityL WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,6 +191,11 @@
 		73368D111AAB9B7F001C1CC3 /* Futura.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Futura.ttc; sourceTree = "<group>"; };
 		733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousUserDefaults.swift; path = ../GratuitousSwift/GratuitousUserDefaults.swift; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
+		73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GratuityL WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		73450E6F1ABF2926005927F1 /* GratuityLocalWatchExtensionInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GratuityLocalWatchExtensionInfo.plist; sourceTree = "<group>"; };
+		73450E781ABF2926005927F1 /* GratuityL WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GratuityL WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		73450E7E1ABF2926005927F1 /* GratuityLocalWatchExtensionAppInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GratuityLocalWatchExtensionAppInfo.plist; sourceTree = "<group>"; };
+		73450EA11ABF2BF1005927F1 /* GratuityL WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuityL WatchKit Extension.entitlements"; path = "GratuityL WatchKit Extension/GratuityL WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIColor.swift; sourceTree = "<group>"; };
 		73556E621A19711E0079A37D /* GratuitousSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GratuitousSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		73556E631A19711F0079A37D /* UIImage+PDFUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PDFUtility.h"; sourceTree = "<group>"; };
@@ -209,6 +251,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		73450E691ABF2926005927F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73450EA21ABF2C0A005927F1 /* WatchKit.framework in Frameworks */,
+				73450E9E1ABF2B09005927F1 /* Crashlytics.framework in Frameworks */,
+				73450E9D1ABF2B05005927F1 /* Fabric.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		736568EB1A26DD1400603602 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -316,6 +368,7 @@
 		738250F819E60EED00CD2B28 = {
 			isa = PBXGroup;
 			children = (
+				73450EA11ABF2BF1005927F1 /* GratuityL WatchKit Extension.entitlements */,
 				7382510319E60EED00CD2B28 /* GratuitousSwift */,
 				73A18D5C1A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension */,
 				73A18D6E1A2A9525002180DD /* GratuitousSwift Watch Watch App */,
@@ -340,6 +393,8 @@
 				73C7B4B31A2A92E400536D86 /* GratuitousSwift Watch.app */,
 				73A18D581A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension.appex */,
 				73A18D6A1A2A9525002180DD /* GratuitousSwift Watch Watch App.app */,
+				73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */,
+				73450E781ABF2926005927F1 /* GratuityL WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -417,6 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				73A18D5E1A2A9525002180DD /* Info.plist */,
+				73450E6F1ABF2926005927F1 /* GratuityLocalWatchExtensionInfo.plist */,
 				73A18D5F1A2A9525002180DD /* PushNotificationPayload.json */,
 			);
 			name = "Supporting Files";
@@ -435,6 +491,7 @@
 		73A18D6F1A2A9525002180DD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				73450E7E1ABF2926005927F1 /* GratuityLocalWatchExtensionAppInfo.plist */,
 				73A18D701A2A9525002180DD /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -495,6 +552,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		73450E6B1ABF2926005927F1 /* GratuityL WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73450E8C1ABF2926005927F1 /* Build configuration list for PBXNativeTarget "GratuityL WatchKit Extension" */;
+			buildPhases = (
+				73450E681ABF2926005927F1 /* Sources */,
+				73450E691ABF2926005927F1 /* Frameworks */,
+				73450E6A1ABF2926005927F1 /* Resources */,
+				73450EA01ABF2BDD005927F1 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				73450E7B1ABF2926005927F1 /* PBXTargetDependency */,
+			);
+			name = "GratuityL WatchKit Extension";
+			productName = "GratuityL WatchKit Extension";
+			productReference = 73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		73450E771ABF2926005927F1 /* GratuityL WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73450E8B1ABF2926005927F1 /* Build configuration list for PBXNativeTarget "GratuityL WatchKit App" */;
+			buildPhases = (
+				73450E761ABF2926005927F1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GratuityL WatchKit App";
+			productName = "GratuityL WatchKit App";
+			productReference = 73450E781ABF2926005927F1 /* GratuityL WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
 		736568D91A26DD1400603602 /* GratuitousSwift Local */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 736568F51A26DD1400603602 /* Build configuration list for PBXNativeTarget "GratuitousSwift Local" */;
@@ -508,6 +599,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				73450E851ABF2926005927F1 /* PBXTargetDependency */,
 			);
 			name = "GratuitousSwift Local";
 			productName = GratuitousSwift;
@@ -595,6 +687,19 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = SaturdayApps;
 				TargetAttributes = {
+					73450E6B1ABF2926005927F1 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = V6ESYGU6CV;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					73450E771ABF2926005927F1 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = V6ESYGU6CV;
+					};
 					736568D91A26DD1400603602 = {
 						DevelopmentTeam = V6ESYGU6CV;
 						SystemCapabilities = {
@@ -650,6 +755,8 @@
 			targets = (
 				7382510019E60EED00CD2B28 /* GratuitousSwift Store */,
 				736568D91A26DD1400603602 /* GratuitousSwift Local */,
+				73450E771ABF2926005927F1 /* GratuityL WatchKit App */,
+				73450E6B1ABF2926005927F1 /* GratuityL WatchKit Extension */,
 				73C7B4931A2A92E400536D86 /* GratuitousSwift Watch */,
 				73A18D571A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension */,
 				73A18D691A2A9525002180DD /* GratuitousSwift Watch Watch App */,
@@ -658,6 +765,25 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		73450E6A1ABF2926005927F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73450E991ABF2A91005927F1 /* Futura.ttc in Resources */,
+				73450E791ABF2926005927F1 /* GratuityL WatchKit App.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73450E761ABF2926005927F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73450E9A1ABF2A92005927F1 /* Futura.ttc in Resources */,
+				73450E971ABF2A71005927F1 /* Interface.storyboard in Resources */,
+				73450E981ABF2A7E005927F1 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		736568EE1A26DD1400603602 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -720,6 +846,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		73450EA01ABF2BDD005927F1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24";
+		};
 		73D730CF1AB49E2F00172397 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -775,6 +914,26 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		73450E681ABF2926005927F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73450E9B1ABF2A97005927F1 /* GratuitousUserDefaults.swift in Sources */,
+				73450E8E1ABF2A50005927F1 /* TotalAmountInterfaceController.swift in Sources */,
+				73450E941ABF2A5F005927F1 /* CrownScrollBillTableRowController.swift in Sources */,
+				73450E951ABF2A5F005927F1 /* CrownScrollTipTableRowController.swift in Sources */,
+				73450E8F1ABF2A50005927F1 /* SettingsInterfaceController.swift in Sources */,
+				73450E961ABF2A64005927F1 /* ThreeButtonStepperInterfaceController.swift in Sources */,
+				73450E9F1ABF2B25005927F1 /* GratuitousUIColor.swift in Sources */,
+				73450E911ABF2A50005927F1 /* GratuitousMenuInterfaceController.swift in Sources */,
+				73450E8D1ABF2A50005927F1 /* AppDelegateInterfaceController.swift in Sources */,
+				73450E901ABF2A50005927F1 /* GratuitousWatchDataSource.swift in Sources */,
+				73450E921ABF2A5F005927F1 /* CrownScrollBillInterfaceController.swift in Sources */,
+				73450E931ABF2A5F005927F1 /* CrownScrollTipInterfaceController.swift in Sources */,
+				73450E9C1ABF2A9C005927F1 /* GratuitousEnums.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		736568DA1A26DD1400603602 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -867,6 +1026,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		73450E7B1ABF2926005927F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 73450E771ABF2926005927F1 /* GratuityL WatchKit App */;
+			targetProxy = 73450E7A1ABF2926005927F1 /* PBXContainerItemProxy */;
+		};
+		73450E851ABF2926005927F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 73450E6B1ABF2926005927F1 /* GratuityL WatchKit Extension */;
+			targetProxy = 73450E841ABF2926005927F1 /* PBXContainerItemProxy */;
+		};
 		73A18D6D1A2A9525002180DD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 73A18D691A2A9525002180DD /* GratuitousSwift Watch Watch App */;
@@ -899,6 +1068,84 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		73450E871ABF2926005927F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "GratuityL WatchKit Extension/GratuityL WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch WatchKit Extension/GratuityLocalWatchExtensionInfo.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		73450E881ABF2926005927F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "GratuityL WatchKit Extension/GratuityL WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch WatchKit Extension/GratuityLocalWatchExtensionInfo.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		73450E891ABF2926005927F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = GratuityL_WatchKit_Extension;
+				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch Watch App/GratuityLocalWatchExtensionAppInfo.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		73450E8A1ABF2926005927F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				IBSC_MODULE = GratuityL_WatchKit_Extension;
+				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch Watch App/GratuityLocalWatchExtensionAppInfo.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
 		736568F61A26DD1400603602 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1193,6 +1440,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		73450E8B1ABF2926005927F1 /* Build configuration list for PBXNativeTarget "GratuityL WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73450E891ABF2926005927F1 /* Debug */,
+				73450E8A1ABF2926005927F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		73450E8C1ABF2926005927F1 /* Build configuration list for PBXNativeTarget "GratuityL WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73450E871ABF2926005927F1 /* Debug */,
+				73450E881ABF2926005927F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		736568F51A26DD1400603602 /* Build configuration list for PBXNativeTarget "GratuitousSwift Local" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
