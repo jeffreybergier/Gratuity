@@ -5,11 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>GratuityL WatchKit Extension</string>
+	<string>Gratuity WatchKit Extension</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.saturdayapps.Gratuity.local.watchkitextension</string>
+	<string>com.saturdayapps.Gratuity.watchkitextension</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -27,17 +27,13 @@
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>WKAppBundleIdentifier</key>
-			<string>com.saturdayapps.Gratuity.local.watchkitapp</string>
+			<string>com.saturdayapps.Gratuity.watchkitapp</string>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
 	<key>RemoteInterfacePrincipalClass</key>
 	<string>$(PRODUCT_MODULE_NAME).InterfaceController</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Futura.ttc</string>
-	</array>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -52,5 +48,9 @@
 			</dict>
 		</array>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Futura.ttc</string>
+	</array>
 </dict>
 </plist>

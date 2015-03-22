@@ -5,11 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>GratuityL</string>
+	<string>Gratuity</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.saturdayapps.Gratuity.local.watchkitapp</string>
+	<string>com.saturdayapps.Gratuity.watchkitapp</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -22,18 +22,18 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.2.0</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Futura.ttc</string>
-	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>com.saturdayapps.Gratuity.local</string>
+	<string>com.saturdayapps.Gratuity</string>
 	<key>WKWatchKitApp</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Futura.ttc</string>
+	</array>
 </dict>
 </plist>
