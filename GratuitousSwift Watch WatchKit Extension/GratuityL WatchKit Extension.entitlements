@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.saturdayapps.Gratuity.storageGroup</string>
+		<string>group.com.saturdayapps.Gratuity.local.storageGroup</string>
 	</array>
 </dict>
 </plist>

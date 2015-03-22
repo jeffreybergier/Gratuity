@@ -13,10 +13,20 @@ class GratuitousUserDefaults: Printable {
     class func watchUIURL() -> NSURL {
         return NSURL(string: "http://www.saturdayapps.com/gratuity/watchUI.json")!
     }
-    var description: String { return "GratuitousUserDefaults Manager: SuiteName: group.com.saturdayapps.Gratuity.storageGroup" }
-    private let userDefaults = NSUserDefaults(suiteName: "group.com.saturdayapps.Gratuity.storageGroup") !! NSUserDefaults.standardUserDefaults()
+    
+    var description: String { return "GratuitousUserDefaults Manager: SuiteName: \(self.suiteName)" }
+    private let userDefaults: NSUserDefaults
+    private let suiteName: String
     
     init() {
+        #if LOCAL
+            let localSuiteName = "group.com.saturdayapps.Gratuity.local.storageGroup"
+        #else
+            let localSuiteName = "group.com.saturdayapps.Gratuity.storageGroup"
+        #endif
+        self.userDefaults = NSUserDefaults(suiteName: localSuiteName) !! NSUserDefaults.standardUserDefaults()
+        self.suiteName = localSuiteName
+        
         var currentAppVersionEqualsDataVersionOnDisk = false
         let appVersionCurrent = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as? String !! "1.0"
         let appVersionOnDisk = self.userDefaults.objectForKey("appVersionString") as? String
