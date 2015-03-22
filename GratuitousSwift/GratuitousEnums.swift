@@ -99,47 +99,42 @@ enum ActualScreenSizeBasedOnWidth: Int {
     case iPhone4or5 = 0, iPhone6, iPhone6Plus, iPad
 }
 
-enum InterfaceControllerContext: String, Printable {
-    case CrownScrollInfinite = "CrownScrollInfinite"
-    case CrownScrollPagedTens = "CrownScrollPagedTens"
-    case CrownScrollPagedOnes = "CrownScrollPagedOnes"
-    case CrownScrollTipChooser = "CrownScrollTipChooser"
-    case ThreeButtonStepperBill = "ThreeButtonStepperBill"
-    case ThreeButtonStepperTip = "ThreeButtonStepperTip"
-//    case StepperPagedOnes = "StepperPagedOnes"
-//    case StepperTipChooser = "StepperTipChooser"
-    case TotalAmountInterfaceController = "TotalAmountInterfaceController"
+enum CrownScrollerInterfaceContext: String, Printable {
+    case Bill = "CrownScrollerBill"
+    case Tip = "CrownScrollerTip"
     case NotSet = "NotSet"
     
     var description: String {
-        return "InterfaceControllerContext Enum: \(self.rawValue)"
+        return "CrownScrollerInterfaceContext Enum: \(self.rawValue)"
+    }
+}
+
+enum ThreeButtonStepperInterfaceContext: String, Printable {
+    case Bill = "ThreeButtonStepperBill"
+    case Tip = "ThreeButtonStepperTip"
+    case NotSet = "NotSet"
+    
+    var description: String {
+        return "ThreeButtonStepperInterfaceContext Enum: \(self.rawValue)"
     }
 }
 
 enum CorrectWatchInterface: Int, Printable {
-    case CrownScrollInfinite = 0, CrownScrollPaged, ThreeButtonStepper//StepperInfinite, StepperPaged
+    case CrownScroller = 0, ThreeButtonStepper
     
     var description: String {
         switch self {
-        case .CrownScrollInfinite:
-            return "InterfaceState Enum: CrownScrollInfinite"
-        case .CrownScrollPaged:
-            return "InterfaceState Enum: CrownScrollPaged"
+        case .CrownScroller:
+            return "CorrectWatchInterface Enum: CrownScrollInfinite"
         case .ThreeButtonStepper:
-            return "InterfaceState Enum: ThreeButtonStepper"
-//        case .StepperInfinite:
-//            return "InterfaceState Enum: StepperInfinite"
-//        case .StepperPaged:
-//            return "InterfaceState Enum: StepperPaged"
+            return "CorrectWatchInterface Enum: ThreeButtonStepper"
         }
     }
     
     static func interfaceStateFromString(string: String) -> CorrectWatchInterface? {
         switch string {
-        case "CrownScrollInfinite":
-            return CorrectWatchInterface.CrownScrollInfinite
-        case "CrownScrollPaged":
-            return CorrectWatchInterface.CrownScrollPaged
+        case "CrownScroller":
+            return CorrectWatchInterface.CrownScroller
         case "ThreeButtonStepper":
             return CorrectWatchInterface.ThreeButtonStepper
         default:

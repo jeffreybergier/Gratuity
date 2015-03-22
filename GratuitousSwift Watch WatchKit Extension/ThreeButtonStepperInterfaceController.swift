@@ -35,7 +35,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     @IBOutlet private weak var backgroundImageGroup: WKInterfaceGroup?
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
     
-    private var currentContext = InterfaceControllerContext.NotSet
+    private var currentContext = ThreeButtonStepperInterfaceContext.NotSet
     private var interfaceControllerIsConfigured = false
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
@@ -63,7 +63,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     }
     
     override func userChoseMenuItem1() {
-        self.pushControllerWithName("CrownScrollBillInterfaceController", context: InterfaceControllerContext.CrownScrollInfinite.rawValue)
+        self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)
     }
     
     private var selectedButton: SelectedButton = .None {
@@ -96,10 +96,10 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        var currentContext: InterfaceControllerContext
+        var currentContext: ThreeButtonStepperInterfaceContext
         //let currentContext: InterfaceControllerContext
         if let contextString = context as? String {
-            currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.ThreeButtonStepperBill
+            currentContext = ThreeButtonStepperInterfaceContext(rawValue: contextString) !! ThreeButtonStepperInterfaceContext.Bill
         } else {
             fatalError("StepperInterfaceController: Context not present during awakeWithContext:")
         }
@@ -152,14 +152,14 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
             self.currencySliderGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             
             switch self.currentContext {
-            case .ThreeButtonStepperBill:
+            case .Bill:
                 self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Bill Amount", comment: ""), attributes: self.titleTextAttributes))
                 self.instructionalTextLabel?.setHidden(true)
                 self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
                 self.tipPercentageLabel?.setHidden(true)
                 
                 self.updateUIWithCurrencyAmount(self.dataSource.billAmount)
-            case .ThreeButtonStepperTip:
+            case .Tip:
                 self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Tip Amount", comment: ""), attributes: self.titleTextAttributes))
                 self.instructionalTextLabel?.setHidden(true)
                 self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
@@ -234,9 +234,9 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     
     private func writeValueToDisk(value: Int) {
         switch self.currentContext {
-        case .ThreeButtonStepperBill:
+        case .Bill:
             self.dataSource.billAmount = value
-        case .ThreeButtonStepperTip:
+        case .Tip:
             self.dataSource.tipAmount = value
         default:
             break
@@ -246,10 +246,10 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     @IBAction private func didTapNextButton() {
         self.writeValueToDisk(self.calculateValueFromUI())
         switch self.currentContext {
-        case .ThreeButtonStepperBill:
-            self.pushControllerWithName("ThreeButtonStepperTipInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperTip.rawValue)
-        case .ThreeButtonStepperTip:
-            self.pushControllerWithName("TotalAmountInterfaceController", context: InterfaceControllerContext.TotalAmountInterfaceController.rawValue)
+        case .Bill:
+            self.pushControllerWithName("ThreeButtonStepperTipInterfaceController", context: ThreeButtonStepperInterfaceContext.Tip.rawValue)
+        case .Tip:
+            self.pushControllerWithName("TotalAmountInterfaceController", context: nil)
         default:
             break
         }

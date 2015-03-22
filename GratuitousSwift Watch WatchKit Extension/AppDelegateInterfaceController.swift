@@ -19,16 +19,10 @@ class AppDelegateInterfaceController: WKInterfaceController {
         self.checkWatchUIJSON()
         
         switch self.dataSource.correctWatchInterface {
-        case .CrownScrollInfinite:
-            self.pushControllerWithName("CrownScrollBillInterfaceController", context: InterfaceControllerContext.CrownScrollInfinite.rawValue)
-        case .CrownScrollPaged:
-            self.pushControllerWithName("CrownScrollBillInterfaceController", context: InterfaceControllerContext.CrownScrollPagedTens.rawValue)
+        case .CrownScroller:
+            self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)
         case .ThreeButtonStepper:
-            self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
-//        case .StepperInfinite:
-//            self.pushControllerWithName("StepperInfiniteInterfaceController", context: InterfaceControllerContext.StepperInfinite.rawValue)
-//        case .StepperPaged:
-//            self.pushControllerWithName("StepperTensInterfaceController", context: InterfaceControllerContext.StepperPagedTens.rawValue)
+            self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: ThreeButtonStepperInterfaceContext.Bill.rawValue)
         }
     }
     

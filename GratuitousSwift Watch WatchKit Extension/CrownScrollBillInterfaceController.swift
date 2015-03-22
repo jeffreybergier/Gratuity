@@ -19,7 +19,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     
     private var data = [Int]()
     private var cellValueMultiplier = 1
-    private var currentContext: InterfaceControllerContext = .NotSet
+    private var currentContext = CrownScrollerInterfaceContext.NotSet
     private var billAmountOffset: Int? // This property is only set when context is CrownScrollPagedOnes
     private var interfaceControllerIsConfigured = false
     
@@ -32,10 +32,10 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        //let currentContext: InterfaceControllerContext
-        var currentContext: InterfaceControllerContext
+        //let currentContext: CrownScrollerInterfaceContext
+        var currentContext: CrownScrollerInterfaceContext
         if let contextString = context as? String {
-            currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.CrownScrollTipChooser
+            currentContext = CrownScrollerInterfaceContext(rawValue: contextString) !! CrownScrollerInterfaceContext.Bill
         } else {
             fatalError("CrownScrollBillInterfaceController: Context not present during awakeWithContext:")
         }
@@ -73,31 +73,18 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
         var cellValueMultiplier: Int
         //let numberOfRowsInTable: Int
         //let cellBeginIndex: Int
-        switch self.currentContext {
-        case .CrownScrollInfinite:
+        //switch self.currentContext {
+        //case .Bill:
             //localizedTitle = NSLocalizedString("Bill Amount", comment: "")
             instructionalText = NSAttributedString(string: NSLocalizedString("Scroll to choose the Bill Amount", comment: ""), attributes: self.titleTextAttributes)
             cellBeginIndex = 1
             numberOfRowsInTable = self.dataSource.numberOfRowsInBillTableForWatch
             cellValueMultiplier = 1
-        case .CrownScrollPagedOnes:
-            localizedTitle = NSLocalizedString("Refine Bill", comment: "")
-            instructionalText = NSAttributedString(string: NSLocalizedString("Scroll to refine the Bill Amount", comment: ""), attributes: self.titleTextAttributes)
-            let billAmount = self.dataSource.billAmount !! 0
-            let offset = 3
-            cellBeginIndex = billAmount >= offset ? billAmount - offset : billAmount
-            self.billAmountOffset = cellBeginIndex
-            numberOfRowsInTable = billAmount + 11
-            cellValueMultiplier = 1
-        case .CrownScrollPagedTens:
-            //localizedTitle = NSLocalizedString("Bill Amount", comment: "")
-            instructionalText = NSAttributedString(string: NSLocalizedString("Scroll to the number closest to the Bill Amount", comment: ""), attributes: self.titleTextAttributes)
-            cellBeginIndex = 1
-            numberOfRowsInTable = 51
-            cellValueMultiplier = 10
-        default:
-            fatalError("CrownScrollBillInterfaceController: Context not set")
-        }
+        //case .Tip:
+            //break
+        //default:
+            //fatalError("CrownScrollBillInterfaceController: Context not set")
+        //}
         
         // prepare the tables
         self.cellValueMultiplier = cellValueMultiplier
@@ -163,22 +150,26 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
         let newBillAmount = self.data[rowIndex] * self.cellValueMultiplier
         self.dataSource.billAmount = newBillAmount
         
-        var nextContext: InterfaceControllerContext
-        //let nextContext: InterfaceControllerContext
+        var nextContext: CrownScrollerInterfaceContext?
+        //let nextContext: CrownScrollerInterfaceContext
         switch self.currentContext {
-        case .CrownScrollPagedOnes:
-            nextContext = .CrownScrollTipChooser
-        case .CrownScrollPagedTens:
-            nextContext = .CrownScrollPagedOnes
+        case .Bill:
+            nextContext = .Tip
+        case .Tip:
+            break
         default:
-            nextContext = .CrownScrollTipChooser
+            break
         }
         
-        switch nextContext {
-        case .CrownScrollTipChooser:
-            self.pushControllerWithName("CrownScrollTipInterfaceController", context: nextContext.rawValue)
-        default:
-            self.pushControllerWithName("CrownScrollBillInterfaceController", context: nextContext.rawValue)
+        if let nextContext = nextContext {
+            switch nextContext {
+            case .Tip:
+                self.pushControllerWithName("CrownScrollTipInterfaceController", context: nextContext.rawValue)
+            default:
+                break
+            }
+        } else {
+            self.pushControllerWithName("TotalAmountInterfaceController", context: nil)
         }
     }
     
@@ -187,25 +178,25 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
         if self.dataSource.watchAppRunCount > 1 {
             let billAmount = self.dataSource.billAmount
             switch self.currentContext {
-            case .CrownScrollPagedOnes:
+            case .Bill:
                 if let offset = self.billAmountOffset {
                     let tableIndex = billAmount - offset
                     self.billAmountTable?.scrollToRowAtIndex(tableIndex)
                     break
                 }
-            case .CrownScrollPagedTens:
-                fallthrough
-            case .CrownScrollInfinite:
-                if let division = GratuitousWatchDataSource.optionalDivision(top: Double(billAmount), bottom: Double(self.cellValueMultiplier)) {
-                    let tableIndex = Int(round(division)) - 1
-                    if let numberOfRows = self.billAmountTable?.numberOfRows {
-                        if numberOfRows > tableIndex {
-                            self.billAmountTable?.scrollToRowAtIndex(tableIndex)
-                        } else {
-                            self.billAmountTable?.scrollToRowAtIndex(numberOfRows - 1)
-                        }
-                    }
-                }
+//            case .CrownScrollPagedTens:
+//                fallthrough
+//            case .CrownScrollInfinite:
+//                if let division = GratuitousWatchDataSource.optionalDivision(top: Double(billAmount), bottom: Double(self.cellValueMultiplier)) {
+//                    let tableIndex = Int(round(division)) - 1
+//                    if let numberOfRows = self.billAmountTable?.numberOfRows {
+//                        if numberOfRows > tableIndex {
+//                            self.billAmountTable?.scrollToRowAtIndex(tableIndex)
+//                        } else {
+//                            self.billAmountTable?.scrollToRowAtIndex(numberOfRows - 1)
+//                        }
+//                    }
+//                }
             default:
                 fatalError("CrownScrollBillInterfaceController: Invalid context found when attempting to scroll to desired row.")
             }

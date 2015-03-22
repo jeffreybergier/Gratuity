@@ -17,7 +17,7 @@ class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
     @IBOutlet private weak var largerButtonLabel: WKInterfaceLabel?
     
     private var data = [Int]()
-    private var currentContext = InterfaceControllerContext.NotSet
+    private var currentContext = CrownScrollerInterfaceContext.NotSet
     private var interfaceControllerIsConfigured = false
     private var idealTipIndex = 0
     
@@ -29,10 +29,10 @@ class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        var currentContext: InterfaceControllerContext
+        var currentContext: CrownScrollerInterfaceContext
         //let currentContext: InterfaceControllerContext
         if let contextString = context as? String {
-            currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.CrownScrollTipChooser
+            currentContext = CrownScrollerInterfaceContext(rawValue: contextString) !! CrownScrollerInterfaceContext.Tip
         } else {
             fatalError("CrownScrollTipInterfaceController: Context not present during awakeWithContext:")
         }
@@ -58,7 +58,7 @@ class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
     private func configureInterfaceController() {
         dispatch_async(dispatch_get_main_queue()) {
             switch self.currentContext {
-            case .CrownScrollTipChooser:
+            case .Tip:
                 self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""), attributes: self.titleTextAttributes))
                 self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
                 
@@ -124,8 +124,8 @@ class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
         let newTipAmount = self.data[rowIndex]
         self.dataSource.tipAmount = newTipAmount
         switch self.currentContext {
-        case .CrownScrollTipChooser:
-            self.pushControllerWithName("TotalAmountInterfaceController", context: InterfaceControllerContext.TotalAmountInterfaceController.rawValue)
+        case .Tip:
+            self.pushControllerWithName("TotalAmountInterfaceController", context: nil)
         default:
             break
         }
@@ -147,7 +147,7 @@ class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
                 self.dataSource.tipAmount = highestTipAmount
             }
         }
-        self.pushControllerWithName("ThreeButtonStepperTipInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperTip.rawValue)
+        self.pushControllerWithName("ThreeButtonStepperTipInterfaceController", context: nil)
     }
     
 }

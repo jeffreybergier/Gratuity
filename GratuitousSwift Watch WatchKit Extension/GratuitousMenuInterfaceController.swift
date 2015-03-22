@@ -54,7 +54,7 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
     
     func userChoseMenuItem1() {
         // defaults to switch UI to three button stepper bill
-        self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: InterfaceControllerContext.ThreeButtonStepperBill.rawValue)
+        self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: ThreeButtonStepperInterfaceContext.Bill.rawValue)
     }
     
     func userChoseMenuItem2() {

@@ -30,25 +30,10 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
     
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
     
-    private var currentContext = InterfaceControllerContext.NotSet
     private var dataSource = GratuitousWatchDataSource.sharedInstance
     
     private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-    
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
-        
-        var currentContext: InterfaceControllerContext
-        //let currentContext: InterfaceControllerContext
-        if let contextString = context as? String {
-            currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.TotalAmountInterfaceController
-        } else {
-            currentContext = Optional.None !! InterfaceControllerContext.TotalAmountInterfaceController
-        }
-        
-        self.currentContext = currentContext
-    }
     
     override func willActivate() {
         super.willActivate()

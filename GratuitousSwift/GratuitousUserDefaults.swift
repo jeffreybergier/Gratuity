@@ -45,7 +45,7 @@ class GratuitousUserDefaults: Printable {
             self.userDefaults.setInteger(201, forKey: "numberOfRowsInBillTableForWatch")
             self.userDefaults.setInteger(0, forKey: "watchAppRunCount")
             self.userDefaults.setBool(true, forKey: "watchAppRunCountShouldBeIncremented")
-            self.userDefaults.setInteger(CorrectWatchInterface.CrownScrollInfinite.rawValue, forKey: "correctInterface")
+            self.userDefaults.setInteger(CorrectWatchInterface.CrownScroller.rawValue, forKey: "correctInterface")
             self.userDefaults.synchronize()
         } else {
             self.userDefaults.setBool(true, forKey: "watchAppRunCountShouldBeIncremented")
@@ -126,7 +126,7 @@ class GratuitousUserDefaults: Printable {
     
     var correctWatchInterface: CorrectWatchInterface {
         get {
-            return CorrectWatchInterface(rawValue: self.userDefaults.integerForKey("correctInterface")) !! CorrectWatchInterface.CrownScrollInfinite
+            return CorrectWatchInterface(rawValue: self.userDefaults.integerForKey("correctInterface")) !! CorrectWatchInterface.CrownScroller
         }
         set {
             self.userDefaults.setInteger(newValue.rawValue, forKey: "correctInterface")
