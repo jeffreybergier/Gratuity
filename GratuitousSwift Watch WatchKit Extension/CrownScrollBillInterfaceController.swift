@@ -21,7 +21,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     
     private let data: [Int] = {
         var array = [Int]()
-        for index in 0..<501 {
+        for index in 0..<201 {
             array.append(index)
         }
         return array
@@ -29,20 +29,21 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     private var currentContext = CrownScrollerInterfaceContext.NotSet
     private var billAmountOffset: Int? // This property is only set when context is CrownScrollPagedOnes
     private var interfaceControllerIsConfigured = false
-    
-    //    private var numberOfRowsLoadedAlready: Int = 0 { //marking for deletion
-    //        didSet {
-    //            println("numberOfRowsLoadedAlready: \(self.numberOfRowsLoadedAlready)")
-    //        }
-    //    }
     private var highestDataIndexInTable: Int = 0 {
         didSet {
+            if self.highestDataIndexInTable >= self.data.count {
+                self.largerButtonGroup?.setHidden(true)
+            }
             println("highestDataIndexInTable: \(self.highestDataIndexInTable)")
             println("highestValueFromArray: \(self.data[self.highestDataIndexInTable])")
         }
     }
     private var lowestDataIndexInTable: Int = 0 {
         didSet {
+            if self.lowestDataIndexInTable <= 0 {
+                self.smallerButtonGroup?.setHidden(true)
+            }
+
             println("lowestDataIndexInTable: \(self.lowestDataIndexInTable)")
             println("lowestValueFromArray: \(self.data[self.lowestDataIndexInTable])")
         }
@@ -88,20 +89,6 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
         //
         dispatch_async(dispatch_get_main_queue()) {
             self.clearDataTable()
-            switch self.currentContext {
-            case .Bill:
-                self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
-                self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to choose the Bill Amount", comment: ""), attributes: self.titleTextAttributes))
-                self.configureBillTableForTheFirstTime()
-                //self.insertBillAmountTableRowControllersAtBottom(50)
-            case .Tip:
-                self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
-                self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""), attributes: self.titleTextAttributes))
-                self.configureTipTableForTheFirstTime()
-                //self.insertTipAmountTableRowControllersAtBottom(50)
-            case .NotSet:
-                break
-            }
             
             // set the text
             self.largerButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Larger", comment: ""), attributes: self.largerButtonTextAttributes))
@@ -118,6 +105,23 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
             self.smallerButtonGroup?.setHidden(false)
             self.instructionalTextLabel?.setHidden(false)
             self.currencyAmountTable?.setHidden(false)
+            
+            switch self.currentContext {
+            case .Bill:
+                self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
+                self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to choose the Bill Amount", comment: ""), attributes: self.titleTextAttributes))
+                self.configureBillTableForTheFirstTime()
+                //self.insertBillAmountTableRowControllersAtBottom(50)
+            case .Tip:
+                self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
+                self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Scroll to the choose your desired Tip Amount", comment: ""), attributes: self.titleTextAttributes))
+                self.configureTipTableForTheFirstTime()
+                //self.insertTipAmountTableRowControllersAtBottom(50)
+            case .NotSet:
+                break
+            }
+            
+            // show the UI
             self.loadingImageGroup?.setHidden(true)
             self.interfaceControllerIsConfigured = true
             
@@ -125,22 +129,15 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
         }
     }
     
-    private func insertBillAmountTableRowControllersAtTop(newNumberOfRows: Int) {
-        switch self.currentContext {
-        case .Bill:
+    private func insertTableRowControllersAtTop(newNumberOfRows: Int) {
+        if self.currentContext != .NotSet {
             if let tableView = self.currencyAmountTable {
                 let currentLowestDataIndex = self.lowestDataIndexInTable
-                var newLowestDataIndex: Int
-                if currentLowestDataIndex > 0 {
-                    if currentLowestDataIndex - newNumberOfRows >= 0 {
-                        newLowestDataIndex = currentLowestDataIndex - newNumberOfRows
-                    } else {
-                        self.smallerButtonGroup?.setHidden(true)
-                        newLowestDataIndex = 0
-                    }
-                    for index in 0 ..< newNumberOfRows {
-                        let value = self.data[newLowestDataIndex + index]
-                        println("Index: \(index), Value: \(value)")
+                let newLowestDataIndex = currentLowestDataIndex - newNumberOfRows > 0 ? currentLowestDataIndex - newNumberOfRows : 0
+                for index in 0 ..< newNumberOfRows {
+                    let value = self.data[newLowestDataIndex + index]
+                    switch self.currentContext {
+                    case .Bill:
                         tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
                         if let row = tableView.rowControllerAtIndex(index) as? CrownScrollBillTableRowController {
                             if row.interfaceIsConfigured == false {
@@ -148,26 +145,27 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
                             }
                             row.updateCurrencyAmountLabel(value)
                         }
+                    case .Tip:
+                        tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollTipTableRowController")
+                        let billAmount = self.dataSource.billAmount
+                        let suggestedTipPercentage = self.dataSource.tipPercentage
+                        let idealTip = Int(round(Double(billAmount) * suggestedTipPercentage))
+                        let star = idealTip == value ? false : true
+                        if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTipTableRowController {
+                            if row.interfaceIsConfigured == false {
+                                row.configureInterface()
+                            }
+                            row.setMoneyAmountLabel(tipAmount: value, billAmount: billAmount, starFlag: star)
+                        }
+                    default:
+                        break
                     }
+                    // update instance variables
                     self.lowestDataIndexInTable = newLowestDataIndex
-                } else {
-                    self.smallerButtonGroup?.setHidden(true)
                 }
             }
-        default:
-            fatalError("CrownScrollBillInterfaceController: billTableRowInsertNumber called when currentContext was not .Bill")
-        }
-    }
-    
-    private func insertTipAmountTableRowControllersAtTop(newNumberOfRows: Int) {
-        switch self.currentContext {
-        case .Tip:
-            if let tableView = self.currencyAmountTable {
-                let currentLowestDataIndex = self.lowestDataIndexInTable
-                let newLowestDataIndex = currentLowestDataIndex - newNumberOfRows >= 0 ? currentLowestDataIndex - newNumberOfRows : 0
-            }
-        default:
-            fatalError("CrownScrollBillInterfaceController: billTableRowInsertNumber called when currentContext was not .Bill")
+        } else {
+            fatalError("CrownScrollBillInterfaceController: insertAmountTableRowControllersAtTop called when currentContext was not .NotSet")
         }
     }
     
@@ -177,9 +175,11 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
             if let tableView = self.currencyAmountTable {
                 // update the table
                 let currentNumberOfRowsInTable = tableView.numberOfRows
-                var dataWithinRange = true
+                let currentLowestNumber = self.lowestDataIndexInTable
+                let currentHighestNumber = self.highestDataIndexInTable
+                let newHighestNumber = currentHighestNumber + newNumberOfRows
                 for index in currentNumberOfRowsInTable ..< currentNumberOfRowsInTable + newNumberOfRows {
-                    let correctedIndex = index + self.highestDataIndexInTable - currentNumberOfRowsInTable
+                    let correctedIndex = index + currentHighestNumber - currentNumberOfRowsInTable
                     if correctedIndex < self.data.count {
                         let value = self.data[correctedIndex]
                         tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
@@ -190,18 +190,12 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
                             row.updateCurrencyAmountLabel(value)
                         }
                     } else {
-                        dataWithinRange = false
-                        self.largerButtonGroup?.setHidden(true)
                         break
                     }
                 }
                 
                 // update instance variables
-                if dataWithinRange == true {
-                    self.highestDataIndexInTable += newNumberOfRows
-                } else {
-                    self.highestDataIndexInTable = self.data.count - 1
-                }
+                self.highestDataIndexInTable = newHighestNumber < self.data.count ? newHighestNumber : self.data.count - 1
             }
         default:
             fatalError("CrownScrollBillInterfaceController: billTableRowInsertNumber called when currentContext was not .Bill")
@@ -219,7 +213,8 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
                 
                 // update the table
                 let currentNumberOfRowsInTable = tableView.numberOfRows
-                var dataWithinRange = true
+                let lowestNumber = self.lowestDataIndexInTable
+                let highestNumber = currentNumberOfRowsInTable + newNumberOfRows
                 for index in currentNumberOfRowsInTable ..< currentNumberOfRowsInTable + newNumberOfRows {
                     let correctedIndex = index + self.highestDataIndexInTable - currentNumberOfRowsInTable
                     if correctedIndex < self.data.count {
@@ -233,18 +228,12 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
                             row.setMoneyAmountLabel(tipAmount: value, billAmount: billAmount, starFlag: star)
                         }
                     } else {
-                        dataWithinRange = false
-                        self.largerButtonGroup?.setHidden(true)
                         break
                     }
                 }
                 
                 // update instance variables
-                if dataWithinRange == true {
-                    self.highestDataIndexInTable += newNumberOfRows
-                } else {
-                    self.highestDataIndexInTable = self.data.count - 1
-                }
+                self.highestDataIndexInTable = highestNumber < self.data.count ? highestNumber : self.data.count - 1
             }
         default:
             fatalError("CrownScrollBillInterfaceController: tipTableRowInsertNumber called when currentContext was not .Tip")
@@ -267,7 +256,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
                     
                     // update the table
                     let currentNumberOfRowsInTable = tableView.numberOfRows
-                    var dataWithinRange = true
+                    //var dataWithinRange = true
                     for index in 0 ..< upperBuffer + lowerBuffer {
                         let correctedIndex = index + lowestNumber
                         if correctedIndex < self.data.count {
@@ -280,23 +269,14 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
                                 row.updateCurrencyAmountLabel(value)
                             }
                         } else {
-                            dataWithinRange = false
-                            self.largerButtonGroup?.setHidden(true)
+                            //dataWithinRange = false
                             break
                         }
                     }
                     
                     // update instance variables
-                    if lowestNumber >= 0 {
-                        self.lowestDataIndexInTable = lowestNumber
-                    } else {
-                        self.lowestDataIndexInTable = 0
-                    }
-                    if highestNumber < self.data.count {
-                        self.highestDataIndexInTable = highestNumber
-                    } else {
-                        self.highestDataIndexInTable = self.data.count - 1
-                    }
+                    self.lowestDataIndexInTable = lowestNumber > 0 ? lowestNumber : 0
+                    self.highestDataIndexInTable = highestNumber < self.data.count ? highestNumber : self.data.count - 1
                 }
             default:
                 fatalError("CrownScrollBillInterfaceController: billTableRowInsertNumber called when currentContext was not .Bill")
@@ -341,16 +321,8 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
                     }
                     
                     // update instance variables
-                    if lowestNumber >= 0 {
-                        self.lowestDataIndexInTable = lowestNumber
-                    } else {
-                        self.lowestDataIndexInTable = 0
-                    }
-                    if highestNumber < self.data.count {
-                        self.highestDataIndexInTable = highestNumber
-                    } else {
-                        self.highestDataIndexInTable = self.data.count - 1
-                    }
+                    self.lowestDataIndexInTable = lowestNumber > 0 ? lowestNumber : 0
+                    self.highestDataIndexInTable = highestNumber < self.data.count ? highestNumber : self.data.count - 1
                 }
             default:
                 fatalError("CrownScrollBillInterfaceController: initialLoadOfTipTable called when currentContext was not .Tip")
@@ -366,6 +338,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
         switch self.currentContext {
         case .Bill:
             let adjustedIndex = rowIndex + self.lowestDataIndexInTable
+            println("DidSelectRowIndex \(rowIndex), Adjusted Index \(adjustedIndex)")
             let newBillAmount = self.data[adjustedIndex]
             self.dataSource.billAmount = newBillAmount
             self.pushControllerWithName("CrownScrollTipInterfaceController", context: CrownScrollerInterfaceContext.Tip.rawValue)
@@ -382,9 +355,9 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     @IBAction func didTapSmallerAmountButton() {
         switch self.currentContext {
         case .Bill:
-            self.insertBillAmountTableRowControllersAtTop(30)
+            self.insertTableRowControllersAtTop(30)
         case .Tip:
-            self.insertTipAmountTableRowControllersAtTop(10)
+            self.insertTableRowControllersAtTop(10)
         case .NotSet:
             break
         }
