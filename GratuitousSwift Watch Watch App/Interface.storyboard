@@ -38,6 +38,23 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="font" style="UICTFontTextStyleBody"/>
                         </label>
+                        <group alignment="left" hidden="YES" id="GOu-zS-kgE">
+                            <items>
+                                <button alignment="left" id="rpL-K2-dDO">
+                                    <group key="contentGroup" width="1" alignment="left" id="8WB-FO-WmR">
+                                        <items>
+                                            <label height="35" alignment="center" verticalAlignment="center" text="Smaller" textAlignment="center" id="GcI-pv-8Ae"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="didTapSmallerAmountButton" destination="tMv-1L-nCj" id="Wje-Y7-ppt"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
                         <table alignment="left" id="QFo-p1-L9c">
                             <items>
                                 <tableRow identifier="CrownScrollBillTableRowController" id="f8C-yj-lVF" customClass="CrownScrollBillTableRowController" customModule="Gratuity_WatchKit_Extension">
@@ -90,6 +107,8 @@
                         <outlet property="largerButtonGroup" destination="1hR-DE-TdZ" id="TzT-aW-wal"/>
                         <outlet property="largerButtonLabel" destination="x3K-Uv-KGd" id="cep-Vm-Vll"/>
                         <outlet property="loadingImageGroup" destination="GEE-Dl-zTy" id="g3t-88-Hzi"/>
+                        <outlet property="smallerButtonGroup" destination="GOu-zS-kgE" id="pmX-T5-G8i"/>
+                        <outlet property="smallerButtonLabel" destination="GcI-pv-8Ae" id="Urn-i0-XV8"/>
                     </connections>
                 </controller>
             </objects>
@@ -775,6 +794,23 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="font" style="UICTFontTextStyleBody"/>
                         </label>
+                        <group alignment="left" hidden="YES" id="kwH-so-mFC">
+                            <items>
+                                <button alignment="left" id="rE9-Gu-lXm">
+                                    <group key="contentGroup" width="1" alignment="left" id="u8v-5N-GiY">
+                                        <items>
+                                            <label height="35" alignment="center" verticalAlignment="center" text="Smaller" textAlignment="center" id="9vA-pF-guo"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="didTapSmallerAmountButton" destination="Pb6-uB-8lW" id="i2U-25-3TQ"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
                         <table alignment="left" id="vYB-zM-w3c">
                             <items>
                                 <tableRow identifier="CrownScrollTipTableRowController" id="BF0-AS-4us" customClass="CrownScrollTipTableRowController" customModule="Gratuity_WatchKit_Extension">
@@ -835,6 +871,8 @@
                         <outlet property="largerButtonGroup" destination="4tV-D0-LTy" id="spo-ev-3SW"/>
                         <outlet property="largerButtonLabel" destination="qCs-rR-7f9" id="fOa-OC-Ycg"/>
                         <outlet property="loadingImageGroup" destination="emx-kG-GDj" id="g6Z-WG-hKs"/>
+                        <outlet property="smallerButtonGroup" destination="kwH-so-mFC" id="fnW-3z-1Fz"/>
+                        <outlet property="smallerButtonLabel" destination="9vA-pF-guo" id="B7g-qW-G5f"/>
                     </connections>
                 </controller>
             </objects>

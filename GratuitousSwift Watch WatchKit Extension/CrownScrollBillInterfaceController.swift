@@ -16,10 +16,12 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
     @IBOutlet private weak var largerButtonGroup: WKInterfaceGroup?
     @IBOutlet private weak var largerButtonLabel: WKInterfaceLabel?
+    @IBOutlet private weak var smallerButtonGroup: WKInterfaceGroup?
+    @IBOutlet private weak var smallerButtonLabel: WKInterfaceLabel?
     
     private let data: [Int] = {
         var array = [Int]()
-        for index in 0..<201 {
+        for index in 0..<501 {
             array.append(index)
         }
         return array
@@ -103,14 +105,17 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
             
             // set the text
             self.largerButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Larger", comment: ""), attributes: self.largerButtonTextAttributes))
+            self.smallerButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Smaller", comment: ""), attributes: self.largerButtonTextAttributes))
             
             // set colors
             self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
             self.largerButtonGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             self.largerButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.smallerButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
             
             // show the UI
             self.largerButtonGroup?.setHidden(false)
+            self.smallerButtonGroup?.setHidden(false)
             self.instructionalTextLabel?.setHidden(false)
             self.currencyAmountTable?.setHidden(false)
             self.loadingImageGroup?.setHidden(true)
@@ -124,33 +129,42 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
         switch self.currentContext {
         case .Bill:
             if let tableView = self.currencyAmountTable {
-                // update the table
-                let currentNumberOfRowsInTable = tableView.numberOfRows
-                var dataWithinRange = true
-                for index in currentNumberOfRowsInTable ..< currentNumberOfRowsInTable + newNumberOfRows {
-                    let correctedIndex = index + self.highestDataIndexInTable - currentNumberOfRowsInTable
-                    if correctedIndex < self.data.count {
-                        let value = self.data[correctedIndex]
+                let currentLowestDataIndex = self.lowestDataIndexInTable
+                var newLowestDataIndex: Int
+                if currentLowestDataIndex > 0 {
+                    if currentLowestDataIndex - newNumberOfRows >= 0 {
+                        newLowestDataIndex = currentLowestDataIndex - newNumberOfRows
+                    } else {
+                        self.smallerButtonGroup?.setHidden(true)
+                        newLowestDataIndex = 0
+                    }
+                    for index in 0 ..< newNumberOfRows {
+                        let value = self.data[newLowestDataIndex + index]
+                        println("Index: \(index), Value: \(value)")
                         tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
-                        if let row = self.currencyAmountTable?.rowControllerAtIndex(index) as? CrownScrollBillTableRowController {
+                        if let row = tableView.rowControllerAtIndex(index) as? CrownScrollBillTableRowController {
                             if row.interfaceIsConfigured == false {
                                 row.configureInterface()
                             }
                             row.updateCurrencyAmountLabel(value)
                         }
-                    } else {
-                        dataWithinRange = false
-                        self.largerButtonGroup?.setHidden(true)
-                        break
                     }
-                }
-                
-                // update instance variables
-                if dataWithinRange == true {
-                    self.highestDataIndexInTable += newNumberOfRows
+                    self.lowestDataIndexInTable = newLowestDataIndex
                 } else {
-                    self.highestDataIndexInTable = self.data.count - 1
+                    self.smallerButtonGroup?.setHidden(true)
                 }
+            }
+        default:
+            fatalError("CrownScrollBillInterfaceController: billTableRowInsertNumber called when currentContext was not .Bill")
+        }
+    }
+    
+    private func insertTipAmountTableRowControllersAtTop(newNumberOfRows: Int) {
+        switch self.currentContext {
+        case .Tip:
+            if let tableView = self.currencyAmountTable {
+                let currentLowestDataIndex = self.lowestDataIndexInTable
+                let newLowestDataIndex = currentLowestDataIndex - newNumberOfRows >= 0 ? currentLowestDataIndex - newNumberOfRows : 0
             }
         default:
             fatalError("CrownScrollBillInterfaceController: billTableRowInsertNumber called when currentContext was not .Bill")
@@ -364,6 +378,18 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
             fatalError("CrownScrollBillInterfaceController: didSelectRowAtIndex called when currentContext was .NotSet")
         }
     }
+    
+    @IBAction func didTapSmallerAmountButton() {
+        switch self.currentContext {
+        case .Bill:
+            self.insertBillAmountTableRowControllersAtTop(30)
+        case .Tip:
+            self.insertTipAmountTableRowControllersAtTop(10)
+        case .NotSet:
+            break
+        }
+    }
+    
     
     @IBAction private func didTapLargerAmountButton() {
         switch self.currentContext {
