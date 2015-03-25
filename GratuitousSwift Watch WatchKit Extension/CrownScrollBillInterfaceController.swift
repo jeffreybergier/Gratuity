@@ -21,7 +21,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     
     private let data: [Int] = {
         var array = [Int]()
-        for index in 0..<201 {
+        for index in 0 ..< 999 {
             array.append(index)
         }
         return array
@@ -31,7 +31,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
     private var interfaceControllerIsConfigured = false
     private var highestDataIndexInTable: Int = 0 {
         didSet {
-            if self.highestDataIndexInTable >= self.data.count {
+            if self.highestDataIndexInTable >= self.data.count - 1 {
                 self.largerButtonGroup?.setHidden(true)
             }
             println("highestDataIndexInTable: \(self.highestDataIndexInTable)")
@@ -134,7 +134,8 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
             if let tableView = self.currencyAmountTable {
                 let currentLowestDataIndex = self.lowestDataIndexInTable
                 let newLowestDataIndex = currentLowestDataIndex - newNumberOfRows > 0 ? currentLowestDataIndex - newNumberOfRows : 0
-                for index in 0 ..< newNumberOfRows {
+                let endOfRange = currentLowestDataIndex < newNumberOfRows ? currentLowestDataIndex : newNumberOfRows
+                for index in 0 ..< endOfRange {
                     let value = self.data[newLowestDataIndex + index]
                     switch self.currentContext {
                     case .Bill:
@@ -246,7 +247,7 @@ class CrownScrollBillInterfaceController: GratuitousMenuInterfaceController {
             case .Bill:
                 if let tableView = self.currencyAmountTable {
                     // get the presetbillAmount
-                    let billAmount = self.dataSource.billAmount
+                    let billAmount = self.dataSource.billAmount < self.data.count ? self.dataSource.billAmount : self.data.count - 1
                     
                     // do the math for the table
                     let upperBuffer = 25
