@@ -25,7 +25,7 @@
         <!--Bill Amount-->
         <scene sceneID="t1K-MZ-tcM">
             <objects>
-                <controller identifier="CrownScrollBillInterfaceController" title="Bill Amount" hidesWhenLoading="NO" id="tMv-1L-nCj" customClass="CrownScrollBillInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                <controller identifier="CrownScrollBillInterfaceController" title="Bill Amount" hidesWhenLoading="NO" id="tMv-1L-nCj" customClass="CrownScrollInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
                         <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="GEE-Dl-zTy">
                             <items>
@@ -781,7 +781,7 @@
         <!--Tip Amount-->
         <scene sceneID="0cJ-h1-wjI">
             <objects>
-                <controller identifier="CrownScrollTipInterfaceController" title="Tip Amount" hidesWhenLoading="NO" id="Pb6-uB-8lW" customClass="CrownScrollBillInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                <controller identifier="CrownScrollTipInterfaceController" title="Tip Amount" hidesWhenLoading="NO" id="Pb6-uB-8lW" customClass="CrownScrollInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
                         <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="emx-kG-GDj">
                             <items>

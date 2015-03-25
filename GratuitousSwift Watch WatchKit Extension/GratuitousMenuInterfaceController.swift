@@ -71,3 +71,22 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
         // does nothing by default
     }
 }
+
+extension ThreeButtonStepperInterfaceController {
+    override func userChoseMenuItem1() {
+        self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)
+    }
+}
+
+extension CrownScrollInterfaceController {
+    override func userChoseMenuItem1() {
+        switch self.currentContext {
+        case .Bill:
+            self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: ThreeButtonStepperInterfaceContext.Bill.rawValue)
+        case .Tip:
+            self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: ThreeButtonStepperInterfaceContext.Bill.rawValue)
+        default:
+            break
+        }
+    }
+}

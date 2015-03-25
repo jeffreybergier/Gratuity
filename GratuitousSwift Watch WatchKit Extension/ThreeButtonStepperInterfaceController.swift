@@ -43,27 +43,12 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     private let nextButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
     
-//    override var menuType: GratuitousMenuInterfaceController.MenuType {
-//        switch self.currentContext {
-//        case .ThreeButtonStepperBill:
-//            return GratuitousMenuInterfaceController.MenuType.SwitchBillFromThreeButtonToScrolling
-//        case .ThreeButtonStepperTip:
-//            return GratuitousMenuInterfaceController.MenuType.SwitchTipFromThreeButtonToScrolling
-//        default:
-//            return GratuitousMenuInterfaceController.MenuType.Unknown
-//        }
-//    }
-    
     private var buttonValues: (hundreds: Int, tens: Int, ones: Int) = (0,0,0) {
         didSet {
             self.hundredsButtonTextLabel?.setAttributedText(NSAttributedString(string: "\(self.buttonValues.hundreds)", attributes: self.valueTextAttributes))
             self.tensButtonTextLabel?.setAttributedText(NSAttributedString(string: "\(self.buttonValues.tens)", attributes: self.valueTextAttributes))
             self.onesButtonTextLabel?.setAttributedText(NSAttributedString(string: "\(self.buttonValues.ones)", attributes: self.valueTextAttributes))
         }
-    }
-    
-    override func userChoseMenuItem1() {
-        self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)
     }
     
     private var selectedButton: SelectedButton = .None {

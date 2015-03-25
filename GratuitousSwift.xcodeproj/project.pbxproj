@@ -19,7 +19,7 @@
 		731375861ABF3FC00074E2F2 /* SettingsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */; };
 		731375871ABF3FC00074E2F2 /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; };
 		731375881ABF3FC00074E2F2 /* GratuitousMenuInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */; };
-		731375891ABF3FC40074E2F2 /* CrownScrollBillInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */; };
+		731375891ABF3FC40074E2F2 /* CrownScrollInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737C87281A8EE5CA0055C04A /* CrownScrollInterfaceController.swift */; };
 		7313758B1ABF3FC40074E2F2 /* CrownScrollBillTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B81A882BB10038E023 /* CrownScrollBillTableRowController.swift */; };
 		7313758C1ABF3FC40074E2F2 /* CrownScrollTipTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */; };
 		7313758D1ABF3FCF0074E2F2 /* ThreeButtonStepperInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1F4D21AA58F3400F6C116 /* ThreeButtonStepperInterfaceController.swift */; };
@@ -42,7 +42,7 @@
 		73450E8F1ABF2A50005927F1 /* SettingsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */; };
 		73450E901ABF2A50005927F1 /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; };
 		73450E911ABF2A50005927F1 /* GratuitousMenuInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */; };
-		73450E921ABF2A5F005927F1 /* CrownScrollBillInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */; };
+		73450E921ABF2A5F005927F1 /* CrownScrollInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737C87281A8EE5CA0055C04A /* CrownScrollInterfaceController.swift */; };
 		73450E941ABF2A5F005927F1 /* CrownScrollBillTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B81A882BB10038E023 /* CrownScrollBillTableRowController.swift */; };
 		73450E951ABF2A5F005927F1 /* CrownScrollTipTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */; };
 		73450E961ABF2A64005927F1 /* ThreeButtonStepperInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1F4D21AA58F3400F6C116 /* ThreeButtonStepperInterfaceController.swift */; };
@@ -188,7 +188,7 @@
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
 		737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIConstant.swift; sourceTree = "<group>"; };
 		7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInterfaceController.swift; sourceTree = "<group>"; };
-		737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownScrollBillInterfaceController.swift; sourceTree = "<group>"; };
+		737C87281A8EE5CA0055C04A /* CrownScrollInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownScrollInterfaceController.swift; sourceTree = "<group>"; };
 		737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = settingsIcon.pdf; sourceTree = "<group>"; };
 		7382510119E60EED00CD2B28 /* GratuitySD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuitySD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7382510519E60EED00CD2B28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -480,7 +480,7 @@
 		73A755AE1A87F1E60038E023 /* Crown Scroll Interface */ = {
 			isa = PBXGroup;
 			children = (
-				737C87281A8EE5CA0055C04A /* CrownScrollBillInterfaceController.swift */,
+				737C87281A8EE5CA0055C04A /* CrownScrollInterfaceController.swift */,
 				73A755B81A882BB10038E023 /* CrownScrollBillTableRowController.swift */,
 				73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */,
 			);
@@ -848,7 +848,7 @@
 				731375881ABF3FC00074E2F2 /* GratuitousMenuInterfaceController.swift in Sources */,
 				731375841ABF3FC00074E2F2 /* AppDelegateInterfaceController.swift in Sources */,
 				731375871ABF3FC00074E2F2 /* GratuitousWatchDataSource.swift in Sources */,
-				731375891ABF3FC40074E2F2 /* CrownScrollBillInterfaceController.swift in Sources */,
+				731375891ABF3FC40074E2F2 /* CrownScrollInterfaceController.swift in Sources */,
 				731375911ABF3FEA0074E2F2 /* GratuitousEnums.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -867,7 +867,7 @@
 				73450E9F1ABF2B25005927F1 /* GratuitousUIColor.swift in Sources */,
 				73450E911ABF2A50005927F1 /* GratuitousMenuInterfaceController.swift in Sources */,
 				73450E901ABF2A50005927F1 /* GratuitousWatchDataSource.swift in Sources */,
-				73450E921ABF2A5F005927F1 /* CrownScrollBillInterfaceController.swift in Sources */,
+				73450E921ABF2A5F005927F1 /* CrownScrollInterfaceController.swift in Sources */,
 				73450E9C1ABF2A9C005927F1 /* GratuitousEnums.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
