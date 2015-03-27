@@ -592,7 +592,7 @@
         <!--Dismiss Settings-->
         <scene sceneID="N6L-dJ-mY2">
             <objects>
-                <controller identifier="SettingsInterfaceController" title="Dismiss Settings" hidesWhenLoading="NO" id="ffT-6F-euT" customClass="SettingsInterfaceController" customModule="GratuitousSwift_Watch_WatchKit_Extension">
+                <controller identifier="SettingsInterfaceController" title="Dismiss Settings" hidesWhenLoading="NO" id="ffT-6F-euT" customClass="SettingsInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
                         <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="h5X-jF-VuH">
                             <items>
@@ -628,9 +628,6 @@
                                     <items>
                                         <slider width="1" alignment="left" continuous="YES" value="200" minimum="100" maximum="999" steps="100" minimumImage="SliderMinus" maximumImage="SliderPlus" id="ecV-6b-7jN">
                                             <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="maximumBillSliderDidChange:" destination="ffT-6F-euT" id="YZG-0U-3Al"/>
-                                            </connections>
                                         </slider>
                                     </items>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -765,10 +762,6 @@
                         <outlet property="currencySymbolTitleLabel" destination="MCm-nN-GLi" id="FFL-Ww-d6M"/>
                         <outlet property="currencySymbolYenGroup" destination="87e-ws-3v4" id="55y-1y-G8W"/>
                         <outlet property="currencySymbolYenLabel" destination="TuF-7m-oCw" id="GuV-7t-RHL"/>
-                        <outlet property="maximumBillAmountLabel" destination="64k-7d-bDb" id="2Ke-I8-Rnk"/>
-                        <outlet property="maximumBillGroup" destination="ALq-zB-gQI" id="lzX-TN-FJR"/>
-                        <outlet property="maximumBillSlider" destination="ecV-6b-7jN" id="UWJ-FG-GOn"/>
-                        <outlet property="maximumBillTitleLabel" destination="aaX-8t-d4o" id="M0w-HD-7qS"/>
                         <outlet property="suggestedTipGroup" destination="EcG-wP-xkF" id="9e1-Fn-w5p"/>
                         <outlet property="suggestedTipPercentageLabel" destination="5An-PC-g8o" id="TqJ-6J-1G4"/>
                         <outlet property="suggestedTipSlider" destination="6PC-nq-DwX" id="5xV-8j-qzh"/>

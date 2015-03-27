@@ -11,14 +11,14 @@ import WatchKit
 class SettingsInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var suggestedTipTitleLabel: WKInterfaceLabel?
-    @IBOutlet private weak var maximumBillTitleLabel: WKInterfaceLabel?
+    @IBOutlet private weak var maximumBillTitleLabel: WKInterfaceLabel? // no longer connected
     @IBOutlet private weak var currencySymbolTitleLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var suggestedTipSlider: WKInterfaceSlider?
-    @IBOutlet private weak var maximumBillSlider: WKInterfaceSlider?
+    @IBOutlet private weak var maximumBillSlider: WKInterfaceSlider? // no longer connected
     
     @IBOutlet private weak var suggestedTipPercentageLabel: WKInterfaceLabel?
-    @IBOutlet private weak var maximumBillAmountLabel: WKInterfaceLabel?
+    @IBOutlet private weak var maximumBillAmountLabel: WKInterfaceLabel? // no longer connected
     
     @IBOutlet private weak var currencySymbolLocalLabel: WKInterfaceLabel?
     @IBOutlet private weak var currencySymbolDollarLabel: WKInterfaceLabel?
@@ -28,7 +28,7 @@ class SettingsInterfaceController: WKInterfaceController {
     @IBOutlet private weak var currencySymbolNoneLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var suggestedTipGroup: WKInterfaceGroup?
-    @IBOutlet private weak var maximumBillGroup: WKInterfaceGroup?
+    @IBOutlet private weak var maximumBillGroup: WKInterfaceGroup? // no longer connected
     @IBOutlet private weak var currencySymbolLocalGroup: WKInterfaceGroup?
     @IBOutlet private weak var currencySymbolDollarGroup: WKInterfaceGroup?
     @IBOutlet private weak var currencySymbolPoundGroup: WKInterfaceGroup?
@@ -128,7 +128,7 @@ class SettingsInterfaceController: WKInterfaceController {
         self.updateSuggestedTipPercentageUI()
     }
     
-    @IBAction func maximumBillSliderDidChange(value: Float) {
+    @IBAction func maximumBillSliderDidChange(value: Float) { // no longer connected
         let integerValue = Int(round(value))
         self.dataSource.numberOfRowsInBillTableForWatch = integerValue
         self.updateMaximumBillAmountUI()

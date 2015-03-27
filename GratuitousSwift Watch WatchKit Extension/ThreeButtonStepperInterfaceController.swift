@@ -35,7 +35,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     @IBOutlet private weak var backgroundImageGroup: WKInterfaceGroup?
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
     
-    private var currentContext = ThreeButtonStepperInterfaceContext.NotSet
+    private(set) var currentContext = ThreeButtonStepperInterfaceContext.NotSet
     private var interfaceControllerIsConfigured = false
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance

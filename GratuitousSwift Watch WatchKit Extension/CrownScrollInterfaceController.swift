@@ -26,7 +26,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
         }
         return array
         }()
-    private var currentContext = CrownScrollerInterfaceContext.NotSet
+    private(set) var currentContext = CrownScrollerInterfaceContext.NotSet
     private var billAmountOffset: Int? // This property is only set when context is CrownScrollPagedOnes
     private var interfaceControllerIsConfigured = false
     private var highestDataIndexInTable: Int = 0 {
