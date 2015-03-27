@@ -148,8 +148,8 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                         }
                     case .Tip:
                         tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollTipTableRowController")
-                        let billAmount = self.dataSource.billAmount
-                        let suggestedTipPercentage = self.dataSource.tipPercentage
+                        let billAmount = self.dataSource.defaultsManager.billIndexPathRow
+                        let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
                         let idealTip = Int(round(Double(billAmount) * suggestedTipPercentage))
                         let star = idealTip == value ? false : true
                         if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTipTableRowController {
@@ -208,8 +208,8 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
         case .Tip:
             if let tableView = self.currencyAmountTable {
                 // calculate ideal tip
-                let billAmount = self.dataSource.billAmount
-                let suggestedTipPercentage = self.dataSource.tipPercentage
+                let billAmount = self.dataSource.defaultsManager.billIndexPathRow
+                let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
                 let idealTip = Int(round(Double(billAmount) * suggestedTipPercentage))
                 
                 // update the table
@@ -247,7 +247,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
             case .Bill:
                 if let tableView = self.currencyAmountTable {
                     // get the presetbillAmount
-                    let billAmount = self.dataSource.billAmount < self.data.count ? self.dataSource.billAmount : self.data.count - 1
+                    let billAmount = self.dataSource.defaultsManager.billIndexPathRow < self.data.count ? self.dataSource.defaultsManager.billIndexPathRow : self.data.count - 1
                     
                     // do the math for the table
                     let upperBuffer = 25
@@ -292,8 +292,8 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
             case .Tip:
                 if let tableView = self.currencyAmountTable {
                     // do the math for the tip
-                    let billAmount = self.dataSource.billAmount
-                    let suggestedTipPercentage = self.dataSource.tipPercentage
+                    let billAmount = self.dataSource.defaultsManager.billIndexPathRow
+                    let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
                     let idealTip = Int(round(Double(billAmount) * suggestedTipPercentage))
                     
                     // do the math for the table
@@ -341,12 +341,12 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
             let adjustedIndex = rowIndex + self.lowestDataIndexInTable
             println("DidSelectRowIndex \(rowIndex), Adjusted Index \(adjustedIndex)")
             let newBillAmount = self.data[adjustedIndex]
-            self.dataSource.billAmount = newBillAmount
+            self.dataSource.defaultsManager.billIndexPathRow = newBillAmount
             self.pushControllerWithName("CrownScrollTipInterfaceController", context: CrownScrollerInterfaceContext.Tip.rawValue)
         case .Tip:
             let adjustedIndex = rowIndex + self.lowestDataIndexInTable
             let newTipAmount = self.data[adjustedIndex]
-            self.dataSource.tipAmount = newTipAmount
+            self.dataSource.defaultsManager.tipIndexPathRow = newTipAmount
             self.pushControllerWithName("TotalAmountInterfaceController", context: nil)
         default:
             fatalError("CrownScrollBillInterfaceController: didSelectRowAtIndex called when currentContext was .NotSet")

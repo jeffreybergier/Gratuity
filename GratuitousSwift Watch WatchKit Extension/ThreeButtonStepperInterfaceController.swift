@@ -143,7 +143,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
                 self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
                 self.tipPercentageLabel?.setHidden(true)
                 
-                self.updateUIWithCurrencyAmount(self.dataSource.billAmount)
+                self.updateUIWithCurrencyAmount(self.dataSource.defaultsManager.billIndexPathRow)
             case .Tip:
                 self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Tip Amount", comment: ""), attributes: self.titleTextAttributes))
                 self.instructionalTextLabel?.setHidden(true)
@@ -151,12 +151,12 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
                 
                 var calculatedTip: Double
                 var tipPercentage: Double
-                let billAmount = self.dataSource.billAmount !! 0
-                if self.dataSource.tipAmount > 0 {
-                    calculatedTip = Double(self.dataSource.tipAmount)
+                let billAmount = self.dataSource.defaultsManager.billIndexPathRow
+                if self.dataSource.defaultsManager.tipIndexPathRow > 0 {
+                    calculatedTip = Double(self.dataSource.defaultsManager.tipIndexPathRow)
                     tipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(calculatedTip), bottom: Double(billAmount)) !! 0.2
                 } else {
-                    tipPercentage = self.dataSource.tipPercentage !! 0.2
+                    tipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
                     calculatedTip = Double(billAmount) * tipPercentage
                 }
                 
@@ -220,9 +220,9 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     private func writeValueToDisk(value: Int) {
         switch self.currentContext {
         case .Bill:
-            self.dataSource.billAmount = value
+            self.dataSource.defaultsManager.billIndexPathRow = value
         case .Tip:
-            self.dataSource.tipAmount = value
+            self.dataSource.defaultsManager.tipIndexPathRow = value
         default:
             break
         }
@@ -272,7 +272,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
         }
         if let tipPercentageLabel = self.tipPercentageLabel {
             // if this outlet is set, we are tip controller and we need to update the tip percentage label
-            let billAmount = self.dataSource.billAmount !! 0
+            let billAmount = self.dataSource.defaultsManager.billIndexPathRow
             let tipAmount = self.calculateValueFromUI()
             let calculatedTipPercentage = Double(tipAmount) / Double(billAmount)
             tipPercentageLabel.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(calculatedTipPercentage), attributes: self.nextButtonTextAttributes))

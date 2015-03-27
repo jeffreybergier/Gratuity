@@ -96,8 +96,8 @@ class SettingsInterfaceController: WKInterfaceController {
             self.updateCurrencySymbolUI()
             
             // configure the values that change
-            self.suggestedTipSlider?.setValue(Float(round(self.dataSource.tipPercentage * 100)))
-            self.maximumBillSlider?.setValue(Float(self.dataSource.numberOfRowsInBillTableForWatch))
+            self.suggestedTipSlider?.setValue(Float(round(self.dataSource.defaultsManager.suggestedTipPercentage * 100)))
+            self.maximumBillSlider?.setValue(Float(self.dataSource.defaultsManager.numberOfRowsInBillTableForWatch))
             self.updateMaximumBillAmountUI()
             self.updateSuggestedTipPercentageUI()
             
@@ -124,54 +124,54 @@ class SettingsInterfaceController: WKInterfaceController {
     
     @IBAction func suggestedTipSliderDidChange(value: Float) {
         let adjustedValue = value / 100
-        self.dataSource.tipPercentage = Double(adjustedValue)
+        self.dataSource.defaultsManager.suggestedTipPercentage = Double(adjustedValue)
         self.updateSuggestedTipPercentageUI()
     }
     
     @IBAction func maximumBillSliderDidChange(value: Float) { // no longer connected
         let integerValue = Int(round(value))
-        self.dataSource.numberOfRowsInBillTableForWatch = integerValue
+        self.dataSource.defaultsManager.numberOfRowsInBillTableForWatch = integerValue
         self.updateMaximumBillAmountUI()
     }
     
     @IBAction func currencySymbolButtonLocalTapped() {
-        self.dataSource.overrideCurrencySymbol = CurrencySign.Default
+        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Default
         self.updateCurrencySymbolUI()
     }
     
     @IBAction func currencySymbolButtonDollarTapped() {
-        self.dataSource.overrideCurrencySymbol = CurrencySign.Dollar
+        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Dollar
         self.updateCurrencySymbolUI()
     }
     
     @IBAction func currencySymbolButtonPoundTapped() {
-        self.dataSource.overrideCurrencySymbol = CurrencySign.Pound
+        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Pound
         self.updateCurrencySymbolUI()
     }
     
     @IBAction func currencySymbolButtonEuroTapped() {
-        self.dataSource.overrideCurrencySymbol = CurrencySign.Euro
+        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Euro
         self.updateCurrencySymbolUI()
     }
     
     @IBAction func currencySymbolButtonYenTapped() {
-        self.dataSource.overrideCurrencySymbol = CurrencySign.Yen
+        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Yen
         self.updateCurrencySymbolUI()
     }
     
     @IBAction func currencySymbolButtonNoneTapped() {
-        self.dataSource.overrideCurrencySymbol = CurrencySign.None
+        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.None
         self.updateCurrencySymbolUI()
     }
     
     private func updateMaximumBillAmountUI() {
-        let maximumBillAmount = self.dataSource.numberOfRowsInBillTableForWatch - 1
+        let maximumBillAmount = self.dataSource.defaultsManager.numberOfRowsInBillTableForWatch - 1
         let maximumBillAmountCurrencyString = self.dataSource.currencyStringFromInteger(maximumBillAmount)
         self.maximumBillAmountLabel?.setAttributedText(NSAttributedString(string: maximumBillAmountCurrencyString, attributes: self.valueTextAttributes))
     }
     
     private func updateSuggestedTipPercentageUI() {
-        let suggestedTipPercentage = self.dataSource.tipPercentage
+        let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
         let suggestedTipPercentageString = self.dataSource.percentStringFromRawDouble(suggestedTipPercentage)
         self.suggestedTipPercentageLabel?.setAttributedText(NSAttributedString(string: suggestedTipPercentageString, attributes: self.valueTextAttributes))
     }
@@ -185,7 +185,7 @@ class SettingsInterfaceController: WKInterfaceController {
         self.currencySymbolYenGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
         self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
         
-        let currencySymbolOnDisk = self.dataSource.overrideCurrencySymbol
+        let currencySymbolOnDisk = self.dataSource.defaultsManager.overrideCurrencySymbol
         switch currencySymbolOnDisk {
         case .Default:
             self.currencySymbolLocalGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())

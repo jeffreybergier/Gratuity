@@ -18,7 +18,7 @@ class AppDelegateInterfaceController: WKInterfaceController {
         //check my server for which UI the watch should use
         self.checkWatchUIJSON()
         
-        switch self.dataSource.correctWatchInterface {
+        switch self.dataSource.defaultsManager.correctWatchInterface {
         case .CrownScroller:
             self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)
         case .ThreeButtonStepper:
@@ -47,7 +47,7 @@ class AppDelegateInterfaceController: WKInterfaceController {
             if let jsonDictionaryArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? [NSDictionary] {
                 if let watchStyleString = jsonDictionaryArray.first?["watchUIStyle"] as? String {
                     if let interfaceState = CorrectWatchInterface.interfaceStateFromString(watchStyleString) {
-                        self.dataSource.correctWatchInterface = interfaceState
+                        self.dataSource.defaultsManager.correctWatchInterface = interfaceState
                     }
                 }
             }

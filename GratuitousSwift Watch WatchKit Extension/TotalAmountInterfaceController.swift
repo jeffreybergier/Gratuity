@@ -77,8 +77,8 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
             self.billAmountLabel?.setText("$ –")
             
             // prepare data
-            let billAmount = self.dataSource.billAmount !! 0
-            let tipAmount = self.dataSource.tipAmount !! 0
+            let billAmount = self.dataSource.defaultsManager.billIndexPathRow
+            let tipAmount = self.dataSource.defaultsManager.tipIndexPathRow
             let tipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
             
             // prepare attributed text from data
@@ -101,9 +101,9 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
             self.billAmountGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             
             // we made it to the final step. time to increment the runcount
-            if self.dataSource.watchAppRunCountShouldBeIncremented == true {
-                self.dataSource.watchAppRunCount++
-                self.dataSource.watchAppRunCountShouldBeIncremented = false // don't want to increment this more than once per runtime.
+            if self.dataSource.defaultsManager.watchAppRunCountShouldBeIncremented == true {
+                self.dataSource.defaultsManager.watchAppRunCount++
+                self.dataSource.defaultsManager.watchAppRunCountShouldBeIncremented = false // don't want to increment this more than once per runtime.
             }
             
             self.backgroundImageGroup?.setHidden(true)
