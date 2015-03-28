@@ -10,66 +10,68 @@ import Foundation
 
 class GratuitousUserDefaults: Printable {
     
-    var description: String { return "GratuitousUserDefaults Manager: SuiteName: \(self.suiteName)" }
-    private let suiteName: String
-    private let userDefaults: NSUserDefaults
+    var description: String { return "GratuitousUserDefaults Manager: SuiteName: \(Keys.localSuiteName)" }
+    private let userDefaults = NSUserDefaults(suiteName: Keys.localSuiteName) !! NSUserDefaults.standardUserDefaults()
     
     init() {
         //
         // configure the storage group appropriately so beta builds and store builds don't share storage
         //
-        #if LOCAL // Local = Not an App Store Bundle Identifier
-        let localSuiteName = "group.com.saturdayapps.Gratuity.local.storageGroup"
-        #else
-        let localSuiteName = "group.com.saturdayapps.Gratuity.storageGroup"
-        #endif
-        
-        self.userDefaults = NSUserDefaults(suiteName: localSuiteName) !! NSUserDefaults.standardUserDefaults()
-        self.suiteName = localSuiteName
-        
-        let appVersionCurrent = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as? String !! "1.0"
-        let appVersionOnDisk = self.userDefaults.objectForKey("appVersionString") as? String
-        
-        if let appVersionOnDisk = appVersionOnDisk {
-            self.startMigration(fromVersion: appVersionOnDisk, toVersion: appVersionCurrent)
+        let appVersionCurrent = NSBundle.mainBundle().infoDictionary![Keys.CFBundleShortVersionString] as? String !! "1.0"
+        if let appVersionOnDisk = self.userDefaults.objectForKey(Keys.appVersionString) as? String {
+            if appVersionOnDisk != appVersionCurrent {
+                // placeholder for future migration
+            }
         } else {
-            let oldWayOfCheckingIfDefaultsSet = self.userDefaults.integerForKey("billIndexPathRow")
-            if oldWayOfCheckingIfDefaultsSet == 0 { // 0 is what is returned when nothing has been set for the key
-                self.configureNewInstallWithCurrentAppVersion(appVersionCurrent)
+            // might be a first run or might be upgrading from 1.0
+            let standardUserDefaults = NSUserDefaults.standardUserDefaults()
+            if standardUserDefaults.integerForKey(Keys.billIndexPathRow) != 0 {
+                // means we're upgrading from 1.0
+                self.startMigrationFromVersionOnePointZero(toVersion: appVersionCurrent)
             } else {
-                self.startMigration(fromVersion: "1.0", toVersion: appVersionCurrent)
+                // looks like a fresh install
+                self.configureNewInstallWithCurrentAppVersion(appVersionCurrent)
             }
         }
     }
     
-    private func startMigration(#fromVersion: String?, toVersion: String?) {
-        if let fromVersion = fromVersion {
-            if let toVersion = toVersion {
-                if fromVersion == "1.0" {
-                    NSLog("\(self): Looks like a an upgrade from 1.0: Setting defaults for new Keys")
-                    // insert all the new data that was started after version 1.0
-                    self.userDefaults.setObject(toVersion, forKey: "appVersionString")
-                    self.userDefaults.setInteger(201, forKey: "numberOfRowsInBillTableForWatch")
-                    self.userDefaults.setInteger(0, forKey: "watchAppRunCount")
-                    self.userDefaults.setBool(true, forKey: "watchAppRunCountShouldBeIncremented")
-                    self.userDefaults.setInteger(CorrectWatchInterface.CrownScroller.rawValue, forKey: "correctInterface")
-                    self.userDefaults.synchronize()
-                }
-            }
-        }
+    private func startMigrationFromVersionOnePointZero(#toVersion: String) {
+        NSLog("\(self): Looks like a an upgrade from 1.0: Setting defaults for new Keys")
+        // first need to extract the settings from standardUserDefaults
+        let standardUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        // get the settings
+        let billIndexPathRow = standardUserDefaults.integerForKey(Keys.billIndexPathRow) - 1
+        let tipIndexPathRow = standardUserDefaults.integerForKey(Keys.tipIndexPathRow) - 1
+        let overrideCurrencySymbol = CurrencySign(rawValue: standardUserDefaults.integerForKey(Keys.overrideCurrencySymbol)) !! CurrencySign.Default
+        let suggestedTipPercentage = standardUserDefaults.doubleForKey(Keys.suggestedTipPercentage)
+        
+        // then write them to the new userDefaults
+        self.userDefaults.setInteger(billIndexPathRow, forKey: Keys.billIndexPathRow)
+        self.userDefaults.setInteger(tipIndexPathRow, forKey: Keys.tipIndexPathRow)
+        self.userDefaults.setInteger(overrideCurrencySymbol.rawValue, forKey: Keys.overrideCurrencySymbol)
+        self.userDefaults.setDouble(suggestedTipPercentage, forKey: Keys.suggestedTipPercentage)
+        
+        // insert all the new data that was started after version 1.0
+        self.userDefaults.setObject(toVersion, forKey: Keys.appVersionString)
+        self.userDefaults.setInteger(0, forKey: Keys.watchAppRunCount)
+        self.userDefaults.setBool(true, forKey: Keys.watchAppRunCountShouldBeIncremented)
+        self.userDefaults.setInteger(201, forKey: Keys.numberOfRowsInBillTableForWatch)
+        self.userDefaults.setInteger(CorrectWatchInterface.CrownScroller.rawValue, forKey: Keys.correctWatchInterface)
+        self.userDefaults.synchronize()
     }
     
-    private func configureNewInstallWithCurrentAppVersion(appVersion: String) {
+    private func configureNewInstallWithCurrentAppVersion(currentAppVersion: String) {
         NSLog("\(self): Looks like a first run or a new version: Writing defaults to disk.")
-        self.userDefaults.setObject(appVersion, forKey: "appVersionString")
-        self.userDefaults.setInteger(25, forKey: "billIndexPathRow")
-        self.userDefaults.setInteger(0, forKey: "tipIndexPathRow")
-        self.userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: "overrideCurrencySymbol")
-        self.userDefaults.setDouble(0.2, forKey: "suggestedTipPercentage")
-        self.userDefaults.setInteger(201, forKey: "numberOfRowsInBillTableForWatch")
-        self.userDefaults.setInteger(0, forKey: "watchAppRunCount")
-        self.userDefaults.setBool(true, forKey: "watchAppRunCountShouldBeIncremented")
-        self.userDefaults.setInteger(CorrectWatchInterface.CrownScroller.rawValue, forKey: "correctInterface")
+        self.userDefaults.setObject(currentAppVersion, forKey: Keys.appVersionString)
+        self.userDefaults.setInteger(25, forKey: Keys.billIndexPathRow)
+        self.userDefaults.setInteger(0, forKey: Keys.tipIndexPathRow)
+        self.userDefaults.setInteger(0, forKey: Keys.watchAppRunCount)
+        self.userDefaults.setDouble(0.2, forKey: Keys.suggestedTipPercentage)
+        self.userDefaults.setInteger(201, forKey: Keys.numberOfRowsInBillTableForWatch)
+        self.userDefaults.setBool(true, forKey: Keys.watchAppRunCountShouldBeIncremented)
+        self.userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: Keys.overrideCurrencySymbol)
+        self.userDefaults.setInteger(CorrectWatchInterface.CrownScroller.rawValue, forKey: Keys.correctWatchInterface)
         self.userDefaults.synchronize()
     }
     
@@ -77,14 +79,14 @@ class GratuitousUserDefaults: Printable {
     var watchAppRunCountShouldBeIncremented: Bool {
         set {
             _watchAppRunCountShouldBeIncremented = newValue
-            self.userDefaults.setBool(newValue, forKey: "watchAppRunCountShouldBeIncremented")
+            self.userDefaults.setBool(newValue, forKey: Keys.watchAppRunCountShouldBeIncremented)
             self.userDefaults.synchronize()
         }
         get {
             if let watchAppRunCountShouldBeIncremented = _watchAppRunCountShouldBeIncremented {
                 return watchAppRunCountShouldBeIncremented
             } else {
-                return self.userDefaults.boolForKey("watchAppRunCountShouldBeIncremented") !! true
+                return self.userDefaults.boolForKey(Keys.watchAppRunCountShouldBeIncremented) !! true
             }
         }
     }
@@ -93,14 +95,14 @@ class GratuitousUserDefaults: Printable {
     var watchAppRunCount: Int {
         set {
             _watchAppRunCount = newValue
-            self.userDefaults.setInteger(newValue, forKey: "watchAppRunCount")
+            self.userDefaults.setInteger(newValue, forKey: Keys.watchAppRunCount)
             self.userDefaults.synchronize()
         }
         get {
             if let watchAppRunCount = _watchAppRunCount {
                 return watchAppRunCount
             } else {
-                return self.userDefaults.integerForKey("watchAppRunCount") !! 0
+                return self.userDefaults.integerForKey(Keys.watchAppRunCount) !! 0
             }
         }
     }
@@ -109,15 +111,15 @@ class GratuitousUserDefaults: Printable {
     var billIndexPathRow: Int {
         set {
             _billIndexPathRow = newValue
-            self.tipIndexPathRow = 0
-            self.userDefaults.setInteger(newValue, forKey: "billIndexPathRow")
+            self.userDefaults.setInteger(0, forKey: Keys.tipIndexPathRow) // save a synchronize by not using //self.tipIndexPathRow = 0
+            self.userDefaults.setInteger(newValue, forKey: Keys.billIndexPathRow)
             self.userDefaults.synchronize()
         }
         get {
             if let billIndexPathRow = _billIndexPathRow {
                 return billIndexPathRow
             } else {
-                return self.userDefaults.integerForKey("billIndexPathRow") !! 26
+                return self.userDefaults.integerForKey(Keys.billIndexPathRow) !! 26
             }
         }
     }
@@ -126,14 +128,14 @@ class GratuitousUserDefaults: Printable {
     var numberOfRowsInBillTableForWatch: Int {
         set {
             _numberOfRowsInBillTableForWatch = newValue
-            self.userDefaults.setInteger(newValue, forKey: "numberOfRowsInBillTableForWatch")
+            self.userDefaults.setInteger(newValue, forKey: Keys.numberOfRowsInBillTableForWatch)
             self.userDefaults.synchronize()
         }
         get {
             if let numberOfRowsInBillTableForWatch = _numberOfRowsInBillTableForWatch {
                 return numberOfRowsInBillTableForWatch
             } else {
-                return self.userDefaults.integerForKey("numberOfRowsInBillTableForWatch") !! 201
+                return self.userDefaults.integerForKey(Keys.numberOfRowsInBillTableForWatch) !! 201
             }
         }
     }
@@ -142,14 +144,14 @@ class GratuitousUserDefaults: Printable {
     var tipIndexPathRow: Int {
         set {
             _tipIndexPathRow = newValue
-            self.userDefaults.setInteger(newValue, forKey: "tipIndexPathRow")
+            self.userDefaults.setInteger(newValue, forKey: Keys.tipIndexPathRow)
             self.userDefaults.synchronize()
         }
         get {
             if let tipIndexPathRow = _tipIndexPathRow {
                 return tipIndexPathRow
             } else {
-                return self.userDefaults.integerForKey("tipIndexPathRow") !! 0
+                return self.userDefaults.integerForKey(Keys.tipIndexPathRow) !! 0
             }
         }
     }
@@ -158,14 +160,14 @@ class GratuitousUserDefaults: Printable {
     var overrideCurrencySymbol: CurrencySign {
         set {
             _overrideCurrencySymbol = newValue
-            self.userDefaults.setInteger(newValue.rawValue, forKey: "overrideCurrencySymbol")
+            self.userDefaults.setInteger(newValue.rawValue, forKey: Keys.overrideCurrencySymbol)
             self.userDefaults.synchronize()
         }
         get {
             if let overrideCurrencySymbol = _overrideCurrencySymbol {
                 return overrideCurrencySymbol
             } else {
-                return CurrencySign(rawValue: self.userDefaults.integerForKey("overrideCurrencySymbol")) !! CurrencySign.Default
+                return CurrencySign(rawValue: self.userDefaults.integerForKey(Keys.overrideCurrencySymbol)) !! CurrencySign.Default
             }
         }
     }
@@ -174,14 +176,14 @@ class GratuitousUserDefaults: Printable {
     var correctWatchInterface: CorrectWatchInterface {
         set {
             _correctWatchInterface = newValue
-            self.userDefaults.setInteger(newValue.rawValue, forKey: "correctInterface")
+            self.userDefaults.setInteger(newValue.rawValue, forKey: Keys.correctWatchInterface)
             self.userDefaults.synchronize()
         }
         get {
             if let correctWatchInterface = _correctWatchInterface {
                 return correctWatchInterface
             } else {
-                return CorrectWatchInterface(rawValue: self.userDefaults.integerForKey("correctInterface")) !! CorrectWatchInterface.CrownScroller
+                return CorrectWatchInterface(rawValue: self.userDefaults.integerForKey(Keys.correctWatchInterface)) !! CorrectWatchInterface.CrownScroller
             }
         }
     }
@@ -190,19 +192,42 @@ class GratuitousUserDefaults: Printable {
     var suggestedTipPercentage: Double {
         set {
             _suggestedTipPercentage = newValue
-            self.userDefaults.setDouble(newValue, forKey: "suggestedTipPercentage")
+            self.userDefaults.setDouble(newValue, forKey: Keys.suggestedTipPercentage)
             self.userDefaults.synchronize()
         }
         get {
             if let suggestedTipPercentage = _suggestedTipPercentage {
                 return suggestedTipPercentage
             } else {
-                return self.userDefaults.doubleForKey("suggestedTipPercentage") !! 0.2
+                return self.userDefaults.doubleForKey(Keys.suggestedTipPercentage) !! 0.2
             }
         }
     }
     
     class func watchUIURL() -> NSURL {
         return NSURL(string: "http://www.saturdayapps.com/gratuity/watchUI.json")!
+    }
+    
+    private struct Keys {
+        #if LOCAL // Local = Not an App Store Bundle Identifier
+        static let localSuiteName = "group.com.saturdayapps.Gratuity.local.storageGroup"
+        #else
+        static let localSuiteName = "group.com.saturdayapps.Gratuity.storageGroup"
+        #endif
+        
+        static let CFBundleShortVersionString = "CFBundleShortVersionString"
+        
+        // version 1.0 and 1.1 keys
+        static let billIndexPathRow = "billIndexPathRow"
+        static let tipIndexPathRow = "tipIndexPathRow"
+        static let overrideCurrencySymbol = "overrideCurrencySymbol"
+        static let suggestedTipPercentage = "suggestedTipPercentage"
+        
+        // version 1.2 keys
+        static let appVersionString = "appVersionString"
+        static let watchAppRunCount = "watchAppRunCount"
+        static let correctWatchInterface = "correctWatchInterface"
+        static let numberOfRowsInBillTableForWatch = "numberOfRowsInBillTableForWatch"
+        static let watchAppRunCountShouldBeIncremented = "watchAppRunCountShouldBeIncremented"
     }
 }

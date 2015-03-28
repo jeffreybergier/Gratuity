@@ -322,7 +322,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     private func writeToDiskBillTableIndexPath(indexPath: NSIndexPath) {
         self.defaultsManager?.billIndexPathRow = indexPath.row - PrivateConstants.ExtraCells + 1
-        self.defaultsManager?.tipIndexPathRow = 0
+        //self.defaultsManager?.tipIndexPathRow = 0
     }
     
     private func writeToDiskTipTableIndexPath(indexPath: NSIndexPath, WithAutoAdjustment autoAdjustment: Bool) {
