@@ -110,8 +110,11 @@ class GratuitousUserDefaults: Printable {
     private var _billIndexPathRow: Int?
     var billIndexPathRow: Int {
         set {
+            // first set the tip to 0 so it performs default behaviors
+            self.tipIndexPathRow = 0
+
+            // then update instance variables and user defaults
             _billIndexPathRow = newValue
-            self.userDefaults.setInteger(0, forKey: Keys.tipIndexPathRow) // save a synchronize by not using //self.tipIndexPathRow = 0
             self.userDefaults.setInteger(newValue, forKey: Keys.billIndexPathRow)
             self.userDefaults.synchronize()
         }

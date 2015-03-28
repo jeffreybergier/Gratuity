@@ -149,18 +149,13 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
                 self.instructionalTextLabel?.setHidden(true)
                 self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
                 
-                var calculatedTip: Double
-                var tipPercentage: Double
-                let billAmount = self.dataSource.defaultsManager.billIndexPathRow
-                if self.dataSource.defaultsManager.tipIndexPathRow > 0 {
-                    calculatedTip = Double(self.dataSource.defaultsManager.tipIndexPathRow)
-                    tipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(calculatedTip), bottom: Double(billAmount)) !! 0.2
-                } else {
-                    tipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
-                    calculatedTip = Double(billAmount) * tipPercentage
-                }
+                let billAmountOnDisk = self.dataSource.defaultsManager.billIndexPathRow
+                let tipAmountOnDisk = self.dataSource.defaultsManager.tipIndexPathRow
+                let suggestedTipOnDisk = self.dataSource.defaultsManager.suggestedTipPercentage
+                let calculatedTip = tipAmountOnDisk > 0 ? tipAmountOnDisk : Int(round(Double(billAmountOnDisk) * suggestedTipOnDisk))
+                let tipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(calculatedTip), bottom: Double(billAmountOnDisk)) ?? 0.0
                 
-                self.updateUIWithCurrencyAmount(Int(round(calculatedTip)))
+                self.updateUIWithCurrencyAmount(calculatedTip)
                 self.tipPercentageLabel?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(tipPercentage), attributes: self.nextButtonTextAttributes))
                 self.tipPercentageLabel?.setHidden(false)
             default:
