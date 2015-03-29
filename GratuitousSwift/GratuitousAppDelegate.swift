@@ -5,7 +5,6 @@
 //  Created by Jeffrey Bergier on 10/8/14.
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
-// Making my first change in Git
 
 import UIKit
 import Fabric
