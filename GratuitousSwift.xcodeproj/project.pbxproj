@@ -23,8 +23,6 @@
 		7313758B1ABF3FC40074E2F2 /* CrownScrollBillTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B81A882BB10038E023 /* CrownScrollBillTableRowController.swift */; };
 		7313758C1ABF3FC40074E2F2 /* CrownScrollTipTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0FD531A884BFB003ED951 /* CrownScrollTipTableRowController.swift */; };
 		7313758D1ABF3FCF0074E2F2 /* ThreeButtonStepperInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1F4D21AA58F3400F6C116 /* ThreeButtonStepperInterfaceController.swift */; };
-		7313758E1ABF3FD20074E2F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D661A2A9525002180DD /* Images.xcassets */; };
-		7313758F1ABF3FD30074E2F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D661A2A9525002180DD /* Images.xcassets */; };
 		731375901ABF3FE70074E2F2 /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
 		731375911ABF3FEA0074E2F2 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 		731375921ABF3FF20074E2F2 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
@@ -204,7 +202,6 @@
 		73A18D5A1A2A9525002180DD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		73A18D5E1A2A9525002180DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73A18D5F1A2A9525002180DD /* PushNotificationPayload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PushNotificationPayload.json; sourceTree = "<group>"; };
-		73A18D661A2A9525002180DD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		73A18D701A2A9525002180DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73A18D711A2A9525002180DD /* Interface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
 		73A18D731A2A9525002180DD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -218,6 +215,7 @@
 		73C7B4B41A2A92E500536D86 /* GratuitousSwift Local copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GratuitousSwift Local copy-Info.plist"; path = "/Users/jeffberg/Documents/SaturdayApps/GratuitousSwift/GratuitousSwift Local copy-Info.plist"; sourceTree = "<absolute>"; };
 		73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepperBillInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/StepperBillInterfaceController.swift"; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
+		73D46AFD1AC7C9B400057185 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
 		73D730D01AB49E4D00172397 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		73D730D11AB49E4D00172397 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
@@ -432,7 +430,7 @@
 				73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */,
 				73A755AE1A87F1E60038E023 /* Crown Scroll Interface */,
 				73A755AB1A87EF310038E023 /* Stepper Interface */,
-				73A18D661A2A9525002180DD /* Images.xcassets */,
+				73D46AFD1AC7C9B400057185 /* Images.xcassets */,
 				73A18D5D1A2A9525002180DD /* Supporting Files */,
 			);
 			path = "GratuitousSwift Watch WatchKit Extension";
@@ -715,7 +713,6 @@
 			files = (
 				731375961ABF40880074E2F2 /* Futura.ttc in Resources */,
 				731375671ABF3D920074E2F2 /* Gratuity WatchKit App.app in Resources */,
-				7313758E1ABF3FD20074E2F2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,7 +730,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7313758F1ABF3FD30074E2F2 /* Images.xcassets in Resources */,
 				73450E991ABF2A91005927F1 /* Futura.ttc in Resources */,
 				73450E791ABF2926005927F1 /* GratuityL WatchKit App.app in Resources */,
 			);

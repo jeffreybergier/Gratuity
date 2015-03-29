@@ -10,22 +10,36 @@
 	<string>GratuitousSwift</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>A5A2D5F28C6BDD9EE2A9FF803841722BB556C9C7</key>
+		<string>https://bitbucket.org/saturdayapps/gratuity.git</string>
 		<key>bd13cce4-38e5-42be-9df0-bbfa65dd9970</key>
 		<string>https://www.jeffburg.com/saturdayappssvn</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>GratuitousSwift/GratuitousSwift.xcodeproj</string>
+	<string>GratuitousSwift.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>A5A2D5F28C6BDD9EE2A9FF803841722BB556C9C7</key>
+		<string>../..</string>
 		<key>bd13cce4-38e5-42be-9df0-bbfa65dd9970</key>
-		<string>../../..</string>
+		<string>../../../../SaturdayApps</string>
 	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/saturdayapps/gratuity.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>bd13cce4-38e5-42be-9df0-bbfa65dd9970</string>
+	<string>A5A2D5F28C6BDD9EE2A9FF803841722BB556C9C7</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A5A2D5F28C6BDD9EE2A9FF803841722BB556C9C7</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Gratuity</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.subversion</string>
