@@ -125,8 +125,29 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
             self.loadingImageGroup?.setHidden(true)
             self.interfaceControllerIsConfigured = true
             
-            //NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "scrollToCorrectRowIfNeeded:", userInfo: nil, repeats: false) // this fixes a bug where scrolling didn't work properly
+            NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "scrollToCorrectRowIfNeeded:", userInfo: nil, repeats: false) // this fixes a bug where scrolling didn't work properly
         }
+    }
+    
+    @objc private func scrollToCorrectRowIfNeeded(timer: NSTimer?) {
+        timer?.invalidate()
+        var currencyAmountToScrollTo: Int
+        switch self.currentContext {
+        case .Bill:
+            currencyAmountToScrollTo = self.dataSource.defaultsManager.billIndexPathRow < self.data.count ? self.dataSource.defaultsManager.billIndexPathRow : self.data.count - 1
+        case .Tip:
+            currencyAmountToScrollTo = self.dataSource.defaultsManager.tipIndexPathRow < self.data.count ? self.dataSource.defaultsManager.billIndexPathRow : self.data.count - 1
+        case .NotSet:
+            currencyAmountToScrollTo = 0
+        }
+        let rowIndexPath = currencyAmountToScrollTo - self.lowestDataIndexInTable
+        println("Scroll to Currency: \(currencyAmountToScrollTo), IndexPath: \(rowIndexPath)")
+        
+        //if self.dataSource.defaultsManager.watchAppRunCount > 1 {
+            if rowIndexPath > 0 && rowIndexPath < self.currencyAmountTable?.numberOfRows {
+                self.currencyAmountTable?.scrollToRowAtIndex(currencyAmountToScrollTo)
+            }
+        //}
     }
     
     private func insertTableRowControllersAtTop(newNumberOfRows: Int) {

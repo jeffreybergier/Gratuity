@@ -94,6 +94,7 @@ class GratuitousUserDefaults: Printable {
     private var _watchAppRunCount: Int?
     var watchAppRunCount: Int {
         set {
+            println("watchAppRunCount Set: \(newValue)")
             _watchAppRunCount = newValue
             self.userDefaults.setInteger(newValue, forKey: Keys.watchAppRunCount)
             self.userDefaults.synchronize()
