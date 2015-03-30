@@ -22,7 +22,7 @@
 		<key>A5A2D5F28C6BDD9EE2A9FF803841722BB556C9C7</key>
 		<string>../..</string>
 		<key>bd13cce4-38e5-42be-9df0-bbfa65dd9970</key>
-		<string>../../../../SaturdayApps</string>
+		<string>../../../SaturdayApps</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/saturdayapps/gratuity.git</string>
