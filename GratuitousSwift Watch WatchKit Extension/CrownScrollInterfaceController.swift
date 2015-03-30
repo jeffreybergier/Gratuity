@@ -143,11 +143,11 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
         let rowIndexPath = currencyAmountToScrollTo - self.lowestDataIndexInTable
         println("Scroll to Currency: \(currencyAmountToScrollTo), IndexPath: \(rowIndexPath)")
         
-        //if self.dataSource.defaultsManager.watchAppRunCount > 1 {
+        if self.dataSource.defaultsManager.watchAppRunCount > 1 {
             if rowIndexPath > 0 && rowIndexPath < self.currencyAmountTable?.numberOfRows {
                 self.currencyAmountTable?.scrollToRowAtIndex(currencyAmountToScrollTo)
             }
-        //}
+        }
     }
     
     private func insertTableRowControllersAtTop(newNumberOfRows: Int) {
