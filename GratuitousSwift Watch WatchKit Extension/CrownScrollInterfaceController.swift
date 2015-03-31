@@ -136,7 +136,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
         case .Bill:
             currencyAmountToScrollTo = self.dataSource.defaultsManager.billIndexPathRow < self.data.count ? self.dataSource.defaultsManager.billIndexPathRow : self.data.count - 1
         case .Tip:
-            currencyAmountToScrollTo = self.dataSource.defaultsManager.tipIndexPathRow < self.data.count ? self.dataSource.defaultsManager.billIndexPathRow : self.data.count - 1
+            currencyAmountToScrollTo = self.dataSource.defaultsManager.tipIndexPathRow < self.data.count ? self.dataSource.defaultsManager.tipIndexPathRow : self.data.count - 1
         case .NotSet:
             currencyAmountToScrollTo = 0
         }
@@ -145,7 +145,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
         
         if self.dataSource.defaultsManager.watchAppRunCount > 1 {
             if rowIndexPath > 0 && rowIndexPath < self.currencyAmountTable?.numberOfRows {
-                self.currencyAmountTable?.scrollToRowAtIndex(currencyAmountToScrollTo)
+                self.currencyAmountTable!.scrollToRowAtIndex(rowIndexPath)
             }
         }
     }
@@ -316,6 +316,9 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                     let billAmount = self.dataSource.defaultsManager.billIndexPathRow
                     let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
                     let idealTip = Int(round(Double(billAmount) * suggestedTipPercentage))
+                    
+                    // write the ideal tip to disk for use later
+                    self.dataSource.defaultsManager.tipIndexPathRow = idealTip
                     
                     // do the math for the table
                     let upperBuffer = 6

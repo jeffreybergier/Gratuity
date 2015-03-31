@@ -55,8 +55,6 @@ class GratuitousUserDefaults: Printable {
         // insert all the new data that was started after version 1.0
         self.userDefaults.setObject(toVersion, forKey: Keys.appVersionString)
         self.userDefaults.setInteger(0, forKey: Keys.watchAppRunCount)
-        self.userDefaults.setBool(true, forKey: Keys.watchAppRunCountShouldBeIncremented)
-        self.userDefaults.setInteger(201, forKey: Keys.numberOfRowsInBillTableForWatch)
         self.userDefaults.setInteger(CorrectWatchInterface.CrownScroller.rawValue, forKey: Keys.correctWatchInterface)
         self.userDefaults.synchronize()
     }
@@ -68,33 +66,14 @@ class GratuitousUserDefaults: Printable {
         self.userDefaults.setInteger(0, forKey: Keys.tipIndexPathRow)
         self.userDefaults.setInteger(0, forKey: Keys.watchAppRunCount)
         self.userDefaults.setDouble(0.2, forKey: Keys.suggestedTipPercentage)
-        self.userDefaults.setInteger(201, forKey: Keys.numberOfRowsInBillTableForWatch)
-        self.userDefaults.setBool(true, forKey: Keys.watchAppRunCountShouldBeIncremented)
         self.userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: Keys.overrideCurrencySymbol)
         self.userDefaults.setInteger(CorrectWatchInterface.CrownScroller.rawValue, forKey: Keys.correctWatchInterface)
         self.userDefaults.synchronize()
     }
     
-    private var _watchAppRunCountShouldBeIncremented: Bool?
-    var watchAppRunCountShouldBeIncremented: Bool {
-        set {
-            _watchAppRunCountShouldBeIncremented = newValue
-            self.userDefaults.setBool(newValue, forKey: Keys.watchAppRunCountShouldBeIncremented)
-            self.userDefaults.synchronize()
-        }
-        get {
-            if let watchAppRunCountShouldBeIncremented = _watchAppRunCountShouldBeIncremented {
-                return watchAppRunCountShouldBeIncremented
-            } else {
-                return self.userDefaults.boolForKey(Keys.watchAppRunCountShouldBeIncremented) !! true
-            }
-        }
-    }
-    
     private var _watchAppRunCount: Int?
     var watchAppRunCount: Int {
         set {
-            println("watchAppRunCount Set: \(newValue)")
             _watchAppRunCount = newValue
             self.userDefaults.setInteger(newValue, forKey: Keys.watchAppRunCount)
             self.userDefaults.synchronize()
@@ -124,22 +103,6 @@ class GratuitousUserDefaults: Printable {
                 return billIndexPathRow
             } else {
                 return self.userDefaults.integerForKey(Keys.billIndexPathRow) !! 26
-            }
-        }
-    }
-    
-    private var _numberOfRowsInBillTableForWatch: Int?
-    var numberOfRowsInBillTableForWatch: Int {
-        set {
-            _numberOfRowsInBillTableForWatch = newValue
-            self.userDefaults.setInteger(newValue, forKey: Keys.numberOfRowsInBillTableForWatch)
-            self.userDefaults.synchronize()
-        }
-        get {
-            if let numberOfRowsInBillTableForWatch = _numberOfRowsInBillTableForWatch {
-                return numberOfRowsInBillTableForWatch
-            } else {
-                return self.userDefaults.integerForKey(Keys.numberOfRowsInBillTableForWatch) !! 201
             }
         }
     }
@@ -231,7 +194,6 @@ class GratuitousUserDefaults: Printable {
         static let appVersionString = "appVersionString"
         static let watchAppRunCount = "watchAppRunCount"
         static let correctWatchInterface = "correctWatchInterface"
-        static let numberOfRowsInBillTableForWatch = "numberOfRowsInBillTableForWatch"
-        static let watchAppRunCountShouldBeIncremented = "watchAppRunCountShouldBeIncremented"
+        //static let numberOfRowsInBillTableForWatch = "numberOfRowsInBillTableForWatch"
     }
 }

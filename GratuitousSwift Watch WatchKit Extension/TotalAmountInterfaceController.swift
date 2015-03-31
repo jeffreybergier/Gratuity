@@ -101,9 +101,9 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
             self.billAmountGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             
             // we made it to the final step. time to increment the runcount
-            if self.dataSource.defaultsManager.watchAppRunCountShouldBeIncremented == true {
+            if self.dataSource.watchAppRunCountShouldBeIncremented == true {
                 self.dataSource.defaultsManager.watchAppRunCount++
-                self.dataSource.defaultsManager.watchAppRunCountShouldBeIncremented = false // don't want to increment this more than once per runtime.
+                self.dataSource.watchAppRunCountShouldBeIncremented = false // don't want to increment this more than once per runtime.
             }
             
             self.backgroundImageGroup?.setHidden(true)

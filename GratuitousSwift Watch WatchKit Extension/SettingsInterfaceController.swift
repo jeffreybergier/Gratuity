@@ -11,14 +11,11 @@ import WatchKit
 class SettingsInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var suggestedTipTitleLabel: WKInterfaceLabel?
-    @IBOutlet private weak var maximumBillTitleLabel: WKInterfaceLabel? // no longer connected
     @IBOutlet private weak var currencySymbolTitleLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var suggestedTipSlider: WKInterfaceSlider?
-    @IBOutlet private weak var maximumBillSlider: WKInterfaceSlider? // no longer connected
     
     @IBOutlet private weak var suggestedTipPercentageLabel: WKInterfaceLabel?
-    @IBOutlet private weak var maximumBillAmountLabel: WKInterfaceLabel? // no longer connected
     
     @IBOutlet private weak var currencySymbolLocalLabel: WKInterfaceLabel?
     @IBOutlet private weak var currencySymbolDollarLabel: WKInterfaceLabel?
@@ -28,7 +25,6 @@ class SettingsInterfaceController: WKInterfaceController {
     @IBOutlet private weak var currencySymbolNoneLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var suggestedTipGroup: WKInterfaceGroup?
-    @IBOutlet private weak var maximumBillGroup: WKInterfaceGroup? // no longer connected
     @IBOutlet private weak var currencySymbolLocalGroup: WKInterfaceGroup?
     @IBOutlet private weak var currencySymbolDollarGroup: WKInterfaceGroup?
     @IBOutlet private weak var currencySymbolPoundGroup: WKInterfaceGroup?
@@ -66,9 +62,7 @@ class SettingsInterfaceController: WKInterfaceController {
         dispatch_async(dispatch_get_main_queue()) {
             // set the color of all the labels
             self.suggestedTipTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-            self.maximumBillTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
             self.suggestedTipPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.maximumBillAmountLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
             self.currencySymbolTitleLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
             self.currencySymbolLocalLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
             self.currencySymbolDollarLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
@@ -79,7 +73,6 @@ class SettingsInterfaceController: WKInterfaceController {
             
             // configure the titles
             self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Suggested Tip Percentage", comment: ""), attributes: self.titleTextAttributes))
-            self.maximumBillTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Maximum Bill Amount", comment: ""), attributes: self.titleTextAttributes))
             self.currencySymbolTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Currency Symbol", comment: ""), attributes: self.titleTextAttributes))
             
             // configure the currency selection titles
@@ -92,13 +85,10 @@ class SettingsInterfaceController: WKInterfaceController {
             
             // set the color of the groups that surround the buttons and sliders
             self.suggestedTipGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
-            self.maximumBillGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             self.updateCurrencySymbolUI()
             
             // configure the values that change
             self.suggestedTipSlider?.setValue(Float(round(self.dataSource.defaultsManager.suggestedTipPercentage * 100)))
-            self.maximumBillSlider?.setValue(Float(self.dataSource.defaultsManager.numberOfRowsInBillTableForWatch))
-            self.updateMaximumBillAmountUI()
             self.updateSuggestedTipPercentageUI()
             
             // this probably isn't needed, but no need to run this code a second time.
@@ -108,9 +98,6 @@ class SettingsInterfaceController: WKInterfaceController {
             self.suggestedTipTitleLabel?.setHidden(false)
             self.suggestedTipPercentageLabel?.setHidden(false)
             self.suggestedTipGroup?.setHidden(false)
-            self.maximumBillTitleLabel?.setHidden(false)
-            self.maximumBillAmountLabel?.setHidden(false)
-            self.maximumBillGroup?.setHidden(false)
             self.currencySymbolTitleLabel?.setHidden(false)
             self.currencySymbolLocalGroup?.setHidden(false)
             self.currencySymbolDollarGroup?.setHidden(false)
@@ -122,52 +109,40 @@ class SettingsInterfaceController: WKInterfaceController {
         }
     }
     
-    @IBAction func suggestedTipSliderDidChange(value: Float) {
+    @IBAction private func suggestedTipSliderDidChange(value: Float) {
         let adjustedValue = value / 100
         self.dataSource.defaultsManager.suggestedTipPercentage = Double(adjustedValue)
         self.updateSuggestedTipPercentageUI()
     }
     
-    @IBAction func maximumBillSliderDidChange(value: Float) { // no longer connected
-        let integerValue = Int(round(value))
-        self.dataSource.defaultsManager.numberOfRowsInBillTableForWatch = integerValue
-        self.updateMaximumBillAmountUI()
-    }
-    
-    @IBAction func currencySymbolButtonLocalTapped() {
+    @IBAction private func currencySymbolButtonLocalTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Default
         self.updateCurrencySymbolUI()
     }
     
-    @IBAction func currencySymbolButtonDollarTapped() {
+    @IBAction private func currencySymbolButtonDollarTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Dollar
         self.updateCurrencySymbolUI()
     }
     
-    @IBAction func currencySymbolButtonPoundTapped() {
+    @IBAction private func currencySymbolButtonPoundTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Pound
         self.updateCurrencySymbolUI()
     }
     
-    @IBAction func currencySymbolButtonEuroTapped() {
+    @IBAction private func currencySymbolButtonEuroTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Euro
         self.updateCurrencySymbolUI()
     }
     
-    @IBAction func currencySymbolButtonYenTapped() {
+    @IBAction private func currencySymbolButtonYenTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Yen
         self.updateCurrencySymbolUI()
     }
     
-    @IBAction func currencySymbolButtonNoneTapped() {
+    @IBAction private func currencySymbolButtonNoneTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.None
         self.updateCurrencySymbolUI()
-    }
-    
-    private func updateMaximumBillAmountUI() {
-        let maximumBillAmount = self.dataSource.defaultsManager.numberOfRowsInBillTableForWatch - 1
-        let maximumBillAmountCurrencyString = self.dataSource.currencyStringFromInteger(maximumBillAmount)
-        self.maximumBillAmountLabel?.setAttributedText(NSAttributedString(string: maximumBillAmountCurrencyString, attributes: self.valueTextAttributes))
     }
     
     private func updateSuggestedTipPercentageUI() {
