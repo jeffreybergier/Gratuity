@@ -18,6 +18,9 @@
                             <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
                         </group>
                     </items>
+                    <connections>
+                        <outlet property="animationImageView" destination="oOu-x6-Qgs" id="Lc9-4x-gnC"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="-231" y="316.5"/>

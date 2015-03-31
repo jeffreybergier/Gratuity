@@ -10,12 +10,18 @@ import WatchKit
 
 class AppDelegateInterfaceController: WKInterfaceController {
     
+    @IBOutlet private weak var animationImageView: WKInterfaceImage?
+    
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     
     override func willActivate() {
         super.willActivate()
         
-        //check my server for which UI the watch should use
+        // start animating
+        self.animationImageView?.setImageNamed("gratuityCap4-")
+        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: 10)
+        
+        // check my server for which UI the watch should use
         self.checkWatchUIJSON()
         
         // configure the timer to fix an issue where sometimes the UI would not push to the correct interface controller.
