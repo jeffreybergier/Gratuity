@@ -18,6 +18,13 @@ class AppDelegateInterfaceController: WKInterfaceController {
         //check my server for which UI the watch should use
         self.checkWatchUIJSON()
         
+        // configure the timer to fix an issue where sometimes the UI would not push to the correct interface controller.
+        let timer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "delayPushAppropriateInterfaceController:", userInfo: nil, repeats: false)
+    }
+    
+    @objc private func delayPushAppropriateInterfaceController(timer: NSTimer?) {
+        timer?.invalidate()
+        
         switch self.dataSource.defaultsManager.correctWatchInterface {
         case .CrownScroller:
             self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)
