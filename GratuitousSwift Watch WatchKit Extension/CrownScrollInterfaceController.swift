@@ -236,7 +236,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                 // update the table
                 let currentNumberOfRowsInTable = tableView.numberOfRows
                 let lowestNumber = self.lowestDataIndexInTable
-                let highestNumber = currentNumberOfRowsInTable + newNumberOfRows
+                let highestNumber = currentNumberOfRowsInTable + newNumberOfRows + lowestNumber
                 for index in currentNumberOfRowsInTable ..< currentNumberOfRowsInTable + newNumberOfRows {
                     let correctedIndex = index + self.highestDataIndexInTable - currentNumberOfRowsInTable
                     if correctedIndex < self.data.count {
@@ -360,17 +360,15 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     }
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+        let adjustedIndex = rowIndex + self.lowestDataIndexInTable
+        let currencyAmount = self.data[adjustedIndex]
+        println("DidSelectRowIndex \(rowIndex), Adjusted Index \(adjustedIndex), Currency Amount: \(currencyAmount)")
         switch self.currentContext {
         case .Bill:
-            let adjustedIndex = rowIndex + self.lowestDataIndexInTable
-            println("DidSelectRowIndex \(rowIndex), Adjusted Index \(adjustedIndex)")
-            let newBillAmount = self.data[adjustedIndex]
-            self.dataSource.defaultsManager.billIndexPathRow = newBillAmount
+            self.dataSource.defaultsManager.billIndexPathRow = currencyAmount
             self.pushControllerWithName("CrownScrollTipInterfaceController", context: CrownScrollerInterfaceContext.Tip.rawValue)
         case .Tip:
-            let adjustedIndex = rowIndex + self.lowestDataIndexInTable
-            let newTipAmount = self.data[adjustedIndex]
-            self.dataSource.defaultsManager.tipIndexPathRow = newTipAmount
+            self.dataSource.defaultsManager.tipIndexPathRow = currencyAmount
             self.pushControllerWithName("TotalAmountInterfaceController", context: nil)
         default:
             fatalError("CrownScrollBillInterfaceController: didSelectRowAtIndex called when currentContext was .NotSet")
