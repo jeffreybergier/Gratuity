@@ -161,12 +161,11 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                     switch self.currentContext {
                     case .Bill:
                         tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
-                        if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
+                        if let row = tableView.rowControllerAtIndex(index) as? CrownScrollBillTableRowController {
                             if row.interfaceIsConfigured == false {
                                 row.configureInterface()
                             }
-                            //row.updateCurrencyAmountLabel(value)
-                            row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
+                            row.updateCurrencyAmountLabel(value)
                         }
                     case .Tip:
                         tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollTipTableRowController")
@@ -174,11 +173,11 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                         let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
                         let idealTip = Int(round(Double(billAmount) * suggestedTipPercentage))
                         let star = idealTip == value ? false : true
-                        if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
+                        if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTipTableRowController {
                             if row.interfaceIsConfigured == false {
                                 row.configureInterface()
                             }
-                            row.setCurrencyLabels(bigCurrency: value, littlePercentage: GratuitousWatchDataSource.optionalDivision(top: Double(value), bottom: Double(billAmount)), starFlag: star)
+                            row.setMoneyAmountLabel(tipAmount: value, billAmount: billAmount, starFlag: star)
                         }
                     default:
                         break
@@ -206,11 +205,11 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                     if correctedIndex < self.data.count {
                         let value = self.data[correctedIndex]
                         tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
-                        if let row = self.currencyAmountTable?.rowControllerAtIndex(index) as? CrownScrollTableRowController {
+                        if let row = self.currencyAmountTable?.rowControllerAtIndex(index) as? CrownScrollBillTableRowController {
                             if row.interfaceIsConfigured == false {
                                 row.configureInterface()
                             }
-                            row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
+                            row.updateCurrencyAmountLabel(value)
                         }
                     } else {
                         break
@@ -244,11 +243,11 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                         tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollTipTableRowController")
                         let value = self.data[correctedIndex]
                         let star = idealTip == value ? false : true
-                        if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
+                        if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTipTableRowController {
                             if row.interfaceIsConfigured == false {
                                 row.configureInterface()
                             }
-                            row.setCurrencyLabels(bigCurrency: value, littlePercentage: GratuitousWatchDataSource.optionalDivision(top: Double(value), bottom: Double(billAmount)), starFlag: star)
+                            row.setMoneyAmountLabel(tipAmount: value, billAmount: billAmount, starFlag: star)
                         }
                     } else {
                         break
@@ -285,11 +284,11 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                         if correctedIndex < self.data.count {
                             let value = self.data[correctedIndex]
                             tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
-                            if let row = self.currencyAmountTable?.rowControllerAtIndex(index) as? CrownScrollTableRowController {
+                            if let row = self.currencyAmountTable?.rowControllerAtIndex(index) as? CrownScrollBillTableRowController {
                                 if row.interfaceIsConfigured == false {
                                     row.configureInterface()
                                 }
-                                row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
+                                row.updateCurrencyAmountLabel(value)
                             }
                         } else {
                             //dataWithinRange = false
@@ -334,11 +333,11 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                             tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollTipTableRowController")
                             let value = self.data[correctedIndex]
                             let star = idealTip == value ? false : true
-                            if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
+                            if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTipTableRowController {
                                 if row.interfaceIsConfigured == false {
                                     row.configureInterface()
                                 }
-                                row.setCurrencyLabels(bigCurrency: value, littlePercentage: GratuitousWatchDataSource.optionalDivision(top: Double(value), bottom: Double(billAmount)), starFlag: star)
+                                row.setMoneyAmountLabel(tipAmount: value, billAmount: billAmount, starFlag: star)
                             }
                         } else {
                             self.largerButtonGroup?.setHidden(true)

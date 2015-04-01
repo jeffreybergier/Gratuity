@@ -60,7 +60,7 @@
                         </group>
                         <table alignment="left" id="QFo-p1-L9c">
                             <items>
-                                <tableRow identifier="CrownScrollBillTableRowController" id="f8C-yj-lVF" customClass="CrownScrollTableRowController" customModule="Gratuity_WatchKit_Extension">
+                                <tableRow identifier="CrownScrollBillTableRowController" id="f8C-yj-lVF" customClass="CrownScrollBillTableRowController" customModule="Gratuity_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="dyi-Yc-WY6">
                                         <items>
                                             <group width="1" height="1" alignment="left" radius="7" id="PM8-Zg-BFX">
@@ -78,8 +78,8 @@
                                         <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                                     </group>
                                     <connections>
-                                        <outlet property="bigCurrencyLabel" destination="bl9-mQ-OlF" id="Cxn-Di-FTW"/>
-                                        <outlet property="outlineGroup" destination="dyi-Yc-WY6" id="inq-fJ-jQC"/>
+                                        <outlet property="moneyAmountLabel" destination="bl9-mQ-OlF" id="ypr-PV-tdU"/>
+                                        <outlet property="outlineGroup" destination="dyi-Yc-WY6" id="6ly-SA-Xjf"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -712,7 +712,7 @@
                         </group>
                         <table alignment="left" id="vYB-zM-w3c">
                             <items>
-                                <tableRow identifier="CrownScrollTipTableRowController" id="BF0-AS-4us" customClass="CrownScrollTableRowController" customModule="Gratuity_WatchKit_Extension">
+                                <tableRow identifier="CrownScrollTipTableRowController" id="BF0-AS-4us" customClass="CrownScrollTipTableRowController" customModule="Gratuity_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="XeW-gt-RW7">
                                         <items>
                                             <group width="1" height="1" alignment="left" radius="7" id="Nzq-VL-dEN">
@@ -737,10 +737,10 @@
                                         <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                                     </group>
                                     <connections>
-                                        <outlet property="bigCurrencyLabel" destination="iBT-Vj-YJq" id="GaY-bp-i2S"/>
-                                        <outlet property="outlineGroup" destination="XeW-gt-RW7" id="rcs-LY-3V3"/>
-                                        <outlet property="smallPercentageLabel" destination="GaG-7f-ROu" id="k2M-Bo-1by"/>
-                                        <outlet property="starLabel" destination="zfx-6K-BaT" id="nVS-Nb-MqZ"/>
+                                        <outlet property="outlineGroup" destination="XeW-gt-RW7" id="1iB-rz-H80"/>
+                                        <outlet property="starLabel" destination="zfx-6K-BaT" id="tGe-9D-qWY"/>
+                                        <outlet property="tipAmountLabel" destination="iBT-Vj-YJq" id="sbX-oe-G56"/>
+                                        <outlet property="tipPercentageLabelSmall" destination="GaG-7f-ROu" id="fBd-R1-fga"/>
                                     </connections>
                                 </tableRow>
                             </items>
