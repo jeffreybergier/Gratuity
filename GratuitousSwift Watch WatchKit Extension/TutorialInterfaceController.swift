@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class TutorialInterfaceController: WKInterfaceController {
+class TutorialInterfaceController: GratuitousMenuInterfaceController {
     
     @IBOutlet private weak var scrollingAnimationImageView: WKInterfaceImage?
     @IBOutlet private weak var instructionTextLabel: WKInterfaceLabel?
@@ -17,6 +17,7 @@ class TutorialInterfaceController: WKInterfaceController {
     
     private var animationTimer: NSTimer?
     private var interfaceControllerIsConfigured = false
+    private var animationsShouldStartAfterViewAlreadytConfigured = false
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
@@ -30,6 +31,12 @@ class TutorialInterfaceController: WKInterfaceController {
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
             dispatch_async(backgroundQueue) {
                 self.configureInterfaceController()
+            }
+        } else {
+            if self.animationsShouldStartAfterViewAlreadytConfigured == true {
+                self.animationsShouldStartAfterViewAlreadytConfigured = false
+                self.animationTimer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "repeatAnimationTimer:", userInfo: nil, repeats: true)
+                self.animationTimer?.fire()
             }
         }
     }
@@ -82,6 +89,7 @@ class TutorialInterfaceController: WKInterfaceController {
     override func didDeactivate() {
         super.didDeactivate()
         
+        self.animationsShouldStartAfterViewAlreadytConfigured = true
         self.animationTimer?.invalidate()
         self.animationTimer = nil
     }

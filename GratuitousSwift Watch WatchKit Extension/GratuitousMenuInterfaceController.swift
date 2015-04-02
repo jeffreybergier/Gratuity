@@ -21,12 +21,13 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
         if self.interfaceControllerIsConfigured == false {
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
             dispatch_async(backgroundQueue) {
-                // configure the menu
-                self.configureMenuItem1()
-                self.configureMenuItem2()
-                self.configureMenuItem3()
-                self.configureMenuItem4()
                 dispatch_async(dispatch_get_main_queue()) {
+                    // configure the menu
+                    self.configureMenuItem1()
+                    self.configureMenuItem2()
+                    self.configureMenuItem3()
+                    self.configureMenuItem4()
+                    
                     self.interfaceControllerIsConfigured = true
                 }
             }
@@ -35,12 +36,12 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
     
     func configureMenuItem1() {
         // defaults to switch UI to three button stepper bill
-        self.addMenuItemWithItemIcon(WKMenuItemIcon.Shuffle, title: NSLocalizedString("Switch", comment: ""), action: MenuItemTarget.UserChoseMenuItem1.rawValue)
+        //self.addMenuItemWithItemIcon(WKMenuItemIcon.Shuffle, title: NSLocalizedString("Switch", comment: ""), action: MenuItemTarget.UserChoseMenuItem1.rawValue)
     }
     
     func configureMenuItem2() {
         // defaults to start over button
-        self.addMenuItemWithItemIcon(WKMenuItemIcon.Repeat, title: NSLocalizedString("Start Over", comment: ""), action: MenuItemTarget.UserChoseMenuItem2.rawValue)
+        //self.addMenuItemWithItemIcon(WKMenuItemIcon.Repeat, title: NSLocalizedString("Start Over", comment: ""), action: MenuItemTarget.UserChoseMenuItem2.rawValue)
     }
     
     func configureMenuItem3() {
