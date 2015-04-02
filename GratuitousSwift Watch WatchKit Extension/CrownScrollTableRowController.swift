@@ -30,6 +30,8 @@ class CrownScrollTableRowController: NSObject {
         // set the percentage if its set
         if let littlePercentage = littlePercentage {
             self.smallPercentageLabel?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(littlePercentage), attributes: self.titleTextAttributes))
+        } else {
+            self.smallPercentageLabel?.setAttributedText(NSAttributedString(string: "– %", attributes: self.titleTextAttributes))
         }
     }
     
