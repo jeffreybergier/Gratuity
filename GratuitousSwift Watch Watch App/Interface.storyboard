@@ -5,6 +5,47 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
+        <!--Tutorial-->
+        <scene sceneID="2NX-ad-ppD">
+            <objects>
+                <controller identifier="TutorialInterfaceController" title="Tutorial" hidesWhenLoading="NO" id="a2X-ms-HfZ" customClass="TutorialInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Use the Digital Crown to scroll" numberOfLines="0" id="AO3-9g-1vp">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" type="system" pointSize="22"/>
+                        </label>
+                        <imageView width="1" alignment="left" image="scrollAnimation-0" contentMode="TopLeft" id="9EC-v6-jgG"/>
+                        <group alignment="left" id="G1f-M9-tj4">
+                            <items>
+                                <button alignment="left" id="Xax-fP-BA0">
+                                    <group key="contentGroup" width="1" alignment="left" id="4Oz-O2-G1p">
+                                        <items>
+                                            <label height="35" alignment="center" verticalAlignment="center" text="Get Started" textAlignment="center" id="boI-vy-TdC">
+                                                <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="26"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="didTapGetStartedButton" destination="a2X-ms-HfZ" id="tBw-Gx-zWF"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="getStartedButtonGroup" destination="G1f-M9-tj4" id="twN-K2-EM0"/>
+                        <outlet property="getStartedButtonLabel" destination="boI-vy-TdC" id="gWQ-lg-ZAn"/>
+                        <outlet property="instructionTextLabel" destination="AO3-9g-1vp" id="zoE-Dj-YP4"/>
+                        <outlet property="scrollingAnimationImageView" destination="9EC-v6-jgG" id="Zsx-aS-YLE"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-171" y="342"/>
+        </scene>
         <!--App Delegate Interface Controller-->
         <scene sceneID="MVV-xz-nNc">
             <objects>
@@ -23,7 +64,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-231" y="316.5"/>
+            <point key="canvasLocation" x="-379" y="340"/>
         </scene>
         <!--Bill Amount-->
         <scene sceneID="t1K-MZ-tcM">
@@ -60,7 +101,7 @@
                         </group>
                         <table alignment="left" id="QFo-p1-L9c">
                             <items>
-                                <tableRow identifier="CrownScrollBillTableRowController" id="f8C-yj-lVF" customClass="CrownScrollBillTableRowController" customModule="Gratuity_WatchKit_Extension">
+                                <tableRow identifier="CrownScrollBillTableRowController" id="f8C-yj-lVF" customClass="CrownScrollTableRowController" customModule="Gratuity_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="dyi-Yc-WY6">
                                         <items>
                                             <group width="1" height="1" alignment="left" radius="7" id="PM8-Zg-BFX">
@@ -78,8 +119,8 @@
                                         <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                                     </group>
                                     <connections>
-                                        <outlet property="moneyAmountLabel" destination="bl9-mQ-OlF" id="ypr-PV-tdU"/>
-                                        <outlet property="outlineGroup" destination="dyi-Yc-WY6" id="6ly-SA-Xjf"/>
+                                        <outlet property="bigCurrencyLabel" destination="bl9-mQ-OlF" id="w09-ea-dog"/>
+                                        <outlet property="outlineGroup" destination="dyi-Yc-WY6" id="HI1-8L-4sJ"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -712,7 +753,7 @@
                         </group>
                         <table alignment="left" id="vYB-zM-w3c">
                             <items>
-                                <tableRow identifier="CrownScrollTipTableRowController" id="BF0-AS-4us" customClass="CrownScrollTipTableRowController" customModule="Gratuity_WatchKit_Extension">
+                                <tableRow identifier="CrownScrollTipTableRowController" id="BF0-AS-4us" customClass="CrownScrollTableRowController" customModule="Gratuity_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="XeW-gt-RW7">
                                         <items>
                                             <group width="1" height="1" alignment="left" radius="7" id="Nzq-VL-dEN">
@@ -737,10 +778,10 @@
                                         <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                                     </group>
                                     <connections>
-                                        <outlet property="outlineGroup" destination="XeW-gt-RW7" id="1iB-rz-H80"/>
-                                        <outlet property="starLabel" destination="zfx-6K-BaT" id="tGe-9D-qWY"/>
-                                        <outlet property="tipAmountLabel" destination="iBT-Vj-YJq" id="sbX-oe-G56"/>
-                                        <outlet property="tipPercentageLabelSmall" destination="GaG-7f-ROu" id="fBd-R1-fga"/>
+                                        <outlet property="bigCurrencyLabel" destination="iBT-Vj-YJq" id="BKc-6c-JNd"/>
+                                        <outlet property="outlineGroup" destination="XeW-gt-RW7" id="IaS-nU-OLu"/>
+                                        <outlet property="smallPercentageLabel" destination="GaG-7f-ROu" id="dUT-po-a2E"/>
+                                        <outlet property="starLabel" destination="zfx-6K-BaT" id="8HZ-wK-9Jv"/>
                                     </connections>
                                 </tableRow>
                             </items>
