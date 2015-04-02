@@ -54,7 +54,7 @@ class GratuitousUserDefaults: Printable {
         
         // insert all the new data that was started after version 1.0
         self.userDefaults.setObject(toVersion, forKey: Keys.appVersionString)
-        self.userDefaults.setInteger(0, forKey: Keys.watchAppRunCount)
+        self.userDefaults.setBool(true, forKey: Keys.showTutorialAtLaunch)
         self.userDefaults.setInteger(CorrectWatchInterface.CrownScroller.rawValue, forKey: Keys.correctWatchInterface)
         self.userDefaults.synchronize()
     }
@@ -64,25 +64,25 @@ class GratuitousUserDefaults: Printable {
         self.userDefaults.setObject(currentAppVersion, forKey: Keys.appVersionString)
         self.userDefaults.setInteger(25, forKey: Keys.billIndexPathRow)
         self.userDefaults.setInteger(0, forKey: Keys.tipIndexPathRow)
-        self.userDefaults.setInteger(0, forKey: Keys.watchAppRunCount)
+        self.userDefaults.setBool(true, forKey: Keys.showTutorialAtLaunch)
         self.userDefaults.setDouble(0.2, forKey: Keys.suggestedTipPercentage)
         self.userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: Keys.overrideCurrencySymbol)
         self.userDefaults.setInteger(CorrectWatchInterface.CrownScroller.rawValue, forKey: Keys.correctWatchInterface)
         self.userDefaults.synchronize()
     }
     
-    private var _watchAppRunCount: Int?
-    var watchAppRunCount: Int {
+    private var _showTutorialAtLaunch: Bool?
+    var showTutorialAtLaunch: Bool {
         set {
-            _watchAppRunCount = newValue
-            self.userDefaults.setInteger(newValue, forKey: Keys.watchAppRunCount)
+            _showTutorialAtLaunch = newValue
+            self.userDefaults.setBool(true, forKey: Keys.showTutorialAtLaunch)
             self.userDefaults.synchronize()
         }
         get {
-            if let watchAppRunCount = _watchAppRunCount {
-                return watchAppRunCount
+            if let showTutorialAtLaunch = _showTutorialAtLaunch {
+                return showTutorialAtLaunch
             } else {
-                return self.userDefaults.integerForKey(Keys.watchAppRunCount) !! 0
+                return self.userDefaults.boolForKey(Keys.showTutorialAtLaunch) !! true
             }
         }
     }
@@ -192,7 +192,7 @@ class GratuitousUserDefaults: Printable {
         
         // version 1.2 keys
         static let appVersionString = "appVersionString"
-        static let watchAppRunCount = "watchAppRunCount"
+        static let showTutorialAtLaunch = "showTutorialAtLaunch"
         static let correctWatchInterface = "correctWatchInterface"
         //static let numberOfRowsInBillTableForWatch = "numberOfRowsInBillTableForWatch"
     }

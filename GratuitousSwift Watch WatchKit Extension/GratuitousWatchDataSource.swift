@@ -16,7 +16,6 @@ class GratuitousWatchDataSource {
     // If a value is requested and the isntance variable has never been set, the value is read from NSUserDefaults.
     
     let defaultsManager = GratuitousUserDefaults()
-    var watchAppRunCountShouldBeIncremented = true // this is true on launch. If the user gets all the way to the final screen, it changes to false so we can increment the runcount in NSUserDefaults.
     private let currencyFormatter = NSNumberFormatter()
     
     init() {
