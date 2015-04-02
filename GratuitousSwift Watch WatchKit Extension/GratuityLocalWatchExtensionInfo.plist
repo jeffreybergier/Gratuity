@@ -36,7 +36,7 @@
 	<string>$(PRODUCT_MODULE_NAME).InterfaceController</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Futura.ttc</string>
+		<string>Futura-Medium.ttf</string>
 	</array>
 	<key>Fabric</key>
 	<dict>

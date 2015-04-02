@@ -75,7 +75,7 @@ class GratuitousUserDefaults: Printable {
     var showTutorialAtLaunch: Bool {
         set {
             _showTutorialAtLaunch = newValue
-            self.userDefaults.setBool(true, forKey: Keys.showTutorialAtLaunch)
+            self.userDefaults.setBool(newValue, forKey: Keys.showTutorialAtLaunch)
             self.userDefaults.synchronize()
         }
         get {

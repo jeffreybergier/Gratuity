@@ -39,8 +39,6 @@ class TutorialInterfaceController: WKInterfaceController {
             self.animationTimer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "repeatAnimationTimer:", userInfo: nil, repeats: true)
             self.animationTimer?.fire()
             
-            let font = GratuitousUIColor.WatchFonts.titleText[NSFontAttributeName]
-            
             self.setTitle(NSLocalizedString("Tutorial", comment: ""))
             
             self.instructionTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
@@ -48,7 +46,7 @@ class TutorialInterfaceController: WKInterfaceController {
             
             self.getStartedButtonGroup?.setBackgroundColor(GratuitousUIColor.lightBackgroundColor())
             self.getStartedButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.getStartedButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Get Started", comment: ""), attributes: self.largerButtonTextAttributes))
+            self.getStartedButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Get Started", comment: ""), attributes: self.titleTextAttributes))
             
             self.interfaceControllerIsConfigured = true
         }

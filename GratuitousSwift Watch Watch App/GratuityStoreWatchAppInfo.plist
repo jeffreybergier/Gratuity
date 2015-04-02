@@ -33,7 +33,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Futura.ttc</string>
+		<string>Futura-Medium.ttf</string>
 	</array>
 </dict>
 </plist>

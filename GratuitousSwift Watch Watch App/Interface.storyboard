@@ -10,7 +10,7 @@
             <objects>
                 <controller identifier="TutorialInterfaceController" title="Tutorial" hidesWhenLoading="NO" id="a2X-ms-HfZ" customClass="TutorialInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
-                        <label alignment="left" text="Use the Digital Crown to scroll" numberOfLines="0" id="AO3-9g-1vp">
+                        <label alignment="left" text="Use the Digital Crown to scroll." numberOfLines="0" id="AO3-9g-1vp">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" type="system" pointSize="22"/>
                         </label>

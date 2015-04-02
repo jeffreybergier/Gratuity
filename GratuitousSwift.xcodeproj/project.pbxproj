@@ -26,8 +26,6 @@
 		731375921ABF3FF20074E2F2 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
 		731375941ABF40470074E2F2 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D711A2A9525002180DD /* Interface.storyboard */; };
 		731375951ABF404B0074E2F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D731A2A9525002180DD /* Images.xcassets */; };
-		731375961ABF40880074E2F2 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 73368D111AAB9B7F001C1CC3 /* Futura.ttc */; };
-		731375971ABF40890074E2F2 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 73368D111AAB9B7F001C1CC3 /* Futura.ttc */; };
 		7334770F1A26E85000513F1F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
 		733E8CB41A86F83100B228CB /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
 		733E8CB51A86FBA200B228CB /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
@@ -42,8 +40,6 @@
 		73450E961ABF2A64005927F1 /* ThreeButtonStepperInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1F4D21AA58F3400F6C116 /* ThreeButtonStepperInterfaceController.swift */; };
 		73450E971ABF2A71005927F1 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D711A2A9525002180DD /* Interface.storyboard */; };
 		73450E981ABF2A7E005927F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D731A2A9525002180DD /* Images.xcassets */; };
-		73450E991ABF2A91005927F1 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 73368D111AAB9B7F001C1CC3 /* Futura.ttc */; };
-		73450E9A1ABF2A92005927F1 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 73368D111AAB9B7F001C1CC3 /* Futura.ttc */; };
 		73450E9B1ABF2A97005927F1 /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
 		73450E9C1ABF2A9C005927F1 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 		73450E9D1ABF2B05005927F1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
@@ -85,6 +81,10 @@
 		7382512D19E6473A00CD2B28 /* GratuitousTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */; };
 		73A2169E1ACCE0D1005547A1 /* CrownScrollTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2169D1ACCE0D1005547A1 /* CrownScrollTableRowController.swift */; };
 		73A2169F1ACCE0D1005547A1 /* CrownScrollTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2169D1ACCE0D1005547A1 /* CrownScrollTableRowController.swift */; };
+		73A216A51ACCF4CB005547A1 /* Futura-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73A216A01ACCF2F5005547A1 /* Futura-Medium.ttf */; };
+		73A216A61ACCF4CC005547A1 /* Futura-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73A216A01ACCF2F5005547A1 /* Futura-Medium.ttf */; };
+		73A216A71ACCF4CD005547A1 /* Futura-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73A216A01ACCF2F5005547A1 /* Futura-Medium.ttf */; };
+		73A216A81ACCF4CD005547A1 /* Futura-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73A216A01ACCF2F5005547A1 /* Futura-Medium.ttf */; };
 		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
@@ -167,7 +167,6 @@
 		7313757D1ABF3E4B0074E2F2 /* GratuityStoreWatchExtensionInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GratuityStoreWatchExtensionInfo.plist; sourceTree = "<group>"; };
 		7313757F1ABF3EB10074E2F2 /* Gratuity WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuity WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		7334770E1A26E85000513F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
-		73368D111AAB9B7F001C1CC3 /* Futura.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Futura.ttc; sourceTree = "<group>"; };
 		733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousUserDefaults.swift; path = ../GratuitousSwift/GratuitousUserDefaults.swift; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
 		73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GratuityL WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +207,7 @@
 		73A18D731A2A9525002180DD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchDataSource.swift; sourceTree = "<group>"; };
 		73A2169D1ACCE0D1005547A1 /* CrownScrollTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownScrollTableRowController.swift; sourceTree = "<group>"; };
+		73A216A01ACCF2F5005547A1 /* Futura-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Futura-Medium.ttf"; sourceTree = "<group>"; };
 		73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateInterfaceController.swift; sourceTree = "<group>"; };
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CrownScrollTipInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/CrownScrollTipInterfaceController.swift"; sourceTree = "<group>"; };
@@ -488,7 +488,7 @@
 		73A755B31A87F8E80038E023 /* Common Files */ = {
 			isa = PBXGroup;
 			children = (
-				73368D111AAB9B7F001C1CC3 /* Futura.ttc */,
+				73A216A01ACCF2F5005547A1 /* Futura-Medium.ttf */,
 				733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */,
 				73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */,
 				733A9C851AAB850700BFBACE /* Unused Files */,
@@ -711,7 +711,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				731375961ABF40880074E2F2 /* Futura.ttc in Resources */,
+				73A216A51ACCF4CB005547A1 /* Futura-Medium.ttf in Resources */,
 				731375671ABF3D920074E2F2 /* Gratuity WatchKit App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -720,9 +720,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				731375971ABF40890074E2F2 /* Futura.ttc in Resources */,
 				731375941ABF40470074E2F2 /* Interface.storyboard in Resources */,
 				731375951ABF404B0074E2F2 /* Images.xcassets in Resources */,
+				73A216A61ACCF4CC005547A1 /* Futura-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,7 +730,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73450E991ABF2A91005927F1 /* Futura.ttc in Resources */,
+				73A216A71ACCF4CD005547A1 /* Futura-Medium.ttf in Resources */,
 				73450E791ABF2926005927F1 /* GratuityL WatchKit App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -739,9 +739,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73450E9A1ABF2A92005927F1 /* Futura.ttc in Resources */,
 				73450E971ABF2A71005927F1 /* Interface.storyboard in Resources */,
 				73450E981ABF2A7E005927F1 /* Images.xcassets in Resources */,
+				73A216A81ACCF4CD005547A1 /* Futura-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
