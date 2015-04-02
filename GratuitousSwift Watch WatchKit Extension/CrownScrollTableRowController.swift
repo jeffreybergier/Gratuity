@@ -32,6 +32,7 @@ class CrownScrollTableRowController: NSObject {
             self.smallPercentageLabel?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(littlePercentage), attributes: self.titleTextAttributes))
         } else {
             self.smallPercentageLabel?.setAttributedText(NSAttributedString(string: "– %", attributes: self.titleTextAttributes))
+            self.starLabel?.setHidden(true)
         }
     }
     

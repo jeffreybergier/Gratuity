@@ -21,7 +21,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     
     private let data: [Int] = {
         var array = [Int]()
-        for index in 0 ..< 49 {
+        for index in 0 ..< 101 {
             array.append(index)
         }
         return array
@@ -148,7 +148,6 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     }
     
     private func insertTableRowControllersAtTop(newNumberOfRows: Int) {
-        if self.currentContext != .NotSet {
             if let tableView = self.currencyAmountTable {
                 let currentLowestDataIndex = self.lowestDataIndexInTable
                 let newLowestDataIndex = currentLowestDataIndex - newNumberOfRows > 0 ? currentLowestDataIndex - newNumberOfRows : 0
@@ -162,7 +161,6 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                             if row.interfaceIsConfigured == false {
                                 row.configureInterface()
                             }
-                            //row.updateCurrencyAmountLabel(value)
                             row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
                         }
                     case .Tip:
@@ -178,49 +176,13 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                             row.setCurrencyLabels(bigCurrency: value, littlePercentage: GratuitousWatchDataSource.optionalDivision(top: Double(value), bottom: Double(billAmount)), starFlag: star)
                         }
                     default:
-                        break
+                        fatalError("CrownScrollBillInterfaceController: insertAmountTableRowControllersAtTop called when currentContext was not .NotSet")
                     }
                     // update instance variables
                     self.lowestDataIndexInTable = newLowestDataIndex
                 }
             }
-        } else {
-            fatalError("CrownScrollBillInterfaceController: insertAmountTableRowControllersAtTop called when currentContext was not .NotSet")
-        }
     }
-    
-//    private func insertBillAmountTableRowControllersAtBottom(newNumberOfRows: Int) {
-//        switch self.currentContext {
-//        case .Bill:
-//            if let tableView = self.currencyAmountTable {
-//                // update the table
-//                let currentNumberOfRowsInTable = tableView.numberOfRows
-//                let currentLowestNumber = self.lowestDataIndexInTable
-//                let currentHighestNumber = self.highestDataIndexInTable
-//                let newHighestNumber = currentHighestNumber + newNumberOfRows
-//                for index in currentNumberOfRowsInTable ..< currentNumberOfRowsInTable + newNumberOfRows {
-//                    let correctedIndex = index + currentHighestNumber - currentNumberOfRowsInTable
-//                    if correctedIndex < self.data.count {
-//                        let value = self.data[correctedIndex]
-//                        tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
-//                        if let row = self.currencyAmountTable?.rowControllerAtIndex(index) as? CrownScrollTableRowController {
-//                            if row.interfaceIsConfigured == false {
-//                                row.configureInterface()
-//                            }
-//                            row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
-//                        }
-//                    } else {
-//                        break
-//                    }
-//                }
-//                
-//                // update instance variables
-//                self.highestDataIndexInTable = newHighestNumber < self.data.count ? newHighestNumber : self.data.count - 1
-//            }
-//        default:
-//            fatalError("CrownScrollBillInterfaceController: billTableRowInsertNumber called when currentContext was not .Bill")
-//        }
-//    }
     
     private func insertTableRowControllersAtBottom(newNumberOfRows: Int) {
             if let tableView = self.currencyAmountTable {
@@ -276,25 +238,24 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                 let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
                 let idealTip = Int(round(Double(billAmount) * suggestedTipPercentage))
                 
+                var idealCurrencyAmount: Int
+                switch self.currentContext {
+                case .Bill:
+                    idealCurrencyAmount = billAmount
+                case .Tip:
+                    idealCurrencyAmount = idealTip
+                case .NotSet:
+                    fatalError("CrownScrollBillInterfaceController: configureTableForTheFirstTime called when currentContext was .NotSet")
+                }
+                
                 // write the ideal tip to disk for use later
                 self.dataSource.defaultsManager.tipIndexPathRow = idealTip
                 
                 // do the math for the table
                 let upperBuffer = ScrollInterfaceConstants.upperBufferWithContext(self.currentContext) !! 25
                 let lowerBuffer = ScrollInterfaceConstants.lowerBufferWithContext(self.currentContext) !! 20
-
-                var lowestNumber: Int
-                var highestNumber: Int
-                switch self.currentContext {
-                case .Bill:
-                    lowestNumber = billAmount > lowerBuffer ? billAmount - lowerBuffer - 1 : 0
-                    highestNumber = billAmount + upperBuffer
-                case .Tip:
-                    lowestNumber = idealTip > lowerBuffer ? idealTip - lowerBuffer - 1 : 0
-                    highestNumber = idealTip + upperBuffer
-                case .NotSet:
-                    fatalError("CrownScrollBillInterfaceController: configureTableForTheFirstTime called when currentContext was .NotSet")
-                }
+                let lowestNumber = idealCurrencyAmount > lowerBuffer ? idealCurrencyAmount - lowerBuffer : 0
+                let highestNumber = idealCurrencyAmount + upperBuffer + 1
                 
                 // add the rows to the table
                 for index in 0 ..< highestNumber - lowestNumber {
