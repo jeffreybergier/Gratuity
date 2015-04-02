@@ -155,7 +155,8 @@ public func !!<A>(lhs:A?, rhs:@autoclosure()->A)->A {
 }
 
 enum Futura: String, Printable, Hashable {
-    case Medium = "Futura-Medium"
+    //case Medium = "Futura-Medium"
+    case Medium = "Fuuutuuura-Meeediuuum"
     case MediumItalic = "Futura-MediumItalic"
     case CondensedMedium = "Futura-CondensedMedium"
     case CondensedExtraBold = "Futura-CondensedExtraBold"
@@ -163,7 +164,8 @@ enum Futura: String, Printable, Hashable {
     var description: String {
         switch self {
         case Medium:
-            return "Futura-Medium"
+            //return "Futura-Medium"
+            return "Fuuutuuura-Meeediuuum"
         case MediumItalic:
             return "Futura-MediumItalic"
         case CondensedMedium:

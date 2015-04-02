@@ -72,6 +72,8 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
         self.animationImageView?.setImageNamed("gratuityCap4-")
         self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
         
+        let font = self.titleTextAttributes[NSFontAttributeName]
+        
         if self.interfaceControllerIsConfigured == false {
             // putting this in a background queue allows willActivate to finish, the animation to start.
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)

@@ -4,6 +4,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Fuuutuuura-Meeediuuum.ttf">
+            <string>Fuuutuuura-Meeediuuum</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Tutorial-->
         <scene sceneID="2NX-ad-ppD">
@@ -12,7 +17,7 @@
                     <items>
                         <label alignment="left" text="Use the Digital Crown to scroll" numberOfLines="0" id="AO3-9g-1vp">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="font" type="system" pointSize="22"/>
+                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="22"/>
                         </label>
                         <imageView width="1" alignment="left" image="scrollAnimation-0" contentMode="TopLeft" id="9EC-v6-jgG"/>
                         <group alignment="left" id="G1f-M9-tj4">
