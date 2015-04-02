@@ -21,7 +21,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     
     private let data: [Int] = {
         var array = [Int]()
-        for index in 0 ..< 101 {
+        for index in ScrollInterfaceConstants.dataMin ..< ScrollInterfaceConstants.dataMax {
             array.append(index)
         }
         return array
