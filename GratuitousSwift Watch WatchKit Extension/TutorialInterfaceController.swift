@@ -49,7 +49,7 @@ class TutorialInterfaceController: GratuitousMenuInterfaceController {
             self.setTitle(NSLocalizedString("Tutorial", comment: ""))
             
             self.instructionTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-            self.instructionTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Use the Digital Crown to scroll.", comment: ""), attributes: self.titleTextAttributes))
+            self.instructionTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Use the Digital Crown to scroll", comment: ""), attributes: self.titleTextAttributes))
             
             self.getStartedButtonGroup?.setBackgroundColor(GratuitousUIColor.lightBackgroundColor())
             self.getStartedButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())

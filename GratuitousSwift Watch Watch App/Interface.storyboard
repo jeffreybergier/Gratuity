@@ -10,7 +10,7 @@
             <objects>
                 <controller identifier="TutorialInterfaceController" title="Tutorial" hidesWhenLoading="NO" id="a2X-ms-HfZ" customClass="TutorialInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
-                        <label alignment="left" text="Use the Digital Crown to scroll." numberOfLines="0" id="AO3-9g-1vp">
+                        <label alignment="left" text="Use the Digital Crown to scroll" numberOfLines="0" id="AO3-9g-1vp">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" type="system" pointSize="22"/>
                         </label>
@@ -552,21 +552,27 @@
             </objects>
             <point key="canvasLocation" x="349" y="565"/>
         </scene>
-        <!--Dismiss Settings-->
+        <!--Close Settings-->
         <scene sceneID="N6L-dJ-mY2">
             <objects>
-                <controller identifier="SettingsInterfaceController" title="Dismiss Settings" hidesWhenLoading="NO" id="ffT-6F-euT" customClass="SettingsInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                <controller identifier="SettingsInterfaceController" title="Close Settings" hidesWhenLoading="NO" id="ffT-6F-euT" customClass="SettingsInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="h5X-jF-VuH">
+                        <group width="1" height="1" alignment="left" hidden="YES" contentMode="scaleAspectFit" layout="vertical" id="h5X-jF-VuH">
                             <items>
                                 <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="VeI-ZN-ObW"/>
                                 <imageView alignment="center" image="LaunchBG" contentMode="top" id="YXD-ok-qWP"/>
                             </items>
                             <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
                         </group>
-                        <label alignment="left" hidden="YES" text="Suggest Tip Percentage" numberOfLines="0" id="nRC-5a-8ct"/>
-                        <label alignment="right" hidden="YES" text="20%" textAlignment="right" id="5An-PC-g8o"/>
-                        <group width="1" alignment="left" hidden="YES" id="EcG-wP-xkF">
+                        <label alignment="left" text="Suggested Tip Percentage" numberOfLines="0" id="nRC-5a-8ct">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" type="system" pointSize="22"/>
+                        </label>
+                        <label alignment="right" text="– %" textAlignment="right" id="5An-PC-g8o">
+                            <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" type="system" pointSize="32"/>
+                        </label>
+                        <group width="1" alignment="left" id="EcG-wP-xkF">
                             <items>
                                 <group alignment="left" radius="7" id="pZT-oz-Y33">
                                     <items>
@@ -580,16 +586,22 @@
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </group>
                             </items>
-                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.39215686274509803" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
-                        <label alignment="left" hidden="YES" text="Currency Symbol" numberOfLines="0" id="MCm-nN-GLi"/>
-                        <group alignment="left" hidden="YES" id="tDl-Kq-9qy">
+                        <label alignment="left" text="Currency Symbol" numberOfLines="0" id="MCm-nN-GLi">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" type="system" pointSize="22"/>
+                        </label>
+                        <group alignment="left" id="tDl-Kq-9qy">
                             <items>
                                 <button alignment="left" id="Nfu-aV-Rvo">
                                     <group key="contentGroup" width="1" alignment="left" id="NCo-hy-MML">
                                         <items>
-                                            <label height="35" alignment="left" verticalAlignment="center" text="Local Currency" textAlignment="left" id="mnK-Ws-IhH"/>
+                                            <label height="35" alignment="left" verticalAlignment="center" text="Local" textAlignment="left" id="mnK-Ws-IhH">
+                                                <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="32"/>
+                                            </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
@@ -599,15 +611,18 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
-                        <group alignment="left" hidden="YES" id="L24-oQ-Y5W">
+                        <group alignment="left" id="L24-oQ-Y5W">
                             <items>
                                 <button alignment="left" id="wSy-xE-5Ud">
                                     <group key="contentGroup" width="1" alignment="left" id="LLM-bb-dNG">
                                         <items>
-                                            <label height="35" alignment="left" verticalAlignment="center" text="$" textAlignment="left" id="s2Q-zU-SDp"/>
+                                            <label height="35" alignment="left" verticalAlignment="center" text="$" textAlignment="left" id="s2Q-zU-SDp">
+                                                <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="32"/>
+                                            </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
@@ -617,15 +632,18 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
-                        <group alignment="left" hidden="YES" id="N2Z-SX-3vI">
+                        <group alignment="left" id="N2Z-SX-3vI">
                             <items>
                                 <button alignment="left" id="BtP-Gp-3Dp">
                                     <group key="contentGroup" width="1" alignment="left" id="Yfj-68-6ZC">
                                         <items>
-                                            <label height="35" alignment="left" verticalAlignment="center" text="£" textAlignment="left" id="3qZ-4S-LId"/>
+                                            <label height="35" alignment="left" verticalAlignment="center" text="£" textAlignment="left" id="3qZ-4S-LId">
+                                                <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="32"/>
+                                            </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
@@ -635,15 +653,18 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
-                        <group alignment="left" hidden="YES" id="Rc9-Ue-Rkd">
+                        <group alignment="left" id="Rc9-Ue-Rkd">
                             <items>
                                 <button alignment="left" id="jrE-Ee-IZs">
                                     <group key="contentGroup" width="1" alignment="left" id="Qlu-eg-wPu">
                                         <items>
-                                            <label height="35" alignment="left" verticalAlignment="center" text="€" textAlignment="left" id="HXA-pQ-4Dc"/>
+                                            <label height="35" alignment="left" verticalAlignment="center" text="€" textAlignment="left" id="HXA-pQ-4Dc">
+                                                <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="32"/>
+                                            </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
@@ -653,15 +674,18 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
-                        <group alignment="left" hidden="YES" id="87e-ws-3v4">
+                        <group alignment="left" id="87e-ws-3v4">
                             <items>
                                 <button alignment="left" id="8bR-es-lKT">
                                     <group key="contentGroup" width="1" alignment="left" id="eib-1d-PIU">
                                         <items>
-                                            <label height="35" alignment="left" verticalAlignment="center" text="¥" textAlignment="left" id="TuF-7m-oCw"/>
+                                            <label height="35" alignment="left" verticalAlignment="center" text="¥" textAlignment="left" id="TuF-7m-oCw">
+                                                <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="32"/>
+                                            </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
@@ -671,15 +695,18 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
-                        <group alignment="left" hidden="YES" id="6T3-Lz-wFT">
+                        <group alignment="left" id="6T3-Lz-wFT">
                             <items>
                                 <button alignment="left" id="1rb-JF-41J">
                                     <group key="contentGroup" width="1" alignment="left" id="drV-s5-wvM">
                                         <items>
-                                            <label height="35" alignment="left" verticalAlignment="center" text="None" textAlignment="left" id="dCe-zf-0fa"/>
+                                            <label height="35" alignment="left" verticalAlignment="center" text="None" textAlignment="left" id="dCe-zf-0fa">
+                                                <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="32"/>
+                                            </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="3" top="0.0" bottom="0.0"/>
@@ -689,7 +716,7 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
                     </items>

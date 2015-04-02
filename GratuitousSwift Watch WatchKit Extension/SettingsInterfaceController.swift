@@ -12,10 +12,9 @@ class SettingsInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var suggestedTipTitleLabel: WKInterfaceLabel?
     @IBOutlet private weak var currencySymbolTitleLabel: WKInterfaceLabel?
+    @IBOutlet private weak var suggestedTipPercentageLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var suggestedTipSlider: WKInterfaceSlider?
-    
-    @IBOutlet private weak var suggestedTipPercentageLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var currencySymbolLocalLabel: WKInterfaceLabel?
     @IBOutlet private weak var currencySymbolDollarLabel: WKInterfaceLabel?
@@ -47,7 +46,7 @@ class SettingsInterfaceController: WKInterfaceController {
         self.animationImageView?.setImageNamed("gratuityCap4-")
         self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
         
-        self.setTitle(NSLocalizedString("Dismiss Settings", comment: ""))
+        self.setTitle(NSLocalizedString("Close Settings", comment: ""))
         
         if self.interfaceControllerIsConfigured == false {
             // putting this in a background queue allows willActivate to finish, the animation to start.
@@ -63,7 +62,7 @@ class SettingsInterfaceController: WKInterfaceController {
             // set the color of all the labels
             self.suggestedTipTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
             self.suggestedTipPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.currencySymbolTitleLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.currencySymbolTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
             self.currencySymbolLocalLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
             self.currencySymbolDollarLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
             self.currencySymbolPoundLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
