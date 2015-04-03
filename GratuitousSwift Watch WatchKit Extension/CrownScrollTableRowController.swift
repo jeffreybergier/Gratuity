@@ -17,7 +17,7 @@ class CrownScrollTableRowController: NSObject {
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-    private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
+    private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.smallValueText
     
     func setCurrencyLabels(#bigCurrency: Int, littlePercentage: Double?, starFlag: Bool?) {
         // set the big text label
@@ -29,17 +29,17 @@ class CrownScrollTableRowController: NSObject {
         }
         // set the percentage if its set
         if let littlePercentage = littlePercentage {
-            self.smallPercentageLabel?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(littlePercentage), attributes: self.titleTextAttributes))
+            self.smallPercentageLabel?.setAttributedText(NSAttributedString(string: self.dataSource.percentStringFromRawDouble(littlePercentage), attributes: self.smallValueTextAttributes))
         } else {
-            self.smallPercentageLabel?.setAttributedText(NSAttributedString(string: "– %", attributes: self.titleTextAttributes))
+            self.smallPercentageLabel?.setAttributedText(NSAttributedString(string: "– %", attributes: self.smallValueTextAttributes))
             self.starLabel?.setHidden(true)
         }
     }
     
     var interfaceIsConfigured = false
     func configureInterface() {
-        self.smallPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-        self.bigCurrencyLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+//        self.smallPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+//        self.bigCurrencyLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
         self.starLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
         self.outlineGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
         self.interfaceIsConfigured = true

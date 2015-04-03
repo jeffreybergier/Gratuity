@@ -13,68 +13,51 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
     @IBOutlet private weak var tipPercentageLabel: WKInterfaceLabel?
     @IBOutlet private weak var totalAmountLabel: WKInterfaceLabel?
     @IBOutlet private weak var tipAmountLabel: WKInterfaceLabel?
-    @IBOutlet private weak var billAmountLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var totalAmountTitleLabel: WKInterfaceLabel?
     @IBOutlet private weak var tipAmountTitleLabel: WKInterfaceLabel?
     @IBOutlet private weak var tipPercentageTitleLabel: WKInterfaceLabel?
-    @IBOutlet private weak var billAmountTitleLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var startOverButtonLabel: WKInterfaceLabel?
     @IBOutlet private weak var backgroundImageGroup: WKInterfaceGroup?
     @IBOutlet private weak var totalAmountGroup: WKInterfaceGroup?
     @IBOutlet private weak var tipAmountGroup: WKInterfaceGroup?
     @IBOutlet private weak var tipPercentageGroup: WKInterfaceGroup?
-    @IBOutlet private weak var billAmountGroup: WKInterfaceGroup?
     @IBOutlet private weak var startOverButtonGroup: WKInterfaceGroup?
     
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
     
     private var dataSource = GratuitousWatchDataSource.sharedInstance
+    private var interfaceControllerIsConfigured = false
     
-    private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
+    private let subtitleTextAttributes = GratuitousUIColor.WatchFonts.subtitleText
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+    private let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
     
     override func willActivate() {
         super.willActivate()
         
-        self.animationImageView?.setImageNamed("gratuityCap4-")
-        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
-        
-        self.setTitle(NSLocalizedString("Total Amount", comment: ""))
-        
-        // putting this in a background queue allows willActivate to finish, the animation to start.
-        let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
-        dispatch_async(backgroundQueue) {
-            self.configureInterfaceController()
+        if self.interfaceControllerIsConfigured == false {
+            self.animationImageView?.setImageNamed("gratuityCap4-")
+            self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
+            
+            self.setTitle(NSLocalizedString("Total Amount", comment: ""))
+            
+            // putting this in a background queue allows willActivate to finish, the animation to start.
+            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
+            dispatch_async(backgroundQueue) {
+                self.configureInterfaceController()
+            }
         }
     }
     
     private func configureInterfaceController() {
         dispatch_async(dispatch_get_main_queue()) {
-            // set the text color of the labels
-            self.tipPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.tipAmountLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.totalAmountLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.billAmountLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.tipPercentageTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-            self.tipAmountTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-            self.totalAmountTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-            self.billAmountTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-            self.startOverButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            
             // set the static text of the labels
-            self.tipPercentageTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Percentage", comment: ""), attributes: self.titleTextAttributes))
-            self.tipAmountTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Tip Amount", comment: ""), attributes: self.titleTextAttributes))
-            self.totalAmountTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Total Amount", comment: ""), attributes: self.titleTextAttributes))
-            self.billAmountTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Bill Amount", comment: ""), attributes: self.titleTextAttributes))
-            self.startOverButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Start Over", comment: ""), attributes: self.titleTextAttributes))
-            
-            // clear strings from nib
-            self.tipPercentageLabel?.setText("– %")
-            self.tipAmountLabel?.setText("$ –")
-            self.totalAmountLabel?.setText("$ –")
-            self.billAmountLabel?.setText("$ –")
+            self.tipPercentageTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Percentage", comment: ""), attributes: self.subtitleTextAttributes))
+            self.tipAmountTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Tip Amount", comment: ""), attributes: self.subtitleTextAttributes))
+            self.totalAmountTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Total Amount", comment: ""), attributes: self.subtitleTextAttributes))
+            self.startOverButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Start Over", comment: ""), attributes: self.largerButtonTextAttributes))
             
             // prepare data
             let billAmount = self.dataSource.defaultsManager.billIndexPathRow
@@ -91,25 +74,23 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
             self.tipPercentageLabel?.setAttributedText(tipPercentageString)
             self.tipAmountLabel?.setAttributedText(tipAmountString)
             self.totalAmountLabel?.setAttributedText(totalAmountString)
-            self.billAmountLabel?.setAttributedText(billAmountString)
             
             // set color for the group rings
-            self.startOverButtonGroup?.setBackgroundColor(GratuitousUIColor.lightBackgroundColor())
+            self.startOverButtonGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             self.totalAmountGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             self.tipAmountGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             self.tipPercentageGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
-            self.billAmountGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             
             // we made it to the final step. time to increment the runcount
             if self.dataSource.defaultsManager.showTutorialAtLaunch == true {
                 self.dataSource.defaultsManager.showTutorialAtLaunch == false
             }
+            self.interfaceControllerIsConfigured = true
             
             self.backgroundImageGroup?.setHidden(true)
             self.totalAmountGroup?.setHidden(false)
             self.tipAmountGroup?.setHidden(false)
             self.tipPercentageGroup?.setHidden(false)
-            self.billAmountGroup?.setHidden(true)
             self.startOverButtonGroup?.setHidden(false)
         }
     }

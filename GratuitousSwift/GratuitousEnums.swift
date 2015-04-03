@@ -154,9 +154,23 @@ public func !!<A>(lhs:A?, rhs:@autoclosure()->A)->A {
     return lhs ?? rhs()
 }
 
-enum Futura: String, Printable, Hashable {
-    //case Medium = "Futura-Medium"
+enum Fuuutuuura: String, Printable, Hashable {
     case Medium = "Fuuutuuura-Meeediuuum"
+    
+    var description: String {
+        switch self {
+        case Medium:
+            return "Fuuutuuura-Meeediuuum"
+        }
+    }
+    
+    var hashValue: Int {
+        return self.description.hashValue
+    }
+}
+
+enum Futura: String, Printable, Hashable {
+    case Medium = "Futura-Medium"
     case MediumItalic = "Futura-MediumItalic"
     case CondensedMedium = "Futura-CondensedMedium"
     case CondensedExtraBold = "Futura-CondensedExtraBold"
@@ -164,8 +178,7 @@ enum Futura: String, Printable, Hashable {
     var description: String {
         switch self {
         case Medium:
-            //return "Futura-Medium"
-            return "Fuuutuuura-Meeediuuum"
+            return "Futura-Medium"
         case MediumItalic:
             return "Futura-MediumItalic"
         case CondensedMedium:
@@ -217,5 +230,13 @@ extension UIFont {
     
     class func futura(#style: Futura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
         return UIFont(futuraStyle: style, size: size) !! UIFont.preferredFontForTextStyle(fallbackStyle.description)
+    }
+    
+    convenience init?(fuuutuuuraStyle: Fuuutuuura, size: CGFloat) {
+        self.init(name: fuuutuuuraStyle.rawValue, size: size)
+    }
+    
+    class func fuuutuuura(#style: Fuuutuuura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
+        return UIFont(fuuutuuuraStyle: style, size: size) !! UIFont.preferredFontForTextStyle(fallbackStyle.description)
     }
 }

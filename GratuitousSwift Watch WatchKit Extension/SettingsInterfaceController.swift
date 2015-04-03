@@ -30,9 +30,6 @@ class SettingsInterfaceController: WKInterfaceController {
     @IBOutlet private weak var currencySymbolEuroGroup: WKInterfaceGroup?
     @IBOutlet private weak var currencySymbolYenGroup: WKInterfaceGroup?
     @IBOutlet private weak var currencySymbolNoneGroup: WKInterfaceGroup?
-    
-    @IBOutlet private weak var animationGroup: WKInterfaceGroup?
-    @IBOutlet private weak var animationImageView: WKInterfaceImage?
 
     private var interfaceControllerIsConfigured = false
     
@@ -43,12 +40,8 @@ class SettingsInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        self.animationImageView?.setImageNamed("gratuityCap4-")
-        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
-        
-        self.setTitle(NSLocalizedString("Close Settings", comment: ""))
-        
         if self.interfaceControllerIsConfigured == false {
+        self.setTitle(NSLocalizedString("Close Settings", comment: ""))
             // putting this in a background queue allows willActivate to finish, the animation to start.
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
             dispatch_async(backgroundQueue) {
@@ -59,17 +52,6 @@ class SettingsInterfaceController: WKInterfaceController {
     
     private func configureInterfaceController() {
         dispatch_async(dispatch_get_main_queue()) {
-            // set the color of all the labels
-            self.suggestedTipTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-            self.suggestedTipPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.currencySymbolTitleLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-            self.currencySymbolLocalLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.currencySymbolDollarLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.currencySymbolPoundLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.currencySymbolEuroLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.currencySymbolYenLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.currencySymbolNoneLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            
             // configure the titles
             self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Suggested Tip Percentage", comment: ""), attributes: self.titleTextAttributes))
             self.currencySymbolTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Currency Symbol", comment: ""), attributes: self.titleTextAttributes))
@@ -92,19 +74,6 @@ class SettingsInterfaceController: WKInterfaceController {
             
             // this probably isn't needed, but no need to run this code a second time.
             self.interfaceControllerIsConfigured = true
-            
-            // unhide the UI
-            self.suggestedTipTitleLabel?.setHidden(false)
-            self.suggestedTipPercentageLabel?.setHidden(false)
-            self.suggestedTipGroup?.setHidden(false)
-            self.currencySymbolTitleLabel?.setHidden(false)
-            self.currencySymbolLocalGroup?.setHidden(false)
-            self.currencySymbolDollarGroup?.setHidden(false)
-            self.currencySymbolPoundGroup?.setHidden(false)
-            self.currencySymbolEuroGroup?.setHidden(false)
-            self.currencySymbolYenGroup?.setHidden(false)
-            self.currencySymbolNoneGroup?.setHidden(false)
-            self.animationGroup?.setHidden(true)
         }
     }
     

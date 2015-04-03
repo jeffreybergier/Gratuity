@@ -20,7 +20,7 @@ class TutorialInterfaceController: GratuitousMenuInterfaceController {
     private var animationsShouldStartAfterViewAlreadytConfigured = false
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
-    private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
+    private let tutorialTitleTextAttributes = GratuitousUIColor.WatchFonts.tutorialTitleText
     private let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
     
     override func willActivate() {
@@ -48,12 +48,10 @@ class TutorialInterfaceController: GratuitousMenuInterfaceController {
             
             self.setTitle(NSLocalizedString("Tutorial", comment: ""))
             
-            self.instructionTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
-            self.instructionTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Use the Digital Crown to scroll", comment: ""), attributes: self.titleTextAttributes))
+            self.instructionTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Use the Digital Crown to scroll", comment: ""), attributes: self.tutorialTitleTextAttributes))
             
-            self.getStartedButtonGroup?.setBackgroundColor(GratuitousUIColor.lightBackgroundColor())
-            self.getStartedButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.getStartedButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Get Started", comment: ""), attributes: self.titleTextAttributes))
+            self.getStartedButtonGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
+            self.getStartedButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Get Started", comment: ""), attributes: self.largerButtonTextAttributes))
             
             self.interfaceControllerIsConfigured = true
         }

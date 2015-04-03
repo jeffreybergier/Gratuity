@@ -69,12 +69,11 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        self.animationImageView?.setImageNamed("gratuityCap4-")
-        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
-        
-        let font = self.titleTextAttributes[NSFontAttributeName]
-        
         if self.interfaceControllerIsConfigured == false {
+            
+            self.animationImageView?.setImageNamed("gratuityCap4-")
+            self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
+            
             // putting this in a background queue allows willActivate to finish, the animation to start.
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
             dispatch_async(backgroundQueue) {
@@ -97,10 +96,8 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
             self.smallerButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Smaller", comment: ""), attributes: self.largerButtonTextAttributes))
             
             // set colors
-            self.instructionalTextLabel?.setTextColor(GratuitousUIColor.lightTextColor())
             self.largerButtonGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
-            self.largerButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-            self.smallerButtonLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
+            self.smallerButtonGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             
             // show the UI
             self.largerButtonGroup?.setHidden(false)

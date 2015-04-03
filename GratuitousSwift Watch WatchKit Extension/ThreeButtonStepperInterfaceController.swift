@@ -39,7 +39,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     private var interfaceControllerIsConfigured = false
     
     private let dataSource = GratuitousWatchDataSource.sharedInstance
-    private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
+    private let subtitleTextAttributes = GratuitousUIColor.WatchFonts.subtitleText
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     private let nextButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
     
@@ -94,10 +94,11 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        self.animationImageView?.setImageNamed("gratuityCap4-")
-        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
-        
         if self.interfaceControllerIsConfigured == false {
+            
+            self.animationImageView?.setImageNamed("gratuityCap4-")
+            self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
+            
             // putting this in a background queue allows willActivate to finish, the animation to start.
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
             dispatch_async(backgroundQueue) {
@@ -138,14 +139,14 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
             
             switch self.currentContext {
             case .Bill:
-                self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Bill Amount", comment: ""), attributes: self.titleTextAttributes))
+                self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Bill Amount", comment: ""), attributes: self.subtitleTextAttributes))
                 self.instructionalTextLabel?.setHidden(true)
                 self.setTitle(NSLocalizedString("Bill Amount", comment: ""))
                 self.tipPercentageLabel?.setHidden(true)
                 
                 self.updateUIWithCurrencyAmount(self.dataSource.defaultsManager.billIndexPathRow)
             case .Tip:
-                self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Tip Amount", comment: ""), attributes: self.titleTextAttributes))
+                self.instructionalTextLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Tip Amount", comment: ""), attributes: self.subtitleTextAttributes))
                 self.instructionalTextLabel?.setHidden(true)
                 self.setTitle(NSLocalizedString("Tip Amount", comment: ""))
                 
