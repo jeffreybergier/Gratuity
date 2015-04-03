@@ -142,45 +142,45 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
         println("Scroll to Currency: \(currencyAmountToScrollTo), IndexPath: \(rowIndexPath)")
         
         if rowIndexPath > 0 && rowIndexPath < self.currencyAmountTable?.numberOfRows {
-            self.currencyAmountTable!.scrollToRowAtIndex(rowIndexPath)
+            self.currencyAmountTable?.scrollToRowAtIndex(rowIndexPath)
         }
     }
     
     private func insertTableRowControllersAtTop(newNumberOfRows: Int) {
-            if let tableView = self.currencyAmountTable {
-                let currentLowestDataIndex = self.lowestDataIndexInTable
-                let newLowestDataIndex = currentLowestDataIndex - newNumberOfRows > 0 ? currentLowestDataIndex - newNumberOfRows : 0
-                let endOfRange = currentLowestDataIndex < newNumberOfRows ? currentLowestDataIndex : newNumberOfRows
-                for index in 0 ..< endOfRange {
-                    let value = self.data[newLowestDataIndex + index]
-                    switch self.currentContext {
-                    case .Bill:
-                        tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
-                        if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
-                            if row.interfaceIsConfigured == false {
-                                row.configureInterface()
-                            }
-                            row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
+        if let tableView = self.currencyAmountTable {
+            let currentLowestDataIndex = self.lowestDataIndexInTable
+            let newLowestDataIndex = currentLowestDataIndex - newNumberOfRows > 0 ? currentLowestDataIndex - newNumberOfRows : 0
+            let endOfRange = currentLowestDataIndex < newNumberOfRows ? currentLowestDataIndex : newNumberOfRows
+            for index in 0 ..< endOfRange {
+                let value = self.data[newLowestDataIndex + index]
+                switch self.currentContext {
+                case .Bill:
+                    tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
+                    if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
+                        if row.interfaceIsConfigured == false {
+                            row.configureInterface()
                         }
-                    case .Tip:
-                        tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollTipTableRowController")
-                        let billAmount = self.dataSource.defaultsManager.billIndexPathRow
-                        let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
-                        let idealTip = Int(round(Double(billAmount) * suggestedTipPercentage))
-                        let star = idealTip == value ? false : true
-                        if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
-                            if row.interfaceIsConfigured == false {
-                                row.configureInterface()
-                            }
-                            row.setCurrencyLabels(bigCurrency: value, littlePercentage: GratuitousWatchDataSource.optionalDivision(top: Double(value), bottom: Double(billAmount)), starFlag: star)
-                        }
-                    default:
-                        fatalError("CrownScrollBillInterfaceController: insertAmountTableRowControllersAtTop called when currentContext was not .NotSet")
+                        row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
                     }
-                    // update instance variables
-                    self.lowestDataIndexInTable = newLowestDataIndex
+                case .Tip:
+                    tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollTipTableRowController")
+                    let billAmount = self.dataSource.defaultsManager.billIndexPathRow
+                    let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
+                    let idealTip = Int(round(Double(billAmount) * suggestedTipPercentage))
+                    let star = idealTip == value ? false : true
+                    if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
+                        if row.interfaceIsConfigured == false {
+                            row.configureInterface()
+                        }
+                        row.setCurrencyLabels(bigCurrency: value, littlePercentage: GratuitousWatchDataSource.optionalDivision(top: Double(value), bottom: Double(billAmount)), starFlag: star)
+                    }
+                default:
+                    fatalError("CrownScrollBillInterfaceController: insertAmountTableRowControllersAtTop called when currentContext was not .NotSet")
                 }
             }
+            // update instance variables
+            self.lowestDataIndexInTable = newLowestDataIndex
+        }
     }
     
     private func insertTableRowControllersAtBottom(newNumberOfRows: Int) {
@@ -223,7 +223,6 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                         break
                     }
                 }
-                
                 // update instance variables
                 self.highestDataIndexInTable = highestNumber < self.data.count ? highestNumber : self.data.count - 1
             }
@@ -247,12 +246,18 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                     fatalError("CrownScrollBillInterfaceController: configureTableForTheFirstTime called when currentContext was .NotSet")
                 }
                 
+                // configure the buffers
+                let upperBuffer = ScrollInterfaceConstants.upperBufferWithContext(self.currentContext) !! 25
+                let lowerBuffer = ScrollInterfaceConstants.lowerBufferWithContext(self.currentContext) !! 20
+                
+                if idealCurrencyAmount > self.data.count {
+                    idealCurrencyAmount = self.data.count - 1 - upperBuffer
+                }
+                
                 // write the ideal tip to disk for use later
                 self.dataSource.defaultsManager.tipIndexPathRow = idealTip
                 
                 // do the math for the table
-                let upperBuffer = ScrollInterfaceConstants.upperBufferWithContext(self.currentContext) !! 25
-                let lowerBuffer = ScrollInterfaceConstants.lowerBufferWithContext(self.currentContext) !! 20
                 let lowestNumber = idealCurrencyAmount > lowerBuffer ? idealCurrencyAmount - lowerBuffer : 0
                 let highestNumber = idealCurrencyAmount + upperBuffer + 1
                 
@@ -313,11 +318,12 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     }
     
     @IBAction func didTapSmallerAmountButton() {
+        println("\(self.numberOfRowsToAdd(buttonType: .SmallerButton)) Rows added to Top")
         switch self.currentContext {
         case .Bill:
-            self.insertTableRowControllersAtTop(30)
+            self.insertTableRowControllersAtTop(self.numberOfRowsToAdd(buttonType: .SmallerButton))
         case .Tip:
-            self.insertTableRowControllersAtTop(10)
+            self.insertTableRowControllersAtTop(self.numberOfRowsToAdd(buttonType: .SmallerButton))
         case .NotSet:
             break
         }
@@ -325,19 +331,89 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     
     
     @IBAction private func didTapLargerAmountButton() {
+        println("\(self.numberOfRowsToAdd(buttonType: .LargerButton)) Rows added to Bottom")
         switch self.currentContext {
         case .Bill:
-            self.insertTableRowControllersAtBottom(30)
+            self.insertTableRowControllersAtBottom(self.numberOfRowsToAdd(buttonType: .LargerButton))
         case .Tip:
-            self.insertTableRowControllersAtBottom(10)
+            self.insertTableRowControllersAtBottom(self.numberOfRowsToAdd(buttonType: .LargerButton))
         case .NotSet:
             break
         }
     }
     
+    private func numberOfRowsToAdd(#buttonType: ScrollInterfaceConstants.ButtonTapped) -> Int {
+        switch self.currentContext {
+        case .Bill:
+            switch buttonType {
+            case .LargerButton:
+                switch self.highestDataIndexInTable {
+                case 50 ..< 100:
+                    return 50
+                case 100 ..< 500:
+                    return 75
+                case 500 ..< 1000:
+                    return 200
+                case 1000 ..< Int.max:
+                    return 300
+                default: // Int.min ..< 50
+                    return 25
+                }
+            case .SmallerButton:
+                switch self.lowestDataIndexInTable {
+                case 50 ..< 100:
+                    return 25
+                case 100 ..< 500:
+                    return 65
+                case 500 ..< 1000:
+                    return 150
+                case 1000 ..< Int.max:
+                    return 200
+                default: // Int.min ..< 50
+                    return 15
+                }
+            }
+        case .Tip:
+            switch buttonType {
+            case .LargerButton:
+                switch self.highestDataIndexInTable {
+                case 50 ..< 100:
+                    return 25
+                case 100 ..< 500:
+                    return 45
+                case 500 ..< 1000:
+                    return 75
+                case 1000 ..< Int.max:
+                    return 150
+                default: // Int.min ..< 50
+                    return 15
+                }
+            case .SmallerButton:
+                switch self.lowestDataIndexInTable {
+                case 50 ..< 100:
+                    return 15
+                case 100 ..< 500:
+                    return 25
+                case 500 ..< 1000:
+                    return 75
+                case 1000 ..< Int.max:
+                    return 150
+                default: // Int.min ..< 50
+                    return 10
+                }
+            }
+        case .NotSet:
+            fatalError("CrownScrollBillInterfaceController: numberOfRowsToAdd called when currentContext was .NotSet")
+        }
+    }
+    
     private struct ScrollInterfaceConstants {
-        static let dataMax = 999
+        static let dataMax = 2001
         static let dataMin = 0
+        
+        enum ButtonTapped {
+            case LargerButton, SmallerButton
+        }
         
         static func upperBufferWithContext(currentContext: CrownScrollerInterfaceContext) -> Int? {
             switch currentContext {
