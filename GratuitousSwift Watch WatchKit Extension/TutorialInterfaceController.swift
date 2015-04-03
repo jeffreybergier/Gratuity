@@ -76,12 +76,12 @@ class TutorialInterfaceController: GratuitousMenuInterfaceController {
     
     @IBAction private func didTapGetStartedButton() {
         self.dataSource.defaultsManager.showTutorialAtLaunch = false
-        switch self.dataSource.defaultsManager.correctWatchInterface {
-        case .CrownScroller:
-            self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)
-        case .ThreeButtonStepper:
-            self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: ThreeButtonStepperInterfaceContext.Bill.rawValue)
-        }
+        //            switch self.dataSource.defaultsManager.correctWatchInterface {
+        //            case .CrownScroller:
+        self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)
+        //            case .ThreeButtonStepper:
+        //                self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: ThreeButtonStepperInterfaceContext.Bill.rawValue)
+        //}
     }
     
     override func didDeactivate() {

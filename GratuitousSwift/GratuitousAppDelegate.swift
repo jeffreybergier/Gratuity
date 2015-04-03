@@ -25,7 +25,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics()])
         
         //check my server for which UI the watch should use
-        self.checkWatchUIJSON()
+//        self.checkWatchUIJSON()
         
         //initialize the view controller from the storyboard
         let tipViewController = self.storyboard.instantiateInitialViewController() as? UIViewController
@@ -43,33 +43,33 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    private func checkWatchUIJSON() {
-        let session = NSURLSession.sharedSession()
-        let url = GratuitousUserDefaults.watchUIURL()
-        let request = NSURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 10.0)
-        let task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-            if error == nil {
-                if let response = response as? NSHTTPURLResponse {
-                    if response.statusCode == 200 {
-                        self.extractCorrectInterfaceFromData(data)
-                    }
-                }
-            }
-        })
-        task.resume()
-    }
-    
-    private func extractCorrectInterfaceFromData(data: NSData?) {
-        if let data = data {
-            if let jsonDictionaryArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? [NSDictionary] {
-                if let watchStyleString = jsonDictionaryArray.first?["watchUIStyle"] as? String {
-                    if let interfaceState = CorrectWatchInterface.interfaceStateFromString(watchStyleString) {
-                        self.defaultsManager.correctWatchInterface = interfaceState
-                    }
-                }
-            }
-        }
-    }
+//    private func checkWatchUIJSON() {
+//        let session = NSURLSession.sharedSession()
+//        let url = GratuitousUserDefaults.watchUIURL()
+//        let request = NSURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+//        let task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+//            if error == nil {
+//                if let response = response as? NSHTTPURLResponse {
+//                    if response.statusCode == 200 {
+//                        self.extractCorrectInterfaceFromData(data)
+//                    }
+//                }
+//            }
+//        })
+//        task.resume()
+//    }
+//    
+//    private func extractCorrectInterfaceFromData(data: NSData?) {
+//        if let data = data {
+//            if let jsonDictionaryArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? [NSDictionary] {
+//                if let watchStyleString = jsonDictionaryArray.first?["watchUIStyle"] as? String {
+//                    if let interfaceState = CorrectWatchInterface.interfaceStateFromString(watchStyleString) {
+//                        self.defaultsManager.correctWatchInterface = interfaceState
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

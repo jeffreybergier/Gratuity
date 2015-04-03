@@ -55,7 +55,6 @@ class GratuitousUserDefaults: Printable {
         // insert all the new data that was started after version 1.0
         self.userDefaults.setObject(toVersion, forKey: Keys.appVersionString)
         self.userDefaults.setBool(true, forKey: Keys.showTutorialAtLaunch)
-        self.userDefaults.setInteger(CorrectWatchInterface.CrownScroller.rawValue, forKey: Keys.correctWatchInterface)
         self.userDefaults.synchronize()
     }
     
@@ -67,7 +66,6 @@ class GratuitousUserDefaults: Printable {
         self.userDefaults.setBool(true, forKey: Keys.showTutorialAtLaunch)
         self.userDefaults.setDouble(0.2, forKey: Keys.suggestedTipPercentage)
         self.userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: Keys.overrideCurrencySymbol)
-        self.userDefaults.setInteger(CorrectWatchInterface.CrownScroller.rawValue, forKey: Keys.correctWatchInterface)
         self.userDefaults.synchronize()
     }
     
@@ -139,22 +137,6 @@ class GratuitousUserDefaults: Printable {
         }
     }
     
-    private var _correctWatchInterface: CorrectWatchInterface?
-    var correctWatchInterface: CorrectWatchInterface {
-        set {
-            _correctWatchInterface = newValue
-            self.userDefaults.setInteger(newValue.rawValue, forKey: Keys.correctWatchInterface)
-            self.userDefaults.synchronize()
-        }
-        get {
-            if let correctWatchInterface = _correctWatchInterface {
-                return correctWatchInterface
-            } else {
-                return CorrectWatchInterface(rawValue: self.userDefaults.integerForKey(Keys.correctWatchInterface)) !! CorrectWatchInterface.CrownScroller
-            }
-        }
-    }
-    
     private var _suggestedTipPercentage: Double?
     var suggestedTipPercentage: Double {
         set {
@@ -193,7 +175,5 @@ class GratuitousUserDefaults: Printable {
         // version 1.2 keys
         static let appVersionString = "appVersionString"
         static let showTutorialAtLaunch = "showTutorialAtLaunch"
-        static let correctWatchInterface = "correctWatchInterface"
-        //static let numberOfRowsInBillTableForWatch = "numberOfRowsInBillTableForWatch"
     }
 }
