@@ -35,7 +35,7 @@ class TutorialInterfaceController: WKInterfaceController {
         } else {
             if self.animationsShouldStartAfterViewAlreadytConfigured == true {
                 self.animationsShouldStartAfterViewAlreadytConfigured = false
-                self.animationTimer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "repeatAnimationTimer:", userInfo: nil, repeats: true)
+                self.animationTimer = NSTimer.scheduledTimerWithTimeInterval(8, target: self, selector: "repeatAnimationTimer:", userInfo: nil, repeats: true)
                 self.animationTimer?.fire()
             }
         }
@@ -43,7 +43,7 @@ class TutorialInterfaceController: WKInterfaceController {
     
     private func configureInterfaceController() {
         dispatch_async(dispatch_get_main_queue()) {
-            self.animationTimer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "repeatAnimationTimer:", userInfo: nil, repeats: true)
+            self.animationTimer = NSTimer.scheduledTimerWithTimeInterval(8, target: self, selector: "repeatAnimationTimer:", userInfo: nil, repeats: true)
             self.animationTimer?.fire()
             
             self.setTitle(NSLocalizedString("Tutorial", comment: ""))
@@ -64,14 +64,14 @@ class TutorialInterfaceController: WKInterfaceController {
     @objc private func animateDownTimer(timer: NSTimer?) {
         timer?.invalidate()
         self.scrollingAnimationImageView?.setImageNamed("scrollDownAnimation-")
-        self.scrollingAnimationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 23), duration: 2.0, repeatCount: 1)
+        self.scrollingAnimationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 23), duration: 3.0, repeatCount: 1)
     }
     
     @objc private func animateUpTimer(timer: NSTimer?) {
         timer?.invalidate()
-        let animateDownTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "animateDownTimer:", userInfo: nil, repeats: false)
-        self.scrollingAnimationImageView?.setImageNamed("scrollAnimation-")
-        self.scrollingAnimationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 23), duration: 2.0, repeatCount: 1)
+        let animateDownTimer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: "animateDownTimer:", userInfo: nil, repeats: false)
+        self.scrollingAnimationImageView?.setImageNamed("scrollUpAnimation-")
+        self.scrollingAnimationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 23), duration: 3.0, repeatCount: 1)
     }
     
     @IBAction private func didTapGetStartedButton() {

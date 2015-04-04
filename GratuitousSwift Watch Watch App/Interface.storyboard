@@ -47,7 +47,7 @@
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="21.5"/>
                         </label>
-                        <imageView width="1" alignment="left" image="scrollAnimation-0" contentMode="TopLeft" id="9EC-v6-jgG"/>
+                        <imageView width="1" alignment="left" image="scrollUpAnimation-0" contentMode="TopLeft" id="9EC-v6-jgG"/>
                         <group alignment="left" id="G1f-M9-tj4">
                             <items>
                                 <button alignment="left" id="Xax-fP-BA0">
