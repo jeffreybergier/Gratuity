@@ -11,8 +11,11 @@ import WatchKit
 class GratuitousMenuInterfaceController: WKInterfaceController {
     
     private var privateInterfaceControllerIsConfigured = false
-    enum MenuItemTarget: Selector {
-        case UserChoseMenuItem1 = "userChoseMenuItem1", UserChoseMenuItem2 = "userChoseMenuItem2", UserChoseMenuItem3 = "userChoseMenuItem3", UserChoseMenuItem4 = "userChoseMenuItem4"
+    private struct MenuItemTarget {
+        static let UserChoseMenuItem1 = Selector("userChoseMenuItem1")
+        static let UserChoseMenuItem2 = Selector("userChoseMenuItem2")
+        static let UserChoseMenuItem3 = Selector("userChoseMenuItem3")
+        static let userChoseMenuItem4 = Selector("userChoseMenuItem4")
     }
     
     override func willActivate() {
@@ -36,7 +39,8 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
     
     func configureMenuItem1() {
         // presents a modal display of settings screen by default.
-        self.addMenuItemWithItemIcon(WKMenuItemIcon.More, title: NSLocalizedString("Settings", comment: ""), action: MenuItemTarget.UserChoseMenuItem1.rawValue)
+        //self.addMenuItemWithItemIcon(WKMenuItemIcon.More, title: NSLocalizedString("Settings", comment: ""), action: MenuItemTarget.UserChoseMenuItem1.rawValue)
+        self.addMenuItemWithImageNamed("settingsMenuIcon", title: NSLocalizedString("Settings", comment: ""), action: MenuItemTarget.UserChoseMenuItem1)
     }
     
     func configureMenuItem2() {
