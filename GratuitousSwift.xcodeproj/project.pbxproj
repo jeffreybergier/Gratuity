@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		73011BE01AD04F90001F6D71 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 73011BDF1AD04F90001F6D71 /* en.lproj */; };
 		73011BE11AD04F90001F6D71 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 73011BDF1AD04F90001F6D71 /* en.lproj */; };
+		73011BE71AD05AFA001F6D71 /* WatchInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */; };
+		73011BE81AD05AFA001F6D71 /* WatchInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */; };
+		73011BE91AD070DC001F6D71 /* CurrencySymbolUpdating.mov in Resources */ = {isa = PBXBuildFile; fileRef = 73011BE21AD05AB1001F6D71 /* CurrencySymbolUpdating.mov */; };
+		73011BEA1AD070DF001F6D71 /* CurrencySymbolUpdating.mov in Resources */ = {isa = PBXBuildFile; fileRef = 73011BE21AD05AB1001F6D71 /* CurrencySymbolUpdating.mov */; };
 		731375551ABF2FA50074E2F2 /* AppDelegateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */; };
 		731375671ABF3D920074E2F2 /* Gratuity WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 731375661ABF3D910074E2F2 /* Gratuity WatchKit App.app */; };
 		731375741ABF3D930074E2F2 /* Gratuity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7313755A1ABF3D900074E2F2 /* Gratuity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -160,6 +164,8 @@
 
 /* Begin PBXFileReference section */
 		73011BDF1AD04F90001F6D71 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
+		73011BE21AD05AB1001F6D71 /* CurrencySymbolUpdating.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = CurrencySymbolUpdating.mov; sourceTree = "<group>"; };
+		73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchInfoViewController.swift; sourceTree = "<group>"; };
 		730530C91A871A3200DC08A6 /* Gratuityδ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuityδ.entitlements"; sourceTree = "<group>"; };
 		730530CA1A871A4700DC08A6 /* Gratuityλδ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuityλδ.entitlements"; sourceTree = "<group>"; };
 		730530CB1A871A5200DC08A6 /* GratuitousSwift Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuitousSwift Watch.entitlements"; sourceTree = "<group>"; };
@@ -271,6 +277,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73011BE51AD05AD3001F6D71 /* Watch Info View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */,
+				73011BE21AD05AB1001F6D71 /* CurrencySymbolUpdating.mov */,
+			);
+			name = "Watch Info View Controller";
+			sourceTree = "<group>";
+		};
 		7334770C1A26E85000513F1F /* en.lproj */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +392,7 @@
 				734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */,
 				7353346D1A1803FB008530E1 /* TipViewController */,
 				735334711A1804CC008530E1 /* Settings View Controller */,
+				73011BE51AD05AD3001F6D71 /* Watch Info View Controller */,
 				735334721A1804E2008530E1 /* Custom Presentation */,
 				73A755B71A87FB010038E023 /* Custom Files */,
 				7382510419E60EED00CD2B28 /* Supporting Files */,
@@ -757,6 +773,7 @@
 			files = (
 				736568EF1A26DD1400603602 /* GratuitousTableViewCell.xib in Resources */,
 				73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */,
+				73011BEA1AD070DF001F6D71 /* CurrencySymbolUpdating.mov in Resources */,
 				736568F01A26DD1400603602 /* GratuitousSwift.storyboard in Resources */,
 				736568F11A26DD1400603602 /* LaunchScreen.xib in Resources */,
 				736568F21A26DD1400603602 /* Images.xcassets in Resources */,
@@ -775,6 +792,7 @@
 				7382511119E60EED00CD2B28 /* LaunchScreen.xib in Resources */,
 				7382510E19E60EED00CD2B28 /* Images.xcassets in Resources */,
 				737E5DE71A1AFD1C00F0A8C7 /* settingsIcon.pdf in Resources */,
+				73011BE91AD070DC001F6D71 /* CurrencySymbolUpdating.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -882,6 +900,7 @@
 				736568DC1A26DD1400603602 /* TipViewController.swift in Sources */,
 				736568DD1A26DD1400603602 /* GratuitousTableViewCell.swift in Sources */,
 				736568DE1A26DD1400603602 /* GratuitousSettingsButtons.swift in Sources */,
+				73011BE81AD05AFA001F6D71 /* WatchInfoViewController.swift in Sources */,
 				736568DF1A26DD1400603602 /* GratuitousTransitioningDelegate.swift in Sources */,
 				733E8CB51A86FBA200B228CB /* GratuitousUserDefaults.swift in Sources */,
 				734A7C5B1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
@@ -905,6 +924,7 @@
 				7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */,
 				7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */,
 				73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */,
+				73011BE71AD05AFA001F6D71 /* WatchInfoViewController.swift in Sources */,
 				73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */,
 				733E8CB41A86F83100B228CB /* GratuitousUserDefaults.swift in Sources */,
 				734A7C5A1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
