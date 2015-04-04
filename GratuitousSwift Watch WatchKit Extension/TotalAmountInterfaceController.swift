@@ -81,12 +81,10 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
             self.tipAmountGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             self.tipPercentageGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
             
-            // we made it to the final step. time to increment the runcount
-            if self.dataSource.defaultsManager.showTutorialAtLaunch == true {
-                self.dataSource.defaultsManager.showTutorialAtLaunch == false
-            }
+            // interface is now configured
             self.interfaceControllerIsConfigured = true
             
+            // unhide everything
             self.backgroundImageGroup?.setHidden(true)
             self.totalAmountGroup?.setHidden(false)
             self.tipAmountGroup?.setHidden(false)

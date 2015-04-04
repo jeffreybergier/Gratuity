@@ -33,6 +33,8 @@
             <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
+            <string>Fuuutuuura-Meeediuuum</string>
+            <string>Fuuutuuura-Meeediuuum</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -750,6 +752,29 @@
                             <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
+                        <label alignment="left" text="Show Tutorial On Next Launch" numberOfLines="0" id="GqM-MT-GUC">
+                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="22"/>
+                        </label>
+                        <group width="1" alignment="left" id="G6K-vV-qnm">
+                            <items>
+                                <group alignment="left" radius="7" id="Fbp-qG-EgR">
+                                    <items>
+                                        <switch width="1" alignment="left" value="YES" title="Show" id="U7f-SK-Oo0">
+                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
+                                            <color key="titleColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="tutorialLaunchSwitchDidChange:" destination="ffT-6F-euT" id="LbC-9k-IDU"/>
+                                            </connections>
+                                        </switch>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </group>
+                            </items>
+                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                        </group>
                     </items>
                     <connections>
                         <outlet property="currencySymbolDollarGroup" destination="L24-oQ-Y5W" id="qvh-uB-4VP"/>
@@ -769,6 +794,9 @@
                         <outlet property="suggestedTipPercentageLabel" destination="5An-PC-g8o" id="TqJ-6J-1G4"/>
                         <outlet property="suggestedTipSlider" destination="6PC-nq-DwX" id="5xV-8j-qzh"/>
                         <outlet property="suggestedTipTitleLabel" destination="nRC-5a-8ct" id="FIc-3q-TSk"/>
+                        <outlet property="tutorialLaunchGroup" destination="G6K-vV-qnm" id="VKr-BV-NcN"/>
+                        <outlet property="tutorialLaunchSwitch" destination="U7f-SK-Oo0" id="IZr-Rz-jE9"/>
+                        <outlet property="tutorialLaunchTitleLabel" destination="GqM-MT-GUC" id="wAL-tV-UvK"/>
                     </connections>
                 </controller>
             </objects>
@@ -815,17 +843,17 @@
                                 <tableRow identifier="CrownScrollTipTableRowController" id="BF0-AS-4us" customClass="CrownScrollTableRowController" customModule="Gratuity_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="XeW-gt-RW7">
                                         <items>
-                                            <group width="1" height="1" alignment="left" radius="7" id="Nzq-VL-dEN">
+                                            <group width="1" height="1" alignment="center" radius="7" id="Nzq-VL-dEN">
                                                 <items>
-                                                    <label alignment="left" verticalAlignment="center" text="$10" id="iBT-Vj-YJq">
+                                                    <label alignment="left" verticalAlignment="center" text="$–" textAlignment="left" id="iBT-Vj-YJq">
                                                         <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                                     </label>
-                                                    <label alignment="left" verticalAlignment="center" text="★" id="zfx-6K-BaT">
+                                                    <label alignment="left" verticalAlignment="center" text="★" textAlignment="left" minimumScaleFactor="0.20000000000000001" id="zfx-6K-BaT">
                                                         <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="font" type="system" pointSize="18"/>
                                                     </label>
-                                                    <label alignment="right" verticalAlignment="center" text="20%" minimumScaleFactor="0.70000000000000007" id="GaG-7f-ROu">
+                                                    <label alignment="right" verticalAlignment="center" text="–%" textAlignment="right" minimumScaleFactor="0.20000000000000001" id="GaG-7f-ROu">
                                                         <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="22"/>
                                                     </label>

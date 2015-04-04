@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class TutorialInterfaceController: GratuitousMenuInterfaceController {
+class TutorialInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var scrollingAnimationImageView: WKInterfaceImage?
     @IBOutlet private weak var instructionTextLabel: WKInterfaceLabel?

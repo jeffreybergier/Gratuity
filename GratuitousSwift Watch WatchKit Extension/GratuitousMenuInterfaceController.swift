@@ -10,7 +10,7 @@ import WatchKit
 
 class GratuitousMenuInterfaceController: WKInterfaceController {
     
-    private var interfaceControllerIsConfigured = false
+    private var privateInterfaceControllerIsConfigured = false
     enum MenuItemTarget: Selector {
         case UserChoseMenuItem1 = "userChoseMenuItem1", UserChoseMenuItem2 = "userChoseMenuItem2", UserChoseMenuItem3 = "userChoseMenuItem3", UserChoseMenuItem4 = "userChoseMenuItem4"
     }
@@ -18,7 +18,7 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        if self.interfaceControllerIsConfigured == false {
+        if self.privateInterfaceControllerIsConfigured == false {
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
             dispatch_async(backgroundQueue) {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -28,15 +28,15 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
                     self.configureMenuItem3()
                     self.configureMenuItem4()
                     
-                    self.interfaceControllerIsConfigured = true
+                    self.privateInterfaceControllerIsConfigured = true
                 }
             }
         }
     }
     
     func configureMenuItem1() {
-        // defaults to switch UI to three button stepper bill
-        //self.addMenuItemWithItemIcon(WKMenuItemIcon.Shuffle, title: NSLocalizedString("Switch", comment: ""), action: MenuItemTarget.UserChoseMenuItem1.rawValue)
+        // presents a modal display of settings screen by default.
+        self.addMenuItemWithItemIcon(WKMenuItemIcon.More, title: NSLocalizedString("Settings", comment: ""), action: MenuItemTarget.UserChoseMenuItem1.rawValue)
     }
     
     func configureMenuItem2() {
@@ -45,8 +45,8 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
     }
     
     func configureMenuItem3() {
-        // presents a modal display of settings screen by default.
-        self.addMenuItemWithItemIcon(WKMenuItemIcon.More, title: NSLocalizedString("Settings", comment: ""), action: MenuItemTarget.UserChoseMenuItem3.rawValue)
+        // defaults to switch UI to three button stepper bill
+        //self.addMenuItemWithItemIcon(WKMenuItemIcon.Shuffle, title: NSLocalizedString("Switch", comment: ""), action: MenuItemTarget.UserChoseMenuItem3.rawValue)
     }
     
     func configureMenuItem4() {
@@ -54,47 +54,21 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
     }
     
     func userChoseMenuItem1() {
-        // defaults to switch UI to three button stepper bill
-        self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: ThreeButtonStepperInterfaceContext.Bill.rawValue)
-    }
-    
-    func userChoseMenuItem2() {
-        // defaults to start over button
-        self.popToRootController()
-    }
-    
-    func userChoseMenuItem3() {
         // presents a modal display of settings screen by default.
         self.presentControllerWithName("SettingsInterfaceController", context: nil)
     }
     
+    func userChoseMenuItem2() {
+        // defaults to start over button
+        //self.popToRootController()
+    }
+    
+    func userChoseMenuItem3() {
+        // defaults to switch UI to three button stepper bill
+        //self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: ThreeButtonStepperInterfaceContext.Bill.rawValue)
+    }
+    
     func userChoseMenuItem4() {
         // does nothing by default
-    }
-}
-
-extension ThreeButtonStepperInterfaceController {
-    override func userChoseMenuItem1() {
-        switch self.currentContext {
-        case .Bill:
-            self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)
-        case .Tip:
-            self.pushControllerWithName("CrownScrollTipInterfaceController", context: CrownScrollerInterfaceContext.Tip.rawValue)
-        case .NotSet:
-            break
-        }
-    }
-}
-
-extension CrownScrollInterfaceController {
-    override func userChoseMenuItem1() {
-        switch self.currentContext {
-        case .Bill:
-            self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: ThreeButtonStepperInterfaceContext.Bill.rawValue)
-        case .Tip:
-            self.pushControllerWithName("ThreeButtonStepperTipInterfaceController", context: ThreeButtonStepperInterfaceContext.Tip.rawValue)
-        default:
-            break
-        }
     }
 }
