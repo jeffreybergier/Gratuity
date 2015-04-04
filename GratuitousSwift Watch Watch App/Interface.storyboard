@@ -592,10 +592,10 @@
             </objects>
             <point key="canvasLocation" x="349" y="565"/>
         </scene>
-        <!--Close Settings-->
+        <!--Close-->
         <scene sceneID="N6L-dJ-mY2">
             <objects>
-                <controller identifier="SettingsInterfaceController" title="Close Settings" hidesWhenLoading="NO" id="ffT-6F-euT" customClass="SettingsInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                <controller identifier="SettingsInterfaceController" title="Close" hidesWhenLoading="NO" id="ffT-6F-euT" customClass="SettingsInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
                         <label alignment="left" text="Suggested Tip Percentage" numberOfLines="0" id="nRC-5a-8ct">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

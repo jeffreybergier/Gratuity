@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73011BE01AD04F90001F6D71 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 73011BDF1AD04F90001F6D71 /* en.lproj */; };
+		73011BE11AD04F90001F6D71 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 73011BDF1AD04F90001F6D71 /* en.lproj */; };
 		731375551ABF2FA50074E2F2 /* AppDelegateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */; };
 		731375671ABF3D920074E2F2 /* Gratuity WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 731375661ABF3D910074E2F2 /* Gratuity WatchKit App.app */; };
 		731375741ABF3D930074E2F2 /* Gratuity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7313755A1ABF3D900074E2F2 /* Gratuity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -157,6 +159,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		73011BDF1AD04F90001F6D71 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 		730530C91A871A3200DC08A6 /* Gratuityδ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuityδ.entitlements"; sourceTree = "<group>"; };
 		730530CA1A871A4700DC08A6 /* Gratuityλδ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuityλδ.entitlements"; sourceTree = "<group>"; };
 		730530CB1A871A5200DC08A6 /* GratuitousSwift Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuitousSwift Watch.entitlements"; sourceTree = "<group>"; };
@@ -440,6 +443,7 @@
 		73A18D5D1A2A9525002180DD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				73011BDF1AD04F90001F6D71 /* en.lproj */,
 				73A18D5E1A2A9525002180DD /* Info.plist */,
 				7313757D1ABF3E4B0074E2F2 /* GratuityStoreWatchExtensionInfo.plist */,
 				73450E6F1ABF2926005927F1 /* GratuityLocalWatchExtensionInfo.plist */,
@@ -712,6 +716,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7320A5471ACDA87E001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */,
+				73011BE01AD04F90001F6D71 /* en.lproj in Resources */,
 				731375671ABF3D920074E2F2 /* Gratuity WatchKit App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -731,6 +736,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7320A5481ACDA87F001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */,
+				73011BE11AD04F90001F6D71 /* en.lproj in Resources */,
 				73450E791ABF2926005927F1 /* GratuityL WatchKit App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
