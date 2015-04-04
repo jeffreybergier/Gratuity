@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct WatchNotification {
+    static let CurrencySymbolDidChangeInSettings = "CurrencySymbolDidChangeInSettings"
+    static let CurrencySymbolShouldUpdate = "CurrencySymbolShouldUpdate"
+}
+
 enum CustomTransitionMode: Int {
     case Present = 0, Dismiss
 }
@@ -143,17 +148,6 @@ enum CorrectWatchInterface: Int, Printable {
     }
 }
 
-// Operator Overloading!!
-// AssertingNilCoalescing operator crashes when LHS is nil when App is in Debug Build.
-// When App is in release build, it performs ?? operator
-// Crediting http://blog.human-friendly.com/theanswer-equals-maybeanswer-or-a-good-alternative
-
-infix operator !! { associativity right precedence 110 }
-public func !!<A>(lhs:A?, rhs:@autoclosure()->A)->A {
-    assert(lhs != nil)
-    return lhs ?? rhs()
-}
-
 enum Fuuutuuura: String, Printable, Hashable {
     case Medium = "Fuuutuuura-Meeediuuum"
     
@@ -239,4 +233,15 @@ extension UIFont {
     class func fuuutuuura(#style: Fuuutuuura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
         return UIFont(fuuutuuuraStyle: style, size: size) !! UIFont.preferredFontForTextStyle(fallbackStyle.description)
     }
+}
+
+// Operator Overloading!!
+// AssertingNilCoalescing operator crashes when LHS is nil when App is in Debug Build.
+// When App is in release build, it performs ?? operator
+// Crediting http://blog.human-friendly.com/theanswer-equals-maybeanswer-or-a-good-alternative
+
+infix operator !! { associativity right precedence 110 }
+public func !!<A>(lhs:A?, rhs:@autoclosure()->A)->A {
+    assert(lhs != nil)
+    return lhs ?? rhs()
 }

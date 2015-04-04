@@ -29,6 +29,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     private(set) var currentContext = CrownScrollerInterfaceContext.NotSet
     private var billAmountOffset: Int? // This property is only set when context is CrownScrollPagedOnes
     private var interfaceControllerIsConfigured = false
+    private var currencySymbolDidChangeWhileAway = false
     private var highestDataIndexInTable: Int = 0 {
         didSet {
             if self.highestDataIndexInTable >= self.data.count - 1 {
@@ -80,6 +81,13 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                 self.configureInterfaceController()
             }
         }
+        
+        // if the currency symbol changed while this controller was not visible, we now need to update the rows
+        // this is needed because updates to the UI won't be sent if they are not visible
+        if self.currencySymbolDidChangeWhileAway == true {
+            NSNotificationCenter.defaultCenter().postNotificationName(WatchNotification.CurrencySymbolShouldUpdate, object: self)
+            self.currencySymbolDidChangeWhileAway = false
+        }
     }
     
     private func configureInterfaceController() {
@@ -89,7 +97,11 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
         // All UI changes must call back to the main queue
         //
         dispatch_async(dispatch_get_main_queue()) {
+            // clear the table of storyboard cruft
             self.clearDataTable()
+            
+            // register for notifications from the settings screen
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySymbolDidChangeInSettings:", name: WatchNotification.CurrencySymbolDidChangeInSettings, object: nil)
             
             // set the text
             self.largerButtonLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Larger", comment: ""), attributes: self.largerButtonTextAttributes))
@@ -146,6 +158,10 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
         }
     }
     
+    @objc private func currencySymbolDidChangeInSettings(notification: NSNotification) {
+        self.currencySymbolDidChangeWhileAway = true
+    }
+    
     private func insertTableRowControllersAtTop(newNumberOfRows: Int) {
         if let tableView = self.currencyAmountTable {
             let currentLowestDataIndex = self.lowestDataIndexInTable
@@ -158,7 +174,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                     tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
                     if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
                         if row.interfaceIsConfigured == false {
-                            row.configureInterface()
+                            row.configureInterface(parentInterfaceController: self)
                         }
                         row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
                     }
@@ -170,7 +186,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                     let star = idealTip == value ? false : true
                     if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
                         if row.interfaceIsConfigured == false {
-                            row.configureInterface()
+                            row.configureInterface(parentInterfaceController: self)
                         }
                         row.setCurrencyLabels(bigCurrency: value, littlePercentage: GratuitousWatchDataSource.optionalDivision(top: Double(value), bottom: Double(billAmount)), starFlag: star)
                     }
@@ -204,7 +220,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                             let star = idealTip == value ? false : true
                             if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
                                 if row.interfaceIsConfigured == false {
-                                    row.configureInterface()
+                                    row.configureInterface(parentInterfaceController: self)
                                 }
                                 row.setCurrencyLabels(bigCurrency: value, littlePercentage: GratuitousWatchDataSource.optionalDivision(top: Double(value), bottom: Double(billAmount)), starFlag: star)
                             }
@@ -212,7 +228,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                             tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
                             if let row = self.currencyAmountTable?.rowControllerAtIndex(index) as? CrownScrollTableRowController {
                                 if row.interfaceIsConfigured == false {
-                                    row.configureInterface()
+                                    row.configureInterface(parentInterfaceController: self)
                                 }
                                 row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
                             }
@@ -272,7 +288,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                             let star = idealTip == value ? false : true
                             if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
                                 if row.interfaceIsConfigured == false {
-                                    row.configureInterface()
+                                    row.configureInterface(parentInterfaceController: self)
                                 }
                                 row.setCurrencyLabels(bigCurrency: value, littlePercentage: GratuitousWatchDataSource.optionalDivision(top: Double(value), bottom: Double(billAmount)), starFlag: star)
                             }
@@ -280,7 +296,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                             tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
                             if let row = self.currencyAmountTable?.rowControllerAtIndex(index) as? CrownScrollTableRowController {
                                 if row.interfaceIsConfigured == false {
-                                    row.configureInterface()
+                                    row.configureInterface(parentInterfaceController: self)
                                 }
                                 row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
                             }

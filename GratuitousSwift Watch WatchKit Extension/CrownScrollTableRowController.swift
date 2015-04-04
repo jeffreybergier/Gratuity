@@ -15,6 +15,8 @@ class CrownScrollTableRowController: NSObject {
     @IBOutlet private weak var starLabel: WKInterfaceLabel?
     @IBOutlet private weak var smallPercentageLabel: WKInterfaceLabel?
     
+    private var currencyAmount: Int?
+    
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.smallValueText
@@ -22,6 +24,9 @@ class CrownScrollTableRowController: NSObject {
     func setCurrencyLabels(#bigCurrency: Int, littlePercentage: Double?, starFlag: Bool?) {
         // set the big text label
         self.bigCurrencyLabel?.setAttributedText(NSAttributedString(string: self.dataSource.currencyStringFromInteger(bigCurrency), attributes: self.valueTextAttributes))
+        
+        // set the property for possible use later
+        self.currencyAmount = bigCurrency
         
         // set the star flag if it was given by the controller
         if let starFlag = starFlag {
@@ -37,11 +42,23 @@ class CrownScrollTableRowController: NSObject {
     }
     
     var interfaceIsConfigured = false
-    func configureInterface() {
+    func configureInterface(#parentInterfaceController: WKInterfaceController) {
 //        self.smallPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
 //        self.bigCurrencyLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
         self.starLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
         self.outlineGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
         self.interfaceIsConfigured = true
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySymbolShouldUpdate:", name: WatchNotification.CurrencySymbolShouldUpdate, object: parentInterfaceController)
+    }
+    
+    @objc private func currencySymbolShouldUpdate(notification: NSNotification) {
+        if let currencyAmount = self.currencyAmount {
+            self.bigCurrencyLabel?.setAttributedText(NSAttributedString(string: self.dataSource.currencyStringFromInteger(currencyAmount), attributes: self.valueTextAttributes))
+        }
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }
