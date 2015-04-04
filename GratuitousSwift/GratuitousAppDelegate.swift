@@ -24,8 +24,8 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         //crashlytics intializer
         Fabric.with([Crashlytics()])
         
-        //check my server for which UI the watch should use
-//        self.checkWatchUIJSON()
+        // Check if the date is April 24 or later to display watch info UI
+        self.defaultsManager.watchInfoViewControllerShouldAppear = self.currentDateAfterTriggerDate()
         
         //initialize the view controller from the storyboard
         let tipViewController = self.storyboard.instantiateInitialViewController() as? UIViewController
@@ -41,6 +41,32 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
         
         return true
+    }
+    
+    private func currentDateAfterTriggerDate() -> Bool {
+        let calendar = NSCalendar.currentCalendar()
+        let todaysDate = NSDate(timeIntervalSinceNow: 0)
+        let triggerDateComponents = NSDateComponents()
+        triggerDateComponents.month = 4
+        triggerDateComponents.day = 24
+        triggerDateComponents.year = 2015
+        if let triggerDate = calendar.dateFromComponents(triggerDateComponents) {
+            let dateComparison = calendar.compareDate(todaysDate, toDate: triggerDate, toUnitGranularity: NSCalendarUnit.DayCalendarUnit)
+            switch dateComparison {
+            case .OrderedAscending:
+                if true == true {
+                    break
+                } else {
+                    println()
+                }
+                return true //return false // returns false if current date is before April 24, 2015
+            case .OrderedDescending:
+                return true
+            case .OrderedSame:
+                return true
+            }
+        }
+        return false
     }
     
 //    private func checkWatchUIJSON() {

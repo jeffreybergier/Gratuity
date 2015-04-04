@@ -48,6 +48,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
     private var totalAmountTextLabelAttributes = [String : NSObject]()
     private var tipPercentageTextLabelAttributes = [String : NSObject]()
+    private var viewDidAppearOnce = false
     private weak var defaultsManager: GratuitousUserDefaults? = {
         let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
         return appDelegate?.defaultsManager
@@ -186,17 +187,25 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.updateTableViewsFromDisk()
-
-        UIView.animateWithDuration(GratuitousUIConstant.animationDuration() * 3.0,
-            delay: 0.0,
-            usingSpringWithDamping: 1.0,
-            initialSpringVelocity: 1.0,
-            options: UIViewAnimationOptions.AllowUserInteraction,
-            animations: { () -> Void in
-                self.labelContainerView?.alpha = 1.0
-                self.tableContainerView?.alpha = 1.0
-            }, completion: nil)
+        if self.viewDidAppearOnce == false {
+            self.updateTableViewsFromDisk()
+            UIView.animateWithDuration(GratuitousUIConstant.animationDuration() * 3.0,
+                delay: 0.0,
+                usingSpringWithDamping: 1.0,
+                initialSpringVelocity: 1.0,
+                options: UIViewAnimationOptions.AllowUserInteraction,
+                animations: { () -> Void in
+                    self.labelContainerView?.alpha = 1.0
+                    self.tableContainerView?.alpha = 1.0
+                }, completion: nil)
+            //WARNING: Need
+            if true == true { //self.defaultsManager?.watchInfoViewControllerShouldAppear == true && self.defaultsManager?.watchInfoViewControllerWasDismissed == true {
+                self.performSegueWithIdentifier("watchInfoModalDialogSegue", sender: self)
+            } else {
+                println()
+            }
+            self.viewDidAppearOnce = true
+        }
     }
 
     private func updateTableViewsFromDisk() {

@@ -52,8 +52,10 @@ class GratuitousUserDefaults: Printable {
         self.userDefaults.setInteger(overrideCurrencySymbol.rawValue, forKey: Keys.overrideCurrencySymbol)
         self.userDefaults.setDouble(suggestedTipPercentage, forKey: Keys.suggestedTipPercentage)
         
-        // insert all the new data that was started after version 1.0
+        // insert all the new data that was started at verion 1.1
         self.userDefaults.setObject(toVersion, forKey: Keys.appVersionString)
+        self.userDefaults.setBool(false, forKey: Keys.watchInfoViewControllerWasDismissed)
+        self.userDefaults.setBool(false, forKey: Keys.watchInfoViewControllerShouldAppear)
         self.userDefaults.setBool(true, forKey: Keys.showTutorialAtLaunch)
         self.userDefaults.synchronize()
     }
@@ -63,6 +65,8 @@ class GratuitousUserDefaults: Printable {
         self.userDefaults.setObject(currentAppVersion, forKey: Keys.appVersionString)
         self.userDefaults.setInteger(25, forKey: Keys.billIndexPathRow)
         self.userDefaults.setInteger(0, forKey: Keys.tipIndexPathRow)
+        self.userDefaults.setBool(false, forKey: Keys.watchInfoViewControllerWasDismissed)
+        self.userDefaults.setBool(false, forKey: Keys.watchInfoViewControllerShouldAppear)
         self.userDefaults.setBool(true, forKey: Keys.showTutorialAtLaunch)
         self.userDefaults.setDouble(0.2, forKey: Keys.suggestedTipPercentage)
         self.userDefaults.setInteger(CurrencySign.Default.rawValue, forKey: Keys.overrideCurrencySymbol)
@@ -153,6 +157,38 @@ class GratuitousUserDefaults: Printable {
         }
     }
     
+    private var _watchInfoViewControllerShouldAppear: Bool?
+    var watchInfoViewControllerShouldAppear: Bool {
+        set {
+            _watchInfoViewControllerShouldAppear = newValue
+            self.userDefaults.setBool(newValue, forKey: Keys.watchInfoViewControllerShouldAppear)
+            self.userDefaults.synchronize()
+        }
+        get {
+            if let watchInfoViewControllerShouldAppear = _watchInfoViewControllerShouldAppear {
+                return watchInfoViewControllerShouldAppear
+            } else {
+                return self.userDefaults.boolForKey(Keys.watchInfoViewControllerShouldAppear) !! false
+            }
+        }
+    }
+    
+    private var _watchInfoViewControllerWasDismissed: Bool?
+    var watchInfoViewControllerWasDismissed: Bool {
+        set {
+            _watchInfoViewControllerWasDismissed = newValue
+            self.userDefaults.setBool(newValue, forKey: Keys.watchInfoViewControllerWasDismissed)
+            self.userDefaults.synchronize()
+        }
+        get {
+            if let watchInfoViewControllerWasDismissed = _watchInfoViewControllerWasDismissed {
+                return watchInfoViewControllerWasDismissed
+            } else {
+                return self.userDefaults.boolForKey(Keys.watchInfoViewControllerWasDismissed) !! false
+            }
+        }
+    }
+    
     class func watchUIURL() -> NSURL {
         return NSURL(string: "http://www.saturdayapps.com/gratuity/watchUI.json")!
     }
@@ -166,14 +202,16 @@ class GratuitousUserDefaults: Printable {
         
         static let CFBundleShortVersionString = "CFBundleShortVersionString"
         
-        // version 1.0 and 1.1 keys
+        // version 1.0 and 1.0.1 keys
         static let billIndexPathRow = "billIndexPathRow"
         static let tipIndexPathRow = "tipIndexPathRow"
         static let overrideCurrencySymbol = "overrideCurrencySymbol"
         static let suggestedTipPercentage = "suggestedTipPercentage"
         
-        // version 1.2 keys
+        // version 1.1 keys
         static let appVersionString = "appVersionString"
         static let showTutorialAtLaunch = "showTutorialAtLaunch"
+        static let watchInfoViewControllerShouldAppear = "watchInfoViewControllerShouldAppear"
+        static let watchInfoViewControllerWasDismissed = "watchInfoViewControllerWasDismissed"
     }
 }
