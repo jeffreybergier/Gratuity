@@ -283,6 +283,8 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     @IBOutlet private weak var aboutSaturdayAppsParagraphLabel: UILabel?
     @IBOutlet private weak var aboutEmailMeButton: UIButton?
     @IBOutlet private weak var aboutReviewButton: UIButton?
+    @IBOutlet private weak var aboutWatchAppButton: UIButton?
+    
     
     private let applicationID = 933679671
     
@@ -302,12 +304,14 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         //prepare the buttons
         self.aboutEmailMeButton?.setTitle(NSLocalizedString("Email Me", comment: "this is the button that users can use to send me an email."), forState: UIControlState.Normal)
         self.aboutReviewButton?.setTitle(NSLocalizedString("Review This App", comment: "this button takes the user to the app store so they can leave a review"), forState: UIControlState.Normal)
+        self.aboutWatchAppButton?.setTitle(NSLocalizedString("Gratuity for Watch", comment: "this button takes the user to see the apple watch info screen"), forState: UIControlState.Normal)
         
         //set the background color of all of the different cells. For some reason on ipad, its white instead of clear
         self.aboutMyPictureImageView?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         self.aboutSaturdayAppsParagraphLabel?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         self.aboutEmailMeButton?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         self.aboutReviewButton?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
+        self.aboutWatchAppButton?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
     }
     
     @IBAction func didTapEmailMeButton(sender: UIButton) {
@@ -340,6 +344,15 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         if let appStoreURL = appStoreURL {
             UIApplication.sharedApplication().openURL(appStoreURL)
         }
+    }
+    
+    @IBAction func didTapAppleWatchButton(sender: UIButton) {
+        let presentingVC = self.presentingViewController as? TipViewController
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            if let presentingVC = presentingVC {
+                presentingVC.performSegueWithIdentifier("watchInfoModalDialogSegue", sender: self)
+            }
+        })
     }
     
     func mailComposeController(controller: MFMailComposeViewController?, didFinishWithResult result: MFMailComposeResult, error: NSError?) {

@@ -198,11 +198,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                     self.labelContainerView?.alpha = 1.0
                     self.tableContainerView?.alpha = 1.0
                 }, completion: nil)
-            //WARNING: Need
-            if true == true { //self.defaultsManager?.watchInfoViewControllerShouldAppear == true && self.defaultsManager?.watchInfoViewControllerWasDismissed == true {
+            
+            // Launch the apple watch info screen if needed
+            if self.defaultsManager?.watchInfoViewControllerShouldAppear == true && self.defaultsManager?.watchInfoViewControllerWasDismissed == false {
                 self.performSegueWithIdentifier("watchInfoModalDialogSegue", sender: self)
-            } else {
-                println()
             }
             self.viewDidAppearOnce = true
         }
@@ -278,22 +277,41 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     //MARK: Handle User Input
     
-    @IBAction func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
+    @IBAction private func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
         self.billAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: 0 + PrivateConstants.ExtraCells, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
     
-    @IBAction func didTapTipAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
+    @IBAction private func didTapTipAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
         self.tipAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: 0 + PrivateConstants.ExtraCells, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
     }
     
-    @IBAction func unwindToViewController (sender: UIStoryboardSegue){
+    @IBAction private func unwindToViewController(segue: UIStoryboardSegue) {
+        if let segueIdentifier = segue.identifier {
+            switch segueIdentifier {
+            case "unwindFromWatchInfoVC":
+                self.defaultsManager?.watchInfoViewControllerWasDismissed = true
+            default:
+                break
+            }
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let settingsViewController = segue.destinationViewController as? UINavigationController
-        if let settingsViewController = settingsViewController {
-            settingsViewController.transitioningDelegate = self.presentationTransitionerDelegate
-            settingsViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+        if let segueIdentifier = segue.identifier {
+            switch segueIdentifier {
+            case "settingsSegue":
+                if let settingsViewController = segue.destinationViewController as? UINavigationController {
+                    settingsViewController.transitioningDelegate = self.presentationTransitionerDelegate
+                    settingsViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                }
+            case "watchInfoModalDialogSegue":
+                if let watchInfoViewController = segue.destinationViewController as? WatchInfoViewController {
+                    watchInfoViewController.transitioningDelegate = self.presentationTransitionerDelegate
+                    watchInfoViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                }
+            default:
+                break
+            }
         }
     }
 

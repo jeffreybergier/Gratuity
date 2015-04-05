@@ -178,7 +178,7 @@
                                 <rect key="frame" x="535" y="558" width="57" height="30"/>
                                 <state key="normal" title="Settings"/>
                                 <connections>
-                                    <segue destination="DJr-td-mzI" kind="presentation" id="Ifz-Xu-nUN"/>
+                                    <segue destination="DJr-td-mzI" kind="presentation" identifier="settingsSegue" id="Ifz-Xu-nUN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -659,6 +659,35 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="luE-tq-pXd">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="luE-tq-pXd" id="Csk-Qh-3xn">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7IP-77-68H" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
+                                                    <rect key="frame" x="210" y="4" width="181" height="36"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <inset key="contentEdgeInsets" minX="24" minY="8" maxX="24" maxY="8"/>
+                                                    <state key="normal" title="Gratuity for Watch">
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapAppleWatchButton:" destination="rPE-iu-epa" eventType="touchUpInside" id="Wih-p1-kuz"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="7IP-77-68H" secondAttribute="bottom" priority="750" constant="4" id="RYF-sB-fLD"/>
+                                                <constraint firstItem="7IP-77-68H" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Csk-Qh-3xn" secondAttribute="topMargin" priority="750" constant="4" id="W3I-KN-vLb"/>
+                                                <constraint firstAttribute="centerY" secondItem="7IP-77-68H" secondAttribute="centerY" id="fPO-rr-Bka"/>
+                                                <constraint firstItem="7IP-77-68H" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Csk-Qh-3xn" secondAttribute="leadingMargin" constant="12" id="m40-cQ-Dp5"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="7IP-77-68H" secondAttribute="trailing" constant="12" id="p09-7Q-1Wg"/>
+                                                <constraint firstAttribute="centerX" secondItem="7IP-77-68H" secondAttribute="centerX" id="rP6-LJ-3Je"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -681,6 +710,7 @@
                         <outlet property="aboutMyPictureImageView" destination="Qdc-6t-Cq7" id="RwF-Zh-E6l"/>
                         <outlet property="aboutReviewButton" destination="OwA-MO-K0L" id="amg-Zy-KpP"/>
                         <outlet property="aboutSaturdayAppsParagraphLabel" destination="FOz-DK-eig" id="h01-g5-YdX"/>
+                        <outlet property="aboutWatchAppButton" destination="7IP-77-68H" id="LyC-9W-k1b"/>
                         <outlet property="headerLabelAboutSaturdayApps" destination="CQ4-3s-gcG" id="sA2-QA-yNC"/>
                         <outlet property="headerLabelCurencySymbol" destination="Rhq-zL-B07" id="d6z-aa-JNO"/>
                         <outlet property="headerLabelTipPercentage" destination="nf5-Rb-Dqy" id="eyb-tC-g0U"/>
@@ -736,10 +766,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPR-iu-zel">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="620"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="628"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gF-6N-FII">
-                                                        <rect key="frame" x="0.0" y="132" width="320" height="568"/>
+                                                        <rect key="frame" x="0.0" y="138" width="320" height="568"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="320" id="7ya-QF-H72"/>
@@ -747,31 +777,33 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gratuity" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSE-Uh-TGD">
-                                                        <rect key="frame" x="20" y="20" width="280" height="34"/>
+                                                        <rect key="frame" x="20" y="24" width="280" height="34"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                                         <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apple Watch" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7i-VU-1If">
-                                                        <rect key="frame" x="20" y="48" width="280" height="34"/>
+                                                        <rect key="frame" x="20" y="54" width="280" height="34"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                                         <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwR-uM-jLF">
-                                                        <rect key="frame" x="20" y="98" width="280" height="89"/>
+                                                        <rect key="frame" x="20" y="104" width="280" height="89"/>
                                                         <string key="text">Did you just open a shiny new Apple Watch? Don't forget to install Gratuity. You can do so in the Apple Watch app on your iPhone.</string>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                         <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbU-d4-xLb" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="550" width="280" height="30"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbU-d4-xLb" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="556" width="280" height="32"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <state key="normal" title="Dismiss">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
-                                                            <segue destination="dML-di-Rig" kind="unwind" unwindAction="unwindToViewController:" id="MOt-SV-qwq"/>
+                                                            <segue destination="dML-di-Rig" kind="unwind" identifier="unwindFromWatchInfoVC" unwindAction="unwindToViewController:" id="Tu2-dF-XPp"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -780,7 +812,7 @@
                                                     <constraint firstItem="i7i-VU-1If" firstAttribute="leading" secondItem="IPR-iu-zel" secondAttribute="leading" constant="20" symbolic="YES" id="1Ta-C1-oGt"/>
                                                     <constraint firstAttribute="trailing" secondItem="oSE-Uh-TGD" secondAttribute="trailing" constant="20" symbolic="YES" id="1oo-0T-19t"/>
                                                     <constraint firstItem="EbU-d4-xLb" firstAttribute="top" secondItem="4gF-6N-FII" secondAttribute="bottom" constant="-150" id="2Ov-GO-z0a"/>
-                                                    <constraint firstItem="oSE-Uh-TGD" firstAttribute="top" secondItem="IPR-iu-zel" secondAttribute="top" constant="20" symbolic="YES" id="Bmu-eM-0y0"/>
+                                                    <constraint firstItem="oSE-Uh-TGD" firstAttribute="top" secondItem="IPR-iu-zel" secondAttribute="top" constant="24" id="Bmu-eM-0y0"/>
                                                     <constraint firstItem="fwR-uM-jLF" firstAttribute="leading" secondItem="IPR-iu-zel" secondAttribute="leading" constant="20" symbolic="YES" id="C1q-4L-691"/>
                                                     <constraint firstAttribute="centerX" secondItem="4gF-6N-FII" secondAttribute="centerX" id="Dl6-Vu-vXE"/>
                                                     <constraint firstAttribute="trailing" secondItem="EbU-d4-xLb" secondAttribute="trailing" constant="20" symbolic="YES" id="IIx-5a-nx0"/>
@@ -791,7 +823,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="EbU-d4-xLb" secondAttribute="bottom" constant="40" id="mq5-SB-ACL"/>
                                                     <constraint firstItem="4gF-6N-FII" firstAttribute="top" secondItem="fwR-uM-jLF" secondAttribute="bottom" constant="-55" id="uML-jl-Ej9"/>
                                                     <constraint firstItem="fwR-uM-jLF" firstAttribute="top" secondItem="i7i-VU-1If" secondAttribute="bottom" constant="16" id="z8Q-G1-09S"/>
-                                                    <constraint firstItem="i7i-VU-1If" firstAttribute="top" secondItem="oSE-Uh-TGD" secondAttribute="bottom" constant="-6" id="zpN-5F-Ryf"/>
+                                                    <constraint firstItem="i7i-VU-1If" firstAttribute="top" secondItem="oSE-Uh-TGD" secondAttribute="bottom" constant="-4" id="zpN-5F-Ryf"/>
                                                     <constraint firstAttribute="width" constant="320" id="zqh-oL-o2J"/>
                                                 </constraints>
                                             </view>
@@ -810,18 +842,25 @@
                                     <constraint firstItem="ri1-EA-AF8" firstAttribute="height" secondItem="jv3-R1-bl9" secondAttribute="height" id="G9e-MN-oUB"/>
                                     <constraint firstAttribute="width" constant="320" id="TYm-FJ-MFE"/>
                                     <constraint firstAttribute="centerX" secondItem="ri1-EA-AF8" secondAttribute="centerX" id="cAS-NZ-xFt"/>
-                                    <constraint firstAttribute="height" constant="568" id="eJV-Ki-czZ"/>
+                                    <constraint firstAttribute="height" priority="749" constant="568" id="e87-Km-89c"/>
                                     <constraint firstItem="ri1-EA-AF8" firstAttribute="width" secondItem="jv3-R1-bl9" secondAttribute="width" id="jJp-0E-24M"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="jv3-R1-bl9" secondAttribute="centerX" id="DSz-kz-G3k"/>
-                            <constraint firstAttribute="centerY" secondItem="jv3-R1-bl9" secondAttribute="centerY" id="YPJ-uI-ofO"/>
+                            <constraint firstItem="y5F-fz-l0t" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jv3-R1-bl9" secondAttribute="bottom" constant="-20" id="hNy-mY-OiY">
+                                <variation key="heightClass=compact" constant="2"/>
+                            </constraint>
+                            <constraint firstItem="jv3-R1-bl9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mQD-Te-16U" secondAttribute="bottom" constant="-20" id="hc6-Mq-suw">
+                                <variation key="heightClass=compact" constant="2"/>
+                            </constraint>
+                            <constraint firstAttribute="centerY" secondItem="jv3-R1-bl9" secondAttribute="centerY" id="wL3-kz-Lqt"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dismissButton" destination="EbU-d4-xLb" id="dhY-iM-G9G"/>
                         <outlet property="gratuityParagraphLabel" destination="fwR-uM-jLF" id="2CH-JF-3MG"/>
                         <outlet property="gratuitySubtitleLabel" destination="i7i-VU-1If" id="ieq-nI-Sg7"/>
                         <outlet property="gratuityTitleLabel" destination="oSE-Uh-TGD" id="Wwo-H8-EGj"/>
@@ -832,7 +871,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jrp-iL-16f" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dML-di-Rig" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="757" y="1033"/>
+            <point key="canvasLocation" x="497" y="1293"/>
         </scene>
     </scenes>
     <resources>

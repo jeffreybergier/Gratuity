@@ -24,9 +24,6 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         //crashlytics intializer
         Fabric.with([Crashlytics()])
         
-        // Check if the date is April 24 or later to display watch info UI
-        self.defaultsManager.watchInfoViewControllerShouldAppear = self.currentDateAfterTriggerDate()
-        
         //initialize the view controller from the storyboard
         let tipViewController = self.storyboard.instantiateInitialViewController() as? UIViewController
         
@@ -35,12 +32,36 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         }
         
+        // Check if the date is April 24 or later to display watch info UI
+        self.defaultsManager.watchInfoViewControllerShouldAppear = self.currentDateAfterTriggerDate()
+        
+        // if the device is an iphone 4s or an ipad, mark watchInfoViewControllerWasDismissed as true
+        if self.defaultsManager.watchInfoViewControllerWasDismissed == false {
+            self.defaultsManager.watchInfoViewControllerWasDismissed = self.checkForWatchInvalidDevice()
+        }
+        
         self.window?.rootViewController = tipViewController
         self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         self.window?.tintColor = GratuitousUIConstant.lightTextColor()
         self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
         
         return true
+    }
+    
+    private func checkForWatchInvalidDevice() -> Bool {
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Pad:
+            return true
+        case .Phone:
+            let screenHeight = UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width ? UIScreen.mainScreen().bounds.size.height : UIScreen.mainScreen().bounds.size.width
+            if screenHeight < 568 { // if its an iphone and if the screen is smaller than 568, its an iphone 4s and its not apple watch compatible
+                return true
+            } else {
+                return false
+            }
+        case .Unspecified:
+            return false
+        }
     }
     
     private func currentDateAfterTriggerDate() -> Bool {
@@ -54,12 +75,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             let dateComparison = calendar.compareDate(todaysDate, toDate: triggerDate, toUnitGranularity: NSCalendarUnit.DayCalendarUnit)
             switch dateComparison {
             case .OrderedAscending:
-                if true == true {
-                    break
-                } else {
-                    println()
-                }
-                return true //return false // returns false if current date is before April 24, 2015
+                return false // returns false if current date is before April 24, 2015
             case .OrderedDescending:
                 return true
             case .OrderedSame:
