@@ -35,8 +35,8 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
             if self.highestDataIndexInTable >= self.data.count - 1 {
                 self.largerButtonGroup?.setHidden(true)
             }
-            println("highestDataIndexInTable: \(self.highestDataIndexInTable)")
-            println("highestValueFromArray: \(self.data[self.highestDataIndexInTable])")
+            //println("highestDataIndexInTable: \(self.highestDataIndexInTable)")
+            //println("highestValueFromArray: \(self.data[self.highestDataIndexInTable])")
         }
     }
     private var lowestDataIndexInTable: Int = 0 {
@@ -45,8 +45,8 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
                 self.smallerButtonGroup?.setHidden(true)
             }
             
-            println("lowestDataIndexInTable: \(self.lowestDataIndexInTable)")
-            println("lowestValueFromArray: \(self.data[self.lowestDataIndexInTable])")
+            //println("lowestDataIndexInTable: \(self.lowestDataIndexInTable)")
+            //println("lowestValueFromArray: \(self.data[self.lowestDataIndexInTable])")
         }
     }
     
@@ -151,7 +151,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
             currencyAmountToScrollTo = 0
         }
         let rowIndexPath = currencyAmountToScrollTo - self.lowestDataIndexInTable
-        println("Scroll to Currency: \(currencyAmountToScrollTo), IndexPath: \(rowIndexPath)")
+        //println("Scroll to Currency: \(currencyAmountToScrollTo), IndexPath: \(rowIndexPath)")
         
         if rowIndexPath > 0 && rowIndexPath < self.currencyAmountTable?.numberOfRows {
             self.currencyAmountTable?.scrollToRowAtIndex(rowIndexPath)
@@ -320,7 +320,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
         let adjustedIndex = rowIndex + self.lowestDataIndexInTable
         let currencyAmount = self.data[adjustedIndex]
-        println("DidSelectRowIndex \(rowIndex), Adjusted Index \(adjustedIndex), Currency Amount: \(currencyAmount)")
+        //println("DidSelectRowIndex \(rowIndex), Adjusted Index \(adjustedIndex), Currency Amount: \(currencyAmount)")
         switch self.currentContext {
         case .Bill:
             self.dataSource.defaultsManager.billIndexPathRow = currencyAmount
@@ -334,7 +334,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     }
     
     @IBAction func didTapSmallerAmountButton() {
-        println("\(self.numberOfRowsToAdd(buttonType: .SmallerButton)) Rows added to Top")
+        //println("\(self.numberOfRowsToAdd(buttonType: .SmallerButton)) Rows added to Top")
         switch self.currentContext {
         case .Bill:
             self.insertTableRowControllersAtTop(self.numberOfRowsToAdd(buttonType: .SmallerButton))
@@ -347,7 +347,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     
     
     @IBAction private func didTapLargerAmountButton() {
-        println("\(self.numberOfRowsToAdd(buttonType: .LargerButton)) Rows added to Bottom")
+        //println("\(self.numberOfRowsToAdd(buttonType: .LargerButton)) Rows added to Bottom")
         switch self.currentContext {
         case .Bill:
             self.insertTableRowControllersAtBottom(self.numberOfRowsToAdd(buttonType: .LargerButton))

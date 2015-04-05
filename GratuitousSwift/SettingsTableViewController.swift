@@ -360,7 +360,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             presentedViewController.dismissViewControllerAnimated(true, completion: nil)
         }
         if let error = error {
-            println("AboutTableViewController: Error while sending email. Error Description: \(error.description)")
+            NSLog("AboutTableViewController: Error while sending email. Error Description: \(error.description)")
         }
     }
     

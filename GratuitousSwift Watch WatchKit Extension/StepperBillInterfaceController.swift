@@ -63,7 +63,7 @@ class StepperInterfaceController: WKInterfaceController {
     
     private func configureBillAmountFromDisk(#round: Bool) {
         let billAmount = round ? Int(roundf(Float(self.dataSource.billAmount !! 0 / self.billAmountMultiplier))) * self.billAmountMultiplier : self.dataSource.billAmount !! 0
-        println("WillActivate: Round = \(round), BillAmount = \(billAmount)")
+        //println("WillActivate: Round = \(round), BillAmount = \(billAmount)")
         self.currencyAmountTextLabel?.setText(self.dataSource.currencyStringFromInteger(billAmount))
         if billAmount > 0 {
             self.currencySlider?.setValue(Float(billAmount))
@@ -72,7 +72,7 @@ class StepperInterfaceController: WKInterfaceController {
     
     @IBAction @objc private func didChangeSlider(value: Float) {
         let adjustedValue = self.billAmountMultiplier * Int(value)
-        println("DidChangeSlider: AdjustedValue = \(adjustedValue)")
+        //println("DidChangeSlider: AdjustedValue = \(adjustedValue)")
         self.dataSource.billAmount = adjustedValue
         self.currencyAmountTextLabel?.setText(self.dataSource.currencyStringFromInteger(adjustedValue))
     }
