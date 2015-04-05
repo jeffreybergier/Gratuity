@@ -423,6 +423,10 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
         }
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     private struct ScrollInterfaceConstants {
         static let dataMax = 2001
         static let dataMin = 0

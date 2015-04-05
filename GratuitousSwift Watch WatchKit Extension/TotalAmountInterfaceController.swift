@@ -110,4 +110,8 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
     @IBAction func didTapStartOverButton() {
         self.popToRootController()
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }

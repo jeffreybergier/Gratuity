@@ -77,9 +77,29 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             case .OrderedAscending:
                 return false // returns false if current date is before April 24, 2015
             case .OrderedDescending:
-                return true
+                return self.dateIsBeforeJuneOne(todaysDate)
             case .OrderedSame:
-                return true
+                return self.dateIsBeforeJuneOne(todaysDate)
+            }
+        }
+        return false
+    }
+    
+    private func dateIsBeforeJuneOne(currentDate: NSDate) -> Bool {
+        let calendar = NSCalendar.currentCalendar()
+        let triggerDateComponents = NSDateComponents()
+        triggerDateComponents.month = 6
+        triggerDateComponents.day = 1
+        triggerDateComponents.year = 2015
+        if let triggerDate = calendar.dateFromComponents(triggerDateComponents) {
+            let dateComparison = calendar.compareDate(currentDate, toDate: triggerDate, toUnitGranularity: NSCalendarUnit.DayCalendarUnit)
+            switch dateComparison {
+            case .OrderedAscending:
+                return true // returns true if current date is before June 01, 2015
+            case .OrderedDescending:
+                return false
+            case .OrderedSame:
+                return false // returns true if current date is before June 01, 2015
             }
         }
         return false
