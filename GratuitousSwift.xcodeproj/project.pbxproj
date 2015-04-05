@@ -11,8 +11,8 @@
 		73011BE11AD04F90001F6D71 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 73011BDF1AD04F90001F6D71 /* en.lproj */; };
 		73011BE71AD05AFA001F6D71 /* WatchInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */; };
 		73011BE81AD05AFA001F6D71 /* WatchInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */; };
-		73011BE91AD070DC001F6D71 /* CurrencySymbolUpdating.mov in Resources */ = {isa = PBXBuildFile; fileRef = 73011BE21AD05AB1001F6D71 /* CurrencySymbolUpdating.mov */; };
-		73011BEA1AD070DF001F6D71 /* CurrencySymbolUpdating.mov in Resources */ = {isa = PBXBuildFile; fileRef = 73011BE21AD05AB1001F6D71 /* CurrencySymbolUpdating.mov */; };
+		73011BEC1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */; };
+		73011BED1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */; };
 		731375551ABF2FA50074E2F2 /* AppDelegateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */; };
 		731375671ABF3D920074E2F2 /* Gratuity WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 731375661ABF3D910074E2F2 /* Gratuity WatchKit App.app */; };
 		731375741ABF3D930074E2F2 /* Gratuity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7313755A1ABF3D900074E2F2 /* Gratuity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -164,8 +164,8 @@
 
 /* Begin PBXFileReference section */
 		73011BDF1AD04F90001F6D71 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
-		73011BE21AD05AB1001F6D71 /* CurrencySymbolUpdating.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = CurrencySymbolUpdating.mov; sourceTree = "<group>"; };
 		73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchInfoViewController.swift; sourceTree = "<group>"; };
+		73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "gratuityInfoDemoVideo@2x.mov"; sourceTree = "<group>"; };
 		730530C91A871A3200DC08A6 /* Gratuityδ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuityδ.entitlements"; sourceTree = "<group>"; };
 		730530CA1A871A4700DC08A6 /* Gratuityλδ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuityλδ.entitlements"; sourceTree = "<group>"; };
 		730530CB1A871A5200DC08A6 /* GratuitousSwift Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuitousSwift Watch.entitlements"; sourceTree = "<group>"; };
@@ -281,7 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */,
-				73011BE21AD05AB1001F6D71 /* CurrencySymbolUpdating.mov */,
+				73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */,
 			);
 			name = "Watch Info View Controller";
 			sourceTree = "<group>";
@@ -773,9 +773,9 @@
 			files = (
 				736568EF1A26DD1400603602 /* GratuitousTableViewCell.xib in Resources */,
 				73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */,
-				73011BEA1AD070DF001F6D71 /* CurrencySymbolUpdating.mov in Resources */,
 				736568F01A26DD1400603602 /* GratuitousSwift.storyboard in Resources */,
 				736568F11A26DD1400603602 /* LaunchScreen.xib in Resources */,
+				73011BED1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov in Resources */,
 				736568F21A26DD1400603602 /* Images.xcassets in Resources */,
 				736568F31A26DD1400603602 /* settingsIcon.pdf in Resources */,
 			);
@@ -787,12 +787,12 @@
 			files = (
 				7382512D19E6473A00CD2B28 /* GratuitousTableViewCell.xib in Resources */,
 				7334770F1A26E85000513F1F /* Localizable.strings in Resources */,
+				73011BEC1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov in Resources */,
 				7313757E1ABF3E4B0074E2F2 /* GratuityStoreWatchExtensionInfo.plist in Resources */,
 				734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */,
 				7382511119E60EED00CD2B28 /* LaunchScreen.xib in Resources */,
 				7382510E19E60EED00CD2B28 /* Images.xcassets in Resources */,
 				737E5DE71A1AFD1C00F0A8C7 /* settingsIcon.pdf in Resources */,
-				73011BE91AD070DC001F6D71 /* CurrencySymbolUpdating.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
