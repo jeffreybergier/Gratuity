@@ -22,7 +22,7 @@ class AppDelegateInterfaceController: WKInterfaceController {
         self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: 10)
         
         // configure the timer to fix an issue where sometimes the UI would not push to the correct interface controller.
-        let timer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "delayPushAppropriateInterfaceController:", userInfo: nil, repeats: false)
+        let timer = NSTimer.scheduledTimerWithTimeInterval(0.75, target: self, selector: "delayPushAppropriateInterfaceController:", userInfo: nil, repeats: false)
     }
     
     @objc private func delayPushAppropriateInterfaceController(timer: NSTimer?) {
