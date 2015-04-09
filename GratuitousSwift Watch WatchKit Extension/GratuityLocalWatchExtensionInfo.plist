@@ -21,19 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.1.0</string>
-	<key>NSExtension</key>
-	<dict>
-		<key>NSExtensionAttributes</key>
-		<dict>
-			<key>WKAppBundleIdentifier</key>
-			<string>com.saturdayapps.Gratuity.local.watchkitapp</string>
-		</dict>
-		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.watchkit</string>
-	</dict>
-	<key>RemoteInterfacePrincipalClass</key>
-	<string>$(PRODUCT_MODULE_NAME).InterfaceController</string>
+	<string>1.1.1</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -48,6 +36,18 @@
 			</dict>
 		</array>
 	</dict>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionAttributes</key>
+		<dict>
+			<key>WKAppBundleIdentifier</key>
+			<string>com.saturdayapps.Gratuity.local.watchkitapp</string>
+		</dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.watchkit</string>
+	</dict>
+	<key>RemoteInterfacePrincipalClass</key>
+	<string>$(PRODUCT_MODULE_NAME).InterfaceController</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Fuuutuuura-Meeediuuum.ttf</string>

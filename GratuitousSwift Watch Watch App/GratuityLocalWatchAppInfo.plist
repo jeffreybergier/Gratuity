@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>GratuityL</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -19,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.1.0</string>
+	<string>1.1.1</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Fuuutuuura-Meeediuuum.ttf</string>
@@ -33,7 +35,5 @@
 	<string>com.saturdayapps.Gratuity.local</string>
 	<key>WKWatchKitApp</key>
 	<true/>
-	<key>CFBundleDisplayName</key>
-	<string>GratuityL</string>
 </dict>
 </plist>
