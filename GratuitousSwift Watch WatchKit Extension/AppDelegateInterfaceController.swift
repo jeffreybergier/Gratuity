@@ -28,7 +28,7 @@ class AppDelegateInterfaceController: WKInterfaceController {
     @objc private func delayPushAppropriateInterfaceController(timer: NSTimer?) {
         timer?.invalidate()
         
-        if self.dataSource.defaultsManager.currentDateIsAfterWatchRelease(considerJuneCutoff: false) == true && self.dataSource.defaultsManager.showTutorialAtLaunch == true {
+        if self.dataSource.defaultsManager.showTutorialAtLaunch == true {
             self.pushControllerWithName("TutorialInterfaceController", context: nil)
         } else {
             self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)

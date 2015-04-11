@@ -305,14 +305,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.aboutReviewButton?.setTitle(NSLocalizedString("Review This App", comment: "this button takes the user to the app store so they can leave a review"), forState: UIControlState.Normal)
         self.aboutWatchAppButton?.setTitle(NSLocalizedString("Gratuity for Watch", comment: "this button takes the user to see the apple watch info screen"), forState: UIControlState.Normal)
         
-        // remove the about watch is not yet released.
-        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
-            if appDelegate.defaultsManager.currentDateIsAfterWatchRelease(considerJuneCutoff: false) == false {
-                self.aboutWatchAppButton?.userInteractionEnabled = false
-                self.aboutWatchAppButton?.removeFromSuperview()
-            }
-        }
-        
         //set the background color of all of the different cells. For some reason on ipad, its white instead of clear
         self.aboutMyPictureImageView?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         self.aboutSaturdayAppsParagraphLabel?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
