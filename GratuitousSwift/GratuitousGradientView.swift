@@ -26,22 +26,17 @@ class GratuitousGradientView: UIView {
         }
     }
     
-    internal override init() {
-        super.init()
-        self.commonInitializer()
-    }
-    
-    internal required init(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInitializer()
     }
     
-    internal override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInitializer()
     }
     
-    internal func commonInitializer() {
+    private func commonInitializer() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         self.backgroundColor = UIColor.clearColor()
         self.gradient.frame = self.bounds
@@ -54,7 +49,7 @@ class GratuitousGradientView: UIView {
         super.layoutSubviews()
     }
     
-    func invertColorsDidChange(notification: NSNotification) {
+    @objc private func invertColorsDidChange(notification: NSNotification) {
         //I know this is lazy... but it will rarely happen because its only when someone switches to inverted colors.
         //we can waste the extra ram for that one rare session.
         if UIAccessibilityIsInvertColorsEnabled() {

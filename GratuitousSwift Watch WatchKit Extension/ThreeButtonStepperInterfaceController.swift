@@ -81,8 +81,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        var currentContext: ThreeButtonStepperInterfaceContext
-        //let currentContext: InterfaceControllerContext
+        let currentContext: ThreeButtonStepperInterfaceContext
         if let contextString = context as? String {
             currentContext = ThreeButtonStepperInterfaceContext(rawValue: contextString) !! ThreeButtonStepperInterfaceContext.Bill
         } else {
