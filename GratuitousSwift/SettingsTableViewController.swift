@@ -37,6 +37,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         //tell the tableview to have dynamic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44
         
         //set the colors for the navigation controller
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
