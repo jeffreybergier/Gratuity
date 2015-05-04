@@ -17,8 +17,8 @@ class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransit
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        if let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) {
-            if let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) {
+        if let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey),
+            let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) {
                 
                 let fromView = fromVC.view
                 let toView = toVC.view
@@ -78,7 +78,6 @@ class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransit
                         fromVC.viewDidDisappear(true)
                         transitionContext.completeTransition(true)
                 })
-            }
         }
     }
 }

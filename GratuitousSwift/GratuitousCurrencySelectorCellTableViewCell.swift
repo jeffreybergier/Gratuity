@@ -48,23 +48,25 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     }
     
     private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {
-        let defaultsManager = (UIApplication.sharedApplication().delegate as GratuitousAppDelegate).defaultsManager
-        if defaultsManager.overrideCurrencySymbol.rawValue == self.tag {
-            self.accessoryType = UITableViewCellAccessoryType.Checkmark
-            if self.animatingBorderColor == false {
-                //if this property is being animated, don't change it
-                self.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
+        let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
+        if let defaultsManager = appDelegate?.defaultsManager {
+            if defaultsManager.overrideCurrencySymbol.rawValue == self.tag {
+                self.accessoryType = UITableViewCellAccessoryType.Checkmark
+                if self.animatingBorderColor == false {
+                    //if this property is being animated, don't change it
+                    self.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
+                }
+                self.accessoryType = UITableViewCellAccessoryType.Checkmark
+                if timer {
+                    let slowFadeOutTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "slowFadeOutOfBorderAroundCell:", userInfo: nil, repeats: false)
+                }
+            } else {
+                self.accessoryType = UITableViewCellAccessoryType.None
+                if self.animatingBorderColor == false {
+                    self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor //UIColor.blackColor().CGColor
+                }
+                self.accessoryType = UITableViewCellAccessoryType.None
             }
-            self.accessoryType = UITableViewCellAccessoryType.Checkmark
-            if timer {
-                let slowFadeOutTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "slowFadeOutOfBorderAroundCell:", userInfo: nil, repeats: false)
-            }
-        } else {
-            self.accessoryType = UITableViewCellAccessoryType.None
-            if self.animatingBorderColor == false {
-                self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor //UIColor.blackColor().CGColor
-            }
-            self.accessoryType = UITableViewCellAccessoryType.None
         }
         self.layoutIfNeeded()
     }
@@ -104,7 +106,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         self.animatingBorderColor = false
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesBegan(touches, withEvent: event)
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
             delay: 0.0,
@@ -116,7 +118,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             completion: { finished in })
     }
     
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesEnded(touches, withEvent: event)
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
             delay: 0.0,
@@ -128,7 +130,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             completion: { finished in })
     }
 
-    override func touchesCancelled(touches: NSSet, withEvent event: UIEvent?) {
+    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent?) {
         super.touchesCancelled(touches, withEvent: event)
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
             delay: 0.0,

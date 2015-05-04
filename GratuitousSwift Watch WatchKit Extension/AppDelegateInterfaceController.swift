@@ -31,12 +31,7 @@ class AppDelegateInterfaceController: WKInterfaceController {
         if self.dataSource.defaultsManager.showTutorialAtLaunch == true {
             self.pushControllerWithName("TutorialInterfaceController", context: nil)
         } else {
-            //            switch self.dataSource.defaultsManager.correctWatchInterface {
-            //            case .CrownScroller:
             self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)
-            //            case .ThreeButtonStepper:
-            //                self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: ThreeButtonStepperInterfaceContext.Bill.rawValue)
-            //            }
         }
     }
 }

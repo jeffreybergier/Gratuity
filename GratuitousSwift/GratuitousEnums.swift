@@ -198,17 +198,17 @@ enum UIFontStyle: Printable, Hashable {
     var description: String {
         switch self {
         case .Headline:
-            return UIFontTextStyleHeadline.description
+            return UIFontTextStyleHeadline
         case Body:
-            return UIFontTextStyleBody.description
+            return UIFontTextStyleBody
         case Caption1:
-            return UIFontTextStyleCaption1.description
+            return UIFontTextStyleCaption1
         case Caption2:
-            return UIFontTextStyleCaption2.description
+            return UIFontTextStyleCaption2
         case Footnote:
-            return UIFontTextStyleFootnote.description
+            return UIFontTextStyleFootnote
         case Subheadline:
-            return UIFontTextStyleSubheadline.description
+            return UIFontTextStyleSubheadline
         }
     }
     
@@ -241,7 +241,7 @@ extension UIFont {
 // Crediting http://blog.human-friendly.com/theanswer-equals-maybeanswer-or-a-good-alternative
 
 infix operator !! { associativity right precedence 110 }
-public func !!<A>(lhs:A?, rhs:@autoclosure()->A)->A {
+public func !!<A>(lhs:A?, @autoclosure rhs:()->A)->A {
     assert(lhs != nil)
     return lhs ?? rhs()
 }

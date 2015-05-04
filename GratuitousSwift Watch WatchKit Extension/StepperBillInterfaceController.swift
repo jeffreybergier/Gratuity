@@ -24,8 +24,7 @@ class StepperInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        var currentContext: InterfaceControllerContext
-        //let currentContext: InterfaceControllerContext
+        let currentContext: InterfaceControllerContext
         if let contextString = context as? String {
             currentContext = InterfaceControllerContext(rawValue: contextString) !! InterfaceControllerContext.StepperPagedTens
         } else {

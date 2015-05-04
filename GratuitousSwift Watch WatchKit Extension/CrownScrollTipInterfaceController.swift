@@ -29,8 +29,7 @@ class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        var currentContext: CrownScrollerInterfaceContext
-        //let currentContext: InterfaceControllerContext
+        let currentContext: InterfaceControllerContext
         if let contextString = context as? String {
             currentContext = CrownScrollerInterfaceContext(rawValue: contextString) !! CrownScrollerInterfaceContext.Tip
         } else {
@@ -66,8 +65,7 @@ class CrownScrollTipInterfaceController: GratuitousMenuInterfaceController {
                 let suggestedTipPercentage = self.dataSource.tipPercentage !! 0.2
                 let tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
                 
-                var cellBeginIndex: Int
-                //let cellBeginIndex: Int
+                let cellBeginIndex: Int
                 if tipAmount >= self.tipOffset {
                     cellBeginIndex = tipAmount - self.tipOffset
                     self.idealTipIndex = 6

@@ -35,8 +35,6 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
             if self.highestDataIndexInTable >= self.data.count - 1 {
                 self.largerButtonGroup?.setHidden(true)
             }
-            //println("highestDataIndexInTable: \(self.highestDataIndexInTable)")
-            //println("highestValueFromArray: \(self.data[self.highestDataIndexInTable])")
         }
     }
     private var lowestDataIndexInTable: Int = 0 {
@@ -44,9 +42,6 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
             if self.lowestDataIndexInTable <= 0 {
                 self.smallerButtonGroup?.setHidden(true)
             }
-            
-            //println("lowestDataIndexInTable: \(self.lowestDataIndexInTable)")
-            //println("lowestValueFromArray: \(self.data[self.lowestDataIndexInTable])")
         }
     }
     
@@ -57,8 +52,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        //let currentContext: CrownScrollerInterfaceContext
-        var currentContext: CrownScrollerInterfaceContext
+        let currentContext: CrownScrollerInterfaceContext
         if let contextString = context as? String {
             currentContext = CrownScrollerInterfaceContext(rawValue: contextString) !! CrownScrollerInterfaceContext.Bill
         } else {
@@ -200,48 +194,48 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     }
     
     private func insertTableRowControllersAtBottom(newNumberOfRows: Int) {
-            if let tableView = self.currencyAmountTable {
-                // calculate ideal tip
-                let billAmount = self.dataSource.defaultsManager.billIndexPathRow
-                let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
-                let idealTip = Int(round(Double(billAmount) * suggestedTipPercentage))
-                
-                // update the table
-                let currentNumberOfRowsInTable = tableView.numberOfRows
-                let lowestNumber = self.lowestDataIndexInTable
-                let highestNumber = currentNumberOfRowsInTable + newNumberOfRows + lowestNumber
-                for index in currentNumberOfRowsInTable ..< currentNumberOfRowsInTable + newNumberOfRows {
-                    let correctedIndex = index + self.highestDataIndexInTable - currentNumberOfRowsInTable
-                    if correctedIndex < self.data.count {
-                        let value = self.data[correctedIndex]
-                        switch self.currentContext {
-                        case .Tip:
-                            tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollTipTableRowController")
-                            let star = idealTip == value ? false : true
-                            if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
-                                if row.interfaceIsConfigured == false {
-                                    row.configureInterface(parentInterfaceController: self)
-                                }
-                                row.setCurrencyLabels(bigCurrency: value, littlePercentage: GratuitousWatchDataSource.optionalDivision(top: Double(value), bottom: Double(billAmount)), starFlag: star)
+        if let tableView = self.currencyAmountTable {
+            // calculate ideal tip
+            let billAmount = self.dataSource.defaultsManager.billIndexPathRow
+            let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
+            let idealTip = Int(round(Double(billAmount) * suggestedTipPercentage))
+            
+            // update the table
+            let currentNumberOfRowsInTable = tableView.numberOfRows
+            let lowestNumber = self.lowestDataIndexInTable
+            let highestNumber = currentNumberOfRowsInTable + newNumberOfRows + lowestNumber
+            for index in currentNumberOfRowsInTable ..< currentNumberOfRowsInTable + newNumberOfRows {
+                let correctedIndex = index + self.highestDataIndexInTable - currentNumberOfRowsInTable
+                if correctedIndex < self.data.count {
+                    let value = self.data[correctedIndex]
+                    switch self.currentContext {
+                    case .Tip:
+                        tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollTipTableRowController")
+                        let star = idealTip == value ? false : true
+                        if let row = tableView.rowControllerAtIndex(index) as? CrownScrollTableRowController {
+                            if row.interfaceIsConfigured == false {
+                                row.configureInterface(parentInterfaceController: self)
                             }
-                        case .Bill:
-                            tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
-                            if let row = self.currencyAmountTable?.rowControllerAtIndex(index) as? CrownScrollTableRowController {
-                                if row.interfaceIsConfigured == false {
-                                    row.configureInterface(parentInterfaceController: self)
-                                }
-                                row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
-                            }
-                        case .NotSet:
-                            fatalError("CrownScrollBillInterfaceController: insertTableRowControllersAtBottom called when currentContext was .NotSet")
+                            row.setCurrencyLabels(bigCurrency: value, littlePercentage: GratuitousWatchDataSource.optionalDivision(top: Double(value), bottom: Double(billAmount)), starFlag: star)
                         }
-                    } else {
-                        break
+                    case .Bill:
+                        tableView.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "CrownScrollBillTableRowController")
+                        if let row = self.currencyAmountTable?.rowControllerAtIndex(index) as? CrownScrollTableRowController {
+                            if row.interfaceIsConfigured == false {
+                                row.configureInterface(parentInterfaceController: self)
+                            }
+                            row.setCurrencyLabels(bigCurrency: value, littlePercentage: nil, starFlag: nil)
+                        }
+                    case .NotSet:
+                        fatalError("CrownScrollBillInterfaceController: insertTableRowControllersAtBottom called when currentContext was .NotSet")
                     }
+                } else {
+                    break
                 }
-                // update instance variables
-                self.highestDataIndexInTable = highestNumber < self.data.count ? highestNumber : self.data.count - 1
             }
+            // update instance variables
+            self.highestDataIndexInTable = highestNumber < self.data.count ? highestNumber : self.data.count - 1
+        }
     }
     
     private func configureTableForTheFirstTime() {

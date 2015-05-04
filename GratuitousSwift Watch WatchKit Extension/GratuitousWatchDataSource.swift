@@ -47,7 +47,6 @@ class GratuitousWatchDataSource {
     func currencyStringFromInteger(integerValue: Int?) -> String {
         var currencyString = "$–"
         if let integerValue = integerValue {
-            //let currencyString: String?
             let currentCurrencyFormat = self.defaultsManager.overrideCurrencySymbol
             switch currentCurrencyFormat {
             case .Default:

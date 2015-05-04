@@ -24,16 +24,14 @@ class WatchInfoViewController: UIViewController {
         }()
     
     private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
-        if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mov") {
-            if let movieURL = NSURL.fileURLWithPath(moviePath) {
-                if let player = AVPlayer(URL: movieURL) {
-                    player.allowsExternalPlayback = false
-                    player.actionAtItemEnd = AVPlayerActionAtItemEnd.None // cause the player to loop
-                    if let playerLayer = AVPlayerLayer(player: player) {
-                        return (player, playerLayer)
-                    }
+        if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mov"),
+            let movieURL = NSURL.fileURLWithPath(moviePath),
+            let player = AVPlayer(URL: movieURL) {
+                player.allowsExternalPlayback = false
+                player.actionAtItemEnd = AVPlayerActionAtItemEnd.None // cause the player to loop
+                if let playerLayer = AVPlayerLayer(player: player) {
+                    return (player, playerLayer)
                 }
-            }
         }
         return nil
     }()

@@ -49,8 +49,7 @@ class GratuitousCurrencyFormatter {
     }
     
     func currencyFormattedString(number: Int) -> String {
-        var currencyString: String
-        //let currencyString: String
+        let currencyString: String
         switch self.selectedCurrencySymbol {
         case .Default:
             currencyString = self.currencyFormatter.stringFromNumber(number) !! "\(number)"

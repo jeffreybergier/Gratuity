@@ -43,8 +43,6 @@ class CrownScrollTableRowController: NSObject {
     
     var interfaceIsConfigured = false
     func configureInterface(#parentInterfaceController: WKInterfaceController) {
-//        self.smallPercentageLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
-//        self.bigCurrencyLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
         self.starLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
         self.outlineGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
         self.interfaceIsConfigured = true

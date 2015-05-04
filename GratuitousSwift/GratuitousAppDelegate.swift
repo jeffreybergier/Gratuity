@@ -33,7 +33,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Check if the date is April 24 or later to display watch info UI
-        self.defaultsManager.watchInfoViewControllerShouldAppear = self.currentDateAfterTriggerDate()
+        self.defaultsManager.watchInfoViewControllerShouldAppear = self.defaultsManager.currentDateIsAfterWatchRelease(considerJuneCutoff: true)
         
         // if the device is an iphone 4s or an ipad, mark watchInfoViewControllerWasDismissed as true
         if self.defaultsManager.watchInfoViewControllerWasDismissed == false {
@@ -63,75 +63,6 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
     }
-    
-    private func currentDateAfterTriggerDate() -> Bool {
-        let calendar = NSCalendar.currentCalendar()
-        let todaysDate = NSDate(timeIntervalSinceNow: 0)
-        let triggerDateComponents = NSDateComponents()
-        triggerDateComponents.month = 4
-        triggerDateComponents.day = 24
-        triggerDateComponents.year = 2015
-        if let triggerDate = calendar.dateFromComponents(triggerDateComponents) {
-            let dateComparison = calendar.compareDate(todaysDate, toDate: triggerDate, toUnitGranularity: NSCalendarUnit.DayCalendarUnit)
-            switch dateComparison {
-            case .OrderedAscending:
-                return false // returns false if current date is before April 24, 2015
-            case .OrderedDescending:
-                return self.dateIsBeforeJuneOne(todaysDate)
-            case .OrderedSame:
-                return self.dateIsBeforeJuneOne(todaysDate)
-            }
-        }
-        return false
-    }
-    
-    private func dateIsBeforeJuneOne(currentDate: NSDate) -> Bool {
-        let calendar = NSCalendar.currentCalendar()
-        let triggerDateComponents = NSDateComponents()
-        triggerDateComponents.month = 6
-        triggerDateComponents.day = 1
-        triggerDateComponents.year = 2015
-        if let triggerDate = calendar.dateFromComponents(triggerDateComponents) {
-            let dateComparison = calendar.compareDate(currentDate, toDate: triggerDate, toUnitGranularity: NSCalendarUnit.DayCalendarUnit)
-            switch dateComparison {
-            case .OrderedAscending:
-                return true // returns true if current date is before June 01, 2015
-            case .OrderedDescending:
-                return false
-            case .OrderedSame:
-                return false // returns true if current date is before June 01, 2015
-            }
-        }
-        return false
-    }
-    
-//    private func checkWatchUIJSON() {
-//        let session = NSURLSession.sharedSession()
-//        let url = GratuitousUserDefaults.watchUIURL()
-//        let request = NSURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 10.0)
-//        let task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-//            if error == nil {
-//                if let response = response as? NSHTTPURLResponse {
-//                    if response.statusCode == 200 {
-//                        self.extractCorrectInterfaceFromData(data)
-//                    }
-//                }
-//            }
-//        })
-//        task.resume()
-//    }
-//    
-//    private func extractCorrectInterfaceFromData(data: NSData?) {
-//        if let data = data {
-//            if let jsonDictionaryArray = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as? [NSDictionary] {
-//                if let watchStyleString = jsonDictionaryArray.first?["watchUIStyle"] as? String {
-//                    if let interfaceState = CorrectWatchInterface.interfaceStateFromString(watchStyleString) {
-//                        self.defaultsManager.correctWatchInterface = interfaceState
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
