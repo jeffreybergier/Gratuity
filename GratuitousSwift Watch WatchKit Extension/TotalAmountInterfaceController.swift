@@ -17,6 +17,16 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
     @IBOutlet private weak var totalAmountTitleLabel: WKInterfaceLabel?
     @IBOutlet private weak var tipAmountTitleLabel: WKInterfaceLabel?
     @IBOutlet private weak var tipPercentageTitleLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmountTitleLabel: WKInterfaceLabel?
+    
+    @IBOutlet private weak var splitAmount0CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount0IconLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount1CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount1IconLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount2CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount2IconLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount3CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount3IconLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var startOverButtonLabel: WKInterfaceLabel?
     @IBOutlet private weak var backgroundImageGroup: WKInterfaceGroup?
@@ -24,6 +34,7 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
     @IBOutlet private weak var tipAmountGroup: WKInterfaceGroup?
     @IBOutlet private weak var tipPercentageGroup: WKInterfaceGroup?
     @IBOutlet private weak var startOverButtonGroup: WKInterfaceGroup?
+    @IBOutlet private weak var splitAmountGroup: WKInterfaceGroup?
     
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
     
