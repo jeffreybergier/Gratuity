@@ -28,15 +28,10 @@ class AppDelegateInterfaceController: WKInterfaceController {
     @objc private func delayPushAppropriateInterfaceController(timer: NSTimer?) {
         timer?.invalidate()
         
-        if self.dataSource.defaultsManager.showTutorialAtLaunch == true {
+        if self.dataSource.defaultsManager.currentDateIsAfterWatchRelease(considerJuneCutoff: false) == true && self.dataSource.defaultsManager.showTutorialAtLaunch == true {
             self.pushControllerWithName("TutorialInterfaceController", context: nil)
         } else {
-            //            switch self.dataSource.defaultsManager.correctWatchInterface {
-            //            case .CrownScroller:
             self.pushControllerWithName("CrownScrollBillInterfaceController", context: CrownScrollerInterfaceContext.Bill.rawValue)
-            //            case .ThreeButtonStepper:
-            //                self.pushControllerWithName("ThreeButtonStepperBillInterfaceController", context: ThreeButtonStepperInterfaceContext.Bill.rawValue)
-            //            }
         }
     }
 }

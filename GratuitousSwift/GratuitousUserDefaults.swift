@@ -189,6 +189,55 @@ class GratuitousUserDefaults: Printable {
         }
     }
     
+    func currentDateIsAfterWatchRelease(#considerJuneCutoff: Bool) -> Bool {
+        let calendar = NSCalendar.currentCalendar()
+        let todaysDate = NSDate(timeIntervalSinceNow: 0)
+        let triggerDateComponents = NSDateComponents()
+        triggerDateComponents.month = 4
+        triggerDateComponents.day = 24
+        triggerDateComponents.year = 2015
+        if let triggerDate = calendar.dateFromComponents(triggerDateComponents) {
+            let dateComparison = calendar.compareDate(todaysDate, toDate: triggerDate, toUnitGranularity: NSCalendarUnit.DayCalendarUnit)
+            switch dateComparison {
+            case .OrderedAscending:
+                return false // returns false if current date is before April 24, 2015
+            case .OrderedDescending:
+                if considerJuneCutoff == true {
+                    return self.dateIsBeforeJuneOne(todaysDate)
+                } else {
+                    return true
+                }
+            case .OrderedSame:
+                if considerJuneCutoff == true {
+                    return self.dateIsBeforeJuneOne(todaysDate)
+                } else {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func dateIsBeforeJuneOne(currentDate: NSDate) -> Bool {
+        let calendar = NSCalendar.currentCalendar()
+        let triggerDateComponents = NSDateComponents()
+        triggerDateComponents.month = 6
+        triggerDateComponents.day = 1
+        triggerDateComponents.year = 2015
+        if let triggerDate = calendar.dateFromComponents(triggerDateComponents) {
+            let dateComparison = calendar.compareDate(currentDate, toDate: triggerDate, toUnitGranularity: NSCalendarUnit.DayCalendarUnit)
+            switch dateComparison {
+            case .OrderedAscending:
+                return true // returns true if current date is before June 01, 2015
+            case .OrderedDescending:
+                return false
+            case .OrderedSame:
+                return false // returns true if current date is before June 01, 2015
+            }
+        }
+        return false
+    }
+    
     class func watchUIURL() -> NSURL {
         return NSURL(string: "http://www.saturdayapps.com/gratuity/watchUI.json")!
     }
