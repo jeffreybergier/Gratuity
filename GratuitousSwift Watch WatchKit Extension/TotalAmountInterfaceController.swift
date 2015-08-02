@@ -17,6 +17,16 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
     @IBOutlet private weak var totalAmountTitleLabel: WKInterfaceLabel?
     @IBOutlet private weak var tipAmountTitleLabel: WKInterfaceLabel?
     @IBOutlet private weak var tipPercentageTitleLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmountTitleLabel: WKInterfaceLabel?
+    
+    @IBOutlet private weak var splitAmount0CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount0IconLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount1CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount1IconLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount2CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount2IconLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount3CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount3IconLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var startOverButtonLabel: WKInterfaceLabel?
     @IBOutlet private weak var backgroundImageGroup: WKInterfaceGroup?
@@ -24,10 +34,11 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
     @IBOutlet private weak var tipAmountGroup: WKInterfaceGroup?
     @IBOutlet private weak var tipPercentageGroup: WKInterfaceGroup?
     @IBOutlet private weak var startOverButtonGroup: WKInterfaceGroup?
+    @IBOutlet private weak var splitAmountGroup: WKInterfaceGroup?
     
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
     
-    private var dataSource = GratuitousWatchDataSource.sharedInstance
+    private let dataSource = GratuitousWatchDataSource.sharedInstance
     private var interfaceControllerIsConfigured = false
     private var currencySymbolDidChangeWhileAway = false
     
@@ -76,12 +87,19 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
             // interface is now configured
             self.interfaceControllerIsConfigured = true
             
+            // unhide split amount of its been purchased
+            //if self.dataSource.defaultsManager.splitTipFeatureUnlocked == true {
+                self.configureSplitAmountLabels()
+                self.splitAmountGroup?.setHidden(false)
+            //}
+            
             // unhide everything
             self.backgroundImageGroup?.setHidden(true)
             self.totalAmountGroup?.setHidden(false)
             self.tipAmountGroup?.setHidden(false)
             self.tipPercentageGroup?.setHidden(false)
             self.startOverButtonGroup?.setHidden(false)
+            
         }
     }
     
@@ -101,6 +119,26 @@ class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
         self.tipPercentageLabel?.setAttributedText(tipPercentageString)
         self.tipAmountLabel?.setAttributedText(tipAmountString)
         self.totalAmountLabel?.setAttributedText(totalAmountString)
+    }
+    
+    private func configureSplitAmountLabels() {
+        // prepare the data
+        let billAmount = self.dataSource.defaultsManager.billIndexPathRow
+        let tipAmount = self.dataSource.defaultsManager.tipIndexPathRow
+        let totalAmount = Double(Double(tipAmount) + Double(billAmount))
+        
+        // prepare the attributed text
+        let zeroString = NSAttributedString(string: self.dataSource.currencyStringFromInteger(Int(round(totalAmount))), attributes: self.valueTextAttributes)
+        let oneString = NSAttributedString(string: self.dataSource.currencyStringFromInteger(Int(round(totalAmount / 2))), attributes: self.valueTextAttributes)
+        let twoString = NSAttributedString(string: self.dataSource.currencyStringFromInteger(Int(round(totalAmount / 3))), attributes: self.valueTextAttributes)
+        let threeString = NSAttributedString(string: self.dataSource.currencyStringFromInteger(Int(round(totalAmount / 4))), attributes: self.valueTextAttributes)
+        
+        // populate the labels
+        self.splitAmount0CurrencyLabel?.setAttributedText(zeroString)
+        self.splitAmount1CurrencyLabel?.setAttributedText(oneString)
+        self.splitAmount2CurrencyLabel?.setAttributedText(twoString)
+        self.splitAmount3CurrencyLabel?.setAttributedText(threeString)
+
     }
     
     @objc private func currencySymbolDidChangeInSettings(notification: NSNotification) {
