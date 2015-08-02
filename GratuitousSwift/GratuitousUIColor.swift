@@ -13,9 +13,11 @@ struct GratuitousUIColor {
     private static func invertColorsIsEnabled() -> Bool {
         var invertColors = false
         
-        if UIAccessibilityIsInvertColorsEnabled() {
-            invertColors = true
-        }
+        #if os(iOS)
+            if UIAccessibilityIsInvertColorsEnabled() {
+                invertColors = true
+            }
+        #endif
         
         return invertColors
     }

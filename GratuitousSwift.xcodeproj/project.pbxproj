@@ -14,11 +14,7 @@
 		73011BEC1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */; };
 		73011BED1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */; };
 		731375551ABF2FA50074E2F2 /* AppDelegateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */; };
-		731375671ABF3D920074E2F2 /* Gratuity WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 731375661ABF3D910074E2F2 /* Gratuity WatchKit App.app */; };
-		731375741ABF3D930074E2F2 /* Gratuity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7313755A1ABF3D900074E2F2 /* Gratuity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7313757E1ABF3E4B0074E2F2 /* GratuityStoreWatchExtensionInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7313757D1ABF3E4B0074E2F2 /* GratuityStoreWatchExtensionInfo.plist */; };
-		731375811ABF3F2B0074E2F2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D01AB49E4D00172397 /* Crashlytics.framework */; };
-		731375821ABF3F2B0074E2F2 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
 		731375831ABF3F330074E2F2 /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A18D5A1A2A9525002180DD /* WatchKit.framework */; };
 		731375841ABF3FC00074E2F2 /* AppDelegateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */; };
 		731375851ABF3FC00074E2F2 /* TotalAmountInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */; };
@@ -40,8 +36,6 @@
 		733E8CB41A86F83100B228CB /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
 		733E8CB51A86FBA200B228CB /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
 		734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
-		73450E791ABF2926005927F1 /* GratuityL WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 73450E781ABF2926005927F1 /* GratuityL WatchKit App.app */; };
-		73450E861ABF2926005927F1 /* GratuityL WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		73450E8E1ABF2A50005927F1 /* TotalAmountInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */; };
 		73450E8F1ABF2A50005927F1 /* SettingsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */; };
 		73450E901ABF2A50005927F1 /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; };
@@ -52,9 +46,6 @@
 		73450E981ABF2A7E005927F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D731A2A9525002180DD /* Images.xcassets */; };
 		73450E9B1ABF2A97005927F1 /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */; };
 		73450E9C1ABF2A9C005927F1 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
-		73450E9D1ABF2B05005927F1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
-		73450E9E1ABF2B09005927F1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D01AB49E4D00172397 /* Crashlytics.framework */; };
-		73450E9F1ABF2B25005927F1 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
 		73450EA21ABF2C0A005927F1 /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A18D5A1A2A9525002180DD /* WatchKit.framework */; };
 		734A7C5A1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
 		734A7C5B1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
@@ -94,6 +85,11 @@
 		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
+		73C98CB41B6E94D300416DDA /* Gratuity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7313755A1ABF3D900074E2F2 /* Gratuity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		73C98CB71B6E94D300416DDA /* Gratuity WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 731375661ABF3D910074E2F2 /* Gratuity WatchKit App.app */; };
+		73C98CBA1B6E94D500416DDA /* GratuityL WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		73C98CBD1B6E94D500416DDA /* GratuityL WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 73450E781ABF2926005927F1 /* GratuityL WatchKit App.app */; };
+		73C98CC21B6E964200416DDA /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
 		73D11C491A1DB2A3003D238C /* GratuitousPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */; };
 		73D11C4A1A1DB2A6003D238C /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */; };
 		73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
@@ -107,57 +103,79 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		731375681ABF3D920074E2F2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 738250F919E60EED00CD2B28 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 731375651ABF3D910074E2F2;
-			remoteInfo = "Gratuity WatchKit App";
-		};
-		731375721ABF3D920074E2F2 /* PBXContainerItemProxy */ = {
+		73C98CB21B6E94D300416DDA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 738250F919E60EED00CD2B28 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 731375591ABF3D900074E2F2;
 			remoteInfo = "Gratuity WatchKit Extension";
 		};
-		73450E7A1ABF2926005927F1 /* PBXContainerItemProxy */ = {
+		73C98CB51B6E94D300416DDA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 738250F919E60EED00CD2B28 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 73450E771ABF2926005927F1;
-			remoteInfo = "GratuityL WatchKit App";
+			remoteGlobalIDString = 731375651ABF3D910074E2F2;
+			remoteInfo = "Gratuity WatchKit App";
 		};
-		73450E841ABF2926005927F1 /* PBXContainerItemProxy */ = {
+		73C98CB81B6E94D500416DDA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 738250F919E60EED00CD2B28 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 73450E6B1ABF2926005927F1;
 			remoteInfo = "GratuityL WatchKit Extension";
 		};
+		73C98CBB1B6E94D500416DDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 738250F919E60EED00CD2B28 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 73450E771ABF2926005927F1;
+			remoteInfo = "GratuityL WatchKit App";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7313757B1ABF3D930074E2F2 /* Embed App Extensions */ = {
+		73C98CBE1B6E94D500416DDA /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				731375741ABF3D930074E2F2 /* Gratuity WatchKit Extension.appex in Embed App Extensions */,
+				73C98CB41B6E94D300416DDA /* Gratuity WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		73467BB81ABA0127006C3DFC /* Embed App Extensions */ = {
+		73C98CBF1B6E94D500416DDA /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				73C98CB71B6E94D300416DDA /* Gratuity WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73C98CC01B6E94D500416DDA /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				73450E861ABF2926005927F1 /* GratuityL WatchKit Extension.appex in Embed App Extensions */,
+				73C98CBA1B6E94D500416DDA /* GratuityL WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73C98CC11B6E94D500416DDA /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				73C98CBD1B6E94D500416DDA /* GratuityL WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -239,8 +257,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				731375831ABF3F330074E2F2 /* WatchKit.framework in Frameworks */,
-				731375811ABF3F2B0074E2F2 /* Crashlytics.framework in Frameworks */,
-				731375821ABF3F2B0074E2F2 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,8 +265,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				73450EA21ABF2C0A005927F1 /* WatchKit.framework in Frameworks */,
-				73450E9E1ABF2B09005927F1 /* Crashlytics.framework in Frameworks */,
-				73450E9D1ABF2B05005927F1 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,27 +563,28 @@
 			buildRules = (
 			);
 			dependencies = (
-				731375691ABF3D920074E2F2 /* PBXTargetDependency */,
 			);
 			name = "Gratuity WatchKit Extension";
 			productName = "Gratuity WatchKit Extension";
 			productReference = 7313755A1ABF3D900074E2F2 /* Gratuity WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		731375651ABF3D910074E2F2 /* Gratuity WatchKit App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 731375751ABF3D930074E2F2 /* Build configuration list for PBXNativeTarget "Gratuity WatchKit App" */;
 			buildPhases = (
 				731375641ABF3D910074E2F2 /* Resources */,
+				73C98CBE1B6E94D500416DDA /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				73C98CB31B6E94D300416DDA /* PBXTargetDependency */,
 			);
 			name = "Gratuity WatchKit App";
 			productName = "Gratuity WatchKit App";
 			productReference = 731375661ABF3D910074E2F2 /* Gratuity WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
+			productType = "com.apple.product-type.application.watchapp2";
 		};
 		73450E6B1ABF2926005927F1 /* GratuityL WatchKit Extension */ = {
 			isa = PBXNativeTarget;
@@ -583,27 +598,28 @@
 			buildRules = (
 			);
 			dependencies = (
-				73450E7B1ABF2926005927F1 /* PBXTargetDependency */,
 			);
 			name = "GratuityL WatchKit Extension";
 			productName = "GratuityL WatchKit Extension";
 			productReference = 73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		73450E771ABF2926005927F1 /* GratuityL WatchKit App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73450E8B1ABF2926005927F1 /* Build configuration list for PBXNativeTarget "GratuityL WatchKit App" */;
 			buildPhases = (
 				73450E761ABF2926005927F1 /* Resources */,
+				73C98CC01B6E94D500416DDA /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				73C98CB91B6E94D500416DDA /* PBXTargetDependency */,
 			);
 			name = "GratuityL WatchKit App";
 			productName = "GratuityL WatchKit App";
 			productReference = 73450E781ABF2926005927F1 /* GratuityL WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
+			productType = "com.apple.product-type.application.watchapp2";
 		};
 		736568D91A26DD1400603602 /* GratuitousSwift Local */ = {
 			isa = PBXNativeTarget;
@@ -613,12 +629,12 @@
 				736568EB1A26DD1400603602 /* Frameworks */,
 				736568EE1A26DD1400603602 /* Resources */,
 				73D730CF1AB49E2F00172397 /* ShellScript */,
-				73467BB81ABA0127006C3DFC /* Embed App Extensions */,
+				73C98CC11B6E94D500416DDA /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				73450E851ABF2926005927F1 /* PBXTargetDependency */,
+				73C98CBC1B6E94D500416DDA /* PBXTargetDependency */,
 			);
 			name = "GratuitousSwift Local";
 			productName = GratuitousSwift;
@@ -633,12 +649,12 @@
 				738250FE19E60EED00CD2B28 /* Frameworks */,
 				738250FF19E60EED00CD2B28 /* Resources */,
 				73D730DA1AB49ED800172397 /* ShellScript */,
-				7313757B1ABF3D930074E2F2 /* Embed App Extensions */,
+				73C98CBF1B6E94D500416DDA /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				731375731ABF3D920074E2F2 /* PBXTargetDependency */,
+				73C98CB61B6E94D300416DDA /* PBXTargetDependency */,
 			);
 			name = "GratuitousSwift Store";
 			productName = GratuitousSwift;
@@ -653,7 +669,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = SaturdayApps;
 				TargetAttributes = {
 					731375591ABF3D900074E2F2 = {
@@ -731,7 +747,6 @@
 			files = (
 				7320A5471ACDA87E001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */,
 				73011BE01AD04F90001F6D71 /* en.lproj in Resources */,
-				731375671ABF3D920074E2F2 /* Gratuity WatchKit App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -751,7 +766,6 @@
 			files = (
 				7320A5481ACDA87F001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */,
 				73011BE11AD04F90001F6D71 /* en.lproj in Resources */,
-				73450E791ABF2926005927F1 /* GratuityL WatchKit App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,10 +891,10 @@
 			files = (
 				731375551ABF2FA50074E2F2 /* AppDelegateInterfaceController.swift in Sources */,
 				73450E9B1ABF2A97005927F1 /* GratuitousUserDefaults.swift in Sources */,
+				73C98CC21B6E964200416DDA /* GratuitousUIColor.swift in Sources */,
 				73450E8E1ABF2A50005927F1 /* TotalAmountInterfaceController.swift in Sources */,
 				73450E8F1ABF2A50005927F1 /* SettingsInterfaceController.swift in Sources */,
 				73450E961ABF2A64005927F1 /* ThreeButtonStepperInterfaceController.swift in Sources */,
-				73450E9F1ABF2B25005927F1 /* GratuitousUIColor.swift in Sources */,
 				73A2169F1ACCE0D1005547A1 /* CrownScrollTableRowController.swift in Sources */,
 				73450E911ABF2A50005927F1 /* GratuitousMenuInterfaceController.swift in Sources */,
 				73450E901ABF2A50005927F1 /* GratuitousWatchDataSource.swift in Sources */,
@@ -941,25 +955,25 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		731375691ABF3D920074E2F2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 731375651ABF3D910074E2F2 /* Gratuity WatchKit App */;
-			targetProxy = 731375681ABF3D920074E2F2 /* PBXContainerItemProxy */;
-		};
-		731375731ABF3D920074E2F2 /* PBXTargetDependency */ = {
+		73C98CB31B6E94D300416DDA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 731375591ABF3D900074E2F2 /* Gratuity WatchKit Extension */;
-			targetProxy = 731375721ABF3D920074E2F2 /* PBXContainerItemProxy */;
+			targetProxy = 73C98CB21B6E94D300416DDA /* PBXContainerItemProxy */;
 		};
-		73450E7B1ABF2926005927F1 /* PBXTargetDependency */ = {
+		73C98CB61B6E94D300416DDA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 73450E771ABF2926005927F1 /* GratuityL WatchKit App */;
-			targetProxy = 73450E7A1ABF2926005927F1 /* PBXContainerItemProxy */;
+			target = 731375651ABF3D910074E2F2 /* Gratuity WatchKit App */;
+			targetProxy = 73C98CB51B6E94D300416DDA /* PBXContainerItemProxy */;
 		};
-		73450E851ABF2926005927F1 /* PBXTargetDependency */ = {
+		73C98CB91B6E94D500416DDA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 73450E6B1ABF2926005927F1 /* GratuityL WatchKit Extension */;
-			targetProxy = 73450E841ABF2926005927F1 /* PBXContainerItemProxy */;
+			targetProxy = 73C98CB81B6E94D500416DDA /* PBXContainerItemProxy */;
+		};
+		73C98CBC1B6E94D500416DDA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 73450E771ABF2926005927F1 /* GratuityL WatchKit App */;
+			targetProxy = 73C98CBB1B6E94D500416DDA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -988,17 +1002,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				IBSC_MODULE = Gratuity_WatchKit_Extension;
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch Watch App/GratuityStoreWatchAppInfo.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1008,13 +1023,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = Gratuity_WatchKit_Extension;
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch Watch App/GratuityStoreWatchAppInfo.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1039,7 +1055,10 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1060,7 +1079,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1086,7 +1108,10 @@
 				PRODUCT_MODULE_NAME = Gratuity_WatchKit_Extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1109,7 +1134,10 @@
 				PRODUCT_MODULE_NAME = Gratuity_WatchKit_Extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1118,17 +1146,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				IBSC_MODULE = GratuityL_WatchKit_Extension;
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch Watch App/GratuityLocalWatchAppInfo.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1138,13 +1167,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = GratuityL_WatchKit_Extension;
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch Watch App/GratuityLocalWatchAppInfo.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};

@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Fabric
-import Crashlytics
 
 class GratuitousWatchDataSource {
     // This class mostly exists to reduce the number of times the app has to read and write NSUserDefaults.
@@ -19,9 +17,6 @@ class GratuitousWatchDataSource {
     private let currencyFormatter = NSNumberFormatter()
     
     init() {
-        // configure crashlytics in an instance that won't disappear
-        Fabric.with([Crashlytics()])
-        
         // configure currency formatter
         self.currencyFormatter.locale = NSLocale.currentLocale()
         self.currencyFormatter.maximumFractionDigits = 0
