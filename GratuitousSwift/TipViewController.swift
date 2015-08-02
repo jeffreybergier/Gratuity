@@ -87,7 +87,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         #if DEBUG
             // add a crash button to the view to test crashlytics
             let crashButton = UIButton(frame: CGRect(x: 12, y: 20, width: 10, height: 10))
-            let viewDictionary = ["crashButton" : crashButton]
             crashButton.setTitle("Cause Crash", forState: UIControlState.Normal)
             let crashDate = NSDate(timeIntervalSinceNow: 0)
             let crashSelector = Selector("causeCrash: InTipViewController: Date: \(crashDate)")
@@ -315,7 +314,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             delay: presenting ? 0.05 : 0.05,
             usingSpringWithDamping: 0.6,
             initialSpringVelocity: 1.9,
-            options: UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState,
+            options: [UIViewAnimationOptions.AllowUserInteraction, UIViewAnimationOptions.BeginFromCurrentState],
             animations: {
                 self.labelContainerView?.transform = transform
                 self.labelContainerView?.alpha = alpha
@@ -350,7 +349,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     //MARK: Handle Updating the Big Labels
     
-    private func updateLargeTextLabels(#billAmount: Int, tipAmount: Int) {
+    private func updateLargeTextLabels(billAmount billAmount: Int, tipAmount: Int) {
         if billAmount > 0 { //this protects from divide by 0 crashes
             let totalAmount = billAmount + tipAmount
             let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
@@ -541,7 +540,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var rowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
+        let rowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
         
         return rowHeight
     }
@@ -556,8 +555,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.All.rawValue)
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.All
     }
     
     //MARK: Handle Text Size Adjustment and Label Attributed Strings
@@ -615,7 +614,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     private func checkForScreenSizeConstraintAdjustments() {
-        let nothing = GratuitousUIConstant.actualScreenSizeBasedOnWidth()
         switch GratuitousUIConstant.actualScreenSizeBasedOnWidth() {
         case .iPhone4or5:
             self.tipPercentageTextLabelTopConstraint?.constant = -15.0

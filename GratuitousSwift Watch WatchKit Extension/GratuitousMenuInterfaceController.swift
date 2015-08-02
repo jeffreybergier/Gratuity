@@ -22,7 +22,7 @@ class GratuitousMenuInterfaceController: WKInterfaceController {
         super.willActivate()
         
         if self.privateInterfaceControllerIsConfigured == false {
-            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
+            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
             dispatch_async(backgroundQueue) {
                 dispatch_async(dispatch_get_main_queue()) {
                     // configure the menu

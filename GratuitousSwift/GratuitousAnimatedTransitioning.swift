@@ -12,19 +12,20 @@ class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransit
     
     var isPresentation = true
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return GratuitousUIConstant.animationDuration() * 2
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         if let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey),
-            let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) {
+            let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey),
+            let transitionContextContainerView = transitionContext.containerView() {
                 
                 let fromView = fromVC.view
                 let toView = toVC.view
                 
                 if self.isPresentation == true {
-                    transitionContext.containerView().addSubview(toView)
+                    transitionContextContainerView.addSubview(toView)
                 }
                 
                 let animatingInVC = self.isPresentation ? toVC : fromVC
@@ -49,7 +50,7 @@ class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransit
                 let finalFrame = self.isPresentation ? appearedFrame : dismissedFrame
                 let animatingInTransform = self.isPresentation ? CGAffineTransformIdentity : CGAffineTransformScale(animatingInView.transform, 0.9, 0.9)
                 let animatingOutScaleTransform = CGAffineTransformScale(animatingOutView.transform, 0.8, 0.8)
-                let animatingOutTransform = self.isPresentation ? CGAffineTransformTranslate(animatingOutScaleTransform, 0 - (transitionContext.containerView().bounds.width * 0.2), 0) : CGAffineTransformIdentity
+                let animatingOutTransform = self.isPresentation ? CGAffineTransformTranslate(animatingOutScaleTransform, 0 - (transitionContextContainerView.bounds.width * 0.2), 0) : CGAffineTransformIdentity
                 
                 animatingInView.frame = initialFrame
                 animatingInView.transform = self.isPresentation ? CGAffineTransformScale(animatingInView.transform, 0.9, 0.9) : CGAffineTransformIdentity
@@ -64,7 +65,7 @@ class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransit
                     delay: 0.0,
                     usingSpringWithDamping: springDamping,
                     initialSpringVelocity: springVelocity,
-                    options: UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState,
+                    options: [UIViewAnimationOptions.AllowUserInteraction, UIViewAnimationOptions.BeginFromCurrentState],
                     animations: {
                         animatingInView.frame = finalFrame
                         animatingInView.transform = animatingInTransform

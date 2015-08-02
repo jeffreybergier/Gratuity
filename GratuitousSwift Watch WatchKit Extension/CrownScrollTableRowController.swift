@@ -21,7 +21,7 @@ class CrownScrollTableRowController: NSObject {
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.smallValueText
     
-    func setCurrencyLabels(#bigCurrency: Int, littlePercentage: Double?, starFlag: Bool?) {
+    func setCurrencyLabels(bigCurrency bigCurrency: Int, littlePercentage: Double?, starFlag: Bool?) {
         // set the big text label
         self.bigCurrencyLabel?.setAttributedText(NSAttributedString(string: self.dataSource.currencyStringFromInteger(bigCurrency), attributes: self.valueTextAttributes))
         
@@ -42,7 +42,7 @@ class CrownScrollTableRowController: NSObject {
     }
     
     var interfaceIsConfigured = false
-    func configureInterface(#parentInterfaceController: WKInterfaceController) {
+    func configureInterface(parentInterfaceController parentInterfaceController: WKInterfaceController) {
         self.starLabel?.setTextColor(GratuitousUIColor.ultraLightTextColor())
         self.outlineGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
         self.interfaceIsConfigured = true

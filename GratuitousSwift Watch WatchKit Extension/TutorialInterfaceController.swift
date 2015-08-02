@@ -28,7 +28,7 @@ class TutorialInterfaceController: WKInterfaceController {
         
         if self.interfaceControllerIsConfigured == false {
             // putting this in a background queue allows willActivate to finish, the animation to start.
-            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
+            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
             dispatch_async(backgroundQueue) {
                 self.configureInterfaceController()
             }
@@ -69,7 +69,7 @@ class TutorialInterfaceController: WKInterfaceController {
     
     @objc private func animateUpTimer(timer: NSTimer?) {
         timer?.invalidate()
-        let animateDownTimer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: "animateDownTimer:", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: "animateDownTimer:", userInfo: nil, repeats: false)
         self.scrollingAnimationImageView?.setImageNamed("scrollUpAnimation-")
         self.scrollingAnimationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 23), duration: 3.0, repeatCount: 1)
     }

@@ -47,7 +47,7 @@ class SettingsInterfaceController: WKInterfaceController {
         if self.interfaceControllerIsConfigured == false {
         self.setTitle(NSLocalizedString("Close Settings", comment: ""))
             // putting this in a background queue allows willActivate to finish, the animation to start.
-            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
+            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
             dispatch_async(backgroundQueue) {
                 self.configureInterfaceController()
             }

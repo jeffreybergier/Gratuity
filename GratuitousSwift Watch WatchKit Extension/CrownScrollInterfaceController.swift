@@ -52,13 +52,12 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        let currentContext: CrownScrollerInterfaceContext
-        if let contextString = context as? String {
-            currentContext = CrownScrollerInterfaceContext(rawValue: contextString) !! CrownScrollerInterfaceContext.Bill
+        if let contextString = context as? String,
+            let currentContext = CrownScrollerInterfaceContext(rawValue: contextString) {
+                self.currentContext = currentContext
         } else {
-            fatalError("CrownScrollBillInterfaceController: Context not present during awakeWithContext:")
+            self.currentContext = CrownScrollerInterfaceContext.Bill
         }
-        self.currentContext = currentContext
     }
     
     override func willActivate() {
@@ -70,7 +69,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
             self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
             
             // putting this in a background queue allows willActivate to finish, the animation to start.
-            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
+            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
             dispatch_async(backgroundQueue) {
                 self.configureInterfaceController()
             }
@@ -352,7 +351,7 @@ class CrownScrollInterfaceController: GratuitousMenuInterfaceController {
         }
     }
     
-    private func numberOfRowsToAdd(#buttonType: ScrollInterfaceConstants.ButtonTapped) -> Int {
+    private func numberOfRowsToAdd(buttonType buttonType: ScrollInterfaceConstants.ButtonTapped) -> Int {
         switch self.currentContext {
         case .Bill:
             switch buttonType {

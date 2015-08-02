@@ -100,7 +100,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     func didTapDoneButton(sender: UIButton) {
-        if let presentingViewController = self.presentingViewController {
+        if let _ = self.presentingViewController {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
@@ -163,7 +163,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         CGContextStrokeEllipseInRect(currentContext, circleRect)
         
         // Create Image
-        let cgImage = CGBitmapContextCreateImage(currentContext)
+        let cgImage = CGBitmapContextCreateImage(currentContext)!
         let image = UIImage(CGImage: cgImage, scale: scale, orientation: UIImageOrientation.Up)
         
         return image
@@ -215,7 +215,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.writeCurrencyOverrideUserDefaultToDisk()
     }
     
-    private func writeCurrencyOverrideUserDefaultToDisk(_ currencyOverride: CurrencySign? = nil) {
+    private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: CurrencySign? = nil) {
         if let currencyOverride = currencyOverride {
             if let defaultsManager = self.defaultsManager {
                 defaultsManager.overrideCurrencySymbol = currencyOverride
@@ -355,7 +355,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         })
     }
     
-    func mailComposeController(controller: MFMailComposeViewController?, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         if let presentedViewController = self.presentedViewController {
             presentedViewController.dismissViewControllerAnimated(true, completion: nil)
         }

@@ -37,7 +37,6 @@ class GratuitousCurrencyFormatter {
     }
     
     @objc private func localeDidChangeInSystem(notification: NSNotification?) {
-        let tempVariable = NSLocale.currentLocale()
         self.currencyFormatter.locale = NSLocale.currentLocale()
         self.selectedCurrencySymbol = CurrencySign.Default
     }

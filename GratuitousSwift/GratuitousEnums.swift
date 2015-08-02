@@ -21,7 +21,7 @@ enum CustomTransitionStyle: Int {
     case Modal = 0, Popover
 }
 
-enum CurrencySign: Int, Printable {
+enum CurrencySign: Int, CustomStringConvertible {
     case Default = 0, Dollar, Pound, Euro, Yen, None
     
     func string() -> String {
@@ -104,7 +104,7 @@ enum ActualScreenSizeBasedOnWidth: Int {
     case iPhone4or5 = 0, iPhone6, iPhone6Plus, iPad
 }
 
-enum CrownScrollerInterfaceContext: String, Printable {
+enum CrownScrollerInterfaceContext: String, CustomStringConvertible {
     case Bill = "CrownScrollerBill"
     case Tip = "CrownScrollerTip"
     case NotSet = "NotSet"
@@ -114,7 +114,7 @@ enum CrownScrollerInterfaceContext: String, Printable {
     }
 }
 
-enum ThreeButtonStepperInterfaceContext: String, Printable {
+enum ThreeButtonStepperInterfaceContext: String, CustomStringConvertible {
     case Bill = "ThreeButtonStepperBill"
     case Tip = "ThreeButtonStepperTip"
     case NotSet = "NotSet"
@@ -124,7 +124,7 @@ enum ThreeButtonStepperInterfaceContext: String, Printable {
     }
 }
 
-enum CorrectWatchInterface: Int, Printable {
+enum CorrectWatchInterface: Int, CustomStringConvertible {
     case CrownScroller = 0, ThreeButtonStepper
     
     var description: String {
@@ -148,7 +148,7 @@ enum CorrectWatchInterface: Int, Printable {
     }
 }
 
-enum Fuuutuuura: String, Printable, Hashable {
+enum Fuuutuuura: String, CustomStringConvertible, Hashable {
     case Medium = "Fuuutuuura-Meeediuuum"
     
     var description: String {
@@ -163,7 +163,7 @@ enum Fuuutuuura: String, Printable, Hashable {
     }
 }
 
-enum Futura: String, Printable, Hashable {
+enum Futura: String, CustomStringConvertible, Hashable {
     case Medium = "Futura-Medium"
     case MediumItalic = "Futura-MediumItalic"
     case CondensedMedium = "Futura-CondensedMedium"
@@ -187,7 +187,7 @@ enum Futura: String, Printable, Hashable {
     }
 }
 
-enum UIFontStyle: Printable, Hashable {
+enum UIFontStyle: CustomStringConvertible, Hashable {
     case Headline
     case Body
     case Caption1
@@ -222,7 +222,7 @@ extension UIFont {
         self.init(name: futuraStyle.rawValue, size: size)
     }
     
-    class func futura(#style: Futura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
+    class func futura(style style: Futura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
         return UIFont(futuraStyle: style, size: size) !! UIFont.preferredFontForTextStyle(fallbackStyle.description)
     }
     
@@ -230,7 +230,7 @@ extension UIFont {
         self.init(name: fuuutuuuraStyle.rawValue, size: size)
     }
     
-    class func fuuutuuura(#style: Fuuutuuura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
+    class func fuuutuuura(style style: Fuuutuuura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
         return UIFont(fuuutuuuraStyle: style, size: size) !! UIFont.preferredFontForTextStyle(fallbackStyle.description)
     }
 }

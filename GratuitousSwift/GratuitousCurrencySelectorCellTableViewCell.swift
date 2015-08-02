@@ -58,7 +58,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
                 }
                 self.accessoryType = UITableViewCellAccessoryType.Checkmark
                 if timer {
-                    let slowFadeOutTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "slowFadeOutOfBorderAroundCell:", userInfo: nil, repeats: false)
+                    NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "slowFadeOutOfBorderAroundCell:", userInfo: nil, repeats: false)
                 }
             } else {
                 self.accessoryType = UITableViewCellAccessoryType.None
@@ -91,13 +91,13 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         }
     }
     
-    override func animationDidStart(anim: CAAnimation?) {
+    override func animationDidStart(anim: CAAnimation) {
         self.animatingBorderColor = true
     }
     
-    override func animationDidStop(anim: CAAnimation?, finished flag: Bool) {
+    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         //this timer was needed because this seems to get called slightly too soon and if the user touched the same cell again it would repeat the animation and it was jarring.
-        let timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "cgAnimationDidFinish:", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "cgAnimationDidFinish:", userInfo: nil, repeats: false)
     }
     
     func cgAnimationDidFinish(timer: NSTimer?) {
@@ -106,7 +106,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         self.animatingBorderColor = false
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
             delay: 0.0,
@@ -118,7 +118,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             completion: { finished in })
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
             delay: 0.0,
@@ -130,7 +130,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
             completion: { finished in })
     }
 
-    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent?) {
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         super.touchesCancelled(touches, withEvent: event)
         UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
             delay: 0.0,

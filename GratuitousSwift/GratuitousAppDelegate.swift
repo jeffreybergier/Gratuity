@@ -25,7 +25,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics()])
         
         //initialize the view controller from the storyboard
-        let tipViewController = self.storyboard.instantiateInitialViewController() as? UIViewController
+        let tipViewController = self.storyboard.instantiateInitialViewController()
         
         //configure the window
         if self.window == nil {

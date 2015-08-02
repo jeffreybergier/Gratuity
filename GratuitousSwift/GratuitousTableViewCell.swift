@@ -11,7 +11,7 @@ import UIKit
 class GratuitousTableViewCell: UITableViewCell {
 
     @IBOutlet weak private var dollarTextLabel: UILabel?
-    private var labelTextAttributes = [NSString(): NSObject()]
+    private var labelTextAttributes = [String(): NSObject()]
     private let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
     weak var currencyFormatter: GratuitousCurrencyFormatter?
     var textSizeAdjustment: CGFloat = 1.0 {

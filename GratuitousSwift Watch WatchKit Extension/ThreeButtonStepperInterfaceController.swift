@@ -99,7 +99,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
             self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
             
             // putting this in a background queue allows willActivate to finish, the animation to start.
-            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
+            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
             dispatch_async(backgroundQueue) {
                 self.configureInterfaceController()
             }
@@ -109,7 +109,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     private func configureInterfaceController() {
         dispatch_async(dispatch_get_main_queue()) {
             var currencySymbolString = "$"
-            if let currencySymbolCharacter = Array(self.dataSource.currencyStringFromInteger(0)).first {
+            if let currencySymbolCharacter = Array(self.dataSource.currencyStringFromInteger(0).characters).first {
                 let stringFromCharacter = String(currencySymbolCharacter)
                 if stringFromCharacter == "0" { // if the preference is set to none, a 0 was showing in the UI instead of blank
                     currencySymbolString = ""
@@ -177,8 +177,8 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
                 self.buttonValues = (9,9,9) // this display cannot show more than 999, so if its, we will use that as the new billAmount
             } else {
                 let intString = "\(currencyAmount)"
-                let intArray = Array(intString).map { String($0).toInt() }
-                for (index, integer) in enumerate(intArray.reverse()) {
+                let intArray = Array(intString.characters).map { Int(String($0)) }
+                for (index, integer) in Array(intArray.reverse()).enumerate() {
                     switch index {
                     case 0:
                         self.buttonValues.ones = integer !! 0
@@ -197,14 +197,14 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
     private func calculateValueFromUI() -> Int {
         let UIArray = [self.buttonValues.hundreds, self.buttonValues.tens, self.buttonValues.ones]
         var compiledInt = 0
-        for (index, integer) in enumerate(UIArray.reverse()) {
+        for (index, integer) in Array(UIArray.reverse()).enumerate() {
             // for index 0 the integer needs to be multiplied by 1.
             // For index 1, it needs to be multiplied by 10
             // for index 2, it needs to be multipled by 100
             // the index == the number of zeros needed after the 1.
             // this for loop accomplishes that.
             var multiplier = 1
-            for i in 0..<index {
+            for _ in 0..<index {
                 multiplier *= 10
             }
             compiledInt += integer * multiplier
@@ -275,7 +275,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
         self.writeValueToDisk(self.calculateValueFromUI())
     }
     
-    private func carryValueUp(#valuePlace: SelectedButton) {
+    private func carryValueUp(valuePlace valuePlace: SelectedButton) {
         switch valuePlace {
         case .Tens:
             self.buttonValues.hundreds += 1
@@ -290,7 +290,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
         }
     }
     
-    private func carryValueDown(#valuePlace: SelectedButton) {
+    private func carryValueDown(valuePlace valuePlace: SelectedButton) {
         // this may or may not make sense
         // it can lead to some strange behavior and some data loss
         // may remove this function before release
@@ -321,7 +321,7 @@ class ThreeButtonStepperInterfaceController: GratuitousMenuInterfaceController {
         self.selectedButton = .Ones
     }
     
-    private enum SelectedButton: Printable {
+    private enum SelectedButton: CustomStringConvertible {
         case None, Hundreds, Tens, Ones
         var description: String {
             switch self {

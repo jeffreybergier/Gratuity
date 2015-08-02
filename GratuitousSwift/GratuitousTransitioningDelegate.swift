@@ -10,7 +10,7 @@ import UIKit
 
 class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController!, sourceViewController source: UIViewController) -> UIPresentationController? {
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
         return GratuitousPresentationController(presentedViewController: presented, presentingViewController: presenting)
     }
     

@@ -21,12 +21,12 @@ class GratuitousGradientView: UIView {
     
     var isUpsideDown:Bool = false {
         didSet {
-            let colorArray = self.gradientColors.reverse()
+            let colorArray = Array(self.gradientColors.reverse())
             self.gradient.colors = colorArray
         }
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInitializer()
     }
@@ -60,7 +60,7 @@ class GratuitousGradientView: UIView {
                 GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.4).CGColor
             ]
             if self.isUpsideDown {
-                unusualGradientColors = unusualGradientColors.reverse()
+                unusualGradientColors = Array(unusualGradientColors.reverse())
             }
             self.gradient.colors = unusualGradientColors
         } else {
@@ -71,7 +71,7 @@ class GratuitousGradientView: UIView {
                 GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.4).CGColor
             ]
             if self.isUpsideDown {
-                unusualGradientColors = unusualGradientColors.reverse()
+                unusualGradientColors = Array(unusualGradientColors.reverse())
             }
             self.gradient.colors = unusualGradientColors
         }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GratuitousUserDefaults: Printable {
+class GratuitousUserDefaults: CustomStringConvertible {
     
     var description: String { return "GratuitousUserDefaults Manager: SuiteName: \(Keys.localSuiteName)" }
     private let userDefaults = NSUserDefaults(suiteName: Keys.localSuiteName) !! NSUserDefaults.standardUserDefaults()
@@ -35,7 +35,7 @@ class GratuitousUserDefaults: Printable {
         }
     }
     
-    private func startMigrationFromVersionOnePointZero(#toVersion: String) {
+    private func startMigrationFromVersionOnePointZero(toVersion toVersion: String) {
         NSLog("\(self): Looks like a an upgrade from 1.0: Setting defaults for new Keys")
         // first need to extract the settings from standardUserDefaults
         let standardUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -189,7 +189,7 @@ class GratuitousUserDefaults: Printable {
         }
     }
     
-    func currentDateIsAfterWatchRelease(#considerJuneCutoff: Bool) -> Bool {
+    func currentDateIsAfterWatchRelease(considerJuneCutoff considerJuneCutoff: Bool) -> Bool {
         let calendar = NSCalendar.currentCalendar()
         let todaysDate = NSDate(timeIntervalSinceNow: 0)
         let triggerDateComponents = NSDateComponents()
@@ -197,7 +197,7 @@ class GratuitousUserDefaults: Printable {
         triggerDateComponents.day = 24
         triggerDateComponents.year = 2015
         if let triggerDate = calendar.dateFromComponents(triggerDateComponents) {
-            let dateComparison = calendar.compareDate(todaysDate, toDate: triggerDate, toUnitGranularity: NSCalendarUnit.DayCalendarUnit)
+            let dateComparison = calendar.compareDate(todaysDate, toDate: triggerDate, toUnitGranularity: NSCalendarUnit.Day)
             switch dateComparison {
             case .OrderedAscending:
                 return false // returns false if current date is before April 24, 2015
@@ -225,7 +225,7 @@ class GratuitousUserDefaults: Printable {
         triggerDateComponents.day = 1
         triggerDateComponents.year = 2015
         if let triggerDate = calendar.dateFromComponents(triggerDateComponents) {
-            let dateComparison = calendar.compareDate(currentDate, toDate: triggerDate, toUnitGranularity: NSCalendarUnit.DayCalendarUnit)
+            let dateComparison = calendar.compareDate(currentDate, toDate: triggerDate, toUnitGranularity: NSCalendarUnit.Day)
             switch dateComparison {
             case .OrderedAscending:
                 return true // returns true if current date is before June 01, 2015

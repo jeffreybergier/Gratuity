@@ -10,6 +10,10 @@ import UIKit
 
 class GratuitousPresentationController: UIPresentationController {
     
+    var unwrappedContainerView: UIView! {
+        return self.containerView!
+    }
+    
     private lazy var dimmingView :UIView = {
         let view = UIView()
         let tap = UITapGestureRecognizer(target:self, action:"dimmingViewTapped:")
@@ -25,10 +29,10 @@ class GratuitousPresentationController: UIPresentationController {
         }()
     
     override func presentationTransitionWillBegin() {
-        self.dimmingView.frame = self.containerView.bounds
+        self.dimmingView.frame = self.unwrappedContainerView.bounds
         self.dimmingView.alpha = 0.0
         
-        self.containerView.insertSubview(self.dimmingView, atIndex: 0)
+        self.unwrappedContainerView.insertSubview(self.dimmingView, atIndex: 0)
         
         if let transitionCoordinator = self.presentedViewController.transitionCoordinator() {
             transitionCoordinator.animateAlongsideTransition({
@@ -107,8 +111,8 @@ class GratuitousPresentationController: UIPresentationController {
     }
     
     override func containerViewWillLayoutSubviews() {
-        self.dimmingView.frame = self.containerView.bounds
-        self.presentedView().frame = self.frameOfPresentedViewInContainerView()
+        self.dimmingView.frame = self.unwrappedContainerView.bounds
+        self.presentedView()!.frame = self.frameOfPresentedViewInContainerView()
     }
     
     override func shouldPresentInFullscreen() -> Bool {
@@ -118,8 +122,8 @@ class GratuitousPresentationController: UIPresentationController {
     override func frameOfPresentedViewInContainerView() -> CGRect {
         var presentedViewFrame = CGRectZero
         
-        presentedViewFrame.size = self.sizeForChildContentContainer(self.presentedViewController, withParentContainerSize: self.containerView.bounds.size)
-        presentedViewFrame.origin.x = self.containerView.bounds.size.width - presentedViewFrame.size.width
+        presentedViewFrame.size = self.sizeForChildContentContainer(self.presentedViewController, withParentContainerSize: self.unwrappedContainerView.bounds.size)
+        presentedViewFrame.origin.x = self.unwrappedContainerView.bounds.size.width - presentedViewFrame.size.width
         
         return presentedViewFrame
     }

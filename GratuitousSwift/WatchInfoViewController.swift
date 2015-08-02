@@ -24,17 +24,15 @@ class WatchInfoViewController: UIViewController {
         }()
     
     private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
-        if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mov"),
-            let movieURL = NSURL.fileURLWithPath(moviePath),
-            let player = AVPlayer(URL: movieURL) {
-                player.allowsExternalPlayback = false
-                player.actionAtItemEnd = AVPlayerActionAtItemEnd.None // cause the player to loop
-                if let playerLayer = AVPlayerLayer(player: player) {
-                    return (player, playerLayer)
-                }
+        if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mov") {
+            let player = AVPlayer(URL: NSURL.fileURLWithPath(moviePath))
+            player.allowsExternalPlayback = false
+            player.actionAtItemEnd = AVPlayerActionAtItemEnd.None // cause the player to loop
+            let playerLayer = AVPlayerLayer(player: player)
+            return (player, playerLayer)
         }
         return nil
-    }()
+        }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,8 +155,8 @@ class WatchInfoViewController: UIViewController {
         return UIInterfaceOrientation.Portrait
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
     }
     
     deinit {

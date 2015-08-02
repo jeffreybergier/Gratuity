@@ -73,7 +73,7 @@ class GratuitousWatchDataSource {
         return "– %"
     }
     
-    class func optionalDivision(#top: Double, bottom: Double) -> Double? {
+    class func optionalDivision(top top: Double, bottom: Double) -> Double? {
         let division = top/bottom
         if isinf(division) == false && isnan(division) == false {
             return division
