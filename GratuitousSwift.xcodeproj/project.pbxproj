@@ -90,14 +90,6 @@
 		73C98CBA1B6E94D500416DDA /* GratuityL WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		73C98CBD1B6E94D500416DDA /* GratuityL WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 73450E781ABF2926005927F1 /* GratuityL WatchKit App.app */; };
 		73C98CC21B6E964200416DDA /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
-		73CDC9631B6EA27C0029F501 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D01AB49E4D00172397 /* Crashlytics.framework */; };
-		73CDC9641B6EA27C0029F501 /* Crashlytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D01AB49E4D00172397 /* Crashlytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		73CDC9651B6EA27D0029F501 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
-		73CDC9661B6EA27D0029F501 /* Fabric.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		73CDC9681B6EA2870029F501 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D01AB49E4D00172397 /* Crashlytics.framework */; };
-		73CDC9691B6EA2870029F501 /* Crashlytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D01AB49E4D00172397 /* Crashlytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		73CDC96A1B6EA2870029F501 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; };
-		73CDC96B1B6EA2870029F501 /* Fabric.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73D730D11AB49E4D00172397 /* Fabric.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		73D11C491A1DB2A3003D238C /* GratuitousPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */; };
 		73D11C4A1A1DB2A6003D238C /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */; };
 		73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
@@ -188,8 +180,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				73CDC9641B6EA27C0029F501 /* Crashlytics.framework in Embed Frameworks */,
-				73CDC9661B6EA27D0029F501 /* Fabric.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,8 +190,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				73CDC9691B6EA2870029F501 /* Crashlytics.framework in Embed Frameworks */,
-				73CDC96B1B6EA2870029F501 /* Fabric.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,8 +288,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73CDC9631B6EA27C0029F501 /* Crashlytics.framework in Frameworks */,
-				73CDC9651B6EA27D0029F501 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,8 +295,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73CDC9681B6EA2870029F501 /* Crashlytics.framework in Frameworks */,
-				73CDC96A1B6EA2870029F501 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,7 +570,6 @@
 				731375561ABF3D900074E2F2 /* Sources */,
 				731375571ABF3D900074E2F2 /* Frameworks */,
 				731375581ABF3D900074E2F2 /* Resources */,
-				731375801ABF3F190074E2F2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -621,7 +604,6 @@
 				73450E681ABF2926005927F1 /* Sources */,
 				73450E691ABF2926005927F1 /* Frameworks */,
 				73450E6A1ABF2926005927F1 /* Resources */,
-				73450EA01ABF2BDD005927F1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -656,7 +638,6 @@
 				736568DA1A26DD1400603602 /* Sources */,
 				736568EB1A26DD1400603602 /* Frameworks */,
 				736568EE1A26DD1400603602 /* Resources */,
-				73D730CF1AB49E2F00172397 /* ShellScript */,
 				73C98CC11B6E94D500416DDA /* Embed Watch Content */,
 				73CDC9671B6EA27D0029F501 /* Embed Frameworks */,
 			);
@@ -677,7 +658,6 @@
 				738250FD19E60EED00CD2B28 /* Sources */,
 				738250FE19E60EED00CD2B28 /* Frameworks */,
 				738250FF19E60EED00CD2B28 /* Resources */,
-				73D730DA1AB49ED800172397 /* ShellScript */,
 				73C98CBF1B6E94D500416DDA /* Embed Watch Content */,
 				73CDC96C1B6EA2870029F501 /* Embed Frameworks */,
 			);
@@ -840,61 +820,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		731375801ABF3F190074E2F2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24";
-		};
-		73450EA01ABF2BDD005927F1 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24";
-		};
-		73D730CF1AB49E2F00172397 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24";
-		};
-		73D730DA1AB49ED800172397 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce d27eb9a1b2174e1b94a1bd36f5a5c097d6b046e5ddfa579bb9aed11ce6f80e24    ";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		731375561ABF3D900074E2F2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1033,6 +958,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1054,6 +980,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				IBSC_MODULE = Gratuity_WatchKit_Extension;
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch Watch App/GratuityStoreWatchAppInfo.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1070,11 +997,8 @@
 				CODE_SIGN_ENTITLEMENTS = "Gratuity WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1099,11 +1023,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch WatchKit Extension/GratuityStoreWatchExtensionInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1122,11 +1043,8 @@
 				CODE_SIGN_ENTITLEMENTS = "GratuitousSwift Watch WatchKit Extension/GratuityL WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1152,11 +1070,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch WatchKit Extension/GratuityLocalWatchExtensionInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1177,6 +1092,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1198,6 +1114,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				IBSC_MODULE = GratuityL_WatchKit_Extension;
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch Watch App/GratuityLocalWatchAppInfo.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1218,10 +1135,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = "GratuitousSwift copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D Local";
@@ -1243,10 +1157,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = "GratuitousSwift copy-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D LOCAL";
@@ -1345,10 +1256,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = GratuitousSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
@@ -1370,10 +1278,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = GratuitousSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Gratuity;
