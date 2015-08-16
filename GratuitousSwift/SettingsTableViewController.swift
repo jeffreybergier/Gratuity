@@ -36,8 +36,8 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         
         //tell the tableview to have dynamic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         
         //set the colors for the navigation controller
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
@@ -64,6 +64,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         //lastly, read the defaults from disk and update the UI
         self.readUserDefaultsAndUpdateSlider(nil)
+        
+        //prepare the currency override cells
+        self.prepareCurrencyIndicatorCells()
     }
     
     private func prepareHeaderLabelsAndCells() {
@@ -84,19 +87,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.headerLabelTipPercentage?.text = NSLocalizedString("Suggested Tip Percentage", comment: "this text is for a section header where the user can set the default tip percentage when they choose a new bill amount").uppercaseString
         self.headerLabelCurencySymbol?.text = NSLocalizedString("Currency Symbol", comment: "this text is for a section header where the user can override the currency symbol that will be shown in front of the currency amounts in the app").uppercaseString
         self.headerLabelAboutSaturdayApps?.text = NSLocalizedString("About SaturdayApps", comment: "This is a section header. It contains information about my company, saturday apps").uppercaseString
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //prepare the currency override cells
-        self.prepareCurrencyIndicatorCells()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.tableView.reloadData()
     }
     
     func didTapDoneButton(sender: UIButton) {
@@ -130,6 +120,14 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     // MARK: Handle Percentage Slider
@@ -216,10 +214,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: CurrencySign? = nil) {
-        if let currencyOverride = currencyOverride {
-            if let defaultsManager = self.defaultsManager {
+        if let currencyOverride = currencyOverride,
+            let defaultsManager = self.defaultsManager {
                 defaultsManager.overrideCurrencySymbol = currencyOverride
-            }
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self)
