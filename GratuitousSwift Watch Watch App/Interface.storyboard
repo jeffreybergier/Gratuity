@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cdi-qG-zGI">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azz-ui-8Qo">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8083.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8089"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Fuuutuuura-Meeediuuum.ttf">
+            <string>Fuuutuuura-Meeediuuum</string>
+            <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
@@ -87,6 +89,46 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="-171" y="342"/>
+        </scene>
+        <!--Picker Interface Controller-->
+        <scene sceneID="ftW-AE-Ff2">
+            <objects>
+                <controller hidesWhenLoading="NO" id="azz-ui-8Qo" customClass="PickerInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                    <items>
+                        <group width="1" height="0.40000000000000002" alignment="left" layout="vertical" id="PW8-B0-TTS">
+                            <items>
+                                <label alignment="center" text="$100" textAlignment="center" id="5zl-jE-VVr">
+                                    <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="25"/>
+                                </label>
+                                <label alignment="center" text="$20" textAlignment="center" id="Xsm-7V-7Bg">
+                                    <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="18"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" height="0.58999999999999997" alignment="left" id="l4m-2O-Zb9">
+                            <items>
+                                <picker width="0.5" height="100" alignment="left" focusStyle="sequence" id="Yf3-3J-pIU">
+                                    <connections>
+                                        <action selector="billPickerChanged:" destination="azz-ui-8Qo" id="ZXi-CP-EMo"/>
+                                    </connections>
+                                </picker>
+                                <picker width="0.5" height="100" alignment="left" focusStyle="sequence" id="JkS-v9-H5m">
+                                    <connections>
+                                        <action selector="tipPickerChanged:" destination="azz-ui-8Qo" id="bwf-ne-IJ7"/>
+                                    </connections>
+                                </picker>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="billAmountLabel" destination="5zl-jE-VVr" id="hZn-UR-JXt"/>
+                        <outlet property="billPicker" destination="Yf3-3J-pIU" id="cv2-oP-kt5"/>
+                        <outlet property="tipPercentageLabel" destination="Xsm-7V-7Bg" id="f8t-y3-Aq1"/>
+                        <outlet property="tipPicker" destination="JkS-v9-H5m" id="Y1U-K1-eUH"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-419" y="-32"/>
         </scene>
         <!--App Delegate Interface Controller-->
         <scene sceneID="MVV-xz-nNc">

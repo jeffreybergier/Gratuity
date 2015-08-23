@@ -96,6 +96,8 @@
 		73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
 		73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 		73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */; };
+		73FB7E911B8A4B70001A47FC /* PickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */; };
+		73FB7E921B8A4B71001A47FC /* PickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,6 +267,7 @@
 		73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPresentationController.swift; sourceTree = "<group>"; };
 		73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimatedTransitioning.swift; sourceTree = "<group>"; };
 		73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTransitioningDelegate.swift; sourceTree = "<group>"; };
+		73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerInterfaceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */,
+				73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */,
 				73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */,
 				7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */,
 				736C441C1ACC6BAF006DB5E2 /* TutorialInterfaceController.swift */,
@@ -830,6 +834,7 @@
 				731375861ABF3FC00074E2F2 /* SettingsInterfaceController.swift in Sources */,
 				7313758D1ABF3FCF0074E2F2 /* ThreeButtonStepperInterfaceController.swift in Sources */,
 				731375921ABF3FF20074E2F2 /* GratuitousUIColor.swift in Sources */,
+				73FB7E911B8A4B70001A47FC /* PickerInterfaceController.swift in Sources */,
 				731375881ABF3FC00074E2F2 /* GratuitousMenuInterfaceController.swift in Sources */,
 				73A2169E1ACCE0D1005547A1 /* CrownScrollTableRowController.swift in Sources */,
 				731375841ABF3FC00074E2F2 /* AppDelegateInterfaceController.swift in Sources */,
@@ -849,6 +854,7 @@
 				73C98CC21B6E964200416DDA /* GratuitousUIColor.swift in Sources */,
 				73450E8E1ABF2A50005927F1 /* TotalAmountInterfaceController.swift in Sources */,
 				73450E8F1ABF2A50005927F1 /* SettingsInterfaceController.swift in Sources */,
+				73FB7E921B8A4B71001A47FC /* PickerInterfaceController.swift in Sources */,
 				73450E961ABF2A64005927F1 /* ThreeButtonStepperInterfaceController.swift in Sources */,
 				73A2169F1ACCE0D1005547A1 /* CrownScrollTableRowController.swift in Sources */,
 				73450E911ABF2A50005927F1 /* GratuitousMenuInterfaceController.swift in Sources */,
