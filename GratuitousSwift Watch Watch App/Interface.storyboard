@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azz-ui-8Qo">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8173.3" systemVersion="15A263e" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cdi-qG-zGI">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8089"/>
@@ -128,7 +128,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-419" y="-32"/>
+            <point key="canvasLocation" x="-293" y="-29"/>
         </scene>
         <!--App Delegate Interface Controller-->
         <scene sceneID="MVV-xz-nNc">
@@ -245,7 +245,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="54" y="125"/>
+            <point key="canvasLocation" x="87" y="340"/>
         </scene>
         <!--Total-->
         <scene sceneID="QVZ-uk-9u4">
@@ -432,290 +432,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="610" y="316"/>
-        </scene>
-        <!--Bill Amount-->
-        <scene sceneID="dEq-bm-f4H">
-            <objects>
-                <controller identifier="ThreeButtonStepperBillInterfaceController" title="Bill Amount" contentMode="scaleAspectFill" hidesWhenLoading="NO" id="vbv-Xr-8bf" customClass="ThreeButtonStepperInterfaceController" customModule="Gratuity_WatchKit_Extension">
-                    <items>
-                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="MQ8-7f-81e">
-                            <items>
-                                <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="shS-yM-gel"/>
-                                <imageView alignment="center" image="BillBG" contentMode="top" id="469-bM-Typ"/>
-                            </items>
-                            <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
-                        </group>
-                        <label alignment="left" hidden="YES" text="Choose Bill Amount" id="xIC-Iu-wcF">
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                        </label>
-                        <group width="1" alignment="left" hidden="YES" id="bza-Jp-x2l">
-                            <items>
-                                <group height="43" alignment="left" id="xWg-US-c1U">
-                                    <items>
-                                        <label alignment="center" verticalAlignment="center" text="$" textAlignment="center" minimumScaleFactor="0.30000000000000016" id="i6s-sR-8E2">
-                                            <fontDescription key="font" type="system" pointSize="20"/>
-                                        </label>
-                                    </items>
-                                </group>
-                                <group width="0.26000000000000001" height="1" alignment="right" radius="7" id="Obv-Vb-WtO">
-                                    <items>
-                                        <button alignment="center" verticalAlignment="center" id="ije-qV-9yS">
-                                            <group key="contentGroup" width="1" height="1" alignment="left" id="LLK-Ok-h3I">
-                                                <items>
-                                                    <label alignment="center" verticalAlignment="center" text="0" textAlignment="center" id="95a-tC-jlc"/>
-                                                </items>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="hundredButtonSelected" destination="vbv-Xr-8bf" id="MBV-OW-fFf"/>
-                                            </connections>
-                                        </button>
-                                    </items>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                                </group>
-                                <group width="0.26000000000000001" height="1" alignment="right" radius="7" id="Nhx-sz-1W7">
-                                    <items>
-                                        <button alignment="center" verticalAlignment="center" id="Muf-ed-4x0">
-                                            <group key="contentGroup" width="1" height="1" alignment="left" id="Wcc-rx-deP">
-                                                <items>
-                                                    <label alignment="center" verticalAlignment="center" text="0" textAlignment="center" id="arD-dO-Mz8">
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </label>
-                                                </items>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="tensButtonSelected" destination="vbv-Xr-8bf" id="8IS-vx-QP6"/>
-                                            </connections>
-                                        </button>
-                                    </items>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                                </group>
-                                <group width="0.26000000000000001" height="1" alignment="right" radius="7" id="Bfk-kY-eFE">
-                                    <items>
-                                        <button alignment="center" verticalAlignment="center" id="6cK-GH-hOW">
-                                            <group key="contentGroup" width="1" height="1" alignment="left" id="LZK-ei-r8R">
-                                                <items>
-                                                    <label alignment="center" verticalAlignment="center" text="0" id="Uzx-Ml-yBk">
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </label>
-                                                </items>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="onesButtonSelected" destination="vbv-Xr-8bf" id="LQC-Px-vrZ"/>
-                                            </connections>
-                                        </button>
-                                    </items>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                                </group>
-                            </items>
-                        </group>
-                        <group width="1" alignment="left" hidden="YES" id="6k9-jz-wD4">
-                            <items>
-                                <group alignment="left" radius="7" id="xga-Ew-cIk">
-                                    <items>
-                                        <slider width="1" alignment="left" value="4" maximum="9" steps="9" minimumImage="SliderMinus" maximumImage="SliderPlus" id="9M8-bu-rEq">
-                                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="sliderDidChange:" destination="vbv-Xr-8bf" id="aXW-id-gwP"/>
-                                            </connections>
-                                        </slider>
-                                    </items>
-                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </group>
-                            </items>
-                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                        </group>
-                        <group alignment="left" hidden="YES" id="Xmf-Xf-d9w">
-                            <items>
-                                <button alignment="left" id="Ar8-BW-IYq">
-                                    <group key="contentGroup" width="1" alignment="left" id="wgN-Vb-U48">
-                                        <items>
-                                            <label height="35" alignment="center" verticalAlignment="center" text="Next" textAlignment="center" id="O1C-fl-H70"/>
-                                        </items>
-                                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </group>
-                                    <connections>
-                                        <action selector="didTapNextButton" destination="vbv-Xr-8bf" id="394-0j-vyt"/>
-                                    </connections>
-                                </button>
-                            </items>
-                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                        </group>
-                    </items>
-                    <connections>
-                        <outlet property="animationImageView" destination="shS-yM-gel" id="TaU-Ap-JDn"/>
-                        <outlet property="backgroundImageGroup" destination="MQ8-7f-81e" id="7uP-rO-3bu"/>
-                        <outlet property="currencyLabel" destination="i6s-sR-8E2" id="NcJ-vb-bh5"/>
-                        <outlet property="currencySlider" destination="9M8-bu-rEq" id="6Jr-UI-Ksc"/>
-                        <outlet property="currencySliderGroup" destination="6k9-jz-wD4" id="YfI-sZ-xdN"/>
-                        <outlet property="currencyValuesGroup" destination="bza-Jp-x2l" id="8A7-4f-8tM"/>
-                        <outlet property="hundredsButton" destination="ije-qV-9yS" id="oGx-5F-z76"/>
-                        <outlet property="hundredsButtonTextLabel" destination="95a-tC-jlc" id="0VU-En-PbF"/>
-                        <outlet property="hundredsGroup" destination="Obv-Vb-WtO" id="tyo-R3-Am3"/>
-                        <outlet property="instructionalTextLabel" destination="xIC-Iu-wcF" id="3m6-DG-Gho"/>
-                        <outlet property="nextButton" destination="Ar8-BW-IYq" id="kd2-FD-mYn"/>
-                        <outlet property="nextButtonGroup" destination="Xmf-Xf-d9w" id="UsW-GV-U0K"/>
-                        <outlet property="nextButtonTextLabel" destination="O1C-fl-H70" id="JWj-h0-R6N"/>
-                        <outlet property="onesButton" destination="6cK-GH-hOW" id="Kzh-vS-Vhf"/>
-                        <outlet property="onesButtonTextLabel" destination="Uzx-Ml-yBk" id="UZn-9H-6TJ"/>
-                        <outlet property="onesGroup" destination="Bfk-kY-eFE" id="Vvb-hN-8wu"/>
-                        <outlet property="tensButton" destination="Muf-ed-4x0" id="MEe-hw-sRv"/>
-                        <outlet property="tensButtonTextLabel" destination="arD-dO-Mz8" id="zBN-Oq-5Nf"/>
-                        <outlet property="tensGroup" destination="Nhx-sz-1W7" id="XJI-D3-8Co"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="54" y="565"/>
-        </scene>
-        <!--Tip Amount-->
-        <scene sceneID="7Ul-z5-eVj">
-            <objects>
-                <controller identifier="ThreeButtonStepperTipInterfaceController" title="Tip Amount" contentMode="scaleAspectFill" hidesWhenLoading="NO" id="cWQ-rw-7fp" customClass="ThreeButtonStepperInterfaceController" customModule="Gratuity_WatchKit_Extension">
-                    <items>
-                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="jQt-EO-csQ">
-                            <items>
-                                <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="cFL-ok-Lbz"/>
-                                <imageView alignment="center" image="TipBG" contentMode="top" id="RxD-uk-h4L"/>
-                            </items>
-                            <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
-                        </group>
-                        <label alignment="left" hidden="YES" text="Choose Bill Amount" id="CeT-jS-z2n">
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                        </label>
-                        <group width="1" alignment="left" hidden="YES" id="ZnC-MQ-ldX">
-                            <items>
-                                <group height="43" alignment="left" id="tj2-66-Tlu">
-                                    <items>
-                                        <label alignment="center" verticalAlignment="center" text="$" textAlignment="center" minimumScaleFactor="0.30000000000000016" id="lgS-NX-8as">
-                                            <fontDescription key="font" type="system" pointSize="20"/>
-                                        </label>
-                                    </items>
-                                </group>
-                                <group width="0.26000000000000001" height="1" alignment="right" radius="7" id="LsM-gN-4eP">
-                                    <items>
-                                        <button alignment="center" verticalAlignment="center" id="vrS-9G-RDX">
-                                            <group key="contentGroup" width="1" height="1" alignment="left" id="yCQ-hE-Njf">
-                                                <items>
-                                                    <label alignment="center" verticalAlignment="center" text="0" textAlignment="center" id="6OU-7W-HMH"/>
-                                                </items>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="hundredButtonSelected" destination="cWQ-rw-7fp" id="KzC-KZ-2ts"/>
-                                            </connections>
-                                        </button>
-                                    </items>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                                </group>
-                                <group width="0.26000000000000001" height="1" alignment="right" radius="7" id="tad-QG-RyS">
-                                    <items>
-                                        <button alignment="center" verticalAlignment="center" id="x8E-a6-7HC">
-                                            <group key="contentGroup" width="1" height="1" alignment="left" id="gka-Ib-E6B">
-                                                <items>
-                                                    <label alignment="center" verticalAlignment="center" text="0" textAlignment="center" id="pg0-On-D3i">
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </label>
-                                                </items>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="tensButtonSelected" destination="cWQ-rw-7fp" id="pP0-EM-qAF"/>
-                                            </connections>
-                                        </button>
-                                    </items>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                                </group>
-                                <group width="0.26000000000000001" height="1" alignment="right" radius="7" id="7hL-E4-pGk">
-                                    <items>
-                                        <button alignment="center" verticalAlignment="center" id="ztw-A8-nf0">
-                                            <group key="contentGroup" width="1" height="1" alignment="left" id="lMh-mX-6jO">
-                                                <items>
-                                                    <label alignment="center" verticalAlignment="center" text="0" id="uh3-xH-og8">
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </label>
-                                                </items>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </group>
-                                            <connections>
-                                                <action selector="onesButtonSelected" destination="cWQ-rw-7fp" id="tYA-Ag-nfE"/>
-                                            </connections>
-                                        </button>
-                                    </items>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                                </group>
-                            </items>
-                        </group>
-                        <label alignment="right" hidden="YES" text="20%" textAlignment="right" id="iMK-Bu-LNf"/>
-                        <group width="1" alignment="left" hidden="YES" id="JMo-Oi-hCQ">
-                            <items>
-                                <group width="1" alignment="left" radius="7" id="j6n-PE-gGL">
-                                    <items>
-                                        <slider width="1" alignment="left" value="4" maximum="9" steps="9" minimumImage="SliderMinus" maximumImage="SliderPlus" id="3ju-nT-DKg">
-                                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="sliderDidChange:" destination="cWQ-rw-7fp" id="hli-H0-uXp"/>
-                                            </connections>
-                                        </slider>
-                                    </items>
-                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </group>
-                            </items>
-                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                        </group>
-                        <group alignment="left" hidden="YES" id="cFb-hn-0Pe">
-                            <items>
-                                <button alignment="left" id="759-Ci-YCv">
-                                    <group key="contentGroup" width="1" alignment="left" id="NF0-iN-X1E">
-                                        <items>
-                                            <label height="35" alignment="center" verticalAlignment="center" text="Next" textAlignment="center" id="PEc-4s-tCE"/>
-                                        </items>
-                                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </group>
-                                    <connections>
-                                        <action selector="didTapNextButton" destination="cWQ-rw-7fp" id="O4y-0C-se6"/>
-                                    </connections>
-                                </button>
-                            </items>
-                            <color key="backgroundColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                        </group>
-                    </items>
-                    <connections>
-                        <outlet property="animationImageView" destination="cFL-ok-Lbz" id="a60-hR-yma"/>
-                        <outlet property="backgroundImageGroup" destination="jQt-EO-csQ" id="qJi-lM-Pw0"/>
-                        <outlet property="currencyLabel" destination="lgS-NX-8as" id="HBJ-st-ows"/>
-                        <outlet property="currencySlider" destination="3ju-nT-DKg" id="yxl-NC-TGu"/>
-                        <outlet property="currencySliderGroup" destination="JMo-Oi-hCQ" id="PEk-e9-dKE"/>
-                        <outlet property="currencyValuesGroup" destination="ZnC-MQ-ldX" id="aFI-lD-fuM"/>
-                        <outlet property="hundredsButton" destination="vrS-9G-RDX" id="kPG-6m-5gJ"/>
-                        <outlet property="hundredsButtonTextLabel" destination="6OU-7W-HMH" id="Suf-nO-fnB"/>
-                        <outlet property="hundredsGroup" destination="LsM-gN-4eP" id="xUE-OY-gP3"/>
-                        <outlet property="instructionalTextLabel" destination="CeT-jS-z2n" id="zZl-Pw-Xld"/>
-                        <outlet property="nextButton" destination="759-Ci-YCv" id="ZoD-7X-ven"/>
-                        <outlet property="nextButtonGroup" destination="cFb-hn-0Pe" id="DB9-mR-KJ6"/>
-                        <outlet property="nextButtonTextLabel" destination="PEc-4s-tCE" id="Jgx-hJ-uV2"/>
-                        <outlet property="onesButton" destination="ztw-A8-nf0" id="UUh-g4-OoV"/>
-                        <outlet property="onesButtonTextLabel" destination="uh3-xH-og8" id="un5-iS-34V"/>
-                        <outlet property="onesGroup" destination="7hL-E4-pGk" id="8VI-XD-wLo"/>
-                        <outlet property="tensButton" destination="x8E-a6-7HC" id="XR4-Xu-4Ze"/>
-                        <outlet property="tensButtonTextLabel" destination="pg0-On-D3i" id="Ee8-OY-mko"/>
-                        <outlet property="tensGroup" destination="tad-QG-RyS" id="j4k-XI-Xao"/>
-                        <outlet property="tipPercentageLabel" destination="iMK-Bu-LNf" id="D2h-HY-Q40"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="349" y="565"/>
         </scene>
         <!--Close-->
         <scene sceneID="N6L-dJ-mY2">
@@ -1032,7 +748,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="383" y="125"/>
+            <point key="canvasLocation" x="329" y="340"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.70588235294117641" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
