@@ -148,6 +148,8 @@ enum CorrectWatchInterface: Int, CustomStringConvertible {
     }
 }
 
+#if os(watchOS)
+
 enum Fuuutuuura: String, CustomStringConvertible, Hashable {
     case Medium = "Fuuutuuura-Meeediuuum"
     
@@ -162,6 +164,10 @@ enum Fuuutuuura: String, CustomStringConvertible, Hashable {
         return self.description.hashValue
     }
 }
+    
+#endif
+
+#if os(iOS)
 
 enum Futura: String, CustomStringConvertible, Hashable {
     case Medium = "Futura-Medium"
@@ -186,6 +192,8 @@ enum Futura: String, CustomStringConvertible, Hashable {
         return self.description.hashValue
     }
 }
+    
+#endif
 
 enum UIFontStyle: CustomStringConvertible, Hashable {
     case Headline
@@ -218,6 +226,9 @@ enum UIFontStyle: CustomStringConvertible, Hashable {
 }
 
 extension UIFont {
+    
+    #if os(iOS)
+    
     convenience init?(futuraStyle: Futura, size: CGFloat) {
         self.init(name: futuraStyle.rawValue, size: size)
     }
@@ -226,6 +237,10 @@ extension UIFont {
         return UIFont(futuraStyle: style, size: size) !! UIFont.preferredFontForTextStyle(fallbackStyle.description)
     }
     
+    #endif
+    
+    #if os(watchOS)
+    
     convenience init?(fuuutuuuraStyle: Fuuutuuura, size: CGFloat) {
         self.init(name: fuuutuuuraStyle.rawValue, size: size)
     }
@@ -233,6 +248,8 @@ extension UIFont {
     class func fuuutuuura(style style: Fuuutuuura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
         return UIFont(fuuutuuuraStyle: style, size: size) !! UIFont.preferredFontForTextStyle(fallbackStyle.description)
     }
+    
+    #endif
 }
 
 // Operator Overloading!!

@@ -71,6 +71,8 @@
 		736C441D1ACC6BAF006DB5E2 /* TutorialInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736C441C1ACC6BAF006DB5E2 /* TutorialInterfaceController.swift */; };
 		736C441E1ACC6BAF006DB5E2 /* TutorialInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736C441C1ACC6BAF006DB5E2 /* TutorialInterfaceController.swift */; };
 		737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */; };
+		7376F8DE1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
+		7376F8DF1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
 		737E5DE71A1AFD1C00F0A8C7 /* settingsIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */; };
 		7382510719E60EED00CD2B28 /* GratuitousAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */; };
 		7382510E19E60EED00CD2B28 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7382510D19E60EED00CD2B28 /* Images.xcassets */; };
@@ -229,6 +231,7 @@
 		736C441C1ACC6BAF006DB5E2 /* TutorialInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialInterfaceController.swift; sourceTree = "<group>"; };
 		737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIConstant.swift; sourceTree = "<group>"; };
 		7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInterfaceController.swift; sourceTree = "<group>"; };
+		7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousLabelImageGenerator.swift; sourceTree = "<group>"; };
 		737C87281A8EE5CA0055C04A /* CrownScrollInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownScrollInterfaceController.swift; sourceTree = "<group>"; };
 		737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = settingsIcon.pdf; sourceTree = "<group>"; };
 		7382510119E60EED00CD2B28 /* GratuitySD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuitySD.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -537,6 +540,7 @@
 				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
 				734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */,
 				735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */,
+				7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */,
 			);
 			name = "Custom Files";
 			sourceTree = "<group>";
@@ -870,6 +874,7 @@
 				736568E61A26DD1400603602 /* GratuitousPresentationController.swift in Sources */,
 				736568E71A26DD1400603602 /* GratuitousAppDelegate.swift in Sources */,
 				736568E81A26DD1400603602 /* GratuitousAnimatedTransitioning.swift in Sources */,
+				7376F8DF1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */,
 				736568E91A26DD1400603602 /* SettingsTableViewController.swift in Sources */,
 				736568EA1A26DD1400603602 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
 			);
@@ -894,6 +899,7 @@
 				73D11C491A1DB2A3003D238C /* GratuitousPresentationController.swift in Sources */,
 				7382510719E60EED00CD2B28 /* GratuitousAppDelegate.swift in Sources */,
 				73D11C4A1A1DB2A6003D238C /* GratuitousAnimatedTransitioning.swift in Sources */,
+				7376F8DE1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */,
 				73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */,
 				73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
 			);

@@ -181,6 +181,28 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //was previously in viewWillAppear
         self.prepareTotalAmountTextLabel()
         self.prepareTipPercentageTextLabel()
+        
+        //generate images for the watch
+        let queue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
+        dispatch_async(queue) {
+            //let subtitleTextAttributes = GratuitousUIColor.WatchFonts.subtitleText
+            let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+            //let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
+            
+            let imageGenerator = GratuitousLabelImageGenerator()
+            let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+            let documentsPath: NSString = paths.first! //Get the docs directory
+            for i in 1 ... 100 {
+                let string = NSAttributedString(string: "$\(i)", attributes: valueTextAttributes)
+                if let image = imageGenerator.generateImageForAttributedString(string) {
+                    let filePath = documentsPath.stringByAppendingPathComponent("image\(i).png")
+                    print(filePath)
+                    let data = UIImagePNGRepresentation(image)
+                    data?.writeToFile(filePath, atomically: true)
+                }
+            }
+        }
+        
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -78,6 +78,9 @@ struct GratuitousUIColor {
     }
     
     struct WatchFonts {
+        
+        #if os(watchOS)
+        
         static let tutorialTitleText = [
             NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 21.5, fallbackStyle: UIFontStyle.Subheadline),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
@@ -102,6 +105,37 @@ struct GratuitousUIColor {
             NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 22, fallbackStyle: UIFontStyle.Body),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
         ]
+        
+        #endif
+        
+        #if os(iOS)
+        
+        static let tutorialTitleText = [
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 21.5, fallbackStyle: UIFontStyle.Subheadline),
+            NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
+        ]
+        static let titleText = [
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Subheadline),
+            NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
+        ]
+        static let subtitleText = [
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 20, fallbackStyle: UIFontStyle.Subheadline),
+            NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
+        ]
+        static let buttonText = [
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 20, fallbackStyle: UIFontStyle.Headline),
+            NSForegroundColorAttributeName : GratuitousUIColor.ultraLightTextColor()
+        ]
+        static let valueText = [
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 27, fallbackStyle: UIFontStyle.Body),
+            NSForegroundColorAttributeName : GratuitousUIColor.ultraLightTextColor()
+        ]
+        static let smallValueText = [
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Body),
+            NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
+        ]
+        
+        #endif
     }
     
     struct WatchColors {
