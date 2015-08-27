@@ -15,24 +15,20 @@ class GratuitousLabelImageGenerator {
         return self.imageFromView(self.view)
     }
     
+    private let scaleFactor = CGFloat(2.0)
     private let view = UILabel()
     
     private func imageFromView(inputView: UIView) -> UIImage? {
         inputView.sizeToFit()
-        let rect = inputView.bounds
+        let size = CGSize(width: inputView.bounds.width * scaleFactor, height: inputView.bounds.height * scaleFactor)
+        UIGraphicsBeginImageContext(size)
         
-        UIGraphicsBeginImageContext(rect.size)
         guard let context = UIGraphicsGetCurrentContext() else { return .None }
-        
+        CGContextScaleCTM(context, scaleFactor, scaleFactor)
         inputView.layer.renderInContext(context)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        
+        guard let coreImage = CGBitmapContextCreateImage(context) else { return .None }
         UIGraphicsEndImageContext()
         
-        if let image = image {
-            return image
-        } else {
-            return .None
-        }
+        return UIImage(CGImage: coreImage, scale: 2.0, orientation: UIImageOrientation.Up)
     }
 }

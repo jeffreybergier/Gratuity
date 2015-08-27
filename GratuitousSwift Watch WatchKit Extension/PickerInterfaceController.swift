@@ -40,20 +40,20 @@ class PickerInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        var items = [WKPickerItem]()
+        print("Beginning Image Loading for Wheels")
         let beginningTime = NSDate(timeIntervalSinceNow: 0)
-        for i in 0..<2000 {
-            let item = WKPickerItem()
-            item.title = "$\(i)"
-            items.append(item)
-        }
-        let endingTime = NSDate(timeIntervalSinceNow: 0)
-        let interval = endingTime.timeIntervalSinceDate(beginningTime)
-        print("items took to create: \(interval)")
-        self.billPicker?.setItems(items)
-        self.tipPicker?.setItems(items)
         
-        // Configure interface objects here.
+        var imageItems = [WKPickerItem]()
+        for i in 1...100 {
+            let item = WKPickerItem()
+            item.contentImage = WKImage(imageName: "dollarAmounts-\(i)")
+            imageItems += [item]
+        }
+        self.billPicker?.setItems(imageItems)
+        self.tipPicker?.setItems(imageItems)
+
+        let interval = NSDate(timeIntervalSinceNow: 0).timeIntervalSinceDate(beginningTime)
+        print("Finished Image Loading for Wheels: \(interval) seconds")
     }
 
     @IBAction func billPickerChanged(value: Int) {
