@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8187.4" systemVersion="15A263e" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azz-ui-8Qo">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BQU-7v-eUk">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
@@ -90,10 +90,10 @@
             </objects>
             <point key="canvasLocation" x="-171" y="342"/>
         </scene>
-        <!--Picker Interface Controller-->
+        <!--Gratuity-->
         <scene sceneID="ftW-AE-Ff2">
             <objects>
-                <controller hidesWhenLoading="NO" id="azz-ui-8Qo" customClass="PickerInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                <controller identifier="MainInterfaceController" title="Gratuity" hidesWhenLoading="NO" id="azz-ui-8Qo" customClass="PickerInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
                         <group width="1" height="0.5" alignment="left" layout="vertical" id="PW8-B0-TTS">
                             <items>
@@ -130,7 +130,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-293" y="-29"/>
+            <point key="canvasLocation" x="-109" y="-13"/>
         </scene>
         <!--App Delegate Interface Controller-->
         <scene sceneID="MVV-xz-nNc">
@@ -751,6 +751,26 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="329" y="340"/>
+        </scene>
+        <!--Gratuity-->
+        <scene sceneID="LN8-nK-YqW">
+            <objects>
+                <controller title="Gratuity" hidesWhenLoading="NO" id="BQU-7v-eUk" customClass="AssetVerificationInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="7hq-5g-2En">
+                            <items>
+                                <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="Gph-pv-IB1"/>
+                                <imageView alignment="center" image="LaunchBG" contentMode="top" id="4sx-MB-xTd"/>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="animationImageView" destination="Gph-pv-IB1" id="mqu-rw-KJa"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-384" y="-13"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.70588235294117641" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

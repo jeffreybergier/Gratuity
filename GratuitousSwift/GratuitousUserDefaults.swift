@@ -27,7 +27,7 @@ class GratuitousUserDefaults: CustomStringConvertible {
             let standardUserDefaults = NSUserDefaults.standardUserDefaults()
             if standardUserDefaults.integerForKey(Keys.billIndexPathRow) != 0 {
                 // means we're upgrading from 1.0
-                self.startMigrationFromVersionOnePointZero(toVersion: appVersionCurrent)
+                self.startMigrationFromVersionOnePointZeroToVersion(appVersionCurrent)
             } else {
                 // looks like a fresh install
                 self.configureNewInstallWithCurrentAppVersion(appVersionCurrent)
@@ -35,7 +35,7 @@ class GratuitousUserDefaults: CustomStringConvertible {
         }
     }
     
-    private func startMigrationFromVersionOnePointZero(toVersion toVersion: String) {
+    private func startMigrationFromVersionOnePointZeroToVersion(toVersion: String) {
         NSLog("\(self): Looks like a an upgrade from 1.0: Setting defaults for new Keys")
         // first need to extract the settings from standardUserDefaults
         let standardUserDefaults = NSUserDefaults.standardUserDefaults()

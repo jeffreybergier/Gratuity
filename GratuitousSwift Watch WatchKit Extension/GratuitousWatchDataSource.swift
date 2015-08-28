@@ -15,6 +15,10 @@ class GratuitousWatchDataSource {
     
     let defaultsManager = GratuitousUserDefaults()
     private let currencyFormatter = NSNumberFormatter()
+    var currencyCode: String {
+        let optionalCode: String? = self.currencyFormatter.currencyCode
+        return optionalCode !! ""
+    }
     
     init() {
         // configure currency formatter

@@ -94,6 +94,8 @@
 		73C98CBA1B6E94D500416DDA /* GratuityL WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		73C98CBD1B6E94D500416DDA /* GratuityL WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 73450E781ABF2926005927F1 /* GratuityL WatchKit App.app */; };
 		73C98CC21B6E964200416DDA /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; };
+		73CA9AE71B90BD28005344FB /* AssetVerificationInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CA9AE61B90BD28005344FB /* AssetVerificationInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
+		73CA9AE81B90BD28005344FB /* AssetVerificationInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CA9AE61B90BD28005344FB /* AssetVerificationInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		73D11C491A1DB2A3003D238C /* GratuitousPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */; };
 		73D11C4A1A1DB2A6003D238C /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */; };
 		73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
@@ -264,6 +266,7 @@
 		73BC11D71B8FF55100A85A25 /* GratuitousiOSConnectivityDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousiOSConnectivityDelegate.swift; path = GratuitousSwift/GratuitousiOSConnectivityDelegate.swift; sourceTree = SOURCE_ROOT; };
 		73BC11DE1B8FFF3500A85A25 /* GratuitousWatchConnectivityDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchConnectivityDelegate.swift; sourceTree = "<group>"; };
 		73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CrownScrollTipInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/CrownScrollTipInterfaceController.swift"; sourceTree = "<group>"; };
+		73CA9AE61B90BD28005344FB /* AssetVerificationInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetVerificationInterfaceController.swift; sourceTree = "<group>"; };
 		73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepperBillInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/StepperBillInterfaceController.swift"; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
 		73D46AFD1AC7C9B400057185 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -390,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */,
+				73CA9AE61B90BD28005344FB /* AssetVerificationInterfaceController.swift */,
 			);
 			name = Experiments;
 			sourceTree = "<group>";
@@ -854,6 +858,7 @@
 				731375841ABF3FC00074E2F2 /* AppDelegateInterfaceController.swift in Sources */,
 				731375871ABF3FC00074E2F2 /* GratuitousWatchDataSource.swift in Sources */,
 				731375891ABF3FC40074E2F2 /* CrownScrollInterfaceController.swift in Sources */,
+				73CA9AE71B90BD28005344FB /* AssetVerificationInterfaceController.swift in Sources */,
 				736C441D1ACC6BAF006DB5E2 /* TutorialInterfaceController.swift in Sources */,
 				731375911ABF3FEA0074E2F2 /* GratuitousEnums.swift in Sources */,
 			);
@@ -874,6 +879,7 @@
 				73450E911ABF2A50005927F1 /* GratuitousMenuInterfaceController.swift in Sources */,
 				73450E901ABF2A50005927F1 /* GratuitousWatchDataSource.swift in Sources */,
 				73450E921ABF2A5F005927F1 /* CrownScrollInterfaceController.swift in Sources */,
+				73CA9AE81B90BD28005344FB /* AssetVerificationInterfaceController.swift in Sources */,
 				736C441E1ACC6BAF006DB5E2 /* TutorialInterfaceController.swift in Sources */,
 				73450E9C1ABF2A9C005927F1 /* GratuitousEnums.swift in Sources */,
 			);
