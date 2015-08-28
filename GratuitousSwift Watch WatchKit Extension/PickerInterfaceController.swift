@@ -15,12 +15,14 @@ class PickerInterfaceController: WKInterfaceController {
     
     private var currentBillAmount = 0 {
         didSet {
-            self.billAmountLabel?.setText("$\(self.currentBillAmount)")
+            let string = NSAttributedString(string: "$\(self.currentBillAmount)", attributes: self.largeValueTextAttributes)
+            self.billAmountLabel?.setAttributedText(string)
         }
     }
     private var currentTipPercentage = 0 {
         didSet {
-            self.tipPercentageLabel?.setText("\(self.currentTipPercentage)%")
+            let string = NSAttributedString(string: "\(self.currentTipPercentage)%", attributes: self.smallValueTextAttributes)
+            self.tipPercentageLabel?.setAttributedText(string)
         }
     }
 
@@ -29,31 +31,50 @@ class PickerInterfaceController: WKInterfaceController {
     @IBOutlet private var tipPicker: WKInterfacePicker?
     @IBOutlet private var billPicker: WKInterfacePicker?
     
-    private let dataSource = GratuitousWatchDataSource.sharedInstance
-    private var interfaceControllerIsConfigured = false
-    private var currencySymbolDidChangeWhileAway = false
+    private let phoneDelegate = GratuitousWatchConnectivityDelegate()
     
-    private let subtitleTextAttributes = GratuitousUIColor.WatchFonts.subtitleText
-    private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-    private let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
+    private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.hugeValueText
+    private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        print("Beginning Image Loading for Wheels")
-        let beginningTime = NSDate(timeIntervalSinceNow: 0)
+        print("Beginning Image Load from Raw NSData file for Wheels")
+        let dataBeginningTime = NSDate(timeIntervalSinceNow: 0)
+        var items = [WKPickerItem]()
         
-        var imageItems = [WKPickerItem]()
-        for i in 1...100 {
-            let item = WKPickerItem()
-            item.contentImage = WKImage(imageName: "dollarAmounts-\(i)")
-            imageItems += [item]
+        // try to get the data
+        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        let dataURL = documentsURL.URLByAppendingPathComponent("dollarAmounts.data")
+        if let data = NSData(contentsOfURL: dataURL),
+            let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSArray {
+                for object in array {
+                    if let image = object as? UIImage {
+                        let wkImage = WKImage(image: image)
+                        let item = WKPickerItem()
+                        item.contentImage = wkImage
+                        items += [item]
+                    }
+                }
         }
-        self.billPicker?.setItems(imageItems)
-        self.tipPicker?.setItems(imageItems)
-
-        let interval = NSDate(timeIntervalSinceNow: 0).timeIntervalSinceDate(beginningTime)
-        print("Finished Image Loading for Wheels: \(interval) seconds")
+        
+        if items.isEmpty == true {
+            print("Falling back to text")
+            
+            for i in 1...500 {
+                let item = WKPickerItem()
+                item.title = "$\(i)"
+                items += [item]
+            }
+            
+            print("Finished Falling Back to Text")
+        }
+        
+        self.billPicker?.setItems(items)
+        self.tipPicker?.setItems(items)
+        
+        let interval = NSDate(timeIntervalSinceNow: 0).timeIntervalSinceDate(dataBeginningTime)
+        print("Finished Loading \(items.count) items for Wheels: \(interval) seconds")
     }
 
     @IBAction func billPickerChanged(value: Int) {

@@ -17,6 +17,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let defaultsManager = GratuitousUserDefaults()
     private let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
+    private var watchDelegate: AnyObject? = .None
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -46,7 +47,10 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
         
         // remove later
-        self.generateImages()
+        if #available(iOS 9, *) {
+            
+            self.generateImages()
+        }
         
         return true
     }
@@ -67,7 +71,10 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    @available(iOS 9, *)
     func generateImages() {
+        let watchDelegate = GratuitousiOSConnectivityDelegate()
+        self.watchDelegate = watchDelegate
         //generate images for the watch
         let queue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
         dispatch_async(queue) {
@@ -76,17 +83,19 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             //let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
             
             let imageGenerator = GratuitousLabelImageGenerator()
-            let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-            let documentsPath: NSString = paths.first! //Get the docs directory
-            for i in 1 ... 100 {
+            var images = [UIImage]()
+            for i in 1 ... 500 {
                 let string = NSAttributedString(string: "$\(i)", attributes: valueTextAttributes)
                 if let image = imageGenerator.generateImageForAttributedString(string) {
-                    let filePath = documentsPath.stringByAppendingPathComponent("image\(i).png")
-                    let data = UIImagePNGRepresentation(image)
-                    data?.writeToFile(filePath, atomically: true)
+                    images += [image]
                 }
             }
-            print("Files written to path: \(documentsPath)")
+            let data = NSKeyedArchiver.archivedDataWithRootObject(images)
+            let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+            let dataURL = documentsURL.URLByAppendingPathComponent("dollarAmounts.data")
+            data.writeToURL(dataURL, atomically: true)
+            print("Ordering Data to be sent: \(dataURL.path)")
+            watchDelegate.sendDataAtURL(dataURL)
         }
     }
 

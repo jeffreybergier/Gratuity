@@ -98,7 +98,11 @@ struct GratuitousUIColor {
             NSForegroundColorAttributeName : GratuitousUIColor.ultraLightTextColor()
         ]
         static let valueText = [
-            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 27, fallbackStyle: UIFontStyle.Body),
+            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 27, fallbackStyle: UIFontStyle.Subheadline),
+            NSForegroundColorAttributeName : GratuitousUIColor.ultraLightTextColor()
+        ]
+        static let hugeValueText = [
+            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 40, fallbackStyle: UIFontStyle.Headline),
             NSForegroundColorAttributeName : GratuitousUIColor.ultraLightTextColor()
         ]
         static let smallValueText = [
