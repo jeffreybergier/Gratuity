@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BQU-7v-eUk">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azz-ui-8Qo">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
@@ -90,41 +90,55 @@
             </objects>
             <point key="canvasLocation" x="-171" y="342"/>
         </scene>
-        <!--Gratuity-->
+        <!--MainInterfaceController-->
         <scene sceneID="ftW-AE-Ff2">
             <objects>
-                <controller identifier="MainInterfaceController" title="Gratuity" hidesWhenLoading="NO" id="azz-ui-8Qo" customClass="PickerInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                <controller identifier="MainInterfaceController" hidesWhenLoading="NO" id="azz-ui-8Qo" customClass="PickerInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
-                        <group width="1" height="0.5" alignment="left" layout="vertical" id="PW8-B0-TTS">
+                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="8mG-iG-dPr">
                             <items>
-                                <label alignment="center" text="$100" textAlignment="center" id="5zl-jE-VVr">
-                                    <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="40"/>
-                                </label>
-                                <label alignment="center" text="$20" textAlignment="center" id="Xsm-7V-7Bg">
-                                    <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
-                                </label>
+                                <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="Bbw-Kw-xZi"/>
+                                <imageView alignment="center" image="LaunchBG" contentMode="top" id="jPa-ri-xxu"/>
                             </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
                         </group>
-                        <group width="1" height="0.48999999999999999" alignment="left" id="l4m-2O-Zb9">
+                        <group width="1" height="1" alignment="left" hidden="YES" layout="vertical" id="fNV-8L-ECv">
                             <items>
-                                <picker width="0.5" height="100" alignment="left" style="stack" focusStyle="stack" indicatorMode="shownWhileFocused" id="Yf3-3J-pIU">
-                                    <connections>
-                                        <action selector="billPickerChanged:" destination="azz-ui-8Qo" id="ZXi-CP-EMo"/>
-                                    </connections>
-                                </picker>
-                                <picker width="0.5" height="100" alignment="left" style="stack" focusStyle="stack" indicatorMode="shownWhileFocused" id="JkS-v9-H5m">
-                                    <connections>
-                                        <action selector="tipPickerChanged:" destination="azz-ui-8Qo" id="bwf-ne-IJ7"/>
-                                    </connections>
-                                </picker>
+                                <group width="1" height="0.59999999999999998" alignment="center" layout="vertical" id="PW8-B0-TTS">
+                                    <items>
+                                        <label alignment="center" text="$100" textAlignment="center" id="5zl-jE-VVr">
+                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="40"/>
+                                        </label>
+                                        <label alignment="center" text="$20" textAlignment="center" id="Xsm-7V-7Bg">
+                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" height="0.40000000000000002" alignment="left" id="l4m-2O-Zb9">
+                                    <items>
+                                        <picker width="0.5" height="1" alignment="left" style="stack" focusStyle="stack" indicatorMode="shownWhileFocused" id="Yf3-3J-pIU">
+                                            <connections>
+                                                <action selector="billPickerChanged:" destination="azz-ui-8Qo" id="ZXi-CP-EMo"/>
+                                            </connections>
+                                        </picker>
+                                        <picker width="0.5" height="1" alignment="left" style="stack" focusStyle="stack" indicatorMode="shownWhileFocused" id="JkS-v9-H5m">
+                                            <connections>
+                                                <action selector="tipPickerChanged:" destination="azz-ui-8Qo" id="bwf-ne-IJ7"/>
+                                            </connections>
+                                        </picker>
+                                    </items>
+                                </group>
                             </items>
                         </group>
                     </items>
                     <connections>
+                        <outlet property="animationImageView" destination="Bbw-Kw-xZi" id="m6t-vl-481"/>
                         <outlet property="billAmountLabel" destination="5zl-jE-VVr" id="hZn-UR-JXt"/>
                         <outlet property="billPicker" destination="Yf3-3J-pIU" id="cv2-oP-kt5"/>
+                        <outlet property="loadingGroup" destination="8mG-iG-dPr" id="Rhd-Cp-Xky"/>
+                        <outlet property="mainGroup" destination="fNV-8L-ECv" id="3ck-dd-BH9"/>
                         <outlet property="tipPercentageLabel" destination="Xsm-7V-7Bg" id="f8t-y3-Aq1"/>
                         <outlet property="tipPicker" destination="JkS-v9-H5m" id="Y1U-K1-eUH"/>
                     </connections>
@@ -751,26 +765,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="329" y="340"/>
-        </scene>
-        <!--Gratuity-->
-        <scene sceneID="LN8-nK-YqW">
-            <objects>
-                <controller title="Gratuity" hidesWhenLoading="NO" id="BQU-7v-eUk" customClass="AssetVerificationInterfaceController" customModule="Gratuity_WatchKit_Extension">
-                    <items>
-                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="7hq-5g-2En">
-                            <items>
-                                <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="Gph-pv-IB1"/>
-                                <imageView alignment="center" image="LaunchBG" contentMode="top" id="4sx-MB-xTd"/>
-                            </items>
-                            <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
-                        </group>
-                    </items>
-                    <connections>
-                        <outlet property="animationImageView" destination="Gph-pv-IB1" id="mqu-rw-KJa"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="-384" y="-13"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.70588235294117641" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

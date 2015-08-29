@@ -47,6 +47,23 @@ class GratuitousCurrencyFormatter {
         }
     }
     
+    var currencyCode: String {
+        switch self.selectedCurrencySymbol {
+        case .Default:
+            return self.currencyFormatter.currencyCode
+        case .Dollar:
+            return "Dollar"
+        case .Pound:
+            return "Pound"
+        case .Euro:
+            return "Euro"
+        case .Yen:
+            return "Yen"
+        case .None:
+            return "None"
+        }
+    }
+    
     func currencyFormattedString(number: Int) -> String {
         let currencyString: String
         switch self.selectedCurrencySymbol {

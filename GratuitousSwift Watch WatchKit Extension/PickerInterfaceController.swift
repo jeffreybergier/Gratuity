@@ -8,44 +8,86 @@
 
 import WatchKit
 import Foundation
-import ObjectiveC.runtime
 
-
-class PickerInterfaceController: WKInterfaceController {
+class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectivityDelegate {
     
-    private var currentBillAmount = 0 {
+    @IBOutlet private var loadingGroup: WKInterfaceGroup?
+    @IBOutlet private var mainGroup: WKInterfaceGroup?
+    @IBOutlet private weak var animationImageView: WKInterfaceImage?
+    private let dataSource = GratuitousWatchDataSource.sharedInstance
+    private let watchConnectivityManager = GratuitousWatchConnectivityManager()
+    
+    private var items = [WKPickerItem]() {
         didSet {
-            let string = NSAttributedString(string: "$\(self.currentBillAmount)", attributes: self.largeValueTextAttributes)
-            self.billAmountLabel?.setAttributedText(string)
+            self.billPicker?.setItems(self.items)
+            self.tipPicker?.setItems(self.items)
+            self.billPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.billIndexPathRow - 1)
+            self.interfaceState = .Loaded
         }
     }
-    private var currentTipPercentage = 0 {
+    
+    enum InterfaceState {
+        case Loading, Loaded
+    }
+    
+    private var interfaceState: InterfaceState = .Loading {
         didSet {
-            let string = NSAttributedString(string: "\(self.currentTipPercentage)%", attributes: self.smallValueTextAttributes)
-            self.tipPercentageLabel?.setAttributedText(string)
+            switch self.interfaceState {
+            case .Loading:
+                self.loadingGroup?.setHidden(false)
+                self.mainGroup?.setHidden(true)
+            case .Loaded:
+                self.loadingGroup?.setHidden(true)
+                self.mainGroup?.setHidden(false)
+            }
         }
     }
-
-    @IBOutlet private var tipPercentageLabel: WKInterfaceLabel?
-    @IBOutlet private var billAmountLabel: WKInterfaceLabel?
-    @IBOutlet private var tipPicker: WKInterfacePicker?
-    @IBOutlet private var billPicker: WKInterfacePicker?
     
-    private let phoneDelegate = GratuitousWatchConnectivityDelegate()
-    
-    private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.hugeValueText
-    private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-    
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func willActivate() {
+        super.willActivate()
         
-        print("Beginning Image Load from Raw NSData file for Wheels")
-        let dataBeginningTime = NSDate(timeIntervalSinceNow: 0)
-        var items = [WKPickerItem]()
+        // start animating
+        self.animationImageView?.setImageNamed("gratuityCap4-")
+        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
         
-        // try to get the data
+        // configure the timer to fix an issue where sometimes the UI would not push to the correct interface controller.
+        let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
+        dispatch_async(backgroundQueue) {
+            self.watchConnectivityManager.interfaceControllerDelegate = self
+            self.dataOnDiskChanged()
+        }
+    }
+    
+    func dataOnDiskChanged() {
+        if let items = readPickerItemsFromDisk(self.dataSource.defaultsManager.overrideCurrencySymbol) {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.items = items
+            }
+        } else {
+            self.watchConnectivityManager.requestDataFromPhone()
+        }
+    }
+    
+    func readPickerItemsFromDisk(currency: CurrencySign) -> [WKPickerItem]? {
+        let fileName: String
+        switch currency {
+        case .Default:
+            fileName = "\(self.dataSource.currencyCode)Currency.data"
+        case .Dollar:
+            fileName = "DollarCurrency.data"
+        case .Pound:
+            fileName = "PoundCurrency.data"
+        case .Euro:
+            fileName = "EuroCurrency.data"
+        case .Yen:
+            fileName = "YenCurrency.data"
+        case .None:
+            fileName = "NoneCurrency.data"
+        }
+        
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-        let dataURL = documentsURL.URLByAppendingPathComponent("dollarAmounts.data")
+        let dataURL = documentsURL.URLByAppendingPathComponent(fileName)
+        var items = [WKPickerItem]()
         if let data = NSData(contentsOfURL: dataURL),
             let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSArray {
                 for object in array {
@@ -58,51 +100,57 @@ class PickerInterfaceController: WKInterfaceController {
                 }
         }
         
-        if items.isEmpty == true {
-            print("Falling back to text")
-            
-            for i in 1...500 {
-                let item = WKPickerItem()
-                item.title = "$\(i)"
-                items += [item]
-            }
-            
-            print("Finished Falling Back to Text")
+        print("\(items.count) found at URL: \(dataURL.path!)")
+        if items.isEmpty == false { return items } else { return .None }
+    }
+    
+    
+    
+    private var currentBillAmount = 0 {
+        didSet {
+            let string = NSAttributedString(string: self.dataSource.currencyStringFromInteger(self.currentBillAmount), attributes: self.largeValueTextAttributes)
+            self.billAmountLabel?.setAttributedText(string)
         }
-        
-        self.billPicker?.setItems(items)
-        self.tipPicker?.setItems(items)
-        
-        let interval = NSDate(timeIntervalSinceNow: 0).timeIntervalSinceDate(dataBeginningTime)
-        print("Finished Loading \(items.count) items for Wheels: \(interval) seconds")
+    }
+    private var currentTipPercentage: Double? = 0.0 {
+        didSet {
+            let string = NSAttributedString(string: self.dataSource.percentStringFromRawDouble(self.currentTipPercentage), attributes: self.smallValueTextAttributes)
+            self.tipPercentageLabel?.setAttributedText(string)
+        }
     }
 
+    @IBOutlet private var tipPercentageLabel: WKInterfaceLabel?
+    @IBOutlet private var billAmountLabel: WKInterfaceLabel?
+    @IBOutlet private var tipPicker: WKInterfacePicker?
+    @IBOutlet private var billPicker: WKInterfacePicker?
+        
+    private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.hugeValueText
+    private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+
     @IBAction func billPickerChanged(value: Int) {
-        let billAmount = value
-        let tipAmount = Int(round(Double(billAmount) * 0.2))
-        let tipPercentage = 20
-        self.tipPicker?.setSelectedItemIndex(tipAmount)
-        self.currentBillAmount = billAmount
-        self.currentTipPercentage = tipPercentage
+        self.dataSource.defaultsManager.billIndexPathRow = value + 1
+        
+        let billAmount = value + 1
+        let suggestTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
+        let tipAmount = Int(round(Double(billAmount) * suggestTipPercentage))
+        
+        let tipIndex = tipAmount - 1
+        if tipIndex >= 0 {
+            self.tipPicker?.setSelectedItemIndex(tipIndex)
+        }
+        
+        let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
+        self.currentBillAmount = billAmount + tipAmount
+        self.currentTipPercentage = actualTipPercentage
     }
     
     @IBAction func tipPickerChanged(value: Int) {
-        let tipAmount = value
-        let billAmount = self.currentBillAmount
-        let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
-        print("tip percentage: \(tipPercentage)")
-        self.currentTipPercentage = tipPercentage
+        self.dataSource.defaultsManager.tipIndexPathRow = value + 1
+        
+        let billAmount = self.dataSource.defaultsManager.billIndexPathRow
+        let tipAmount = value + 1
+        let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
+        self.currentBillAmount = billAmount + tipAmount
+        self.currentTipPercentage = actualTipPercentage
     }
-    
-    
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
-    }
-
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-    }
-
 }

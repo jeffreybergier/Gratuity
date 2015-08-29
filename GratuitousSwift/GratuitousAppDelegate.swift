@@ -7,23 +7,36 @@
 //
 
 import UIKit
+import WatchConnectivity
 //import Fabric
 //import Crashlytics
 
 @UIApplicationMain
-class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
+class GratuitousAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     
     //initialize the window and the storyboard
     var window: UIWindow?
     let defaultsManager = GratuitousUserDefaults()
     private let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
-    private var watchDelegate: AnyObject? = .None
+    private let currencyFormatter = GratuitousCurrencyFormatter()
+    private let watchSession: WCSession? = {
+        if WCSession.isSupported() {
+           return WCSession.defaultSession()
+        } else {
+            return .None
+        }
+    }()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         //crashlytics intializer
 //        Fabric.with([Crashlytics()])
+        
+        if let session = self.watchSession {
+            session.delegate = self
+            session.activateSession()
+        }
         
         //initialize the view controller from the storyboard
         let tipViewController = self.storyboard.instantiateInitialViewController()
@@ -47,10 +60,10 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
         
         // remove later
-        if #available(iOS 9, *) {
-            
-            self.generateImages()
-        }
+//        if let session = self.watchSession,
+//            let url = self.generateNewImages() {
+//                session.transferFile(url, metadata: ["CurrencyCode" : self.currencyFormatter.currencyCode])
+//        }
         
         return true
     }
@@ -72,54 +85,67 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     @available(iOS 9, *)
-    func generateImages() {
-        let watchDelegate = GratuitousiOSConnectivityDelegate()
-        self.watchDelegate = watchDelegate
+    func generateNewImages() -> NSURL? {
         //generate images for the watch
-        let queue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
-        dispatch_async(queue) {
+        if let _ = self.watchSession {
             //let subtitleTextAttributes = GratuitousUIColor.WatchFonts.subtitleText
             let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
             //let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
             
             let imageGenerator = GratuitousLabelImageGenerator()
             var images = [UIImage]()
-            for i in 1 ... 500 {
-                let string = NSAttributedString(string: "$\(i)", attributes: valueTextAttributes)
+            for i in 1 ... 250 {
+                let string = NSAttributedString(string: self.currencyFormatter.currencyFormattedString(i), attributes: valueTextAttributes)
                 if let image = imageGenerator.generateImageForAttributedString(string) {
                     images += [image]
                 }
             }
             let data = NSKeyedArchiver.archivedDataWithRootObject(images)
             let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-            let dataURL = documentsURL.URLByAppendingPathComponent("dollarAmounts.data")
+            let dataURL = documentsURL.URLByAppendingPathComponent("imageArray.data")
             data.writeToURL(dataURL, atomically: true)
-            print("Ordering Data to be sent: \(dataURL.path)")
-            watchDelegate.sendDataAtURL(dataURL)
+            return dataURL
+        }
+        return .None
+    }
+
+
+    func sessionWatchStateDidChange(session: WCSession) {
+        print("GratuitousiOSConnectivityDelegate: sessionWatchStateDidChange: \(session)")
+    }
+
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+        print("GratuitousiOSConnectivityDelegate: Message Received: \(message) without reply handler")
+    }
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        print("GratuitousiOSConnectivityDelegate: Message Received: \(message)")
+        replyHandler(["reply" : "sending data..."])
+        if let session = self.watchSession,
+            let url = self.generateNewImages() {
+                session.transferFile(url, metadata: ["CurrencyCode" : self.currencyFormatter.currencyCode])
         }
     }
-
-    func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+        print("GratuitousiOSConnectivityDelegate: didReceiveApplicationContext: \(applicationContext)")
     }
-
-    func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: NSError?) {
+        print("GratuitousiOSConnectivityDelegate: didFinishUserInfoTransfer: \(userInfoTransfer)")
     }
-
-    func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        //Crashlytics.sharedInstance().crash()
+    
+    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
+        print("GratuitousiOSConnectivityDelegate: didReceiveUserInfo: \(userInfo)")
     }
-
-    func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
+        print("GratuitousiOSConnectivityDelegate: didFinishFileTransfer: \(fileTransfer)")
     }
-
-    func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    func session(session: WCSession, didReceiveFile file: WCSessionFile) {
+        print("GratuitousiOSConnectivityDelegate: didReceiveFile: \(file)")
     }
 }
 
