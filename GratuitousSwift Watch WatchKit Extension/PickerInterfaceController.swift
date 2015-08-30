@@ -16,6 +16,7 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectiv
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private let watchConnectivityManager = GratuitousWatchConnectivityManager()
+    private var interfaceControllerIsConfigured = false
     
     private var items: (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
         didSet {
@@ -23,7 +24,13 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectiv
                 self.billPicker?.setItems(items.billItems)
                 self.tipPicker?.setItems(items.tipItems)
                 self.billPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.billIndexPathRow - 1)
-                self.interfaceState = .Loaded
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                dispatch_after(delayTime, dispatch_get_main_queue()) {
+                    let row = self.dataSource.defaultsManager.tipIndexPathRow - 1
+                    self.tipPicker?.setSelectedItemIndex(row)
+                    self.interfaceControllerIsConfigured = true
+                    self.interfaceState = .Loaded
+                }
             }
         }
     }
@@ -36,13 +43,40 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectiv
         didSet {
             switch self.interfaceState {
             case .Loading:
+                let animationDuration = NSTimeInterval(3.0)
                 self.loadingGroup?.setHidden(false)
-                self.mainGroup?.setHidden(true)
-                self.setTitle("")
-            case .Loaded:
-                self.loadingGroup?.setHidden(true)
+                self.loadingGroup?.setAlpha(0.0)
                 self.mainGroup?.setHidden(false)
-                self.setTitle("Gratuity")
+                self.mainGroup?.setAlpha(1.0)
+                self.animateWithDuration(animationDuration) {
+                    self.mainGroup?.setAlpha(0.0)
+                }
+                delay(animationDuration) {
+                    self.mainGroup?.setHidden(true)
+                    self.setTitle("")
+                    self.animateWithDuration(animationDuration) {
+                        self.loadingGroup?.setAlpha(1.0)
+                    }
+                }
+            case .Loaded:
+                let animationDuration = NSTimeInterval(0.3)
+                self.loadingGroup?.setHidden(false)
+                self.loadingGroup?.setAlpha(1.0)
+                self.mainGroup?.setHidden(false)
+                self.mainGroup?.setAlpha(0.0)
+                self.animateWithDuration(animationDuration) {
+                    self.loadingGroup?.setAlpha(0.0)
+                }
+                delay(animationDuration) {
+                    self.loadingGroup?.setHidden(true)
+                    self.setTitle("Gratuity")
+                    self.animateWithDuration(animationDuration) {
+                        self.mainGroup?.setAlpha(1.0)
+                    }
+                    delay(animationDuration) {
+                        self.billPicker?.focus()
+                    }
+                }
             }
         }
     }
@@ -141,7 +175,9 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectiv
     private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
 
     @IBAction func billPickerChanged(value: Int) {
-        self.dataSource.defaultsManager.billIndexPathRow = value + 1
+        if self.interfaceControllerIsConfigured == true {
+            self.dataSource.defaultsManager.billIndexPathRow = value + 1
+        }
         
         let billAmount = value + 1
         let suggestTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
@@ -158,7 +194,9 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectiv
     }
     
     @IBAction func tipPickerChanged(value: Int) {
-        self.dataSource.defaultsManager.tipIndexPathRow = value + 1
+        if self.interfaceControllerIsConfigured == true {
+            self.dataSource.defaultsManager.tipIndexPathRow = value + 1
+        }
         
         let billAmount = self.dataSource.defaultsManager.billIndexPathRow
         let tipAmount = value + 1
