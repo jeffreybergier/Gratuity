@@ -60,10 +60,10 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelega
         self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
         
         // remove later
-//        if let session = self.watchSession,
-//            let url = self.generateNewImages() {
-//                session.transferFile(url, metadata: ["CurrencyCode" : self.currencyFormatter.currencyCode])
-//        }
+        if let session = self.watchSession,
+            let url = self.generateNewImages() {
+                session.transferFile(url, metadata: ["CurrencyCode" : self.currencyFormatter.currencyCode])
+        }
         
         return true
     }
@@ -94,7 +94,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelega
             
             let imageGenerator = GratuitousLabelImageGenerator()
             var images = [UIImage]()
-            for i in 1 ... 250 {
+            for i in 1 ... 350 {
                 let string = NSAttributedString(string: self.currencyFormatter.currencyFormattedString(i), attributes: valueTextAttributes)
                 if let image = imageGenerator.generateImageForAttributedString(string) {
                     images += [image]

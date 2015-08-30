@@ -104,26 +104,26 @@
                         </group>
                         <group width="1" height="1" alignment="left" hidden="YES" layout="vertical" id="fNV-8L-ECv">
                             <items>
-                                <group width="1" height="0.59999999999999998" alignment="center" layout="vertical" id="PW8-B0-TTS">
+                                <group width="1" height="0.5" alignment="center" layout="vertical" id="PW8-B0-TTS">
                                     <items>
-                                        <label alignment="center" text="$100" textAlignment="center" id="5zl-jE-VVr">
+                                        <label alignment="center" verticalAlignment="bottom" text="$100" textAlignment="center" id="5zl-jE-VVr">
                                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="40"/>
                                         </label>
-                                        <label alignment="center" text="$20" textAlignment="center" id="Xsm-7V-7Bg">
+                                        <label alignment="center" verticalAlignment="bottom" text="$20" textAlignment="center" id="Xsm-7V-7Bg">
                                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
                                     </items>
                                 </group>
-                                <group width="1" height="0.40000000000000002" alignment="left" id="l4m-2O-Zb9">
+                                <group width="1" height="0.5" alignment="left" id="l4m-2O-Zb9">
                                     <items>
-                                        <picker width="0.5" height="1" alignment="left" style="stack" focusStyle="stack" indicatorMode="shownWhileFocused" id="Yf3-3J-pIU">
+                                        <picker width="0.5" height="1" alignment="left" style="stack" focusStyle="sequence" indicatorMode="shownWhileFocused" id="Yf3-3J-pIU">
                                             <connections>
                                                 <action selector="billPickerChanged:" destination="azz-ui-8Qo" id="ZXi-CP-EMo"/>
                                             </connections>
                                         </picker>
-                                        <picker width="0.5" height="1" alignment="left" style="stack" focusStyle="stack" indicatorMode="shownWhileFocused" id="JkS-v9-H5m">
+                                        <picker width="0.5" height="1" alignment="left" style="stack" focusStyle="sequence" indicatorMode="shownWhileFocused" id="JkS-v9-H5m">
                                             <connections>
                                                 <action selector="tipPickerChanged:" destination="azz-ui-8Qo" id="bwf-ne-IJ7"/>
                                             </connections>

@@ -17,12 +17,14 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectiv
     private let dataSource = GratuitousWatchDataSource.sharedInstance
     private let watchConnectivityManager = GratuitousWatchConnectivityManager()
     
-    private var items = [WKPickerItem]() {
+    private var items: (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
         didSet {
-            self.billPicker?.setItems(self.items)
-            self.tipPicker?.setItems(self.items)
-            self.billPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.billIndexPathRow - 1)
-            self.interfaceState = .Loaded
+            if let items = self.items {
+                self.billPicker?.setItems(items.billItems)
+                self.tipPicker?.setItems(items.tipItems)
+                self.billPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.billIndexPathRow - 1)
+                self.interfaceState = .Loaded
+            }
         }
     }
     
@@ -36,9 +38,11 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectiv
             case .Loading:
                 self.loadingGroup?.setHidden(false)
                 self.mainGroup?.setHidden(true)
+                self.setTitle("")
             case .Loaded:
                 self.loadingGroup?.setHidden(true)
                 self.mainGroup?.setHidden(false)
+                self.setTitle("Gratuity")
             }
         }
     }
@@ -68,7 +72,7 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectiv
         }
     }
     
-    func readPickerItemsFromDisk(currency: CurrencySign) -> [WKPickerItem]? {
+    func readPickerItemsFromDisk(currency: CurrencySign) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
         let fileName: String
         switch currency {
         case .Default:
@@ -87,21 +91,30 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectiv
         
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
         let dataURL = documentsURL.URLByAppendingPathComponent(fileName)
-        var items = [WKPickerItem]()
+        var billItems = [WKPickerItem]()
+        var tipItems = [WKPickerItem]()
         if let data = NSData(contentsOfURL: dataURL),
             let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSArray {
-                for object in array {
+                for (index, object) in array.enumerate() {
                     if let image = object as? UIImage {
                         let wkImage = WKImage(image: image)
-                        let item = WKPickerItem()
-                        item.contentImage = wkImage
-                        items += [item]
+                        if index < 100 {
+                            let tipItem = WKPickerItem()
+                            tipItem.contentImage = wkImage
+                            tipItem.caption = "Tip"
+                            tipItems += [tipItem]
+                        }
+                        let billItem = WKPickerItem()
+                        billItem.contentImage = wkImage
+                        billItem.caption = "Bill"
+                        billItems += [billItem]
                     }
                 }
         }
+        let returnValue = (billItems: billItems, tipItems: tipItems)
         
-        print("\(items.count) found at URL: \(dataURL.path!)")
-        if items.isEmpty == false { return items } else { return .None }
+        print("\(billItems.count) found at URL: \(dataURL.path!)")
+        if billItems.isEmpty == false { return returnValue } else { return .None }
     }
     
     
