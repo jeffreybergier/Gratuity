@@ -44,8 +44,6 @@
             <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -88,7 +86,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-171" y="342"/>
+            <point key="canvasLocation" x="-165" y="716.75"/>
         </scene>
         <!--MainInterfaceController-->
         <scene sceneID="ftW-AE-Ff2">
@@ -133,6 +131,12 @@
                             </items>
                         </group>
                     </items>
+                    <menu key="menu" id="Ng4-PQ-0Vy">
+                        <items>
+                            <menuItem title="Settings" icon="info" id="hi9-uF-tQ9"/>
+                            <menuItem title="Split Tip" icon="shuffle" id="NJN-tw-QVC"/>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="animationImageView" destination="Bbw-Kw-xZi" id="m6t-vl-481"/>
                         <outlet property="billAmountLabel" destination="5zl-jE-VVr" id="hZn-UR-JXt"/>
@@ -164,7 +168,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-379" y="340"/>
+            <point key="canvasLocation" x="-420" y="704"/>
         </scene>
         <!--Bill Amount-->
         <scene sceneID="t1K-MZ-tcM">
@@ -261,7 +265,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="87" y="340"/>
+            <point key="canvasLocation" x="46" y="689.75"/>
         </scene>
         <!--Total-->
         <scene sceneID="QVZ-uk-9u4">
@@ -447,7 +451,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="610" y="316"/>
+            <point key="canvasLocation" x="533" y="808.75"/>
         </scene>
         <!--Close-->
         <scene sceneID="N6L-dJ-mY2">
@@ -609,29 +613,6 @@
                             <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
-                        <label alignment="left" text="Show Tutorial On Next Launch" numberOfLines="0" id="GqM-MT-GUC">
-                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="22"/>
-                        </label>
-                        <group width="1" alignment="left" id="G6K-vV-qnm">
-                            <items>
-                                <group alignment="left" radius="7" id="Fbp-qG-EgR">
-                                    <items>
-                                        <switch width="1" alignment="left" value="YES" title="Show" id="U7f-SK-Oo0">
-                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
-                                            <color key="titleColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <action selector="tutorialLaunchSwitchDidChange:" destination="ffT-6F-euT" id="LbC-9k-IDU"/>
-                                            </connections>
-                                        </switch>
-                                    </items>
-                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </group>
-                            </items>
-                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                        </group>
                     </items>
                     <connections>
                         <outlet property="currencySymbolDollarGroup" destination="L24-oQ-Y5W" id="qvh-uB-4VP"/>
@@ -651,13 +632,10 @@
                         <outlet property="suggestedTipPercentageLabel" destination="5An-PC-g8o" id="TqJ-6J-1G4"/>
                         <outlet property="suggestedTipSlider" destination="6PC-nq-DwX" id="5xV-8j-qzh"/>
                         <outlet property="suggestedTipTitleLabel" destination="nRC-5a-8ct" id="FIc-3q-TSk"/>
-                        <outlet property="tutorialLaunchGroup" destination="G6K-vV-qnm" id="VKr-BV-NcN"/>
-                        <outlet property="tutorialLaunchSwitch" destination="U7f-SK-Oo0" id="IZr-Rz-jE9"/>
-                        <outlet property="tutorialLaunchTitleLabel" destination="GqM-MT-GUC" id="wAL-tV-UvK"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="885" y="316"/>
+            <point key="canvasLocation" x="223" y="-1.75"/>
         </scene>
         <!--Tip Amount-->
         <scene sceneID="0cJ-h1-wjI">
@@ -764,7 +742,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="329" y="340"/>
+            <point key="canvasLocation" x="310" y="703.75"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.70588235294117641" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

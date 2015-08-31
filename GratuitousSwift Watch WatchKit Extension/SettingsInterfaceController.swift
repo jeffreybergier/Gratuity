@@ -12,11 +12,9 @@ class SettingsInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var suggestedTipTitleLabel: WKInterfaceLabel?
     @IBOutlet private weak var currencySymbolTitleLabel: WKInterfaceLabel?
-    @IBOutlet private weak var tutorialLaunchTitleLabel: WKInterfaceLabel?
     @IBOutlet private weak var suggestedTipPercentageLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var suggestedTipSlider: WKInterfaceSlider?
-    @IBOutlet private weak var tutorialLaunchSwitch: WKInterfaceSwitch?
     
     @IBOutlet private weak var currencySymbolLocalLabel: WKInterfaceLabel?
     @IBOutlet private weak var currencySymbolDollarLabel: WKInterfaceLabel?
@@ -26,7 +24,6 @@ class SettingsInterfaceController: WKInterfaceController {
     @IBOutlet private weak var currencySymbolNoneLabel: WKInterfaceLabel?
     
     @IBOutlet private weak var suggestedTipGroup: WKInterfaceGroup?
-    @IBOutlet private weak var tutorialLaunchGroup: WKInterfaceGroup?
     @IBOutlet private weak var currencySymbolLocalGroup: WKInterfaceGroup?
     @IBOutlet private weak var currencySymbolDollarGroup: WKInterfaceGroup?
     @IBOutlet private weak var currencySymbolPoundGroup: WKInterfaceGroup?
@@ -59,8 +56,6 @@ class SettingsInterfaceController: WKInterfaceController {
             // configure the titles
             self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Suggested Tip Percentage", comment: ""), attributes: self.titleTextAttributes))
             self.currencySymbolTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Currency Symbol", comment: ""), attributes: self.titleTextAttributes))
-            self.tutorialLaunchTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Show Tutorial On Next Launch", comment: ""), attributes: self.titleTextAttributes))
-            self.tutorialLaunchSwitch?.setAttributedTitle(NSAttributedString(string: NSLocalizedString("Show", comment: ""), attributes: self.buttonTextAttributes))
             
             
             // configure the currency selection titles
@@ -75,7 +70,6 @@ class SettingsInterfaceController: WKInterfaceController {
             self.suggestedTipSlider?.setValue(Float(round(self.dataSource.defaultsManager.suggestedTipPercentage * 100)))
             self.updateSuggestedTipPercentageUI()
             self.updateCurrencySymbolUI()
-            self.updateTutorialLaunchUI()
             
             // this probably isn't needed, but no need to run this code a second time.
             self.interfaceControllerIsConfigured = true
@@ -86,10 +80,6 @@ class SettingsInterfaceController: WKInterfaceController {
         let adjustedValue = value / 100
         self.dataSource.defaultsManager.suggestedTipPercentage = Double(adjustedValue)
         self.updateSuggestedTipPercentageUI()
-    }
-    
-    @IBAction func tutorialLaunchSwitchDidChange(value: Bool) {
-        self.dataSource.defaultsManager.showTutorialAtLaunch = value
     }
     
     @IBAction private func currencySymbolButtonLocalTapped() {
@@ -136,10 +126,6 @@ class SettingsInterfaceController: WKInterfaceController {
         let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
         let suggestedTipPercentageString = self.dataSource.percentStringFromRawDouble(suggestedTipPercentage)
         self.suggestedTipPercentageLabel?.setAttributedText(NSAttributedString(string: suggestedTipPercentageString, attributes: self.valueTextAttributes))
-    }
-    
-    private func updateTutorialLaunchUI() {
-        self.tutorialLaunchSwitch?.setOn(self.dataSource.defaultsManager.showTutorialAtLaunch)
     }
     
     private func updateCurrencySymbolUI() {

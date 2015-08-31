@@ -49,7 +49,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private var totalAmountTextLabelAttributes = [String : NSObject]()
     private var tipPercentageTextLabelAttributes = [String : NSObject]()
     private var viewDidAppearOnce = false
-    private weak var defaultsManager: GratuitousUserDefaults? = {
+    private weak var defaultsManager: GratuitousPropertyListPreferences? = {
         let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
         return appDelegate?.defaultsManager
         }()
@@ -200,9 +200,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 }, completion: nil)
             
             // Launch the apple watch info screen if needed
-            if self.defaultsManager?.watchInfoViewControllerShouldAppear == true && self.defaultsManager?.watchInfoViewControllerWasDismissed == false {
-                self.performSegueWithIdentifier("watchInfoModalDialogSegue", sender: self)
-            }
             self.viewDidAppearOnce = true
         }
     }
@@ -273,14 +270,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     @IBAction private func unwindToViewController(segue: UIStoryboardSegue) {
-        if let segueIdentifier = segue.identifier {
-            switch segueIdentifier {
-            case "unwindFromWatchInfoVC":
-                self.defaultsManager?.watchInfoViewControllerWasDismissed = true
-            default:
-                break
-            }
-        }
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

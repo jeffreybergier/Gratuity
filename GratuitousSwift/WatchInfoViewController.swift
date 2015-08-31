@@ -18,7 +18,7 @@ class WatchInfoViewController: UIViewController {
     @IBOutlet private weak var gratuitySubtitleLabel: UILabel?
     @IBOutlet private weak var dismissButton: UIButton?
     
-    private weak var defaultsManager: GratuitousUserDefaults? = {
+    private weak var defaultsManager: GratuitousPropertyListPreferences? = {
         let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
         return appDelegate?.defaultsManager
         }()
@@ -140,11 +140,6 @@ class WatchInfoViewController: UIViewController {
         self.videoPlayerParentView?.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
         self.videoPlayerParentView?.layer.cornerRadius = 6
         self.videoPlayerParentView?.clipsToBounds = true
-    }
-    
-    override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
-        self.defaultsManager?.watchInfoViewControllerWasDismissed = true
-        super.dismissViewControllerAnimated(flag, completion: completion)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

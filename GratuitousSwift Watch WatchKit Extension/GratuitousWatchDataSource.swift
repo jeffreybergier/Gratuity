@@ -13,7 +13,7 @@ class GratuitousWatchDataSource {
     // Reads are saved into Instance Variables in this class
     // If a value is requested and the isntance variable has never been set, the value is read from NSUserDefaults.
     
-    let defaultsManager = GratuitousUserDefaults()
+    let defaultsManager = GratuitousPropertyListPreferences()
     private let currencyFormatter = NSNumberFormatter()
     var currencyCode: String {
         let optionalCode: String? = self.currencyFormatter.currencyCode

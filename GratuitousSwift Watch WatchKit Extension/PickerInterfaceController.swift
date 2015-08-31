@@ -9,12 +9,14 @@
 import WatchKit
 import Foundation
 
-class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectivityDelegate {
+class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegate {
+    
+    let dataSource = GratuitousWatchDataSource.sharedInstance
     
     @IBOutlet private var loadingGroup: WKInterfaceGroup?
     @IBOutlet private var mainGroup: WKInterfaceGroup?
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
-    private let dataSource = GratuitousWatchDataSource.sharedInstance
+    
     private let watchConnectivityManager = GratuitousWatchConnectivityManager()
     private var interfaceControllerIsConfigured = false
     
@@ -102,7 +104,7 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchConnectiv
                 self.items = items
             }
         } else {
-            self.watchConnectivityManager.requestDataFromPhone()
+            self.dataSource.defaultsManager.currencySymbolsNeeded = true
         }
     }
     
