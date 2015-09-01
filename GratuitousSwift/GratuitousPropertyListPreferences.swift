@@ -28,6 +28,8 @@ class GratuitousPropertyListPreferences {
         }
         self.model = Properties(dictionary: plistDictionary)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferencesWereReceived:", name: "GratuitousPropertyListPreferencesWereReceived", object: .None)
+        
         #if os(iOS)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResignActive:", name: UIApplicationWillResignActiveNotification, object: .None)
         #endif
@@ -50,10 +52,17 @@ class GratuitousPropertyListPreferences {
         self.writeTimerFired(.None)
     }
     
+    @objc private func preferencesWereReceived(notification: NSNotification?) {
+        self.model = Properties(dictionary: (notification?.userInfo as? NSDictionary))
+    }
+    
     @objc private func writeTimerFired(timer: NSTimer?) {
         timer?.invalidate()
         self.writeTimer = .None
-        self.writeToDisk()
+        if self.writeToDisk() == true,
+            let plistData = self.model.dataVersion {
+                NSNotificationCenter.defaultCenter().postNotificationName("GratuitousPropertyListPreferencesWereChanged", object: self, userInfo: self.model.dictionaryVersion as [NSObject : AnyObject])
+        }
     }
     
     private var writeTimer: NSTimer?
@@ -64,13 +73,16 @@ class GratuitousPropertyListPreferences {
         let plistURL = GratuitousPropertyListPreferences.locationOnDisk
         
         do {
-            let plistData = try NSPropertyListSerialization.dataWithPropertyList(self.model.dictionaryVersion, format: .XMLFormat_v1_0, options: 0)
-            if fileManager.fileExistsAtPath(preferencesURL.path!) == false {
-                try fileManager.createDirectoryAtPath(preferencesURL.path!, withIntermediateDirectories: true, attributes: .None)
+            if let plistData = self.model.dataVersion {
+                if fileManager.fileExistsAtPath(preferencesURL.path!) == false {
+                    try fileManager.createDirectoryAtPath(preferencesURL.path!, withIntermediateDirectories: true, attributes: .None)
+                }
+                try plistData.writeToURL(plistURL, options: .AtomicWrite)
+                print("GratuitousPropertyListPreferences: Successfully Wrote to disk: \(plistURL.path!)")
+                return true
+            } else {
+                return false
             }
-            try plistData.writeToURL(plistURL, options: .AtomicWrite)
-            print("GratuitousPropertyListPreferences: Successfully Wrote to disk: \(plistURL.path!)")
-            return true
         } catch {
             print("GratuitousPropertyListPreferences: Failed to write PLIST to disk with error: \(error)")
             return false
@@ -94,6 +106,10 @@ class GratuitousPropertyListPreferences {
                 Keys.appVersionString : self.appVersionString,
                 Keys.currencySymbolsNeeded : NSNumber(bool: self.currencySymbolsNeeded)
             ]
+        }
+        
+        var dataVersion: NSData? {
+            return try? NSPropertyListSerialization.dataWithPropertyList(self.dictionaryVersion, format: .XMLFormat_v1_0, options: 0)
         }
     
         init(dictionary: NSDictionary?) {

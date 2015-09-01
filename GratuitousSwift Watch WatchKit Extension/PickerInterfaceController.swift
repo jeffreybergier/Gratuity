@@ -93,22 +93,28 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
         // configure the timer to fix an issue where sometimes the UI would not push to the correct interface controller.
         let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
         dispatch_async(backgroundQueue) {
-            self.watchConnectivityManager.interfaceControllerDelegate = self
+            self.watchConnectivityManager.delegate = self
             self.dataOnDiskChanged()
         }
     }
     
     func dataOnDiskChanged() {
-        if let items = readPickerItemsFromDisk(self.dataSource.defaultsManager.overrideCurrencySymbol) {
+        if let items = self.parsePickerItemsFromData(self.rawPickerItems(self.dataSource.defaultsManager.overrideCurrencySymbol)) {
             dispatch_async(dispatch_get_main_queue()) {
                 self.items = items
+            }
+        } else if let fallbackDataURL = NSBundle.mainBundle().URLForResource("fallbackPickerImages", withExtension: "data"),
+            let fallbackData = NSData(contentsOfURL: fallbackDataURL),
+            let items = self.parsePickerItemsFromData(fallbackData) {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.items = items
             }
         } else {
             self.dataSource.defaultsManager.currencySymbolsNeeded = true
         }
     }
     
-    func readPickerItemsFromDisk(currency: CurrencySign) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
+    func rawPickerItems(currency: CurrencySign) -> NSData? {
         let fileName: String
         switch currency {
         case .Default:
@@ -127,9 +133,14 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
         
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
         let dataURL = documentsURL.URLByAppendingPathComponent(fileName)
+        
+        return NSData(contentsOfURL: dataURL)
+    }
+    
+    func parsePickerItemsFromData(data: NSData?) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
         var billItems = [WKPickerItem]()
         var tipItems = [WKPickerItem]()
-        if let data = NSData(contentsOfURL: dataURL),
+        if let data = data,
             let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSArray {
                 for (index, object) in array.enumerate() {
                     if let image = object as? UIImage {
@@ -149,7 +160,7 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
         }
         let returnValue = (billItems: billItems, tipItems: tipItems)
         
-        print("\(billItems.count) found at URL: \(dataURL.path!)")
+        print("\(billItems.count) found")
         if billItems.isEmpty == false { return returnValue } else { return .None }
     }
     

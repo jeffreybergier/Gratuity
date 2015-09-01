@@ -19,7 +19,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate, WatchConnectivi
     let defaultsManager = GratuitousPropertyListPreferences()
     private let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
     private let currencyFormatter = GratuitousCurrencyFormatter()
-    private let watchManager = GratuitousiOSWatchConnectivityManager()
+    private let watchManager = GratuitousWatchConnectivityManager()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch
@@ -27,7 +27,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate, WatchConnectivi
         //crashlytics intializer
 //        Fabric.with([Crashlytics()])
         
-        self.watchManager.watchConnectivityDelegate = self
+        self.watchManager.delegate = self
         
         //initialize the view controller from the storyboard
         let tipViewController = self.storyboard.instantiateInitialViewController()
@@ -41,6 +41,8 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate, WatchConnectivi
         self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         self.window?.tintColor = GratuitousUIConstant.lightTextColor()
         self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
+        
+        print("GratuitousAppDelegate: Wrote Currency Symbols to Disk: \(generateNewCurrencySymbols().url)")
     
         return true
     }
@@ -64,13 +66,5 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate, WatchConnectivi
         data.writeToURL(dataURL, atomically: true)
         return (dataURL, self.currencyFormatter.currencyCode)
     }
-    
-//    func applicationWillResignActive(application: UIApplication) {
-//        self.defaultsManager.writeToDisk()
-//    }
-//    
-//    func applicationWillTerminate(application: UIApplication) {
-//        self.defaultsManager.writeToDisk()
-//    }
 }
 

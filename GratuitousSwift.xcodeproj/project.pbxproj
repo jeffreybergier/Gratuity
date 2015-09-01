@@ -27,6 +27,12 @@
 		7334770F1A26E85000513F1F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
 		733C4F401B95458300EF8B46 /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		733C4F411B95458500EF8B46 /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
+		733C4F421B954C3C00EF8B46 /* GratuitousWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
+		733C4F431B954C3E00EF8B46 /* GratuitousWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
+		733C4F441B9559BF00EF8B46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73D46AFD1AC7C9B400057185 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		733C4F451B9559C200EF8B46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73D46AFD1AC7C9B400057185 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		733C4F471B955DC100EF8B46 /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 733C4F461B955DC100EF8B46 /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
+		733C4F481B955DC100EF8B46 /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 733C4F461B955DC100EF8B46 /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
 		734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
 		73450E8F1ABF2A50005927F1 /* SettingsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */; };
 		73450E971ABF2A71005927F1 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D711A2A9525002180DD /* Interface.storyboard */; };
@@ -70,8 +76,6 @@
 		73884B691B939C8900EEDB5F /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		73884B6C1B93C38400EEDB5F /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		73884B6D1B93C38500EEDB5F /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; settings = {ASSET_TAGS = (); }; };
-		73884B6F1B93C62300EEDB5F /* GratuitousiOSWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73884B6E1B93C62300EEDB5F /* GratuitousiOSWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
-		73884B701B93C62300EEDB5F /* GratuitousiOSWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73884B6E1B93C62300EEDB5F /* GratuitousiOSWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
 		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
@@ -205,6 +209,7 @@
 		7313757F1ABF3EB10074E2F2 /* Gratuity WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuity WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fuuutuuura-Meeediuuum.ttf"; sourceTree = "<group>"; };
 		7334770E1A26E85000513F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		733C4F461B955DC100EF8B46 /* fallbackPickerImages.data */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fallbackPickerImages.data; sourceTree = "<group>"; };
 		733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousUserDefaults.swift; path = ../GratuitousSwift/GratuitousUserDefaults.swift; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
 		73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GratuityL WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,7 +241,6 @@
 		7382512619E60F3900CD2B28 /* TipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableViewCell.swift; sourceTree = "<group>"; };
 		7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GratuitousTableViewCell.xib; sourceTree = "<group>"; };
-		73884B6E1B93C62300EEDB5F /* GratuitousiOSWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousiOSWatchConnectivityManager.swift; sourceTree = "<group>"; };
 		73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalAmountInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/TotalAmountInterfaceController.swift"; sourceTree = "<group>"; };
 		73A18D5A1A2A9525002180DD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		73A18D5E1A2A9525002180DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -251,7 +255,7 @@
 		73BC11D51B8FF29100A85A25 /* GratuityL WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuityL WatchKit App.entitlements"; path = "../GratuityL WatchKit App.entitlements"; sourceTree = "<group>"; };
 		73BC11D61B8FF29F00A85A25 /* Gratuity WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuity WatchKit App.entitlements"; sourceTree = "<group>"; };
 		73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CrownScrollTipInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/CrownScrollTipInterfaceController.swift"; sourceTree = "<group>"; };
-		73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchConnectivityManager.swift; sourceTree = "<group>"; };
+		73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousWatchConnectivityManager.swift; path = "../GratuitousSwift Watch WatchKit Extension/GratuitousWatchConnectivityManager.swift"; sourceTree = "<group>"; };
 		73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepperBillInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/StepperBillInterfaceController.swift"; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
 		73D46AFD1AC7C9B400057185 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -419,7 +423,6 @@
 			isa = PBXGroup;
 			children = (
 				7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */,
-				73884B6E1B93C62300EEDB5F /* GratuitousiOSWatchConnectivityManager.swift */,
 				734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */,
 				7353346D1A1803FB008530E1 /* TipViewController */,
 				735334711A1804CC008530E1 /* Settings View Controller */,
@@ -476,8 +479,8 @@
 			children = (
 				73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */,
 				7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */,
-				73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */,
 				73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */,
+				733C4F461B955DC100EF8B46 /* fallbackPickerImages.data */,
 				73D46AFD1AC7C9B400057185 /* Images.xcassets */,
 				73A18D5D1A2A9525002180DD /* Supporting Files */,
 			);
@@ -520,6 +523,7 @@
 			isa = PBXGroup;
 			children = (
 				7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */,
+				73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */,
 				73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */,
 				73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */,
 				733A9C851AAB850700BFBACE /* Unused Files */,
@@ -758,6 +762,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				733C4F441B9559BF00EF8B46 /* Images.xcassets in Resources */,
+				733C4F471B955DC100EF8B46 /* fallbackPickerImages.data in Resources */,
 				7320A5471ACDA87E001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */,
 				73011BE01AD04F90001F6D71 /* en.lproj in Resources */,
 			);
@@ -777,6 +783,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				733C4F451B9559C200EF8B46 /* Images.xcassets in Resources */,
+				733C4F481B955DC100EF8B46 /* fallbackPickerImages.data in Resources */,
 				7320A5481ACDA87F001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */,
 				73011BE11AD04F90001F6D71 /* en.lproj in Resources */,
 			);
@@ -859,7 +867,6 @@
 				73884B691B939C8900EEDB5F /* GratuitousPropertyListPreferences.swift in Sources */,
 				736568DB1A26DD1400603602 /* UIImage+PDFUtility.m in Sources */,
 				736568DC1A26DD1400603602 /* TipViewController.swift in Sources */,
-				73884B701B93C62300EEDB5F /* GratuitousiOSWatchConnectivityManager.swift in Sources */,
 				736568DD1A26DD1400603602 /* GratuitousTableViewCell.swift in Sources */,
 				736568DE1A26DD1400603602 /* GratuitousSettingsButtons.swift in Sources */,
 				73011BE81AD05AFA001F6D71 /* WatchInfoViewController.swift in Sources */,
@@ -867,6 +874,7 @@
 				734A7C5B1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
 				736568E01A26DD1400603602 /* GratuitousCurrencyFormatter.swift in Sources */,
 				736568E11A26DD1400603602 /* GratuitousEnums.swift in Sources */,
+				733C4F431B954C3E00EF8B46 /* GratuitousWatchConnectivityManager.swift in Sources */,
 				736568E31A26DD1400603602 /* GratuitousUIConstant.swift in Sources */,
 				736568E51A26DD1400603602 /* GratuitousGradientView.swift in Sources */,
 				736568E61A26DD1400603602 /* GratuitousPresentationController.swift in Sources */,
@@ -885,7 +893,6 @@
 				73884B681B939C8800EEDB5F /* GratuitousPropertyListPreferences.swift in Sources */,
 				73556E651A19711F0079A37D /* UIImage+PDFUtility.m in Sources */,
 				7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */,
-				73884B6F1B93C62300EEDB5F /* GratuitousiOSWatchConnectivityManager.swift in Sources */,
 				7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */,
 				73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */,
 				73011BE71AD05AFA001F6D71 /* WatchInfoViewController.swift in Sources */,
@@ -893,6 +900,7 @@
 				734A7C5A1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
 				735C011E1A0878D000A19462 /* GratuitousCurrencyFormatter.swift in Sources */,
 				73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */,
+				733C4F421B954C3C00EF8B46 /* GratuitousWatchConnectivityManager.swift in Sources */,
 				737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */,
 				73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */,
 				73D11C491A1DB2A3003D238C /* GratuitousPresentationController.swift in Sources */,
