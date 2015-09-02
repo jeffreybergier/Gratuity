@@ -31,8 +31,6 @@
 		733C4F431B954C3E00EF8B46 /* GratuitousWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
 		733C4F441B9559BF00EF8B46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73D46AFD1AC7C9B400057185 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		733C4F451B9559C200EF8B46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73D46AFD1AC7C9B400057185 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
-		733C4F471B955DC100EF8B46 /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 733C4F461B955DC100EF8B46 /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
-		733C4F481B955DC100EF8B46 /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 733C4F461B955DC100EF8B46 /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
 		734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; };
 		73450E8F1ABF2A50005927F1 /* SettingsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */; };
 		73450E971ABF2A71005927F1 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D711A2A9525002180DD /* Interface.storyboard */; };
@@ -76,6 +74,8 @@
 		73884B691B939C8900EEDB5F /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		73884B6C1B93C38400EEDB5F /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		73884B6D1B93C38500EEDB5F /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; settings = {ASSET_TAGS = (); }; };
+		7399D9BE1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
+		7399D9BF1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
 		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
@@ -91,6 +91,8 @@
 		73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
 		73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
 		73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
+		73EA790B1B9690A0006C52DE /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 73EA790A1B9690A0006C52DE /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
+		73EA790C1B9690A0006C52DE /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 73EA790A1B9690A0006C52DE /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
 		73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */; };
 		73FB7E911B8A4B70001A47FC /* PickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */; };
 		73FB7E921B8A4B71001A47FC /* PickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */; };
@@ -209,7 +211,6 @@
 		7313757F1ABF3EB10074E2F2 /* Gratuity WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuity WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fuuutuuura-Meeediuuum.ttf"; sourceTree = "<group>"; };
 		7334770E1A26E85000513F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
-		733C4F461B955DC100EF8B46 /* fallbackPickerImages.data */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fallbackPickerImages.data; sourceTree = "<group>"; };
 		733E8CB31A86F83100B228CB /* GratuitousUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousUserDefaults.swift; path = ../GratuitousSwift/GratuitousUserDefaults.swift; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
 		73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GratuityL WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,6 +242,7 @@
 		7382512619E60F3900CD2B28 /* TipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableViewCell.swift; sourceTree = "<group>"; };
 		7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GratuitousTableViewCell.xib; sourceTree = "<group>"; };
+		7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyStringImageGenerator.swift; sourceTree = "<group>"; };
 		73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalAmountInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/TotalAmountInterfaceController.swift"; sourceTree = "<group>"; };
 		73A18D5A1A2A9525002180DD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		73A18D5E1A2A9525002180DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 		73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousMenuInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/GratuitousMenuInterfaceController.swift"; sourceTree = "<group>"; };
 		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousEnums.swift; path = ../GratuitousSwift/GratuitousEnums.swift; sourceTree = "<group>"; };
 		73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousPropertyListPreferences.swift; path = ../GratuitousSwift/GratuitousPropertyListPreferences.swift; sourceTree = "<group>"; };
+		73EA790A1B9690A0006C52DE /* fallbackPickerImages.data */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fallbackPickerImages.data; sourceTree = "<group>"; };
 		73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPresentationController.swift; sourceTree = "<group>"; };
 		73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimatedTransitioning.swift; sourceTree = "<group>"; };
 		73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTransitioningDelegate.swift; sourceTree = "<group>"; };
@@ -480,7 +483,7 @@
 				73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */,
 				7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */,
 				73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */,
-				733C4F461B955DC100EF8B46 /* fallbackPickerImages.data */,
+				73EA790A1B9690A0006C52DE /* fallbackPickerImages.data */,
 				73D46AFD1AC7C9B400057185 /* Images.xcassets */,
 				73A18D5D1A2A9525002180DD /* Supporting Files */,
 			);
@@ -537,6 +540,7 @@
 			children = (
 				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
 				734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */,
+				7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */,
 				735C011D1A0878D000A19462 /* GratuitousCurrencyFormatter.swift */,
 				7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */,
 			);
@@ -763,7 +767,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				733C4F441B9559BF00EF8B46 /* Images.xcassets in Resources */,
-				733C4F471B955DC100EF8B46 /* fallbackPickerImages.data in Resources */,
+				73EA790B1B9690A0006C52DE /* fallbackPickerImages.data in Resources */,
 				7320A5471ACDA87E001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */,
 				73011BE01AD04F90001F6D71 /* en.lproj in Resources */,
 			);
@@ -784,7 +788,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				733C4F451B9559C200EF8B46 /* Images.xcassets in Resources */,
-				733C4F481B955DC100EF8B46 /* fallbackPickerImages.data in Resources */,
+				73EA790C1B9690A0006C52DE /* fallbackPickerImages.data in Resources */,
 				7320A5481ACDA87F001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */,
 				73011BE11AD04F90001F6D71 /* en.lproj in Resources */,
 			);
@@ -866,6 +870,7 @@
 			files = (
 				73884B691B939C8900EEDB5F /* GratuitousPropertyListPreferences.swift in Sources */,
 				736568DB1A26DD1400603602 /* UIImage+PDFUtility.m in Sources */,
+				7399D9BF1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift in Sources */,
 				736568DC1A26DD1400603602 /* TipViewController.swift in Sources */,
 				736568DD1A26DD1400603602 /* GratuitousTableViewCell.swift in Sources */,
 				736568DE1A26DD1400603602 /* GratuitousSettingsButtons.swift in Sources */,
@@ -892,6 +897,7 @@
 			files = (
 				73884B681B939C8800EEDB5F /* GratuitousPropertyListPreferences.swift in Sources */,
 				73556E651A19711F0079A37D /* UIImage+PDFUtility.m in Sources */,
+				7399D9BE1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift in Sources */,
 				7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */,
 				7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */,
 				73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */,

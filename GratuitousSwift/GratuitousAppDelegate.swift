@@ -18,7 +18,6 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate, WatchConnectivi
     var window: UIWindow?
     let defaultsManager = GratuitousPropertyListPreferences()
     private let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
-    private let currencyFormatter = GratuitousCurrencyFormatter()
     private let watchManager = GratuitousWatchConnectivityManager()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -41,30 +40,8 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate, WatchConnectivi
         self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         self.window?.tintColor = GratuitousUIConstant.lightTextColor()
         self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
-        
-        print("GratuitousAppDelegate: Wrote Currency Symbols to Disk: \(generateNewCurrencySymbols().url)")
-    
+            
         return true
-    }
-    
-    func generateNewCurrencySymbols() -> (url: NSURL, currencyCode: String) {
-        //let subtitleTextAttributes = GratuitousUIColor.WatchFonts.subtitleText
-        let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-        //let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
-        
-        let imageGenerator = GratuitousLabelImageGenerator()
-        var images = [UIImage]()
-        for i in 1 ... 250 {
-            let string = NSAttributedString(string: self.currencyFormatter.currencyFormattedString(i), attributes: valueTextAttributes)
-            if let image = imageGenerator.generateImageForAttributedString(string) {
-                images += [image]
-            }
-        }
-        let data = NSKeyedArchiver.archivedDataWithRootObject(images)
-        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-        let dataURL = documentsURL.URLByAppendingPathComponent("imageArray.data")
-        data.writeToURL(dataURL, atomically: true)
-        return (dataURL, self.currencyFormatter.currencyCode)
     }
 }
 

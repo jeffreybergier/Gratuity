@@ -13,7 +13,13 @@ class GratuitousTableViewCell: UITableViewCell {
     @IBOutlet weak private var dollarTextLabel: UILabel?
     private var labelTextAttributes = [String(): NSObject()]
     private let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
-    weak var currencyFormatter: GratuitousCurrencyFormatter?
+    weak var currencyFormatter: GratuitousCurrencyFormatter? {
+        didSet {
+            if let currencyFormatter = self.currencyFormatter {
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateTextField:", name: "currencyFormatterReadyReloadView", object: currencyFormatter)
+            }
+        }
+    }
     var textSizeAdjustment: CGFloat = 1.0 {
         didSet {
             if (self.labelTextAttributes["NSFont"] != nil) {
@@ -49,7 +55,6 @@ class GratuitousTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateTextField:", name: "currencyFormatterReadyReloadView", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         
         //configure the font

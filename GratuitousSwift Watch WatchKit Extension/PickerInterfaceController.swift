@@ -100,12 +100,14 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
     
     func dataOnDiskChanged() {
         if let items = self.parsePickerItemsFromData(self.rawPickerItems(self.dataSource.defaultsManager.overrideCurrencySymbol)) {
+            self.dataSource.defaultsManager.currencySymbolsNeeded = false
             dispatch_async(dispatch_get_main_queue()) {
                 self.items = items
             }
         } else if let fallbackDataURL = NSBundle.mainBundle().URLForResource("fallbackPickerImages", withExtension: "data"),
             let fallbackData = NSData(contentsOfURL: fallbackDataURL),
             let items = self.parsePickerItemsFromData(fallbackData) {
+                self.dataSource.defaultsManager.currencySymbolsNeeded = true
                 dispatch_async(dispatch_get_main_queue()) {
                     self.items = items
             }
@@ -118,17 +120,17 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
         let fileName: String
         switch currency {
         case .Default:
-            fileName = "\(self.dataSource.currencyCode)Currency.data"
+            fileName = "\(self.dataSource.currencyCode)Images.data"
         case .Dollar:
-            fileName = "DollarCurrency.data"
+            fileName = "DollarImages.data"
         case .Pound:
-            fileName = "PoundCurrency.data"
+            fileName = "PoundImages.data"
         case .Euro:
-            fileName = "EuroCurrency.data"
+            fileName = "EuroImages.data"
         case .Yen:
-            fileName = "YenCurrency.data"
+            fileName = "YenImages.data"
         case .None:
-            fileName = "NoneCurrency.data"
+            fileName = "NoneImages.data"
         }
         
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!

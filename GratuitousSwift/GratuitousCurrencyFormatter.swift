@@ -12,22 +12,18 @@ class GratuitousCurrencyFormatter {
     
     private let currencyFormatter = NSNumberFormatter()
     
-    private var selectedCurrencySymbol: CurrencySign = CurrencySign.Default {
+    var selectedCurrencySymbol: CurrencySign = CurrencySign.Default {
         didSet {
-            NSNotificationCenter.defaultCenter().postNotificationName("currencyFormatterReadyReloadView", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("currencyFormatterReadyReloadView", object: self)
         }
     }
     
-    init() {
-        self.prepareCurrencyFormatter()
-    }
-    
-    private func prepareCurrencyFormatter() {
-        //prepare NSNotificationCenter
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeWasOverridenByUser:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
-        
-        self.localeWasOverridenByUser(nil)
+    init(respondToNotifications: Bool) {
+        if respondToNotifications == true {
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeWasOverridenByUser:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
+            self.localeWasOverridenByUser(nil)
+        }
         
         self.currencyFormatter.locale = NSLocale.currentLocale()
         self.currencyFormatter.maximumFractionDigits = 0

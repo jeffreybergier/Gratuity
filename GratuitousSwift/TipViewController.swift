@@ -44,7 +44,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         case BillAmount = 0, TipAmount
     }
     
-    private let currencyFormatter = GratuitousCurrencyFormatter()
+    private let currencyFormatter = GratuitousCurrencyFormatter(respondToNotifications: true)
     private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
     private var totalAmountTextLabelAttributes = [String : NSObject]()
     private var tipPercentageTextLabelAttributes = [String : NSObject]()
@@ -97,7 +97,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         // configure notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "suggestedTipUpdatedOnDisk:", name: "suggestedTipValueUpdated", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateView:", name: "currencyFormatterReadyReloadView", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateView:", name: "currencyFormatterReadyReloadView", object: self.currencyFormatter)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         
