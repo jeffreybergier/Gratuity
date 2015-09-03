@@ -58,11 +58,13 @@ class PickerInterfaceController: WKInterfaceController {
         
         if self.interfaceControllerIsConfigured == false {
             // start animating
+            self.interfaceState = .Loading
             self.animationImageView?.setImageNamed("gratuityCap4-")
             self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
             
             // configure watch delegate
             self.watchConnectivityManager.delegate = self
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "overrideCurrencySymbolUpdatedOnDisk:", name: "overrideCurrencySymbolUpdatedOnDisk", object: self.dataSource.defaultsManager)
             
             // configure the timer to fix an issue where sometimes the UI would not push to the correct interface controller.
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
@@ -75,17 +77,17 @@ class PickerInterfaceController: WKInterfaceController {
     private func configurePickerItems() {
         if let items = self.setPickerItems(self.dataSource.defaultsManager.overrideCurrencySymbol) {
             dispatch_async(dispatch_get_main_queue()) {
-                self.interfaceState = .Loaded
                 self.items = items
                 self.billPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.billIndexPathRow - 1)
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, dispatch_get_main_queue()) {
-                    self.tipPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.tipIndexPathRow - 1)
-                    self.interfaceState = .Loaded
-                    self.interfaceControllerIsConfigured == true
-                }
+                self.tipPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.tipIndexPathRow - 1)
+                self.interfaceState = .Loaded
+                self.interfaceControllerIsConfigured = true
             }
         }
+    }
+    
+    @objc private func overrideCurrencySymbolUpdatedOnDisk(notification: NSNotification?) {
+        self.interfaceControllerIsConfigured = false
     }
     
     private func setPickerItems(currencySymbol: CurrencySign) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
@@ -174,14 +176,14 @@ class PickerInterfaceController: WKInterfaceController {
                 if pickerCurrencySign != dataSourceCurrencySign {
                     let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
                     dispatch_async(backgroundQueue) {
-                        self.configurePickerItems()
+                        //self.configurePickerItems()
                     }
                 }
             } else {
                 if let _ = self.pickerItemsURL(dataSourceCurrencySign) {
                     let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
                     dispatch_async(backgroundQueue) {
-                        self.configurePickerItems()
+                        //self.configurePickerItems()
                     }
                 }
             }

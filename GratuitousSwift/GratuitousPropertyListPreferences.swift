@@ -207,6 +207,7 @@ class GratuitousPropertyListPreferences {
     
     var overrideCurrencySymbol: CurrencySign {
         set {
+            NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self, userInfo: .None)
             self.model.overrideCurrencySymbol = newValue
         }
         get {
