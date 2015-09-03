@@ -12,7 +12,7 @@ import WatchConnectivity
 //import Crashlytics
 
 @UIApplicationMain
-class GratuitousAppDelegate: UIResponder, UIApplicationDelegate, WatchConnectivityDelegate {
+class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     //initialize the window and the storyboard
     var window: UIWindow?

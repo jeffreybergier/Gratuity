@@ -133,7 +133,11 @@
                     </items>
                     <menu key="menu" id="Ng4-PQ-0Vy">
                         <items>
-                            <menuItem title="Settings" icon="info" id="hi9-uF-tQ9"/>
+                            <menuItem title="Settings" icon="info" id="hi9-uF-tQ9">
+                                <connections>
+                                    <action selector="settingsMenuButtonTapped" destination="azz-ui-8Qo" id="c7B-9G-UQh"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Split Tip" icon="shuffle" id="NJN-tw-QVC"/>
                         </items>
                     </menu>

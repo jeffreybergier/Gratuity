@@ -9,10 +9,6 @@
 import WatchKit
 import WatchConnectivity
 
-protocol WatchConnectivityDelegate: class {
-    
-}
-
 class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
     
     let session: WCSession? = {
@@ -23,42 +19,39 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
         }
     }()
     
-    weak var delegate: WatchConnectivityDelegate? {
+    weak var delegate: AnyObject? {
         didSet {
             if let session = self.session {
                 session.delegate = self
                 session.activateSession()
                 NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferencesChanged:", name: "GratuitousPropertyListPreferencesWereChanged", object: .None)
-                //NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferencesChanged:", name: "GratuitousPropertyListPreferencesWereReceived", object: .None)
             }
         }
     }
     
     @objc private func preferencesChanged(notification: NSNotification?) {
         print("GratuitousWatchConnectivityManager: GratuitousPropertyListPreferencesWereChanged Fired: \(notification?.userInfo)")
-        if var dictionary = notification?.userInfo as? [String : AnyObject] {
-            #if os(iOS)
-                if let overrideCurrencySymbol = notification?.userInfo?["overrideCurrencySymbol"] as? Int,
-                    let currencySymbolsNeeded = notification?.userInfo?["currencySymbolsNeeded"] as? NSNumber,
-                    let currencySign = CurrencySign(rawValue: overrideCurrencySymbol)
-                    where currencySymbolsNeeded.boolValue == true {
-                        let currencyStringImageGenerator = GratuitousCurrencyStringImageGenerator()
-                        if let tuple = currencyStringImageGenerator.generateCurrencySymbolsForCurrencySign(currencySign),
-                            session = self.session {
-                                print("CurrencySymbols Needed on Watch for CurrencySign: \(currencySign). Sending...")
-                                session.transferFile(tuple.url, metadata: ["fileName" : tuple.fileName])
-                                // assume the file is going to make it
-                                dictionary["currencySymbolsNeeded"] = NSNumber(bool: false)
-                                NSNotificationCenter.defaultCenter().postNotificationName("GratuitousPropertyListPreferencesWereReceived", object: self, userInfo: dictionary)
-                        }
-                }
-            #endif
-            
+        if let dictionary = notification?.userInfo as? [String : AnyObject] {
             do {
                 try self.session?.updateApplicationContext(dictionary)
             } catch {
                 print("GratuitousWatchConnectivityManager: Failed to update application context with error: \(error)")
             }
+            
+            #if os(watchOS)
+                if let currencySymbolsNeeded = dictionary["currencySymbolsNeeded"] as? NSNumber where currencySymbolsNeeded.boolValue == true {
+                    print("CurrencySymbols Needed on Watch. Requesting from iOS.")
+                    session?.sendMessage(dictionary,
+                        replyHandler: { reply in
+                            if let currencySymbolsNeeded = reply["currencySymbolsNeeded"] as? NSNumber where currencySymbolsNeeded.boolValue == false {
+                                GratuitousWatchDataSource.sharedInstance.defaultsManager.currencySymbolsNeeded = false
+                            }
+                        }, errorHandler: { error in
+                            print("GratuitousWatchConnectivityManager: Error sending message to iOS app: \(dictionary)")
+                    })
+                    
+                }
+            #endif
         }
     }
     
@@ -67,10 +60,30 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
         NSNotificationCenter.defaultCenter().postNotificationName("GratuitousPropertyListPreferencesWereReceived", object: self, userInfo: applicationContext)
     }
     
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        #if os(iOS)
+            var dictionary = message
+            if let overrideCurrencySymbol = dictionary["overrideCurrencySymbol"] as? Int,
+                let currencySymbolsNeeded = dictionary["currencySymbolsNeeded"] as? NSNumber,
+                let currencySign = CurrencySign(rawValue: overrideCurrencySymbol)
+                where currencySymbolsNeeded.boolValue == true {
+                    let currencyStringImageGenerator = GratuitousCurrencyStringImageGenerator()
+                    if let tuple = currencyStringImageGenerator.generateCurrencySymbolsForCurrencySign(currencySign),
+                        session = self.session {
+                            print("CurrencySymbols Needed on Watch for CurrencySign: \(currencySign). Sending...")
+                            session.transferFile(tuple.url, metadata: ["fileName" : tuple.fileName])
+                            // assume the file is going to make it
+                            dictionary["currencySymbolsNeeded"] = NSNumber(bool: false)
+                    }
+            }
+            replyHandler(dictionary)
+        #endif
+    }
+    
     func session(session: WCSession, didReceiveFile file: WCSessionFile) {
         #if os(watchOS)
             print("GratuitousWatchConnectivityManager Watch Did Receive File: \(file)")
-            if let originalFileName = file.metadata?["filename"] as? String {
+            if let originalFileName = file.metadata?["fileName"] as? String {
                 let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
                 let dataURL = documentsURL.URLByAppendingPathComponent(originalFileName)
                 do {
@@ -82,5 +95,9 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
                 }
             }
         #endif
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

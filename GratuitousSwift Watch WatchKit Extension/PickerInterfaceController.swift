@@ -9,9 +9,9 @@
 import WatchKit
 import Foundation
 
-class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegate {
+class PickerInterfaceController: WKInterfaceController {
     
-    let dataSource = GratuitousWatchDataSource.sharedInstance
+    private let dataSource = GratuitousWatchDataSource.sharedInstance
     
     @IBOutlet private var loadingGroup: WKInterfaceGroup?
     @IBOutlet private var mainGroup: WKInterfaceGroup?
@@ -37,7 +37,7 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
         }
     }
     
-    enum InterfaceState {
+    private enum InterfaceState {
         case Loading, Loaded
     }
     
@@ -45,6 +45,7 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
         didSet {
             switch self.interfaceState {
             case .Loading:
+                self.interfaceControllerIsConfigured = false
                 let animationDuration = NSTimeInterval(3.0)
                 self.loadingGroup?.setHidden(false)
                 self.loadingGroup?.setAlpha(0.0)
@@ -54,10 +55,12 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
                     self.mainGroup?.setAlpha(0.0)
                 }
                 delay(animationDuration) {
-                    self.mainGroup?.setHidden(true)
-                    self.setTitle("")
-                    self.animateWithDuration(animationDuration) {
-                        self.loadingGroup?.setAlpha(1.0)
+                    if self.interfaceState == .Loading {
+                        self.mainGroup?.setHidden(true)
+                        self.setTitle("")
+                        self.animateWithDuration(animationDuration) {
+                            self.loadingGroup?.setAlpha(1.0)
+                        }
                     }
                 }
             case .Loaded:
@@ -70,13 +73,15 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
                     self.loadingGroup?.setAlpha(0.0)
                 }
                 delay(animationDuration) {
-                    self.loadingGroup?.setHidden(true)
-                    self.setTitle("Gratuity")
-                    self.animateWithDuration(animationDuration) {
-                        self.mainGroup?.setAlpha(1.0)
-                    }
-                    delay(animationDuration) {
-                        self.billPicker?.focus()
+                    if self.interfaceState == .Loaded {
+                        self.loadingGroup?.setHidden(true)
+                        self.setTitle("Gratuity")
+                        self.animateWithDuration(animationDuration) {
+                            self.mainGroup?.setAlpha(1.0)
+                        }
+                        delay(animationDuration) {
+                            self.billPicker?.focus()
+                        }
                     }
                 }
             }
@@ -94,29 +99,36 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
         let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
         dispatch_async(backgroundQueue) {
             self.watchConnectivityManager.delegate = self
-            self.dataOnDiskChanged()
+            self.setPickerItems()
         }
     }
     
-    func dataOnDiskChanged() {
-        if let items = self.parsePickerItemsFromData(self.rawPickerItems(self.dataSource.defaultsManager.overrideCurrencySymbol)) {
-            self.dataSource.defaultsManager.currencySymbolsNeeded = false
-            dispatch_async(dispatch_get_main_queue()) {
-                self.items = items
-            }
+    private func setPickerItems() {
+        self.interfaceState = .Loading
+        let currencySymbol = self.dataSource.defaultsManager.overrideCurrencySymbol
+        if let url = self.pickerItemsURL(currencySymbol),
+            let data = NSData(contentsOfURL: url),
+            let items = self.parsePickerItemsFromData(data) {
+                self.dataSource.defaultsManager.currencySymbolsNeeded = false
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.pickerCurrencySign = currencySymbol
+                    self.items = items
+                }
         } else if let fallbackDataURL = NSBundle.mainBundle().URLForResource("fallbackPickerImages", withExtension: "data"),
             let fallbackData = NSData(contentsOfURL: fallbackDataURL),
             let items = self.parsePickerItemsFromData(fallbackData) {
                 self.dataSource.defaultsManager.currencySymbolsNeeded = true
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.pickerCurrencySign = nil
                     self.items = items
-            }
+                }
         } else {
+            self.pickerCurrencySign = nil
             self.dataSource.defaultsManager.currencySymbolsNeeded = true
         }
     }
     
-    func rawPickerItems(currency: CurrencySign) -> NSData? {
+    private func pickerItemsURL(currency: CurrencySign) -> NSURL? {
         let fileName: String
         switch currency {
         case .Default:
@@ -136,10 +148,10 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
         let dataURL = documentsURL.URLByAppendingPathComponent(fileName)
         
-        return NSData(contentsOfURL: dataURL)
+        if NSFileManager.defaultManager().fileExistsAtPath(dataURL.path!) == true { return dataURL } else { return .None }
     }
     
-    func parsePickerItemsFromData(data: NSData?) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
+    private func parsePickerItemsFromData(data: NSData?) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
         var billItems = [WKPickerItem]()
         var tipItems = [WKPickerItem]()
         if let data = data,
@@ -166,7 +178,7 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
         if billItems.isEmpty == false { return returnValue } else { return .None }
     }
     
-    
+    private var pickerCurrencySign: CurrencySign?
     
     private var currentBillAmount = 0 {
         didSet {
@@ -176,6 +188,17 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
     }
     private var currentTipPercentage: Double? = 0.0 {
         didSet {
+            // this horrible bit of code, updates the picker items if they are available and/or differ from what is set.
+            let dataSourceCurrencySign = self.dataSource.defaultsManager.overrideCurrencySymbol
+            if let pickerCurrencySign = self.pickerCurrencySign {
+                if pickerCurrencySign != dataSourceCurrencySign {
+                    self.setPickerItems()
+                }
+            } else {
+                if let _ = self.pickerItemsURL(dataSourceCurrencySign) {
+                    self.setPickerItems()
+                }
+            }
             let string = NSAttributedString(string: self.dataSource.percentStringFromRawDouble(self.currentTipPercentage), attributes: self.smallValueTextAttributes)
             self.tipPercentageLabel?.setAttributedText(string)
         }
@@ -218,5 +241,8 @@ class PickerInterfaceController: WKInterfaceController, WatchConnectivityDelegat
         let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
         self.currentBillAmount = billAmount + tipAmount
         self.currentTipPercentage = actualTipPercentage
+    }
+    @IBAction private func settingsMenuButtonTapped() {
+        self.presentControllerWithName("SettingsInterfaceController", context: .None)
     }
 }
