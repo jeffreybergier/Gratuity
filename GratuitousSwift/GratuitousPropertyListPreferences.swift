@@ -53,15 +53,18 @@ class GratuitousPropertyListPreferences {
     }
     
     @objc private func preferencesWereReceived(notification: NSNotification?) {
-        self.model = Properties(dictionary: (notification?.userInfo as? NSDictionary))
+        if let newPreferences = notification?.userInfo {
+            self.model = Properties(dictionary: newPreferences)
+        } else {
+            print("GratuitousPropertyListPreferences: Invalid Preferences Received: \(notification)")
+        }
     }
     
     @objc private func writeTimerFired(timer: NSTimer?) {
         timer?.invalidate()
         self.writeTimer = .None
-        if self.writeToDisk() == true,
-            let plistData = self.model.dataVersion {
-                NSNotificationCenter.defaultCenter().postNotificationName("GratuitousPropertyListPreferencesWereChanged", object: self, userInfo: self.model.dictionaryVersion as [NSObject : AnyObject])
+        if self.writeToDisk() == true {
+            NSNotificationCenter.defaultCenter().postNotificationName("GratuitousPropertyListPreferencesWereChanged", object: self, userInfo: self.model.dictionaryVersion as [NSObject : AnyObject])
         }
     }
     

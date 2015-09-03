@@ -25,14 +25,6 @@ class PickerInterfaceController: WKInterfaceController {
             if let items = self.items {
                 self.billPicker?.setItems(items.billItems)
                 self.tipPicker?.setItems(items.tipItems)
-                self.billPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.billIndexPathRow - 1)
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, dispatch_get_main_queue()) {
-                    let row = self.dataSource.defaultsManager.tipIndexPathRow - 1
-                    self.tipPicker?.setSelectedItemIndex(row)
-                    self.interfaceControllerIsConfigured = true
-                    self.interfaceState = .Loaded
-                }
             }
         }
     }
@@ -45,45 +37,18 @@ class PickerInterfaceController: WKInterfaceController {
         didSet {
             switch self.interfaceState {
             case .Loading:
-                self.interfaceControllerIsConfigured = false
-                let animationDuration = NSTimeInterval(3.0)
+                self.mainGroup?.setHidden(true)
                 self.loadingGroup?.setHidden(false)
-                self.loadingGroup?.setAlpha(0.0)
-                self.mainGroup?.setHidden(false)
-                self.mainGroup?.setAlpha(1.0)
-                self.animateWithDuration(animationDuration) {
-                    self.mainGroup?.setAlpha(0.0)
-                }
-                delay(animationDuration) {
-                    if self.interfaceState == .Loading {
-                        self.mainGroup?.setHidden(true)
-                        self.setTitle("")
-                        self.animateWithDuration(animationDuration) {
-                            self.loadingGroup?.setAlpha(1.0)
-                        }
-                    }
-                }
+                self.setTitle("")
             case .Loaded:
-                let animationDuration = NSTimeInterval(0.3)
-                self.loadingGroup?.setHidden(false)
-                self.loadingGroup?.setAlpha(1.0)
                 self.mainGroup?.setHidden(false)
-                self.mainGroup?.setAlpha(0.0)
-                self.animateWithDuration(animationDuration) {
-                    self.loadingGroup?.setAlpha(0.0)
-                }
-                delay(animationDuration) {
-                    if self.interfaceState == .Loaded {
-                        self.loadingGroup?.setHidden(true)
-                        self.setTitle("Gratuity")
-                        self.animateWithDuration(animationDuration) {
-                            self.mainGroup?.setAlpha(1.0)
-                        }
-                        delay(animationDuration) {
-                            self.billPicker?.focus()
-                        }
-                    }
-                }
+                self.loadingGroup?.setHidden(true)
+                self.setTitle("Gratuity")
+                self.billPicker?.focus()
+//                self.animateWithDuration(animationDuration) {
+//                }
+//                delay(animationDuration) {
+//                }
             }
         }
     }
@@ -91,40 +56,55 @@ class PickerInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        // start animating
-        self.animationImageView?.setImageNamed("gratuityCap4-")
-        self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
-        
-        // configure the timer to fix an issue where sometimes the UI would not push to the correct interface controller.
-        let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
-        dispatch_async(backgroundQueue) {
+        if self.interfaceControllerIsConfigured == false {
+            // start animating
+            self.animationImageView?.setImageNamed("gratuityCap4-")
+            self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
+            
+            // configure watch delegate
             self.watchConnectivityManager.delegate = self
-            self.setPickerItems()
+            
+            // configure the timer to fix an issue where sometimes the UI would not push to the correct interface controller.
+            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
+            dispatch_async(backgroundQueue) {
+                self.configurePickerItems()
+            }
         }
     }
     
-    private func setPickerItems() {
-        self.interfaceState = .Loading
-        let currencySymbol = self.dataSource.defaultsManager.overrideCurrencySymbol
+    private func configurePickerItems() {
+        if let items = self.setPickerItems(self.dataSource.defaultsManager.overrideCurrencySymbol) {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.interfaceState = .Loaded
+                self.items = items
+                self.billPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.billIndexPathRow - 1)
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
+                dispatch_after(delayTime, dispatch_get_main_queue()) {
+                    self.tipPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.tipIndexPathRow - 1)
+                    self.interfaceState = .Loaded
+                    self.interfaceControllerIsConfigured == true
+                }
+            }
+        }
+    }
+    
+    private func setPickerItems(currencySymbol: CurrencySign) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
         if let url = self.pickerItemsURL(currencySymbol),
             let data = NSData(contentsOfURL: url),
             let items = self.parsePickerItemsFromData(data) {
                 self.dataSource.defaultsManager.currencySymbolsNeeded = false
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.pickerCurrencySign = currencySymbol
-                    self.items = items
-                }
+                self.pickerCurrencySign = currencySymbol
+                return items
         } else if let fallbackDataURL = NSBundle.mainBundle().URLForResource("fallbackPickerImages", withExtension: "data"),
             let fallbackData = NSData(contentsOfURL: fallbackDataURL),
             let items = self.parsePickerItemsFromData(fallbackData) {
                 self.dataSource.defaultsManager.currencySymbolsNeeded = true
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.pickerCurrencySign = nil
-                    self.items = items
-                }
+                self.pickerCurrencySign = nil
+                return items
         } else {
             self.pickerCurrencySign = nil
             self.dataSource.defaultsManager.currencySymbolsNeeded = true
+            return .None
         }
     }
     
@@ -192,11 +172,17 @@ class PickerInterfaceController: WKInterfaceController {
             let dataSourceCurrencySign = self.dataSource.defaultsManager.overrideCurrencySymbol
             if let pickerCurrencySign = self.pickerCurrencySign {
                 if pickerCurrencySign != dataSourceCurrencySign {
-                    self.setPickerItems()
+                    let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
+                    dispatch_async(backgroundQueue) {
+                        self.configurePickerItems()
+                    }
                 }
             } else {
                 if let _ = self.pickerItemsURL(dataSourceCurrencySign) {
-                    self.setPickerItems()
+                    let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
+                    dispatch_async(backgroundQueue) {
+                        self.configurePickerItems()
+                    }
                 }
             }
             let string = NSAttributedString(string: self.dataSource.percentStringFromRawDouble(self.currentTipPercentage), attributes: self.smallValueTextAttributes)
