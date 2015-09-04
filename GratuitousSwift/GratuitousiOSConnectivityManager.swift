@@ -34,9 +34,9 @@ class GratuitousiOSConnectivityManager: NSObject, WCSessionDelegate {
         
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
         var dictionary = message
-        if let overrideCurrencySymbol = dictionary["overrideCurrencySymbol"] as? Int,
+        if let overrideCurrencySymbol = dictionary["overrideCurrencySymbol"] as? NSNumber,
             let currencySymbolsNeeded = dictionary["currencySymbolsNeeded"] as? NSNumber,
-            let currencySign = CurrencySign(rawValue: overrideCurrencySymbol)
+            let currencySign = CurrencySign(rawValue: overrideCurrencySymbol.integerValue)
             where currencySymbolsNeeded.boolValue == true {
                 let currencyStringImageGenerator = GratuitousCurrencyStringImageGenerator()
                 if let tuple = currencyStringImageGenerator.generateCurrencySymbolsForCurrencySign(currencySign),
@@ -53,17 +53,21 @@ class GratuitousiOSConnectivityManager: NSObject, WCSessionDelegate {
     private var skipNextContextReception = false
     
     func updateWatchApplicationContext(context: [String : AnyObject]) {
-        if let session = self.session where session.paired == true && self.skipNextContextReception == false {
-            do {
-                print("GratuitousWatchConnectivityManager<iOS>: Updating Watch Application Context")
-                try session.updateApplicationContext(context)
-            } catch {
-                NSLog("GratuitousWatchConnectivityManager<iOS>: Failed Updating iOS Application Context: \(error)")
+        if let session = self.session where session.paired == true {
+            if self.skipNextContextReception == false {
+                do {
+                    print("GratuitousWatchConnectivityManager<iOS>: Updating Watch Application Context")
+                    try session.updateApplicationContext(context)
+                } catch {
+                    NSLog("GratuitousWatchConnectivityManager<iOS>: Failed Updating iOS Application Context: \(error)")
+                }
+            } else {
+                print("GratuitousWatchConnectivityManager<iOS>: Did Not Attempt to Update Watch. SkipNext == true.")
             }
         } else {
-            self.skipNextContextReception = false
             NSLog("GratuitousWatchConnectivityManager<iOS>: Did Not Attempt to Update Watch. No Watch Paired.")
         }
+        self.skipNextContextReception = false
     }
     
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {

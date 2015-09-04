@@ -100,7 +100,9 @@ class GratuitousPropertyListPreferences {
     var currencySymbolsNeeded: Bool {
         set {
             self.model.currencySymbolsNeeded = newValue
-            self.notifyDelegateDataNeeded(.CurrencySymbols)
+            if newValue == true {
+                self.notifyDelegateDataNeeded(.CurrencySymbols(specificSymbol: self.model.overrideCurrencySymbol))
+            }
             self.dataChanged = true
         }
         get {
@@ -180,7 +182,7 @@ class GratuitousPropertyListPreferences {
     }
     
     enum DataNeeded {
-        case CurrencySymbols
+        case CurrencySymbols(specificSymbol: CurrencySign)
     }
     
     struct Keys {

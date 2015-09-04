@@ -53,7 +53,7 @@ class GratuitousWatchDataSource: GratuitousPropertyListPreferencesDelegate, Grat
     }
 
     func setInterfaceDataChanged() {
-    
+        self.delegate?.setLargeInterfaceRefreshNeeded()
     }
     
     func setDataChanged() {
@@ -61,7 +61,16 @@ class GratuitousWatchDataSource: GratuitousPropertyListPreferencesDelegate, Grat
     }
     
     func dataNeeded(dataNeeded: GratuitousPropertyListPreferences.DataNeeded) {
-        
+        self.watchConnectivityManager.requestDataFromiOSDevice(dataNeeded)
+    }
+    
+    func receivedCurrencySymbolsFromiOS() {
+        self.defaultsManager.currencySymbolsNeeded = false
+        self.delegate?.setLargeInterfaceRefreshNeeded()
+    }
+    
+    func receivedCurrencySymbolPromiseFromiOS() {
+        self.defaultsManager.currencySymbolsNeeded = false
     }
     
     func currencyStringFromInteger(integerValue: Int?) -> String {

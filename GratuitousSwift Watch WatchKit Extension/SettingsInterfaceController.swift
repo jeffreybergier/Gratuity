@@ -33,10 +33,18 @@ class SettingsInterfaceController: WKInterfaceController {
 
     private var interfaceControllerIsConfigured = false
     
-    private let dataSource = GratuitousWatchDataSource()
+    private weak var dataSource: GratuitousWatchDataSource?
     private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     private let buttonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        if let dataSource = context as? GratuitousWatchDataSource {
+            self.dataSource = dataSource
+        }
+    }
     
     override func willActivate() {
         super.willActivate()
@@ -67,7 +75,9 @@ class SettingsInterfaceController: WKInterfaceController {
             self.currencySymbolNoneLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("None", comment: ""), attributes: self.valueTextAttributes))
 
             // configure the values that change
-            self.suggestedTipSlider?.setValue(Float(round(self.dataSource.defaultsManager.suggestedTipPercentage * 100)))
+            if let dataSource = self.dataSource {
+                self.suggestedTipSlider?.setValue(Float(round(dataSource.defaultsManager.suggestedTipPercentage * 100)))
+            }
             self.updateSuggestedTipPercentageUI()
             self.updateCurrencySymbolUI()
             
@@ -78,44 +88,46 @@ class SettingsInterfaceController: WKInterfaceController {
     
     @IBAction private func suggestedTipSliderDidChange(value: Float) {
         let adjustedValue = value / 100
-        self.dataSource.defaultsManager.suggestedTipPercentage = Double(adjustedValue)
+        self.dataSource?.defaultsManager.suggestedTipPercentage = Double(adjustedValue)
         self.updateSuggestedTipPercentageUI()
     }
     
     @IBAction private func currencySymbolButtonLocalTapped() {
-        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Default
+        self.dataSource?.defaultsManager.overrideCurrencySymbol = CurrencySign.Default
         self.updateCurrencySymbolUI()
     }
     
     @IBAction private func currencySymbolButtonDollarTapped() {
-        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Dollar
+        self.dataSource?.defaultsManager.overrideCurrencySymbol = CurrencySign.Dollar
         self.updateCurrencySymbolUI()
     }
     
     @IBAction private func currencySymbolButtonPoundTapped() {
-        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Pound
+        self.dataSource?.defaultsManager.overrideCurrencySymbol = CurrencySign.Pound
         self.updateCurrencySymbolUI()
     }
     
     @IBAction private func currencySymbolButtonEuroTapped() {
-        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Euro
+        self.dataSource?.defaultsManager.overrideCurrencySymbol = CurrencySign.Euro
         self.updateCurrencySymbolUI()
     }
     
     @IBAction private func currencySymbolButtonYenTapped() {
-        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Yen
+        self.dataSource?.defaultsManager.overrideCurrencySymbol = CurrencySign.Yen
         self.updateCurrencySymbolUI()
     }
     
     @IBAction private func currencySymbolButtonNoneTapped() {
-        self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.None
+        self.dataSource?.defaultsManager.overrideCurrencySymbol = CurrencySign.None
         self.updateCurrencySymbolUI()
     }
     
     private func updateSuggestedTipPercentageUI() {
-        let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
-        let suggestedTipPercentageString = self.dataSource.percentStringFromRawDouble(suggestedTipPercentage)
-        self.suggestedTipPercentageLabel?.setAttributedText(NSAttributedString(string: suggestedTipPercentageString, attributes: self.valueTextAttributes))
+        if let dataSource = self.dataSource {
+            let suggestedTipPercentage = dataSource.defaultsManager.suggestedTipPercentage
+            let suggestedTipPercentageString = dataSource.percentStringFromRawDouble(suggestedTipPercentage)
+            self.suggestedTipPercentageLabel?.setAttributedText(NSAttributedString(string: suggestedTipPercentageString, attributes: self.valueTextAttributes))
+        }
     }
     
     private func updateCurrencySymbolUI() {
@@ -127,20 +139,22 @@ class SettingsInterfaceController: WKInterfaceController {
         self.currencySymbolYenGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
         self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
         
-        let currencySymbolOnDisk = self.dataSource.defaultsManager.overrideCurrencySymbol
-        switch currencySymbolOnDisk {
-        case .Default:
-            self.currencySymbolLocalGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
-        case .Dollar:
-            self.currencySymbolDollarGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
-        case .Pound:
-            self.currencySymbolPoundGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
-        case .Euro:
-            self.currencySymbolEuroGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
-        case .Yen:
-            self.currencySymbolYenGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
-        case .None:
-            self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+        if let dataSource = self.dataSource {
+            let currencySymbolOnDisk = dataSource.defaultsManager.overrideCurrencySymbol
+            switch currencySymbolOnDisk {
+            case .Default:
+                self.currencySymbolLocalGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+            case .Dollar:
+                self.currencySymbolDollarGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+            case .Pound:
+                self.currencySymbolPoundGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+            case .Euro:
+                self.currencySymbolEuroGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+            case .Yen:
+                self.currencySymbolYenGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+            case .None:
+                self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
+            }
         }
     }
 }

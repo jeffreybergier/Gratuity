@@ -54,7 +54,10 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     }
     
     func receivedContextFromWatch(context: [String : AnyObject]) {
-        
+        let oldModel = self.defaultsManager.model
+        let newModel = GratuitousPropertyListPreferences.Properties(dictionary: context, fallback: oldModel)
+        self.defaultsManager.model = newModel
+        self.delegate?.setInterfaceRefreshNeeded()
     }
     
     func setInterfaceDataChanged() {

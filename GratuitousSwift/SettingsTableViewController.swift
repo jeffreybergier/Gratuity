@@ -228,7 +228,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         }
         
         if let presentingViewController = self.presentingViewController as? TipViewController {
-            presentingViewController.setInterfaceRefreshNeeded()
+            presentingViewController.refreshInterface()
         }
     }
     

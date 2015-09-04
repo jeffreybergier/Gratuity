@@ -11,6 +11,8 @@ import WatchConnectivity
 
 protocol GratuitousWatchConnectivityManagerDelegate: class {
     func receivedContextFromiOS(context: [String : AnyObject])
+    func receivedCurrencySymbolPromiseFromiOS()
+    func receivedCurrencySymbolsFromiOS()
 }
 
 class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
@@ -50,12 +52,16 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
     func requestDataFromiOSDevice(dataNeeded: GratuitousPropertyListPreferences.DataNeeded) {
         if let session = session {
             switch dataNeeded {
-            case .CurrencySymbols:
+            case .CurrencySymbols(let sign):
                 print("GratuitousWatchConnectivityManager<WatchOS>: Currency Symbols Needed. Requesting from iOS Device")
-                session.sendMessage(["currencySymbolsNeeded" : NSNumber(bool: true)],
+                let message = [
+                    "currencySymbolsNeeded" : NSNumber(bool: true),
+                    "overrideCurrencySymbol" : NSNumber(integer: sign.rawValue),
+                ]
+                session.sendMessage(message,
                     replyHandler: { reply in
                         if let currencySymbolsNeeded = reply["currencySymbolsNeeded"] as? NSNumber where currencySymbolsNeeded.boolValue == false {
-                            
+                            self.delegate?.receivedCurrencySymbolPromiseFromiOS()
                         }
                     }, errorHandler: { error in
                         print("GratuitousWatchConnectivityManager<WatchOS>: Error sending message to iOS app)")
@@ -78,6 +84,7 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
             do {
                 let data = try NSData(contentsOfURL: file.fileURL, options: .DataReadingMappedIfSafe)
                 try data.writeToURL(dataURL, options: .AtomicWrite)
+                self.delegate?.receivedCurrencySymbolsFromiOS()
             } catch {
                 NSLog("GratuitousWatchConnectivityManager: didReceiveFile: Failed with error: \(error)")
             }

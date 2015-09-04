@@ -17,7 +17,11 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
     @IBOutlet private var mainGroup: WKInterfaceGroup?
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
     
-    private var largeInterfaceUpdateNeeded = true
+    private var largeInterfaceUpdateNeeded = true {
+        didSet {
+            print("largeInterfaceUpdateNeeded set tot \(self.largeInterfaceUpdateNeeded)")
+        }
+    }
     private var smallInterfaceUpdateNeeded = true
     private var interfaceControllerConfiguredOnce = false
     
@@ -222,7 +226,7 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
     }
     
     @IBAction private func settingsMenuButtonTapped() {
-        self.presentControllerWithName("SettingsInterfaceController", context: .None)
+        self.presentControllerWithName("SettingsInterfaceController", context: self.dataSource)
     }
     
     @IBAction private func splitTipMenuButtonTapped() {

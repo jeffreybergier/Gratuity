@@ -85,6 +85,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         // Do any additional setup after loading the view.
         
         self.dataSource?.delegate = self
+        self.resetInterfaceIdleTimer()
         
         #if DEBUG
             // add a crash button to the view to test crashlytics
@@ -337,6 +338,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     //MARK: Handle Updating the Big Labels
     
     private func updateLargeTextLabels(billAmount billAmount: Int, tipAmount: Int) {
+        self.resetInterfaceIdleTimer()
         if billAmount > 0 { //this protects from divide by 0 crashes
             let totalAmount = billAmount + tipAmount
             let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
@@ -352,7 +354,34 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
+    private var interfaceIdleTimer: NSTimer?
+    private func resetInterfaceIdleTimer() {
+        self.interfaceIdleTimer?.invalidate()
+        self.interfaceIdleTimer = nil
+        self.interfaceIdleTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "interfaceIdleTimerFired:", userInfo: nil, repeats: true)
+    }
+    
+    @objc private func interfaceIdleTimerFired(timer: NSTimer?) {
+        if self.interfaceRefreshNeeded == true {
+            let billIndex = self.dataSource?.defaultsManager.billIndexPathRow
+            let tipIndex = self.dataSource?.defaultsManager.tipIndexPathRow
+            if let billIndex = billIndex {
+                self.billAmountTableView?.selectRowAtIndexPath(NSIndexPath(forRow: billIndex + 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            }
+            if let tipIndex = tipIndex where tipIndex > 0 {
+                self.tipAmountTableView?.selectRowAtIndexPath(NSIndexPath(forRow: tipIndex + 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            }
+            self.refreshInterface()
+        }
+    }
+    
+    private var interfaceRefreshNeeded = false
     func setInterfaceRefreshNeeded() {
+        self.interfaceRefreshNeeded = true
+    }
+    
+    func refreshInterface() {
+        self.interfaceRefreshNeeded = false
         if let billAmountTableView = self.billAmountTableView,
             let tipAmountTableView = self.tipAmountTableView,
             let billIndexPath = self.indexPathInCenterOfTable(billAmountTableView),
