@@ -95,11 +95,22 @@ class PickerInterfaceController: WKInterfaceController {
     }
     
     private func configurePickerItems() {
+        // set the UI into a loading state
         self.interfaceState = .Loading
+        
+        // tell the timer the interface is loaded
+        // sometimes it takes longer to load than the timer allows
+        // in those cases it loads twice
+        self.largeInterfaceUpdateNeeded = false
+        self.smallInterfaceUpdateNeeded = false
+        
+        // dispatch the background for the long running items read from disk operation
         let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
         dispatch_async(backgroundQueue) {
             if let items = self.setPickerItems(self.dataSource.defaultsManager.overrideCurrencySymbol) {
+                // dispatch back to the main queue to do the UI work
                 dispatch_async(dispatch_get_main_queue()) {
+                    // this operation takes the longest
                     self.items = items
                     
                     // set the text in the UI
@@ -130,14 +141,10 @@ class PickerInterfaceController: WKInterfaceController {
                             
                             // restore the UI state
                             self.interfaceState = .Loaded
-                            self.largeInterfaceUpdateNeeded = false
-                            self.smallInterfaceUpdateNeeded = false
                         }
                     } else {
                         // restore the ui state
                         self.interfaceState = .Loaded
-                        self.largeInterfaceUpdateNeeded = false
-                        self.smallInterfaceUpdateNeeded = false
                     }
                 }
             }
