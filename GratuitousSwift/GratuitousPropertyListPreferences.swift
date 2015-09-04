@@ -54,7 +54,11 @@ class GratuitousPropertyListPreferences {
     
     @objc private func preferencesWereReceived(notification: NSNotification?) {
         if let newPreferences = notification?.userInfo {
-            self.model = Properties(dictionary: newPreferences)
+            let newModel = Properties(dictionary: newPreferences)
+            if newModel.overrideCurrencySymbol != self.model.overrideCurrencySymbol {
+                NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self, userInfo: nil)
+            }
+            self.model = newModel
         } else {
             print("GratuitousPropertyListPreferences: Invalid Preferences Received: \(notification)")
         }
@@ -158,16 +162,21 @@ class GratuitousPropertyListPreferences {
     private var model: Properties {
         didSet {
             print("GratuitousPropertyListPreferences: Was Set")
-            if let writeTimer = self.writeTimer {
-                writeTimer.invalidate()
-            }
-            self.writeTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "writeTimerFired:", userInfo: .None, repeats: false)
         }
+    }
+    
+    private func resetWriteTimer() {
+        if let writeTimer = self.writeTimer {
+            writeTimer.invalidate()
+            self.writeTimer = .None
+        }
+        self.writeTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "writeTimerFired:", userInfo: .None, repeats: false)
     }
     
     var currencySymbolsNeeded: Bool {
         set {
             self.model.currencySymbolsNeeded = newValue
+            self.resetWriteTimer()
         }
         get {
             return self.model.currencySymbolsNeeded
@@ -177,6 +186,7 @@ class GratuitousPropertyListPreferences {
     private var appVersionString: String {
         set {
             self.model.appVersionString = newValue
+            self.resetWriteTimer()
         }
         get {
             return self.model.appVersionString
@@ -190,6 +200,7 @@ class GratuitousPropertyListPreferences {
             
             // then update instance variables and user defaults
             self.model.billIndexPathRow = newValue
+            self.resetWriteTimer()
         }
         get {
             return self.model.billIndexPathRow
@@ -199,6 +210,7 @@ class GratuitousPropertyListPreferences {
     var tipIndexPathRow: Int {
         set {
             self.model.tipIndexPathRow = newValue
+            self.resetWriteTimer()
         }
         get {
             return self.model.tipIndexPathRow
@@ -207,8 +219,9 @@ class GratuitousPropertyListPreferences {
     
     var overrideCurrencySymbol: CurrencySign {
         set {
-            NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self, userInfo: .None)
             self.model.overrideCurrencySymbol = newValue
+            NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self, userInfo: .None)
+            self.resetWriteTimer()
         }
         get {
             return self.model.overrideCurrencySymbol
@@ -218,6 +231,7 @@ class GratuitousPropertyListPreferences {
     var suggestedTipPercentage: Double {
         set {
             self.model.suggestedTipPercentage = newValue
+            self.resetWriteTimer()
         }
         get {
             return self.model.suggestedTipPercentage

@@ -18,7 +18,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let defaultsManager = GratuitousPropertyListPreferences()
     private let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
-    private let watchManager = GratuitousWatchConnectivityManager()
+    private let watchManager = GratuitousiOSConnectivityManager()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch

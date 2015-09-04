@@ -85,41 +85,31 @@ class SettingsInterfaceController: WKInterfaceController {
     @IBAction private func currencySymbolButtonLocalTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Default
         self.updateCurrencySymbolUI()
-        self.postCurrencySymbolChangeNotification()
     }
     
     @IBAction private func currencySymbolButtonDollarTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Dollar
         self.updateCurrencySymbolUI()
-        self.postCurrencySymbolChangeNotification()
     }
     
     @IBAction private func currencySymbolButtonPoundTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Pound
         self.updateCurrencySymbolUI()
-        self.postCurrencySymbolChangeNotification()
     }
     
     @IBAction private func currencySymbolButtonEuroTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Euro
         self.updateCurrencySymbolUI()
-        self.postCurrencySymbolChangeNotification()
     }
     
     @IBAction private func currencySymbolButtonYenTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.Yen
         self.updateCurrencySymbolUI()
-        self.postCurrencySymbolChangeNotification()
     }
     
     @IBAction private func currencySymbolButtonNoneTapped() {
         self.dataSource.defaultsManager.overrideCurrencySymbol = CurrencySign.None
         self.updateCurrencySymbolUI()
-        self.postCurrencySymbolChangeNotification()
-    }
-    
-    private func postCurrencySymbolChangeNotification() {
-        NSNotificationCenter.defaultCenter().postNotificationName(WatchNotification.CurrencySymbolDidChangeInSettings, object: nil)
     }
     
     private func updateSuggestedTipPercentageUI() {

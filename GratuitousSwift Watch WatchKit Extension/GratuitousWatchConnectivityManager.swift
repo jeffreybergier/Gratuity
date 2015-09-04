@@ -17,7 +17,7 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
         } else {
             return .None
         }
-    }()
+        }()
     
     weak var delegate: AnyObject? {
         didSet {
@@ -30,46 +30,32 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
     }
     
     @objc private func preferencesChanged(notification: NSNotification?) {
-        #if os(iOS)
-            // send the new preferences to the watch
-            if let dictionary = notification?.userInfo as? [String : AnyObject],
-                let session = self.session where session.watchAppInstalled == true {
-                    do {
-                        print("GratuitousWatchConnectivityManager<iOS>: GratuitousPropertyListPreferencesWereChanged Fired: \(notification?.userInfo)")
-                        try session.updateApplicationContext(dictionary)
-                    } catch {
-                        print("GratuitousWatchConnectivityManager<iOS>: Failed to update application context with error: \(error)")
-                    }
-            }
-        #endif
-        #if os(watchOS)
-            // send the new preferences to the Phone
-            if let dictionary = notification?.userInfo as? [String : AnyObject],
-                let session = self.session {
-                    do {
-                        print("GratuitousWatchConnectivityManager<WatchOS>: GratuitousPropertyListPreferencesWereChanged Fired: \(notification?.userInfo)")
-                        try session.updateApplicationContext(dictionary)
-                    } catch {
-                        print("GratuitousWatchConnectivityManager<WatchOS>: Failed to update application context with error: \(error)")
-                    }
-            }
-            
-            // if currency symbols are missing, wake up the phone and request new ones.
-            if let dictionary = notification?.userInfo as? [String : AnyObject],
-                let session = self.session,
-                let currencySymbolsNeeded = dictionary["currencySymbolsNeeded"] as? NSNumber where currencySymbolsNeeded.boolValue == true {
-                    print("<WatchOS>: CurrencySymbols Needed on Watch. Requesting from iOS.")
-                    session.sendMessage(dictionary,
-                        replyHandler: { reply in
-                            if let currencySymbolsNeeded = reply["currencySymbolsNeeded"] as? NSNumber where currencySymbolsNeeded.boolValue == false {
-                                GratuitousWatchDataSource.sharedInstance.defaultsManager.currencySymbolsNeeded = false
-                            }
-                        }, errorHandler: { error in
-                            print("GratuitousWatchConnectivityManager<WatchOS>: Error sending message to iOS app: \(dictionary)")
-                    })
-                    
-            }
-        #endif
+        // send the new preferences to the Phone
+        if let dictionary = notification?.userInfo as? [String : AnyObject],
+            let session = self.session {
+                do {
+                    print("GratuitousWatchConnectivityManager<WatchOS>: GratuitousPropertyListPreferencesWereChanged Fired: \(notification?.userInfo)")
+                    try session.updateApplicationContext(dictionary)
+                } catch {
+                    print("GratuitousWatchConnectivityManager<WatchOS>: Failed to update application context with error: \(error)")
+                }
+        }
+        
+        // if currency symbols are missing, wake up the phone and request new ones.
+        if let dictionary = notification?.userInfo as? [String : AnyObject],
+            let session = self.session,
+            let currencySymbolsNeeded = dictionary["currencySymbolsNeeded"] as? NSNumber where currencySymbolsNeeded.boolValue == true {
+                print("<WatchOS>: CurrencySymbols Needed on Watch. Requesting from iOS.")
+                session.sendMessage(dictionary,
+                    replyHandler: { reply in
+                        if let currencySymbolsNeeded = reply["currencySymbolsNeeded"] as? NSNumber where currencySymbolsNeeded.boolValue == false {
+                            GratuitousWatchDataSource.sharedInstance.defaultsManager.currencySymbolsNeeded = false
+                        }
+                    }, errorHandler: { error in
+                        print("GratuitousWatchConnectivityManager<WatchOS>: Error sending message to iOS app: \(dictionary)")
+                })
+                
+        }
     }
     
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
@@ -77,41 +63,20 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
         NSNotificationCenter.defaultCenter().postNotificationName("GratuitousPropertyListPreferencesWereReceived", object: self, userInfo: applicationContext)
     }
     
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
-        #if os(iOS)
-            var dictionary = message
-            if let overrideCurrencySymbol = dictionary["overrideCurrencySymbol"] as? Int,
-                let currencySymbolsNeeded = dictionary["currencySymbolsNeeded"] as? NSNumber,
-                let currencySign = CurrencySign(rawValue: overrideCurrencySymbol)
-                where currencySymbolsNeeded.boolValue == true {
-                    let currencyStringImageGenerator = GratuitousCurrencyStringImageGenerator()
-                    if let tuple = currencyStringImageGenerator.generateCurrencySymbolsForCurrencySign(currencySign),
-                        session = self.session {
-                            print("CurrencySymbols Needed on Watch for CurrencySign: \(currencySign). Sending...")
-                            session.transferFile(tuple.url, metadata: ["fileName" : tuple.fileName])
-                            // assume the file is going to make it
-                            dictionary["currencySymbolsNeeded"] = NSNumber(bool: false)
-                    }
-            }
-            replyHandler(dictionary)
-        #endif
-    }
-    
     func session(session: WCSession, didReceiveFile file: WCSessionFile) {
-        #if os(watchOS)
-            print("GratuitousWatchConnectivityManager Watch Did Receive File: \(file)")
-            if let originalFileName = file.metadata?["fileName"] as? String {
-                let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-                let dataURL = documentsURL.URLByAppendingPathComponent(originalFileName)
-                do {
-                    let data = try NSData(contentsOfURL: file.fileURL, options: .DataReadingMappedIfSafe)
-                    try data.writeToURL(dataURL, options: .AtomicWrite)
-                    GratuitousWatchDataSource.sharedInstance.defaultsManager.currencySymbolsNeeded = false
-                } catch {
-                    NSLog("GratuitousWatchConnectivityManager: didReceiveFile: Failed with error: \(error)")
-                }
+        print("GratuitousWatchConnectivityManager Watch Did Receive File: \(file)")
+        if let originalFileName = file.metadata?["fileName"] as? String {
+            let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+            let dataURL = documentsURL.URLByAppendingPathComponent(originalFileName)
+            do {
+                let data = try NSData(contentsOfURL: file.fileURL, options: .DataReadingMappedIfSafe)
+                try data.writeToURL(dataURL, options: .AtomicWrite)
+                GratuitousWatchDataSource.sharedInstance.defaultsManager.currencySymbolsNeeded = false
+                NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self, userInfo: nil)
+            } catch {
+                NSLog("GratuitousWatchConnectivityManager: didReceiveFile: Failed with error: \(error)")
             }
-        #endif
+        }
     }
     
     deinit {
