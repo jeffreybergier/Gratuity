@@ -9,14 +9,14 @@
 import UIKit
 import MessageUI
 
-class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate, GratuitousiOSDataSourceDelegate {
     
     // MARK: Handle TableViewController
     @IBOutlet private weak var headerLabelTipPercentage: UILabel?
     @IBOutlet private weak var headerLabelCurencySymbol: UILabel?
     @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel?
     
-    private weak var defaultsManager = (UIApplication.sharedApplication().delegate as? GratuitousAppDelegate)?.defaultsManager
+    private weak var dataSource = (UIApplication.sharedApplication().delegate as? GratuitousAppDelegate)?.dataSource
     private var headerLabelsArray: [UILabel?] = []
     private lazy var swipeToDismiss: UISwipeGestureRecognizer = {
         let swipe = UISwipeGestureRecognizer(target: self, action: "didSwipeToDismiss:")
@@ -28,7 +28,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         super.viewDidLoad()
         
         //add necessary notification center observers
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "readUserDefaultsAndUpdateSlider:", name: "suggestedTipValueUpdated", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         
@@ -63,10 +62,16 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.prepareHeaderLabelsAndCells()
         
         //lastly, read the defaults from disk and update the UI
-        self.readUserDefaultsAndUpdateSlider(nil)
+        self.readUserDefaultsAndUpdateSlider()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.dataSource?.delegate = self
         
         //prepare the currency override cells
-        self.prepareCurrencyIndicatorCells()
+        self.setInterfaceRefreshNeeded()
     }
     
     private func prepareHeaderLabelsAndCells() {
@@ -183,8 +188,8 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.suggestedTipPercentageSlider?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
     }
     
-    func readUserDefaultsAndUpdateSlider(notification: NSNotification?) {
-        let onDiskTipPercentage = self.defaultsManager?.suggestedTipPercentage !! 0.20
+    private func readUserDefaultsAndUpdateSlider() {
+        let onDiskTipPercentage = self.dataSource?.defaultsManager.suggestedTipPercentage !! 0.20
         self.suggestedTipPercentageLabel?.text = "\(Int(round(onDiskTipPercentage * 100)))%"
         self.suggestedTipPercentageSlider?.setValue(Float(onDiskTipPercentage), animated: false)
     }
@@ -197,7 +202,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     @IBAction func didChangeSuggestedTipPercentageSlider(sender: UISlider) {
         //this is only called when the user lets go of the slider
         let newTipPercentage = sender.value
-        self.defaultsManager?.suggestedTipPercentage = Double(newTipPercentage)
+        self.dataSource?.defaultsManager.suggestedTipPercentage = Double(newTipPercentage)
         NSNotificationCenter.defaultCenter().postNotificationName("suggestedTipValueUpdated", object: self)
     }
     
@@ -209,17 +214,29 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     @IBOutlet private weak var textLabelYenSign: UILabel?
     @IBOutlet private weak var textLabelNone: UILabel?
     
-    func prepareCurrencyIndicatorCells() {
+    private func prepareCurrencyIndicatorCells() {
         self.writeCurrencyOverrideUserDefaultToDisk()
+    }
+    
+    func setInterfaceRefreshNeeded() {
+        if let cells = self.tableView?.visibleCells {
+            cells.forEach() { genericCell in
+                if let cell = genericCell as? GratuitousCurrencySelectorCellTableViewCell {
+                    cell.setInterfaceRefreshNeeded()
+                }
+            }
+        }
+        
+        if let presentingViewController = self.presentingViewController as? TipViewController {
+            presentingViewController.setInterfaceRefreshNeeded()
+        }
     }
     
     private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: CurrencySign? = nil) {
         if let currencyOverride = currencyOverride,
-            let defaultsManager = self.defaultsManager {
-                defaultsManager.overrideCurrencySymbol = currencyOverride
+            let defaultsManager = self.dataSource {
+                defaultsManager.defaultsManager.overrideCurrencySymbol = currencyOverride
         }
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self)
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

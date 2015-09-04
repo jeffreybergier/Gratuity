@@ -9,15 +9,13 @@
 import WatchKit
 import Foundation
 
-class PickerInterfaceController: WKInterfaceController {
+class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourceDelegate {
     
-    private let dataSource = GratuitousWatchDataSource.sharedInstance
+    private let dataSource = GratuitousWatchDataSource()
     
     @IBOutlet private var loadingGroup: WKInterfaceGroup?
     @IBOutlet private var mainGroup: WKInterfaceGroup?
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
-    
-    private let watchConnectivityManager = GratuitousWatchConnectivityManager()
     
     private var largeInterfaceUpdateNeeded = true
     private var smallInterfaceUpdateNeeded = true
@@ -52,44 +50,35 @@ class PickerInterfaceController: WKInterfaceController {
                 self.loadingGroup?.setHidden(true)
                 self.setTitle("Gratuity")
                 self.billPicker?.focus()
-//                self.animateWithDuration(animationDuration) {
-//                }
-//                delay(animationDuration) {
-//                }
             }
         }
     }
     
+    private func resetInterfaceIdleTimer() {
+        if let existingTimer = self.interfaceIdleTimer {
+            existingTimer.invalidate()
+            self.interfaceIdleTimer = nil
+        }
+        self.interfaceIdleTimer = NSTimer.interfaceIdleTimer(self)
+    }
+    
     override func willActivate() {
         super.willActivate()
+        self.dataSource.delegate = self
         
         if self.interfaceControllerConfiguredOnce == false {
             self.interfaceControllerConfiguredOnce = true
             
-            if let existingTimer = self.interfaceIdleTimer {
-                existingTimer.invalidate()
-                self.interfaceIdleTimer = nil
-            }
-            self.interfaceIdleTimer = NSTimer.interfaceIdleTimer(self)
+            self.resetInterfaceIdleTimer()
             
             // start animating
             self.animationImageView?.setImageNamed("gratuityCap4-")
-            
-            // configure watch delegate
-            self.watchConnectivityManager.delegate = self
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "overrideCurrencySymbolUpdatedOnDisk:", name: "overrideCurrencySymbolUpdatedOnDisk", object: .None)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferencesWereChanged:", name: "GratuitousPropertyListPreferencesWereChanged", object: self.dataSource.defaultsManager)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferencesWereChanged:", name: "GratuitousPropertyListPreferencesWereReceived", object: .None)
             
             // configure the timer to fix an issue where sometimes the UI would not push to the correct interface controller.
             self.configurePickerItems()
         } else {
             // if this is not the first time the view has appeared we need the timer to fire immediately
-            if let existingTimer = self.interfaceIdleTimer {
-                existingTimer.invalidate()
-                self.interfaceIdleTimer = nil
-            }
-            self.interfaceIdleTimer = NSTimer.interfaceIdleTimer(self)
+            self.resetInterfaceIdleTimer()
             self.interfaceIdleTimer?.fire()
         }
     }
@@ -107,7 +96,7 @@ class PickerInterfaceController: WKInterfaceController {
         // dispatch the background for the long running items read from disk operation
         let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
         dispatch_async(backgroundQueue) {
-            if let items = self.setPickerItems(self.dataSource.defaultsManager.overrideCurrencySymbol) {
+            if let items = self.accessiblePickerItems(self.dataSource.defaultsManager.overrideCurrencySymbol) {
                 // dispatch back to the main queue to do the UI work
                 dispatch_async(dispatch_get_main_queue()) {
                     // this operation takes the longest
@@ -151,12 +140,12 @@ class PickerInterfaceController: WKInterfaceController {
         }
     }
     
-    @objc private func overrideCurrencySymbolUpdatedOnDisk(notification: NSNotification?) {
+    func setLargeInterfaceRefreshNeeded() {
         self.largeInterfaceUpdateNeeded = true
         self.smallInterfaceUpdateNeeded = true
     }
     
-    @objc private func preferencesWereChanged(notification: NSNotification?) {
+    func setSmallInterfaceRefreshNeeded() {
         self.smallInterfaceUpdateNeeded = true
     }
     
@@ -178,8 +167,71 @@ class PickerInterfaceController: WKInterfaceController {
         }
     }
     
+    // MARK: Handle User Input
     
-    private func setPickerItems(currencySymbol: CurrencySign) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
+    private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.hugeValueText
+    private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+    private var pickerCurrencySign: CurrencySign?
+    private var currentBillAmount = 0 {
+        didSet {
+            let string = NSAttributedString(string: self.dataSource.currencyStringFromInteger(self.currentBillAmount), attributes: self.largeValueTextAttributes)
+            self.billAmountLabel?.setAttributedText(string)
+        }
+    }
+    private var currentTipPercentage: Double? = 0.0 {
+        didSet {
+            let string = NSAttributedString(string: self.dataSource.percentStringFromRawDouble(self.currentTipPercentage), attributes: self.smallValueTextAttributes)
+            self.tipPercentageLabel?.setAttributedText(string)
+        }
+    }
+
+    @IBOutlet private var tipPercentageLabel: WKInterfaceLabel?
+    @IBOutlet private var billAmountLabel: WKInterfaceLabel?
+    @IBOutlet private var tipPicker: WKInterfacePicker?
+    @IBOutlet private var billPicker: WKInterfacePicker?
+
+    @IBAction func billPickerChanged(value: Int) {
+        let billAmount = value + 1
+        let suggestTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
+        let tipAmount = Int(round(Double(billAmount) * suggestTipPercentage))
+        
+        self.dataSource.defaultsManager.billIndexPathRow = value + 1
+        let tipIndex = tipAmount - 1
+        if self.dataSource.defaultsManager.tipIndexPathRow != 0 {
+            self.tipPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.tipIndexPathRow - 1)
+        } else if tipIndex >= 0 {
+            self.tipPicker?.setSelectedItemIndex(tipIndex)
+        }
+        self.dataSource.defaultsManager.tipIndexPathRow = 0
+        
+        let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
+        self.currentBillAmount = billAmount + tipAmount
+        self.currentTipPercentage = actualTipPercentage
+    }
+    
+    @IBAction func tipPickerChanged(value: Int) {
+        self.dataSource.defaultsManager.tipIndexPathRow = value + 1
+        
+        self.resetInterfaceIdleTimer()
+        
+        let billAmount = self.dataSource.defaultsManager.billIndexPathRow
+        let tipAmount = value + 1
+        let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
+        self.currentBillAmount = billAmount + tipAmount
+        self.currentTipPercentage = actualTipPercentage
+    }
+    
+    @IBAction private func settingsMenuButtonTapped() {
+        self.presentControllerWithName("SettingsInterfaceController", context: .None)
+    }
+    
+    @IBAction private func splitTipMenuButtonTapped() {
+        self.pushControllerWithName("TotalAmountInterfaceController", context: .None)
+    }
+    
+    // MARK: Handle Loading Picker Items
+    
+    private func accessiblePickerItems(currencySymbol: CurrencySign) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
         if let url = self.pickerItemsURL(currencySymbol),
             let data = NSData(contentsOfURL: url),
             let items = self.parsePickerItemsFromData(data) {
@@ -248,86 +300,7 @@ class PickerInterfaceController: WKInterfaceController {
         if billItems.isEmpty == false { return returnValue } else { return .None }
     }
     
-    private var pickerCurrencySign: CurrencySign?
-    
-    private var currentBillAmount = 0 {
-        didSet {
-            let string = NSAttributedString(string: self.dataSource.currencyStringFromInteger(self.currentBillAmount), attributes: self.largeValueTextAttributes)
-            self.billAmountLabel?.setAttributedText(string)
-        }
-    }
-    private var currentTipPercentage: Double? = 0.0 {
-        didSet {
-            // this horrible bit of code, updates the picker items if they are available and/or differ from what is set.
-            let dataSourceCurrencySign = self.dataSource.defaultsManager.overrideCurrencySymbol
-            if let pickerCurrencySign = self.pickerCurrencySign {
-                if pickerCurrencySign != dataSourceCurrencySign {
-                    let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
-                    dispatch_async(backgroundQueue) {
-                        //self.configurePickerItems()
-                    }
-                }
-            } else {
-                if let _ = self.pickerItemsURL(dataSourceCurrencySign) {
-                    let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
-                    dispatch_async(backgroundQueue) {
-                        //self.configurePickerItems()
-                    }
-                }
-            }
-            let string = NSAttributedString(string: self.dataSource.percentStringFromRawDouble(self.currentTipPercentage), attributes: self.smallValueTextAttributes)
-            self.tipPercentageLabel?.setAttributedText(string)
-        }
-    }
-
-    @IBOutlet private var tipPercentageLabel: WKInterfaceLabel?
-    @IBOutlet private var billAmountLabel: WKInterfaceLabel?
-    @IBOutlet private var tipPicker: WKInterfacePicker?
-    @IBOutlet private var billPicker: WKInterfacePicker?
-        
-    private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.hugeValueText
-    private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-
-    @IBAction func billPickerChanged(value: Int) {
-        let billAmount = value + 1
-        let suggestTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
-        let tipAmount = Int(round(Double(billAmount) * suggestTipPercentage))
-        
-        self.dataSource.defaultsManager.billIndexPathRow = value + 1
-        let tipIndex = tipAmount - 1
-        if self.dataSource.defaultsManager.tipIndexPathRow != 0 {
-            self.tipPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.tipIndexPathRow - 1)
-        } else if tipIndex >= 0 {
-            self.tipPicker?.setSelectedItemIndex(tipIndex)
-        }
-        self.dataSource.defaultsManager.tipIndexPathRow = 0
-        
-        let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
-        self.currentBillAmount = billAmount + tipAmount
-        self.currentTipPercentage = actualTipPercentage
-    }
-    
-    @IBAction func tipPickerChanged(value: Int) {
-        self.dataSource.defaultsManager.tipIndexPathRow = value + 1
-        
-        if let existingTimer = self.interfaceIdleTimer {
-            existingTimer.invalidate()
-            self.interfaceIdleTimer = nil
-        }
-        self.interfaceIdleTimer = NSTimer.interfaceIdleTimer(self)
-        
-        let billAmount = self.dataSource.defaultsManager.billIndexPathRow
-        let tipAmount = value + 1
-        let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
-        self.currentBillAmount = billAmount + tipAmount
-        self.currentTipPercentage = actualTipPercentage
-    }
-    @IBAction private func settingsMenuButtonTapped() {
-        self.presentControllerWithName("SettingsInterfaceController", context: .None)
-    }
-    @IBAction private func splitTipMenuButtonTapped() {
-        self.pushControllerWithName("TotalAmountInterfaceController", context: .None)
-    }
+    // MARK: Handle Going Away
     
     override func willDisappear() {
         super.willDisappear()

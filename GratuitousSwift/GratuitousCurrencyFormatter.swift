@@ -21,8 +21,6 @@ class GratuitousCurrencyFormatter {
     init(respondToNotifications: Bool) {
         if respondToNotifications == true {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeWasOverridenByUser:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
-            self.localeWasOverridenByUser(nil)
         }
         
         self.currencyFormatter.locale = NSLocale.currentLocale()
@@ -35,12 +33,6 @@ class GratuitousCurrencyFormatter {
     @objc private func localeDidChangeInSystem(notification: NSNotification?) {
         self.currencyFormatter.locale = NSLocale.currentLocale()
         self.selectedCurrencySymbol = CurrencySign.Default
-    }
-    
-    @objc private func localeWasOverridenByUser(notification: NSNotification?) {
-        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
-            self.selectedCurrencySymbol = appDelegate.defaultsManager.overrideCurrencySymbol
-        }
     }
     
     var currencyCode: String {

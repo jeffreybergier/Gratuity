@@ -8,12 +8,21 @@
 
 import UIKit
 
-class GratuitousWatchDataSource {
+protocol GratuitousWatchDataSourceDelegate: class {
+    func setLargeInterfaceRefreshNeeded()
+    func setSmallInterfaceRefreshNeeded()
+}
+
+class GratuitousWatchDataSource: GratuitousPropertyListPreferencesDelegate, GratuitousWatchConnectivityManagerDelegate {
     // This class mostly exists to reduce the number of times the app has to read and write NSUserDefaults.
     // Reads are saved into Instance Variables in this class
     // If a value is requested and the isntance variable has never been set, the value is read from NSUserDefaults.
     
+    weak var delegate: GratuitousWatchDataSourceDelegate?
+    
     let defaultsManager = GratuitousPropertyListPreferences()
+    private let watchConnectivityManager = GratuitousWatchConnectivityManager()
+    
     private let currencyFormatter = NSNumberFormatter()
     var currencyCode: String {
         let optionalCode: String? = self.currencyFormatter.currencyCode
@@ -27,20 +36,32 @@ class GratuitousWatchDataSource {
         self.currencyFormatter.minimumFractionDigits = 0
         self.currencyFormatter.alwaysShowsDecimalSeparator = false
         self.currencyFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        
+        self.defaultsManager.delegate = self
+        self.watchConnectivityManager.delegate = self
     }
     
-    //this code allows this object to be a singleton
-    class var sharedInstance: GratuitousWatchDataSource {
-        struct Static {
-            static var instance: GratuitousWatchDataSource?
-            static var token: dispatch_once_t = 0
+    func receivedContextFromiOS(context: [String : AnyObject]) {
+        let oldModel = self.defaultsManager.model
+        let newModel = GratuitousPropertyListPreferences.Properties(dictionary: context, fallback: oldModel)
+        self.defaultsManager.model = newModel
+        if newModel.overrideCurrencySymbol != oldModel.overrideCurrencySymbol {
+            self.delegate?.setLargeInterfaceRefreshNeeded()
+        } else {
+            self.delegate?.setSmallInterfaceRefreshNeeded()
         }
+    }
+
+    func setInterfaceDataChanged() {
+    
+    }
+    
+    func setDataChanged() {
+        self.watchConnectivityManager.updateiOSApplicationContext(self.defaultsManager.model.dictionaryVersion)
+    }
+    
+    func dataNeeded(dataNeeded: GratuitousPropertyListPreferences.DataNeeded) {
         
-        dispatch_once(&Static.token) {
-            Static.instance = GratuitousWatchDataSource()
-        }
-        
-        return Static.instance!
     }
     
     func currencyStringFromInteger(integerValue: Int?) -> String {

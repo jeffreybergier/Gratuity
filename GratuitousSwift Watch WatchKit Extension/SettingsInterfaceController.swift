@@ -33,7 +33,7 @@ class SettingsInterfaceController: WKInterfaceController {
 
     private var interfaceControllerIsConfigured = false
     
-    private let dataSource = GratuitousWatchDataSource.sharedInstance
+    private let dataSource = GratuitousWatchDataSource()
     private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     private let buttonTextAttributes = GratuitousUIColor.WatchFonts.buttonText

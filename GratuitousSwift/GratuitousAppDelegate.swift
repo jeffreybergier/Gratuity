@@ -16,18 +16,15 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     //initialize the window and the storyboard
     var window: UIWindow?
-    let defaultsManager = GratuitousPropertyListPreferences()
+    let dataSource = GratuitousiOSDataSource(respondToNotifications: true)
     private let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
-    private let watchManager = GratuitousiOSConnectivityManager()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch
         
         //crashlytics intializer
 //        Fabric.with([Crashlytics()])
-        
-        self.watchManager.delegate = self
-        
+                
         //initialize the view controller from the storyboard
         let tipViewController = self.storyboard.instantiateInitialViewController()
         

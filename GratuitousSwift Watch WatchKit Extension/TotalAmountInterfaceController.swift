@@ -38,7 +38,7 @@ class TotalAmountInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
     
-    private let dataSource = GratuitousWatchDataSource.sharedInstance
+    private let dataSource = GratuitousWatchDataSource()
     private var interfaceControllerIsConfigured = false
     private var currencySymbolDidChangeWhileAway = false
     
@@ -72,9 +72,6 @@ class TotalAmountInterfaceController: WKInterfaceController {
     
     private func configureInterfaceController() {
         dispatch_async(dispatch_get_main_queue()) {
-            // register for notifications from the settings screen
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySymbolDidChangeInSettings:", name: WatchNotification.CurrencySymbolDidChangeInSettings, object: nil)
-            
             // set the static text of the labels
             self.tipPercentageTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Percentage", comment: ""), attributes: self.subtitleTextAttributes))
             self.tipAmountTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Tip Amount", comment: ""), attributes: self.subtitleTextAttributes))
@@ -147,9 +144,5 @@ class TotalAmountInterfaceController: WKInterfaceController {
     
     @IBAction func didTapStartOverButton() {
         self.popToRootController()
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

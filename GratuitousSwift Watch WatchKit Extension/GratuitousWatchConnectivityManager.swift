@@ -9,6 +9,10 @@
 import WatchKit
 import WatchConnectivity
 
+protocol GratuitousWatchConnectivityManagerDelegate: class {
+    func receivedContextFromiOS(context: [String : AnyObject])
+}
+
 class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
     
     let session: WCSession? = {
@@ -19,48 +23,51 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
         }
         }()
     
-    weak var delegate: AnyObject? {
+    weak var delegate: GratuitousWatchConnectivityManagerDelegate? {
         didSet {
             if let session = self.session {
                 session.delegate = self
                 session.activateSession()
-                NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferencesChanged:", name: "GratuitousPropertyListPreferencesWereChanged", object: .None)
             }
         }
     }
     
-    @objc private func preferencesChanged(notification: NSNotification?) {
-        // send the new preferences to the Phone
-        if let dictionary = notification?.userInfo as? [String : AnyObject],
-            let session = self.session {
-                do {
-                    print("GratuitousWatchConnectivityManager<WatchOS>: GratuitousPropertyListPreferencesWereChanged Fired: \(notification?.userInfo)")
-                    try session.updateApplicationContext(dictionary)
-                } catch {
-                    print("GratuitousWatchConnectivityManager<WatchOS>: Failed to update application context with error: \(error)")
-                }
+    private var skipNextContextReception = false
+    
+    func updateiOSApplicationContext(context: [String : AnyObject]) {
+        if let session = self.session where self.skipNextContextReception == false {
+            do {
+                print("GratuitousWatchConnectivityManager<WatchOS>: Updating iOS Application Context")
+                try session.updateApplicationContext(context)
+            } catch {
+                print("GratuitousWatchConnectivityManager<WatchOS>: Failed Updating iOS Application Context: \(error)")
+            }
+        } else {
+            self.skipNextContextReception = false
         }
-        
-        // if currency symbols are missing, wake up the phone and request new ones.
-        if let dictionary = notification?.userInfo as? [String : AnyObject],
-            let session = self.session,
-            let currencySymbolsNeeded = dictionary["currencySymbolsNeeded"] as? NSNumber where currencySymbolsNeeded.boolValue == true {
-                print("<WatchOS>: CurrencySymbols Needed on Watch. Requesting from iOS.")
-                session.sendMessage(dictionary,
+    }
+    
+    func requestDataFromiOSDevice(dataNeeded: GratuitousPropertyListPreferences.DataNeeded) {
+        if let session = session {
+            switch dataNeeded {
+            case .CurrencySymbols:
+                print("GratuitousWatchConnectivityManager<WatchOS>: Currency Symbols Needed. Requesting from iOS Device")
+                session.sendMessage(["currencySymbolsNeeded" : NSNumber(bool: true)],
                     replyHandler: { reply in
                         if let currencySymbolsNeeded = reply["currencySymbolsNeeded"] as? NSNumber where currencySymbolsNeeded.boolValue == false {
-                            GratuitousWatchDataSource.sharedInstance.defaultsManager.currencySymbolsNeeded = false
+                            
                         }
                     }, errorHandler: { error in
-                        print("GratuitousWatchConnectivityManager<WatchOS>: Error sending message to iOS app: \(dictionary)")
+                        print("GratuitousWatchConnectivityManager<WatchOS>: Error sending message to iOS app)")
                 })
-                
+            }
         }
     }
     
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
         print("GratuitousWatchConnectivityManager: didReceiveApplicationContext: \(applicationContext)")
-        NSNotificationCenter.defaultCenter().postNotificationName("GratuitousPropertyListPreferencesWereReceived", object: self, userInfo: applicationContext)
+        self.skipNextContextReception = true
+        self.delegate?.receivedContextFromiOS(applicationContext)
     }
     
     func session(session: WCSession, didReceiveFile file: WCSessionFile) {
@@ -71,15 +78,9 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
             do {
                 let data = try NSData(contentsOfURL: file.fileURL, options: .DataReadingMappedIfSafe)
                 try data.writeToURL(dataURL, options: .AtomicWrite)
-                GratuitousWatchDataSource.sharedInstance.defaultsManager.currencySymbolsNeeded = false
-                NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self, userInfo: nil)
             } catch {
                 NSLog("GratuitousWatchConnectivityManager: didReceiveFile: Failed with error: \(error)")
             }
         }
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

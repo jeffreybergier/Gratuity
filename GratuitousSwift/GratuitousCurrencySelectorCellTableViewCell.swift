@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
+class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell, GratuitousiOSDataSourceDelegate {
     
     weak var instanceTextLabel: UILabel? {
         didSet {
@@ -24,12 +24,11 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
         self.layer.borderWidth = GratuitousUIConstant.thinBorderWidth()
         self.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "overrideCurrencySymbolUpdatedOnDisk:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
     }
     
-    @objc private func overrideCurrencySymbolUpdatedOnDisk(notification: NSNotification?) {
+    func setInterfaceRefreshNeeded() {
         self.readUserDefaultsAndSetCheckmarkWithTimer(true)
     }
     
@@ -49,7 +48,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     
     private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {
         let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
-        if let defaultsManager = appDelegate?.defaultsManager {
+        if let defaultsManager = appDelegate?.dataSource.defaultsManager {
             if defaultsManager.overrideCurrencySymbol.rawValue == self.tag {
                 self.accessoryType = UITableViewCellAccessoryType.Checkmark
                 if self.animatingBorderColor == false {

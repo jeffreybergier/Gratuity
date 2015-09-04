@@ -18,11 +18,6 @@ class WatchInfoViewController: UIViewController {
     @IBOutlet private weak var gratuitySubtitleLabel: UILabel?
     @IBOutlet private weak var dismissButton: UIButton?
     
-    private weak var defaultsManager: GratuitousPropertyListPreferences? = {
-        let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
-        return appDelegate?.defaultsManager
-        }()
-    
     private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
         if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mov") {
             let player = AVPlayer(URL: NSURL.fileURLWithPath(moviePath))
