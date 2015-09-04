@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class TotalAmountInterfaceController: GratuitousMenuInterfaceController {
+class TotalAmountInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var tipPercentageLabel: WKInterfaceLabel?
     @IBOutlet private weak var totalAmountLabel: WKInterfaceLabel?

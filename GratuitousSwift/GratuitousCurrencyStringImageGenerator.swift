@@ -39,9 +39,8 @@ class GratuitousCurrencyStringImageGenerator {
     
     
     private func generateNewCurrencySymbolsFromConfiguredCurrencyFormatter(currencyFormatter: GratuitousCurrencyFormatter) -> NSURL? {
-        //let subtitleTextAttributes = GratuitousUIColor.WatchFonts.subtitleText
-        let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-        //let largerButtonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
+        //let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+        let valueTextAttributes = GratuitousUIColor.WatchFonts.pickerItemText
         
         let imageGenerator = GratuitousLabelImageGenerator()
         var images = [UIImage]()

@@ -138,6 +138,10 @@ struct GratuitousUIColor {
             NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Body),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
         ]
+        static let pickerItemText = [
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 24, fallbackStyle: UIFontStyle.Body),
+            NSForegroundColorAttributeName : GratuitousUIColor.ultraLightTextColor()
+        ]
         
         #endif
     }

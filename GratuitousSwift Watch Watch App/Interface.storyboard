@@ -93,26 +93,33 @@
             <objects>
                 <controller identifier="MainInterfaceController" hidesWhenLoading="NO" id="azz-ui-8Qo" customClass="PickerInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" contentMode="scaleAspectFit" layout="vertical" id="8mG-iG-dPr">
+                        <group width="1" height="1" alignment="left" hidden="YES" contentMode="scaleAspectFit" layout="vertical" id="8mG-iG-dPr">
                             <items>
                                 <imageView alignment="center" image="gratuityCap4-0" contentMode="bottom" id="Bbw-Kw-xZi"/>
                                 <imageView alignment="center" image="LaunchBG" contentMode="top" id="jPa-ri-xxu"/>
                             </items>
                             <edgeInsets key="margins" left="0.0" right="0.0" top="8" bottom="0.0"/>
                         </group>
-                        <group width="1" height="1" alignment="left" hidden="YES" layout="vertical" id="fNV-8L-ECv">
+                        <group width="1" height="1" alignment="left" layout="vertical" id="fNV-8L-ECv">
                             <items>
                                 <group width="1" height="0.5" alignment="center" layout="vertical" id="PW8-B0-TTS">
                                     <items>
-                                        <label alignment="center" verticalAlignment="bottom" text="$100" textAlignment="center" id="5zl-jE-VVr">
+                                        <label alignment="center" text="$100" textAlignment="center" id="5zl-jE-VVr">
                                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="40"/>
+                                            <variation key="device=watch38mm">
+                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="36"/>
+                                            </variation>
                                         </label>
-                                        <label alignment="center" verticalAlignment="bottom" text="$20" textAlignment="center" id="Xsm-7V-7Bg">
+                                        <label alignment="center" text="$20" textAlignment="center" id="Xsm-7V-7Bg">
                                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                            <variation key="device=watch38mm">
+                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="23"/>
+                                            </variation>
                                         </label>
                                     </items>
+                                    <variation key="device=watch38mm" height="0.59999999999999998"/>
                                 </group>
                                 <group width="1" height="0.5" alignment="left" id="l4m-2O-Zb9">
                                     <items>
@@ -127,18 +134,23 @@
                                             </connections>
                                         </picker>
                                     </items>
+                                    <variation key="device=watch38mm" height="0.40000000000000002"/>
                                 </group>
                             </items>
                         </group>
                     </items>
                     <menu key="menu" id="Ng4-PQ-0Vy">
                         <items>
+                            <menuItem title="Split Tip" icon="shuffle" id="NJN-tw-QVC">
+                                <connections>
+                                    <action selector="splitTipMenuButtonTapped" destination="azz-ui-8Qo" id="epJ-TB-8RQ"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Settings" icon="info" id="hi9-uF-tQ9">
                                 <connections>
                                     <action selector="settingsMenuButtonTapped" destination="azz-ui-8Qo" id="c7B-9G-UQh"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Split Tip" icon="shuffle" id="NJN-tw-QVC"/>
                         </items>
                     </menu>
                     <connections>
@@ -152,7 +164,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-109" y="-13"/>
+            <point key="canvasLocation" x="-31" y="-175"/>
         </scene>
         <!--App Delegate Interface Controller-->
         <scene sceneID="MVV-xz-nNc">
@@ -455,7 +467,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="533" y="808.75"/>
+            <point key="canvasLocation" x="165" y="-18.25"/>
         </scene>
         <!--Close-->
         <scene sceneID="N6L-dJ-mY2">
@@ -639,7 +651,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="223" y="-1.75"/>
+            <point key="canvasLocation" x="367" y="-2.5"/>
         </scene>
         <!--Tip Amount-->
         <scene sceneID="0cJ-h1-wjI">

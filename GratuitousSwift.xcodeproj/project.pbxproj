@@ -70,6 +70,10 @@
 		7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512619E60F3900CD2B28 /* TipViewController.swift */; };
 		7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */; };
 		7382512D19E6473A00CD2B28 /* GratuitousTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */; };
+		738484D21B992B9A0044C14C /* TotalAmountInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
+		738484D31B992B9B0044C14C /* TotalAmountInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
+		738484D51B992E1B0044C14C /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 738484D41B992E1B0044C14C /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
+		738484D61B992E1B0044C14C /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 738484D41B992E1B0044C14C /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
 		73884B681B939C8800EEDB5F /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		73884B691B939C8900EEDB5F /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		73884B6C1B93C38400EEDB5F /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; settings = {ASSET_TAGS = (); }; };
@@ -91,8 +95,6 @@
 		73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
 		73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
 		73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
-		73EA790B1B9690A0006C52DE /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 73EA790A1B9690A0006C52DE /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
-		73EA790C1B9690A0006C52DE /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 73EA790A1B9690A0006C52DE /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
 		73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */; };
 		73FB7E911B8A4B70001A47FC /* PickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */; };
 		73FB7E921B8A4B71001A47FC /* PickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */; };
@@ -242,8 +244,9 @@
 		7382512619E60F3900CD2B28 /* TipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableViewCell.swift; sourceTree = "<group>"; };
 		7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GratuitousTableViewCell.xib; sourceTree = "<group>"; };
+		738484D41B992E1B0044C14C /* fallbackPickerImages.data */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fallbackPickerImages.data; sourceTree = "<group>"; };
 		7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyStringImageGenerator.swift; sourceTree = "<group>"; };
-		73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalAmountInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/TotalAmountInterfaceController.swift"; sourceTree = "<group>"; };
+		73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalAmountInterfaceController.swift; sourceTree = "<group>"; };
 		73A18D5A1A2A9525002180DD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		73A18D5E1A2A9525002180DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73A18D5F1A2A9525002180DD /* PushNotificationPayload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PushNotificationPayload.json; sourceTree = "<group>"; };
@@ -267,7 +270,6 @@
 		73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousMenuInterfaceController.swift; path = "../GratuitousSwift Watch WatchKit Extension/GratuitousMenuInterfaceController.swift"; sourceTree = "<group>"; };
 		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousEnums.swift; path = ../GratuitousSwift/GratuitousEnums.swift; sourceTree = "<group>"; };
 		73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousPropertyListPreferences.swift; path = ../GratuitousSwift/GratuitousPropertyListPreferences.swift; sourceTree = "<group>"; };
-		73EA790A1B9690A0006C52DE /* fallbackPickerImages.data */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fallbackPickerImages.data; sourceTree = "<group>"; };
 		73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPresentationController.swift; sourceTree = "<group>"; };
 		73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimatedTransitioning.swift; sourceTree = "<group>"; };
 		73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTransitioningDelegate.swift; sourceTree = "<group>"; };
@@ -333,7 +335,6 @@
 				73A755B11A87F2770038E023 /* AppDelegateInterfaceController.swift */,
 				73A2169D1ACCE0D1005547A1 /* CrownScrollTableRowController.swift */,
 				737C87281A8EE5CA0055C04A /* CrownScrollInterfaceController.swift */,
-				73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */,
 				73DE026D1AB92E4E004B694D /* GratuitousMenuInterfaceController.swift */,
 				73C0FD511A884789003ED951 /* CrownScrollTipInterfaceController.swift */,
 				73D179271A90532E003D9DEE /* StepperBillInterfaceController.swift */,
@@ -481,9 +482,10 @@
 			isa = PBXGroup;
 			children = (
 				73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */,
+				73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */,
 				7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */,
 				73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */,
-				73EA790A1B9690A0006C52DE /* fallbackPickerImages.data */,
+				738484D41B992E1B0044C14C /* fallbackPickerImages.data */,
 				73D46AFD1AC7C9B400057185 /* Images.xcassets */,
 				73A18D5D1A2A9525002180DD /* Supporting Files */,
 			);
@@ -767,7 +769,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				733C4F441B9559BF00EF8B46 /* Images.xcassets in Resources */,
-				73EA790B1B9690A0006C52DE /* fallbackPickerImages.data in Resources */,
+				738484D51B992E1B0044C14C /* fallbackPickerImages.data in Resources */,
 				7320A5471ACDA87E001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */,
 				73011BE01AD04F90001F6D71 /* en.lproj in Resources */,
 			);
@@ -788,7 +790,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				733C4F451B9559C200EF8B46 /* Images.xcassets in Resources */,
-				73EA790C1B9690A0006C52DE /* fallbackPickerImages.data in Resources */,
+				738484D61B992E1B0044C14C /* fallbackPickerImages.data in Resources */,
 				7320A5481ACDA87F001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */,
 				73011BE11AD04F90001F6D71 /* en.lproj in Resources */,
 			);
@@ -844,6 +846,7 @@
 				731375861ABF3FC00074E2F2 /* SettingsInterfaceController.swift in Sources */,
 				731375921ABF3FF20074E2F2 /* GratuitousUIColor.swift in Sources */,
 				733C4F401B95458300EF8B46 /* GratuitousPropertyListPreferences.swift in Sources */,
+				738484D21B992B9A0044C14C /* TotalAmountInterfaceController.swift in Sources */,
 				73FB7E911B8A4B70001A47FC /* PickerInterfaceController.swift in Sources */,
 				73CA9AE71B90BD28005344FB /* GratuitousWatchConnectivityManager.swift in Sources */,
 				731375911ABF3FEA0074E2F2 /* GratuitousEnums.swift in Sources */,
@@ -858,6 +861,7 @@
 				73C98CC21B6E964200416DDA /* GratuitousUIColor.swift in Sources */,
 				73450E8F1ABF2A50005927F1 /* SettingsInterfaceController.swift in Sources */,
 				733C4F411B95458500EF8B46 /* GratuitousPropertyListPreferences.swift in Sources */,
+				738484D31B992B9B0044C14C /* TotalAmountInterfaceController.swift in Sources */,
 				73FB7E921B8A4B71001A47FC /* PickerInterfaceController.swift in Sources */,
 				73CA9AE81B90BD28005344FB /* GratuitousWatchConnectivityManager.swift in Sources */,
 				73450E9C1ABF2A9C005927F1 /* GratuitousEnums.swift in Sources */,
