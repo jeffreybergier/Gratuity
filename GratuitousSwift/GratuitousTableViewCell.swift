@@ -30,7 +30,7 @@ class GratuitousTableViewCell: UITableViewCell {
         self.didSetBillAmount()
     }
     
-    func invertColorsDidChange(notification: NSNotification) {
+    @objc private func invertColorsDidChange(notification: NSNotification) {
         self.contentView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
         self.prepareLabelTextAttributes()
     }
@@ -78,7 +78,7 @@ class GratuitousTableViewCell: UITableViewCell {
         if let font = self.originalFont {
             let attributes = [
                 NSForegroundColorAttributeName : textColor,
-                NSFontAttributeName : font,
+                NSFontAttributeName : font.fontWithSize(font.pointSize * self.textSizeAdjustment),
                 //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
                 NSShadowAttributeName : shadow
             ]

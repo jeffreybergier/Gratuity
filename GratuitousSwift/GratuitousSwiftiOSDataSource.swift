@@ -54,18 +54,24 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     }
     
     func receivedContextFromWatch(context: [String : AnyObject]) {
-        let oldModel = self.defaultsManager.model
-        let newModel = GratuitousPropertyListPreferences.Properties(dictionary: context, fallback: oldModel)
-        self.defaultsManager.model = newModel
-        self.delegate?.setInterfaceRefreshNeeded()
+        dispatch_async(dispatch_get_main_queue()) {
+            let oldModel = self.defaultsManager.model
+            let newModel = GratuitousPropertyListPreferences.Properties(dictionary: context, fallback: oldModel)
+            self.defaultsManager.model = newModel
+            self.delegate?.setInterfaceRefreshNeeded()
+        }
     }
     
     func setInterfaceDataChanged() {
-        self.delegate?.setInterfaceRefreshNeeded()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.delegate?.setInterfaceRefreshNeeded()
+        }
     }
     
     func setDataChanged() {
-        self.watchConnectivityManager.updateWatchApplicationContext(self.defaultsManager.model.dictionaryVersion)
+        dispatch_async(dispatch_get_main_queue()) {
+            self.watchConnectivityManager.updateWatchApplicationContext(self.defaultsManager.model.dictionaryVersion)
+        }
     }
     
     func dataNeeded(dataNeeded: GratuitousPropertyListPreferences.DataNeeded) {
