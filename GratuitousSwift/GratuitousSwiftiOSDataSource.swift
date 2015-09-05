@@ -38,11 +38,11 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
         }
     }
     
-    init(respondToNotifications: Bool) {
-        if respondToNotifications == true {
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: nil)
-        }
-        
+    enum Use {
+        case AppLifeTime, Temporary
+    }
+    
+    init(use: Use) {
         self.currencyFormatter.locale = NSLocale.currentLocale()
         self.currencyFormatter.maximumFractionDigits = 0
         self.currencyFormatter.minimumFractionDigits = 0
@@ -51,6 +51,23 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
         
         self.defaultsManager.delegate = self
         self.watchConnectivityManager.delegate = self
+        
+        switch use {
+        case .Temporary:
+            break
+        case .AppLifeTime:
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: nil)
+            if self.defaultsManager.iOSFirstRun == true {
+                self.defaultsManager.iOSFirstRun = false
+                let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
+                dispatch_async(backgroundQueue) {
+                    let generator = GratuitousCurrencyStringImageGenerator()
+                    if let files = generator.generateAllCurrencySymbols() {
+                        self.watchConnectivityManager.transferBulkData(files)
+                    }
+                }
+            }
+        }
     }
     
     func receivedContextFromWatch(context: [String : AnyObject]) {

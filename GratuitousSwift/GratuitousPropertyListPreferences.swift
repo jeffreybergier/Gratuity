@@ -166,6 +166,16 @@ class GratuitousPropertyListPreferences: NSObject {
             return self.model.suggestedTipPercentage
         }
     }
+    
+    var iOSFirstRun: Bool {
+        set {
+            self.model.iOSFirstRun = newValue
+            self.dataChanged = true
+        }
+        get {
+            return self.model.iOSFirstRun
+        }
+    }
 
     class var locationOnDisk: NSURL {
         let plistURL = GratuitousPropertyListPreferences.preferencesURL.URLByAppendingPathComponent(Keys.propertyListFileName)
@@ -211,6 +221,7 @@ class GratuitousPropertyListPreferences: NSObject {
         
         // version 1.2 keys
         static let currencySymbolsNeeded = "currencySymbolsNeeded"
+        static let iOSFirstRun = "iOSFirstRun"
     }
 
     
@@ -221,6 +232,7 @@ class GratuitousPropertyListPreferences: NSObject {
         var tipIndexPathRow: Int
         var overrideCurrencySymbol: CurrencySign
         var suggestedTipPercentage: Double
+        var iOSFirstRun: Bool
         
         var dictionaryVersion: [String : AnyObject] {
             return [
@@ -229,7 +241,8 @@ class GratuitousPropertyListPreferences: NSObject {
                 Keys.overrideCurrencySymbol : NSNumber(integer: self.overrideCurrencySymbol.rawValue),
                 Keys.suggestedTipPercentage : NSNumber(double: self.suggestedTipPercentage),
                 Keys.appVersionString : self.appVersionString,
-                Keys.currencySymbolsNeeded : NSNumber(bool: self.currencySymbolsNeeded)
+                Keys.currencySymbolsNeeded : NSNumber(bool: self.currencySymbolsNeeded),
+                Keys.iOSFirstRun : NSNumber(bool: self.iOSFirstRun)
             ]
         }
         
@@ -267,6 +280,11 @@ class GratuitousPropertyListPreferences: NSObject {
                 self.appVersionString = fallback.appVersionString
             }
             // version 1.2 keys
+            if let iOSFirstRun = dictionary?[Keys.iOSFirstRun] as? NSNumber {
+                self.iOSFirstRun = iOSFirstRun.boolValue
+            } else {
+                self.iOSFirstRun = true
+            }
             // ignored from disk version. Always set to false on load
             self.currencySymbolsNeeded = fallback.currencySymbolsNeeded
         }
@@ -301,6 +319,11 @@ class GratuitousPropertyListPreferences: NSObject {
                 self.appVersionString = "1.1.0"
             }
             // version 1.2 keys
+            if let iOSFirstRun = dictionary?[Keys.iOSFirstRun] as? NSNumber {
+                self.iOSFirstRun = iOSFirstRun.boolValue
+            } else {
+                self.iOSFirstRun = true
+            }
             // ignored from disk version. Always set to false on load
             self.currencySymbolsNeeded = false
         }

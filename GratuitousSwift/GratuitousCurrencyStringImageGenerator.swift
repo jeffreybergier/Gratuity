@@ -10,24 +10,26 @@ import Foundation
 
 class GratuitousCurrencyStringImageGenerator {
     
-    func generateAllCurrencySymbols() -> [NSURL]? {
-        let dataSource = GratuitousiOSDataSource(respondToNotifications: false)
-        var URLs = [NSURL]()
+    func generateAllCurrencySymbols() -> [(url: NSURL, fileName: String)]? {
+        let dataSource = GratuitousiOSDataSource(use: .Temporary)
+        var tuples = [(url: NSURL, fileName: String)]()
         for i in 0 ..< 10 {
             if let currencySign = CurrencySign(rawValue: i) {
                 dataSource.defaultsManager.overrideCurrencySymbol = currencySign
                 if let url = self.generateNewCurrencySymbolsFromConfiguredCurrencyFormatter(dataSource) {
-                    URLs += [url]
+                    if let lastPathComponent = url.lastPathComponent {
+                        tuples += [(url: url, fileName: lastPathComponent)]
+                    }
                 }
             } else {
                 break
             }
         }
-        if URLs.isEmpty == false { return URLs } else { return .None }
+        if tuples.isEmpty == false { return tuples } else { return .None }
     }
     
     func generateCurrencySymbolsForCurrencySign(currencySign: CurrencySign) -> (url: NSURL, fileName: String)? {
-        let dataSource = GratuitousiOSDataSource(respondToNotifications: false)
+        let dataSource = GratuitousiOSDataSource(use: .Temporary)
         dataSource.defaultsManager.overrideCurrencySymbol = currencySign
         if let url = self.generateNewCurrencySymbolsFromConfiguredCurrencyFormatter(dataSource),
             let lastPathComponent = url.lastPathComponent {

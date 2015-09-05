@@ -63,6 +63,14 @@ class GratuitousiOSConnectivityManager: NSObject, WCSessionDelegate {
         }
     }
     
+    func transferBulkData(tuples: [(url: NSURL, fileName: String)]) {
+        if let session = self.session {
+            for tuple in tuples {
+                session.transferFile(tuple.url, metadata: ["fileName" : tuple.fileName])
+            }
+        }
+    }
+    
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
         print("GratuitousWatchConnectivityManager: didReceiveApplicationContext: \(applicationContext)")
         self.delegate?.receivedContextFromWatch(applicationContext)

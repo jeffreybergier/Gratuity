@@ -16,7 +16,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     //initialize the window and the storyboard
     var window: UIWindow?
-    let dataSource = GratuitousiOSDataSource(respondToNotifications: true)
+    let dataSource = GratuitousiOSDataSource(use: .AppLifeTime)
     private let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
