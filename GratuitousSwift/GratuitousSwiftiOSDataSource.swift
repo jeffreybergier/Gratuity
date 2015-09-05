@@ -57,8 +57,8 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
             break
         case .AppLifeTime:
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: nil)
-            if self.defaultsManager.iOSFirstRun == true {
-                if let session = self.watchConnectivityManager.session where session.paired == true && session.watchAppInstalled {
+            if let session = self.watchConnectivityManager.session where session.paired == true && session.watchAppInstalled {
+                if self.defaultsManager.iOSFirstRun == true {
                     self.defaultsManager.iOSFirstRun = false
                     let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
                     dispatch_async(backgroundQueue) {
@@ -68,6 +68,8 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
                         }
                     }
                 }
+            } else {
+                self.defaultsManager.iOSFirstRun = true
             }
         }
     }
