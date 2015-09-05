@@ -58,12 +58,14 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
         case .AppLifeTime:
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: nil)
             if self.defaultsManager.iOSFirstRun == true {
-                self.defaultsManager.iOSFirstRun = false
-                let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
-                dispatch_async(backgroundQueue) {
-                    let generator = GratuitousCurrencyStringImageGenerator()
-                    if let files = generator.generateAllCurrencySymbols() {
-                        self.watchConnectivityManager.transferBulkData(files)
+                if let session = self.watchConnectivityManager.session where session.paired == true && session.watchAppInstalled {
+                    self.defaultsManager.iOSFirstRun = false
+                    let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
+                    dispatch_async(backgroundQueue) {
+                        let generator = GratuitousCurrencyStringImageGenerator()
+                        if let files = generator.generateAllCurrencySymbols() {
+                            self.watchConnectivityManager.transferBulkData(files)
+                        }
                     }
                 }
             }
