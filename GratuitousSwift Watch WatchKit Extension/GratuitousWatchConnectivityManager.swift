@@ -34,18 +34,14 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
         }
     }
     
-    private var skipNextContextReception = false
-    
     func updateiOSApplicationContext(context: [String : AnyObject]) {
-        if let session = self.session where self.skipNextContextReception == false {
+        if let session = self.session {
             do {
                 print("GratuitousWatchConnectivityManager<WatchOS>: Updating iOS Application Context")
                 try session.updateApplicationContext(context)
             } catch {
                 print("GratuitousWatchConnectivityManager<WatchOS>: Failed Updating iOS Application Context: \(error)")
             }
-        } else {
-            self.skipNextContextReception = false
         }
     }
     
@@ -72,7 +68,6 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
     
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
         print("GratuitousWatchConnectivityManager: didReceiveApplicationContext: \(applicationContext)")
-        self.skipNextContextReception = true
         self.delegate?.receivedContextFromiOS(applicationContext)
     }
     

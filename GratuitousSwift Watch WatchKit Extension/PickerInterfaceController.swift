@@ -17,11 +17,7 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
     @IBOutlet private var mainGroup: WKInterfaceGroup?
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
     
-    private var largeInterfaceUpdateNeeded = true {
-        didSet {
-            print("largeInterfaceUpdateNeeded set tot \(self.largeInterfaceUpdateNeeded)")
-        }
-    }
+    private var largeInterfaceUpdateNeeded = true
     private var smallInterfaceUpdateNeeded = true
     private var interfaceControllerConfiguredOnce = false
     
@@ -95,7 +91,6 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
         // sometimes it takes longer to load than the timer allows
         // in those cases it loads twice
         self.largeInterfaceUpdateNeeded = false
-        self.smallInterfaceUpdateNeeded = false
         
         // dispatch the background for the long running items read from disk operation
         let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
@@ -133,10 +128,12 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
                             self.tipPicker?.setSelectedItemIndex(tipIndex)
                             
                             // restore the UI state
+                            self.smallInterfaceUpdateNeeded = false
                             self.interfaceState = .Loaded
                         }
                     } else {
                         // restore the ui state
+                        self.smallInterfaceUpdateNeeded = false
                         self.interfaceState = .Loaded
                     }
                 }
@@ -163,10 +160,7 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
                 let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
                 dispatch_after(delayTime, dispatch_get_main_queue()) {
                     self.tipPicker?.setSelectedItemIndex(tipIndex)
-                    self.smallInterfaceUpdateNeeded = false
                 }
-            } else {
-                self.smallInterfaceUpdateNeeded = false
             }
         }
     }
@@ -199,22 +193,33 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
         let suggestTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
         let tipAmount = Int(round(Double(billAmount) * suggestTipPercentage))
         
-        self.dataSource.defaultsManager.billIndexPathRow = value + 1
+        
         let tipIndex = tipAmount - 1
-        if self.dataSource.defaultsManager.tipIndexPathRow != 0 {
+        if self.dataSource.defaultsManager.tipIndexPathRow > 0 {
             self.tipPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.tipIndexPathRow - 1)
         } else if tipIndex >= 0 {
             self.tipPicker?.setSelectedItemIndex(tipIndex)
         }
-        self.dataSource.defaultsManager.tipIndexPathRow = 0
+        if self.smallInterfaceUpdateNeeded == false {
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.30 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.dataSource.defaultsManager.billIndexPathRow = value + 1
+            }
+        }
         
         let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
         self.currentBillAmount = billAmount + tipAmount
         self.currentTipPercentage = actualTipPercentage
+        
     }
     
     @IBAction func tipPickerChanged(value: Int) {
-        self.dataSource.defaultsManager.tipIndexPathRow = value + 1
+        if self.smallInterfaceUpdateNeeded == false {
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.20 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.dataSource.defaultsManager.tipIndexPathRow = value + 1
+            }
+        }
         
         self.resetInterfaceIdleTimer()
         
@@ -223,6 +228,8 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
         let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
         self.currentBillAmount = billAmount + tipAmount
         self.currentTipPercentage = actualTipPercentage
+        
+        self.smallInterfaceUpdateNeeded = false
     }
     
     @IBAction private func settingsMenuButtonTapped() {
@@ -239,7 +246,6 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
         if let url = self.pickerItemsURL(currencySymbol),
             let data = NSData(contentsOfURL: url),
             let items = self.parsePickerItemsFromData(data) {
-                self.dataSource.defaultsManager.currencySymbolsNeeded = false
                 self.pickerCurrencySign = currencySymbol
                 return items
         } else if let fallbackDataURL = NSBundle.mainBundle().URLForResource("fallbackPickerImages", withExtension: "data"),

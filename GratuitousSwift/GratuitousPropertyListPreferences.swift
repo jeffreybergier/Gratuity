@@ -93,6 +93,7 @@ class GratuitousPropertyListPreferences {
     var model: Properties {
         didSet {
             self.dataChanged = false // set this to false so we don't notify iOS of changes because they likely came from iOS
+            print("model Set: \(self.model.dictionaryVersion)")
             self.resetWriteTimer()
         }
     }
@@ -123,7 +124,7 @@ class GratuitousPropertyListPreferences {
     var billIndexPathRow: Int {
         set {
             // first set the tip to 0 so it performs default behaviors
-            self.tipIndexPathRow = 0
+            self.model.tipIndexPathRow = 0
             
             // then update instance variables and user defaults
             self.model.billIndexPathRow = newValue
@@ -249,8 +250,6 @@ class GratuitousPropertyListPreferences {
             }
             if let overrideCurrencySymbol = dictionary?[Keys.overrideCurrencySymbol] as? NSNumber,
                 symbolEnum = CurrencySign(rawValue: overrideCurrencySymbol.integerValue) {
-                    print(overrideCurrencySymbol.integerValue)
-                    print(symbolEnum)
                     self.overrideCurrencySymbol = symbolEnum
             } else {
                 self.overrideCurrencySymbol = fallback.overrideCurrencySymbol
@@ -267,11 +266,8 @@ class GratuitousPropertyListPreferences {
                 self.appVersionString = fallback.appVersionString
             }
             // version 1.2 keys
-            if let currencySymbolsNeeded = dictionary?[Keys.currencySymbolsNeeded] as? NSNumber {
-                self.currencySymbolsNeeded = currencySymbolsNeeded.boolValue
-            } else {
-                self.currencySymbolsNeeded = fallback.currencySymbolsNeeded
-            }
+            // ignored from disk version. Always set to false on load
+            self.currencySymbolsNeeded = fallback.currencySymbolsNeeded
         }
         
         init(dictionary: NSDictionary?) {
@@ -288,8 +284,6 @@ class GratuitousPropertyListPreferences {
             }
             if let overrideCurrencySymbol = dictionary?[Keys.overrideCurrencySymbol] as? NSNumber,
                 symbolEnum = CurrencySign(rawValue: overrideCurrencySymbol.integerValue) {
-                    print(overrideCurrencySymbol.integerValue)
-                    print(symbolEnum)
                     self.overrideCurrencySymbol = symbolEnum
             } else {
                 self.overrideCurrencySymbol = .Default
@@ -306,11 +300,8 @@ class GratuitousPropertyListPreferences {
                 self.appVersionString = "1.1.0"
             }
             // version 1.2 keys
-            if let currencySymbolsNeeded = dictionary?[Keys.currencySymbolsNeeded] as? NSNumber {
-                self.currencySymbolsNeeded = currencySymbolsNeeded.boolValue
-            } else {
-                self.currencySymbolsNeeded = true
-            }
+            // ignored from disk version. Always set to false on load
+            self.currencySymbolsNeeded = false
         }
     }
 

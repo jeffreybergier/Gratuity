@@ -50,29 +50,21 @@ class GratuitousiOSConnectivityManager: NSObject, WCSessionDelegate {
         replyHandler(dictionary)
     }
     
-    private var skipNextContextReception = false
-    
     func updateWatchApplicationContext(context: [String : AnyObject]) {
         if let session = self.session where session.paired == true {
-            if self.skipNextContextReception == false {
-                do {
-                    print("GratuitousWatchConnectivityManager<iOS>: Updating Watch Application Context")
-                    try session.updateApplicationContext(context)
-                } catch {
-                    NSLog("GratuitousWatchConnectivityManager<iOS>: Failed Updating iOS Application Context: \(error)")
-                }
-            } else {
-                print("GratuitousWatchConnectivityManager<iOS>: Did Not Attempt to Update Watch. SkipNext == true.")
+            do {
+                print("GratuitousWatchConnectivityManager<iOS>: Updating Watch Application Context")
+                try session.updateApplicationContext(context)
+            } catch {
+                NSLog("GratuitousWatchConnectivityManager<iOS>: Failed Updating iOS Application Context: \(error)")
             }
         } else {
             NSLog("GratuitousWatchConnectivityManager<iOS>: Did Not Attempt to Update Watch. No Watch Paired.")
         }
-        self.skipNextContextReception = false
     }
     
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
         print("GratuitousWatchConnectivityManager: didReceiveApplicationContext: \(applicationContext)")
-        self.skipNextContextReception = true
         self.delegate?.receivedContextFromWatch(applicationContext)
     }
 }
