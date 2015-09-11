@@ -69,6 +69,11 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
         if self.interfaceControllerConfiguredOnce == false {
             self.interfaceControllerConfiguredOnce = true
             
+            // configure the menu
+            self.addMenuItemWithImageNamed("splitTipMenuIcon", title: NSLocalizedString("Split Tip", comment: ""), action: "splitTipMenuButtonTapped")
+            self.addMenuItemWithImageNamed("settingsMenuIcon", title: NSLocalizedString("Settings", comment: ""), action: "settingsMenuButtonTapped")
+            
+            // start the idle timer
             self.resetInterfaceIdleTimer()
             
             // start animating
@@ -232,12 +237,12 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
         self.smallInterfaceUpdateNeeded = false
     }
     
-    @IBAction private func settingsMenuButtonTapped() {
+    @objc private func settingsMenuButtonTapped() {
         self.presentControllerWithName("SettingsInterfaceController", context: self.dataSource)
     }
     
-    @IBAction private func splitTipMenuButtonTapped() {
-        self.pushControllerWithName("TotalAmountInterfaceController", context: .None)
+    @objc private func splitTipMenuButtonTapped() {
+        self.presentControllerWithName("SplitTipInterfaceController", context: self.dataSource)
     }
     
     // MARK: Handle Loading Picker Items

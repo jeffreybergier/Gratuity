@@ -68,8 +68,8 @@
 		7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512619E60F3900CD2B28 /* TipViewController.swift */; };
 		7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */; };
 		7382512D19E6473A00CD2B28 /* GratuitousTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */; };
-		738484D21B992B9A0044C14C /* TotalAmountInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
-		738484D31B992B9B0044C14C /* TotalAmountInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
+		738484D21B992B9A0044C14C /* SplitTipInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0B5671A8FC56A00D17943 /* SplitTipInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
+		738484D31B992B9B0044C14C /* SplitTipInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0B5671A8FC56A00D17943 /* SplitTipInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		738484D51B992E1B0044C14C /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 738484D41B992E1B0044C14C /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
 		738484D61B992E1B0044C14C /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 738484D41B992E1B0044C14C /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
 		738484D81B993B750044C14C /* GratuitousiOSConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
@@ -248,7 +248,7 @@
 		738484D41B992E1B0044C14C /* fallbackPickerImages.data */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fallbackPickerImages.data; sourceTree = "<group>"; };
 		738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousiOSConnectivityManager.swift; path = GratuitousSwift/GratuitousiOSConnectivityManager.swift; sourceTree = SOURCE_ROOT; };
 		7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyStringImageGenerator.swift; sourceTree = "<group>"; };
-		73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalAmountInterfaceController.swift; sourceTree = "<group>"; };
+		73A0B5671A8FC56A00D17943 /* SplitTipInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTipInterfaceController.swift; sourceTree = "<group>"; };
 		73A18D5A1A2A9525002180DD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		73A18D5E1A2A9525002180DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73A18D5F1A2A9525002180DD /* PushNotificationPayload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PushNotificationPayload.json; sourceTree = "<group>"; };
@@ -485,7 +485,7 @@
 			isa = PBXGroup;
 			children = (
 				73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */,
-				73A0B5671A8FC56A00D17943 /* TotalAmountInterfaceController.swift */,
+				73A0B5671A8FC56A00D17943 /* SplitTipInterfaceController.swift */,
 				7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */,
 				73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */,
 				73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */,
@@ -851,7 +851,7 @@
 				731375921ABF3FF20074E2F2 /* GratuitousUIColor.swift in Sources */,
 				738484DA1B993BFF0044C14C /* GratuitousWatchConnectivityManager.swift in Sources */,
 				733C4F401B95458300EF8B46 /* GratuitousPropertyListPreferences.swift in Sources */,
-				738484D21B992B9A0044C14C /* TotalAmountInterfaceController.swift in Sources */,
+				738484D21B992B9A0044C14C /* SplitTipInterfaceController.swift in Sources */,
 				73FB7E911B8A4B70001A47FC /* PickerInterfaceController.swift in Sources */,
 				731375911ABF3FEA0074E2F2 /* GratuitousEnums.swift in Sources */,
 			);
@@ -866,7 +866,7 @@
 				73450E8F1ABF2A50005927F1 /* SettingsInterfaceController.swift in Sources */,
 				738484DB1B993C010044C14C /* GratuitousWatchConnectivityManager.swift in Sources */,
 				733C4F411B95458500EF8B46 /* GratuitousPropertyListPreferences.swift in Sources */,
-				738484D31B992B9B0044C14C /* TotalAmountInterfaceController.swift in Sources */,
+				738484D31B992B9B0044C14C /* SplitTipInterfaceController.swift in Sources */,
 				73FB7E921B8A4B71001A47FC /* PickerInterfaceController.swift in Sources */,
 				73450E9C1ABF2A9C005927F1 /* GratuitousEnums.swift in Sources */,
 			);
