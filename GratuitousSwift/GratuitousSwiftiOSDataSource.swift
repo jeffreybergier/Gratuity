@@ -19,7 +19,7 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     
     weak var delegate: GratuitousiOSDataSourceDelegate?
     let defaultsManager = GratuitousPropertyListPreferences()
-    private let watchConnectivityManager = GratuitousiOSConnectivityManager()
+    let watchConnectivityManager = GratuitousiOSConnectivityManager()
     private let currencyFormatter = NSNumberFormatter()
     var currencyCode: String {
         switch self.defaultsManager.overrideCurrencySymbol {
@@ -56,21 +56,7 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
         case .Temporary:
             break
         case .AppLifeTime:
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: nil)
-            if let session = self.watchConnectivityManager.session where session.paired == true && session.watchAppInstalled {
-                if self.defaultsManager.iOSFirstRun == true {
-                    self.defaultsManager.iOSFirstRun = false
-                    let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
-                    dispatch_async(backgroundQueue) {
-                        let generator = GratuitousCurrencyStringImageGenerator()
-                        if let files = generator.generateAllCurrencySymbols() {
-                            self.watchConnectivityManager.transferBulkData(files)
-                        }
-                    }
-                }
-            } else {
-                self.defaultsManager.iOSFirstRun = true
-            }
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: .None)
         }
     }
     

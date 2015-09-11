@@ -180,6 +180,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.prepareTotalAmountTextLabel()
         self.prepareTipPercentageTextLabel()
         
+        
     }
     
     override func viewWillAppear(animated: Bool) {

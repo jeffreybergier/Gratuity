@@ -60,7 +60,7 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
                             self.delegate?.receivedCurrencySymbolPromiseFromiOS()
                         }
                     }, errorHandler: { error in
-                        print("GratuitousWatchConnectivityManager<WatchOS>: Error sending message to iOS app)")
+                        print("GratuitousWatchConnectivityManager<WatchOS>: Error sending message to iOS app: \(error)")
                 })
             }
         }
