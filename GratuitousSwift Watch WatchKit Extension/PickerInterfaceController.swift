@@ -130,7 +130,7 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
                     self.items = items
                     
                     // set the text in the UI
-                    let billAmount = self.dataSource.defaultsManager.billIndexPathRow + 1
+                    let billAmount = self.dataSource.defaultsManager.billIndexPathRow
                     let suggestTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
                     let tipAmount = Int(round(Double(billAmount) * suggestTipPercentage))
                     let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
@@ -138,22 +138,21 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
                     self.currentTipPercentage = actualTipPercentage
                     
                     // set the billpicker
-                    self.billPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.billIndexPathRow - 1)
+                    self.billPicker?.setSelectedItemIndex(billAmount - 1)
                     
                     // if there is a manual tip amount set
                     if self.dataSource.defaultsManager.tipIndexPathRow != 0 {
                         // set the text in the UI
                         let billAmount = self.dataSource.defaultsManager.billIndexPathRow
-                        let tipAmount = self.dataSource.defaultsManager.tipIndexPathRow + 1
+                        let tipAmount = self.dataSource.defaultsManager.tipIndexPathRow
                         let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
                         self.currentBillAmount = billAmount + tipAmount
                         self.currentTipPercentage = actualTipPercentage
                         
                         // set the picker after a delay
-                        let tipIndex = self.dataSource.defaultsManager.tipIndexPathRow - 1
                         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
                         dispatch_after(delayTime, dispatch_get_main_queue()) {
-                            self.tipPicker?.setSelectedItemIndex(tipIndex)
+                            self.tipPicker?.setSelectedItemIndex(tipAmount - 1)
                             
                             // restore the UI state
                             self.smallInterfaceUpdateNeeded = false
