@@ -37,8 +37,32 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         self.window?.tintColor = GratuitousUIConstant.lightTextColor()
         self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
+        
+        self.transferBulkCurrencySymbolsIfNeeded()
             
         return true
+    }
+    
+    private func transferBulkCurrencySymbolsIfNeeded() {
+        //on first run make a last ditch effort to send a lot of currency symbols to the watch
+        //this may prevent waiting on the watch later
+        if let watchConnectivityManager = self.dataSource.watchConnectivityManager,
+            let session = watchConnectivityManager.session
+            where session.paired == true && session.watchAppInstalled == true {
+                if self.dataSource.defaultsManager?.freshWatchAppInstall == true {
+                    self.dataSource.defaultsManager?.freshWatchAppInstall = false
+                    let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
+                    dispatch_async(backgroundQueue) {
+                        let generator = GratuitousCurrencyStringImageGenerator()
+                        if let files = generator.generateAllCurrencySymbols() {
+                            watchConnectivityManager.transferBulkData(files)
+                        }
+                    }
+                }
+        } else {
+            // watch app not installed or watch not paired
+            self.dataSource.defaultsManager?.freshWatchAppInstall = true
+        }
     }
 }
 

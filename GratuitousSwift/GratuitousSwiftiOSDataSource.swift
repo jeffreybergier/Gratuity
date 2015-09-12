@@ -18,11 +18,12 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     // If a value is requested and the isntance variable has never been set, the value is read from NSUserDefaults.
     
     weak var delegate: GratuitousiOSDataSourceDelegate?
-    let defaultsManager = GratuitousPropertyListPreferences()
+    let defaultsManager: GratuitousPropertyListPreferences?
     let watchConnectivityManager: GratuitousiOSConnectivityManager?
     private let currencyFormatter = NSNumberFormatter()
     var currencyCode: String {
-        switch self.defaultsManager.overrideCurrencySymbol {
+        guard let defaultsManager = self.defaultsManager else { return "None" }
+        switch defaultsManager.overrideCurrencySymbol {
         case .Default:
             return self.currencyFormatter.currencyCode
         case .Dollar:
@@ -46,7 +47,9 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
         switch use {
         case .Temporary:
             self.watchConnectivityManager = .None
+            self.defaultsManager = .None
         case .AppLifeTime:
+            self.defaultsManager = GratuitousPropertyListPreferences()
             self.watchConnectivityManager = GratuitousiOSConnectivityManager()
         }
         
@@ -63,39 +66,17 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
             
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: .None)
             
-            self.defaultsManager.delegate = self
+            self.defaultsManager?.delegate = self
             self.watchConnectivityManager?.delegate = self
-            
-            if self.defaultsManager.freshWatchAppInstall == true {
-                self.bulkTransferCurrencySymbols()
-            }
-        }
-    }
-    
-    private func bulkTransferCurrencySymbols() {
-        //on first run make a last ditch effort to send a lot of currency symbols to the watch
-        //this may prevent waiting on the watch later
-        if let watchConnectivityManager = self.watchConnectivityManager,
-            let session = watchConnectivityManager.session
-            where session.paired == true && session.watchAppInstalled == true {
-                let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
-                dispatch_async(backgroundQueue) {
-                    let generator = GratuitousCurrencyStringImageGenerator()
-                    if let files = generator.generateAllCurrencySymbols() {
-                        watchConnectivityManager.transferBulkData(files)
-                    }
-                }
-                self.defaultsManager.freshWatchAppInstall = false
-        } else {
-            self.defaultsManager.freshWatchAppInstall = true
         }
     }
     
     func receivedContextFromWatch(context: [String : AnyObject]) {
+        guard let defaultsManager = self.defaultsManager else { return }
         dispatch_async(dispatch_get_main_queue()) {
-            let oldModel = self.defaultsManager.model
+            let oldModel = defaultsManager.model
             let newModel = GratuitousPropertyListPreferences.Properties(dictionary: context, fallback: oldModel)
-            self.defaultsManager.model = newModel
+            defaultsManager.model = newModel
             self.delegate?.setInterfaceRefreshNeeded()
         }
     }
@@ -107,7 +88,7 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     }
     
     func setDataChanged() {
-        self.watchConnectivityManager?.updateWatchApplicationContext(self.defaultsManager.model.contextDictionaryCopy)
+        self.watchConnectivityManager?.updateWatchApplicationContext(self.defaultsManager?.model.contextDictionaryCopy)
     }
     
     func dataNeeded(dataNeeded: GratuitousPropertyListPreferences.DataNeeded) {
@@ -119,14 +100,15 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     }
     
     func currencyFormattedString(number: Int) -> String {
+        guard let defaultsManager = self.defaultsManager else { return "\(number)" }
         let currencyString: String
-        switch self.defaultsManager.overrideCurrencySymbol {
+        switch defaultsManager.overrideCurrencySymbol {
         case .Default:
             currencyString = self.currencyFormatter.stringFromNumber(number) !! "\(number)"
         case .None:
             currencyString = "\(number)"
         default:
-            currencyString = "\(self.defaultsManager.overrideCurrencySymbol.string())\(number)"
+            currencyString = "\(defaultsManager.overrideCurrencySymbol.string())\(number)"
         }
         return currencyString
     }

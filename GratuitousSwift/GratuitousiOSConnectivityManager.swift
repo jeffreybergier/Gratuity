@@ -49,7 +49,8 @@ class GratuitousiOSConnectivityManager: NSObject, WCSessionDelegate {
         replyHandler(dictionary)
     }
     
-    func updateWatchApplicationContext(context: [String : AnyObject]) {
+    func updateWatchApplicationContext(context: [String : AnyObject]?) {
+        guard let context = context else { return }
         if let session = self.session where session.paired == true && session.watchAppInstalled {
             do {
                 print("GratuitousWatchConnectivityManager<iOS>: Updating Watch Application Context")

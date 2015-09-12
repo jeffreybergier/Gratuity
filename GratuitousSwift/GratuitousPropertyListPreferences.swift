@@ -289,7 +289,8 @@ class GratuitousPropertyListPreferences: NSObject {
             }
             // version 1.2 keys
             if let freshWatchAppInstall = dictionary?[Keys.freshWatchAppInstall] as? NSNumber {
-                self.freshWatchAppInstall = freshWatchAppInstall.boolValue
+                let value = freshWatchAppInstall.boolValue
+                self.freshWatchAppInstall = value
             } else {
                 self.freshWatchAppInstall = true
             }
@@ -328,7 +329,8 @@ class GratuitousPropertyListPreferences: NSObject {
             }
             // version 1.2 keys
             if let freshWatchAppInstall = dictionary?[Keys.freshWatchAppInstall] as? NSNumber {
-                self.freshWatchAppInstall = freshWatchAppInstall.boolValue
+                let value = freshWatchAppInstall.boolValue
+                self.freshWatchAppInstall = value
             } else {
                 self.freshWatchAppInstall = true
             }
