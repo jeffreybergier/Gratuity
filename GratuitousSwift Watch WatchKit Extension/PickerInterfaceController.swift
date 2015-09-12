@@ -128,44 +128,59 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
                 dispatch_async(dispatch_get_main_queue()) {
                     // this operation takes the longest
                     self.items = items
-                    
-                    // set the text in the UI
-                    let billAmount = self.dataSource.defaultsManager.billIndexPathRow
-                    let suggestTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
-                    let tipAmount = Int(round(Double(billAmount) * suggestTipPercentage))
-                    let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
-                    self.currentBillAmount = billAmount + tipAmount
-                    self.currentTipPercentage = actualTipPercentage
-                    
-                    // set the billpicker
-                    self.billPicker?.setSelectedItemIndex(billAmount - 1)
-                    
-                    // if there is a manual tip amount set
-                    if self.dataSource.defaultsManager.tipIndexPathRow != 0 {
-                        // set the text in the UI
-                        let billAmount = self.dataSource.defaultsManager.billIndexPathRow
-                        let tipAmount = self.dataSource.defaultsManager.tipIndexPathRow
-                        let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
-                        self.currentBillAmount = billAmount + tipAmount
-                        self.currentTipPercentage = actualTipPercentage
-                        
-                        // set the picker after a delay
-                        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-                        dispatch_after(delayTime, dispatch_get_main_queue()) {
-                            self.tipPicker?.setSelectedItemIndex(tipAmount - 1)
-                            
-                            // restore the UI state
-                            self.smallInterfaceUpdateNeeded = false
-                            self.interfaceState = .Loaded
-                        }
-                    } else {
-                        // restore the ui state
-                        self.smallInterfaceUpdateNeeded = false
-                        self.interfaceState = .Loaded
-                    }
+                    self.updateInterfaceLabels()
                 }
             }
         }
+    }
+    
+    private func updateInterfaceLabels() {
+        self.smallInterfaceUpdateNeeded = true
+        // set the text in the UI
+        let billAmount: Int
+        if self.dataSource.defaultsManager.billIndexPathRow < self.items?.billItems.count {
+            billAmount = self.dataSource.defaultsManager.billIndexPathRow
+        } else {
+            billAmount = self.items?.billItems.count ?? self.dataSource.defaultsManager.billIndexPathRow
+        }
+        let suggestTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
+        let tipAmount = Int(round(Double(billAmount) * suggestTipPercentage))
+        let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
+        self.currentBillAmount = billAmount + tipAmount
+        self.currentTipPercentage = actualTipPercentage
+        
+        // set the billpicker
+        self.billPicker?.setSelectedItemIndex(billAmount - 1)
+        
+        // if there is a manual tip amount set
+        if self.dataSource.defaultsManager.tipIndexPathRow != 0 {
+            // set the text in the UI
+            let tipAmount: Int
+            if self.dataSource.defaultsManager.tipIndexPathRow < self.items?.tipItems.count {
+                tipAmount = self.dataSource.defaultsManager.tipIndexPathRow
+            } else {
+                tipAmount = self.items?.tipItems.count ?? self.dataSource.defaultsManager.tipIndexPathRow
+            }
+            let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
+            self.currentBillAmount = billAmount + tipAmount
+            self.currentTipPercentage = actualTipPercentage
+            
+            self.tipPicker?.setSelectedItemIndex(tipAmount - 1)
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                // restore the UI state
+                self.smallInterfaceUpdateNeeded = false
+                self.interfaceState = .Loaded
+            }
+        } else {
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                // restore the ui state
+                self.smallInterfaceUpdateNeeded = false
+                self.interfaceState = .Loaded
+            }
+        }
+
     }
     
     func setLargeInterfaceRefreshNeeded() {
@@ -181,14 +196,7 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
         if self.largeInterfaceUpdateNeeded == true {
             self.configurePickerItems()
         } else if self.smallInterfaceUpdateNeeded == true {
-            self.billPicker?.setSelectedItemIndex(self.dataSource.defaultsManager.billIndexPathRow - 1)
-            if self.dataSource.defaultsManager.tipIndexPathRow != 0 {
-                let tipIndex = self.dataSource.defaultsManager.tipIndexPathRow - 1
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, dispatch_get_main_queue()) {
-                    self.tipPicker?.setSelectedItemIndex(tipIndex)
-                }
-            }
+            self.updateInterfaceLabels()
         }
     }
     
@@ -220,6 +228,8 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
                 self.dataSource.defaultsManager.billIndexPathRow = value + 1
             }
         }
+        
+        self.resetInterfaceIdleTimer()
         
         let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
         self.currentBillAmount = billAmount + tipAmount
