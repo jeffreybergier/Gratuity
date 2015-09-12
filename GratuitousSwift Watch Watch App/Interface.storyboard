@@ -33,9 +33,6 @@
             <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -264,56 +261,27 @@
         <!--Close-->
         <scene sceneID="QVZ-uk-9u4">
             <objects>
-                <controller identifier="SplitTipInterfaceController" title="Close" hidesWhenLoading="NO" id="2tI-Ya-wiK" customClass="SplitTipInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                <controller identifier="SplitTotalInterfaceController" title="Close" hidesWhenLoading="NO" id="2tI-Ya-wiK" customClass="SplitTotalInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" id="b6x-uh-6We">
-                            <items>
-                                <group width="1" alignment="left" layout="vertical" radius="7" id="Pl4-NM-Q89">
-                                    <items>
-                                        <label alignment="left" text="Total Amount" id="JyE-3w-DEm">
-                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
-                                        </label>
-                                        <label alignment="left" text="$–" id="w2I-WK-JbS">
-                                            <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
-                                        </label>
-                                    </items>
-                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <edgeInsets key="margins" left="3" right="3" top="1" bottom="2"/>
-                                </group>
-                            </items>
-                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                        </group>
-                        <group width="1" alignment="left" layout="vertical" id="ya1-on-kUD">
-                            <items>
-                                <group width="1" alignment="left" layout="vertical" radius="7" id="4Oi-9I-xsF">
-                                    <items>
-                                        <label alignment="left" text="Tip Amount" id="TQQ-zr-Rgf">
-                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
-                                        </label>
-                                        <label alignment="left" text="$–" id="y4y-fj-5JE">
-                                            <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
-                                        </label>
-                                    </items>
-                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <edgeInsets key="margins" left="3" right="3" top="1" bottom="2"/>
-                                </group>
-                            </items>
-                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
-                        </group>
                         <group width="1" alignment="left" layout="vertical" id="2T2-JC-gxj">
                             <items>
                                 <group width="1" alignment="left" layout="vertical" radius="7" id="pot-QA-E3b">
                                     <items>
-                                        <label alignment="left" text="Split Amount" id="c6s-SH-Elc">
+                                        <label alignment="left" text="Split" id="c6s-SH-Elc">
                                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
                                         </label>
+                                        <group width="1" alignment="left" id="28Y-fK-ql9">
+                                            <items>
+                                                <label alignment="left" text="$100" id="38r-NH-vfB">
+                                                    <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                                </label>
+                                                <imageView alignment="right" verticalAlignment="center" image="faces1" contentMode="right" id="AkK-kK-kjx">
+                                                    <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </imageView>
+                                            </items>
+                                        </group>
                                         <group width="1" alignment="left" id="VQf-tO-deK">
                                             <items>
                                                 <label alignment="left" text="$50" id="0ne-Mv-fok">
@@ -362,16 +330,10 @@
                         <outlet property="splitAmount3CurrencyLabel" destination="o6k-om-SKk" id="leH-mb-1xp"/>
                         <outlet property="splitAmountGroup" destination="2T2-JC-gxj" id="Lke-1h-Cna"/>
                         <outlet property="splitAmountTitleLabel" destination="c6s-SH-Elc" id="nfO-KY-lxU"/>
-                        <outlet property="tipAmountGroup" destination="ya1-on-kUD" id="WQM-Yk-35h"/>
-                        <outlet property="tipAmountLabel" destination="y4y-fj-5JE" id="wFE-ts-THe"/>
-                        <outlet property="tipAmountTitleLabel" destination="TQQ-zr-Rgf" id="afL-dr-gfr"/>
-                        <outlet property="totalAmountGroup" destination="b6x-uh-6We" id="Z9N-8T-mhL"/>
-                        <outlet property="totalAmountLabel" destination="w2I-WK-JbS" id="AKW-Yu-Z1n"/>
-                        <outlet property="totalAmountTitleLabel" destination="JyE-3w-DEm" id="c9b-zT-L0K"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="136" y="-87.25"/>
+            <point key="canvasLocation" x="135" y="-105.75"/>
         </scene>
         <!--Close-->
         <scene sceneID="N6L-dJ-mY2">

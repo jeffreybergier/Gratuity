@@ -242,7 +242,7 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
     }
     
     @objc private func splitTipMenuButtonTapped() {
-        self.presentControllerWithName("SplitTipInterfaceController", context: self.dataSource)
+        self.presentControllerWithName("SplitTotalInterfaceController", context: self.dataSource)
     }
     
     // MARK: Handle Loading Picker Items
