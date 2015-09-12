@@ -279,6 +279,7 @@
                                             <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
+                                        <group width="2" alignment="left" id="2yK-of-nPv"/>
                                         <imageView alignment="right" verticalAlignment="center" image="faces1" contentMode="right" id="AkK-kK-kjx">
                                             <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
@@ -290,6 +291,7 @@
                                             <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
+                                        <group width="2" alignment="left" id="RbX-1N-iIc"/>
                                         <imageView alignment="right" verticalAlignment="center" image="faces2" contentMode="right" id="6qL-r0-b9O">
                                             <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
@@ -301,6 +303,7 @@
                                             <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
+                                        <group width="2" alignment="left" id="dCj-wB-5T0"/>
                                         <imageView alignment="right" verticalAlignment="center" image="faces3" contentMode="right" id="eK5-6o-IYB">
                                             <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
@@ -312,6 +315,7 @@
                                             <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
+                                        <group width="2" alignment="left" id="inq-BN-kg3"/>
                                         <imageView alignment="right" verticalAlignment="center" image="faces4" contentMode="right" id="Lcz-xi-eap">
                                             <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
@@ -323,6 +327,7 @@
                                             <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
+                                        <group width="2" alignment="left" id="8Gm-Fj-32R"/>
                                         <imageView alignment="right" verticalAlignment="center" image="faces5" contentMode="right" id="d5p-MY-fY4">
                                             <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
@@ -341,7 +346,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="118" y="-128.25"/>
+            <point key="canvasLocation" x="117" y="-117"/>
         </scene>
         <!--Close-->
         <scene sceneID="N6L-dJ-mY2">

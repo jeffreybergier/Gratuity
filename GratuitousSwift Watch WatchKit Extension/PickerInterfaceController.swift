@@ -54,6 +54,27 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
         }
     }
     
+    private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.hugeValueText
+    private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+    private var pickerCurrencySign: CurrencySign?
+    private var currentBillAmount = 0 {
+        didSet {
+            let string = NSAttributedString(string: self.dataSource.currencyStringFromInteger(self.currentBillAmount), attributes: self.largeValueTextAttributes)
+            self.billAmountLabel?.setAttributedText(string)
+        }
+    }
+    private var currentTipPercentage: Double? = 0.0 {
+        didSet {
+            let string = NSAttributedString(string: self.dataSource.percentStringFromRawDouble(self.currentTipPercentage), attributes: self.smallValueTextAttributes)
+            self.tipPercentageLabel?.setAttributedText(string)
+        }
+    }
+    
+    @IBOutlet private var tipPercentageLabel: WKInterfaceLabel?
+    @IBOutlet private var billAmountLabel: WKInterfaceLabel?
+    @IBOutlet private var tipPicker: WKInterfacePicker?
+    @IBOutlet private var billPicker: WKInterfacePicker?
+    
     private func resetInterfaceIdleTimer() {
         if let existingTimer = self.interfaceIdleTimer {
             existingTimer.invalidate()
@@ -61,6 +82,8 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
         }
         self.interfaceIdleTimer = NSTimer.interfaceIdleTimer(self)
     }
+    
+    // MARK: Initialize
     
     override func willActivate() {
         super.willActivate()
@@ -170,28 +193,15 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
         }
     }
     
-    // MARK: Handle User Input
+    // MARK: Handle Going Away
     
-    private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.hugeValueText
-    private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-    private var pickerCurrencySign: CurrencySign?
-    private var currentBillAmount = 0 {
-        didSet {
-            let string = NSAttributedString(string: self.dataSource.currencyStringFromInteger(self.currentBillAmount), attributes: self.largeValueTextAttributes)
-            self.billAmountLabel?.setAttributedText(string)
-        }
+    override func willDisappear() {
+        super.willDisappear()
+        self.interfaceIdleTimer?.invalidate()
+        self.interfaceIdleTimer = nil
     }
-    private var currentTipPercentage: Double? = 0.0 {
-        didSet {
-            let string = NSAttributedString(string: self.dataSource.percentStringFromRawDouble(self.currentTipPercentage), attributes: self.smallValueTextAttributes)
-            self.tipPercentageLabel?.setAttributedText(string)
-        }
-    }
-
-    @IBOutlet private var tipPercentageLabel: WKInterfaceLabel?
-    @IBOutlet private var billAmountLabel: WKInterfaceLabel?
-    @IBOutlet private var tipPicker: WKInterfacePicker?
-    @IBOutlet private var billPicker: WKInterfacePicker?
+    
+    // MARK: Handle User Input
 
     @IBAction func billPickerChanged(value: Int) {
         let billAmount = value + 1
@@ -313,14 +323,6 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
         let returnValue = (billItems: billItems, tipItems: tipItems)
         
         if billItems.isEmpty == false { return returnValue } else { return .None }
-    }
-    
-    // MARK: Handle Going Away
-    
-    override func willDisappear() {
-        super.willDisappear()
-        self.interfaceIdleTimer?.invalidate()
-        self.interfaceIdleTimer = nil
     }
 }
 
