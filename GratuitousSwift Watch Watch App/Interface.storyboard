@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azz-ui-8Qo">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azz-ui-8Qo">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Fuuutuuura-Meeediuuum.ttf">
+            <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
             <string>Fuuutuuura-Meeediuuum</string>
@@ -274,7 +275,7 @@
                                 </imageView>
                                 <group width="1" alignment="left" id="28Y-fK-ql9">
                                     <items>
-                                        <label alignment="left" text="$100" id="38r-NH-vfB">
+                                        <label alignment="left" text="$–" id="38r-NH-vfB">
                                             <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
@@ -285,7 +286,7 @@
                                 </group>
                                 <group width="1" alignment="left" id="VQf-tO-deK">
                                     <items>
-                                        <label alignment="left" text="$50" id="0ne-Mv-fok">
+                                        <label alignment="left" text="$–" id="0ne-Mv-fok">
                                             <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
@@ -296,7 +297,7 @@
                                 </group>
                                 <group width="1" alignment="left" id="Ejr-zh-Bjd">
                                     <items>
-                                        <label alignment="left" text="$25" id="1pt-vb-1LT">
+                                        <label alignment="left" text="$–" id="1pt-vb-1LT">
                                             <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
@@ -307,11 +308,22 @@
                                 </group>
                                 <group width="1" alignment="left" id="zcQ-Ah-6R2">
                                     <items>
-                                        <label alignment="left" text="$13" id="o6k-om-SKk">
+                                        <label alignment="left" text="$–" id="o6k-om-SKk">
                                             <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
                                         <imageView alignment="right" verticalAlignment="center" image="faces4" contentMode="right" id="Lcz-xi-eap">
+                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </imageView>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="HF6-SY-WvS">
+                                    <items>
+                                        <label alignment="left" text="$–" id="2cE-yE-JDw">
+                                            <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                        </label>
+                                        <imageView alignment="right" verticalAlignment="center" image="faces5" contentMode="right" id="d5p-MY-fY4">
                                             <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                     </items>
@@ -324,11 +336,12 @@
                         <outlet property="splitAmount1CurrencyLabel" destination="0ne-Mv-fok" id="9ya-a3-muH"/>
                         <outlet property="splitAmount2CurrencyLabel" destination="1pt-vb-1LT" id="xf4-Q0-Epd"/>
                         <outlet property="splitAmount3CurrencyLabel" destination="o6k-om-SKk" id="leH-mb-1xp"/>
+                        <outlet property="splitAmount4CurrencyLabel" destination="2cE-yE-JDw" id="Yy0-uF-5LO"/>
                         <outlet property="splitAmountTitleLabel" destination="c6s-SH-Elc" id="nfO-KY-lxU"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="118" y="-148"/>
+            <point key="canvasLocation" x="118" y="-128.25"/>
         </scene>
         <!--Close-->
         <scene sceneID="N6L-dJ-mY2">

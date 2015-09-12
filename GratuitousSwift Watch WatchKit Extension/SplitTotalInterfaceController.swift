@@ -16,6 +16,7 @@ class SplitTotalInterfaceController: WKInterfaceController {
     @IBOutlet private weak var splitAmount1CurrencyLabel: WKInterfaceLabel?
     @IBOutlet private weak var splitAmount2CurrencyLabel: WKInterfaceLabel?
     @IBOutlet private weak var splitAmount3CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet private weak var splitAmount4CurrencyLabel: WKInterfaceLabel?
     
     private var interfaceControllerIsConfigured = false
     
@@ -38,11 +39,6 @@ class SplitTotalInterfaceController: WKInterfaceController {
                 self.totalAmount = totalAmount
             }
         }
-    }
-    
-    struct Context {
-        var totalAmount: Int
-        var tipAmount: Int
     }
     
     override func awakeWithContext(context: AnyObject?) {
@@ -84,18 +80,21 @@ class SplitTotalInterfaceController: WKInterfaceController {
         let one = Int(round(Double(self.totalAmount) / 2))
         let two = Int(round(Double(self.totalAmount) / 3))
         let three = Int(round(Double(self.totalAmount) / 4))
+        let four = Int(round(Double(self.totalAmount) / 5))
         
         // prepare the attributed text
         let zeroString = NSAttributedString(string: dataSource.currencyStringFromInteger(zero), attributes: self.valueTextAttributes)
         let oneString = NSAttributedString(string: dataSource.currencyStringFromInteger(one), attributes: self.valueTextAttributes)
         let twoString = NSAttributedString(string: dataSource.currencyStringFromInteger(two), attributes: self.valueTextAttributes)
         let threeString = NSAttributedString(string: dataSource.currencyStringFromInteger(three), attributes: self.valueTextAttributes)
+        let fourString = NSAttributedString(string: dataSource.currencyStringFromInteger(four), attributes: self.valueTextAttributes)
         
         // populate the labels
         self.splitAmount0CurrencyLabel?.setAttributedText(zeroString)
         self.splitAmount1CurrencyLabel?.setAttributedText(oneString)
         self.splitAmount2CurrencyLabel?.setAttributedText(twoString)
         self.splitAmount3CurrencyLabel?.setAttributedText(threeString)
+        self.splitAmount4CurrencyLabel?.setAttributedText(fourString)
 
     }
 }
