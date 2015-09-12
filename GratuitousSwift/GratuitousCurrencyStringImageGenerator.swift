@@ -21,6 +21,24 @@ class GratuitousCurrencyStringImageGenerator {
         }
     }
     
+    func generateAllCurrencySymbols() -> [(url: NSURL, fileName: String)]? {
+        let dataSource = GratuitousiOSDataSource(use: .Temporary)
+        var tuples = [(url: NSURL, fileName: String)]()
+        for i in 0 ..< 10 {
+            if let currencySign = CurrencySign(rawValue: i) {
+                dataSource.defaultsManager.overrideCurrencySymbol = currencySign
+                if let url = self.generateNewCurrencySymbolsFromConfiguredCurrencyFormatter(dataSource) {
+                    if let lastPathComponent = url.lastPathComponent {
+                        tuples += [(url: url, fileName: lastPathComponent)]
+                    }
+                }
+            } else {
+                break
+            }
+        }
+        if tuples.isEmpty == false { return tuples } else { return .None }
+    }
+    
     
     private func generateNewCurrencySymbolsFromConfiguredCurrencyFormatter(dataSource: GratuitousiOSDataSource) -> NSURL? {
         //let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText

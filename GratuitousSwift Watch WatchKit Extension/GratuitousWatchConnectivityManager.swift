@@ -17,6 +17,8 @@ protocol GratuitousWatchConnectivityManagerDelegate: class {
 
 class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
     
+    private var requestedDataFromiOS = false
+    
     let session: WCSession? = {
         if WCSession.isSupported() {
             return WCSession.defaultSession()
@@ -50,6 +52,7 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
             switch dataNeeded {
             case .CurrencySymbols(let sign):
                 print("GratuitousWatchConnectivityManager<WatchOS>: Currency Symbols Needed. Requesting from iOS Device")
+                self.requestedDataFromiOS = true
                 let message = [
                     "currencySymbolsNeeded" : NSNumber(bool: true),
                     "overrideCurrencySymbol" : NSNumber(integer: sign.rawValue),
@@ -79,7 +82,10 @@ class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
             do {
                 let data = try NSData(contentsOfURL: file.fileURL, options: .DataReadingMappedIfSafe)
                 try data.writeToURL(dataURL, options: .AtomicWrite)
-                self.delegate?.receivedCurrencySymbolsFromiOS()
+                if self.requestedDataFromiOS == true {
+                    self.requestedDataFromiOS = false
+                    self.delegate?.receivedCurrencySymbolsFromiOS()
+                }
             } catch {
                 NSLog("GratuitousWatchConnectivityManager: didReceiveFile: Failed with error: \(error)")
             }

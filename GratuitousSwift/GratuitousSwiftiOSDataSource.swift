@@ -19,7 +19,7 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     
     weak var delegate: GratuitousiOSDataSourceDelegate?
     let defaultsManager = GratuitousPropertyListPreferences()
-    let watchConnectivityManager = GratuitousiOSConnectivityManager()
+    let watchConnectivityManager: GratuitousiOSConnectivityManager?
     private let currencyFormatter = NSNumberFormatter()
     var currencyCode: String {
         switch self.defaultsManager.overrideCurrencySymbol {
@@ -43,20 +43,51 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     }
     
     init(use: Use) {
+        switch use {
+        case .Temporary:
+            self.watchConnectivityManager = .None
+        case .AppLifeTime:
+            self.watchConnectivityManager = GratuitousiOSConnectivityManager()
+        }
+        
         self.currencyFormatter.locale = NSLocale.currentLocale()
         self.currencyFormatter.maximumFractionDigits = 0
         self.currencyFormatter.minimumFractionDigits = 0
         self.currencyFormatter.alwaysShowsDecimalSeparator = false
         self.currencyFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
         
-        self.defaultsManager.delegate = self
-        self.watchConnectivityManager.delegate = self
-        
         switch use {
         case .Temporary:
             break
         case .AppLifeTime:
+            
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: .None)
+            
+            self.defaultsManager.delegate = self
+            self.watchConnectivityManager?.delegate = self
+            
+            if self.defaultsManager.freshWatchAppInstall == true {
+                self.bulkTransferCurrencySymbols()
+            }
+        }
+    }
+    
+    private func bulkTransferCurrencySymbols() {
+        //on first run make a last ditch effort to send a lot of currency symbols to the watch
+        //this may prevent waiting on the watch later
+        if let watchConnectivityManager = self.watchConnectivityManager,
+            let session = watchConnectivityManager.session
+            where session.paired == true && session.watchAppInstalled == true {
+                let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
+                dispatch_async(backgroundQueue) {
+                    let generator = GratuitousCurrencyStringImageGenerator()
+                    if let files = generator.generateAllCurrencySymbols() {
+                        watchConnectivityManager.transferBulkData(files)
+                    }
+                }
+                self.defaultsManager.freshWatchAppInstall = false
+        } else {
+            self.defaultsManager.freshWatchAppInstall = true
         }
     }
     
@@ -76,9 +107,7 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     }
     
     func setDataChanged() {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.watchConnectivityManager.updateWatchApplicationContext(self.defaultsManager.model.dictionaryVersion)
-        }
+        self.watchConnectivityManager?.updateWatchApplicationContext(self.defaultsManager.model.contextDictionaryCopy)
     }
     
     func dataNeeded(dataNeeded: GratuitousPropertyListPreferences.DataNeeded) {

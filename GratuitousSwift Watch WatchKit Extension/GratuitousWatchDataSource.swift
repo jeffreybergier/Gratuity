@@ -57,7 +57,7 @@ class GratuitousWatchDataSource: GratuitousPropertyListPreferencesDelegate, Grat
     }
     
     func setDataChanged() {
-        self.watchConnectivityManager.updateiOSApplicationContext(self.defaultsManager.model.dictionaryVersion)
+        self.watchConnectivityManager.updateiOSApplicationContext(self.defaultsManager.model.contextDictionaryCopy)
     }
     
     func dataNeeded(dataNeeded: GratuitousPropertyListPreferences.DataNeeded) {

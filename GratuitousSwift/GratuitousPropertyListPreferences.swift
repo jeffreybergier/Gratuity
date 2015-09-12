@@ -70,7 +70,7 @@ class GratuitousPropertyListPreferences: NSObject {
         let plistURL = GratuitousPropertyListPreferences.locationOnDisk
         
         do {
-            if let plistData = self.model.dataVersion {
+            if let plistData = self.model.saveToDiskDataCopy {
                 if fileManager.fileExistsAtPath(preferencesURL.path!) == false {
                     try fileManager.createDirectoryAtPath(preferencesURL.path!, withIntermediateDirectories: true, attributes: .None)
                 }
@@ -167,13 +167,13 @@ class GratuitousPropertyListPreferences: NSObject {
         }
     }
     
-    var iOSFirstRun: Bool {
+    var freshWatchAppInstall: Bool {
         set {
-            self.model.iOSFirstRun = newValue
+            self.model.freshWatchAppInstall = newValue
             self.dataChanged = true
         }
         get {
-            return self.model.iOSFirstRun
+            return self.model.freshWatchAppInstall
         }
     }
 
@@ -221,7 +221,7 @@ class GratuitousPropertyListPreferences: NSObject {
         
         // version 1.2 keys
         static let currencySymbolsNeeded = "currencySymbolsNeeded"
-        static let iOSFirstRun = "iOSFirstRun"
+        static let freshWatchAppInstall = "freshWatchAppInstall"
     }
 
     
@@ -232,22 +232,30 @@ class GratuitousPropertyListPreferences: NSObject {
         var tipIndexPathRow: Int
         var overrideCurrencySymbol: CurrencySign
         var suggestedTipPercentage: Double
-        var iOSFirstRun: Bool
+        var freshWatchAppInstall: Bool
         
-        var dictionaryVersion: [String : AnyObject] {
+        var contextDictionaryCopy: [String : AnyObject] {
+            return [
+                Keys.billIndexPathRow : NSNumber(integer: self.billIndexPathRow),
+                Keys.tipIndexPathRow : NSNumber(integer: self.tipIndexPathRow),
+                Keys.overrideCurrencySymbol : NSNumber(integer: self.overrideCurrencySymbol.rawValue),
+                Keys.suggestedTipPercentage : NSNumber(double: self.suggestedTipPercentage),
+            ]
+        }
+        
+        var saveToDiskDictionaryCopy: [String : AnyObject] {
             return [
                 Keys.billIndexPathRow : NSNumber(integer: self.billIndexPathRow),
                 Keys.tipIndexPathRow : NSNumber(integer: self.tipIndexPathRow),
                 Keys.overrideCurrencySymbol : NSNumber(integer: self.overrideCurrencySymbol.rawValue),
                 Keys.suggestedTipPercentage : NSNumber(double: self.suggestedTipPercentage),
                 Keys.appVersionString : self.appVersionString,
-                Keys.currencySymbolsNeeded : NSNumber(bool: self.currencySymbolsNeeded),
-                Keys.iOSFirstRun : NSNumber(bool: self.iOSFirstRun)
+                Keys.freshWatchAppInstall : NSNumber(bool: self.freshWatchAppInstall)
             ]
         }
         
-        var dataVersion: NSData? {
-            return try? NSPropertyListSerialization.dataWithPropertyList(self.dictionaryVersion, format: .XMLFormat_v1_0, options: 0)
+        var saveToDiskDataCopy: NSData? {
+            return try? NSPropertyListSerialization.dataWithPropertyList(self.saveToDiskDictionaryCopy, format: .XMLFormat_v1_0, options: 0)
         }
         
         init(dictionary: NSDictionary?, fallback: Properties) {
@@ -280,10 +288,10 @@ class GratuitousPropertyListPreferences: NSObject {
                 self.appVersionString = fallback.appVersionString
             }
             // version 1.2 keys
-            if let iOSFirstRun = dictionary?[Keys.iOSFirstRun] as? NSNumber {
-                self.iOSFirstRun = iOSFirstRun.boolValue
+            if let freshWatchAppInstall = dictionary?[Keys.freshWatchAppInstall] as? NSNumber {
+                self.freshWatchAppInstall = freshWatchAppInstall.boolValue
             } else {
-                self.iOSFirstRun = true
+                self.freshWatchAppInstall = true
             }
             // ignored from disk version. Always set to false on load
             self.currencySymbolsNeeded = fallback.currencySymbolsNeeded
@@ -319,10 +327,10 @@ class GratuitousPropertyListPreferences: NSObject {
                 self.appVersionString = "1.1.0"
             }
             // version 1.2 keys
-            if let iOSFirstRun = dictionary?[Keys.iOSFirstRun] as? NSNumber {
-                self.iOSFirstRun = iOSFirstRun.boolValue
+            if let freshWatchAppInstall = dictionary?[Keys.freshWatchAppInstall] as? NSNumber {
+                self.freshWatchAppInstall = freshWatchAppInstall.boolValue
             } else {
-                self.iOSFirstRun = true
+                self.freshWatchAppInstall = true
             }
             // ignored from disk version. Always set to false on load
             self.currencySymbolsNeeded = false
