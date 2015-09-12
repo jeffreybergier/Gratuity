@@ -70,7 +70,7 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
             self.interfaceControllerConfiguredOnce = true
             
             // configure the menu
-            self.addMenuItemWithImageNamed("splitTipMenuIcon", title: NSLocalizedString("Split Tip", comment: ""), action: "splitTipMenuButtonTapped")
+            self.addMenuItemWithImageNamed("splitTipMenuIcon", title: NSLocalizedString("Split Bill", comment: ""), action: "splitTipMenuButtonTapped")
             self.addMenuItemWithImageNamed("settingsMenuIcon", title: NSLocalizedString("Settings", comment: ""), action: "settingsMenuButtonTapped")
             
             // start the idle timer

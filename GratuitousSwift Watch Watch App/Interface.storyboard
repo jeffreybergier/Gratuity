@@ -139,7 +139,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-40" y="-164"/>
+            <point key="canvasLocation" x="-52" y="-167"/>
         </scene>
         <!--App Delegate Interface Controller-->
         <scene sceneID="MVV-xz-nNc">
@@ -263,77 +263,72 @@
             <objects>
                 <controller identifier="SplitTotalInterfaceController" title="Close" hidesWhenLoading="NO" id="2tI-Ya-wiK" customClass="SplitTotalInterfaceController" customModule="Gratuity_WatchKit_Extension">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" id="2T2-JC-gxj">
+                        <group width="1" alignment="left" layout="vertical" id="pot-QA-E3b">
                             <items>
-                                <group width="1" alignment="left" layout="vertical" radius="7" id="pot-QA-E3b">
+                                <label alignment="left" text="Split Bill" id="c6s-SH-Elc">
+                                    <color key="textColor" red="0.58823529411764708" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
+                                </label>
+                                <imageView width="1" alignment="left" image="horizontalLine" id="Hic-Hi-ck0">
+                                    <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </imageView>
+                                <group width="1" alignment="left" id="28Y-fK-ql9">
                                     <items>
-                                        <label alignment="left" text="Split" id="c6s-SH-Elc">
-                                            <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
+                                        <label alignment="left" text="$100" id="38r-NH-vfB">
+                                            <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
-                                        <group width="1" alignment="left" id="28Y-fK-ql9">
-                                            <items>
-                                                <label alignment="left" text="$100" id="38r-NH-vfB">
-                                                    <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
-                                                </label>
-                                                <imageView alignment="right" verticalAlignment="center" image="faces1" contentMode="right" id="AkK-kK-kjx">
-                                                    <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                </imageView>
-                                            </items>
-                                        </group>
-                                        <group width="1" alignment="left" id="VQf-tO-deK">
-                                            <items>
-                                                <label alignment="left" text="$50" id="0ne-Mv-fok">
-                                                    <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
-                                                </label>
-                                                <imageView alignment="right" verticalAlignment="center" image="faces2" contentMode="right" id="6qL-r0-b9O">
-                                                    <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                </imageView>
-                                            </items>
-                                        </group>
-                                        <group width="1" alignment="left" id="Ejr-zh-Bjd">
-                                            <items>
-                                                <label alignment="left" text="$25" id="1pt-vb-1LT">
-                                                    <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
-                                                </label>
-                                                <imageView alignment="right" verticalAlignment="center" image="faces3" contentMode="right" id="eK5-6o-IYB">
-                                                    <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                </imageView>
-                                            </items>
-                                        </group>
-                                        <group width="1" alignment="left" id="zcQ-Ah-6R2">
-                                            <items>
-                                                <label alignment="left" text="$13" id="o6k-om-SKk">
-                                                    <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
-                                                </label>
-                                                <imageView alignment="right" verticalAlignment="center" image="faces4" contentMode="right" id="Lcz-xi-eap">
-                                                    <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                </imageView>
-                                            </items>
-                                        </group>
+                                        <imageView alignment="right" verticalAlignment="center" image="faces1" contentMode="right" id="AkK-kK-kjx">
+                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </imageView>
                                     </items>
-                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <edgeInsets key="margins" left="3" right="3" top="1" bottom="2"/>
+                                </group>
+                                <group width="1" alignment="left" id="VQf-tO-deK">
+                                    <items>
+                                        <label alignment="left" text="$50" id="0ne-Mv-fok">
+                                            <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                        </label>
+                                        <imageView alignment="right" verticalAlignment="center" image="faces2" contentMode="right" id="6qL-r0-b9O">
+                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </imageView>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="Ejr-zh-Bjd">
+                                    <items>
+                                        <label alignment="left" text="$25" id="1pt-vb-1LT">
+                                            <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                        </label>
+                                        <imageView alignment="right" verticalAlignment="center" image="faces3" contentMode="right" id="eK5-6o-IYB">
+                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </imageView>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="zcQ-Ah-6R2">
+                                    <items>
+                                        <label alignment="left" text="$13" id="o6k-om-SKk">
+                                            <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                        </label>
+                                        <imageView alignment="right" verticalAlignment="center" image="faces4" contentMode="right" id="Lcz-xi-eap">
+                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </imageView>
+                                    </items>
                                 </group>
                             </items>
-                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
                     </items>
                     <connections>
+                        <outlet property="splitAmount0CurrencyLabel" destination="38r-NH-vfB" id="RY2-i1-Ixd"/>
                         <outlet property="splitAmount1CurrencyLabel" destination="0ne-Mv-fok" id="9ya-a3-muH"/>
                         <outlet property="splitAmount2CurrencyLabel" destination="1pt-vb-1LT" id="xf4-Q0-Epd"/>
                         <outlet property="splitAmount3CurrencyLabel" destination="o6k-om-SKk" id="leH-mb-1xp"/>
-                        <outlet property="splitAmountGroup" destination="2T2-JC-gxj" id="Lke-1h-Cna"/>
                         <outlet property="splitAmountTitleLabel" destination="c6s-SH-Elc" id="nfO-KY-lxU"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="135" y="-105.75"/>
+            <point key="canvasLocation" x="118" y="-148"/>
         </scene>
         <!--Close-->
         <scene sceneID="N6L-dJ-mY2">
@@ -517,7 +512,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="329" y="5.75"/>
+            <point key="canvasLocation" x="296" y="5.5"/>
         </scene>
         <!--Tip Amount-->
         <scene sceneID="0cJ-h1-wjI">
