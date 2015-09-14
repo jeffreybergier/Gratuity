@@ -14,11 +14,11 @@ protocol GratuitousPropertyListPreferencesDelegate: class {
     func dataNeeded(dataNeeded: GratuitousPropertyListPreferences.DataNeeded)
 }
 
-class GratuitousPropertyListPreferences: NSObject {
+class GratuitousPropertyListPreferences {
     
     weak var delegate: GratuitousPropertyListPreferencesDelegate?
     
-    override init() {
+    init() {
         let plistURL = GratuitousPropertyListPreferences.locationOnDisk
         
         let plistDictionary: NSDictionary?
@@ -30,9 +30,7 @@ class GratuitousPropertyListPreferences: NSObject {
             plistDictionary = .None
         }
         self.model = Properties(dictionary: plistDictionary)
-        
-        super.init()
-        
+                
         #if os(iOS)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResignActive:", name: UIApplicationWillResignActiveNotification, object: .None)
         #endif

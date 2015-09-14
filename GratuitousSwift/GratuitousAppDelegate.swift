@@ -23,8 +23,8 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch
         
         //crashlytics intializer
-//        Fabric.with([Crashlytics()])
-                
+        //Fabric.with([Crashlytics()])
+        
         //initialize the view controller from the storyboard
         let tipViewController = self.storyboard.instantiateInitialViewController()
         

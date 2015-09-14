@@ -176,26 +176,6 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		73CDC9671B6EA27D0029F501 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		73CDC96C1B6EA2870029F501 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -206,6 +186,8 @@
 		730530CA1A871A4700DC08A6 /* Gratuityλδ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuityλδ.entitlements"; sourceTree = "<group>"; };
 		730530CB1A871A5200DC08A6 /* GratuitousSwift Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuitousSwift Watch.entitlements"; sourceTree = "<group>"; };
 		730530CC1A871A5F00DC08A6 /* GratuitousSwift Watch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuitousSwift Watch WatchKit Extension.entitlements"; path = "GratuitousSwift Watch WatchKit Extension/GratuitousSwift Watch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		730614941BA64E970031D2D3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
+		730614951BA64E970031D2D3 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		7313755A1ABF3D900074E2F2 /* Gratuity WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Gratuity WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		731375661ABF3D910074E2F2 /* Gratuity WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gratuity WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7313757C1ABF3E400074E2F2 /* GratuityStoreWatchAppInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GratuityStoreWatchAppInfo.plist; sourceTree = "<group>"; };
@@ -235,8 +217,6 @@
 		7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratuitousAppDelegate.swift; sourceTree = "<group>"; };
 		7382510D19E60EED00CD2B28 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7382511019E60EED00CD2B28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		7382511B19E60EED00CD2B28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7382511C19E60EED00CD2B28 /* GratuitousSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratuitousSwiftTests.swift; sourceTree = "<group>"; };
 		7382512619E60F3900CD2B28 /* TipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableViewCell.swift; sourceTree = "<group>"; };
 		7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GratuitousTableViewCell.xib; sourceTree = "<group>"; };
@@ -252,14 +232,12 @@
 		73A18D731A2A9525002180DD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchDataSource.swift; sourceTree = "<group>"; };
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		73BC11D51B8FF29100A85A25 /* GratuityL WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuityL WatchKit App.entitlements"; path = "../GratuityL WatchKit App.entitlements"; sourceTree = "<group>"; };
+		73BC11D51B8FF29100A85A25 /* GratuityL WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuityL WatchKit App.entitlements"; sourceTree = "<group>"; };
 		73BC11D61B8FF29F00A85A25 /* Gratuity WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuity WatchKit App.entitlements"; sourceTree = "<group>"; };
 		73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchConnectivityManager.swift; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
 		73D46AFD1AC7C9B400057185 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
-		73D730D01AB49E4D00172397 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
-		73D730D11AB49E4D00172397 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousEnums.swift; path = ../GratuitousSwift/GratuitousEnums.swift; sourceTree = "<group>"; };
 		73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousPropertyListPreferences.swift; path = ../GratuitousSwift/GratuitousPropertyListPreferences.swift; sourceTree = "<group>"; };
 		73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPresentationController.swift; sourceTree = "<group>"; };
@@ -375,8 +353,8 @@
 				73A755B31A87F8E80038E023 /* Common Files */,
 				73A18D591A2A9525002180DD /* Frameworks */,
 				7382510219E60EED00CD2B28 /* Products */,
-				7382511919E60EED00CD2B28 /* GratuitousSwiftTests */,
 				730530CC1A871A5F00DC08A6 /* GratuitousSwift Watch WatchKit Extension.entitlements */,
+				73BC11D51B8FF29100A85A25 /* GratuityL WatchKit App.entitlements */,
 				73BC11D61B8FF29F00A85A25 /* Gratuity WatchKit App.entitlements */,
 				730530CB1A871A5200DC08A6 /* GratuitousSwift Watch.entitlements */,
 				730530CA1A871A4700DC08A6 /* Gratuityλδ.entitlements */,
@@ -424,24 +402,6 @@
 				7382510519E60EED00CD2B28 /* Info.plist */,
 				73556E621A19711E0079A37D /* GratuitousSwift-Bridging-Header.h */,
 				7334770C1A26E85000513F1F /* en.lproj */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7382511919E60EED00CD2B28 /* GratuitousSwiftTests */ = {
-			isa = PBXGroup;
-			children = (
-				7382511C19E60EED00CD2B28 /* GratuitousSwiftTests.swift */,
-				7382511A19E60EED00CD2B28 /* Supporting Files */,
-			);
-			path = GratuitousSwiftTests;
-			sourceTree = "<group>";
-		};
-		7382511A19E60EED00CD2B28 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7382511B19E60EED00CD2B28 /* Info.plist */,
-				73BC11D51B8FF29100A85A25 /* GratuityL WatchKit App.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -528,10 +488,10 @@
 		73E7E60F1A19A9FB004F9F5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				730614941BA64E970031D2D3 /* Crashlytics.framework */,
+				730614951BA64E970031D2D3 /* Fabric.framework */,
 				73556E631A19711F0079A37D /* UIImage+PDFUtility.h */,
 				73556E641A19711F0079A37D /* UIImage+PDFUtility.m */,
-				73D730D01AB49E4D00172397 /* Crashlytics.framework */,
-				73D730D11AB49E4D00172397 /* Fabric.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -615,7 +575,6 @@
 				736568EB1A26DD1400603602 /* Frameworks */,
 				736568EE1A26DD1400603602 /* Resources */,
 				73C98CC11B6E94D500416DDA /* Embed Watch Content */,
-				73CDC9671B6EA27D0029F501 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -635,7 +594,6 @@
 				738250FE19E60EED00CD2B28 /* Frameworks */,
 				738250FF19E60EED00CD2B28 /* Resources */,
 				73C98CBF1B6E94D500416DDA /* Embed Watch Content */,
-				73CDC96C1B6EA2870029F501 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1136,9 +1094,8 @@
 				CODE_SIGN_ENTITLEMENTS = "Gratuityλδ.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "GratuitousSwift copy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1159,9 +1116,8 @@
 				CODE_SIGN_ENTITLEMENTS = "Gratuityλδ.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "GratuitousSwift copy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1259,7 +1215,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Gratuityδ.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = GratuitousSwift/Info.plist;
@@ -1281,7 +1236,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Gratuityδ.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = GratuitousSwift/Info.plist;
