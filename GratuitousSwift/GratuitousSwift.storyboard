@@ -27,21 +27,33 @@
                                         <rect key="frame" x="0.0" y="0.0" width="304" height="268"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="127.5" height="322"/>
+                                        </variation>
                                     </tableView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="V1Q-ia-Gn2">
                                         <rect key="frame" x="304" y="0.0" width="304" height="268"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="127.5" y="0.0" width="127" height="322"/>
+                                        </variation>
                                     </tableView>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xpb-Dz-Chr" customClass="GratuitousGradientView" customModule="Gratuity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="608" height="99"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="254.5" height="126"/>
+                                        </variation>
                                     </view>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qr8-7O-BPw" customClass="GratuitousGradientView" customModule="Gratuity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="169" width="608" height="99"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="196" width="254.5" height="126"/>
+                                        </variation>
                                     </view>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhw-69-tGe">
                                         <rect key="frame" x="0.0" y="99" width="608" height="70"/>
@@ -50,6 +62,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="6OR-Wa-ftF"/>
                                         </constraints>
+                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="8" y="126" width="246.5" height="70"/>
+                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cFa-ss-hba">
                                         <rect key="frame" x="87" y="0.0" width="129" height="33"/>
@@ -134,6 +149,9 @@
                                     <constraint firstItem="YkV-Bf-bef" firstAttribute="top" secondItem="Xpb-Dz-Chr" secondAttribute="top" id="ubx-Ny-tGW"/>
                                     <constraint firstItem="cFa-ss-hba" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YkV-Bf-bef" secondAttribute="leading" priority="750" id="xPl-Xg-Gen"/>
                                 </constraints>
+                                <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="-4" y="28" width="254.5" height="322"/>
+                                </variation>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sGt-Qz-W1j" userLabel="BigTextView">
                                 <rect key="frame" x="4" y="32" width="592" height="300"/>
@@ -189,25 +207,62 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5O-Qc-eNn">
-                                <rect key="frame" x="531" y="558" width="57" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AnE-E9-lRW" userLabel="SplitBillView">
+                                <rect key="frame" x="-4" y="556" width="608" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5O-Qc-eNn">
+                                        <rect key="frame" x="531" y="6" width="57" height="32"/>
+                                        <animations/>
+                                        <state key="normal" title="Settings"/>
+                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="177.5" y="10" width="57" height="30"/>
+                                        </variation>
+                                        <connections>
+                                            <segue destination="DJr-td-mzI" kind="presentation" identifier="settingsSegue" id="Ifz-Xu-nUN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOV-Xb-gam" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="6" width="499" height="32"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <state key="normal" title="Split Bill"/>
+                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="20" y="10" width="149.5" height="30"/>
+                                        </variation>
+                                    </button>
+                                </subviews>
                                 <animations/>
-                                <state key="normal" title="Settings"/>
-                                <connections>
-                                    <segue destination="DJr-td-mzI" kind="presentation" identifier="settingsSegue" id="Ifz-Xu-nUN"/>
-                                </connections>
-                            </button>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="x5O-Qc-eNn" secondAttribute="bottom" constant="20" symbolic="YES" id="09M-gl-tqw"/>
+                                    <constraint firstAttribute="trailing" secondItem="x5O-Qc-eNn" secondAttribute="trailing" constant="20" symbolic="YES" id="BPw-Au-76G"/>
+                                    <constraint firstItem="ZOV-Xb-gam" firstAttribute="centerY" secondItem="AnE-E9-lRW" secondAttribute="centerY" id="Pk8-vQ-f5c"/>
+                                    <constraint firstItem="x5O-Qc-eNn" firstAttribute="height" secondItem="ZOV-Xb-gam" secondAttribute="height" id="aBf-FI-vwP"/>
+                                    <constraint firstItem="ZOV-Xb-gam" firstAttribute="leading" secondItem="AnE-E9-lRW" secondAttribute="leading" constant="16" id="de8-k8-1Xn"/>
+                                    <constraint firstItem="ZOV-Xb-gam" firstAttribute="top" secondItem="AnE-E9-lRW" secondAttribute="top" constant="6" id="kMe-ae-f9d"/>
+                                    <constraint firstItem="x5O-Qc-eNn" firstAttribute="centerY" secondItem="AnE-E9-lRW" secondAttribute="centerY" id="nlg-GO-0Xa"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZOV-Xb-gam" secondAttribute="bottom" constant="6" id="yyK-Xu-c6c"/>
+                                    <constraint firstItem="x5O-Qc-eNn" firstAttribute="leading" secondItem="ZOV-Xb-gam" secondAttribute="trailing" constant="16" id="zaF-aV-Mgh"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="09M-gl-tqw"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="-4" y="350" width="254.5" height="50"/>
+                                </variation>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.11764705882352941" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="Tiu-8h-vjS" secondAttribute="leadingMargin" constant="-16" id="2AQ-5R-nkv"/>
+                            <constraint firstItem="AnE-E9-lRW" firstAttribute="leading" secondItem="Tiu-8h-vjS" secondAttribute="leadingMargin" constant="-24" id="529-bV-deN"/>
                             <constraint firstAttribute="width" secondItem="sGt-Qz-W1j" secondAttribute="width" multiplier="1.8" id="6Xg-LP-mPD"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="leading" secondItem="Tiu-8h-vjS" secondAttribute="leadingMargin" constant="-24" id="7KF-BY-y7Z"/>
-                            <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="bottom" id="BlF-RJ-lCt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="F2W-Pc-eWf" secondAttribute="trailing" constant="-24" id="BuD-8c-UWl"/>
-                            <constraint firstItem="F2W-Pc-eWf" firstAttribute="leading" secondItem="sGt-Qz-W1j" secondAttribute="trailing" constant="-608" id="DkL-g7-myv"/>
+                            <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="AnE-E9-lRW" secondAttribute="bottom" id="D48-qF-Ryp"/>
                             <constraint firstAttribute="height" secondItem="sGt-Qz-W1j" secondAttribute="height" multiplier="2/1" id="FaC-fR-bZY"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="top" secondItem="xlK-8w-4Zl" secondAttribute="bottom" constant="284" id="HR0-LO-i2X">
                                 <variation key="heightClass=compact" constant="8" symbolic="YES"/>
@@ -215,21 +270,24 @@
                             <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="F2W-Pc-eWf" secondAttribute="trailing" constant="208" id="V2B-iS-X4u">
                                 <variation key="heightClass=compact" constant="12"/>
                             </constraint>
-                            <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="x5O-Qc-eNn" secondAttribute="bottom" constant="12" id="Wbb-ez-0u8"/>
+                            <constraint firstItem="AnE-E9-lRW" firstAttribute="width" secondItem="F2W-Pc-eWf" secondAttribute="width" id="b1Y-2F-Qjj"/>
                             <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="sGt-Qz-W1j" secondAttribute="bottom" constant="96" id="dLp-g9-Eue">
                                 <variation key="heightClass=compact" constant="8" symbolic="YES"/>
                             </constraint>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="top" secondItem="sGt-Qz-W1j" secondAttribute="bottom" id="eVl-Jb-BFN"/>
+                            <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="bottom" id="iLc-dg-Qkj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sGt-Qz-W1j" secondAttribute="trailing" constant="-16" id="kxj-Dh-Zpe"/>
                             <constraint firstItem="sGt-Qz-W1j" firstAttribute="top" secondItem="xlK-8w-4Zl" secondAttribute="bottom" constant="12" id="o3k-iH-xLc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="x5O-Qc-eNn" secondAttribute="trailing" constant="-8" id="rCu-ms-0HB"/>
+                            <constraint firstItem="AnE-E9-lRW" firstAttribute="top" secondItem="F2W-Pc-eWf" secondAttribute="bottom" id="px6-Ge-IUi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AnE-E9-lRW" secondAttribute="trailing" constant="-24" id="ud8-9H-KKJ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="6Xg-LP-mPD"/>
                                 <exclude reference="V2B-iS-X4u"/>
-                                <exclude reference="DkL-g7-myv"/>
                                 <exclude reference="HR0-LO-i2X"/>
+                                <exclude reference="b1Y-2F-Qjj"/>
+                                <exclude reference="px6-Ge-IUi"/>
                                 <exclude reference="dLp-g9-Eue"/>
                             </mask>
                         </variation>
@@ -240,9 +298,10 @@
                                 <exclude reference="FaC-fR-bZY"/>
                                 <include reference="V2B-iS-X4u"/>
                                 <exclude reference="BuD-8c-UWl"/>
-                                <exclude reference="DkL-g7-myv"/>
                                 <include reference="HR0-LO-i2X"/>
                                 <exclude reference="eVl-Jb-BFN"/>
+                                <include reference="b1Y-2F-Qjj"/>
+                                <exclude reference="ud8-9H-KKJ"/>
                                 <include reference="dLp-g9-Eue"/>
                             </mask>
                         </variation>
@@ -280,7 +339,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="497" y="220"/>
+            <point key="canvasLocation" x="497" y="219"/>
         </scene>
         <!--Gratuity Settings-->
         <scene sceneID="PNA-as-gbs">
