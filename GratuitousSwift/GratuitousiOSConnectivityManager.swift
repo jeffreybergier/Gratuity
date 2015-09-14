@@ -13,6 +13,7 @@ protocol GratuitousiOSConnectivityManagerDelegate: class {
     func receivedContextFromWatch(context: [String : AnyObject])
 }
 
+@available(iOS 9, *)
 class GratuitousiOSConnectivityManager: NSObject, WCSessionDelegate {
     
     let session: WCSession? = {

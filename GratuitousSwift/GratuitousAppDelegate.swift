@@ -38,15 +38,18 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.tintColor = GratuitousUIConstant.lightTextColor()
         self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
         
-        self.transferBulkCurrencySymbolsIfNeeded()
-            
+        if #available(iOS 9, *) {
+            self.transferBulkCurrencySymbolsIfNeeded()
+        }
+        
         return true
     }
     
+    @available (iOS 9, *)
     private func transferBulkCurrencySymbolsIfNeeded() {
         //on first run make a last ditch effort to send a lot of currency symbols to the watch
         //this may prevent waiting on the watch later
-        if let watchConnectivityManager = self.dataSource.watchConnectivityManager,
+        if let watchConnectivityManager = self.dataSource.watchConnectivityManager as? GratuitousiOSConnectivityManager,
             let session = watchConnectivityManager.session
             where session.paired == true && session.watchAppInstalled == true {
                 if self.dataSource.defaultsManager?.freshWatchAppInstall == true {

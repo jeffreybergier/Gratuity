@@ -19,7 +19,7 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     
     weak var delegate: GratuitousiOSDataSourceDelegate?
     let defaultsManager: GratuitousPropertyListPreferences?
-    let watchConnectivityManager: GratuitousiOSConnectivityManager?
+    let watchConnectivityManager: AnyObject?
     private let currencyFormatter = NSNumberFormatter()
     var currencyCode: String {
         guard let defaultsManager = self.defaultsManager else { return "None" }
@@ -50,7 +50,11 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
             self.defaultsManager = .None
         case .AppLifeTime:
             self.defaultsManager = GratuitousPropertyListPreferences()
-            self.watchConnectivityManager = GratuitousiOSConnectivityManager()
+            if #available(iOS 9, *) {
+                self.watchConnectivityManager = GratuitousiOSConnectivityManager()
+            } else {
+                self.watchConnectivityManager = .None
+            }
         }
         
         self.currencyFormatter.locale = NSLocale.currentLocale()
@@ -67,7 +71,9 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: .None)
             
             self.defaultsManager?.delegate = self
-            self.watchConnectivityManager?.delegate = self
+            if #available(iOS 9, *) {
+                (self.watchConnectivityManager as? GratuitousiOSConnectivityManager)?.delegate = self
+            }
         }
     }
     
@@ -88,7 +94,9 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     }
     
     func setDataChanged() {
-        self.watchConnectivityManager?.updateWatchApplicationContext(self.defaultsManager?.model.contextDictionaryCopy)
+        if #available(iOS 9, *) {
+            (self.watchConnectivityManager as? GratuitousiOSConnectivityManager)?.updateWatchApplicationContext(self.defaultsManager?.model.contextDictionaryCopy)
+        }
     }
     
     func dataNeeded(dataNeeded: GratuitousPropertyListPreferences.DataNeeded) {
