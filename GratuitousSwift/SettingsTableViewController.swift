@@ -364,7 +364,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         let presentingVC = self.presentingViewController as? TipViewController
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             if let presentingVC = presentingVC {
-                presentingVC.performSegueWithIdentifier("watchInfoModalDialogSegue", sender: self)
+                presentingVC.performSegueWithIdentifier(TipViewController.StoryboardSegues.WatchInfo.rawValue, sender: self)
             }
         })
     }

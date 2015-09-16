@@ -9,10 +9,9 @@
 import UIKit
 import AVFoundation
 
-class WatchInfoViewController: UIViewController {
+class WatchInfoViewController: SmallModalViewController {
     
     @IBOutlet private weak var videoPlayerView: UIView?
-    @IBOutlet private weak var videoPlayerParentView: UIView?
     @IBOutlet private weak var gratuityTitleLabel: UILabel?
     @IBOutlet private weak var gratuityParagraphLabel: UILabel?
     @IBOutlet private weak var gratuitySubtitleLabel: UILabel?
@@ -51,9 +50,6 @@ class WatchInfoViewController: UIViewController {
             
             player.play()
         }
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        self.configureDynamicTextLabels()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -67,7 +63,9 @@ class WatchInfoViewController: UIViewController {
         }
     }
     
-    private func configureDynamicTextLabels() {
+    override func configureDynamicTextLabels() {
+        super.configureDynamicTextLabels()
+        
         let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         let headlineFontSize = headlineFont.pointSize * 2
         
@@ -88,68 +86,11 @@ class WatchInfoViewController: UIViewController {
         
         // prepare the button
         self.dismissButton?.setTitle(NSLocalizedString("Dismiss", comment: "Dismiss button for the Apple Watch Info Screen."), forState: UIControlState.Normal)
-        
-        // check screen height and draw border if appropriate
-        self.switchOnScreenSizeToDetermineBorderSurround()
-    }
-    
-    @objc private func systemTextSizeDidChange(notification: NSNotification) {
-        self.configureDynamicTextLabels()
     }
     
     @objc private func videoPlaybackFinished(notification: NSNotification) {
         if let videoPlayer = self.videoPlayer {
             videoPlayer.player.seekToTime(kCMTimeZero)
         }
-    }
-    
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        self.switchOnScreenSizeToDetermineBorderSurround()
-    }
-    
-    private func switchOnScreenSizeToDetermineBorderSurround() {
-        let actualHeight = UIScreen.mainScreen().bounds.size.height
-        switch actualHeight {
-        case 0 ..< 480:
-            self.showBorder()
-        case 480 ... 568:
-            self.hideBorder()
-        case 569 ..< CGFloat.max:
-            self.showBorder()
-        default:
-            break
-        }
-    }
-    
-    private func hideBorder() {
-        self.videoPlayerParentView?.layer.borderColor = GratuitousUIColor.mediumBackgroundColor().CGColor
-        self.videoPlayerParentView?.layer.borderWidth = 0
-        self.videoPlayerParentView?.layer.cornerRadius = 0
-        self.videoPlayerParentView?.clipsToBounds = true
-    }
-    
-    private func showBorder() {
-        self.videoPlayerParentView?.layer.borderColor = GratuitousUIColor.mediumBackgroundColor().CGColor
-        self.videoPlayerParentView?.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
-        self.videoPlayerParentView?.layer.cornerRadius = 6
-        self.videoPlayerParentView?.clipsToBounds = true
-    }
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
-    }
-    
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return UIInterfaceOrientation.Portrait
-    }
-    
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

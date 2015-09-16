@@ -1029,11 +1029,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contentView" destination="jv3-R1-bl9" id="LwA-jc-b8L"/>
                         <outlet property="dismissButton" destination="EbU-d4-xLb" id="dhY-iM-G9G"/>
                         <outlet property="gratuityParagraphLabel" destination="fwR-uM-jLF" id="2CH-JF-3MG"/>
                         <outlet property="gratuitySubtitleLabel" destination="i7i-VU-1If" id="ieq-nI-Sg7"/>
                         <outlet property="gratuityTitleLabel" destination="oSE-Uh-TGD" id="Wwo-H8-EGj"/>
-                        <outlet property="videoPlayerParentView" destination="jv3-R1-bl9" id="jew-gx-Jsf"/>
                         <outlet property="videoPlayerView" destination="4gF-6N-FII" id="sKx-Gp-ymw"/>
                     </connections>
                 </viewController>
@@ -1042,10 +1042,10 @@
             </objects>
             <point key="canvasLocation" x="421" y="1245"/>
         </scene>
-        <!--Watch Info View Controller-->
+        <!--Split Bill View Controller-->
         <scene sceneID="GV2-0q-hJS">
             <objects>
-                <viewController id="guv-CE-Qih" customClass="WatchInfoViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="guv-CE-Qih" customClass="SplitBillViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uo7-Vu-ny9"/>
                         <viewControllerLayoutGuide type="bottom" id="EV2-1F-kVg"/>
@@ -1061,17 +1061,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yt8-z7-ISB">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="628"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
                                                 <subviews>
-                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qdq-6q-KPO">
-                                                        <rect key="frame" x="0.0" y="138" width="320" height="568"/>
-                                                        <animations/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="320" id="Eh9-hc-US7"/>
-                                                            <constraint firstAttribute="height" constant="568" id="Z5A-L0-cDC"/>
-                                                        </constraints>
-                                                    </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gratuity" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0x-WI-Vew">
                                                         <rect key="frame" x="20" y="24" width="280" height="34"/>
                                                         <animations/>
@@ -1079,27 +1070,19 @@
                                                         <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apple Watch" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a46-ac-raj">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Split Bill" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a46-ac-raj">
                                                         <rect key="frame" x="20" y="54" width="280" height="34"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                                         <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUB-TW-cIx">
-                                                        <rect key="frame" x="20" y="104" width="280" height="89"/>
-                                                        <animations/>
-                                                        <string key="text">Did you just open a shiny new Apple Watch? Don't forget to install Gratuity. You can do so in the Apple Watch app on your iPhone.</string>
-                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                                        <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="veL-Cj-tja" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="556" width="280" height="32"/>
+                                                        <rect key="frame" x="20" y="96" width="280" height="32"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <state key="normal" title="Dismiss">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
@@ -1110,20 +1093,15 @@
                                                 <animations/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="veL-Cj-tja" firstAttribute="top" secondItem="a46-ac-raj" secondAttribute="bottom" constant="8" symbolic="YES" id="0pa-Qt-NPh"/>
                                                     <constraint firstItem="N0x-WI-Vew" firstAttribute="top" secondItem="Yt8-z7-ISB" secondAttribute="top" constant="24" id="170-kF-WMg"/>
                                                     <constraint firstItem="a46-ac-raj" firstAttribute="top" secondItem="N0x-WI-Vew" secondAttribute="bottom" constant="-4" id="3hq-K3-f7g"/>
-                                                    <constraint firstAttribute="trailing" secondItem="yUB-TW-cIx" secondAttribute="trailing" constant="20" symbolic="YES" id="4tw-HE-od1"/>
-                                                    <constraint firstItem="Qdq-6q-KPO" firstAttribute="top" secondItem="yUB-TW-cIx" secondAttribute="bottom" constant="-55" id="CPV-EC-UJR"/>
                                                     <constraint firstAttribute="width" constant="320" id="EAy-lj-Eaq"/>
-                                                    <constraint firstItem="veL-Cj-tja" firstAttribute="top" secondItem="Qdq-6q-KPO" secondAttribute="bottom" constant="-150" id="NPn-CP-9iZ"/>
                                                     <constraint firstItem="a46-ac-raj" firstAttribute="leading" secondItem="Yt8-z7-ISB" secondAttribute="leading" constant="20" symbolic="YES" id="QGH-FS-1aT"/>
                                                     <constraint firstAttribute="trailing" secondItem="veL-Cj-tja" secondAttribute="trailing" constant="20" symbolic="YES" id="TXh-ew-pV8"/>
                                                     <constraint firstAttribute="bottom" secondItem="veL-Cj-tja" secondAttribute="bottom" constant="40" id="Wta-hc-HeP"/>
-                                                    <constraint firstAttribute="centerX" secondItem="Qdq-6q-KPO" secondAttribute="centerX" id="XPX-Bu-JNY"/>
-                                                    <constraint firstItem="yUB-TW-cIx" firstAttribute="leading" secondItem="Yt8-z7-ISB" secondAttribute="leading" constant="20" symbolic="YES" id="a9u-FE-HSJ"/>
                                                     <constraint firstAttribute="trailing" secondItem="N0x-WI-Vew" secondAttribute="trailing" constant="20" symbolic="YES" id="oxv-Tm-1Jk"/>
                                                     <constraint firstItem="veL-Cj-tja" firstAttribute="leading" secondItem="Yt8-z7-ISB" secondAttribute="leading" constant="20" symbolic="YES" id="pz2-bv-NuM"/>
-                                                    <constraint firstItem="yUB-TW-cIx" firstAttribute="top" secondItem="a46-ac-raj" secondAttribute="bottom" constant="16" id="tZC-ki-9PE"/>
                                                     <constraint firstItem="N0x-WI-Vew" firstAttribute="leading" secondItem="Yt8-z7-ISB" secondAttribute="leading" constant="20" symbolic="YES" id="tlu-IW-Ugs"/>
                                                     <constraint firstAttribute="trailing" secondItem="a46-ac-raj" secondAttribute="trailing" constant="20" symbolic="YES" id="um9-Vg-bb9"/>
                                                 </constraints>
@@ -1164,12 +1142,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dismissButton" destination="veL-Cj-tja" id="Oy5-Wj-0N9"/>
-                        <outlet property="gratuityParagraphLabel" destination="yUB-TW-cIx" id="RA0-QJ-aQt"/>
-                        <outlet property="gratuitySubtitleLabel" destination="a46-ac-raj" id="lZz-fE-cIC"/>
-                        <outlet property="gratuityTitleLabel" destination="N0x-WI-Vew" id="GSk-Al-jfg"/>
-                        <outlet property="videoPlayerParentView" destination="E82-Bt-usv" id="pgF-MS-TFW"/>
-                        <outlet property="videoPlayerView" destination="Qdq-6q-KPO" id="8pm-Z3-ZJi"/>
+                        <outlet property="contentView" destination="E82-Bt-usv" id="Ljo-a0-jz7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6wz-e1-yRP" userLabel="First Responder" sceneMemberID="firstResponder"/>

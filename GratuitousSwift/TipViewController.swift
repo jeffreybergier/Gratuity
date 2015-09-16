@@ -292,20 +292,17 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         switch segueID {
         case .Settings:
-            if let settingsViewController = segue.destinationViewController as? UINavigationController {
-                settingsViewController.transitioningDelegate = self.presentationTransitionerDelegate
-                settingsViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-            }
+            let settingsViewController = segue.destinationViewController
+            settingsViewController.transitioningDelegate = self.presentationTransitionerDelegate
+            settingsViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         case .WatchInfo:
-            if let watchInfoViewController = segue.destinationViewController as? WatchInfoViewController {
-                watchInfoViewController.transitioningDelegate = self.presentationTransitionerDelegate
-                watchInfoViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-            }
+            let watchInfoViewController = segue.destinationViewController
+            watchInfoViewController.transitioningDelegate = self.presentationTransitionerDelegate
+            watchInfoViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         case .SplitBill:
-            if let splitBillViewController = segue.destinationViewController as? WatchInfoViewController {
-                splitBillViewController.transitioningDelegate = self.presentationTransitionerDelegate
-                splitBillViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-            }
+            let splitBillViewController = segue.destinationViewController
+            splitBillViewController.transitioningDelegate = self.presentationTransitionerDelegate
+            splitBillViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         }
     }
     

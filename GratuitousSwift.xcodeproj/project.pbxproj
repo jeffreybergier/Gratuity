@@ -26,6 +26,10 @@
 		7320A5461ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */; };
 		7320A5471ACDA87E001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */; };
 		7320A5481ACDA87F001C10B0 /* Fuuutuuura-Meeediuuum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */; };
+		732615E71BA9237C0081598F /* SmallModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732615E61BA9237C0081598F /* SmallModalViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		732615E81BA9237C0081598F /* SmallModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732615E61BA9237C0081598F /* SmallModalViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		732615EB1BA9289F0081598F /* SplitBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732615EA1BA9289F0081598F /* SplitBillViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		732615EC1BA9289F0081598F /* SplitBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732615EA1BA9289F0081598F /* SplitBillViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7334770F1A26E85000513F1F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
 		733C4F401B95458300EF8B46 /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		733C4F411B95458500EF8B46 /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
@@ -195,6 +199,8 @@
 		7313757F1ABF3EB10074E2F2 /* Gratuity WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuity WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		731633101B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSwiftiOSDataSource.swift; sourceTree = "<group>"; };
 		7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fuuutuuura-Meeediuuum.ttf"; sourceTree = "<group>"; };
+		732615E61BA9237C0081598F /* SmallModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallModalViewController.swift; sourceTree = "<group>"; };
+		732615EA1BA9289F0081598F /* SplitBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitBillViewController.swift; sourceTree = "<group>"; };
 		7334770E1A26E85000513F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
 		73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GratuityL WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -287,6 +293,24 @@
 				73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */,
 			);
 			name = "Watch Info View Controller";
+			sourceTree = "<group>";
+		};
+		732615E51BA923010081598F /* Small Modal View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				732615E61BA9237C0081598F /* SmallModalViewController.swift */,
+				732615E91BA928770081598F /* Split Bill View Controller */,
+				73011BE51AD05AD3001F6D71 /* Watch Info View Controller */,
+			);
+			name = "Small Modal View Controller";
+			sourceTree = "<group>";
+		};
+		732615E91BA928770081598F /* Split Bill View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				732615EA1BA9289F0081598F /* SplitBillViewController.swift */,
+			);
+			name = "Split Bill View Controller";
 			sourceTree = "<group>";
 		};
 		7334770C1A26E85000513F1F /* en.lproj */ = {
@@ -384,7 +408,7 @@
 				734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */,
 				7353346D1A1803FB008530E1 /* TipViewController */,
 				735334711A1804CC008530E1 /* Settings View Controller */,
-				73011BE51AD05AD3001F6D71 /* Watch Info View Controller */,
+				732615E51BA923010081598F /* Small Modal View Controller */,
 				735334721A1804E2008530E1 /* Custom Presentation */,
 				73A755B71A87FB010038E023 /* Custom Files */,
 				7382510419E60EED00CD2B28 /* Supporting Files */,
@@ -824,8 +848,10 @@
 				731633121B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift in Sources */,
 				738484D91B993B750044C14C /* GratuitousiOSConnectivityManager.swift in Sources */,
 				7376F8DF1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */,
+				732615EC1BA9289F0081598F /* SplitBillViewController.swift in Sources */,
 				736568E91A26DD1400603602 /* SettingsTableViewController.swift in Sources */,
 				736568EA1A26DD1400603602 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
+				732615E81BA9237C0081598F /* SmallModalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -851,8 +877,10 @@
 				731633111B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift in Sources */,
 				738484D81B993B750044C14C /* GratuitousiOSConnectivityManager.swift in Sources */,
 				7376F8DE1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */,
+				732615EB1BA9289F0081598F /* SplitBillViewController.swift in Sources */,
 				73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */,
 				73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
+				732615E71BA9237C0081598F /* SmallModalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
