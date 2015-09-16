@@ -278,21 +278,33 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
+    enum StoryboardSegues: String {
+        case Settings
+        case WatchInfo
+        case SplitBill
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let segueIdentifier = segue.identifier {
-            switch segueIdentifier {
-            case "settingsSegue":
-                if let settingsViewController = segue.destinationViewController as? UINavigationController {
-                    settingsViewController.transitioningDelegate = self.presentationTransitionerDelegate
-                    settingsViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-                }
-            case "watchInfoModalDialogSegue":
-                if let watchInfoViewController = segue.destinationViewController as? WatchInfoViewController {
-                    watchInfoViewController.transitioningDelegate = self.presentationTransitionerDelegate
-                    watchInfoViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-                }
-            default:
-                break
+        guard let identifier = segue.identifier, let segueID = StoryboardSegues(rawValue: identifier) else {
+            NSLog("TipViewController: Unknown Storyboard Segue Ocurred: \(segue)")
+            return
+        }
+        
+        switch segueID {
+        case .Settings:
+            if let settingsViewController = segue.destinationViewController as? UINavigationController {
+                settingsViewController.transitioningDelegate = self.presentationTransitionerDelegate
+                settingsViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+            }
+        case .WatchInfo:
+            if let watchInfoViewController = segue.destinationViewController as? WatchInfoViewController {
+                watchInfoViewController.transitioningDelegate = self.presentationTransitionerDelegate
+                watchInfoViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+            }
+        case .SplitBill:
+            if let splitBillViewController = segue.destinationViewController as? WatchInfoViewController {
+                splitBillViewController.transitioningDelegate = self.presentationTransitionerDelegate
+                splitBillViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
             }
         }
     }

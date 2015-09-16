@@ -218,7 +218,7 @@
                                             <rect key="frame" x="177.5" y="10" width="57" height="30"/>
                                         </variation>
                                         <connections>
-                                            <segue destination="DJr-td-mzI" kind="presentation" identifier="settingsSegue" id="Ifz-Xu-nUN"/>
+                                            <segue destination="DJr-td-mzI" kind="presentation" identifier="Settings" id="Ifz-Xu-nUN"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOV-Xb-gam" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
@@ -229,6 +229,9 @@
                                         <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
                                             <rect key="frame" x="20" y="10" width="149.5" height="30"/>
                                         </variation>
+                                        <connections>
+                                            <segue destination="guv-CE-Qih" kind="presentation" identifier="SplitBill" id="nCc-Vv-SMo"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <animations/>
@@ -324,7 +327,7 @@
                         <outlet property="tipPercentageTextLabelTopConstraint" destination="TnZ-0L-cV3" id="D1T-uh-FQn"/>
                         <outlet property="totalAmountTextLabel" destination="XcP-fE-KxA" id="qE9-EE-EG0"/>
                         <outlet property="totalAmountTextLabelBottomConstraint" destination="SWc-Sz-CRn" id="DQ5-bV-KEL"/>
-                        <segue destination="PgV-AZ-ABa" kind="presentation" identifier="watchInfoModalDialogSegue" id="Kwy-a3-dj5"/>
+                        <segue destination="PgV-AZ-ABa" kind="presentation" identifier="WatchInfo" id="Kwy-a3-dj5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0T-rq-gS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1037,7 +1040,142 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jrp-iL-16f" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dML-di-Rig" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="497" y="1293"/>
+            <point key="canvasLocation" x="421" y="1245"/>
+        </scene>
+        <!--Watch Info View Controller-->
+        <scene sceneID="GV2-0q-hJS">
+            <objects>
+                <viewController id="guv-CE-Qih" customClass="WatchInfoViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uo7-Vu-ny9"/>
+                        <viewControllerLayoutGuide type="bottom" id="EV2-1F-kVg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EMj-hc-rvt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E82-Bt-usv">
+                                <rect key="frame" x="140" y="16" width="320" height="568"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29I-6b-Xjk">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yt8-z7-ISB">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="628"/>
+                                                <subviews>
+                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qdq-6q-KPO">
+                                                        <rect key="frame" x="0.0" y="138" width="320" height="568"/>
+                                                        <animations/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="320" id="Eh9-hc-US7"/>
+                                                            <constraint firstAttribute="height" constant="568" id="Z5A-L0-cDC"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gratuity" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0x-WI-Vew">
+                                                        <rect key="frame" x="20" y="24" width="280" height="34"/>
+                                                        <animations/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
+                                                        <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apple Watch" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a46-ac-raj">
+                                                        <rect key="frame" x="20" y="54" width="280" height="34"/>
+                                                        <animations/>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
+                                                        <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUB-TW-cIx">
+                                                        <rect key="frame" x="20" y="104" width="280" height="89"/>
+                                                        <animations/>
+                                                        <string key="text">Did you just open a shiny new Apple Watch? Don't forget to install Gratuity. You can do so in the Apple Watch app on your iPhone.</string>
+                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                        <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="veL-Cj-tja" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="556" width="280" height="32"/>
+                                                        <animations/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <state key="normal" title="Dismiss">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <segue destination="SRS-ls-S5K" kind="unwind" identifier="unwindFromWatchInfoVC" unwindAction="unwindToViewController:" id="h8q-OX-SII"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <animations/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="N0x-WI-Vew" firstAttribute="top" secondItem="Yt8-z7-ISB" secondAttribute="top" constant="24" id="170-kF-WMg"/>
+                                                    <constraint firstItem="a46-ac-raj" firstAttribute="top" secondItem="N0x-WI-Vew" secondAttribute="bottom" constant="-4" id="3hq-K3-f7g"/>
+                                                    <constraint firstAttribute="trailing" secondItem="yUB-TW-cIx" secondAttribute="trailing" constant="20" symbolic="YES" id="4tw-HE-od1"/>
+                                                    <constraint firstItem="Qdq-6q-KPO" firstAttribute="top" secondItem="yUB-TW-cIx" secondAttribute="bottom" constant="-55" id="CPV-EC-UJR"/>
+                                                    <constraint firstAttribute="width" constant="320" id="EAy-lj-Eaq"/>
+                                                    <constraint firstItem="veL-Cj-tja" firstAttribute="top" secondItem="Qdq-6q-KPO" secondAttribute="bottom" constant="-150" id="NPn-CP-9iZ"/>
+                                                    <constraint firstItem="a46-ac-raj" firstAttribute="leading" secondItem="Yt8-z7-ISB" secondAttribute="leading" constant="20" symbolic="YES" id="QGH-FS-1aT"/>
+                                                    <constraint firstAttribute="trailing" secondItem="veL-Cj-tja" secondAttribute="trailing" constant="20" symbolic="YES" id="TXh-ew-pV8"/>
+                                                    <constraint firstAttribute="bottom" secondItem="veL-Cj-tja" secondAttribute="bottom" constant="40" id="Wta-hc-HeP"/>
+                                                    <constraint firstAttribute="centerX" secondItem="Qdq-6q-KPO" secondAttribute="centerX" id="XPX-Bu-JNY"/>
+                                                    <constraint firstItem="yUB-TW-cIx" firstAttribute="leading" secondItem="Yt8-z7-ISB" secondAttribute="leading" constant="20" symbolic="YES" id="a9u-FE-HSJ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="N0x-WI-Vew" secondAttribute="trailing" constant="20" symbolic="YES" id="oxv-Tm-1Jk"/>
+                                                    <constraint firstItem="veL-Cj-tja" firstAttribute="leading" secondItem="Yt8-z7-ISB" secondAttribute="leading" constant="20" symbolic="YES" id="pz2-bv-NuM"/>
+                                                    <constraint firstItem="yUB-TW-cIx" firstAttribute="top" secondItem="a46-ac-raj" secondAttribute="bottom" constant="16" id="tZC-ki-9PE"/>
+                                                    <constraint firstItem="N0x-WI-Vew" firstAttribute="leading" secondItem="Yt8-z7-ISB" secondAttribute="leading" constant="20" symbolic="YES" id="tlu-IW-Ugs"/>
+                                                    <constraint firstAttribute="trailing" secondItem="a46-ac-raj" secondAttribute="trailing" constant="20" symbolic="YES" id="um9-Vg-bb9"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Yt8-z7-ISB" secondAttribute="bottom" id="CgM-Op-snq"/>
+                                            <constraint firstAttribute="trailing" secondItem="Yt8-z7-ISB" secondAttribute="trailing" id="dHX-fw-FvU"/>
+                                            <constraint firstItem="Yt8-z7-ISB" firstAttribute="top" secondItem="29I-6b-Xjk" secondAttribute="top" id="sIj-nM-Vws"/>
+                                            <constraint firstItem="Yt8-z7-ISB" firstAttribute="leading" secondItem="29I-6b-Xjk" secondAttribute="leading" id="xJ8-gw-pTM"/>
+                                        </constraints>
+                                    </scrollView>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="749" constant="568" id="GXW-Bo-WnZ"/>
+                                    <constraint firstAttribute="centerX" secondItem="29I-6b-Xjk" secondAttribute="centerX" id="Oy1-wc-7cu"/>
+                                    <constraint firstItem="29I-6b-Xjk" firstAttribute="height" secondItem="E82-Bt-usv" secondAttribute="height" id="qMi-a9-se8"/>
+                                    <constraint firstAttribute="centerY" secondItem="29I-6b-Xjk" secondAttribute="centerY" id="toC-ER-kur"/>
+                                    <constraint firstItem="29I-6b-Xjk" firstAttribute="width" secondItem="E82-Bt-usv" secondAttribute="width" id="uK7-mD-R1J"/>
+                                    <constraint firstAttribute="width" constant="320" id="vJm-EH-e31"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="E82-Bt-usv" secondAttribute="centerX" id="6Ln-0I-Fdg"/>
+                            <constraint firstAttribute="centerY" secondItem="E82-Bt-usv" secondAttribute="centerY" id="EPE-IL-mah"/>
+                            <constraint firstItem="E82-Bt-usv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Uo7-Vu-ny9" secondAttribute="bottom" constant="-20" id="NKk-6b-Q3j">
+                                <variation key="heightClass=compact" constant="2"/>
+                            </constraint>
+                            <constraint firstItem="EV2-1F-kVg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="E82-Bt-usv" secondAttribute="bottom" constant="-20" id="nWM-4O-yau">
+                                <variation key="heightClass=compact" constant="2"/>
+                            </constraint>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dismissButton" destination="veL-Cj-tja" id="Oy5-Wj-0N9"/>
+                        <outlet property="gratuityParagraphLabel" destination="yUB-TW-cIx" id="RA0-QJ-aQt"/>
+                        <outlet property="gratuitySubtitleLabel" destination="a46-ac-raj" id="lZz-fE-cIC"/>
+                        <outlet property="gratuityTitleLabel" destination="N0x-WI-Vew" id="GSk-Al-jfg"/>
+                        <outlet property="videoPlayerParentView" destination="E82-Bt-usv" id="pgF-MS-TFW"/>
+                        <outlet property="videoPlayerView" destination="Qdq-6q-KPO" id="8pm-Z3-ZJi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6wz-e1-yRP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="SRS-ls-S5K" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1115" y="1245"/>
         </scene>
     </scenes>
     <resources>
