@@ -10,6 +10,36 @@ class SplitBillViewController: SmallModalViewController, UITableViewDataSource, 
     
     @IBOutlet private weak var tableView: UITableView?
     
+    private var dataSource: GratuitousiOSDataSource {
+        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
+            return appDelegate.dataSource
+        } else {
+            fatalError("SplitBillTableViewCell: Data Source was NIL.")
+        }
+    }
+    
+    private var totalAmount: Int {
+        guard let defaultsManager = self.dataSource.defaultsManager else { return 0 }
+        let billAmount = defaultsManager.billIndexPathRow
+        let suggestedTipPercentage = defaultsManager.suggestedTipPercentage
+        let tipAmount: Int
+        if defaultsManager.tipIndexPathRow != 0 {
+            tipAmount = defaultsManager.tipIndexPathRow
+        } else {
+            tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
+        }
+        let totalAmount = tipAmount + billAmount
+        //return 4000
+        return totalAmount
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.tableView?.estimatedRowHeight = 100
+        self.tableView?.rowHeight = UITableViewAutomaticDimension
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -23,25 +53,46 @@ class SplitBillViewController: SmallModalViewController, UITableViewDataSource, 
         }
     }
     
+    private func roundedDivisionWithTop(top: Int, bottom: Int) -> Int {
+        let division = Double(top)/Double(bottom)
+        if isinf(division) == false && isnan(division) == false {
+            return Int(round(division))
+        }
+        return 0
+    }
+    
+    private func determineTableRowCount() -> Int {
+        for i in 1 ..< 100 {
+            if self.roundedDivisionWithTop(self.totalAmount, bottom: i) <= 5 {
+                return i
+            }
+        }
+        return 100
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.determineTableRowCount()
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         guard let cell = cell as? SplitBillTableViewCell else { return }
         switch indexPath.row {
         case 0:
-            cell.identity = SplitBillTableViewCell.Identity.One(value: 100)
+            cell.identity = SplitBillTableViewCell.Identity.One(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
         case 1:
-            cell.identity = SplitBillTableViewCell.Identity.Two(value: 50)
+            cell.identity = SplitBillTableViewCell.Identity.Two(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
         case 2:
-            cell.identity = SplitBillTableViewCell.Identity.Three(value: 25)
+            cell.identity = SplitBillTableViewCell.Identity.Three(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
         case 3:
-            cell.identity = SplitBillTableViewCell.Identity.Four(value: 13)
+            cell.identity = SplitBillTableViewCell.Identity.Four(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
         case 4:
-            cell.identity = SplitBillTableViewCell.Identity.Five(value: 6)
+            cell.identity = SplitBillTableViewCell.Identity.Five(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
         default:
-            cell.identity = .None
+            cell.identity = SplitBillTableViewCell.Identity.Higher(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1), divisor: indexPath.row + 1)
         }
     }
     

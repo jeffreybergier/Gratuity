@@ -856,7 +856,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Gratuity Settings" id="7gG-vi-gS7">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="nPx-3f-eOd">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="nPx-3f-eOd">
                             <connections>
                                 <segue destination="3Sq-0z-Qfg" kind="unwind" unwindAction="unwindToViewController:" id="9N1-4L-sng"/>
                             </connections>
@@ -1069,11 +1069,18 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xj-zk-mFD">
-                                                            <rect key="frame" x="16" y="12.5" width="41.5" height="19.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xj-zk-mFD">
+                                                            <rect key="frame" x="16" y="12" width="41.5" height="19.5"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <color key="textColor" red="0.70588235294117641" green="0.039215686274509803" blue="0.039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hR-3o-gvu">
+                                                            <rect key="frame" x="237" y="12" width="41.5" height="19.5"/>
+                                                            <animations/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <color key="textColor" red="0.70588235290000001" green="0.039215686270000001" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="faces1" translatesAutoresizingMaskIntoConstraints="NO" id="Ayy-IW-xt7">
@@ -1083,14 +1090,19 @@
                                                     </subviews>
                                                     <animations/>
                                                     <constraints>
+                                                        <constraint firstItem="6hR-3o-gvu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9xj-zk-mFD" secondAttribute="trailing" constant="8" symbolic="YES" id="5sE-GV-dSj"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="Ayy-IW-xt7" secondAttribute="trailing" constant="8" id="9C2-7K-0Tj"/>
                                                         <constraint firstItem="9xj-zk-mFD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AiH-62-m6b" secondAttribute="topMargin" id="Kdp-1u-MsW"/>
                                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Ayy-IW-xt7" secondAttribute="bottom" id="NGh-85-xx2"/>
+                                                        <constraint firstItem="Ayy-IW-xt7" firstAttribute="leading" secondItem="6hR-3o-gvu" secondAttribute="trailing" constant="8" symbolic="YES" id="QRn-nK-GIE"/>
                                                         <constraint firstItem="Ayy-IW-xt7" firstAttribute="centerY" secondItem="AiH-62-m6b" secondAttribute="centerY" id="RpH-L2-3MP"/>
+                                                        <constraint firstItem="6hR-3o-gvu" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AiH-62-m6b" secondAttribute="topMargin" id="T0y-Ll-bTW"/>
                                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="9xj-zk-mFD" secondAttribute="bottom" id="bYM-gr-0dA"/>
                                                         <constraint firstItem="9xj-zk-mFD" firstAttribute="leading" secondItem="AiH-62-m6b" secondAttribute="leadingMargin" constant="8" id="cM2-xc-Zjq"/>
                                                         <constraint firstItem="9xj-zk-mFD" firstAttribute="centerY" secondItem="AiH-62-m6b" secondAttribute="centerY" id="gUr-qk-H3X"/>
                                                         <constraint firstItem="Ayy-IW-xt7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AiH-62-m6b" secondAttribute="topMargin" id="lK9-Io-O50"/>
+                                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="6hR-3o-gvu" secondAttribute="bottom" id="mg4-Lz-TQe"/>
+                                                        <constraint firstItem="6hR-3o-gvu" firstAttribute="centerY" secondItem="AiH-62-m6b" secondAttribute="centerY" id="uoS-ah-YJ1"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <animations/>
@@ -1101,6 +1113,7 @@
                                                 <connections>
                                                     <outlet property="primaryImageView" destination="Ayy-IW-xt7" id="0ni-PR-WAN"/>
                                                     <outlet property="primaryLabel" destination="9xj-zk-mFD" id="AhL-37-qmh"/>
+                                                    <outlet property="secondaryTextLabel" destination="6hR-3o-gvu" id="kEo-fX-r3h"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
