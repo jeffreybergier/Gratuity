@@ -10,7 +10,8 @@ import UIKit
 
 class SmallModalViewController: UIViewController {
     
-    @IBOutlet private weak var contentView: UIView?
+    @IBOutlet weak var contentView: UIView?
+    @IBOutlet weak var navigationBar: UINavigationBar?
     
     override func viewDidLoad() {
         super.viewDidLoad()

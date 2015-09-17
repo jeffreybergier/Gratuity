@@ -88,6 +88,8 @@
 		7399D9BF1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
 		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
+		73BF48541BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		73BF48551BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
 		73C98CB41B6E94D300416DDA /* Gratuity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7313755A1ABF3D900074E2F2 /* Gratuity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		73C98CB71B6E94D300416DDA /* Gratuity WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 731375661ABF3D910074E2F2 /* Gratuity WatchKit App.app */; };
@@ -240,6 +242,7 @@
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		73BC11D51B8FF29100A85A25 /* GratuityL WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuityL WatchKit App.entitlements"; sourceTree = "<group>"; };
 		73BC11D61B8FF29F00A85A25 /* Gratuity WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuity WatchKit App.entitlements"; sourceTree = "<group>"; };
+		73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitBillTableViewCell.swift; sourceTree = "<group>"; };
 		73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchConnectivityManager.swift; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
 		73D46AFD1AC7C9B400057185 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -309,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				732615EA1BA9289F0081598F /* SplitBillViewController.swift */,
+				73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */,
 			);
 			name = "Split Bill View Controller";
 			sourceTree = "<group>";
@@ -841,6 +845,7 @@
 				734A7C5B1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
 				736568E11A26DD1400603602 /* GratuitousEnums.swift in Sources */,
 				736568E31A26DD1400603602 /* GratuitousUIConstant.swift in Sources */,
+				73BF48551BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */,
 				736568E51A26DD1400603602 /* GratuitousGradientView.swift in Sources */,
 				736568E61A26DD1400603602 /* GratuitousPresentationController.swift in Sources */,
 				736568E71A26DD1400603602 /* GratuitousAppDelegate.swift in Sources */,
@@ -870,6 +875,7 @@
 				734A7C5A1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
 				73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */,
 				737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */,
+				73BF48541BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */,
 				73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */,
 				73D11C491A1DB2A3003D238C /* GratuitousPresentationController.swift in Sources */,
 				7382510719E60EED00CD2B28 /* GratuitousAppDelegate.swift in Sources */,
