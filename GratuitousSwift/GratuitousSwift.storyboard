@@ -27,33 +27,21 @@
                                         <rect key="frame" x="0.0" y="0.0" width="304" height="268"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="127.5" height="322"/>
-                                        </variation>
                                     </tableView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="V1Q-ia-Gn2">
                                         <rect key="frame" x="304" y="0.0" width="304" height="268"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="127.5" y="0.0" width="127" height="322"/>
-                                        </variation>
                                     </tableView>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xpb-Dz-Chr" customClass="GratuitousGradientView" customModule="Gratuity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="608" height="99"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="254.5" height="126"/>
-                                        </variation>
                                     </view>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qr8-7O-BPw" customClass="GratuitousGradientView" customModule="Gratuity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="169" width="608" height="99"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="196" width="254.5" height="126"/>
-                                        </variation>
                                     </view>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhw-69-tGe">
                                         <rect key="frame" x="0.0" y="99" width="608" height="70"/>
@@ -62,9 +50,6 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="6OR-Wa-ftF"/>
                                         </constraints>
-                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="8" y="126" width="246.5" height="70"/>
-                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cFa-ss-hba">
                                         <rect key="frame" x="87" y="0.0" width="129" height="33"/>
@@ -149,9 +134,6 @@
                                     <constraint firstItem="YkV-Bf-bef" firstAttribute="top" secondItem="Xpb-Dz-Chr" secondAttribute="top" id="ubx-Ny-tGW"/>
                                     <constraint firstItem="cFa-ss-hba" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YkV-Bf-bef" secondAttribute="leading" priority="750" id="xPl-Xg-Gen"/>
                                 </constraints>
-                                <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="-4" y="28" width="254.5" height="322"/>
-                                </variation>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sGt-Qz-W1j" userLabel="BigTextView">
                                 <rect key="frame" x="4" y="32" width="592" height="300"/>
@@ -214,9 +196,6 @@
                                         <rect key="frame" x="531" y="6" width="57" height="32"/>
                                         <animations/>
                                         <state key="normal" title="Settings"/>
-                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="177.5" y="10" width="57" height="30"/>
-                                        </variation>
                                         <connections>
                                             <segue destination="DJr-td-mzI" kind="presentation" identifier="Settings" id="Ifz-Xu-nUN"/>
                                         </connections>
@@ -226,9 +205,6 @@
                                         <animations/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <state key="normal" title="Split Bill"/>
-                                        <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="20" y="10" width="149.5" height="30"/>
-                                        </variation>
                                         <connections>
                                             <segue destination="guv-CE-Qih" kind="presentation" identifier="SplitBill" id="nCc-Vv-SMo"/>
                                         </connections>
@@ -240,7 +216,9 @@
                                     <constraint firstAttribute="trailing" secondItem="x5O-Qc-eNn" secondAttribute="trailing" constant="20" symbolic="YES" id="BPw-Au-76G"/>
                                     <constraint firstItem="ZOV-Xb-gam" firstAttribute="centerY" secondItem="AnE-E9-lRW" secondAttribute="centerY" id="Pk8-vQ-f5c"/>
                                     <constraint firstItem="x5O-Qc-eNn" firstAttribute="height" secondItem="ZOV-Xb-gam" secondAttribute="height" id="aBf-FI-vwP"/>
-                                    <constraint firstItem="ZOV-Xb-gam" firstAttribute="leading" secondItem="AnE-E9-lRW" secondAttribute="leading" constant="16" id="de8-k8-1Xn"/>
+                                    <constraint firstItem="ZOV-Xb-gam" firstAttribute="leading" secondItem="AnE-E9-lRW" secondAttribute="leading" constant="16" id="de8-k8-1Xn">
+                                        <variation key="heightClass=compact" constant="8"/>
+                                    </constraint>
                                     <constraint firstItem="ZOV-Xb-gam" firstAttribute="top" secondItem="AnE-E9-lRW" secondAttribute="top" constant="6" id="kMe-ae-f9d"/>
                                     <constraint firstItem="x5O-Qc-eNn" firstAttribute="centerY" secondItem="AnE-E9-lRW" secondAttribute="centerY" id="nlg-GO-0Xa"/>
                                     <constraint firstAttribute="bottom" secondItem="ZOV-Xb-gam" secondAttribute="bottom" constant="6" id="yyK-Xu-c6c"/>
@@ -251,8 +229,10 @@
                                         <exclude reference="09M-gl-tqw"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="-4" y="350" width="254.5" height="50"/>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="zaF-aV-Mgh"/>
+                                    </mask>
                                 </variation>
                             </view>
                         </subviews>
@@ -261,9 +241,15 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="Tiu-8h-vjS" secondAttribute="leadingMargin" constant="-16" id="2AQ-5R-nkv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AnE-E9-lRW" secondAttribute="trailing" constant="329.5" id="2hf-a4-8Rh">
+                                <variation key="heightClass=compact" constant="-24"/>
+                            </constraint>
                             <constraint firstItem="AnE-E9-lRW" firstAttribute="leading" secondItem="Tiu-8h-vjS" secondAttribute="leadingMargin" constant="-24" id="529-bV-deN"/>
                             <constraint firstAttribute="width" secondItem="sGt-Qz-W1j" secondAttribute="width" multiplier="1.8" id="6Xg-LP-mPD"/>
                             <constraint firstItem="F2W-Pc-eWf" firstAttribute="leading" secondItem="Tiu-8h-vjS" secondAttribute="leadingMargin" constant="-24" id="7KF-BY-y7Z"/>
+                            <constraint firstItem="ZOV-Xb-gam" firstAttribute="trailing" secondItem="F2W-Pc-eWf" secondAttribute="trailing" id="8d1-9i-PeZ">
+                                <variation key="heightClass=compact" constant="-2"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="F2W-Pc-eWf" secondAttribute="trailing" constant="-24" id="BuD-8c-UWl"/>
                             <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="AnE-E9-lRW" secondAttribute="bottom" id="D48-qF-Ryp"/>
                             <constraint firstAttribute="height" secondItem="sGt-Qz-W1j" secondAttribute="height" multiplier="2/1" id="FaC-fR-bZY"/>
@@ -273,7 +259,6 @@
                             <constraint firstItem="sGt-Qz-W1j" firstAttribute="leading" secondItem="F2W-Pc-eWf" secondAttribute="trailing" constant="208" id="V2B-iS-X4u">
                                 <variation key="heightClass=compact" constant="12"/>
                             </constraint>
-                            <constraint firstItem="AnE-E9-lRW" firstAttribute="width" secondItem="F2W-Pc-eWf" secondAttribute="width" id="b1Y-2F-Qjj"/>
                             <constraint firstItem="Msr-dh-upq" firstAttribute="top" secondItem="sGt-Qz-W1j" secondAttribute="bottom" constant="96" id="dLp-g9-Eue">
                                 <variation key="heightClass=compact" constant="8" symbolic="YES"/>
                             </constraint>
@@ -286,25 +271,27 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="HR0-LO-i2X"/>
                                 <exclude reference="6Xg-LP-mPD"/>
                                 <exclude reference="V2B-iS-X4u"/>
-                                <exclude reference="HR0-LO-i2X"/>
-                                <exclude reference="b1Y-2F-Qjj"/>
+                                <exclude reference="2hf-a4-8Rh"/>
                                 <exclude reference="px6-Ge-IUi"/>
+                                <exclude reference="8d1-9i-PeZ"/>
                                 <exclude reference="dLp-g9-Eue"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
+                                <exclude reference="BuD-8c-UWl"/>
+                                <include reference="HR0-LO-i2X"/>
+                                <exclude reference="eVl-Jb-BFN"/>
                                 <exclude reference="2AQ-5R-nkv"/>
                                 <include reference="6Xg-LP-mPD"/>
                                 <exclude reference="FaC-fR-bZY"/>
                                 <include reference="V2B-iS-X4u"/>
-                                <exclude reference="BuD-8c-UWl"/>
-                                <include reference="HR0-LO-i2X"/>
-                                <exclude reference="eVl-Jb-BFN"/>
-                                <include reference="b1Y-2F-Qjj"/>
+                                <include reference="2hf-a4-8Rh"/>
                                 <exclude reference="ud8-9H-KKJ"/>
+                                <include reference="8d1-9i-PeZ"/>
                                 <include reference="dLp-g9-Eue"/>
                             </mask>
                         </variation>
@@ -1118,14 +1105,13 @@
                                             </tableViewCell>
                                         </prototypes>
                                         <sections/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="guv-CE-Qih" id="wt3-7g-gwK"/>
-                                            <outlet property="delegate" destination="guv-CE-Qih" id="K6X-nN-h7Y"/>
-                                        </connections>
                                     </tableView>
                                     <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="mYb-Mx-bIv">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <animations/>
+                                        <textAttributes key="titleTextAttributes">
+                                            <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
+                                        </textAttributes>
                                         <items>
                                             <navigationItem title="Split Bill" id="5lq-WS-yOQ">
                                                 <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="lnU-wU-fCK">
@@ -1138,7 +1124,7 @@
                                     </navigationBar>
                                 </subviews>
                                 <animations/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="mYb-Mx-bIv" firstAttribute="top" secondItem="E82-Bt-usv" secondAttribute="top" id="2J9-0Z-NhX"/>
                                     <constraint firstItem="TVK-l4-hlr" firstAttribute="leading" secondItem="E82-Bt-usv" secondAttribute="leading" id="69d-eb-I3T"/>
@@ -1167,7 +1153,7 @@
                     <connections>
                         <outlet property="contentView" destination="E82-Bt-usv" id="Ljo-a0-jz7"/>
                         <outlet property="navigationBar" destination="mYb-Mx-bIv" id="CN7-Fr-LFt"/>
-                        <outlet property="tableView" destination="TVK-l4-hlr" id="S9Q-2P-7Zv"/>
+                        <outlet property="tableView" destination="TVK-l4-hlr" id="iDs-th-Uoq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6wz-e1-yRP" userLabel="First Responder" sceneMemberID="firstResponder"/>

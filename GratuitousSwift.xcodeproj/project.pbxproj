@@ -101,6 +101,8 @@
 		73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */; };
 		73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
 		73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
+		73EB5C731BABCA14000F4A99 /* SmallModalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB5C721BABCA14000F4A99 /* SmallModalTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		73EB5C741BABCA14000F4A99 /* SmallModalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB5C721BABCA14000F4A99 /* SmallModalTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */; };
 		73FB7E911B8A4B70001A47FC /* PickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */; };
 		73FB7E921B8A4B71001A47FC /* PickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */; };
@@ -249,6 +251,7 @@
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
 		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousEnums.swift; path = ../GratuitousSwift/GratuitousEnums.swift; sourceTree = "<group>"; };
 		73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousPropertyListPreferences.swift; path = ../GratuitousSwift/GratuitousPropertyListPreferences.swift; sourceTree = "<group>"; };
+		73EB5C721BABCA14000F4A99 /* SmallModalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallModalTableViewController.swift; sourceTree = "<group>"; };
 		73EDC4BC1A1807AA006AA72D /* GratuitousPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPresentationController.swift; sourceTree = "<group>"; };
 		73EDC4BE1A1816DD006AA72D /* GratuitousAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimatedTransitioning.swift; sourceTree = "<group>"; };
 		73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTransitioningDelegate.swift; sourceTree = "<group>"; };
@@ -302,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				732615E61BA9237C0081598F /* SmallModalViewController.swift */,
+				73EB5C721BABCA14000F4A99 /* SmallModalTableViewController.swift */,
 				732615E91BA928770081598F /* Split Bill View Controller */,
 				73011BE51AD05AD3001F6D71 /* Watch Info View Controller */,
 			);
@@ -853,6 +857,7 @@
 				731633121B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift in Sources */,
 				738484D91B993B750044C14C /* GratuitousiOSConnectivityManager.swift in Sources */,
 				7376F8DF1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */,
+				73EB5C741BABCA14000F4A99 /* SmallModalTableViewController.swift in Sources */,
 				732615EC1BA9289F0081598F /* SplitBillViewController.swift in Sources */,
 				736568E91A26DD1400603602 /* SettingsTableViewController.swift in Sources */,
 				736568EA1A26DD1400603602 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
@@ -883,6 +888,7 @@
 				731633111B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift in Sources */,
 				738484D81B993B750044C14C /* GratuitousiOSConnectivityManager.swift in Sources */,
 				7376F8DE1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */,
+				73EB5C731BABCA14000F4A99 /* SmallModalTableViewController.swift in Sources */,
 				732615EB1BA9289F0081598F /* SplitBillViewController.swift in Sources */,
 				73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */,
 				73D653461A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,

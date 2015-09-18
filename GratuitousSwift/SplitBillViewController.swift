@@ -6,9 +6,7 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-class SplitBillViewController: SmallModalViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    @IBOutlet private weak var tableView: UITableView?
+class SplitBillViewController: SmallModalTableViewController {
     
     private var dataSource: GratuitousiOSDataSource {
         if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
@@ -40,19 +38,6 @@ class SplitBillViewController: SmallModalViewController, UITableViewDataSource, 
         self.tableView?.rowHeight = UITableViewAutomaticDimension
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if let navBar = self.navigationBar, let tableView = self.tableView {
-            tableView.contentInset = UIEdgeInsets(
-                top: navBar.frame.size.height,
-                left: tableView.contentInset.left,
-                bottom: tableView.contentInset.bottom,
-                right: tableView.contentInset.right
-            )
-        }
-    }
-    
     private func roundedDivisionWithTop(top: Int, bottom: Int) -> Int {
         let division = Double(top)/Double(bottom)
         if isinf(division) == false && isnan(division) == false {
@@ -70,12 +55,12 @@ class SplitBillViewController: SmallModalViewController, UITableViewDataSource, 
         return 100
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.determineTableRowCount()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.determineTableRowCount()
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCellWithIdentifier("Detail")!
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -96,7 +81,7 @@ class SplitBillViewController: SmallModalViewController, UITableViewDataSource, 
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier("Detail")!
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
 }

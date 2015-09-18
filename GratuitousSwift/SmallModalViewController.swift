@@ -20,6 +20,13 @@ class SmallModalViewController: UIViewController {
         self.configureDynamicTextLabels()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // just in case this is not called by the trait collection changing
+        self.navigationBarHeightDidChange()
+    }
+    
     @objc private func systemTextSizeDidChange(notification: NSNotification) {
         self.configureDynamicTextLabels()
     }
@@ -31,7 +38,16 @@ class SmallModalViewController: UIViewController {
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            // needs to be called slightly after animation to work
+            self.navigationBarHeightDidChange()
+        }
         self.switchOnScreenSizeToDetermineBorderSurround()
+    }
+    
+    func navigationBarHeightDidChange() {
+        self.navigationBar?.sizeToFitWithStatusBar()
     }
     
     private func switchOnScreenSizeToDetermineBorderSurround() {
@@ -76,5 +92,18 @@ class SmallModalViewController: UIViewController {
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+}
+
+extension UINavigationBar {
+    func sizeToFitWithStatusBar() {
+        self.sizeToFit()
+        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+        let frameInWindowCoordinates = self.convertRect(self.frame, toView: .None)
+        if frameInWindowCoordinates.origin.y <= statusBarHeight {
+            //navbar is touching status bar
+            let navBarHeight = self.frame.size.height
+            self.frame.size.height = statusBarHeight + navBarHeight
+        }
     }
 }
