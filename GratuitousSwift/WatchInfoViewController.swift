@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class WatchInfoViewController: SmallModalViewController {
+class WatchInfoViewController: SmallModalScollViewController {
     
     @IBOutlet private weak var videoPlayerView: UIView?
     @IBOutlet private weak var gratuityTitleLabel: UILabel?

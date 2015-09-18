@@ -913,10 +913,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPR-iu-zel">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="628"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="650.5"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gF-6N-FII">
-                                                        <rect key="frame" x="0.0" y="138" width="320" height="568"/>
+                                                        <rect key="frame" x="0.0" y="137.5" width="320" height="568"/>
                                                         <animations/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
@@ -939,41 +939,26 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwR-uM-jLF">
-                                                        <rect key="frame" x="20" y="104" width="280" height="89"/>
+                                                        <rect key="frame" x="20" y="104" width="280" height="88.5"/>
                                                         <animations/>
                                                         <string key="text">Did you just open a shiny new Apple Watch? Don't forget to install Gratuity. You can do so in the Apple Watch app on your iPhone.</string>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                         <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbU-d4-xLb" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="556" width="280" height="32"/>
-                                                        <animations/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <state key="normal" title="Dismiss">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                        <connections>
-                                                            <segue destination="dML-di-Rig" kind="unwind" identifier="unwindFromWatchInfoVC" unwindAction="unwindToViewController:" id="Tu2-dF-XPp"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <animations/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="i7i-VU-1If" firstAttribute="leading" secondItem="IPR-iu-zel" secondAttribute="leading" constant="20" symbolic="YES" id="1Ta-C1-oGt"/>
                                                     <constraint firstAttribute="trailing" secondItem="oSE-Uh-TGD" secondAttribute="trailing" constant="20" symbolic="YES" id="1oo-0T-19t"/>
-                                                    <constraint firstItem="EbU-d4-xLb" firstAttribute="top" secondItem="4gF-6N-FII" secondAttribute="bottom" constant="-150" id="2Ov-GO-z0a"/>
                                                     <constraint firstItem="oSE-Uh-TGD" firstAttribute="top" secondItem="IPR-iu-zel" secondAttribute="top" constant="24" id="Bmu-eM-0y0"/>
                                                     <constraint firstItem="fwR-uM-jLF" firstAttribute="leading" secondItem="IPR-iu-zel" secondAttribute="leading" constant="20" symbolic="YES" id="C1q-4L-691"/>
                                                     <constraint firstAttribute="centerX" secondItem="4gF-6N-FII" secondAttribute="centerX" id="Dl6-Vu-vXE"/>
-                                                    <constraint firstAttribute="trailing" secondItem="EbU-d4-xLb" secondAttribute="trailing" constant="20" symbolic="YES" id="IIx-5a-nx0"/>
                                                     <constraint firstAttribute="trailing" secondItem="fwR-uM-jLF" secondAttribute="trailing" constant="20" symbolic="YES" id="Jsn-zo-ZQX"/>
+                                                    <constraint firstAttribute="bottom" secondItem="4gF-6N-FII" secondAttribute="bottom" constant="-55" id="Jwj-81-TKe"/>
                                                     <constraint firstAttribute="trailing" secondItem="i7i-VU-1If" secondAttribute="trailing" constant="20" symbolic="YES" id="St3-yz-Y8y"/>
-                                                    <constraint firstItem="EbU-d4-xLb" firstAttribute="leading" secondItem="IPR-iu-zel" secondAttribute="leading" constant="20" symbolic="YES" id="cUU-5H-npa"/>
                                                     <constraint firstItem="oSE-Uh-TGD" firstAttribute="leading" secondItem="IPR-iu-zel" secondAttribute="leading" constant="20" symbolic="YES" id="jVs-2e-W7l"/>
-                                                    <constraint firstAttribute="bottom" secondItem="EbU-d4-xLb" secondAttribute="bottom" constant="40" id="mq5-SB-ACL"/>
                                                     <constraint firstItem="4gF-6N-FII" firstAttribute="top" secondItem="fwR-uM-jLF" secondAttribute="bottom" constant="-55" id="uML-jl-Ej9"/>
                                                     <constraint firstItem="fwR-uM-jLF" firstAttribute="top" secondItem="i7i-VU-1If" secondAttribute="bottom" constant="16" id="z8Q-G1-09S"/>
                                                     <constraint firstItem="i7i-VU-1If" firstAttribute="top" secondItem="oSE-Uh-TGD" secondAttribute="bottom" constant="-4" id="zpN-5F-Ryf"/>
@@ -989,13 +974,32 @@
                                             <constraint firstAttribute="bottom" secondItem="IPR-iu-zel" secondAttribute="bottom" id="ght-2w-wRY"/>
                                         </constraints>
                                     </scrollView>
+                                    <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Z7s-S4-LFO">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <animations/>
+                                        <textAttributes key="titleTextAttributes">
+                                            <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
+                                        </textAttributes>
+                                        <items>
+                                            <navigationItem title="Split Bill" id="RgP-fT-kKu">
+                                                <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="hG4-Ov-lhB">
+                                                    <connections>
+                                                        <segue destination="dML-di-Rig" kind="unwind" unwindAction="unwindToViewController:" id="EBo-9d-p0O"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="ri1-EA-AF8" secondAttribute="centerY" id="DhK-Ht-2cy"/>
                                     <constraint firstItem="ri1-EA-AF8" firstAttribute="height" secondItem="jv3-R1-bl9" secondAttribute="height" id="G9e-MN-oUB"/>
+                                    <constraint firstAttribute="trailing" secondItem="Z7s-S4-LFO" secondAttribute="trailing" id="GkB-y2-D5G"/>
+                                    <constraint firstItem="Z7s-S4-LFO" firstAttribute="top" secondItem="jv3-R1-bl9" secondAttribute="top" id="JHD-OA-fo8"/>
                                     <constraint firstAttribute="width" constant="320" id="TYm-FJ-MFE"/>
+                                    <constraint firstItem="Z7s-S4-LFO" firstAttribute="leading" secondItem="jv3-R1-bl9" secondAttribute="leading" id="Wtq-6z-0dt"/>
                                     <constraint firstAttribute="centerX" secondItem="ri1-EA-AF8" secondAttribute="centerX" id="cAS-NZ-xFt"/>
                                     <constraint firstAttribute="height" priority="749" constant="568" id="e87-Km-89c"/>
                                     <constraint firstItem="ri1-EA-AF8" firstAttribute="width" secondItem="jv3-R1-bl9" secondAttribute="width" id="jJp-0E-24M"/>
@@ -1016,11 +1020,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentView" destination="jv3-R1-bl9" id="LwA-jc-b8L"/>
-                        <outlet property="dismissButton" destination="EbU-d4-xLb" id="dhY-iM-G9G"/>
+                        <outlet property="contentView" destination="jv3-R1-bl9" id="dFO-3c-PIV"/>
                         <outlet property="gratuityParagraphLabel" destination="fwR-uM-jLF" id="2CH-JF-3MG"/>
                         <outlet property="gratuitySubtitleLabel" destination="i7i-VU-1If" id="ieq-nI-Sg7"/>
                         <outlet property="gratuityTitleLabel" destination="oSE-Uh-TGD" id="Wwo-H8-EGj"/>
+                        <outlet property="navigationBar" destination="Z7s-S4-LFO" id="4s9-rC-cBQ"/>
+                        <outlet property="scrollView" destination="ri1-EA-AF8" id="nzF-7B-YC4"/>
                         <outlet property="videoPlayerView" destination="4gF-6N-FII" id="sKx-Gp-ymw"/>
                     </connections>
                 </viewController>
