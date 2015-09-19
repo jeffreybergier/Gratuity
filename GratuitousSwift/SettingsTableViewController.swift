@@ -70,6 +70,14 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         self.dataSource?.delegate = self
         
+        if let restoreIndexPath = self.restoreScrollPosition {
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.tableView.scrollToRowAtIndexPath(restoreIndexPath, atScrollPosition: .Top, animated: true)
+                self.restoreScrollPosition = .None
+            }
+        }
+        
         //prepare the currency override cells
         self.setInterfaceRefreshNeeded()
     }
@@ -390,6 +398,26 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             self.tableView.reloadData()
         })
         
+    }
+    
+    // MARK: Handle state restoration
+    
+    private var restoreScrollPosition: NSIndexPath?
+    
+    override func decodeRestorableStateWithCoder(coder: NSCoder) {
+        self.restoreScrollPosition = coder.decodeObjectForKey(RestoreKeys.ScrollToCellKey) as? NSIndexPath
+        super.decodeRestorableStateWithCoder(coder)
+    }
+    
+    override func encodeRestorableStateWithCoder(coder: NSCoder) {
+        if let indexPath = self.tableView.indexPathsForVisibleRows?.first {
+            coder.encodeObject(indexPath, forKey: RestoreKeys.ScrollToCellKey)
+        }
+        super.encodeRestorableStateWithCoder(coder)
+    }
+    
+    struct RestoreKeys {
+        static let ScrollToCellKey = "ScrollToCellKey"
     }
     
     // MARK: Handle View Going Away

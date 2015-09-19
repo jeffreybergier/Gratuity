@@ -11,10 +11,9 @@ import UIKit
 class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
     
     var isPresentation = true
-    var shouldAnimate = true
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-        let duration = self.shouldAnimate == true ? GratuitousUIConstant.animationDuration() * 2 : 0.01
+        let duration = GratuitousUIConstant.animationDuration() * 2
         return duration
     }
     

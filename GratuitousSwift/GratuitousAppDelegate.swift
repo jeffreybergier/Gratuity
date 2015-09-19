@@ -29,13 +29,6 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.tintColor = GratuitousUIConstant.lightTextColor()
         self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         
-        if let delegate = self.presentationTransitionerDelegate {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                delegate.shouldAnimate = true
-            }
-        }
-        
         if #available(iOS 9, *) {
             self.transferBulkCurrencySymbolsIfNeeded()
         }
@@ -44,7 +37,13 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
-        return true
+        if let _ = self.window?.rootViewController?.presentedViewController {
+            // only want to save state if there was a presented view controller
+            return true
+        } else {
+            // not saving state here prevents a small flash of state restoration when its not needed
+            return false
+        }
     }
     
     func application(application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
@@ -66,7 +65,6 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         
         if let vc = vc {
             let delegate = GratuitousTransitioningDelegate()
-            delegate.shouldAnimate = false
             vc.transitioningDelegate = delegate
             vc.modalPresentationStyle = UIModalPresentationStyle.Custom
             self.presentationTransitionerDelegate = delegate
