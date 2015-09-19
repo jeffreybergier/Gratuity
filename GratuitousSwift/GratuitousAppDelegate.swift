@@ -47,7 +47,13 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
-        return true
+        if let coderVersion = coder.decodeObjectForKey(UIApplicationStateRestorationBundleVersionKey) as? String,
+            let bundleVersion = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String
+            where coderVersion == bundleVersion {
+                return true
+        } else {
+            return false
+        }
     }
     
     func application(application: UIApplication, viewControllerWithRestorationIdentifierPath identifierComponents: [AnyObject], coder: NSCoder) -> UIViewController? {
