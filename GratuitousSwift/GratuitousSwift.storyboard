@@ -8,10 +8,10 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Tip View Controller-->
+        <!--Gratuity-->
         <scene sceneID="Rwn-PE-g5C">
             <objects>
-                <viewController storyboardIdentifier="TipViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="x3f-eR-MGT" customClass="TipViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TipViewController" title="Gratuity" useStoryboardIdentifierAsRestorationIdentifier="YES" id="x3f-eR-MGT" customClass="TipViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xlK-8w-4Zl"/>
                         <viewControllerLayoutGuide type="bottom" id="Msr-dh-upq"/>
@@ -271,9 +271,9 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="HR0-LO-i2X"/>
                                 <exclude reference="6Xg-LP-mPD"/>
                                 <exclude reference="V2B-iS-X4u"/>
+                                <exclude reference="HR0-LO-i2X"/>
                                 <exclude reference="2hf-a4-8Rh"/>
                                 <exclude reference="px6-Ge-IUi"/>
                                 <exclude reference="8d1-9i-PeZ"/>
@@ -282,13 +282,13 @@
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
-                                <exclude reference="BuD-8c-UWl"/>
-                                <include reference="HR0-LO-i2X"/>
-                                <exclude reference="eVl-Jb-BFN"/>
                                 <exclude reference="2AQ-5R-nkv"/>
                                 <include reference="6Xg-LP-mPD"/>
                                 <exclude reference="FaC-fR-bZY"/>
                                 <include reference="V2B-iS-X4u"/>
+                                <exclude reference="BuD-8c-UWl"/>
+                                <include reference="HR0-LO-i2X"/>
+                                <exclude reference="eVl-Jb-BFN"/>
                                 <include reference="2hf-a4-8Rh"/>
                                 <exclude reference="ud8-9H-KKJ"/>
                                 <include reference="8d1-9i-PeZ"/>
@@ -878,7 +878,7 @@
         <!--Navigation Controller-->
         <scene sceneID="poH-R9-Bm0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DJr-td-mzI" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SettingsNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DJr-td-mzI" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lWB-Bg-Uab">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -897,7 +897,7 @@
         <!--Watch Info View Controller-->
         <scene sceneID="EJD-a2-7g5">
             <objects>
-                <viewController id="PgV-AZ-ABa" customClass="WatchInfoViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WatchInfoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PgV-AZ-ABa" customClass="WatchInfoViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mQD-Te-16U"/>
                         <viewControllerLayoutGuide type="bottom" id="y5F-fz-l0t"/>
@@ -1037,7 +1037,7 @@
         <!--Split Bill View Controller-->
         <scene sceneID="GV2-0q-hJS">
             <objects>
-                <viewController id="guv-CE-Qih" customClass="SplitBillViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SplitBillViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="guv-CE-Qih" customClass="SplitBillViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uo7-Vu-ny9"/>
                         <viewControllerLayoutGuide type="bottom" id="EV2-1F-kVg"/>

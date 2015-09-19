@@ -10,12 +10,16 @@ import UIKit
 
 class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
+    var shouldAnimate = true
+    
     func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
         return GratuitousPresentationController(presentedViewController: presented, presentingViewController: presenting)
     }
     
     func animationController() -> GratuitousAnimatedTransitioning {
-        return GratuitousAnimatedTransitioning()
+        let animationController = GratuitousAnimatedTransitioning()
+        animationController.shouldAnimate = self.shouldAnimate
+        return animationController
     }
     
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

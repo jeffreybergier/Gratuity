@@ -17,7 +17,8 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     //initialize the window and the storyboard
     var window: UIWindow?
     let dataSource = GratuitousiOSDataSource(use: .AppLifeTime)
-    private let storyboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
+    private lazy var storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
+    private var presentationTransitionerDelegate: GratuitousTransitioningDelegate?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch
@@ -25,24 +26,53 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         //crashlytics intializer
         //Fabric.with([Crashlytics()])
         
-        //initialize the view controller from the storyboard
-        let tipViewController = self.storyboard.instantiateInitialViewController()
+        self.window!.tintColor = GratuitousUIConstant.lightTextColor()
+        self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         
-        //configure the window
-        if self.window == nil {
-            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        if let delegate = self.presentationTransitionerDelegate {
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                delegate.shouldAnimate = true
+            }
         }
-        
-        self.window?.rootViewController = tipViewController
-        self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
-        self.window?.tintColor = GratuitousUIConstant.lightTextColor()
-        self.window!.makeKeyAndVisible() //if window is not initialized yet, this should crash.
         
         if #available(iOS 9, *) {
             self.transferBulkCurrencySymbolsIfNeeded()
         }
         
         return true
+    }
+    
+    func application(application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
+    
+    func application(application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
+    
+    func application(application: UIApplication, viewControllerWithRestorationIdentifierPath identifierComponents: [AnyObject], coder: NSCoder) -> UIViewController? {
+        guard let viewControllerID = identifierComponents.last as? String else { return .None }
+        
+        let vc: UIViewController?
+        switch viewControllerID {
+        case "TipViewController":
+            vc = .None // do nothing because this is the main view controller
+        case "SettingsTableViewController":
+            vc = .None // do nothing because we actually need to customize the nav controller for this view controller
+        default:
+            vc = self.storyboard.instantiateViewControllerWithIdentifier(viewControllerID)
+        }
+        
+        if let vc = vc {
+            let delegate = GratuitousTransitioningDelegate()
+            delegate.shouldAnimate = false
+            vc.transitioningDelegate = delegate
+            vc.modalPresentationStyle = UIModalPresentationStyle.Custom
+            self.presentationTransitionerDelegate = delegate
+        }
+        
+        return vc
     }
     
     @available (iOS 9, *)
