@@ -981,7 +981,7 @@
                                             <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                                         </textAttributes>
                                         <items>
-                                            <navigationItem title="Split Bill" id="RgP-fT-kKu">
+                                            <navigationItem title="Gratuity" id="RgP-fT-kKu">
                                                 <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="hG4-Ov-lhB">
                                                     <connections>
                                                         <segue destination="dML-di-Rig" kind="unwind" unwindAction="unwindToViewController:" id="EBo-9d-p0O"/>
@@ -1007,7 +1007,7 @@
                             </view>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.13213659159999999" green="1" blue="0.1071995449" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="jv3-R1-bl9" secondAttribute="centerX" id="DSz-kz-G3k"/>
                             <constraint firstItem="y5F-fz-l0t" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jv3-R1-bl9" secondAttribute="bottom" constant="-20" id="hNy-mY-OiY">

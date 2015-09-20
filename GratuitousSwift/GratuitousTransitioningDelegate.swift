@@ -19,7 +19,15 @@ class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitioningDe
     }
         
     func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-        return GratuitousPresentationController(presentedViewController: presented, presentingViewController: presenting)
+        
+        switch self.type {
+        case .Right:
+            return GratuitousRightPresentationController(presentedViewController: presented, presentingViewController: presenting)
+        case .Bottom:
+            return GratuitousPresentationController(presentedViewController: presented, presentingViewController: presenting)
+        case .NotApplicable:
+            return .None
+        }
     }
     
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

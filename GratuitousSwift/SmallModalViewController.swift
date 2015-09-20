@@ -20,8 +20,24 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap = UITapGestureRecognizer(target:self, action:"dismissViewControllerGestureTriggered:")
+        let swipe = UISwipeGestureRecognizer(target:self, action:"dismissViewControllerGestureTriggered:")
+        swipe.direction = UISwipeGestureRecognizerDirection.Down
+        self.view.addGestureRecognizer(tap)
+        self.view.addGestureRecognizer(swipe)
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         self.configureDynamicTextLabels()
+    }
+    
+    @objc private func dismissViewControllerGestureTriggered(sender: UIGestureRecognizer?) {
+        guard let sender = sender else { return }
+        switch sender.state {
+        case .Ended:
+            self.dismissViewControllerAnimated(true, completion: .None)
+        default:
+            return
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
