@@ -21,11 +21,13 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell, GratuitousiO
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.layer.cornerRadius = 6.0
         self.layer.borderWidth = GratuitousUIConstant.thinBorderWidth()
         self.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
+        
     }
     
     func setInterfaceRefreshNeeded() {

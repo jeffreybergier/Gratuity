@@ -88,6 +88,8 @@
 		7399D9BE1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
 		7399D9BF1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
 		73B9BFF119FC629100700608 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
+		73BE874E1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BE874D1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift */; settings = {ASSET_TAGS = (); }; };
+		73BE874F1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BE874D1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift */; settings = {ASSET_TAGS = (); }; };
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73BF48541BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		73BF48551BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
@@ -249,6 +251,7 @@
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		73BC11D51B8FF29100A85A25 /* GratuityL WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuityL WatchKit App.entitlements"; sourceTree = "<group>"; };
 		73BC11D61B8FF29F00A85A25 /* Gratuity WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Gratuity WatchKit App.entitlements"; sourceTree = "<group>"; };
+		73BE874D1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousRoundedHeaderTableView.swift; sourceTree = "<group>"; };
 		73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitBillTableViewCell.swift; sourceTree = "<group>"; };
 		73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchConnectivityManager.swift; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
@@ -359,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */,
+				73BE874D1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift */,
 				73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */,
 			);
 			name = "Settings Subclasses";
@@ -852,6 +856,7 @@
 				736568DC1A26DD1400603602 /* TipViewController.swift in Sources */,
 				736568DD1A26DD1400603602 /* GratuitousTableViewCell.swift in Sources */,
 				736568DE1A26DD1400603602 /* GratuitousSettingsButtons.swift in Sources */,
+				73BE874F1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift in Sources */,
 				73011BE81AD05AFA001F6D71 /* WatchInfoViewController.swift in Sources */,
 				736568DF1A26DD1400603602 /* GratuitousTransitioningDelegate.swift in Sources */,
 				734A7C5B1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
@@ -885,6 +890,7 @@
 				7382512819E60F3900CD2B28 /* TipViewController.swift in Sources */,
 				7382512C19E6473A00CD2B28 /* GratuitousTableViewCell.swift in Sources */,
 				73D403A21A0C7D36007247E0 /* GratuitousSettingsButtons.swift in Sources */,
+				73BE874E1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift in Sources */,
 				73011BE71AD05AFA001F6D71 /* WatchInfoViewController.swift in Sources */,
 				73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */,
 				734A7C5A1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,

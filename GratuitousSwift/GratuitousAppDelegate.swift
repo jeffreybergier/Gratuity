@@ -38,13 +38,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
-        if let _ = self.window?.rootViewController?.presentedViewController {
-            // only want to save state if there was a presented view controller
-            return true
-        } else {
-            // not saving state here prevents a small flash of state restoration when its not needed
-            return false
-        }
+        return true
     }
     
     func application(application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
