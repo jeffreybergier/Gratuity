@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate, GratuitousiOSDataSourceDelegate {
+class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate, GratuitousiOSDataSourceDelegate, CustomAnimatedTransitionable {
     
     // MARK: Handle TableViewController
     @IBOutlet private weak var headerLabelTipPercentage: UILabel?
@@ -23,6 +23,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         swipe.direction = UISwipeGestureRecognizerDirection.Right
         return swipe
         }()
+    
+    var customTransitionType: GratuitousTransitioningDelegateType {
+        return .Right
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

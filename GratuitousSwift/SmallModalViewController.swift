@@ -8,10 +8,14 @@
 
 import UIKit
 
-class SmallModalViewController: UIViewController {
+class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
     
     @IBOutlet weak var contentView: UIView?
     @IBOutlet weak var navigationBar: UINavigationBar?
+    
+    var customTransitionType: GratuitousTransitioningDelegateType {
+        return .Bottom
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

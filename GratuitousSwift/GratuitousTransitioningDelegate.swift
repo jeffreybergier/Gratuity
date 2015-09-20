@@ -9,26 +9,46 @@
 import UIKit
 
 class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
+    
+    let type: GratuitousTransitioningDelegateType
+    lazy var rightAnimationController = GratuitousRightAnimatedTransitioning()
+    lazy var bottomAnimationController = GratuitousBottomAnimatedTransitioning()
+    
+    init(type: GratuitousTransitioningDelegateType) {
+        self.type = type
+    }
         
     func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
         return GratuitousPresentationController(presentedViewController: presented, presentingViewController: presenting)
     }
     
-    func animationController() -> GratuitousAnimatedTransitioning {
-        let animationController = GratuitousAnimatedTransitioning()
-        return animationController
-    }
-    
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let animationController = self.animationController()
-        animationController.isPresentation = true
+        
+        let animationController: UIViewControllerAnimatedTransitioning?
+        switch self.type {
+        case .Bottom:
+            animationController = self.bottomAnimationController
+        case .Right:
+            animationController = self.rightAnimationController
+        case .NotApplicable:
+            animationController = nil
+        }
+        (animationController as! GratuitousAnimatedTransitioning).isPresentation = true
         
         return animationController
     }
     
     func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let animationController = self.animationController()
-        animationController.isPresentation = false
+        let animationController: UIViewControllerAnimatedTransitioning?
+        switch self.type {
+        case .Bottom:
+            animationController = self.bottomAnimationController
+        case .Right:
+            animationController = self.rightAnimationController
+        case .NotApplicable:
+            animationController = nil
+        }
+        (animationController as! GratuitousAnimatedTransitioning).isPresentation = false
         
         return animationController
     }

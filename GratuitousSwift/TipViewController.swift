@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GratuitousiOSDataSourceDelegate {
+class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GratuitousiOSDataSourceDelegate, CustomAnimatedTransitionable {
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel?
     @IBOutlet private weak var totalAmountTextLabel: UILabel?
@@ -44,7 +44,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         case BillAmount = 0, TipAmount
     }
     
-    private let presentationTransitionerDelegate = GratuitousTransitioningDelegate()
+    private lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right)
+    private lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom)
     private var totalAmountTextLabelAttributes = [String : NSObject]()
     private var tipPercentageTextLabelAttributes = [String : NSObject]()
     private var viewDidAppearOnce = false
@@ -278,6 +279,10 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
+    var customTransitionType: GratuitousTransitioningDelegateType {
+        return .NotApplicable
+    }
+    
     enum StoryboardSegues: String {
         case Settings
         case WatchInfo
@@ -286,23 +291,24 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let identifier = segue.identifier, let segueID = StoryboardSegues(rawValue: identifier) else {
-            NSLog("TipViewController: Unknown Storyboard Segue Ocurred: \(segue)")
+            NSLog("TipViewController<PrepareForSegue>: Unknown Storyboard Segue Ocurred: \(segue)")
             return
         }
         
-        switch segueID {
-        case .Settings:
-            let settingsViewController = segue.destinationViewController
-            settingsViewController.transitioningDelegate = self.presentationTransitionerDelegate
-            settingsViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-        case .WatchInfo:
-            let watchInfoViewController = segue.destinationViewController
-            watchInfoViewController.transitioningDelegate = self.presentationTransitionerDelegate
-            watchInfoViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-        case .SplitBill:
-            let splitBillViewController = segue.destinationViewController
-            splitBillViewController.transitioningDelegate = self.presentationTransitionerDelegate
-            splitBillViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+        guard let animatableDestinationViewController = segue.destinationViewController as? CustomAnimatedTransitionable else {
+            NSLog("TipViewController<PrepareForSegue>: Destination View Controller does not conform to CustomAnimatedTransitionable: \(segue.destinationViewController)")
+            return
+        }
+        
+        switch animatableDestinationViewController.customTransitionType {
+        case .Right:
+            segue.destinationViewController.transitioningDelegate = self.presentationRightTransitionerDelegate
+            segue.destinationViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+        case .Bottom:
+            segue.destinationViewController.transitioningDelegate = self.presentationBottomTransitionerDelegate
+            segue.destinationViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+        case .NotApplicable:
+            break
         }
     }
     

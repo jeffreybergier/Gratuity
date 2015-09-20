@@ -18,7 +18,8 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let dataSource = GratuitousiOSDataSource(use: .AppLifeTime)
     private lazy var storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
-    private var presentationTransitionerDelegate: GratuitousTransitioningDelegate?
+    private lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right)
+    private lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom)
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch
@@ -69,11 +70,18 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             vc = self.storyboard.instantiateViewControllerWithIdentifier(viewControllerID)
         }
         
-        if let vc = vc {
-            let delegate = GratuitousTransitioningDelegate()
-            vc.transitioningDelegate = delegate
-            vc.modalPresentationStyle = UIModalPresentationStyle.Custom
-            self.presentationTransitionerDelegate = delegate
+        if let vc = vc,
+            let transitionable = vc as? CustomAnimatedTransitionable {
+                switch transitionable.customTransitionType {
+                case .Right:
+                    vc.transitioningDelegate = self.presentationRightTransitionerDelegate
+                    vc.modalPresentationStyle = UIModalPresentationStyle.Custom
+                case .Bottom:
+                    vc.transitioningDelegate = self.presentationBottomTransitionerDelegate
+                    vc.modalPresentationStyle = UIModalPresentationStyle.Custom
+                case .NotApplicable:
+                    break
+                }
         }
         
         return vc
