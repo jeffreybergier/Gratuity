@@ -60,7 +60,12 @@ class SplitBillViewController: SmallModalTableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier("Detail")!
+        switch indexPath.row {
+        case 0 ..< 5:
+            return tableView.dequeueReusableCellWithIdentifier("DetailSingleLabel")!
+        default:
+            return tableView.dequeueReusableCellWithIdentifier("DetailBiLabel")!
+        }
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
