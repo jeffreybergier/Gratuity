@@ -11,8 +11,17 @@ import UIKit
 class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
     let type: GratuitousTransitioningDelegateType
-    lazy var rightAnimationController = GratuitousRightAnimatedTransitioning()
-    lazy var bottomAnimationController = GratuitousBottomAnimatedTransitioning()
+    
+    lazy var rightAnimationController: GratuitousAnimatedTransitioning = {
+        let a = GratuitousAnimatedTransitioning()
+        a.style = .Right
+        return a
+    }()
+    lazy var bottomAnimationController: GratuitousAnimatedTransitioning = {
+        let a = GratuitousAnimatedTransitioning()
+        a.style = .Bottom
+        return a
+    }()
     
     init(type: GratuitousTransitioningDelegateType) {
         self.type = type
@@ -32,7 +41,7 @@ class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitioningDe
     
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        let animationController: UIViewControllerAnimatedTransitioning?
+        let animationController: GratuitousAnimatedTransitioning?
         switch self.type {
         case .Bottom:
             animationController = self.bottomAnimationController
@@ -41,7 +50,7 @@ class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitioningDe
         case .NotApplicable:
             animationController = nil
         }
-        (animationController as! GratuitousAnimatedTransitioning).isPresentation = true
+        animationController?.isPresentation = true
         
         return animationController
     }
