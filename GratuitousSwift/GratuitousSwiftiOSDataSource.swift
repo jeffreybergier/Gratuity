@@ -7,9 +7,18 @@
 //
 
 import UIKit
+import StoreKit
 
 protocol GratuitousiOSDataSourceDelegate: class {
     func setInterfaceRefreshNeeded()
+}
+
+class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate {
+    init(productIdentifiers: )
+    
+    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        
+    }
 }
 
 class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, GratuitousiOSConnectivityManagerDelegate {
@@ -19,6 +28,7 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
     
     weak var delegate: GratuitousiOSDataSourceDelegate?
     let defaultsManager: GratuitousPropertyListPreferences?
+    let purchaseManager: GratuitousPurchaseManager?
     let watchConnectivityManager: AnyObject?
     private let currencyFormatter = NSNumberFormatter()
     var currencyCode: String {
@@ -48,8 +58,10 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
         case .Temporary:
             self.watchConnectivityManager = .None
             self.defaultsManager = .None
+            self.purchaseManager = .None
         case .AppLifeTime:
             self.defaultsManager = GratuitousPropertyListPreferences()
+            self.purchaseManager = GratuitousPurchaseManager()
             if #available(iOS 9, *) {
                 self.watchConnectivityManager = GratuitousiOSConnectivityManager()
             } else {
