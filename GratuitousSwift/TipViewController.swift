@@ -44,8 +44,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         case BillAmount = 0, TipAmount
     }
     
-    private lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right)
-    private lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom)
+    private lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right, animate: true)
+    private lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom, animate: true)
     private var totalAmountTextLabelAttributes = [String : NSObject]()
     private var tipPercentageTextLabelAttributes = [String : NSObject]()
     private var viewDidAppearOnce = false
@@ -290,11 +290,6 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let identifier = segue.identifier, let segueID = StoryboardSegues(rawValue: identifier) else {
-            NSLog("TipViewController<PrepareForSegue>: Unknown Storyboard Segue Ocurred: \(segue)")
-            return
-        }
-        
         guard let animatableDestinationViewController = segue.destinationViewController as? CustomAnimatedTransitionable else {
             NSLog("TipViewController<PrepareForSegue>: Destination View Controller does not conform to CustomAnimatedTransitionable: \(segue.destinationViewController)")
             return

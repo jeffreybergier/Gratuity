@@ -18,8 +18,8 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let dataSource = GratuitousiOSDataSource(use: .AppLifeTime)
     private lazy var storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
-    private lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right)
-    private lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom)
+    private lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right, animate: false)
+    private lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom, animate: false)
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch

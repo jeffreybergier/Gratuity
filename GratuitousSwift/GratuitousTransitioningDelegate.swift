@@ -10,21 +10,25 @@ import UIKit
 
 class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
-    let type: GratuitousTransitioningDelegateType
+    private let type: GratuitousTransitioningDelegateType
+    private let shouldAnimate: Bool
     
     lazy var rightAnimationController: GratuitousAnimatedTransitioning = {
         let a = GratuitousAnimatedTransitioning()
         a.style = .Right
+        a.shouldAnimate = self.shouldAnimate
         return a
     }()
     lazy var bottomAnimationController: GratuitousAnimatedTransitioning = {
         let a = GratuitousAnimatedTransitioning()
         a.style = .Bottom
+        a.shouldAnimate = self.shouldAnimate
         return a
     }()
     
-    init(type: GratuitousTransitioningDelegateType) {
+    init(type: GratuitousTransitioningDelegateType, animate: Bool) {
         self.type = type
+        self.shouldAnimate = animate
     }
         
     func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
