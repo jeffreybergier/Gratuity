@@ -43,6 +43,7 @@ class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell, GratuitousiO
     }
     
     private func prepareTextLabel() {
+        self.readUserDefaultsAndSetCheckmarkWithTimer(false)
         self.instanceTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.instanceTextLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.layoutIfNeeded()
