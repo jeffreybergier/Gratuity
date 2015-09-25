@@ -63,6 +63,10 @@
 		736568F11A26DD1400603602 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382510F19E60EED00CD2B28 /* LaunchScreen.xib */; };
 		736568F21A26DD1400603602 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7382510D19E60EED00CD2B28 /* Images.xcassets */; };
 		736568F31A26DD1400603602 /* settingsIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */; };
+		7371F6CC1BB4ED2600048EC2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */; };
+		7371F6CD1BB4ED2F00048EC2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */; };
+		7371F6CF1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */; settings = {ASSET_TAGS = (); }; };
+		7371F6D01BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */; settings = {ASSET_TAGS = (); }; };
 		737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */; };
 		7376F8DE1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
 		7376F8DF1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
@@ -225,6 +229,8 @@
 		73621A951BAE563C00593FE4 /* GratuitousAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimatedTransitioning.swift; sourceTree = "<group>"; };
 		736568F81A26DD1400603602 /* GratuityLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuityLD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
+		7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPurchaseManager.swift; sourceTree = "<group>"; };
 		737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIConstant.swift; sourceTree = "<group>"; };
 		7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInterfaceController.swift; sourceTree = "<group>"; };
 		7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousLabelImageGenerator.swift; sourceTree = "<group>"; };
@@ -288,6 +294,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7371F6CC1BB4ED2600048EC2 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +302,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7371F6CD1BB4ED2F00048EC2 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +461,7 @@
 		73A18D591A2A9525002180DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */,
 				73A18D5A1A2A9525002180DD /* WatchKit.framework */,
 			);
 			name = Frameworks;
@@ -523,6 +532,7 @@
 				734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */,
 				738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */,
 				731633101B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift */,
+				7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */,
 				7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */,
 				7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */,
 			);
@@ -705,6 +715,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 0;
 							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 						};
 					};
 					7382510019E60EED00CD2B28 = {
@@ -712,6 +725,9 @@
 						DevelopmentTeam = V6ESYGU6CV;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
 						};
@@ -861,6 +877,7 @@
 				736568DF1A26DD1400603602 /* GratuitousTransitioningDelegate.swift in Sources */,
 				734A7C5B1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
 				736568E11A26DD1400603602 /* GratuitousEnums.swift in Sources */,
+				7371F6D01BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift in Sources */,
 				736568E31A26DD1400603602 /* GratuitousUIConstant.swift in Sources */,
 				73BF48551BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */,
 				736568E51A26DD1400603602 /* GratuitousGradientView.swift in Sources */,
@@ -895,6 +912,7 @@
 				73EDC4C11A181726006AA72D /* GratuitousTransitioningDelegate.swift in Sources */,
 				734A7C5A1AA8347C008823B6 /* GratuitousUIColor.swift in Sources */,
 				73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */,
+				7371F6CF1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift in Sources */,
 				737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */,
 				73BF48541BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */,
 				73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */,

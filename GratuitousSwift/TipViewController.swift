@@ -209,7 +209,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             self.viewDidAppearOnce = true
         }
     }
-    
+
     private func updateTableViewsFromDisk() {
         if let defaultsManager = self.dataSource?.defaultsManager {
             let billAmount = defaultsManager.billIndexPathRow + PrivateConstants.ExtraCells - 1
@@ -287,6 +287,23 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         case Settings
         case WatchInfo
         case SplitBill
+        case PurchaseSplitBill
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        guard let segue = StoryboardSegues(rawValue: identifier) else { return true }
+        
+        switch segue {
+        case .SplitBill:
+            if self.dataSource?.purchaseManager?.splitBillProduct.purchased == true {
+                return true
+            } else {
+                self.performSegueWithIdentifier(StoryboardSegues.PurchaseSplitBill.rawValue, sender: self)
+                return false
+            }
+        default:
+            return true
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

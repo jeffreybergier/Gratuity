@@ -13,14 +13,6 @@ protocol GratuitousiOSDataSourceDelegate: class {
     func setInterfaceRefreshNeeded()
 }
 
-class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate {
-    init(productIdentifiers: )
-    
-    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        
-    }
-}
-
 class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, GratuitousiOSConnectivityManagerDelegate {
     // This class mostly exists to reduce the number of times the app has to read and write NSUserDefaults.
     // Reads are saved into Instance Variables in this class
@@ -61,7 +53,7 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
             self.purchaseManager = .None
         case .AppLifeTime:
             self.defaultsManager = GratuitousPropertyListPreferences()
-            self.purchaseManager = GratuitousPurchaseManager()
+            self.purchaseManager = GratuitousPurchaseManager(requestImmediately: true)
             if #available(iOS 9, *) {
                 self.watchConnectivityManager = GratuitousiOSConnectivityManager()
             } else {
