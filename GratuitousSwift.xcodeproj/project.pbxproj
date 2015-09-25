@@ -67,6 +67,8 @@
 		7371F6CD1BB4ED2F00048EC2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */; };
 		7371F6CF1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */; settings = {ASSET_TAGS = (); }; };
 		7371F6D01BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */; settings = {ASSET_TAGS = (); }; };
+		7371F6D31BB5065B00048EC2 /* PurchaseSplitBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7371F6D21BB5065B00048EC2 /* PurchaseSplitBillViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		7371F6D41BB5065B00048EC2 /* PurchaseSplitBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7371F6D21BB5065B00048EC2 /* PurchaseSplitBillViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */; };
 		7376F8DE1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
 		7376F8DF1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
@@ -231,6 +233,7 @@
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
 		7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPurchaseManager.swift; sourceTree = "<group>"; };
+		7371F6D21BB5065B00048EC2 /* PurchaseSplitBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseSplitBillViewController.swift; sourceTree = "<group>"; };
 		737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIConstant.swift; sourceTree = "<group>"; };
 		7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInterfaceController.swift; sourceTree = "<group>"; };
 		7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousLabelImageGenerator.swift; sourceTree = "<group>"; };
@@ -325,6 +328,7 @@
 				73EB5C721BABCA14000F4A99 /* SmallModalTableViewController.swift */,
 				73EB5C751BABCD35000F4A99 /* SmallModalScrollViewController.swift */,
 				732615E91BA928770081598F /* Split Bill View Controller */,
+				7371F6D11BB5062900048EC2 /* Purchase Split Bill View Controller */,
 				73011BE51AD05AD3001F6D71 /* Watch Info View Controller */,
 			);
 			name = "Small Modal View Controller";
@@ -394,6 +398,14 @@
 				73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */,
 			);
 			name = "Custom Presentation";
+			sourceTree = "<group>";
+		};
+		7371F6D11BB5062900048EC2 /* Purchase Split Bill View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7371F6D21BB5065B00048EC2 /* PurchaseSplitBillViewController.swift */,
+			);
+			name = "Purchase Split Bill View Controller";
 			sourceTree = "<group>";
 		};
 		738250F819E60EED00CD2B28 = {
@@ -879,6 +891,7 @@
 				736568E11A26DD1400603602 /* GratuitousEnums.swift in Sources */,
 				7371F6D01BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift in Sources */,
 				736568E31A26DD1400603602 /* GratuitousUIConstant.swift in Sources */,
+				7371F6D41BB5065B00048EC2 /* PurchaseSplitBillViewController.swift in Sources */,
 				73BF48551BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */,
 				736568E51A26DD1400603602 /* GratuitousGradientView.swift in Sources */,
 				736568E61A26DD1400603602 /* GratuitousRightPresentationController.swift in Sources */,
@@ -914,6 +927,7 @@
 				73E35AF21A0D33DA009A2F97 /* GratuitousEnums.swift in Sources */,
 				7371F6CF1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift in Sources */,
 				737233DD19E8B9B70072EDB4 /* GratuitousUIConstant.swift in Sources */,
+				7371F6D31BB5065B00048EC2 /* PurchaseSplitBillViewController.swift in Sources */,
 				73BF48541BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */,
 				73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */,
 				73D11C491A1DB2A3003D238C /* GratuitousRightPresentationController.swift in Sources */,

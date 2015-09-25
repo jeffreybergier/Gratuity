@@ -8,13 +8,7 @@
 
 class SplitBillViewController: SmallModalTableViewController {
     
-    private var dataSource: GratuitousiOSDataSource {
-        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
-            return appDelegate.dataSource
-        } else {
-            fatalError("SplitBillTableViewCell: Data Source was NIL.")
-        }
-    }
+    private var dataSource: GratuitousiOSDataSource = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).dataSource
     
     private var totalAmount: Int {
         guard let defaultsManager = self.dataSource.defaultsManager else { return 0 }

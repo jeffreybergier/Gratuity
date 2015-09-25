@@ -1224,10 +1224,10 @@
             </objects>
             <point key="canvasLocation" x="1115" y="1245"/>
         </scene>
-        <!--Watch Info View Controller-->
+        <!--Purchase Split Bill View Controller-->
         <scene sceneID="jdD-Kf-8R3">
             <objects>
-                <viewController storyboardIdentifier="PurchaseSplitBillViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4i0-5n-mLI" customClass="WatchInfoViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PurchaseSplitBillViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4i0-5n-mLI" customClass="PurchaseSplitBillViewController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GMT-eH-rf8"/>
                         <viewControllerLayoutGuide type="bottom" id="geB-wN-ccA"/>
@@ -1243,17 +1243,24 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VcH-d6-Leh">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="650.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="332.5"/>
                                                 <subviews>
-                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNT-el-wJf">
-                                                        <rect key="frame" x="0.0" y="137.5" width="320" height="568"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNc-kG-LyJ" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="244.5" width="280" height="30"/>
                                                         <animations/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="568" id="0Fb-qU-ro3"/>
-                                                            <constraint firstAttribute="width" constant="320" id="6uS-na-nKQ"/>
-                                                        </constraints>
-                                                    </view>
+                                                        <state key="normal" title="Buy - 99¢"/>
+                                                        <connections>
+                                                            <action selector="didTapPurchaseButton:" destination="4i0-5n-mLI" eventType="touchUpInside" id="ydg-gk-6MK"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Wa-65-IUU" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="282.5" width="280" height="30"/>
+                                                        <animations/>
+                                                        <state key="normal" title="Restore Purchases"/>
+                                                        <connections>
+                                                            <action selector="didTapRestoreButton:" destination="4i0-5n-mLI" eventType="touchUpInside" id="owq-l7-nCM"/>
+                                                        </connections>
+                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gratuity" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQG-6Y-dUJ">
                                                         <rect key="frame" x="20" y="24" width="280" height="34"/>
                                                         <animations/>
@@ -1261,7 +1268,7 @@
                                                         <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apple Watch" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KxT-mW-U8Z">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Split Bill" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KxT-mW-U8Z">
                                                         <rect key="frame" x="20" y="54" width="280" height="34"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
@@ -1269,9 +1276,9 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khF-Uq-Ynf">
-                                                        <rect key="frame" x="20" y="104" width="280" height="88.5"/>
+                                                        <rect key="frame" x="20" y="104" width="280" height="132.5"/>
                                                         <animations/>
-                                                        <string key="text">Did you just open a shiny new Apple Watch? Don't forget to install Gratuity. You can do so in the Apple Watch app on your iPhone.</string>
+                                                        <string key="text">The Split Bill feature of Gratuity is offered as an in-app purchase. You can purchase this feature below. If you have already purchased this feature, tap the 'Restore' button below.</string>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                         <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1282,16 +1289,20 @@
                                                 <constraints>
                                                     <constraint firstItem="khF-Uq-Ynf" firstAttribute="leading" secondItem="VcH-d6-Leh" secondAttribute="leading" constant="20" symbolic="YES" id="1SJ-R0-pMe"/>
                                                     <constraint firstAttribute="trailing" secondItem="KxT-mW-U8Z" secondAttribute="trailing" constant="20" symbolic="YES" id="4CB-78-m4J"/>
+                                                    <constraint firstItem="uNc-kG-LyJ" firstAttribute="top" secondItem="khF-Uq-Ynf" secondAttribute="bottom" constant="8" symbolic="YES" id="8ny-UX-xx4"/>
                                                     <constraint firstAttribute="trailing" secondItem="khF-Uq-Ynf" secondAttribute="trailing" constant="20" symbolic="YES" id="9xl-tN-ydF"/>
                                                     <constraint firstAttribute="trailing" secondItem="kQG-6Y-dUJ" secondAttribute="trailing" constant="20" symbolic="YES" id="Dib-m8-JK2"/>
-                                                    <constraint firstAttribute="bottom" secondItem="cNT-el-wJf" secondAttribute="bottom" constant="-55" id="Fe8-j4-YVd"/>
-                                                    <constraint firstAttribute="centerX" secondItem="cNT-el-wJf" secondAttribute="centerX" id="ImE-yS-rQd"/>
+                                                    <constraint firstItem="3Wa-65-IUU" firstAttribute="top" secondItem="uNc-kG-LyJ" secondAttribute="bottom" constant="8" symbolic="YES" id="HC2-55-McC"/>
                                                     <constraint firstItem="kQG-6Y-dUJ" firstAttribute="leading" secondItem="VcH-d6-Leh" secondAttribute="leading" constant="20" symbolic="YES" id="JoE-Ub-BbM"/>
                                                     <constraint firstAttribute="width" constant="320" id="Usk-MT-TRH"/>
-                                                    <constraint firstItem="cNT-el-wJf" firstAttribute="top" secondItem="khF-Uq-Ynf" secondAttribute="bottom" constant="-55" id="X0Y-b8-mVN"/>
+                                                    <constraint firstAttribute="trailing" secondItem="3Wa-65-IUU" secondAttribute="trailing" constant="20" symbolic="YES" id="Yxw-N3-gLk"/>
+                                                    <constraint firstAttribute="bottom" secondItem="3Wa-65-IUU" secondAttribute="bottom" constant="20" symbolic="YES" id="Zj8-6p-qoD"/>
+                                                    <constraint firstItem="3Wa-65-IUU" firstAttribute="leading" secondItem="VcH-d6-Leh" secondAttribute="leading" constant="20" symbolic="YES" id="e5S-6s-TGS"/>
                                                     <constraint firstItem="KxT-mW-U8Z" firstAttribute="top" secondItem="kQG-6Y-dUJ" secondAttribute="bottom" constant="-4" id="ekT-g7-yVZ"/>
                                                     <constraint firstItem="kQG-6Y-dUJ" firstAttribute="top" secondItem="VcH-d6-Leh" secondAttribute="top" constant="24" id="hDm-gp-uaJ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="uNc-kG-LyJ" secondAttribute="trailing" constant="20" symbolic="YES" id="hdc-Rd-ULa"/>
                                                     <constraint firstItem="KxT-mW-U8Z" firstAttribute="leading" secondItem="VcH-d6-Leh" secondAttribute="leading" constant="20" symbolic="YES" id="jSW-BR-dNS"/>
+                                                    <constraint firstItem="uNc-kG-LyJ" firstAttribute="leading" secondItem="VcH-d6-Leh" secondAttribute="leading" constant="20" symbolic="YES" id="mxw-OU-j9c"/>
                                                     <constraint firstItem="khF-Uq-Ynf" firstAttribute="top" secondItem="KxT-mW-U8Z" secondAttribute="bottom" constant="16" id="qaJ-Ww-i3E"/>
                                                 </constraints>
                                             </view>
@@ -1311,7 +1322,7 @@
                                             <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                                         </textAttributes>
                                         <items>
-                                            <navigationItem title="Purchase" id="gQo-dW-tYf">
+                                            <navigationItem title="In App Purchase" id="gQo-dW-tYf">
                                                 <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="yla-me-1tS">
                                                     <connections>
                                                         <segue destination="1oh-P3-juZ" kind="unwind" unwindAction="unwindToViewController:" id="FZD-w5-ctL"/>
@@ -1350,12 +1361,13 @@
                     </view>
                     <connections>
                         <outlet property="contentView" destination="tXF-3g-8Mi" id="6nS-eu-36u"/>
-                        <outlet property="gratuityParagraphLabel" destination="khF-Uq-Ynf" id="N1V-sC-bYW"/>
-                        <outlet property="gratuitySubtitleLabel" destination="KxT-mW-U8Z" id="Ah5-US-hJy"/>
-                        <outlet property="gratuityTitleLabel" destination="kQG-6Y-dUJ" id="cA1-ca-fIj"/>
+                        <outlet property="descriptionParagraphLabel" destination="khF-Uq-Ynf" id="OZs-Pa-qw0"/>
                         <outlet property="navigationBar" destination="xoS-6e-CiA" id="mom-xo-2pj"/>
+                        <outlet property="purchaseButton" destination="uNc-kG-LyJ" id="iZk-lf-1pr"/>
+                        <outlet property="restoreButton" destination="3Wa-65-IUU" id="Tfl-VG-yyT"/>
                         <outlet property="scrollView" destination="u3v-oh-tY6" id="0de-SY-X9L"/>
-                        <outlet property="videoPlayerView" destination="cNT-el-wJf" id="tMe-oW-1gq"/>
+                        <outlet property="subtitleLabel" destination="KxT-mW-U8Z" id="yTd-re-IMv"/>
+                        <outlet property="titleLabel" destination="kQG-6Y-dUJ" id="szt-q6-1cW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zf8-2t-opd" userLabel="First Responder" sceneMemberID="firstResponder"/>

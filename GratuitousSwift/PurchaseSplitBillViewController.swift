@@ -1,20 +1,24 @@
 //
-//  WatchInfoViewController.swift
+//  PurchaseSplitBillViewController.swift
 //  GratuitousSwift
 //
-//  Created by Jeffrey Bergier on 4/4/15.
-//  Copyright (c) 2015 SaturdayApps. All rights reserved.
+//  Created by Jeffrey Bergier on 9/24/15.
+//  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
 import UIKit
 import AVFoundation
 
-class WatchInfoViewController: SmallModalScollViewController {
+class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     @IBOutlet private weak var videoPlayerView: UIView?
-    @IBOutlet private weak var gratuityTitleLabel: UILabel?
-    @IBOutlet private weak var gratuityParagraphLabel: UILabel?
-    @IBOutlet private weak var gratuitySubtitleLabel: UILabel?
+    @IBOutlet private weak var titleLabel: UILabel?
+    @IBOutlet private weak var descriptionParagraphLabel: UILabel?
+    @IBOutlet private weak var subtitleLabel: UILabel?
+    @IBOutlet private weak var purchaseButton: UIButton?
+    @IBOutlet private weak var restoreButton: UIButton?
+    
+    private var dataSource: GratuitousiOSDataSource = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).dataSource
     
     private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
         if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mov") {
@@ -69,25 +73,37 @@ class WatchInfoViewController: SmallModalScollViewController {
         let headlineFontSize = headlineFont.pointSize * 2
         
         //configure the large title label
-        self.gratuityTitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 1.3, fallbackStyle: .Headline)
-        self.gratuityTitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.gratuityTitleLabel?.text = NSLocalizedString("Gratuity", comment: "Large Title of Watch Info View Controller")
+        self.titleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 1.3, fallbackStyle: .Headline)
+        self.titleLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.titleLabel?.text = NSLocalizedString("Gratuity", comment: "Large Title of Watch Info View Controller")
         
         //configure the subtitle label
-        self.gratuitySubtitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 0.85, fallbackStyle: .Headline)
-        self.gratuitySubtitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.gratuitySubtitleLabel?.text = NSLocalizedString("Apple Watch", comment: "Large SubTitle of Watch Info View Controller")
+        self.subtitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 0.85, fallbackStyle: .Headline)
+        self.subtitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.subtitleLabel?.text = NSLocalizedString("Split Bill", comment: "Subtitle for the purchase split bill view controller")
         
         //configure the paragraph of text
-        self.gratuityParagraphLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        self.gratuityParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.gratuityParagraphLabel?.text = NSLocalizedString("Did you just open a shiny new Apple Watch? Don't forget to install Gratuity. You can do so in the Apple Watch App on the home screen.", comment: "Paragraph that explains how to install the watch app")
+        self.descriptionParagraphLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.descriptionParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.descriptionParagraphLabel?.text = NSLocalizedString("The Split Bill feature of Gratuity is offered as an in-app purchase. You can purchase this feature below. If you have already purchased this feature, tap the 'Restore' button below.", comment: "Paragraph that how to purchase the split bill feature.")
+
         
     }
     
     @objc private func videoPlaybackFinished(notification: NSNotification) {
         if let videoPlayer = self.videoPlayer {
             videoPlayer.player.seekToTime(kCMTimeZero)
+        }
+    }
+    
+    @IBAction private func didTapPurchaseButton(sender: UIButton?) {
+        
+    }
+    
+    @IBAction private func didTapRestoreButton(sender: UIButton?) {
+        self.dataSource.purchaseManager?.restorePurchasesWithCompletionHandler() { queue, success, error in
+            print("PurchaseSplitBillViewController: Attempted to Restore Purchases With Success: \(success)")
+            if let error = error { print("PurchaseSplitBillViewController: Attempted to Restore Purchases Failed with Error: \(error)") }
         }
     }
 }
