@@ -20,10 +20,8 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap = UITapGestureRecognizer(target:self, action:"dismissViewControllerGestureTriggered:")
         let swipe = UISwipeGestureRecognizer(target:self, action:"dismissViewControllerGestureTriggered:")
         swipe.direction = UISwipeGestureRecognizerDirection.Down
-        self.view.addGestureRecognizer(tap)
         self.view.addGestureRecognizer(swipe)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)

@@ -30,7 +30,6 @@
 		732615E81BA9237C0081598F /* SmallModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732615E61BA9237C0081598F /* SmallModalViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		732615EB1BA9289F0081598F /* SplitBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732615EA1BA9289F0081598F /* SplitBillViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		732615EC1BA9289F0081598F /* SplitBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732615EA1BA9289F0081598F /* SplitBillViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		7334770F1A26E85000513F1F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
 		733C4F401B95458300EF8B46 /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		733C4F411B95458500EF8B46 /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		733C4F441B9559BF00EF8B46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73D46AFD1AC7C9B400057185 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
@@ -99,7 +98,6 @@
 		73BEB23C19F73BEF009907AF /* GratuitousGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */; };
 		73BF48541BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		73BF48551BAA4CAF007CAD8E /* SplitBillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
 		73C98CB41B6E94D300416DDA /* Gratuity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7313755A1ABF3D900074E2F2 /* Gratuity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		73C98CB71B6E94D300416DDA /* Gratuity WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 731375661ABF3D910074E2F2 /* Gratuity WatchKit App.app */; };
 		73C98CBA1B6E94D500416DDA /* GratuityL WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73450E6C1ABF2926005927F1 /* GratuityL WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -817,7 +815,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				736568EF1A26DD1400603602 /* GratuitousTableViewCell.xib in Resources */,
-				73C7B4921A2A911E00536D86 /* Localizable.strings in Resources */,
 				736568F01A26DD1400603602 /* GratuitousSwift.storyboard in Resources */,
 				736568F11A26DD1400603602 /* LaunchScreen.xib in Resources */,
 				73011BED1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov in Resources */,
@@ -831,7 +828,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7382512D19E6473A00CD2B28 /* GratuitousTableViewCell.xib in Resources */,
-				7334770F1A26E85000513F1F /* Localizable.strings in Resources */,
 				73011BEC1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov in Resources */,
 				7313757E1ABF3E4B0074E2F2 /* GratuityStoreWatchExtensionInfo.plist in Resources */,
 				734171AF19E77BEF00405C7B /* GratuitousSwift.storyboard in Resources */,
@@ -1308,6 +1304,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = GratuitousSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
@@ -1329,6 +1326,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = GratuitousSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Gratuity;
 				PROVISIONING_PROFILE = "";

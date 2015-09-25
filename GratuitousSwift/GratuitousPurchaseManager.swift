@@ -89,14 +89,15 @@ class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentT
     
     let products = Set([
         SplitBillProduct.identifierString,
-        "com.saturdayapps.Gratuity.splitbillpurchase",
-        "com.SaturdayApps.Gratuity.splitbillpurchase",
-        "splitbillpurchase",
+        "com.saturdayapps.gratuity.splitbillpurchase",
+        "com.saturdayapps.Gratuity.splitbillpurchase2",
+        "com.SaturdayApps.Gratuity.splitbillpurchase2",
+        "splitbillpurchase2",
         "fakeItem"
         ])
     
     struct SplitBillProduct: Purchasable {
-        static let identifierString = "com.saturdayapps.gratuity.splitbillpurchase"
+        static let identifierString = "com.saturdayapps.gratuity.splitbillpurchase2"
         var purchased = false
     }
 }

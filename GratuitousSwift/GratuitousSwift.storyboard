@@ -55,7 +55,7 @@
                                         <rect key="frame" x="87" y="0.0" width="129" height="33"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Amount on Bill" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="qGH-24-ssK">
-                                                <rect key="frame" x="8" y="5" width="112.5" height="22.5"/>
+                                                <rect key="frame" x="8" y="5" width="113" height="23"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -79,7 +79,7 @@
                                         <rect key="frame" x="393" y="0.0" width="125" height="33"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Suggested Tip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="afh-uC-UXK">
-                                                <rect key="frame" x="8" y="5" width="108.5" height="22.5"/>
+                                                <rect key="frame" x="8" y="5" width="109" height="23"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -352,10 +352,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEd-ZB-RQk" customClass="GratuitousRoundedHeaderTableView" customModule="Gratuity" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="8" width="280.5" height="24"/>
+                                                    <rect key="frame" x="0.0" y="8" width="281" height="24"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Suggested Tip Percentage" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nf5-Rb-Dqy">
-                                                            <rect key="frame" x="20" y="4" width="200.5" height="16"/>
+                                                            <rect key="frame" x="20" y="4" width="201" height="16"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -391,7 +391,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.20000000298023224" minValue="0.0" maxValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aGj-HE-HCm">
-                                                    <rect key="frame" x="18" y="12" width="508.5" height="21"/>
+                                                    <rect key="frame" x="18" y="12" width="509" height="21"/>
                                                     <animations/>
                                                     <connections>
                                                         <action selector="didChangeSuggestedTipPercentageSlider:" destination="rPE-iu-epa" eventType="touchDragOutside" id="5dL-k7-q64"/>
@@ -400,7 +400,7 @@
                                                     </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="20%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9y-uL-XxO">
-                                                    <rect key="frame" x="548.5" y="16" width="31.5" height="12"/>
+                                                    <rect key="frame" x="549" y="16" width="31" height="12"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -442,10 +442,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fnc-WP-ncD" customClass="GratuitousRoundedHeaderTableView" customModule="Gratuity" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="20" width="280.5" height="12"/>
+                                                    <rect key="frame" x="0.0" y="20" width="281" height="12"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Override Currency Symbol" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhq-zL-B07">
-                                                            <rect key="frame" x="20" y="4" width="200.5" height="4"/>
+                                                            <rect key="frame" x="20" y="4" width="201" height="4"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -647,10 +647,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hOu-uH-xlh" customClass="GratuitousRoundedHeaderTableView" customModule="Gratuity" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="20" width="236.5" height="12"/>
+                                                    <rect key="frame" x="0.0" y="20" width="237" height="12"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="About SaturdayApps" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQ4-3s-gcG">
-                                                            <rect key="frame" x="20" y="4" width="156.5" height="4"/>
+                                                            <rect key="frame" x="20" y="4" width="157" height="4"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -741,7 +741,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sec-o8-Mzc" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
-                                                    <rect key="frame" x="242.5" y="4" width="114" height="36"/>
+                                                    <rect key="frame" x="243" y="4" width="114" height="36"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <inset key="contentEdgeInsets" minX="24" minY="8" maxX="24" maxY="8"/>
@@ -914,10 +914,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPR-iu-zel">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="650.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="651"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gF-6N-FII">
-                                                        <rect key="frame" x="0.0" y="137.5" width="320" height="568"/>
+                                                        <rect key="frame" x="0.0" y="138" width="320" height="568"/>
                                                         <animations/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
@@ -940,7 +940,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwR-uM-jLF">
-                                                        <rect key="frame" x="20" y="104" width="280" height="88.5"/>
+                                                        <rect key="frame" x="20" y="104" width="280" height="89"/>
                                                         <animations/>
                                                         <string key="text">Did you just open a shiny new Apple Watch? Don't forget to install Gratuity. You can do so in the Apple Watch app on your iPhone.</string>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
@@ -1062,14 +1062,14 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xj-zk-mFD">
-                                                            <rect key="frame" x="16" y="12" width="41.5" height="19.5"/>
+                                                            <rect key="frame" x="16" y="12" width="42" height="20"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <color key="textColor" red="0.70588235294117641" green="0.039215686274509803" blue="0.039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hR-3o-gvu">
-                                                            <rect key="frame" x="270" y="12" width="41.5" height="19.5"/>
+                                                            <rect key="frame" x="270" y="12" width="42" height="20"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <color key="textColor" red="0.70588235290000001" green="0.039215686270000001" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1126,7 +1126,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYZ-eJ-nPI">
-                                                            <rect key="frame" x="16" y="12" width="41.5" height="19.5"/>
+                                                            <rect key="frame" x="16" y="12" width="42" height="20"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <color key="textColor" red="0.70588235290000001" green="0.039215686270000001" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1243,10 +1243,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VcH-d6-Leh">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="332.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="333"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNc-kG-LyJ" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="244.5" width="280" height="30"/>
+                                                        <rect key="frame" x="20" y="245" width="272" height="30"/>
                                                         <animations/>
                                                         <state key="normal" title="Buy - 99¢"/>
                                                         <connections>
@@ -1254,13 +1254,27 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Wa-65-IUU" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="282.5" width="280" height="30"/>
+                                                        <rect key="frame" x="20" y="283" width="272" height="30"/>
                                                         <animations/>
                                                         <state key="normal" title="Restore Purchases"/>
                                                         <connections>
                                                             <action selector="didTapRestoreButton:" destination="4i0-5n-mLI" eventType="touchUpInside" id="owq-l7-nCM"/>
                                                         </connections>
                                                     </button>
+                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="nL4-5q-tKU">
+                                                        <rect key="frame" x="300" y="250" width="0.0" height="20"/>
+                                                        <animations/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" id="VVl-dj-vvJ"/>
+                                                        </constraints>
+                                                    </activityIndicatorView>
+                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="I0s-PC-Pew">
+                                                        <rect key="frame" x="300" y="288" width="0.0" height="20"/>
+                                                        <animations/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" id="xCd-Oy-mIM"/>
+                                                        </constraints>
+                                                    </activityIndicatorView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gratuity" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQG-6Y-dUJ">
                                                         <rect key="frame" x="20" y="24" width="280" height="34"/>
                                                         <animations/>
@@ -1276,7 +1290,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khF-Uq-Ynf">
-                                                        <rect key="frame" x="20" y="104" width="280" height="132.5"/>
+                                                        <rect key="frame" x="20" y="104" width="280" height="133"/>
                                                         <animations/>
                                                         <string key="text">The Split Bill feature of Gratuity is offered as an in-app purchase. You can purchase this feature below. If you have already purchased this feature, tap the 'Restore' button below.</string>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
@@ -1287,6 +1301,7 @@
                                                 <animations/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="nL4-5q-tKU" firstAttribute="centerY" secondItem="uNc-kG-LyJ" secondAttribute="centerY" id="0oA-XT-3RV"/>
                                                     <constraint firstItem="khF-Uq-Ynf" firstAttribute="leading" secondItem="VcH-d6-Leh" secondAttribute="leading" constant="20" symbolic="YES" id="1SJ-R0-pMe"/>
                                                     <constraint firstAttribute="trailing" secondItem="KxT-mW-U8Z" secondAttribute="trailing" constant="20" symbolic="YES" id="4CB-78-m4J"/>
                                                     <constraint firstItem="uNc-kG-LyJ" firstAttribute="top" secondItem="khF-Uq-Ynf" secondAttribute="bottom" constant="8" symbolic="YES" id="8ny-UX-xx4"/>
@@ -1294,17 +1309,28 @@
                                                     <constraint firstAttribute="trailing" secondItem="kQG-6Y-dUJ" secondAttribute="trailing" constant="20" symbolic="YES" id="Dib-m8-JK2"/>
                                                     <constraint firstItem="3Wa-65-IUU" firstAttribute="top" secondItem="uNc-kG-LyJ" secondAttribute="bottom" constant="8" symbolic="YES" id="HC2-55-McC"/>
                                                     <constraint firstItem="kQG-6Y-dUJ" firstAttribute="leading" secondItem="VcH-d6-Leh" secondAttribute="leading" constant="20" symbolic="YES" id="JoE-Ub-BbM"/>
+                                                    <constraint firstItem="I0s-PC-Pew" firstAttribute="centerY" secondItem="3Wa-65-IUU" secondAttribute="centerY" id="RXh-EN-aFv"/>
+                                                    <constraint firstAttribute="trailing" secondItem="nL4-5q-tKU" secondAttribute="trailing" constant="20" symbolic="YES" id="TEG-mB-hKO"/>
                                                     <constraint firstAttribute="width" constant="320" id="Usk-MT-TRH"/>
                                                     <constraint firstAttribute="trailing" secondItem="3Wa-65-IUU" secondAttribute="trailing" constant="20" symbolic="YES" id="Yxw-N3-gLk"/>
                                                     <constraint firstAttribute="bottom" secondItem="3Wa-65-IUU" secondAttribute="bottom" constant="20" symbolic="YES" id="Zj8-6p-qoD"/>
+                                                    <constraint firstItem="I0s-PC-Pew" firstAttribute="leading" secondItem="3Wa-65-IUU" secondAttribute="trailing" constant="8" symbolic="YES" id="dCf-k1-KMZ"/>
                                                     <constraint firstItem="3Wa-65-IUU" firstAttribute="leading" secondItem="VcH-d6-Leh" secondAttribute="leading" constant="20" symbolic="YES" id="e5S-6s-TGS"/>
                                                     <constraint firstItem="KxT-mW-U8Z" firstAttribute="top" secondItem="kQG-6Y-dUJ" secondAttribute="bottom" constant="-4" id="ekT-g7-yVZ"/>
+                                                    <constraint firstItem="nL4-5q-tKU" firstAttribute="leading" secondItem="uNc-kG-LyJ" secondAttribute="trailing" constant="8" symbolic="YES" id="f0c-5B-pcQ"/>
                                                     <constraint firstItem="kQG-6Y-dUJ" firstAttribute="top" secondItem="VcH-d6-Leh" secondAttribute="top" constant="24" id="hDm-gp-uaJ"/>
                                                     <constraint firstAttribute="trailing" secondItem="uNc-kG-LyJ" secondAttribute="trailing" constant="20" symbolic="YES" id="hdc-Rd-ULa"/>
                                                     <constraint firstItem="KxT-mW-U8Z" firstAttribute="leading" secondItem="VcH-d6-Leh" secondAttribute="leading" constant="20" symbolic="YES" id="jSW-BR-dNS"/>
                                                     <constraint firstItem="uNc-kG-LyJ" firstAttribute="leading" secondItem="VcH-d6-Leh" secondAttribute="leading" constant="20" symbolic="YES" id="mxw-OU-j9c"/>
+                                                    <constraint firstAttribute="trailing" secondItem="I0s-PC-Pew" secondAttribute="trailing" constant="20" symbolic="YES" id="pde-sa-Rdj"/>
                                                     <constraint firstItem="khF-Uq-Ynf" firstAttribute="top" secondItem="KxT-mW-U8Z" secondAttribute="bottom" constant="16" id="qaJ-Ww-i3E"/>
                                                 </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="hdc-Rd-ULa"/>
+                                                        <exclude reference="Yxw-N3-gLk"/>
+                                                    </mask>
+                                                </variation>
                                             </view>
                                         </subviews>
                                         <animations/>
@@ -1364,7 +1390,11 @@
                         <outlet property="descriptionParagraphLabel" destination="khF-Uq-Ynf" id="OZs-Pa-qw0"/>
                         <outlet property="navigationBar" destination="xoS-6e-CiA" id="mom-xo-2pj"/>
                         <outlet property="purchaseButton" destination="uNc-kG-LyJ" id="iZk-lf-1pr"/>
+                        <outlet property="purchaseButtonSpinner" destination="nL4-5q-tKU" id="xx5-QS-8QQ"/>
+                        <outlet property="purchaseButtonSpinnerWidthConstraint" destination="VVl-dj-vvJ" id="6iZ-Kz-Iax"/>
                         <outlet property="restoreButton" destination="3Wa-65-IUU" id="Tfl-VG-yyT"/>
+                        <outlet property="restoreButtonSpinner" destination="I0s-PC-Pew" id="vF8-lI-6gH"/>
+                        <outlet property="restoreButtonSpinnerWidthConstraint" destination="xCd-Oy-mIM" id="LwM-We-6u6"/>
                         <outlet property="scrollView" destination="u3v-oh-tY6" id="0de-SY-X9L"/>
                         <outlet property="subtitleLabel" destination="KxT-mW-U8Z" id="yTd-re-IMv"/>
                         <outlet property="titleLabel" destination="kQG-6Y-dUJ" id="szt-q6-1cW"/>

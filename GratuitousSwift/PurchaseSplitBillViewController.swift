@@ -8,8 +8,9 @@
 
 import UIKit
 import AVFoundation
+import MessageUI
 
-class PurchaseSplitBillViewController: SmallModalScollViewController {
+class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComposeViewControllerDelegate {
     
     @IBOutlet private weak var videoPlayerView: UIView?
     @IBOutlet private weak var titleLabel: UILabel?
@@ -17,8 +18,49 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBOutlet private weak var subtitleLabel: UILabel?
     @IBOutlet private weak var purchaseButton: UIButton?
     @IBOutlet private weak var restoreButton: UIButton?
+    @IBOutlet private var purchaseButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
+    @IBOutlet private var restoreButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
+    @IBOutlet private weak var purchaseButtonSpinner: UIActivityIndicatorView?
+    @IBOutlet private weak var restoreButtonSpinner: UIActivityIndicatorView?
     
     private var dataSource: GratuitousiOSDataSource = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).dataSource
+    
+    enum State {
+        case Normal
+        case RestoreInProgress
+        case PurchaseInProgress
+    }
+    
+    private var state = State.Normal {
+        didSet {
+            UIView.animateWithDuration(0.3) {
+                switch self.state {
+                case .Normal:
+                    self.restoreButtonSpinnerWidthConstraint?.active = true
+                    self.purchaseButtonSpinnerWidthConstraint?.active = true
+                    self.restoreButtonSpinner?.stopAnimating()
+                    self.purchaseButtonSpinner?.stopAnimating()
+                    self.purchaseButton?.enabled = true
+                    self.restoreButton?.enabled = true
+                case .RestoreInProgress:
+                    self.restoreButtonSpinnerWidthConstraint?.active = false
+                    self.purchaseButtonSpinnerWidthConstraint?.active = true
+                    self.restoreButtonSpinner?.startAnimating()
+                    self.purchaseButtonSpinner?.stopAnimating()
+                    self.purchaseButton?.enabled = false
+                    self.restoreButton?.enabled = false
+                case .PurchaseInProgress:
+                    self.restoreButtonSpinnerWidthConstraint?.active = true
+                    self.purchaseButtonSpinnerWidthConstraint?.active = false
+                    self.restoreButtonSpinner?.stopAnimating()
+                    self.purchaseButtonSpinner?.startAnimating()
+                    self.purchaseButton?.enabled = false
+                    self.restoreButton?.enabled = false
+                }
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
     
     private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
         if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mov") {
@@ -51,7 +93,7 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
             self.videoPlayerView?.layer.addSublayer(layer)
             self.videoPlayerView?.clipsToBounds = true
             
-            player.play()
+            //player.play()
         }
     }
     
@@ -96,14 +138,72 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
         }
     }
     
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        self.state = .Normal
+        self.dismissViewControllerAnimated(true, completion: .None)
+        if let error = error {
+            NSLog("AboutTableViewController: Error while sending email. Error Description: \(error.description)")
+        }
+    }
+    
     @IBAction private func didTapPurchaseButton(sender: UIButton?) {
-        
+        self.state = .PurchaseInProgress
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(4.0 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.state = .Normal
+        }
     }
     
     @IBAction private func didTapRestoreButton(sender: UIButton?) {
+        self.state = .RestoreInProgress
         self.dataSource.purchaseManager?.restorePurchasesWithCompletionHandler() { queue, success, error in
-            print("PurchaseSplitBillViewController: Attempted to Restore Purchases With Success: \(success)")
-            if let error = error { print("PurchaseSplitBillViewController: Attempted to Restore Purchases Failed with Error: \(error)") }
+            self.state = .Normal
+            if success == false {
+                NSLog("PurchaseSplitBillViewController: Restoring Purchases Failed with Error: \(error)")
+                let errorVC = UIAlertController(customStyle: .RestorePurchaseError, mailComposeDelegate: self, presentingViewController: self, error: error)
+                self.presentViewController(errorVC, animated: true, completion: .None)
+            }
         }
+    }
+}
+
+extension UIAlertController {
+    enum CustomStyle {
+        case RestorePurchaseError
+    }
+    
+    convenience init(customStyle: CustomStyle, mailComposeDelegate: MFMailComposeViewControllerDelegate, presentingViewController: UIViewController, error: NSError?) {
+        let errorTitle = NSLocalizedString("Restore Error", comment: "Error title when in-app purchase restore fails")
+        let errorDescription = error?.localizedDescription ?? "An error ocurred while restoring purchase. Please try again later."
+        
+        self.init(title: errorTitle, message: errorDescription, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let dismissAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: "Button to dismiss alert/error"), style: UIAlertActionStyle.Cancel, handler: .None)
+        let emailAction = UIAlertAction(title: NSLocalizedString("Email Support", comment: "Button that shows in the alert view when there was an error restoring purchases, used to email support."), style: UIAlertActionStyle.Default) { action in
+            let subject = NSLocalizedString("Trouble Restoring In-App Purchases", comment: "This is the subject line of the email that users can send when they are having trouble restoring in app purchases")
+            let body = NSLocalizedString("THISSHOULDBEBLANK", comment: "this is the body line of support requests, it should be blank, but the possibilies are endless")
+            
+            if MFMailComposeViewController.canSendMail() {
+                let mailer = MFMailComposeViewController()
+                mailer.mailComposeDelegate = mailComposeDelegate
+                mailer.setSubject(subject)
+                mailer.setToRecipients(["support@saturdayapps.com"])
+                mailer.setMessageBody(body, isHTML: false)
+                
+                presentingViewController.presentViewController(mailer, animated: true, completion: .None)
+            } else {
+                let mailStringWrongEncoding = NSString(format: "mailto:support@saturdayapps.com?subject=%@&body=%@", subject, body)
+                let mailString = mailStringWrongEncoding.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+                if let mailString = mailString {
+                    let mailToURL = NSURL(string: mailString)
+                    if let mailToURL = mailToURL {
+                        UIApplication.sharedApplication().openURL(mailToURL)
+                    }
+                }
+            }
+        }
+        
+        self.addAction(emailAction)
+        self.addAction(dismissAction)
     }
 }
