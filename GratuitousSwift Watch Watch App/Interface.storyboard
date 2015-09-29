@@ -29,7 +29,7 @@
         <!--MainInterfaceController-->
         <scene sceneID="ftW-AE-Ff2">
             <objects>
-                <controller identifier="MainInterfaceController" hidesWhenLoading="NO" id="azz-ui-8Qo" customClass="PickerInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                <controller identifier="MainInterfaceController" hidesWhenLoading="NO" id="azz-ui-8Qo" customClass="PickerInterfaceController" customModule="GratuityWatch_Extension">
                     <items>
                         <group width="1" height="1" alignment="left" hidden="YES" contentMode="scaleAspectFit" layout="vertical" id="8mG-iG-dPr">
                             <items>
@@ -93,7 +93,7 @@
         <!--Close-->
         <scene sceneID="QVZ-uk-9u4">
             <objects>
-                <controller identifier="SplitTotalInterfaceController" title="Close" hidesWhenLoading="NO" id="2tI-Ya-wiK" customClass="SplitTotalInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                <controller identifier="SplitTotalInterfaceController" title="Close" hidesWhenLoading="NO" id="2tI-Ya-wiK" customClass="SplitTotalInterfaceController" customModule="GratuityWatch_Extension">
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="pot-QA-E3b">
                             <items>
@@ -182,7 +182,7 @@
         <!--Close-->
         <scene sceneID="N6L-dJ-mY2">
             <objects>
-                <controller identifier="SettingsInterfaceController" title="Close" hidesWhenLoading="NO" id="ffT-6F-euT" customClass="SettingsInterfaceController" customModule="Gratuity_WatchKit_Extension">
+                <controller identifier="SettingsInterfaceController" title="Close" hidesWhenLoading="NO" id="ffT-6F-euT" customClass="SettingsInterfaceController" customModule="GratuityWatch_Extension">
                     <items>
                         <label alignment="left" text="Suggested Tip Percentage" numberOfLines="0" id="nRC-5a-8ct">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
