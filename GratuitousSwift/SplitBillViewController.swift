@@ -11,12 +11,11 @@ class SplitBillViewController: SmallModalTableViewController {
     private var dataSource: GratuitousiOSDataSource = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).dataSource
     
     private var totalAmount: Int {
-        guard let defaultsManager = self.dataSource.defaultsManager else { return 0 }
-        let billAmount = defaultsManager.billIndexPathRow
-        let suggestedTipPercentage = defaultsManager.suggestedTipPercentage
+        let billAmount = self.dataSource.defaultsManager.billIndexPathRow
+        let suggestedTipPercentage = self.dataSource.defaultsManager.suggestedTipPercentage
         let tipAmount: Int
-        if defaultsManager.tipIndexPathRow != 0 {
-            tipAmount = defaultsManager.tipIndexPathRow
+        if self.dataSource.defaultsManager.tipIndexPathRow != 0 {
+            tipAmount = self.dataSource.defaultsManager.tipIndexPathRow
         } else {
             tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
         }

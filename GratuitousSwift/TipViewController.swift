@@ -350,16 +350,16 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     //MARK: Handle Writing to Disk
     
     private func writeToDiskBillTableIndexPath(indexPath: NSIndexPath) {
-        self.dataSource?.defaultsManager?.billIndexPathRow = indexPath.row - PrivateConstants.ExtraCells + 1
+        self.dataSource?.defaultsManager.billIndexPathRow = indexPath.row - PrivateConstants.ExtraCells + 1
         //self.defaultsManager?.tipIndexPathRow = 0
     }
     
     private func writeToDiskTipTableIndexPath(indexPath: NSIndexPath, WithAutoAdjustment autoAdjustment: Bool) {
         // Auto adjustment lets me know when we are saving an actual value of tip vs just setting the tipamount to 0 or 1 for logic reasons.
         if autoAdjustment == true {
-            self.dataSource?.defaultsManager?.tipIndexPathRow = indexPath.row - PrivateConstants.ExtraCells + 1
+            self.dataSource?.defaultsManager.tipIndexPathRow = indexPath.row - PrivateConstants.ExtraCells + 1
         } else {
-            self.dataSource?.defaultsManager?.tipIndexPathRow = indexPath.row
+            self.dataSource?.defaultsManager.tipIndexPathRow = indexPath.row
         }
     }
     
@@ -391,8 +391,8 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @objc private func interfaceIdleTimerFired(timer: NSTimer?) {
         if self.interfaceRefreshNeeded == true {
-            let billIndex = self.dataSource?.defaultsManager?.billIndexPathRow
-            let tipIndex = self.dataSource?.defaultsManager?.tipIndexPathRow
+            let billIndex = self.dataSource?.defaultsManager.billIndexPathRow
+            let tipIndex = self.dataSource?.defaultsManager.tipIndexPathRow
             if let billIndex = billIndex {
                 self.billAmountTableView?.selectRowAtIndexPath(NSIndexPath(forRow: billIndex + 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             }
@@ -414,11 +414,11 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
             let tipAmountTableView = self.tipAmountTableView,
             let billIndexPath = self.indexPathInCenterOfTable(billAmountTableView),
             let billCell = billAmountTableView.cellForRowAtIndexPath(billIndexPath) as? GratuitousTableViewCell,
-            let suggestedTipPercentage = self.dataSource?.defaultsManager?.suggestedTipPercentage {
+            let suggestedTipPercentage = self.dataSource?.defaultsManager.suggestedTipPercentage {
                 let billAmount = billCell.billAmount
                 if billAmount > 0 {
                     let tipAmount: Int
-                    if let tipUserDefaults = self.dataSource?.defaultsManager?.tipIndexPathRow,
+                    if let tipUserDefaults = self.dataSource?.defaultsManager.tipIndexPathRow,
                         let tipIndexPath = self.indexPathInCenterOfTable(tipAmountTableView),
                         let tipCell = tipAmountTableView.cellForRowAtIndexPath(tipIndexPath) as? GratuitousTableViewCell {
                             if tipUserDefaults != 0 {

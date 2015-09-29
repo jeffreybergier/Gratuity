@@ -91,8 +91,8 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         if let watchConnectivityManager = self.dataSource.watchConnectivityManager as? GratuitousiOSConnectivityManager,
             let session = watchConnectivityManager.session
             where session.paired == true && session.watchAppInstalled == true {
-                if self.dataSource.defaultsManager?.freshWatchAppInstall == true {
-                    self.dataSource.defaultsManager?.freshWatchAppInstall = false
+                if self.dataSource.defaultsManager.freshWatchAppInstall == true {
+                    self.dataSource.defaultsManager.freshWatchAppInstall = false
                     let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
                     dispatch_async(backgroundQueue) {
                         let generator = GratuitousCurrencyStringImageGenerator()
@@ -103,7 +103,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
                 }
         } else {
             // watch app not installed or watch not paired
-            self.dataSource.defaultsManager?.freshWatchAppInstall = true
+            self.dataSource.defaultsManager.freshWatchAppInstall = true
         }
     }
 }

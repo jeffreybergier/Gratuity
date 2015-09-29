@@ -12,7 +12,7 @@ class GratuitousCurrencyStringImageGenerator {
         
     func generateCurrencySymbolsForCurrencySign(currencySign: CurrencySign) -> (url: NSURL, fileName: String)? {
         let dataSource = GratuitousiOSDataSource(use: .Temporary)
-        dataSource.defaultsManager?.overrideCurrencySymbol = currencySign
+        dataSource.defaultsManager.overrideCurrencySymbol = currencySign
         if let url = self.generateNewCurrencySymbolsFromConfiguredCurrencyFormatter(dataSource),
             let lastPathComponent = url.lastPathComponent {
                 return (url: url, fileName: lastPathComponent)
@@ -26,7 +26,7 @@ class GratuitousCurrencyStringImageGenerator {
         var tuples = [(url: NSURL, fileName: String)]()
         for i in 0 ..< 10 {
             if let currencySign = CurrencySign(rawValue: i) {
-                dataSource.defaultsManager?.overrideCurrencySymbol = currencySign
+                dataSource.defaultsManager.overrideCurrencySymbol = currencySign
                 if let url = self.generateNewCurrencySymbolsFromConfiguredCurrencyFormatter(dataSource) {
                     if let lastPathComponent = url.lastPathComponent {
                         tuples += [(url: url, fileName: lastPathComponent)]

@@ -150,8 +150,8 @@
 		73AEA6C61BBB05EB004B16DE /* GratuityWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GratuityWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AEA6DD1BBB06A0004B16DE /* Gratuity-Watch-Extension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Gratuity-Watch-Extension.plist"; sourceTree = "<group>"; };
 		73AEA6DE1BBB06AD004B16DE /* Gratuity-Watch-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Gratuity-Watch-Info.plist"; sourceTree = "<group>"; };
-		73AEA6EE1BBB07E5004B16DE /* GratuityWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GratuityWatch.entitlements; sourceTree = "<group>"; };
-		73AEA6EF1BBB07F1004B16DE /* GratuityWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "GratuityWatch Extension.entitlements"; sourceTree = "<group>"; };
+		73AEA6EE1BBB07E5004B16DE /* GratuityWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = GratuityWatch.entitlements; path = ../GratuityWatch.entitlements; sourceTree = "<group>"; };
+		73AEA6EF1BBB07F1004B16DE /* GratuityWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuityWatch Extension.entitlements"; path = "../GratuityWatch Extension.entitlements"; sourceTree = "<group>"; };
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		73BE874D1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousRoundedHeaderTableView.swift; sourceTree = "<group>"; };
 		73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitBillTableViewCell.swift; sourceTree = "<group>"; };
@@ -287,8 +287,6 @@
 		738250F819E60EED00CD2B28 = {
 			isa = PBXGroup;
 			children = (
-				73AEA6EF1BBB07F1004B16DE /* GratuityWatch Extension.entitlements */,
-				73AEA6EE1BBB07E5004B16DE /* GratuityWatch.entitlements */,
 				7382510319E60EED00CD2B28 /* GratuitousSwift */,
 				73A18D5C1A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension */,
 				73A18D6E1A2A9525002180DD /* GratuitousSwift Watch Watch App */,
@@ -365,6 +363,7 @@
 		73A18D5D1A2A9525002180DD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				73AEA6EF1BBB07F1004B16DE /* GratuityWatch Extension.entitlements */,
 				73AEA6DD1BBB06A0004B16DE /* Gratuity-Watch-Extension.plist */,
 				73011BDF1AD04F90001F6D71 /* en.lproj */,
 			);
@@ -385,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				73AEA6DE1BBB06AD004B16DE /* Gratuity-Watch-Info.plist */,
+				73AEA6EE1BBB07E5004B16DE /* GratuityWatch.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -901,6 +901,7 @@
 				73AEA6D81BBB05EB004B16DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		73AEA6DB1BBB05EC004B16DE /* Build configuration list for PBXNativeTarget "GratuityWatch" */ = {
 			isa = XCConfigurationList;
@@ -909,6 +910,7 @@
 				73AEA6D61BBB05EB004B16DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

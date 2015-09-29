@@ -197,7 +197,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     private func readUserDefaultsAndUpdateSlider() {
-        let onDiskTipPercentage = self.dataSource?.defaultsManager?.suggestedTipPercentage !! 0.20
+        let onDiskTipPercentage = self.dataSource?.defaultsManager.suggestedTipPercentage !! 0.20
         self.suggestedTipPercentageLabel?.text = "\(Int(round(onDiskTipPercentage * 100)))%"
         self.suggestedTipPercentageSlider?.setValue(Float(onDiskTipPercentage), animated: false)
     }
@@ -210,7 +210,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     @IBAction func didChangeSuggestedTipPercentageSlider(sender: UISlider) {
         //this is only called when the user lets go of the slider
         let newTipPercentage = sender.value
-        self.dataSource?.defaultsManager?.suggestedTipPercentage = Double(newTipPercentage)
+        self.dataSource?.defaultsManager.suggestedTipPercentage = Double(newTipPercentage)
         NSNotificationCenter.defaultCenter().postNotificationName("suggestedTipValueUpdated", object: self)
     }
     
@@ -243,7 +243,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: CurrencySign? = nil) {
         if let currencyOverride = currencyOverride,
             let dataSource = self.dataSource {
-                dataSource.defaultsManager?.overrideCurrencySymbol = currencyOverride
+                dataSource.defaultsManager.overrideCurrencySymbol = currencyOverride
         }
     }
     
