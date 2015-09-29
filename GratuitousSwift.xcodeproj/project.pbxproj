@@ -148,7 +148,7 @@
 		73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchDataSource.swift; sourceTree = "<group>"; };
 		73AEA6BA1BBB05EB004B16DE /* GratuityWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuityWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AEA6C61BBB05EB004B16DE /* GratuityWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GratuityWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		73AEA6DD1BBB06A0004B16DE /* Gratuity-Watch-Extension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Gratuity-Watch-Extension.plist"; sourceTree = "<group>"; };
+		73AEA6DD1BBB06A0004B16DE /* Gratuity-Watch-Extension-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Gratuity-Watch-Extension-Info.plist"; sourceTree = "<group>"; };
 		73AEA6DE1BBB06AD004B16DE /* Gratuity-Watch-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Gratuity-Watch-Info.plist"; sourceTree = "<group>"; };
 		73AEA6EE1BBB07E5004B16DE /* GratuityWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = GratuityWatch.entitlements; path = ../GratuityWatch.entitlements; sourceTree = "<group>"; };
 		73AEA6EF1BBB07F1004B16DE /* GratuityWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuityWatch Extension.entitlements"; path = "../GratuityWatch Extension.entitlements"; sourceTree = "<group>"; };
@@ -364,7 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				73AEA6EF1BBB07F1004B16DE /* GratuityWatch Extension.entitlements */,
-				73AEA6DD1BBB06A0004B16DE /* Gratuity-Watch-Extension.plist */,
+				73AEA6DD1BBB06A0004B16DE /* Gratuity-Watch-Extension-Info.plist */,
 				73011BDF1AD04F90001F6D71 /* en.lproj */,
 			);
 			name = "Supporting Files";
@@ -843,7 +843,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch WatchKit Extension/Gratuity-Watch-Extension.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch WatchKit Extension/Gratuity-Watch-Extension-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.saturdayapps.Gratuity.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -862,7 +862,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch WatchKit Extension/Gratuity-Watch-Extension.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch WatchKit Extension/Gratuity-Watch-Extension-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.saturdayapps.Gratuity.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
