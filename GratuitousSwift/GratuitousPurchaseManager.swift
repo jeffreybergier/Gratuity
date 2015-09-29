@@ -8,6 +8,15 @@
 
 import StoreKit
 
+protocol Purchasable: CustomStringConvertible {
+    static var identifierString: String { get }
+    var purchased: Bool? { get set }
+    var localizedTitle: String { get }
+    var localizedDescription: String { get }
+    var price: Double { get }
+    var skProductValue: SKProduct { get }
+}
+
 class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
     private(set) var splitBillProduct: SplitBillProduct? {
@@ -40,6 +49,11 @@ class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentT
         self.latestRequest = SKProductsRequest(productIdentifiers: self.products)
         self.latestRequest?.delegate = self
         self.latestRequest?.start()
+    }
+    
+    func buyPurchasable(purchasable: Purchasable) {
+        let payment = SKPayment(product: purchasable.skProductValue)
+        self.paymentQueue.addPayment(payment)
     }
     
     func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
@@ -91,17 +105,19 @@ class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentT
         
     }
     
-    struct SplitBillProduct: CustomStringConvertible {
+    struct SplitBillProduct: Purchasable {
         static let identifierString = "com.saturdayapps.gratuity.splitbillpurchase"
         var purchased: Bool?
         let localizedTitle: String
         let localizedDescription: String
         let price: Double
+        let skProductValue: SKProduct
         
         init(product: SKProduct) {
             self.localizedTitle = product.localizedTitle
             self.localizedDescription = product.localizedDescription
             self.price = product.price.doubleValue
+            self.skProductValue = product
         }
         
         var description: String {

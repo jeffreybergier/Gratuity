@@ -152,6 +152,7 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
         dispatch_after(delayTime, dispatch_get_main_queue()) {
             self.state = .Normal
         }
+        self.dataSource.purchaseManager?.buyPurchasable(self.dataSource.purchaseManager!.splitBillProduct!)
     }
     
     @IBAction private func didTapRestoreButton(sender: UIButton?) {
