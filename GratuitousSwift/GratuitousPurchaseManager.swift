@@ -8,14 +8,15 @@
 
 import StoreKit
 
-protocol Purchasable {
-    static var identifierString: String { get }
-    var purchased: Bool { get set }
-}
-
 class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
-    private(set) var splitBillProduct = SplitBillProduct(purchased: false)
+    private(set) var splitBillProduct: SplitBillProduct? {
+        didSet {
+            print("DidSet Product: \(self.splitBillProduct)")
+        }
+    }
+    private let products = Set([SplitBillProduct.identifierString])
+    
     private lazy var paymentQueue: SKPaymentQueue = {
         let queue = SKPaymentQueue.defaultQueue()
         queue.addTransactionObserver(self)
@@ -30,7 +31,6 @@ class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentT
     }
     
     private var latestRequest: SKProductsRequest?
-    
     func requestProducts() {
         if let requestInProgress = self.latestRequest {
             requestInProgress.cancel()
@@ -43,11 +43,15 @@ class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentT
     }
     
     func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        if let latestRequest = self.latestRequest where request == latestRequest {
-            print("GratuitousPurchaseManager: Valid Items: \(response.products)")
-            print("GratuitousPurchaseManager: Invalid Items:  \(response.invalidProductIdentifiers)")
+        if request == self.latestRequest {
+            for product in response.products {
+                if product.productIdentifier == SplitBillProduct.identifierString {
+                    self.splitBillProduct = SplitBillProduct(product: product)
+                    break
+                }
+            }
+            self.latestRequest = .None
         }
-        self.latestRequest = .None
     }
     
     private var latestRestoreCompletionHandler: ((queue: SKPaymentQueue, success: Bool, error: NSError?) -> ())?
@@ -87,17 +91,22 @@ class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentT
         
     }
     
-    let products = Set([
-        SplitBillProduct.identifierString,
-        "com.saturdayapps.gratuity.splitbillpurchase",
-        "com.saturdayapps.Gratuity.splitbillpurchase2",
-        "com.SaturdayApps.Gratuity.splitbillpurchase2",
-        "splitbillpurchase2",
-        "fakeItem"
-        ])
-    
-    struct SplitBillProduct: Purchasable {
-        static let identifierString = "com.saturdayapps.gratuity.splitbillpurchase2"
-        var purchased = false
+    struct SplitBillProduct: CustomStringConvertible {
+        static let identifierString = "com.saturdayapps.gratuity.splitbillpurchase"
+        var purchased: Bool?
+        let localizedTitle: String
+        let localizedDescription: String
+        let price: Double
+        
+        init(product: SKProduct) {
+            self.localizedTitle = product.localizedTitle
+            self.localizedDescription = product.localizedDescription
+            self.price = product.price.doubleValue
+        }
+        
+        var description: String {
+            return "SplitBillProduct: Price \(self.price), Purchased \(self.purchased), Title \(self.localizedTitle), Description \(self.localizedDescription)"
+        }
     }
 }
+

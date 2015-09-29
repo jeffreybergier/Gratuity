@@ -18,8 +18,8 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
     @IBOutlet private weak var subtitleLabel: UILabel?
     @IBOutlet private weak var purchaseButton: UIButton?
     @IBOutlet private weak var restoreButton: UIButton?
-    @IBOutlet private var purchaseButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
-    @IBOutlet private var restoreButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
+    @IBOutlet private weak var purchaseButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
+    @IBOutlet private weak var restoreButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
     @IBOutlet private weak var purchaseButtonSpinner: UIActivityIndicatorView?
     @IBOutlet private weak var restoreButtonSpinner: UIActivityIndicatorView?
     
@@ -36,24 +36,24 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
             UIView.animateWithDuration(0.3) {
                 switch self.state {
                 case .Normal:
-                    self.restoreButtonSpinnerWidthConstraint?.active = true
-                    self.purchaseButtonSpinnerWidthConstraint?.active = true
-                    self.restoreButtonSpinner?.stopAnimating()
-                    self.purchaseButtonSpinner?.stopAnimating()
+                    self.restoreButtonSpinnerWidthConstraint?.constant = 0
+                    self.purchaseButtonSpinnerWidthConstraint?.constant = 0
+                    self.purchaseButtonSpinner?.alpha = 0
+                    self.restoreButtonSpinner?.alpha = 0
                     self.purchaseButton?.enabled = true
                     self.restoreButton?.enabled = true
                 case .RestoreInProgress:
-                    self.restoreButtonSpinnerWidthConstraint?.active = false
-                    self.purchaseButtonSpinnerWidthConstraint?.active = true
-                    self.restoreButtonSpinner?.startAnimating()
-                    self.purchaseButtonSpinner?.stopAnimating()
+                    self.restoreButtonSpinnerWidthConstraint?.constant = 40
+                    self.purchaseButtonSpinnerWidthConstraint?.constant = 0
+                    self.purchaseButtonSpinner?.alpha = 0
+                    self.restoreButtonSpinner?.alpha = 1
                     self.purchaseButton?.enabled = false
                     self.restoreButton?.enabled = false
                 case .PurchaseInProgress:
-                    self.restoreButtonSpinnerWidthConstraint?.active = true
-                    self.purchaseButtonSpinnerWidthConstraint?.active = false
-                    self.restoreButtonSpinner?.stopAnimating()
-                    self.purchaseButtonSpinner?.startAnimating()
+                    self.restoreButtonSpinnerWidthConstraint?.constant = 0
+                    self.purchaseButtonSpinnerWidthConstraint?.constant = 40
+                    self.purchaseButtonSpinner?.alpha = 1
+                    self.restoreButtonSpinner?.alpha = 0
                     self.purchaseButton?.enabled = false
                     self.restoreButton?.enabled = false
                 }
