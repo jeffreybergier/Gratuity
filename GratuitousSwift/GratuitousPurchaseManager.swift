@@ -17,14 +17,7 @@ protocol Purchasable: CustomStringConvertible {
     var skProductValue: SKProduct { get }
 }
 
-class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
-    
-    private(set) var splitBillProduct: SplitBillProduct? {
-        didSet {
-            print("DidSet Product: \(self.splitBillProduct)")
-        }
-    }
-    private let products = Set([SplitBillProduct.identifierString])
+class PurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
     private lazy var paymentQueue: SKPaymentQueue = {
         let queue = SKPaymentQueue.defaultQueue()
@@ -32,41 +25,26 @@ class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentT
         return queue
     }()
     
-    init(requestImmediately: Bool) {
-        super.init()
-        if requestImmediately == true {
-            self.requestProducts()
+    private var latestProductRequestCompletionHandler: ((request: SKProductsRequest?, response: SKProductsResponse?, error: NSError?) -> ())?
+    private var latestProductRequest: SKProductsRequest?
+    func initiateRequest(request: SKProductsRequest, completionHandler: (request: SKProductsRequest?, response: SKProductsResponse?, error: NSError?) -> ()) {
+        if let existingCompletionHandler = self.latestProductRequestCompletionHandler {
+            self.latestProductRequest?.cancel()
+            existingCompletionHandler(request: self.latestProductRequest, response: .None, error: NSError(domain: "SKErrorDomain", code: 24, userInfo: ["NSLocalizedDescription" : "Product request interupted by another restore request."]))
+            self.latestProductRequest = .None
+            self.latestProductRequestCompletionHandler = .None
         }
-    }
-    
-    private var latestRequest: SKProductsRequest?
-    func requestProducts() {
-        if let requestInProgress = self.latestRequest {
-            requestInProgress.cancel()
-            self.latestRequest = .None
-        }
-        
-        self.latestRequest = SKProductsRequest(productIdentifiers: self.products)
-        self.latestRequest?.delegate = self
-        self.latestRequest?.start()
-    }
-    
-    func buyPurchasable(purchasable: Purchasable) {
-        let payment = SKPayment(product: purchasable.skProductValue)
-        self.paymentQueue.addPayment(payment)
+        self.latestProductRequest = request
+        self.latestProductRequestCompletionHandler = completionHandler
+        request.delegate = self
+        request.start()
     }
     
     func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        if request == self.latestRequest {
-            for product in response.products {
-                if product.productIdentifier == SplitBillProduct.identifierString {
-                    self.splitBillProduct = SplitBillProduct(product: product)
-                    break
-                }
-            }
-            self.latestRequest = .None
-        }
+        self.latestProductRequestCompletionHandler?(request: request, response: response, error: .None)
     }
+    
+    // MARK: Restore Purchases
     
     private var latestRestoreCompletionHandler: ((queue: SKPaymentQueue, success: Bool, error: NSError?) -> ())?
     func restorePurchasesWithCompletionHandler(completionHandler: (queue: SKPaymentQueue, success: Bool, error: NSError?) -> ()) {
@@ -78,32 +56,83 @@ class GratuitousPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentT
         self.paymentQueue.restoreCompletedTransactions()
     }
     
-    // Sent when the transaction array has changed (additions or state changes).  Client should check state of transactions and finish as appropriate.
-    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        
-    }
-    
-    // Sent when transactions are removed from the queue (via finishTransaction:).
-    func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
-        
-    }
-    
-    // Sent when an error is encountered while adding transactions from the user's purchase history back to the queue.
     func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError) {
         self.latestRestoreCompletionHandler?(queue: queue, success: false, error: error)
         self.latestRestoreCompletionHandler = .None
     }
     
-    // Sent when all transactions from the user's purchase history have successfully been added back to the queue.
     func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
         self.latestRestoreCompletionHandler?(queue: queue, success: true, error: .None)
         self.latestRestoreCompletionHandler = .None
     }
     
-    // Sent when the download state has changed.
-    func paymentQueue(queue: SKPaymentQueue, updatedDownloads downloads: [SKDownload]) {
+    // MARK: Purchasing Items
+    
+    private var latestPurchaseCompletionHandler: ((purchasable: Purchasable, transaction: SKPaymentTransaction?, error: NSError?) -> ())?
+    private var latestPurchasePayment: SKPayment?
+    private var latestPurchasePurchasable: Purchasable?
+    func buyPurchasable(purchasable: Purchasable, completionHandler: (purchasable: Purchasable, transaction: SKPaymentTransaction?, error: NSError?) -> ()) {
+        if let existingCompletionHandler = self.latestPurchaseCompletionHandler {
+            existingCompletionHandler(purchasable: self.latestPurchasePurchasable!, transaction: .None, error: NSError(domain: "SKErrorDomain", code: 25, userInfo: ["NSLocalizedDescription" : "Purchase request interrupted by another purchase request."]))
+            self.latestPurchaseCompletionHandler = .None
+            self.latestPurchasePayment = .None
+            self.latestPurchasePurchasable = .None
+        }
         
+        let payment = SKPayment(product: purchasable.skProductValue)
+        self.latestPurchaseCompletionHandler = completionHandler
+        self.latestPurchasePayment = payment
+        self.latestPurchasePurchasable = purchasable
+        self.paymentQueue.addPayment(payment)
     }
+    
+    // Sent when the transaction array has changed (additions or state changes).  Client should check state of transactions and finish as appropriate.
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        if queue == self.paymentQueue {
+            for transaction in transactions {
+                if transaction.payment == self.latestPurchasePayment {
+                    switch transaction.transactionState {
+                    case .Purchased, .Restored:
+                        self.latestPurchaseCompletionHandler?(purchasable: self.latestPurchasePurchasable!, transaction: transaction, error: .None)
+                        self.latestPurchaseCompletionHandler = .None
+                        self.latestPurchasePayment = .None
+                        self.latestPurchasePurchasable = .None
+                    case .Failed, .Deferred:
+                        self.latestPurchaseCompletionHandler?(purchasable: self.latestPurchasePurchasable!, transaction: transaction, error: transaction.error ?? NSError(domain: "SKErrorDomain", code: 26, userInfo: ["NSLocalizedDescription" : "Purchase Failed or Was Deferred"]))
+                        self.latestPurchaseCompletionHandler = .None
+                        self.latestPurchasePayment = .None
+                        self.latestPurchasePurchasable = .None
+                    default:
+                        break
+                    }
+                }
+            }
+        } else {
+            NSLog("PurchaseManager: Purchase transaction updated on unknown queue.")
+        }
+    }
+}
+
+class GratuitousPurchaseManager: PurchaseManager {
+    private(set) var splitBillProduct: SplitBillProduct? {
+        didSet {
+            print("DidSet Product: \(self.splitBillProduct)")
+        }
+    }
+    private let products = Set([SplitBillProduct.identifierString])
+    
+//    init(requestImmediately: Bool) {
+//        super.init()
+//        if requestImmediately == true {
+//            self.requestProducts()
+//        }
+//    }
+//    
+//    func requestProducts() {
+//        let request = SKProductsRequest(productIdentifiers: self.products)
+//        self.latestRequest?.delegate = self
+//        self.latestRequest?.start()
+//    }
     
     struct SplitBillProduct: Purchasable {
         static let identifierString = "com.saturdayapps.gratuity.splitbillpurchase"
