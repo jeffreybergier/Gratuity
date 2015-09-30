@@ -19,29 +19,35 @@ protocol Purchasable: CustomStringConvertible {
 
 class PurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
-    private lazy var paymentQueue: SKPaymentQueue = {
-        let queue = SKPaymentQueue.defaultQueue()
-        queue.addTransactionObserver(self)
-        return queue
-    }()
+    var paymentQueue: SKPaymentQueue { return SKPaymentQueue.defaultQueue() }
     
-    private var latestProductRequestCompletionHandler: ((request: SKProductsRequest?, response: SKProductsResponse?, error: NSError?) -> ())?
-    private var latestProductRequest: SKProductsRequest?
-    func initiateRequest(request: SKProductsRequest, completionHandler: (request: SKProductsRequest?, response: SKProductsResponse?, error: NSError?) -> ()) {
-        if let existingCompletionHandler = self.latestProductRequestCompletionHandler {
-            self.latestProductRequest?.cancel()
-            existingCompletionHandler(request: self.latestProductRequest, response: .None, error: NSError(domain: "SKErrorDomain", code: 24, userInfo: ["NSLocalizedDescription" : "Product request interupted by another restore request."]))
-            self.latestProductRequest = .None
-            self.latestProductRequestCompletionHandler = .None
-        }
-        self.latestProductRequest = request
-        self.latestProductRequestCompletionHandler = completionHandler
+    // MARK: Product Request
+    
+    private var productsRequestsInProgress = [SKRequest : ProductsRequestComponents]()
+    
+    func initiateRequest(request: SKProductsRequest, completionHandler: (request: SKProductsRequest, response: SKProductsResponse?, error: NSError?) -> ()) {
+        self.productsRequestsInProgress[request] = ProductsRequestComponents(productRequest: request, completionHandler: completionHandler)
         request.delegate = self
         request.start()
     }
     
     func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        self.latestProductRequestCompletionHandler?(request: request, response: response, error: .None)
+        if let existingRequestComponents = self.productsRequestsInProgress[request] {
+            existingRequestComponents.completionHandler(request: request, response: response, error: .None)
+        }
+        self.productsRequestsInProgress.removeValueForKey(request)
+    }
+    
+    func request(request: SKRequest, didFailWithError error: NSError) {
+        if let existingRequestComponents = self.productsRequestsInProgress[request], let productsRequest = request as? SKProductsRequest {
+            existingRequestComponents.completionHandler(request: productsRequest, response: .None, error: error)
+        }
+        self.productsRequestsInProgress.removeValueForKey(request)
+    }
+    
+    private struct ProductsRequestComponents {
+        var productRequest: SKProductsRequest
+        var completionHandler: ((request: SKProductsRequest, response: SKProductsResponse?, error: NSError?) -> ())
     }
     
     // MARK: Restore Purchases
@@ -114,25 +120,43 @@ class PurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransaction
 }
 
 class GratuitousPurchaseManager: PurchaseManager {
+    
+    static let Products = Set([SplitBillProduct.identifierString])
+    
     private(set) var splitBillProduct: SplitBillProduct? {
         didSet {
-            print("DidSet Product: \(self.splitBillProduct)")
+            struct Token {
+                static var onceToken: dispatch_once_t = 0
+            }
+            dispatch_once(&Token.onceToken) {
+                self.paymentQueue.addTransactionObserver(self)
+            }
         }
     }
-    private let products = Set([SplitBillProduct.identifierString])
     
-//    init(requestImmediately: Bool) {
-//        super.init()
-//        if requestImmediately == true {
-//            self.requestProducts()
-//        }
-//    }
-//    
-//    func requestProducts() {
-//        let request = SKProductsRequest(productIdentifiers: self.products)
-//        self.latestRequest?.delegate = self
-//        self.latestRequest?.start()
-//    }
+    init(requestAvailableProductsImmediately: Bool) {
+        super.init()
+        if requestAvailableProductsImmediately == true {
+            self.requestProducts()
+        }
+    }
+
+    func requestProducts() {
+        let request = SKProductsRequest(productIdentifiers: GratuitousPurchaseManager.Products)
+        self.initiateRequest(request) { request, response, error in
+            guard let response = response else {
+                NSLog("GratuitousPurchaseManager: Product Request at Init Failed. Be Sure to Request Products Again before Attempting to Restore or Initiate Purchases: \(error)")
+                return
+            }
+            
+            for product in response.products {
+                if product.productIdentifier == SplitBillProduct.identifierString {
+                    self.splitBillProduct = SplitBillProduct(product: product)
+                    break
+                }
+            }
+        }
+    }
     
     struct SplitBillProduct: Purchasable {
         static let identifierString = "com.saturdayapps.gratuity.splitbillpurchase"
