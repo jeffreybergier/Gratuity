@@ -20,57 +20,62 @@ protocol Purchasable: CustomStringConvertible {
 class PurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
     var paymentQueue: SKPaymentQueue { return SKPaymentQueue.defaultQueue() }
+    private var transactionObserverSet = false
     
     // MARK: Product Request
     
-    private var productsRequestsInProgress = [SKRequest : ProductsRequestComponents]()
+    private var productsRequestsInProgress = [SKRequest : ProductsRequestCompletionHandler]()
     
     func initiateRequest(request: SKProductsRequest, completionHandler: (request: SKProductsRequest, response: SKProductsResponse?, error: NSError?) -> ()) {
-        self.productsRequestsInProgress[request] = ProductsRequestComponents(productRequest: request, completionHandler: completionHandler)
+        self.productsRequestsInProgress[request] = completionHandler
         request.delegate = self
         request.start()
     }
     
     func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        if let existingRequestComponents = self.productsRequestsInProgress[request] {
-            existingRequestComponents.completionHandler(request: request, response: response, error: .None)
+        if let completionHandler = self.productsRequestsInProgress[request] {
+            completionHandler(request: request, response: response, error: .None)
         }
         self.productsRequestsInProgress.removeValueForKey(request)
     }
     
     func request(request: SKRequest, didFailWithError error: NSError) {
-        if let existingRequestComponents = self.productsRequestsInProgress[request], let productsRequest = request as? SKProductsRequest {
-            existingRequestComponents.completionHandler(request: productsRequest, response: .None, error: error)
+        if let completionHandler = self.productsRequestsInProgress[request], let productsRequest = request as? SKProductsRequest {
+            completionHandler(request: productsRequest, response: .None, error: error)
         }
         self.productsRequestsInProgress.removeValueForKey(request)
     }
     
-    private struct ProductsRequestComponents {
-        var productRequest: SKProductsRequest
-        var completionHandler: ((request: SKProductsRequest, response: SKProductsResponse?, error: NSError?) -> ())
-    }
+    private typealias ProductsRequestCompletionHandler = (request: SKProductsRequest, response: SKProductsResponse?, error: NSError?) -> ()
     
     // MARK: Restore Purchases
     
-    private var latestRestoreCompletionHandler: ((queue: SKPaymentQueue, success: Bool, error: NSError?) -> ())?
-    func restorePurchasesWithCompletionHandler(completionHandler: (queue: SKPaymentQueue, success: Bool, error: NSError?) -> ()) {
-        if let existingCompletionHandler = self.latestRestoreCompletionHandler {
-            existingCompletionHandler(queue: self.paymentQueue, success: false, error: NSError(domain: "SKErrorDomain", code: 23, userInfo: ["NSLocalizedDescription" : "Restore request interrupted by another restore request."]))
-            self.latestRestoreCompletionHandler = .None
+    private var latestPurchasesRestoreCompletionHandler: PurchasesRestoreCompletionHandler?
+    
+    func restorePurchasesWithCompletionHandler(completionHandler: (queue: SKPaymentQueue?, success: Bool, error: NSError?) -> ()) {
+        if self.transactionObserverSet == true {
+            if let _ = self.latestPurchasesRestoreCompletionHandler {
+                completionHandler(queue: .None, success: false, error: NSError(domain: "SKErrorDomain", code: 27, userInfo: ["NSLocalizedDescription" : "Purchase Restore already in progress. Wait for the previous one to succeed or fail and then try again."]))
+            } else {
+                self.latestPurchasesRestoreCompletionHandler = completionHandler
+                self.paymentQueue.restoreCompletedTransactions()
+            }
+        } else {
+            completionHandler(queue: .None, success: false, error: NSError(domain: "SKErrorDomain", code: 26, userInfo: ["NSLocalizedDescription" : "Purchase Queue Observer Not Set. This is usually due to products never having been downloaded. Perform Products Request, then try again."]))
         }
-        self.latestRestoreCompletionHandler = completionHandler
-        self.paymentQueue.restoreCompletedTransactions()
     }
     
     func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError) {
-        self.latestRestoreCompletionHandler?(queue: queue, success: false, error: error)
-        self.latestRestoreCompletionHandler = .None
+        self.latestPurchasesRestoreCompletionHandler?(queue: queue, success: false, error: error)
+        self.latestPurchasesRestoreCompletionHandler = .None
     }
     
     func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
-        self.latestRestoreCompletionHandler?(queue: queue, success: true, error: .None)
-        self.latestRestoreCompletionHandler = .None
+        self.latestPurchasesRestoreCompletionHandler?(queue: queue, success: true, error: .None)
+        self.latestPurchasesRestoreCompletionHandler = .None
     }
+    
+    private typealias PurchasesRestoreCompletionHandler = (queue: SKPaymentQueue?, success: Bool, error: NSError?) -> ()
     
     // MARK: Purchasing Items
     
@@ -94,30 +99,14 @@ class PurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransaction
     
     // Sent when the transaction array has changed (additions or state changes).  Client should check state of transactions and finish as appropriate.
     func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        if queue == self.paymentQueue {
-            for transaction in transactions {
-                if transaction.payment == self.latestPurchasePayment {
-                    switch transaction.transactionState {
-                    case .Purchased, .Restored:
-                        self.latestPurchaseCompletionHandler?(purchasable: self.latestPurchasePurchasable!, transaction: transaction, error: .None)
-                        self.latestPurchaseCompletionHandler = .None
-                        self.latestPurchasePayment = .None
-                        self.latestPurchasePurchasable = .None
-                    case .Failed, .Deferred:
-                        self.latestPurchaseCompletionHandler?(purchasable: self.latestPurchasePurchasable!, transaction: transaction, error: transaction.error ?? NSError(domain: "SKErrorDomain", code: 26, userInfo: ["NSLocalizedDescription" : "Purchase Failed or Was Deferred"]))
-                        self.latestPurchaseCompletionHandler = .None
-                        self.latestPurchasePayment = .None
-                        self.latestPurchasePurchasable = .None
-                    default:
-                        break
-                    }
-                }
-            }
-        } else {
-            NSLog("PurchaseManager: Purchase transaction updated on unknown queue.")
-        }
+        
+    }
+    
+    func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
+        
     }
 }
+
 
 class GratuitousPurchaseManager: PurchaseManager {
     
@@ -130,6 +119,7 @@ class GratuitousPurchaseManager: PurchaseManager {
             }
             dispatch_once(&Token.onceToken) {
                 self.paymentQueue.addTransactionObserver(self)
+                self.transactionObserverSet = true
             }
         }
     }

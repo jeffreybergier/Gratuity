@@ -165,6 +165,8 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
                 NSLog("PurchaseSplitBillViewController: Restoring Purchases Failed with Error: \(error)")
                 let errorVC = UIAlertController(customStyle: .RestorePurchaseError, mailComposeDelegate: self, presentingViewController: self, error: error)
                 self.presentViewController(errorVC, animated: true, completion: .None)
+            } else {
+                print("PurchaseSplitBillViewController: Transaction: \(queue?.transactions)")
             }
         }
     }
