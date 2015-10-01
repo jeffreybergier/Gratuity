@@ -26,7 +26,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet private weak var largeTextWidthLandscapeOnlyConstraint: NSLayoutConstraint?
     @IBOutlet private weak var labelContainerView: UIView?
     @IBOutlet private weak var tableContainerView: UIView?
+    @IBOutlet private weak var bottomButtonsContainerView: UIView?
     @IBOutlet private weak var settingsButton: UIButton?
+    @IBOutlet private weak var splitBillButton: UIButton?
     
     private struct PrivateConstants {
         static let MaxBillAmount = 2000
@@ -157,6 +159,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //configure the text
         self.billAmountTableViewTitleTextLabel?.text = NSLocalizedString("Amount on Bill", comment: "this is a text label displayed on the main page of the UI above the dollar amounts that user is supposed to select from for the cost of their restaurant bill.")
         self.tipAmountTableViewTitleTextLabel?.text = NSLocalizedString("Suggested Tip", comment: "this is a text label displayed on the main page of the UI above the tip amounts. The app suggests a tip amount, but they can also override it. This should be text that describes this suggestion is just a suggestion.")
+        self.splitBillButton?.setTitle(NSLocalizedString("Split Bill", comment: "This is the text that is displayed in the Split Bill button on the main view controller."), forState: .Normal)
         
         //prepare the cell select surrounds
         self.prepareCellSelectSurroundView()
@@ -167,6 +170,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         //prepare the primary view for the animation in
         self.labelContainerView?.alpha = 0
         self.tableContainerView?.alpha = 0
+        self.bottomButtonsContainerView?.alpha = 0
         
         //check screensize and set text side adjustment
         self.checkForScreenSizeConstraintAdjustments()
@@ -203,6 +207,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
                 animations: { () -> Void in
                     self.labelContainerView?.alpha = 1.0
                     self.tableContainerView?.alpha = 1.0
+                    self.bottomButtonsContainerView?.alpha = 1.0
                 }, completion: nil)
             
             // Launch the apple watch info screen if needed

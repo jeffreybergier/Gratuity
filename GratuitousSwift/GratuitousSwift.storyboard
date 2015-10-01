@@ -302,10 +302,12 @@
                         <outlet property="billAmountTableView" destination="YkV-Bf-bef" id="oEz-Hp-kr0"/>
                         <outlet property="billAmountTableViewTitleTextLabel" destination="qGH-24-ssK" id="ViN-Ve-1sT"/>
                         <outlet property="billAmountTableViewTitleTextLabelView" destination="cFa-ss-hba" id="KKJ-x4-Np0"/>
+                        <outlet property="bottomButtonsContainerView" destination="AnE-E9-lRW" id="Nnz-le-1V8"/>
                         <outlet property="labelContainerView" destination="sGt-Qz-W1j" id="ras-jG-tge"/>
                         <outlet property="largeTextWidthLandscapeOnlyConstraint" destination="6Xg-LP-mPD" id="1P7-Xx-DR1"/>
                         <outlet property="selectedTableViewCellOutlineViewHeightConstraint" destination="6OR-Wa-ftF" id="Dp9-hW-g63"/>
                         <outlet property="settingsButton" destination="x5O-Qc-eNn" id="2sX-nd-Sre"/>
+                        <outlet property="splitBillButton" destination="ZOV-Xb-gam" id="yHM-ub-ABv"/>
                         <outlet property="tableContainerView" destination="F2W-Pc-eWf" id="CgB-oD-Y9o"/>
                         <outlet property="tipAmountTableView" destination="V1Q-ia-Gn2" id="Z7T-iT-UOW"/>
                         <outlet property="tipAmountTableViewTitleTextLabel" destination="afh-uC-UXK" id="ugT-gy-nJP"/>
