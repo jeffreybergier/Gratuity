@@ -148,13 +148,12 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
     
     @IBAction private func didTapPurchaseButton(sender: UIButton?) {
         self.state = .PurchaseInProgress
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(4.0 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        self.dataSource.purchaseManager?.purchaseSplitBillProductWithCompletionHandler() { transaction in
             self.state = .Normal
+            print("PurchaseSplitBillViewController< Purchase Product Complete > Transaction: \(transaction), state: \(transaction.transactionState), error: \(transaction.error)")
+            // do stuff in the UI
+            self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction(transaction)
         }
-        self.dataSource.purchaseManager?.buyPurchasable(self.dataSource.purchaseManager!.splitBillProduct!, completionHandler: { (purchasable, transaction, error) in
-            //
-        })
     }
     
     @IBAction private func didTapRestoreButton(sender: UIButton?) {
@@ -166,7 +165,10 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
                 let errorVC = UIAlertController(customStyle: .RestorePurchaseError, mailComposeDelegate: self, presentingViewController: self, error: error)
                 self.presentViewController(errorVC, animated: true, completion: .None)
             } else {
-                print("PurchaseSplitBillViewController: Transaction: \(queue?.transactions)")
+                queue?.transactions.forEach() { transaction in
+                    let verified = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction(transaction)
+                    print("PurchaseSplitBillViewController: Transaction: \(transaction) restored successfully. Verified Split Bill Purchase: \(verified)")
+                }
             }
         }
     }

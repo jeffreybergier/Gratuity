@@ -17,98 +17,7 @@ protocol Purchasable: CustomStringConvertible {
     var skProductValue: SKProduct { get }
 }
 
-class PurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
-    
-    var paymentQueue: SKPaymentQueue { return SKPaymentQueue.defaultQueue() }
-    private var transactionObserverSet = false
-    
-    // MARK: Product Request
-    
-    private var productsRequestsInProgress = [SKRequest : ProductsRequestCompletionHandler]()
-    
-    func initiateRequest(request: SKProductsRequest, completionHandler: (request: SKProductsRequest, response: SKProductsResponse?, error: NSError?) -> ()) {
-        self.productsRequestsInProgress[request] = completionHandler
-        request.delegate = self
-        request.start()
-    }
-    
-    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        if let completionHandler = self.productsRequestsInProgress[request] {
-            completionHandler(request: request, response: response, error: .None)
-        }
-        self.productsRequestsInProgress.removeValueForKey(request)
-    }
-    
-    func request(request: SKRequest, didFailWithError error: NSError) {
-        if let completionHandler = self.productsRequestsInProgress[request], let productsRequest = request as? SKProductsRequest {
-            completionHandler(request: productsRequest, response: .None, error: error)
-        }
-        self.productsRequestsInProgress.removeValueForKey(request)
-    }
-    
-    private typealias ProductsRequestCompletionHandler = (request: SKProductsRequest, response: SKProductsResponse?, error: NSError?) -> ()
-    
-    // MARK: Restore Purchases
-    
-    private var latestPurchasesRestoreCompletionHandler: PurchasesRestoreCompletionHandler?
-    
-    func restorePurchasesWithCompletionHandler(completionHandler: (queue: SKPaymentQueue?, success: Bool, error: NSError?) -> ()) {
-        if self.transactionObserverSet == true {
-            if let _ = self.latestPurchasesRestoreCompletionHandler {
-                completionHandler(queue: .None, success: false, error: NSError(domain: "SKErrorDomain", code: 27, userInfo: ["NSLocalizedDescription" : "Purchase Restore already in progress. Wait for the previous one to succeed or fail and then try again."]))
-            } else {
-                self.latestPurchasesRestoreCompletionHandler = completionHandler
-                self.paymentQueue.restoreCompletedTransactions()
-            }
-        } else {
-            completionHandler(queue: .None, success: false, error: NSError(domain: "SKErrorDomain", code: 26, userInfo: ["NSLocalizedDescription" : "Purchase Queue Observer Not Set. This is usually due to products never having been downloaded. Perform Products Request, then try again."]))
-        }
-    }
-    
-    func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError) {
-        self.latestPurchasesRestoreCompletionHandler?(queue: queue, success: false, error: error)
-        self.latestPurchasesRestoreCompletionHandler = .None
-    }
-    
-    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
-        self.latestPurchasesRestoreCompletionHandler?(queue: queue, success: true, error: .None)
-        self.latestPurchasesRestoreCompletionHandler = .None
-    }
-    
-    private typealias PurchasesRestoreCompletionHandler = (queue: SKPaymentQueue?, success: Bool, error: NSError?) -> ()
-    
-    // MARK: Purchasing Items
-    
-    private var latestPurchaseCompletionHandler: ((purchasable: Purchasable, transaction: SKPaymentTransaction?, error: NSError?) -> ())?
-    private var latestPurchasePayment: SKPayment?
-    private var latestPurchasePurchasable: Purchasable?
-    func buyPurchasable(purchasable: Purchasable, completionHandler: (purchasable: Purchasable, transaction: SKPaymentTransaction?, error: NSError?) -> ()) {
-        if let existingCompletionHandler = self.latestPurchaseCompletionHandler {
-            existingCompletionHandler(purchasable: self.latestPurchasePurchasable!, transaction: .None, error: NSError(domain: "SKErrorDomain", code: 25, userInfo: ["NSLocalizedDescription" : "Purchase request interrupted by another purchase request."]))
-            self.latestPurchaseCompletionHandler = .None
-            self.latestPurchasePayment = .None
-            self.latestPurchasePurchasable = .None
-        }
-        
-        let payment = SKPayment(product: purchasable.skProductValue)
-        self.latestPurchaseCompletionHandler = completionHandler
-        self.latestPurchasePayment = payment
-        self.latestPurchasePurchasable = purchasable
-        self.paymentQueue.addPayment(payment)
-    }
-    
-    // Sent when the transaction array has changed (additions or state changes).  Client should check state of transactions and finish as appropriate.
-    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        
-    }
-    
-    func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
-        
-    }
-}
-
-
-class GratuitousPurchaseManager: PurchaseManager {
+class GratuitousPurchaseManager: JSBPurchaseManager {
     
     static let Products = Set([SplitBillProduct.identifierString])
     
@@ -145,6 +54,25 @@ class GratuitousPurchaseManager: PurchaseManager {
                     break
                 }
             }
+        }
+    }
+    
+    func purchaseSplitBillProductWithCompletionHandler(completionHandler: (transaction: SKPaymentTransaction) -> ()) {
+        let payment = SKPayment(product: self.splitBillProduct!.skProductValue)
+        self.initiatePurchaseWithPayment(payment, completionHandler: completionHandler)
+    }
+    
+    func verifySplitBillPurchaseTransaction(transaction: SKPaymentTransaction) -> Bool {
+        if transaction.payment.productIdentifier == SplitBillProduct.identifierString {
+            switch transaction.transactionState {
+            case .Purchasing, .Deferred, .Failed:
+                return false
+            case .Purchased, .Restored:
+                self.splitBillProduct?.purchased = true
+                return true
+            }
+        } else {
+            return false
         }
     }
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73048CF41BBCEBC400D8EAA6 /* JSBPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02BA1BBA4CE600E40EC5 /* GratuitousAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02BB1BBA4CFA00E40EC5 /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; settings = {ASSET_TAGS = (); }; };
 		733D02BC1BBA4D0000E40EC5 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512619E60F3900CD2B28 /* TipViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -108,6 +109,7 @@
 		73011BDF1AD04F90001F6D71 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 		73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchInfoViewController.swift; sourceTree = "<group>"; };
 		73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "gratuityInfoDemoVideo@2x.mov"; sourceTree = "<group>"; };
+		73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBPurchaseManager.swift; sourceTree = "<group>"; };
 		730614941BA64E970031D2D3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		730614951BA64E970031D2D3 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		731633101B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSwiftiOSDataSource.swift; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
 				738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */,
 				731633101B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift */,
+				73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */,
 				7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */,
 				7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */,
 				7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */,
@@ -590,6 +593,7 @@
 				733D02BC1BBA4D0000E40EC5 /* TipViewController.swift in Sources */,
 				733D02CD1BBA4D2800E40EC5 /* GratuitousPresentationController.swift in Sources */,
 				733D02C31BBA4D1300E40EC5 /* GratuitousSettingsButtons.swift in Sources */,
+				73048CF41BBCEBC400D8EAA6 /* JSBPurchaseManager.swift in Sources */,
 				733D02C71BBA4D1F00E40EC5 /* SplitBillViewController.swift in Sources */,
 				733D02CA1BBA4D1F00E40EC5 /* WatchInfoViewController.swift in Sources */,
 				733D02C01BBA4D1300E40EC5 /* SettingsTableViewController.swift in Sources */,
