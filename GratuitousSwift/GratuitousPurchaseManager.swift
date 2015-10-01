@@ -65,15 +65,18 @@ class GratuitousPurchaseManager: JSBPurchaseManager {
     func verifySplitBillPurchaseTransaction(transaction: SKPaymentTransaction) -> Bool {
         if transaction.payment.productIdentifier == SplitBillProduct.identifierString {
             switch transaction.transactionState {
-            case .Purchasing, .Deferred, .Failed:
-                return false
             case .Purchased, .Restored:
+                self.paymentQueue.finishTransaction(transaction)
                 self.splitBillProduct?.purchased = true
                 return true
+            case .Failed:
+                self.paymentQueue.finishTransaction(transaction)
+                fallthrough
+            default:
+                return false
             }
-        } else {
-            return false
         }
+        return false
     }
     
     struct SplitBillProduct: Purchasable {
