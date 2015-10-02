@@ -62,6 +62,9 @@
 		73AEA6ED1BBB0732004B16DE /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6F01BBB0877004B16DE /* Fuuutuuura-Meeediuuum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */; settings = {ASSET_TAGS = (); }; };
 		73AEA6F11BBB087A004B16DE /* Fuuutuuura-Meeediuuum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */; settings = {ASSET_TAGS = (); }; };
+		73FF9E9F1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF9E9E1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m */; settings = {ASSET_TAGS = (); }; };
+		73FF9EA21BBE4BE400F9278C /* RMAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF9EA11BBE4BE400F9278C /* RMAppReceipt.m */; settings = {ASSET_TAGS = (); }; };
+		73FF9EA51BBE4ED000F9278C /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF9EA41BBE4ED000F9278C /* RMStore.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +174,12 @@
 		73EDC4BC1A1807AA006AA72D /* GratuitousRightPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousRightPresentationController.swift; sourceTree = "<group>"; };
 		73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTransitioningDelegate.swift; sourceTree = "<group>"; };
 		73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerInterfaceController.swift; sourceTree = "<group>"; };
+		73FF9E9D1BBE496600F9278C /* RMStoreAppReceiptVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreAppReceiptVerifier.h; sourceTree = "<group>"; };
+		73FF9E9E1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreAppReceiptVerifier.m; sourceTree = "<group>"; };
+		73FF9EA01BBE4BDC00F9278C /* RMAppReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAppReceipt.h; sourceTree = "<group>"; };
+		73FF9EA11BBE4BE400F9278C /* RMAppReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAppReceipt.m; sourceTree = "<group>"; };
+		73FF9EA31BBE4ED000F9278C /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStore.h; sourceTree = "<group>"; };
+		73FF9EA41BBE4ED000F9278C /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,7 +332,7 @@
 				735334721A1804E2008530E1 /* Custom Presentation */,
 				73A755B71A87FB010038E023 /* Custom Files */,
 				7382510419E60EED00CD2B28 /* Supporting Files */,
-				73E7E60F1A19A9FB004F9F5C /* Frameworks */,
+				73E7E60F1A19A9FB004F9F5C /* Objective-C */,
 			);
 			path = GratuitousSwift;
 			sourceTree = "<group>";
@@ -422,13 +431,19 @@
 			name = "Custom Files";
 			sourceTree = "<group>";
 		};
-		73E7E60F1A19A9FB004F9F5C /* Frameworks */ = {
+		73E7E60F1A19A9FB004F9F5C /* Objective-C */ = {
 			isa = PBXGroup;
 			children = (
 				73556E631A19711F0079A37D /* UIImage+PDFUtility.h */,
 				73556E641A19711F0079A37D /* UIImage+PDFUtility.m */,
+				73FF9EA31BBE4ED000F9278C /* RMStore.h */,
+				73FF9EA41BBE4ED000F9278C /* RMStore.m */,
+				73FF9E9D1BBE496600F9278C /* RMStoreAppReceiptVerifier.h */,
+				73FF9E9E1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m */,
+				73FF9EA01BBE4BDC00F9278C /* RMAppReceipt.h */,
+				73FF9EA11BBE4BE400F9278C /* RMAppReceipt.m */,
 			);
-			name = Frameworks;
+			name = "Objective-C";
 			sourceTree = "<group>";
 		};
 		800AFDFD38FE21974E511AC6 /* Pods */ = {
@@ -687,7 +702,9 @@
 				733D02BA1BBA4CE600E40EC5 /* GratuitousAppDelegate.swift in Sources */,
 				733D02E01BBA4D8600E40EC5 /* GratuitousEnums.swift in Sources */,
 				733D02D51BBA4D2800E40EC5 /* GratuitousCurrencyStringImageGenerator.swift in Sources */,
+				73FF9EA21BBE4BE400F9278C /* RMAppReceipt.m in Sources */,
 				733D02C51BBA4D1900E40EC5 /* SmallModalTableViewController.swift in Sources */,
+				73FF9EA51BBE4ED000F9278C /* RMStore.m in Sources */,
 				733D02D61BBA4D2800E40EC5 /* GratuitousLabelImageGenerator.swift in Sources */,
 				733D02CC1BBA4D2800E40EC5 /* GratuitousRightPresentationController.swift in Sources */,
 				733D02C61BBA4D1900E40EC5 /* SmallModalScrollViewController.swift in Sources */,
@@ -696,6 +713,7 @@
 				733D02D21BBA4D2800E40EC5 /* GratuitousiOSConnectivityManager.swift in Sources */,
 				733D02C41BBA4D1900E40EC5 /* SmallModalViewController.swift in Sources */,
 				733D02C81BBA4D1F00E40EC5 /* SplitBillTableViewCell.swift in Sources */,
+				73FF9E9F1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,6 +775,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gratuity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -782,6 +801,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
