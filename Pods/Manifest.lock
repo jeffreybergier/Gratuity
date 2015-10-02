@@ -1,0 +1,23 @@
+PODS:
+  - Crashlytics (3.3.3)
+  - Fabric (1.5.4):
+    - Fabric/Base (= 1.5.4)
+  - Fabric/Base (1.5.4)
+  - RMStore (0.7.1):
+    - RMStore/Core (= 0.7.1)
+  - RMStore/Core (0.7.1)
+  - XCGLogger (3.0)
+
+DEPENDENCIES:
+  - Crashlytics (~> 3.3)
+  - Fabric (~> 1.5)
+  - RMStore (~> 0.7)
+  - XCGLogger (~> 3.0)
+
+SPEC CHECKSUMS:
+  Crashlytics: 9120a5c1515655e57a65e565e2eae8dd326be2e9
+  Fabric: 93e3053474839d8df33a61a29c328a48c83792c8
+  RMStore: 64ba13a9c040e3b7572765d169f77175cd3243e5
+  XCGLogger: 5802533aff8bafc8b3b9776ab8972576f31d0a4e
+
+COCOAPODS: 0.38.2

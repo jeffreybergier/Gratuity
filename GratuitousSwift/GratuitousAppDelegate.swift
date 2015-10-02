@@ -8,8 +8,8 @@
 
 import UIKit
 import WatchConnectivity
-//import Fabric
-//import Crashlytics
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
