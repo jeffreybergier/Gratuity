@@ -36,6 +36,7 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         
         let receiptData = NSData(contentsOfURL: NSBundle.mainBundle().appStoreReceiptURL!)
         let receipt = RMAppReceipt(ASN1Data: receiptData)
+        print("\(receipt.inAppPurchases)")
         let verifier = RMStoreAppReceiptVerifier()
         let verified = verifier.verifyAppReceipt()
         
