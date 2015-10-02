@@ -110,8 +110,6 @@
 		73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchInfoViewController.swift; sourceTree = "<group>"; };
 		73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "gratuityInfoDemoVideo@2x.mov"; sourceTree = "<group>"; };
 		73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBPurchaseManager.swift; sourceTree = "<group>"; };
-		730614941BA64E970031D2D3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
-		730614951BA64E970031D2D3 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		731633101B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSwiftiOSDataSource.swift; sourceTree = "<group>"; };
 		7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fuuutuuura-Meeediuuum.ttf"; sourceTree = "<group>"; };
 		732615E61BA9237C0081598F /* SmallModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallModalViewController.swift; sourceTree = "<group>"; };
@@ -420,8 +418,6 @@
 		73E7E60F1A19A9FB004F9F5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				730614941BA64E970031D2D3 /* Crashlytics.framework */,
-				730614951BA64E970031D2D3 /* Fabric.framework */,
 				73556E631A19711F0079A37D /* UIImage+PDFUtility.h */,
 				73556E641A19711F0079A37D /* UIImage+PDFUtility.m */,
 			);
