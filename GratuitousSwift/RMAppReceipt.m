@@ -223,7 +223,7 @@ static NSURL *_appleRootCertificateURL = nil;
 {
     // Converts the NSData string representation back into NSData object
     const char *chars = [string UTF8String];
-    int i = 0, len = string.length;
+    int i = 0, len = (int)string.length;
     
     NSMutableData *data = [NSMutableData dataWithCapacity:len / 2];
     char byteChars[3] = {'\0','\0','\0'};
