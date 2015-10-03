@@ -217,6 +217,28 @@ static NSURL *_appleRootCertificateURL = nil;
 
 #pragma mark - Utils
 
+#define krej6fUksh5Oj8doI9hUk3Zec8paSk9uV5lyD4Yar6eD0Jurf3 @"<308204bb 308203a3 a0030201 02020102 300d0609 2a864886 f70d0101 05050030 62310b30 09060355 04061302 55533113 30110603 55040a13 0a417070 6c652049 6e632e31 26302406 0355040b 131d4170 706c6520 43657274 69666963 6174696f 6e204175 74686f72 69747931 16301406 03550403 130d4170 706c6520 526f6f74 20434130 1e170d30 36303432 35323134 3033365a 170d3335 30323039 32313430 33365a30 62310b30 09060355 04061302 55533113 30110603 55040a13 0a417070 6c652049 6e632e31 26302406 0355040b 131d4170 706c6520 43657274 69666963 6174696f 6e204175 74686f72 69747931 16301406 03550403 130d4170 706c6520 526f6f74 20434130 82012230 0d06092a 864886f7 0d010101 05000382 010f0030 82010a02 82010100 e491a909 1f91db1e 4750eb05 ed5e7984 2deb36a2 574c55ec 8b1989de f94b6cf5 07ab2230 02e8183e f85009d3 7f41a898 f9d1ca66 9c246b11 d0a3bbe4 1b2ac31f 959e7a0c a4478b5b d4163733 cbc40f4d ce1469d1 c91972f5 5d0ed57f 5f9bf225 03ba558f 4d5d0df1 64352315 4b15591d b394f7f6 9c9ecf50 bac15850 678f08b4 20f7cbac 2c206f70 b63f0130 8cb743cf 0f9d3df3 2b49281a c8feceb5 b90ed95e 1cd6cb3d b53aadf4 0f0e0092 0bb12116 2e74d53c 0ddb6216 aba37192 475355c1 af2f41b3 f8fbe370 cde6a34c 457e1f4c 6b509641 89c47462 0b108341 87338a81 b13058ec 5a04328c 68b38f1d de6573ff 675e65bc 49d8769f 331465a1 7794c92d 02030100 01a38201 7a308201 76300e06 03551d0f 0101ff04 04030201 06300f06 03551d13 0101ff04 05300301 01ff301d 0603551d 0e041604 142bd069 47947609 fef46b8d 2e40a6f7 474d7f08 5e301f06 03551d23 04183016 80142bd0 69479476 09fef46b 8d2e40a6 f7474d7f 085e3082 01110603 551d2004 82010830 82010430 82010006 092a8648 86f76364 05013081 f2302a06 082b0601 05050702 01161e68 74747073 3a2f2f77 77772e61 70706c65 2e636f6d 2f617070 6c656361 2f3081c3 06082b06 01050507 02023081 b61a81b3 52656c69 616e6365 206f6e20 74686973 20636572 74696669 63617465 20627920 616e7920 70617274 79206173 73756d65 73206163 63657074 616e6365 206f6620 74686520 7468656e 20617070 6c696361 626c6520 7374616e 64617264 20746572 6d732061 6e642063 6f6e6469 74696f6e 73206f66 20757365 2c206365 72746966 69636174 6520706f 6c696379 20616e64 20636572 74696669 63617469 6f6e2070 72616374 69636520 73746174 656d656e 74732e30 0d06092a 864886f7 0d010105 05000382 0101005c 36994c2d 78b7ed8c 9bdcf377 9bf276d2 77304fc1 1f858385 1b993d47 37f2a99b 408e2cd4 b19012d8 bef4739b eed2640f cb794f34 d8a23ef9 78ff6bc8 07ec7d39 838b5320 d338c4b1 bf9a4f0a 6bff2bfc 59a70509 7c174056 111e74d3 b78b233b 47a3d56f 24e2ebd1 b770df0f 45e127ca f16d78ed e7b51717 a8dc7e22 35ca25d5 d90fd66b d4a22423 11f7a1ac 8f738160 c61b5b09 2f92b2f8 4448f060 389e15f5 3d266720 8a336af7 0d82cfde eba32ff9 536a5b64 c0633377 f73a072c 56ebda0f 210edaba 73194fb5 d9367fc1 8755d9a7 99b93242 fbd8d571 9e7ea152 b71bbd93 4224122a c70f1db6 4d9c5e63 c84b8017 50aa8ad5 dae4fcd0 090737b0 757521>"
+
++ (NSData *)Ea5huev8yEash9saf2uG2woY1Ru2drowD9aK7oal1kes8ond5O:(NSString *)string
+{
+    // Converts the NSData string representation back into NSData object
+    const char *chars = [string UTF8String];
+    int i = 0, len = string.length;
+    
+    NSMutableData *data = [NSMutableData dataWithCapacity:len / 2];
+    char byteChars[3] = {'\0','\0','\0'};
+    unsigned long wholeByte;
+    
+    while (i < len)
+    {
+        byteChars[0] = chars[i++];
+        byteChars[1] = chars[i++];
+        wholeByte = strtoul(byteChars, NULL, 16);
+        [data appendBytes:&wholeByte length:1];
+    }
+    return data;
+}
+
 + (NSData*)dataFromPCKS7Path:(NSString*)path
 {
     const char *cpath = [[path stringByStandardizingPath] fileSystemRepresentation];
@@ -229,9 +251,10 @@ static NSURL *_appleRootCertificateURL = nil;
     if (!p7) return nil;
     
     NSData *data;
-    NSURL *certificateURL = _appleRootCertificateURL ? : [[NSBundle mainBundle] URLForResource:@"AppleIncRootCertificate" withExtension:@"cer"];
-    NSData *certificateData = [NSData dataWithContentsOfURL:certificateURL];
-    if (!certificateData || [self verifyPCKS7:p7 withCertificateData:certificateData])
+//    NSURL *certificateURL = _appleRootCertificateURL ? : [[NSBundle mainBundle] URLForResource:@"AppleIncRootCertificate" withExtension:@"cer"];
+//    NSData *certificateData = [NSData dataWithContentsOfURL:certificateURL];
+    NSData *certificateData = [self Ea5huev8yEash9saf2uG2woY1Ru2drowD9aK7oal1kes8ond5O:[[[krej6fUksh5Oj8doI9hUk3Zec8paSk9uV5lyD4Yar6eD0Jurf3 stringByReplacingOccurrencesOfString:@"<" withString:@""]stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    if ([self verifyPCKS7:p7 withCertificateData:certificateData])
     {
         struct pkcs7_st *contents = p7->d.sign->contents;
         if (PKCS7_type_is_data(contents))

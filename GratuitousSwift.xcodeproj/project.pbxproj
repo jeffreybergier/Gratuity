@@ -62,7 +62,6 @@
 		73AEA6ED1BBB0732004B16DE /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6F01BBB0877004B16DE /* Fuuutuuura-Meeediuuum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */; settings = {ASSET_TAGS = (); }; };
 		73AEA6F11BBB087A004B16DE /* Fuuutuuura-Meeediuuum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */; settings = {ASSET_TAGS = (); }; };
-		73EC11651BC049A400716CA8 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 73EC11641BC049A400716CA8 /* AppleIncRootCertificate.cer */; settings = {ASSET_TAGS = (); }; };
 		73FF9E9F1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF9E9E1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m */; settings = {ASSET_TAGS = (); }; };
 		73FF9EA21BBE4BE400F9278C /* RMAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF9EA11BBE4BE400F9278C /* RMAppReceipt.m */; settings = {ASSET_TAGS = (); }; };
 		73FF9EA51BBE4ED000F9278C /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF9EA41BBE4ED000F9278C /* RMStore.m */; settings = {ASSET_TAGS = (); }; };
@@ -588,7 +587,6 @@
 			files = (
 				733D02D81BBA4D4000E40EC5 /* settingsIcon.pdf in Resources */,
 				733D02D71BBA4D2D00E40EC5 /* Images.xcassets in Resources */,
-				73EC11651BC049A400716CA8 /* AppleIncRootCertificate.cer in Resources */,
 				733D02D91BBA4D4700E40EC5 /* LaunchScreen.xib in Resources */,
 				733D02BB1BBA4CFA00E40EC5 /* GratuitousSwift.storyboard in Resources */,
 				733D02BE1BBA4D0900E40EC5 /* GratuitousTableViewCell.xib in Resources */,
