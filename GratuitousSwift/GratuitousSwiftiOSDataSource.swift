@@ -58,7 +58,6 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
             }
         }
         
-        
         self.currencyFormatter.locale = NSLocale.currentLocale()
         self.currencyFormatter.maximumFractionDigits = 0
         self.currencyFormatter.minimumFractionDigits = 0
@@ -76,9 +75,29 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
             if #available(iOS 9, *) {
                 (self.watchConnectivityManager as? GratuitousiOSConnectivityManager)?.delegate = self
             }
+            
+            let verifier = RMStoreAppReceiptVerifier()
+            verifier.bundleIdentifier = "com.saturdayapps.Gratuity"
+            // first verify the receipt. If it does not verify, mark the purchase as false
+            if verifier.verifyAppReceipt() == true {
+                // if it does verify AND the purchase is marked as false in the settings, then we can check for purhcases
+                if self.defaultsManager.splitBillPurchased == false {
+                    let purchases = RMAppReceipt.bundleReceipt().inAppPurchases
+                    purchases.forEach() { purchase in
+                        switch purchase.productIdentifier {
+                        case GratuitousPurchaseManager.SplitBillProduct.identifierString:
+                            self.defaultsManager.splitBillPurchased = true
+                        default:
+                            break
+                        }
+                    }
+                }
+            } else {
+                self.defaultsManager.splitBillPurchased = false
+            }
         }
     }
-    
+
     func receivedContextFromWatch(context: [String : AnyObject]) {
         dispatch_async(dispatch_get_main_queue()) {
             let oldModel = self.defaultsManager.model

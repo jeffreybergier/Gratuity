@@ -34,12 +34,6 @@ class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             self.transferBulkCurrencySymbolsIfNeeded()
         }
         
-        let receiptData = NSData(contentsOfURL: NSBundle.mainBundle().appStoreReceiptURL!)
-        let receipt = RMAppReceipt(ASN1Data: receiptData)
-        print("\(receipt.inAppPurchases)")
-        let verifier = RMStoreAppReceiptVerifier()
-        let verified = verifier.verifyAppReceipt()
-        
         return true
     }
     

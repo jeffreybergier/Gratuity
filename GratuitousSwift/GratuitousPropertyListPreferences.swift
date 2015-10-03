@@ -174,6 +174,16 @@ class GratuitousPropertyListPreferences {
             return self.model.freshWatchAppInstall
         }
     }
+    
+    var splitBillPurchased: Bool {
+        set {
+            self.model.splitBillPurchased = newValue
+            self.dataChanged = true
+        }
+        get {
+            return self.model.splitBillPurchased
+        }
+    }
 
     class var locationOnDisk: NSURL {
         let plistURL = GratuitousPropertyListPreferences.preferencesURL.URLByAppendingPathComponent(Keys.propertyListFileName)
@@ -220,6 +230,7 @@ class GratuitousPropertyListPreferences {
         // version 1.2 keys
         static let currencySymbolsNeeded = "currencySymbolsNeeded"
         static let freshWatchAppInstall = "freshWatchAppInstall"
+        static let splitBillPurchased = "splitBillPurchased"
     }
 
     
@@ -231,6 +242,7 @@ class GratuitousPropertyListPreferences {
         var overrideCurrencySymbol: CurrencySign
         var suggestedTipPercentage: Double
         var freshWatchAppInstall: Bool
+        var splitBillPurchased: Bool
         
         var contextDictionaryCopy: [String : AnyObject] {
             return [
@@ -238,6 +250,7 @@ class GratuitousPropertyListPreferences {
                 Keys.tipIndexPathRow : NSNumber(integer: self.tipIndexPathRow),
                 Keys.overrideCurrencySymbol : NSNumber(integer: self.overrideCurrencySymbol.rawValue),
                 Keys.suggestedTipPercentage : NSNumber(double: self.suggestedTipPercentage),
+                Keys.splitBillPurchased : NSNumber(bool: self.splitBillPurchased)
             ]
         }
         
@@ -248,7 +261,8 @@ class GratuitousPropertyListPreferences {
                 Keys.overrideCurrencySymbol : NSNumber(integer: self.overrideCurrencySymbol.rawValue),
                 Keys.suggestedTipPercentage : NSNumber(double: self.suggestedTipPercentage),
                 Keys.appVersionString : self.appVersionString,
-                Keys.freshWatchAppInstall : NSNumber(bool: self.freshWatchAppInstall)
+                Keys.freshWatchAppInstall : NSNumber(bool: self.freshWatchAppInstall),
+                Keys.splitBillPurchased : NSNumber(bool: self.splitBillPurchased)
             ]
         }
         
@@ -292,6 +306,12 @@ class GratuitousPropertyListPreferences {
             } else {
                 self.freshWatchAppInstall = true
             }
+            if let splitBillPurchased = dictionary?[Keys.splitBillPurchased] as? NSNumber {
+                let value = splitBillPurchased.boolValue
+                self.splitBillPurchased = value
+            } else {
+                splitBillPurchased = false
+            }
             // ignored from disk version. Always set to false on load
             self.currencySymbolsNeeded = fallback.currencySymbolsNeeded
         }
@@ -331,6 +351,12 @@ class GratuitousPropertyListPreferences {
                 self.freshWatchAppInstall = value
             } else {
                 self.freshWatchAppInstall = true
+            }
+            if let splitBillPurchased = dictionary?[Keys.splitBillPurchased] as? NSNumber {
+                let value = splitBillPurchased.boolValue
+                self.splitBillPurchased = value
+            } else {
+                splitBillPurchased = false
             }
             // ignored from disk version. Always set to false on load
             self.currencySymbolsNeeded = false
