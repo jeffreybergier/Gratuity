@@ -214,3 +214,7 @@ extension UIAlertController {
         self.addAction(dismissAction)
     }
 }
+
+extension NSError {
+    
+}

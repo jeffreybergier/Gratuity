@@ -1,8 +1,8 @@
 PODS:
-  - Crashlytics (3.3.3)
-  - Fabric (1.5.4):
-    - Fabric/Base (= 1.5.4)
-  - Fabric/Base (1.5.4)
+  - Crashlytics (3.3.4)
+  - Fabric (1.5.5):
+    - Fabric/Base (= 1.5.5)
+  - Fabric/Base (1.5.5)
   - OpenSSL-Universal (1.0.1.k)
   - XCGLogger (3.0)
 
@@ -13,8 +13,8 @@ DEPENDENCIES:
   - XCGLogger (~> 3.0)
 
 SPEC CHECKSUMS:
-  Crashlytics: 9120a5c1515655e57a65e565e2eae8dd326be2e9
-  Fabric: 93e3053474839d8df33a61a29c328a48c83792c8
+  Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c
+  Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
   OpenSSL-Universal: 5b864c8eb334c8e78f44e4b2eb294ee2c1891c23
   XCGLogger: 5802533aff8bafc8b3b9776ab8972576f31d0a4e
 
