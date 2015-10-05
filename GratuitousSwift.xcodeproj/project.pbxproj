@@ -45,6 +45,7 @@
 		733D02DF1BBA4D8600E40EC5 /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02E01BBA4D8600E40EC5 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02E41BBA505600E40EC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */; };
+		73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6C71BBB05EB004B16DE /* GratuityWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73AEA6C61BBB05EB004B16DE /* GratuityWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		73AEA6D41BBB05EB004B16DE /* GratuityWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 73AEA6BA1BBB05EB004B16DE /* GratuityWatch.app */; };
 		73AEA6DF1BBB06D0004B16DE /* PickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -153,6 +154,7 @@
 		73A18D711A2A9525002180DD /* Interface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
 		73A18D731A2A9525002180DD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchDataSource.swift; sourceTree = "<group>"; };
+		73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousErrors.swift; sourceTree = "<group>"; };
 		73AEA6BA1BBB05EB004B16DE /* GratuityWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuityWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AEA6C61BBB05EB004B16DE /* GratuityWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GratuityWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AEA6DD1BBB06A0004B16DE /* Gratuity-Watch-Extension-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Gratuity-Watch-Extension-Info.plist"; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 				7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */,
 				7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */,
 				7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */,
+				73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */,
 			);
 			name = "Custom Files";
 			sourceTree = "<group>";
@@ -716,6 +719,7 @@
 				733D02C41BBA4D1900E40EC5 /* SmallModalViewController.swift in Sources */,
 				733D02C81BBA4D1F00E40EC5 /* SplitBillTableViewCell.swift in Sources */,
 				73FF9E9F1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m in Sources */,
+				73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

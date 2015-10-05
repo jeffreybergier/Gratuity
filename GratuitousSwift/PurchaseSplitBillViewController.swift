@@ -146,13 +146,49 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
         }
     }
     
+    private var temporaryMailManager: EmailSupportHandler?
+    
     @IBAction private func didTapPurchaseButton(sender: UIButton?) {
         self.state = .PurchaseInProgress
         self.dataSource.purchaseManager?.purchaseSplitBillProductWithCompletionHandler() { transaction in
             self.state = .Normal
             print("PurchaseSplitBillViewController< Purchase Product Complete > Transaction: \(transaction), state: \(transaction.transactionState), error: \(transaction.error)")
             // do stuff in the UI
-            self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction(transaction)
+            if let splitBillPurchased = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() {
+                self.dataSource.defaultsManager.splitBillPurchased = splitBillPurchased
+            }
+
+            switch transaction.transactionState {
+            case .Purchased, .Restored, .Purchasing:
+                let presentingViewController = self.presentingViewController
+                self.dismissViewControllerAnimated(true, completion: {
+                    presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
+                })
+            case .Deferred:
+                let dismissAction = UIAlertAction(type: .Dismiss) { sender in
+                    let presentingViewController = self.presentingViewController
+                    self.dismissViewControllerAnimated(true, completion: {
+                        presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
+                    })
+                }
+                let error = NSError(purchaseError: .PurchaseDeferred)
+                let alertVC = UIAlertController(actions: [dismissAction], error: error)
+                self.presentViewController(alertVC, animated: true, completion: nil)
+            case .Failed:
+                let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
+                let emailAction = UIAlertAction(type: .EmailSupport) { sender in
+                    let emailManager = EmailSupportHandler(type: .GenericEmailSupport)
+                    self.temporaryMailManager = emailManager
+                    if let mailVC = emailManager.presentableMailViewController {
+                        self.presentViewController(mailVC, animated: true, completion: .None)
+                    } else {
+                        emailManager.switchAppForEmailSupport()
+                    }
+                }
+                let error = NSError(purchaseError: .PurchaseFailed)
+                let alertVC = UIAlertController(actions: [dismissAction, emailAction], error: error)
+                self.presentViewController(alertVC, animated: true, completion: nil)
+            }
         }
     }
     
@@ -160,61 +196,43 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
         self.state = .RestoreInProgress
         self.dataSource.purchaseManager?.restorePurchasesWithCompletionHandler() { queue, success, error in
             self.state = .Normal
-            if success == false {
-                NSLog("PurchaseSplitBillViewController: Restoring Purchases Failed with Error: \(error)")
-                let errorVC = UIAlertController(customStyle: .RestorePurchaseError, mailComposeDelegate: self, presentingViewController: self, error: error)
-                self.presentViewController(errorVC, animated: true, completion: .None)
-            } else {
-                queue?.transactions.forEach() { transaction in
-                    let verified = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction(transaction)
-                    print("PurchaseSplitBillViewController: Transaction: \(transaction) restored successfully. Verified Split Bill Purchase: \(verified)")
+            if success == true {
+                if let verified = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() where verified == true {
+                    self.dataSource.defaultsManager.splitBillPurchased = verified
+                    let presentingViewController = self.presentingViewController
+                    self.dismissViewControllerAnimated(true, completion: {
+                        presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
+                    })
+                } else {
+                    let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
+                    let emailAction = UIAlertAction(type: .EmailSupport) { sender in
+                        let emailManager = EmailSupportHandler(type: .GenericEmailSupport)
+                        self.temporaryMailManager = emailManager
+                        if let mailVC = emailManager.presentableMailViewController {
+                            self.presentViewController(mailVC, animated: true, completion: .None)
+                        } else {
+                            emailManager.switchAppForEmailSupport()
+                        }
+                    }
+                    let error = NSError(purchaseError: .RestoreSucceededSplitBillNotPurchased)
+                    let alertVC = UIAlertController(actions: [dismissAction, emailAction], error: error)
+                    self.presentViewController(alertVC, animated: true, completion: nil)
                 }
-            }
-        }
-    }
-}
-
-extension UIAlertController {
-    enum CustomStyle {
-        case RestorePurchaseError
-    }
-    
-    convenience init(customStyle: CustomStyle, mailComposeDelegate: MFMailComposeViewControllerDelegate, presentingViewController: UIViewController, error: NSError?) {
-        let errorTitle = NSLocalizedString("Restore Error", comment: "Error title when in-app purchase restore fails")
-        let errorDescription = error?.localizedDescription ?? "An error ocurred while restoring purchase. Please try again later."
-        
-        self.init(title: errorTitle, message: errorDescription, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let dismissAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: "Button to dismiss alert/error"), style: UIAlertActionStyle.Cancel, handler: .None)
-        let emailAction = UIAlertAction(title: NSLocalizedString("Email Support", comment: "Button that shows in the alert view when there was an error restoring purchases, used to email support."), style: UIAlertActionStyle.Default) { action in
-            let subject = NSLocalizedString("Trouble Restoring In-App Purchases", comment: "This is the subject line of the email that users can send when they are having trouble restoring in app purchases")
-            let body = NSLocalizedString("THISSHOULDBEBLANK", comment: "this is the body line of support requests, it should be blank, but the possibilies are endless")
-            
-            if MFMailComposeViewController.canSendMail() {
-                let mailer = MFMailComposeViewController()
-                mailer.mailComposeDelegate = mailComposeDelegate
-                mailer.setSubject(subject)
-                mailer.setToRecipients(["support@saturdayapps.com"])
-                mailer.setMessageBody(body, isHTML: false)
-                
-                presentingViewController.presentViewController(mailer, animated: true, completion: .None)
             } else {
-                let mailStringWrongEncoding = NSString(format: "mailto:support@saturdayapps.com?subject=%@&body=%@", subject, body)
-                let mailString = mailStringWrongEncoding.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-                if let mailString = mailString {
-                    let mailToURL = NSURL(string: mailString)
-                    if let mailToURL = mailToURL {
-                        UIApplication.sharedApplication().openURL(mailToURL)
+                let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
+                let emailAction = UIAlertAction(type: .EmailSupport) { sender in
+                    let emailManager = EmailSupportHandler(type: .GenericEmailSupport)
+                    self.temporaryMailManager = emailManager
+                    if let mailVC = emailManager.presentableMailViewController {
+                        self.presentViewController(mailVC, animated: true, completion: .None)
+                    } else {
+                        emailManager.switchAppForEmailSupport()
                     }
                 }
+                let error = NSError(purchaseError: .RestoreSucceededSplitBillNotPurchased)
+                let alertVC = UIAlertController(actions: [dismissAction, emailAction], error: error)
+                self.presentViewController(alertVC, animated: true, completion: nil)
             }
         }
-        
-        self.addAction(emailAction)
-        self.addAction(dismissAction)
     }
-}
-
-extension NSError {
-    
 }

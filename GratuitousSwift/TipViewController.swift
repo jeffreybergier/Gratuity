@@ -281,7 +281,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     @IBAction private func unwindToViewController(segue: UIStoryboardSegue) {
-        
+
     }
     
     var customTransitionType: GratuitousTransitioningDelegateType {
@@ -300,7 +300,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         switch segue {
         case .SplitBill:
-            if self.dataSource?.purchaseManager?.splitBillProduct?.purchased == true {
+            if true == false { //self.dataSource?.defaultsManager.splitBillPurchased == true {
                 return true
             } else {
                 self.performSegueWithIdentifier(StoryboardSegues.PurchaseSplitBill.rawValue, sender: self)

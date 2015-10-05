@@ -10,7 +10,6 @@ import StoreKit
 
 protocol Purchasable: CustomStringConvertible {
     static var identifierString: String { get }
-    var purchased: Bool? { get set }
     var localizedTitle: String { get }
     var localizedDescription: String { get }
     var price: Double { get }
@@ -62,26 +61,20 @@ class GratuitousPurchaseManager: JSBPurchaseManager {
         self.initiatePurchaseWithPayment(payment, completionHandler: completionHandler)
     }
     
-    func verifySplitBillPurchaseTransaction(transaction: SKPaymentTransaction) -> Bool {
-        if transaction.payment.productIdentifier == SplitBillProduct.identifierString {
-            switch transaction.transactionState {
-            case .Purchased, .Restored:
-                self.paymentQueue.finishTransaction(transaction)
-                self.splitBillProduct?.purchased = true
-                return true
-            case .Failed:
-                self.paymentQueue.finishTransaction(transaction)
-                fallthrough
-            default:
-                return false
+    func verifySplitBillPurchaseTransaction() -> Bool {
+        guard let receipt = RMAppReceipt.bundleReceipt() else { return false }
+        var verified = false
+        for purchase in receipt.inAppPurchases {
+            if purchase.productIdentifier == SplitBillProduct.identifierString {
+                verified = true
+                break
             }
         }
-        return false
+        return verified
     }
     
     struct SplitBillProduct: Purchasable {
         static let identifierString = "com.saturdayapps.gratuity.splitbillpurchase"
-        var purchased: Bool?
         let localizedTitle: String
         let localizedDescription: String
         let price: Double
@@ -95,7 +88,7 @@ class GratuitousPurchaseManager: JSBPurchaseManager {
         }
         
         var description: String {
-            return "SplitBillProduct: Price \(self.price), Purchased \(self.purchased), Title \(self.localizedTitle), Description \(self.localizedDescription)"
+            return "SplitBillProduct: Price \(self.price), Title \(self.localizedTitle), Description \(self.localizedDescription)"
         }
     }
 }

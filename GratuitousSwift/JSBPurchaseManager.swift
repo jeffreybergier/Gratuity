@@ -46,13 +46,13 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
     func restorePurchasesWithCompletionHandler(completionHandler: (queue: SKPaymentQueue?, success: Bool, error: NSError?) -> ()) {
         if self.transactionObserverSet == true {
             if let _ = self.latestPurchasesRestoreCompletionHandler {
-                completionHandler(queue: .None, success: false, error: NSError(domain: "SKErrorDomain", code: 27, userInfo: ["NSLocalizedDescription" : "Purchase Restore already in progress. Wait for the previous one to succeed or fail and then try again."]))
+                completionHandler(queue: .None, success: false, error: NSError(purchaseError: .RestorePurchasesAlreadyInProgress))
             } else {
                 self.latestPurchasesRestoreCompletionHandler = completionHandler
                 self.paymentQueue.restoreCompletedTransactions()
             }
         } else {
-            completionHandler(queue: .None, success: false, error: NSError(domain: "SKErrorDomain", code: 26, userInfo: ["NSLocalizedDescription" : "Purchase Queue Observer Not Set. This is usually due to products never having been downloaded. Perform Products Request, then try again."]))
+            completionHandler(queue: .None, success: false, error: NSError(purchaseError: .ProductRequestNeeded))
         }
     }
     
@@ -86,9 +86,9 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
         for transaction in transactions {
             print("PurchaseManager: Transaction: \(transaction) changed to state \(transaction.transactionState) with error: \(transaction.error)")
             switch transaction.transactionState {
-            case .Purchasing, .Deferred:
+            case .Purchasing:
                 break // do nothing and wait
-            case .Purchased, .Restored, .Failed:
+            case .Purchased, .Restored, .Failed, .Deferred:
                 if let completionHandler = self.purchasesInProgress[transaction.payment] {
                     completionHandler(transaction: transaction)
                     self.purchasesInProgress.removeValueForKey(transaction.payment)
