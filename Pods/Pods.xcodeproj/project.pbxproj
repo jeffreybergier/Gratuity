@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AACDEC8064EDBA6E1E502CEA46721FEA /* PBXContainerItemProxy */ = {
+		94CE972D25DBE9AA1F6BCFF333F5CE47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -429,7 +429,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				00F1A1B72B95F8F9F535A7248AB11C48 /* PBXTargetDependency */,
+				53DB1729F4C7CF0240B0EEA09B847B20 /* PBXTargetDependency */,
 			);
 			name = "Pods-Gratuity";
 			productName = "Pods-Gratuity";
@@ -484,11 +484,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		00F1A1B72B95F8F9F535A7248AB11C48 /* PBXTargetDependency */ = {
+		53DB1729F4C7CF0240B0EEA09B847B20 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = XCGLogger;
 			target = 19D92C3BFC7DD6EEE6176941B8DA624B /* XCGLogger */;
-			targetProxy = AACDEC8064EDBA6E1E502CEA46721FEA /* PBXContainerItemProxy */;
+			targetProxy = 94CE972D25DBE9AA1F6BCFF333F5CE47 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
