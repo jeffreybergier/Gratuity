@@ -20,6 +20,11 @@ class GratuitousPurchaseManager: JSBPurchaseManager {
     
     static let Products = Set([SplitBillProduct.identifierString])
     
+    override var Scej9Uj9vIrth8Ev7quaG9vob6iP8buK5ferS8yoak3Fots5El: String {
+        let bytes: [CChar] = [0x63, 0x6f, 0x6d, 0x2e, 0x73, 0x61, 0x74, 0x75, 0x72, 0x64, 0x61, 0x79, 0x61, 0x70, 0x70, 0x73, 0x2e, 0x47, 0x72, 0x61, 0x74, 0x75, 0x69, 0x74, 0x79]
+        return NSString(bytes: bytes, length: bytes.count, encoding: NSUTF8StringEncoding) as! String
+    }
+    
     private(set) var splitBillProduct: SplitBillProduct? {
         didSet {
             struct Token {
@@ -61,16 +66,21 @@ class GratuitousPurchaseManager: JSBPurchaseManager {
         self.initiatePurchaseWithPayment(payment, completionHandler: completionHandler)
     }
     
+    // MARK: Receipt Verification
+    
     func verifySplitBillPurchaseTransaction() -> Bool {
-        guard let receipt = RMAppReceipt.bundleReceipt() else { return false }
-        var verified = false
-        for purchase in receipt.inAppPurchases {
-            if purchase.productIdentifier == SplitBillProduct.identifierString {
-                verified = true
-                break
+        if let receipt = RMAppReceipt.bundleReceipt() where self.verifyAppReceiptAgainstAppleCertificate() == true {
+            var verified = false
+            for purchase in receipt.inAppPurchases {
+                if purchase.productIdentifier == SplitBillProduct.identifierString {
+                    verified = true
+                    break
+                }
             }
+            return verified
+        } else {
+            return false
         }
-        return verified
     }
     
     struct SplitBillProduct: Purchasable {

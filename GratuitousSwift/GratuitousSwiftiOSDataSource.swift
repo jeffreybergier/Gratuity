@@ -44,13 +44,6 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
         case AppLifeTime, Temporary
     }
     
-    private struct eG9aJ2Ev2rOrk8eF1caM3aG5dor4eeD9Duc2Yeb3yIm0by4hu0 {
-        static var Scej9Uj9vIrth8Ev7quaG9vob6iP8buK5ferS8yoak3Fots5El: String {
-            let bytes: [CChar] = [0x63, 0x6f, 0x6d, 0x2e, 0x73, 0x61, 0x74, 0x75, 0x72, 0x64, 0x61, 0x79, 0x61, 0x70, 0x70, 0x73, 0x2e, 0x47, 0x72, 0x61, 0x74, 0x75, 0x69, 0x74, 0x79]
-            return NSString(bytes: bytes, length: bytes.count, encoding: NSUTF8StringEncoding) as! String
-        }
-    }
-    
     init(use: Use) {
         switch use {
         case .Temporary:
@@ -83,25 +76,8 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
                 (self.watchConnectivityManager as? GratuitousiOSConnectivityManager)?.delegate = self
             }
             
-            let verifier = RMStoreAppReceiptVerifier()
-            verifier.bundleIdentifier = eG9aJ2Ev2rOrk8eF1caM3aG5dor4eeD9Duc2Yeb3yIm0by4hu0.Scej9Uj9vIrth8Ev7quaG9vob6iP8buK5ferS8yoak3Fots5El
-            // first verify the receipt. If it does not verify, mark the purchase as false
-            if verifier.verifyAppReceipt() == true {
-                // if it does verify, check the receipt for the purchases
-                guard let receipt = RMAppReceipt.bundleReceipt() else {
-                    self.defaultsManager.splitBillPurchased = false
-                    return
-                }
-                
-                let purchases = receipt.inAppPurchases
-                purchases.forEach() { purchase in
-                    switch purchase.productIdentifier {
-                    case GratuitousPurchaseManager.SplitBillProduct.identifierString:
-                        self.defaultsManager.splitBillPurchased = true
-                    default:
-                        break
-                    }
-                }
+            if self.purchaseManager?.verifySplitBillPurchaseTransaction() == true {
+                self.defaultsManager.splitBillPurchased = true
             } else {
                 self.defaultsManager.splitBillPurchased = false
             }
