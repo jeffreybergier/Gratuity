@@ -137,9 +137,7 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
             videoPlayer.player.seekToTime(kCMTimeZero)
         }
     }
-    
-    //private var temporaryMailManager: EmailSupportHandler?
-    
+        
     @IBAction private func didTapPurchaseButton(sender: UIButton?) {
         self.state = .PurchaseInProgress
         self.dataSource.purchaseManager?.purchaseSplitBillProductWithCompletionHandler() { transaction in
@@ -170,7 +168,6 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                 let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
                 let emailAction = UIAlertAction(type: .EmailSupport) { sender in
                     let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
-                    //self.temporaryMailManager = emailManager
                     if let mailVC = emailManager.presentableMailViewController {
                         self.presentViewController(mailVC, animated: true, completion: .None)
                     } else {
@@ -199,7 +196,6 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                     let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
                     let emailAction = UIAlertAction(type: .EmailSupport) { sender in
                         let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
-                        //self.temporaryMailManager = emailManager
                         if let mailVC = emailManager.presentableMailViewController {
                             self.presentViewController(mailVC, animated: true, completion: .None)
                         } else {
@@ -214,7 +210,6 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                 let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
                 let emailAction = UIAlertAction(type: .EmailSupport) { sender in
                     let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
-                    //self.temporaryMailManager = emailManager
                     if let mailVC = emailManager.presentableMailViewController {
                         self.presentViewController(mailVC, animated: true, completion: .None)
                     } else {
