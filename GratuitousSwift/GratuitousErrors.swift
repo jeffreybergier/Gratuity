@@ -18,6 +18,7 @@ extension NSError {
             case PurchaseDeferred = 03
             case PurchaseFailed = 04
             case RestoreSucceededSplitBillNotPurchased = 05
+            case RestoreFailed = 06
         }
     }
     
@@ -42,7 +43,10 @@ extension NSError {
             localizedRecoverySuggestion = NSLocalizedString("The purchased was cancelled or failed. Check your data connection and try again later.", comment: "")
         case .RestoreSucceededSplitBillNotPurchased:
             localizedDescription = NSLocalizedString("Purchase Not Found", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("The Split Bill Feature was not found while restoring In-App Purchases. Tap the Buy button to purchase this feature. If you believe this message is in error, please tap the Support button below.", comment: "")
+            localizedRecoverySuggestion = NSLocalizedString("The Split Bill Feature was not found while restoring In-App Purchases. Tap the Buy button to purchase this feature.", comment: "")
+        case .RestoreFailed:
+            localizedDescription = NSLocalizedString("Failed to Restore Purchases", comment: "")
+            localizedRecoverySuggestion = NSLocalizedString("An error ocurred while restoring purchases, please check your data connection and try again later.", comment: "")
         }
         
         let userInfo = [
@@ -92,7 +96,7 @@ extension UIAlertAction {
     }
 }
 
-class EmailSupportHandler: NSObject, MFMailComposeViewControllerDelegate {
+class EmailSupportHandler {
     
     enum Type {
         case GenericEmailSupport
@@ -104,7 +108,7 @@ class EmailSupportHandler: NSObject, MFMailComposeViewControllerDelegate {
     
     var presentableMailViewController: MFMailComposeViewController?
 
-    init(type: Type) {
+    init(type: Type, delegate: MFMailComposeViewControllerDelegate) {
         
         switch type {
         case .GenericEmailSupport:
@@ -112,11 +116,9 @@ class EmailSupportHandler: NSObject, MFMailComposeViewControllerDelegate {
             self.body = NSLocalizedString("", comment: "")
         }
         
-        super.init()
-        
         if MFMailComposeViewController.canSendMail() {
             let mailer = MFMailComposeViewController()
-            mailer.mailComposeDelegate = self
+            mailer.mailComposeDelegate = delegate
             mailer.setSubject(self.subject)
             mailer.setToRecipients([self.recipient])
             mailer.setMessageBody(self.body, isHTML: false)
@@ -130,9 +132,5 @@ class EmailSupportHandler: NSObject, MFMailComposeViewControllerDelegate {
         let mailString = mailStringWrongEncoding.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         let mailToURL = NSURL(string: mailString!)!
         UIApplication.sharedApplication().openURL(mailToURL)
-    }
-    
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: .None)
     }
 }

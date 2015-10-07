@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import MessageUI
 
-class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComposeViewControllerDelegate {
+class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     @IBOutlet private weak var videoPlayerView: UIView?
     @IBOutlet private weak var titleLabel: UILabel?
@@ -138,15 +138,7 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
         }
     }
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        self.state = .Normal
-        self.dismissViewControllerAnimated(true, completion: .None)
-        if let error = error {
-            NSLog("AboutTableViewController: Error while sending email. Error Description: \(error.description)")
-        }
-    }
-    
-    private var temporaryMailManager: EmailSupportHandler?
+    //private var temporaryMailManager: EmailSupportHandler?
     
     @IBAction private func didTapPurchaseButton(sender: UIButton?) {
         self.state = .PurchaseInProgress
@@ -177,8 +169,8 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
             case .Failed:
                 let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
                 let emailAction = UIAlertAction(type: .EmailSupport) { sender in
-                    let emailManager = EmailSupportHandler(type: .GenericEmailSupport)
-                    self.temporaryMailManager = emailManager
+                    let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
+                    //self.temporaryMailManager = emailManager
                     if let mailVC = emailManager.presentableMailViewController {
                         self.presentViewController(mailVC, animated: true, completion: .None)
                     } else {
@@ -206,8 +198,8 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
                 } else {
                     let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
                     let emailAction = UIAlertAction(type: .EmailSupport) { sender in
-                        let emailManager = EmailSupportHandler(type: .GenericEmailSupport)
-                        self.temporaryMailManager = emailManager
+                        let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
+                        //self.temporaryMailManager = emailManager
                         if let mailVC = emailManager.presentableMailViewController {
                             self.presentViewController(mailVC, animated: true, completion: .None)
                         } else {
@@ -221,18 +213,28 @@ class PurchaseSplitBillViewController: SmallModalScollViewController, MFMailComp
             } else {
                 let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
                 let emailAction = UIAlertAction(type: .EmailSupport) { sender in
-                    let emailManager = EmailSupportHandler(type: .GenericEmailSupport)
-                    self.temporaryMailManager = emailManager
+                    let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
+                    //self.temporaryMailManager = emailManager
                     if let mailVC = emailManager.presentableMailViewController {
                         self.presentViewController(mailVC, animated: true, completion: .None)
                     } else {
                         emailManager.switchAppForEmailSupport()
                     }
                 }
-                let error = NSError(purchaseError: .RestoreSucceededSplitBillNotPurchased)
-                let alertVC = UIAlertController(actions: [dismissAction, emailAction], error: error)
+                let customError = NSError(purchaseError: .RestoreFailed)
+                let alertVC = UIAlertController(actions: [dismissAction, emailAction], error: customError)
                 self.presentViewController(alertVC, animated: true, completion: nil)
             }
+        }
+    }
+}
+
+extension PurchaseSplitBillViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        self.state = .Normal
+        self.dismissViewControllerAnimated(true, completion: .None)
+        if let error = error {
+            NSLog("AboutTableViewController: Error while sending email. Error Description: \(error.description)")
         }
     }
 }
