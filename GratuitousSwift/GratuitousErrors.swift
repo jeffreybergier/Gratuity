@@ -107,6 +107,7 @@ extension UIAlertAction {
     enum Type {
         case Dismiss
         case EmailSupport
+        case Buy
     }
     
     convenience init(type: Type, completionHandler: (UIAlertAction -> Void)?) {
@@ -118,6 +119,9 @@ extension UIAlertAction {
             style = UIAlertActionStyle.Cancel
         case .EmailSupport:
             title = NSLocalizedString("Email Support", comment: "")
+            style = UIAlertActionStyle.Default
+        case .Buy:
+            title = NSLocalizedString("Buy", comment: "")
             style = UIAlertActionStyle.Default
         }
         self.init(title: title, style: style, handler: completionHandler)
