@@ -137,7 +137,7 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
             videoPlayer.player.seekToTime(kCMTimeZero)
         }
     }
-        
+    
     @IBAction private func didTapPurchaseButton(sender: UIButton?) {
         self.state = .PurchaseInProgress
         self.dataSource.purchaseManager?.purchaseSplitBillProductWithCompletionHandler() { transaction in
