@@ -87,21 +87,19 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
             verifier.bundleIdentifier = eG9aJ2Ev2rOrk8eF1caM3aG5dor4eeD9Duc2Yeb3yIm0by4hu0.Scej9Uj9vIrth8Ev7quaG9vob6iP8buK5ferS8yoak3Fots5El
             // first verify the receipt. If it does not verify, mark the purchase as false
             if verifier.verifyAppReceipt() == true {
-                // if it does verify AND the purchase is marked as false in the settings, then we can check for purhcases
-                if self.defaultsManager.splitBillPurchased == false {
-                    guard let receipt = RMAppReceipt.bundleReceipt() else {
-                        self.defaultsManager.splitBillPurchased = false
-                        return
-                    }
-                    
-                    let purchases = receipt.inAppPurchases
-                    purchases.forEach() { purchase in
-                        switch purchase.productIdentifier {
-                        case GratuitousPurchaseManager.SplitBillProduct.identifierString:
-                            self.defaultsManager.splitBillPurchased = true
-                        default:
-                            break
-                        }
+                // if it does verify, check the receipt for the purchases
+                guard let receipt = RMAppReceipt.bundleReceipt() else {
+                    self.defaultsManager.splitBillPurchased = false
+                    return
+                }
+                
+                let purchases = receipt.inAppPurchases
+                purchases.forEach() { purchase in
+                    switch purchase.productIdentifier {
+                    case GratuitousPurchaseManager.SplitBillProduct.identifierString:
+                        self.defaultsManager.splitBillPurchased = true
+                    default:
+                        break
                     }
                 }
             } else {

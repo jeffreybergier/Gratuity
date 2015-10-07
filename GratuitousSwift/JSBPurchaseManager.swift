@@ -107,6 +107,10 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
         }
     }
     
+    func finishTransaction(transaction: SKPaymentTransaction) {
+        self.paymentQueue.finishTransaction(transaction)
+    }
+    
     private typealias PurchasePaymentCompletionHandler = (transaction: SKPaymentTransaction) -> ()
 }
 

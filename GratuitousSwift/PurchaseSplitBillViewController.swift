@@ -149,10 +149,10 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
             }
 
             switch transaction.transactionState {
-            case .Purchased, .Restored, .Purchasing:
-                let presentingViewController = self.presentingViewController
+            case .Purchased, .Restored:
+                self.dataSource.purchaseManager?.finishTransaction(transaction)
                 self.dismissViewControllerAnimated(true, completion: {
-                    presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
+                    self.presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
                 })
             case .Deferred:
                 let dismissAction = UIAlertAction(type: .Dismiss) { sender in
@@ -165,6 +165,7 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                 let alertVC = UIAlertController(actions: [dismissAction], error: error)
                 self.presentViewController(alertVC, animated: true, completion: nil)
             case .Failed:
+                self.dataSource.purchaseManager?.finishTransaction(transaction)
                 let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
                 let emailAction = UIAlertAction(type: .EmailSupport) { sender in
                     let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
@@ -177,6 +178,8 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                 let error = NSError(purchaseError: .PurchaseFailed)
                 let alertVC = UIAlertController(actions: [dismissAction, emailAction], error: error)
                 self.presentViewController(alertVC, animated: true, completion: nil)
+            case .Purchasing:
+                break // do nothing
             }
         }
     }
