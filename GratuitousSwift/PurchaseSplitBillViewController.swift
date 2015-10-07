@@ -141,46 +141,45 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBAction private func didTapPurchaseButton(sender: UIButton?) {
         self.state = .PurchaseInProgress
         self.dataSource.purchaseManager?.purchaseSplitBillProductWithCompletionHandler() { transaction in
+            
+            // change the UI back to normal state
             self.state = .Normal
-            print("PurchaseSplitBillViewController< Purchase Product Complete > Transaction: \(transaction), state: \(transaction.transactionState), error: \(transaction.error)")
-            // do stuff in the UI
-            if let splitBillPurchased = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() {
-                self.dataSource.defaultsManager.splitBillPurchased = splitBillPurchased
+            // update the preferences
+            if transaction.transactionState == .Deferred {
+                // if the transaction is deferred I give temporary access.
+                // the receipt is checked on every launch, so this will get undone if it doesn't get deferred
+                self.dataSource.defaultsManager.splitBillPurchased = true
+            } else {
+                // update the preference based on the receipt
+                // the receipt is the source of truth, all the error handling is just sugar coating
+                if let splitBillPurchased = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() {
+                    self.dataSource.defaultsManager.splitBillPurchased = splitBillPurchased
+                }
             }
-
+            
+            // We need to finish the transaction unless its in the Deferred or Purchasing state
             switch transaction.transactionState {
-            case .Purchased, .Restored:
+            case .Purchased, .Restored, .Failed:
                 self.dataSource.purchaseManager?.finishTransaction(transaction)
-                let presentingViewController = self.presentingViewController
-                self.dismissViewControllerAnimated(true, completion: {
-                    presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
-                })
-            case .Deferred:
-                let dismissAction = UIAlertAction(type: .Dismiss) { sender in
+            case .Deferred, .Purchasing:
+                break //do nothing
+            }
+            
+            // lets present stuff to the user
+            if let userFacingErrorTuple = self.errorErrorForPurchaseTransaction(transaction) {
+                // an error ocurred, lets show it to the user.
+                let alertVC = UIAlertController(actions: userFacingErrorTuple.userAlertActions, error: userFacingErrorTuple.userFacingError)
+                self.presentViewController(alertVC, animated: true, completion: .None)
+            } else {
+                switch transaction.transactionState {
+                case .Purchased, .Restored:
                     let presentingViewController = self.presentingViewController
                     self.dismissViewControllerAnimated(true, completion: {
                         presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
                     })
+                case .Deferred, .Failed, .Purchasing:
+                    break //do nothing
                 }
-                let error = NSError(purchaseError: .PurchaseDeferred)
-                let alertVC = UIAlertController(actions: [dismissAction], error: error)
-                self.presentViewController(alertVC, animated: true, completion: nil)
-            case .Failed:
-                self.dataSource.purchaseManager?.finishTransaction(transaction)
-                let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
-                let emailAction = UIAlertAction(type: .EmailSupport) { sender in
-                    let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
-                    if let mailVC = emailManager.presentableMailViewController {
-                        self.presentViewController(mailVC, animated: true, completion: .None)
-                    } else {
-                        emailManager.switchAppForEmailSupport()
-                    }
-                }
-                let error = NSError(purchaseError: .PurchaseFailed)
-                let alertVC = UIAlertController(actions: [dismissAction, emailAction], error: error)
-                self.presentViewController(alertVC, animated: true, completion: nil)
-            case .Purchasing:
-                break // do nothing
             }
         }
     }
@@ -188,42 +187,124 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBAction private func didTapRestoreButton(sender: UIButton?) {
         self.state = .RestoreInProgress
         self.dataSource.purchaseManager?.restorePurchasesWithCompletionHandler() { queue, success, error in
+            
+            // change the UI back to normal state
             self.state = .Normal
-            if success == true {
-                if self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() == true {
-                    self.dataSource.defaultsManager.splitBillPurchased = true
-                    let presentingViewController = self.presentingViewController
-                    self.dismissViewControllerAnimated(true, completion: {
-                        presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
-                    })
-                } else {
-                    let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
-                    let emailAction = UIAlertAction(type: .EmailSupport) { sender in
-                        let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
-                        if let mailVC = emailManager.presentableMailViewController {
-                            self.presentViewController(mailVC, animated: true, completion: .None)
-                        } else {
-                            emailManager.switchAppForEmailSupport()
-                        }
-                    }
-                    let error = NSError(purchaseError: .RestoreSucceededSplitBillNotPurchased)
-                    let alertVC = UIAlertController(actions: [dismissAction, emailAction], error: error)
-                    self.presentViewController(alertVC, animated: true, completion: nil)
-                }
-            } else {
-                let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: .None)
-                let emailAction = UIAlertAction(type: .EmailSupport) { sender in
-                    let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
-                    if let mailVC = emailManager.presentableMailViewController {
-                        self.presentViewController(mailVC, animated: true, completion: .None)
-                    } else {
-                        emailManager.switchAppForEmailSupport()
-                    }
-                }
-                let customError = NSError(purchaseError: .RestoreFailed)
-                let alertVC = UIAlertController(actions: [dismissAction, emailAction], error: customError)
-                self.presentViewController(alertVC, animated: true, completion: nil)
+            // update the preference based on the receipt
+            // the receipt is the source of truth, all the error handling is just sugar coating
+            if let splitBillPurchased = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() {
+                self.dataSource.defaultsManager.splitBillPurchased = splitBillPurchased
             }
+        }
+    }
+    
+    private enum StoreAction {
+        case Purchase, Restore
+    }
+    private func errorErrorForPurchaseTransaction(transaction: SKPaymentTransaction) -> (userFacingError: NSError, userAlertActions: [UIAlertAction])? {
+        let userFacingError: NSError?
+        let userAlertActions: [UIAlertAction]
+        
+        if let error = transaction.error, let reason = StoreKitPurchaseErrorCode(rawValue: error.code) {
+            switch reason {
+            case .Unknown:
+                userFacingError = NSError(purchaseError: .PurchaseFailedUnknown)
+                userAlertActions = [
+                    UIAlertAction(type: .Dismiss, completionHandler: .None),
+                    UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                ]
+            case .ClientInvalid:
+                userFacingError = NSError(purchaseError: .PurchaseFailedClientInvalid)
+                userAlertActions = [
+                    UIAlertAction(type: .Dismiss, completionHandler: .None),
+                    UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                ]
+            case .PaymentCancelled:
+                userFacingError = .None
+                userAlertActions = []
+            case .PaymentInvalid:
+                userFacingError = NSError(purchaseError: .PurchaseFailedPaymentInvalid)
+                userAlertActions = [
+                    UIAlertAction(type: .Dismiss, completionHandler: .None),
+                    UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                ]
+            case .PaymentNotAllowed:
+                userFacingError = NSError(purchaseError: .PurchaseFailedPaymentNotAllowed)
+                userAlertActions = [
+                    UIAlertAction(type: .Dismiss, completionHandler: .None),
+                    UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                ]
+            case .ProductNotAvailable:
+                userFacingError = NSError(purchaseError: .PurchaseFailedProductNotAvailable)
+                userAlertActions = [
+                    UIAlertAction(type: .Dismiss, completionHandler: .None),
+                    UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                ]
+            }
+        } else {
+            switch transaction.transactionState {
+            case .Purchased, .Restored:
+                // true true success
+                userFacingError = .None
+                userAlertActions = []
+            case .Deferred:
+                // Deferred for parents to approve, granting temporary access
+                userFacingError = NSError(purchaseError: .PurchaseDeferred)
+                userAlertActions = [UIAlertAction(type: .Dismiss, completionHandler: self.deferredPurchaseAlertDismissed)]
+            case .Failed:
+                // not sure how we made it this far, but thats OK, unknown error
+                userFacingError = NSError(purchaseError: .PurchaseFailedUnknown)
+                userAlertActions = [
+                    UIAlertAction(type: .Dismiss, completionHandler: .None),
+                    UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                ]
+            case .Purchasing:
+                // should not ever see this but will do nothing because most likely stuff is still in progress
+                userFacingError = .None
+                userAlertActions = []
+            }
+        }
+        
+        if let userFacingError = userFacingError {
+            return (userFacingError: userFacingError, userAlertActions: userAlertActions)
+        } else {
+            return .None
+        }
+    }
+    
+//    private func errorFromTransaction(transaction: SKPaymentTransaction) -> (userFacingError: NSError, userAlertActions: [UIAlertAction])? {
+//        if let transactionError = transaction.error,
+//            let reason = StoreKitPurchaseErrorCode(rawValue: transactionError.code)
+//            where reason == .PaymentCancelled {
+//                // if the transaction is marked as canceled by the user, I don't want to present any error
+//                return .None
+//        }
+//        
+//        let userFacingError: NSError?
+//        let userAlertActions: [UIAlertAction]
+//
+//        
+//        
+//        if let userFacingError = userFacingError {
+//            return (userFacingError: userFacingError, userAlertActions: userAlertActions)
+//        } else {
+//            return .None
+//        }
+//    }
+    
+    private func deferredPurchaseAlertDismissed(action: UIAlertAction) {
+        let presentingViewController = self.presentingViewController
+        self.dismissViewControllerAnimated(true, completion: {
+            presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
+        })
+    }
+    
+    private func didTapEmailSupportActionButton(action: UIAlertAction) {
+        let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
+        if let mailVC = emailManager.presentableMailViewController {
+            self.presentViewController(mailVC, animated: true, completion: .None)
+        } else {
+            emailManager.switchAppForEmailSupport()
         }
     }
 }

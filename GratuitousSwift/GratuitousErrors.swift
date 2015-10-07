@@ -7,6 +7,16 @@
 //
 
 import MessageUI
+import StoreKit
+
+enum StoreKitPurchaseErrorCode: Int {
+    case Unknown = 0 //SKErrorUnknown
+    case ClientInvalid = 1 //SKErrorClientInvalid // client is not allowed to issue the request, etc.
+    case PaymentCancelled = 2 //SKErrorPaymentCancelled // user cancelled the request, etc.
+    case PaymentInvalid = 3 //SKErrorPaymentInvalid  // purchase identifier was invalid, etc.
+    case PaymentNotAllowed = 4 //SKErrorPaymentNotAllowed // this device is not allowed to make the payment
+    case ProductNotAvailable = 5 //SKErrorStoreProductNotAvailable // Product is not available in the current storefront
+}
 
 extension NSError {
     struct GratuitousPurchaseError {
@@ -18,7 +28,16 @@ extension NSError {
             case PurchaseDeferred = 03
             case PurchaseFailed = 04
             case RestoreSucceededSplitBillNotPurchased = 05
-            case RestoreFailed = 06
+            case RestoreFailedUnknown = 06
+            case RestoreFailedClientInvalid = 07
+            case RestoreFailedPaymentInvalid = 09
+            case RestoreFailedPaymentNotAllowed = 10
+            case RestoreFailedProductNotAvailable = 11
+            case PurchaseFailedUnknown = 12
+            case PurchaseFailedClientInvalid = 13
+            case PurchaseFailedPaymentInvalid = 15
+            case PurchaseFailedPaymentNotAllowed = 16
+            case PurchaseFailedProductNotAvailable = 17
         }
     }
     
@@ -44,9 +63,18 @@ extension NSError {
         case .RestoreSucceededSplitBillNotPurchased:
             localizedDescription = NSLocalizedString("Purchase Not Found", comment: "")
             localizedRecoverySuggestion = NSLocalizedString("The Split Bill Feature was not found while restoring In-App Purchases. Tap the Buy button to purchase this feature.", comment: "")
-        case .RestoreFailed:
+        case .RestoreFailedUnknown, .RestoreFailedClientInvalid, .RestoreFailedPaymentInvalid, .RestoreFailedProductNotAvailable:
             localizedDescription = NSLocalizedString("Failed to Restore Purchases", comment: "")
             localizedRecoverySuggestion = NSLocalizedString("An error ocurred while restoring purchases, please check your data connection and try again later.", comment: "")
+        case .PurchaseFailedUnknown, .PurchaseFailedClientInvalid, .PurchaseFailedPaymentInvalid, .PurchaseFailedProductNotAvailable:
+            localizedDescription = NSLocalizedString("Purchase Failed", comment: "")
+            localizedRecoverySuggestion = NSLocalizedString("An error ocurred while purchasing, please check your data connection and try again later.", comment: "")
+        case .RestoreFailedPaymentNotAllowed:
+            localizedDescription = NSLocalizedString("Restore Failed", comment: "")
+            localizedRecoverySuggestion = NSLocalizedString("In-App purchases are restricted on this device. Please remove the restriction and try again.", comment: "")
+        case .PurchaseFailedPaymentNotAllowed:
+            localizedDescription = NSLocalizedString("Purchase Failed", comment: "")
+            localizedRecoverySuggestion = NSLocalizedString("In-App purchases are restricted on this device. Please remove the restriction and try again.", comment: "")
         }
         
         let userInfo = [
