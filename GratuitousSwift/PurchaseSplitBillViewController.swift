@@ -151,8 +151,9 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
             switch transaction.transactionState {
             case .Purchased, .Restored:
                 self.dataSource.purchaseManager?.finishTransaction(transaction)
+                let presentingViewController = self.presentingViewController
                 self.dismissViewControllerAnimated(true, completion: {
-                    self.presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
+                    presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
                 })
             case .Deferred:
                 let dismissAction = UIAlertAction(type: .Dismiss) { sender in
@@ -189,8 +190,8 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
         self.dataSource.purchaseManager?.restorePurchasesWithCompletionHandler() { queue, success, error in
             self.state = .Normal
             if success == true {
-                if let verified = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() where verified == true {
-                    self.dataSource.defaultsManager.splitBillPurchased = verified
+                if self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() == true {
+                    self.dataSource.defaultsManager.splitBillPurchased = true
                     let presentingViewController = self.presentingViewController
                     self.dismissViewControllerAnimated(true, completion: {
                         presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
