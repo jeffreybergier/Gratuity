@@ -291,7 +291,7 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         switch segue {
         case .SplitBill:
-            if true == true { //self.dataSource.defaultsManager.splitBillPurchased == true {
+            if self.dataSource.defaultsManager.splitBillPurchased == true {
                 return true
             } else {
                 self.performSegueWithIdentifier(StoryboardSegues.PurchaseSplitBill.rawValue, sender: self)

@@ -86,9 +86,23 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
     
     private var purchasesInProgress = [SKPayment : PurchasePaymentCompletionHandler]()
     
+    private class BogusTransaction: SKPaymentTransaction {
+        override var error: NSError? {
+            get {
+                return _error
+            }
+            set {
+                _error = newValue
+            }
+        }
+        private var _error: NSError?
+    }
+    
     func initiatePurchaseWithPayment(payment: SKPayment, completionHandler: (transaction: SKPaymentTransaction) -> ()) {
-        if let _ = self.purchasesInProgress[payment] {
-            // return error about payment is already in progress
+        if let existingCompletionHandler = self.purchasesInProgress[payment] {
+            let bogusTransaction = BogusTransaction()
+            bogusTransaction.error = NSError(purchaseError: .PurchaseAlreadyInProgress)
+            existingCompletionHandler(transaction: bogusTransaction)
         } else {
             self.purchasesInProgress[payment] = completionHandler
             self.paymentQueue.addPayment(payment)

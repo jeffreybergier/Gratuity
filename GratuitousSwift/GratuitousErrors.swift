@@ -23,21 +23,22 @@ extension NSError {
         static let domainKey = "GratuitousPurchaseError"
         
         enum ErrorCode: Int {
-            case RestorePurchasesAlreadyInProgress = 01
-            case ProductRequestNeeded = 02
-            case PurchaseDeferred = 03
-            case PurchaseFailed = 04
-            case RestoreSucceededSplitBillNotPurchased = 05
-            case RestoreFailedUnknown = 06
-            case RestoreFailedClientInvalid = 07
-            case RestoreFailedPaymentInvalid = 09
-            case RestoreFailedPaymentNotAllowed = 10
-            case RestoreFailedProductNotAvailable = 11
-            case PurchaseFailedUnknown = 12
-            case PurchaseFailedClientInvalid = 13
-            case PurchaseFailedPaymentInvalid = 15
-            case PurchaseFailedPaymentNotAllowed = 16
-            case PurchaseFailedProductNotAvailable = 17
+            case RestorePurchasesAlreadyInProgress = 2001
+            case PurchaseAlreadyInProgress = 2018
+            case ProductRequestNeeded = 2002
+            case PurchaseDeferred = 2003
+            case PurchaseFailed = 2004
+            case RestoreSucceededSplitBillNotPurchased = 2005
+            case RestoreFailedUnknown = 2006
+            case RestoreFailedClientInvalid = 2007
+            case RestoreFailedPaymentInvalid = 2009
+            case RestoreFailedPaymentNotAllowed = 2010
+            case RestoreFailedProductNotAvailable = 2011
+            case PurchaseFailedUnknown = 2012
+            case PurchaseFailedClientInvalid = 2013
+            case PurchaseFailedPaymentInvalid = 2015
+            case PurchaseFailedPaymentNotAllowed = 2016
+            case PurchaseFailedProductNotAvailable = 2017
         }
     }
     
@@ -51,6 +52,9 @@ extension NSError {
         case .RestorePurchasesAlreadyInProgress:
             localizedDescription = NSLocalizedString("Restore in Progress", comment: "")
             localizedRecoverySuggestion = NSLocalizedString("A purchase restore is already in progress. Please wait for the first restore to finish before trying again.", comment: "")
+        case .PurchaseAlreadyInProgress:
+            localizedDescription = NSLocalizedString("Purchase in Progress", comment: "")
+            localizedRecoverySuggestion = NSLocalizedString("This purchase is already in progress. Please wait for the first restore to finish before trying again.", comment: "")
         case .ProductRequestNeeded:
             localizedDescription = NSLocalizedString("Request Failure", comment: "")
             localizedRecoverySuggestion = NSLocalizedString("Failed to request products from the App Store. Check your data connection and try again later.", comment: "")
@@ -83,6 +87,14 @@ extension NSError {
         ]
         
         self.init(domain: errorDomain, code: code, userInfo: userInfo)
+    }
+    
+    func isaGratuitousPurchaseError() -> Bool {
+        if let _ = GratuitousPurchaseError.ErrorCode(rawValue: self.code) where self.domain == GratuitousPurchaseError.domainKey {
+            return true
+        } else {
+            return false
+        }
     }
 }
 

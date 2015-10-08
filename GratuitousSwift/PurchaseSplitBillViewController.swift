@@ -320,7 +320,13 @@ extension PurchaseSplitBillViewController {
                 }
             } else {
                 // there was an error but it didn't match one of the known codes
-                userFacingError = NSError(purchaseError: .RestoreFailedUnknown)
+                if error.isaGratuitousPurchaseError() == true {
+                    // if we already custom crafted this error, we can show it to the user
+                    userFacingError = error
+                } else {
+                    // otherwise we'll give a generic failure
+                    userFacingError = NSError(purchaseError: .RestoreFailedUnknown)
+                }
                 userAlertActions = [
                     UIAlertAction(type: .Dismiss, completionHandler: .None),
                     UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
@@ -401,7 +407,13 @@ extension PurchaseSplitBillViewController {
                 }
             } else {
                 // there was an error but it didn't match one of the known codes
-                userFacingError = NSError(purchaseError: .RestoreFailedUnknown)
+                if error.isaGratuitousPurchaseError() == true {
+                    // if we already custom crafted this error, we can show it to the user
+                    userFacingError = error
+                } else {
+                    // otherwise we'll give a generic failure
+                    userFacingError = NSError(purchaseError: .RestoreFailedUnknown)
+                }
                 userAlertActions = [
                     UIAlertAction(type: .Dismiss, completionHandler: .None),
                     UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
