@@ -10,8 +10,21 @@ import StoreKit
 
 class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
-    var paymentQueue: SKPaymentQueue { return SKPaymentQueue.defaultQueue() }
+    private let paymentQueue = SKPaymentQueue.defaultQueue()
+    
+    // MARK: Set Observer
+    
     var transactionObserverSet = false
+    
+    func beginObserving() {
+        self.transactionObserverSet = true
+        self.paymentQueue.addTransactionObserver(self)
+    }
+    
+    func endObserving() {
+        self.transactionObserverSet = false
+        self.paymentQueue.removeTransactionObserver(self)
+    }
     
     // MARK: Receipt verification
     

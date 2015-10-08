@@ -50,7 +50,7 @@ class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, Gratui
             self.watchConnectivityManager = .None
             self.purchaseManager = .None
         case .AppLifeTime:
-            self.purchaseManager = GratuitousPurchaseManager(requestAvailableProductsImmediately: true)
+            self.purchaseManager = GratuitousPurchaseManager()
             if #available(iOS 9, *) {
                 self.watchConnectivityManager = GratuitousiOSConnectivityManager()
             } else {

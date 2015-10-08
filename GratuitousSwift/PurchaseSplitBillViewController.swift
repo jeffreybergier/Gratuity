@@ -80,6 +80,8 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.dataSource.purchaseManager?.beginObserving()
+
         if let videoPlayer = self.videoPlayer {
             let player = videoPlayer.player
             let layer = videoPlayer.layer
@@ -258,6 +260,12 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
         } else {
             emailManager.switchAppForEmailSupport()
         }
+    }
+    
+    // MARK: Handle Going Away
+    
+    deinit {
+        self.dataSource.purchaseManager?.endObserving()
     }
 }
 

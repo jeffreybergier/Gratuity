@@ -27,31 +27,31 @@ class GratuitousPurchaseManager: JSBPurchaseManager {
     
     private(set) var splitBillProduct: SplitBillProduct? {
         didSet {
-            struct Token {
-                static var onceToken: dispatch_once_t = 0
+            self.productRequestCompletionHandlers.forEach() { completionHandler in
+                completionHandler()
             }
-            dispatch_once(&Token.onceToken) {
-                self.paymentQueue.addTransactionObserver(self)
-                self.transactionObserverSet = true
-            }
+            self.productRequestCompletionHandlers = []
         }
     }
     
-    init(requestAvailableProductsImmediately: Bool) {
+    override init() {
         super.init()
-        if requestAvailableProductsImmediately == true {
-            self.requestProducts()
+        if self.verifySplitBillPurchaseTransaction() == false {
+            self.requestSplitBillProductWithCompletionHandler(.None)
         }
     }
+    
+    private var productRequestCompletionHandlers = [ProductsRequestCompletionHandler]()
+    private typealias ProductsRequestCompletionHandler = () -> Void
 
-    func requestProducts() {
+    func requestSplitBillProductWithCompletionHandler(completionHandler: (() -> Void)?) {
+        if let completionHandler = completionHandler {
+            self.productRequestCompletionHandlers += [completionHandler]
+        }
+        
         let request = SKProductsRequest(productIdentifiers: GratuitousPurchaseManager.Products)
         self.initiateRequest(request) { request, response, error in
-            guard let response = response else {
-                NSLog("GratuitousPurchaseManager: Product Request at Init Failed. Be Sure to Request Products Again before Attempting to Restore or Initiate Purchases: \(error)")
-                return
-            }
-            
+            guard let response = response else { return }
             for product in response.products {
                 if product.productIdentifier == SplitBillProduct.identifierString {
                     self.splitBillProduct = SplitBillProduct(product: product)
