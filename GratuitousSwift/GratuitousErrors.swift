@@ -25,7 +25,7 @@ extension NSError {
         enum ErrorCode: Int {
             case RestorePurchasesAlreadyInProgress = 2001
             case PurchaseAlreadyInProgress = 2018
-            case ProductRequestNeeded = 2002
+            case ProductRequestFailed = 2002
             case PurchaseDeferred = 2003
             case PurchaseFailed = 2004
             case RestoreSucceededSplitBillNotPurchased = 2005
@@ -55,9 +55,9 @@ extension NSError {
         case .PurchaseAlreadyInProgress:
             localizedDescription = NSLocalizedString("Purchase in Progress", comment: "")
             localizedRecoverySuggestion = NSLocalizedString("This purchase is already in progress. Please wait for the first restore to finish before trying again.", comment: "")
-        case .ProductRequestNeeded:
-            localizedDescription = NSLocalizedString("Request Failure", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("Failed to request products from the App Store. Check your data connection and try again later.", comment: "")
+        case .ProductRequestFailed:
+            localizedDescription = NSLocalizedString("App Store Error", comment: "")
+            localizedRecoverySuggestion = NSLocalizedString("Unable to connect to the App Store. Please check your data connection and try again later.", comment: "")
         case .PurchaseDeferred:
             localizedDescription = NSLocalizedString("Successfully Asked Permission", comment: "")
             localizedRecoverySuggestion = NSLocalizedString("While waiting for approval, the feature has been enabled. Note, without approval the feature may disable itself.", comment: "")

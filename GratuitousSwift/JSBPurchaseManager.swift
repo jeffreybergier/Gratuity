@@ -14,15 +14,11 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
     
     // MARK: Set Observer
     
-    var transactionObserverSet = false
-    
     func beginObserving() {
-        self.transactionObserverSet = true
         self.paymentQueue.addTransactionObserver(self)
     }
     
     func endObserving() {
-        self.transactionObserverSet = false
         self.paymentQueue.removeTransactionObserver(self)
     }
     
@@ -69,30 +65,26 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
     
     private var latestPurchasesRestoreCompletionHandler: PurchasesRestoreCompletionHandler?
     
-    func restorePurchasesWithCompletionHandler(completionHandler: (queue: SKPaymentQueue?, success: Bool, error: NSError?) -> ()) {
-        if self.transactionObserverSet == true {
-            if let _ = self.latestPurchasesRestoreCompletionHandler {
-                completionHandler(queue: .None, success: false, error: NSError(purchaseError: .RestorePurchasesAlreadyInProgress))
-            } else {
-                self.latestPurchasesRestoreCompletionHandler = completionHandler
-                self.paymentQueue.restoreCompletedTransactions()
-            }
+    func restorePurchasesWithCompletionHandler(completionHandler: (queue: SKPaymentQueue?, error: NSError?) -> ()) {
+        if let _ = self.latestPurchasesRestoreCompletionHandler {
+            completionHandler(queue: .None, error: NSError(purchaseError: .RestorePurchasesAlreadyInProgress))
         } else {
-            completionHandler(queue: .None, success: false, error: NSError(purchaseError: .ProductRequestNeeded))
+            self.latestPurchasesRestoreCompletionHandler = completionHandler
+            self.paymentQueue.restoreCompletedTransactions()
         }
     }
     
     func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError) {
-        self.latestPurchasesRestoreCompletionHandler?(queue: queue, success: false, error: error)
+        self.latestPurchasesRestoreCompletionHandler?(queue: queue, error: error)
         self.latestPurchasesRestoreCompletionHandler = .None
     }
     
     func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
-        self.latestPurchasesRestoreCompletionHandler?(queue: queue, success: true, error: .None)
+        self.latestPurchasesRestoreCompletionHandler?(queue: queue, error: .None)
         self.latestPurchasesRestoreCompletionHandler = .None
     }
     
-    private typealias PurchasesRestoreCompletionHandler = (queue: SKPaymentQueue?, success: Bool, error: NSError?) -> ()
+    private typealias PurchasesRestoreCompletionHandler = (queue: SKPaymentQueue?, error: NSError?) -> ()
     
     // MARK: Purchasing Items
     
