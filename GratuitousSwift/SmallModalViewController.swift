@@ -20,12 +20,15 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let swipe = UISwipeGestureRecognizer(target:self, action:"dismissViewControllerGestureTriggered:")
-        swipe.direction = UISwipeGestureRecognizerDirection.Down
-        self.view.addGestureRecognizer(swipe)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         self.configureDynamicTextLabels()
+    }
+    
+    override var preferredContentSize: CGSize {
+        get {
+            return CGSize(width: 320, height: 568)
+        }
+        set { }
     }
     
     @objc private func dismissViewControllerGestureTriggered(sender: UIGestureRecognizer?) {
@@ -43,14 +46,16 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
         
         // just in case this is not called by the trait collection changing
         self.navigationBarHeightDidChange()
+        self.switchOnScreenSizeToDetermineBorderSurround()
     }
     
     @objc private func systemTextSizeDidChange(notification: NSNotification) {
         self.configureDynamicTextLabels()
+        self.switchOnScreenSizeToDetermineBorderSurround()
     }
     
     func configureDynamicTextLabels() {
-        self.switchOnScreenSizeToDetermineBorderSurround()
+        
     }
     
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
@@ -71,16 +76,13 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
     }
     
     private func switchOnScreenSizeToDetermineBorderSurround() {
-        let actualHeight = UIScreen.mainScreen().bounds.size.height
-        switch actualHeight {
-        case 0 ..< 480:
+        let shorterThanScreen = self.view.bounds.height < UIScreen.mainScreen().bounds.size.height
+        let narrowerThanScreen = self.view.bounds.width < UIScreen.mainScreen().bounds.size.width
+        
+        if shorterThanScreen || narrowerThanScreen {
             self.showBorder()
-        case 480 ... 568:
+        } else {
             self.hideBorder()
-        case 569 ..< CGFloat.max:
-            self.showBorder()
-        default:
-            break
         }
     }
     

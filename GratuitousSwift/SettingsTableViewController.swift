@@ -24,6 +24,13 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         return swipe
         }()
     
+    override var preferredContentSize: CGSize {
+        get {
+            return CGSize(width: 320, height: UIScreen.mainScreen().bounds.height)
+        }
+        set { }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

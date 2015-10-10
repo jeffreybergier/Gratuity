@@ -10,7 +10,7 @@ import UIKit
 
 class GratuitousRightPresentationController: GratuitousPresentationController {
     
-    private lazy var _dimmingView :UIView = {
+    lazy var _dimmingView :UIView = {
         let view = UIView()
         let tap = UITapGestureRecognizer(target:self, action:"dimmingViewTapped:")
         let swipe = UISwipeGestureRecognizer(target:self, action:"dimmingViewTapped:")
@@ -25,61 +25,16 @@ class GratuitousRightPresentationController: GratuitousPresentationController {
     }()
     
     override var dimmingView: UIView {
-        return _dimmingView
+        let dimmingView = _dimmingView
+        return dimmingView
     }
     
-    @objc private func dimmingViewTapped(sender: UITapGestureRecognizer) {
-        if sender.state == UIGestureRecognizerState.Ended {
-            self.presentingViewController.dismissViewControllerAnimated(true, completion: nil)
-        }
+    override func frameOfPresentedViewInContainerView() -> CGRect {
+        let size = self.sizeForChildContentContainer(self.presentedViewController, withParentContainerSize: self.containerView!.bounds.size)
+        let point = CGPoint(x: self.containerView!.bounds.size.width - size.width, y: 0)
+        
+        let rect = CGRect(origin: point, size: size)
+        return rect
     }
     
-    override func sizeForChildContentContainer(container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        var divisionConstant = CGFloat(1.0)
-        var textSizeAdjustment = CGFloat(0.0)
-        let deviceScreen = GratuitousUIConstant.deviceScreen()
-        
-        if deviceScreen.smallDeviceLandscape {
-            divisionConstant = 1.4
-        }
-        
-        if deviceScreen.largeDevice {
-            if deviceScreen.largeDeviceLandscape {
-                divisionConstant = 1.9
-            } else {
-                divisionConstant = 1.2
-            }
-        }
-        
-        if deviceScreen.padIdiom {
-            if deviceScreen.largeDeviceLandscape {
-                divisionConstant = 2.7
-            } else {
-                divisionConstant = 2.3
-            }
-        }
-        
-        switch UIApplication.sharedApplication().preferredContentSizeCategory {
-        case UIContentSizeCategoryExtraExtraExtraLarge:
-            textSizeAdjustment = 0.25
-        case UIContentSizeCategoryAccessibilityMedium:
-            textSizeAdjustment = 0.5
-        case UIContentSizeCategoryAccessibilityLarge:
-            textSizeAdjustment = 0.75
-        case UIContentSizeCategoryAccessibilityExtraLarge:
-            textSizeAdjustment = 1.0
-        case UIContentSizeCategoryAccessibilityExtraExtraLarge:
-            textSizeAdjustment = 1.25
-        case UIContentSizeCategoryAccessibilityExtraExtraExtraLarge:
-            textSizeAdjustment = 1.5
-        default:
-            break
-        }
-        
-        let divisionCalculation = (divisionConstant - textSizeAdjustment < 1.0) ? (1.0) : (divisionConstant - textSizeAdjustment)
-        
-        let floatWidth = Float(parentSize.width / divisionCalculation)
-        let cgWidth = CGFloat(floorf(floatWidth))
-        return CGSizeMake(cgWidth, parentSize.height)
-    }
 }
