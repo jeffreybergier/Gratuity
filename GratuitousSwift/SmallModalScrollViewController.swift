@@ -24,8 +24,11 @@ class SmallModalScollViewController: SmallModalViewController {
         super.navigationBarHeightDidChange()
         self.autoFitScrollViewTopInset()
         if self.shouldScrollScrollViewToTopBecauseFirstLoad == true {
-            self.scrollView?.scrollRectToVisible(CGRect(x: 0, y: 0, width: 100, height: 100), animated: false)
-            self.shouldScrollScrollViewToTopBecauseFirstLoad = false
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.scrollView?.scrollRectToVisible(CGRect(x: 0, y: 0, width: 100, height: 100), animated: false)
+                self.shouldScrollScrollViewToTopBecauseFirstLoad = false
+            }
         }
     }
     

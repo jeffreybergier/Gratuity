@@ -19,6 +19,9 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBOutlet private weak var subtitleLabel: UILabel?
     @IBOutlet private weak var purchaseButton: UIButton?
     @IBOutlet private weak var restoreButton: UIButton?
+    @IBOutlet private weak var modalBlockingView: UIView?
+    @IBOutlet private weak var splitBillScreenshotImageView: UIImageView?
+    @IBOutlet private var descriptionParagraphHeightConstraint: NSLayoutConstraint?
     @IBOutlet private weak var purchaseButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
     @IBOutlet private weak var restoreButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
     @IBOutlet private weak var purchaseButtonSpinner: UIActivityIndicatorView?
@@ -35,9 +38,9 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     private var state = State.Normal {
         didSet {
-            UIView.animateWithDuration(0.3) {
-                let buttomDimmedAlpha = CGFloat(0.6)
-                let buttonFullAlpha = CGFloat(1.0)
+            UIView.animateWithDuration(GratuitousUIConstant.animationDuration()) {
+                let modalPresentAlpha = CGFloat(0.5)
+                let modalInvisibleAlpha = CGFloat(0.0)
                 switch self.state {
                 case .Normal:
                     self.restoreButtonSpinnerWidthConstraint?.constant = 0
@@ -46,8 +49,10 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                     self.restoreButtonSpinner?.alpha = 0
                     self.purchaseButton?.enabled = true
                     self.restoreButton?.enabled = true
-                    self.purchaseButton?.alpha = buttonFullAlpha
-                    self.restoreButton?.alpha = buttonFullAlpha
+                    self.purchaseButton?.alpha = 1
+                    self.restoreButton?.alpha = 1
+                    self.descriptionParagraphHeightConstraint?.active = false
+                    self.modalBlockingView?.alpha = modalInvisibleAlpha
                 case .RestoreInProgress:
                     self.restoreButtonSpinnerWidthConstraint?.constant = 40
                     self.purchaseButtonSpinnerWidthConstraint?.constant = 0
@@ -55,8 +60,10 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                     self.restoreButtonSpinner?.alpha = 1
                     self.purchaseButton?.enabled = false
                     self.restoreButton?.enabled = false
-                    self.purchaseButton?.alpha = buttomDimmedAlpha
-                    self.restoreButton?.alpha = buttomDimmedAlpha
+                    self.purchaseButton?.alpha = 1
+                    self.restoreButton?.alpha = 1
+                    self.descriptionParagraphHeightConstraint?.active = false
+                    self.modalBlockingView?.alpha = modalPresentAlpha
                 case .PurchaseInProgress:
                     self.restoreButtonSpinnerWidthConstraint?.constant = 0
                     self.purchaseButtonSpinnerWidthConstraint?.constant = 40
@@ -64,8 +71,10 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                     self.restoreButtonSpinner?.alpha = 0
                     self.purchaseButton?.enabled = false
                     self.restoreButton?.enabled = false
-                    self.purchaseButton?.alpha = buttomDimmedAlpha
-                    self.restoreButton?.alpha = buttomDimmedAlpha
+                    self.purchaseButton?.alpha = 1
+                    self.restoreButton?.alpha = 1
+                    self.descriptionParagraphHeightConstraint?.active = false
+                    self.modalBlockingView?.alpha = modalPresentAlpha
                 case .SplitBillProductNotFoundInStoreFront:
                     self.restoreButtonSpinnerWidthConstraint?.constant = 0
                     self.purchaseButtonSpinnerWidthConstraint?.constant = 40
@@ -73,8 +82,10 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                     self.restoreButtonSpinner?.alpha = 0
                     self.purchaseButton?.enabled = false
                     self.restoreButton?.enabled = false
-                    self.purchaseButton?.alpha = buttomDimmedAlpha
-                    self.restoreButton?.alpha = buttomDimmedAlpha
+                    self.purchaseButton?.alpha = 0.6
+                    self.restoreButton?.alpha = 0
+                    self.descriptionParagraphHeightConstraint?.active = true
+                    self.modalBlockingView?.alpha = modalInvisibleAlpha
                 }
                 self.view.layoutIfNeeded()
             }
@@ -100,31 +111,40 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
         //configure the large title label
         self.titleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 1.3, fallbackStyle: .Headline)
         self.titleLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.titleLabel?.text = NSLocalizedString("Gratuity", comment: "Large Title of Watch Info View Controller")
+        self.titleLabel?.text = NSLocalizedString("Split Bill", comment: "Large Title of Watch Info View Controller")
         
         //configure the subtitle label
         self.subtitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 0.85, fallbackStyle: .Headline)
         self.subtitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.subtitleLabel?.text = NSLocalizedString("Split Bill", comment: "Subtitle for the purchase split bill view controller")
+        self.subtitleLabel?.text = NSLocalizedString("In-App Purchase", comment: "Subtitle for the purchase split bill view controller")
+        
+        //configure the navigation bar
+        self.navigationBar?.items?.first?.title = NSLocalizedString("Split Bill", comment: "Large Title of Watch Info View Controller")
         
         //configure the paragraph of text
         self.descriptionParagraphLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.descriptionParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.descriptionParagraphLabel?.text = NSLocalizedString("The Split Bill feature of Gratuity is offered as an in-app purchase. You can purchase this feature below. If you have already purchased this feature, tap the 'Restore' button below.", comment: "Paragraph that how to purchase the split bill feature.")
+        
+        //configure the button text
+        self.purchaseButton?.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        self.restoreButton?.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
         
         // configure the button text
-        self.configureBuyButton()
-        self.restoreButton?.setTitle("Restore Purchases", forState: UIControlState.Normal)
+        self.configureDynamicElements()
+        self.restoreButton?.setTitle(NSLocalizedString("Restore Purchases", comment: ""), forState: UIControlState.Normal)
     }
     
-    private func configureBuyButton() {
-        if let priceString = self.priceString {
-            let purchaseString = NSLocalizedString("Buy – \(priceString)", comment: "")
-            self.purchaseButton?.setTitle(purchaseString, forState: UIControlState.Normal)
+    private func configureDynamicElements() {
+        if let splitBillProduct = self.splitBillProduct {
+            let purchaseString = NSLocalizedString("Purchase", comment: "")
+            self.purchaseButton?.setTitle(purchaseString + " – \(self.priceString)", forState: UIControlState.Normal)
+            self.descriptionParagraphLabel?.text = splitBillProduct.localizedDescription ?? ""
+            
         } else {
             // need to request the product!!!
-            let downloadingLocalizedString = NSLocalizedString("Downloading Price...", comment: "")
+            let downloadingLocalizedString = NSLocalizedString("Downloading...", comment: "")
             self.purchaseButton?.setTitle(downloadingLocalizedString, forState: UIControlState.Normal)
+            self.descriptionParagraphLabel?.text = NSLocalizedString("", comment: "")
         }
     }
     
@@ -136,27 +156,26 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
         return formatter
     }()
     
-    private var priceString: String? {
+    private var priceString: String {
         let priceString: String?
         if let splitBillProduct = self.splitBillProduct {
             self.priceNumberFormatter.locale = splitBillProduct.priceLocale
             priceString = self.priceNumberFormatter.stringFromNumber(splitBillProduct.price)
-            return priceString
         } else {
-            return .None
+            priceString = .None
         }
+        return priceString ?? ""
     }
     
     private var splitBillProduct: SKProduct? {
         didSet {
-            self.configureBuyButton()
+            self.configureDynamicElements()
         }
     }
     
     private func requestSplitBillProductWithCompletionHandler() {
         let request = SKProductsRequest(productIdentifiers: Set([GratuitousPurchaseManager.splitBillPurchaseIdentifier]))
         self.dataSource.purchaseManager?.initiateRequest(request) { [weak self] request, response, error in
-            self?.state = .Normal
             let guaranteedSplitBillProductArray = response?.products.filter() { product -> Bool in
                 if product.productIdentifier == GratuitousPurchaseManager.splitBillPurchaseIdentifier {
                     return true
@@ -177,6 +196,7 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                 let errorVC = UIAlertController(actions: actions, error: userFacingError)
                 self?.presentViewController(errorVC, animated: true, completion: .None)
             }
+            self?.state = .Normal
         }
     }
     

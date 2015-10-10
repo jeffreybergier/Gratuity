@@ -41,7 +41,7 @@ class SplitBillViewController: SmallModalTableViewController {
     
     private func determineTableRowCount() -> Int {
         for i in 1 ..< 100 {
-            if self.roundedDivisionWithTop(self.totalAmount, bottom: i) <= 5 {
+            if self.roundedDivisionWithTop(self.totalAmount, bottom: i) <= 6 {
                 return i
             }
         }

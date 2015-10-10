@@ -92,6 +92,8 @@ class SplitBillTableViewCell: UITableViewCell {
         
         self.primaryLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.secondaryTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        
+        self.contentView.backgroundColor = UIColor.blackColor()
     }
     
 }
