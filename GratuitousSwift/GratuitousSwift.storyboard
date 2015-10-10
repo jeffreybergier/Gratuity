@@ -1412,7 +1412,7 @@
                     <connections>
                         <outlet property="contentView" destination="tXF-3g-8Mi" id="6nS-eu-36u"/>
                         <outlet property="descriptionParagraphLabel" destination="khF-Uq-Ynf" id="OZs-Pa-qw0"/>
-                        <outlet property="navigationBar" destination="xoS-6e-CiA" id="mom-xo-2pj"/>
+                        <outlet property="navigationBar" destination="xoS-6e-CiA" id="dOG-fe-eO6"/>
                         <outlet property="purchaseButton" destination="uNc-kG-LyJ" id="iZk-lf-1pr"/>
                         <outlet property="purchaseButtonSpinner" destination="nL4-5q-tKU" id="xx5-QS-8QQ"/>
                         <outlet property="purchaseButtonSpinnerWidthConstraint" destination="MX5-cs-fuH" id="I6B-Rt-iQP"/>

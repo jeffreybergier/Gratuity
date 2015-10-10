@@ -14,7 +14,6 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     // MARK: Instance Variables
     
-    @IBOutlet private weak var videoPlayerView: UIView?
     @IBOutlet private weak var titleLabel: UILabel?
     @IBOutlet private weak var descriptionParagraphLabel: UILabel?
     @IBOutlet private weak var subtitleLabel: UILabel?
@@ -82,17 +81,6 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
         }
     }
     
-    private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
-        if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mov") {
-            let player = AVPlayer(URL: NSURL.fileURLWithPath(moviePath))
-            player.allowsExternalPlayback = false
-            player.actionAtItemEnd = AVPlayerActionAtItemEnd.None // cause the player to loop
-            let playerLayer = AVPlayerLayer(player: player)
-            return (player, playerLayer)
-        }
-        return nil
-        }()
-    
     // MARK: View Loading
     
     override func viewDidLoad() {
@@ -101,37 +89,6 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
         self.dataSource.purchaseManager?.beginObserving()
         self.requestSplitBillProductWithCompletionHandler()
         self.state = .SplitBillProductNotFoundInStoreFront
-        
-        if let videoPlayer = self.videoPlayer {
-            let player = videoPlayer.player
-            let layer = videoPlayer.layer
-            
-            let desiredSize = self.videoPlayerView?.frame.size
-            var desiredFrame = CGRect(x: 0, y: 0, width: 640, height: 1136)
-            if let desiredSize = desiredSize {
-                desiredFrame = CGRect(origin: CGPointZero, size: desiredSize)
-            }
-            
-            layer.frame = desiredFrame
-            layer.backgroundColor = UIColor.blackColor().CGColor
-            layer.videoGravity = AVLayerVideoGravityResizeAspect
-            
-            self.videoPlayerView?.layer.addSublayer(layer)
-            self.videoPlayerView?.clipsToBounds = true
-            
-            //player.play()
-        }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if let videoPlayer = self.videoPlayer {
-            videoPlayer.player.seekToTime(kCMTimeZero)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoPlaybackFinished:", name: AVPlayerItemDidPlayToEndTimeNotification, object: videoPlayer.player.currentItem)
-        } else {
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
     }
     
     override func configureDynamicTextLabels() {
@@ -220,14 +177,6 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                 let errorVC = UIAlertController(actions: actions, error: userFacingError)
                 self?.presentViewController(errorVC, animated: true, completion: .None)
             }
-        }
-    }
-
-    // MARK: Handle Looping the Video Player
-    
-    @objc private func videoPlaybackFinished(notification: NSNotification) {
-        if let videoPlayer = self.videoPlayer {
-            videoPlayer.player.seekToTime(kCMTimeZero)
         }
     }
     

@@ -38,8 +38,8 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         // just in case this is not called by the trait collection changing
         self.navigationBarHeightDidChange()
@@ -61,6 +61,8 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
             // needs to be called slightly after animation to work
             self.navigationBarHeightDidChange()
         }
+        
+        self.navigationBarHeightDidChange()
         self.switchOnScreenSizeToDetermineBorderSurround()
     }
     
@@ -115,6 +117,7 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
 
 extension UINavigationBar {
     func sizeToFitWithStatusBar() {
+        self.layoutSubviews()
         self.sizeToFit()
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
         let frameInWindowCoordinates = self.convertRect(self.frame, toView: .None)

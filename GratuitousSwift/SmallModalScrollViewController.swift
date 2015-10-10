@@ -18,14 +18,14 @@ class SmallModalScollViewController: SmallModalViewController {
         
         // just in case its not caught by navigationBarDidChangeHeight
         self.autoFitScrollViewTopInset()
-        self.shouldScrollScrollViewToTopBecauseFirstLoad = false
     }
     
     override func navigationBarHeightDidChange() {
         super.navigationBarHeightDidChange()
         self.autoFitScrollViewTopInset()
         if self.shouldScrollScrollViewToTopBecauseFirstLoad == true {
-            self.scrollView?.scrollRectToVisible(CGRect(x: 0, y: 0, width: 100, height: 100), animated: true)
+            self.scrollView?.scrollRectToVisible(CGRect(x: 0, y: 0, width: 100, height: 100), animated: false)
+            self.shouldScrollScrollViewToTopBecauseFirstLoad = false
         }
     }
     

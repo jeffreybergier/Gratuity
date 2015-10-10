@@ -25,14 +25,14 @@ class SmallModalTableViewController: SmallModalViewController, UITableViewDataSo
         
         // just in case its not caught by navigationBarDidChangeHeight
         self.autoFitTableViewTopInset()
-        self.shouldScrollTableViewToTopBecauseFirstLoad = false
     }
     
     override func navigationBarHeightDidChange() {
         super.navigationBarHeightDidChange()
         self.autoFitTableViewTopInset()
         if self.shouldScrollTableViewToTopBecauseFirstLoad == true {
-            self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+            self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: false)
+            self.shouldScrollTableViewToTopBecauseFirstLoad = false
         }
     }
     
