@@ -69,7 +69,7 @@ class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransit
         switch self.style {
         case .Bottom:
             originX = appearedFrame.origin.x
-            originY = appearedFrame.origin.y + appearedFrame.size.height
+            originY = transitionContextContainerView.bounds.height
             transformTX = 0
             transformTY = 0 - (transitionContextContainerView.bounds.height * 0.2)
         default:
@@ -113,10 +113,10 @@ class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransit
             },
             completion: { finished in
                 toVC.viewDidAppear(true)
+                fromVC.viewDidDisappear(true)
                 if self.isPresentation == false {
                     fromView.removeFromSuperview()
                 }
-                fromVC.viewDidDisappear(true)
                 transitionContext.completeTransition(true)
         })
     }
