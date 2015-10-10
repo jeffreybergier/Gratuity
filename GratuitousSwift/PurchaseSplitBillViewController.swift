@@ -212,8 +212,12 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
                 self?.splitBillProduct = splitBillProduct
             } else {
                 let userFacingError = NSError(purchaseError: .ProductRequestFailed)
-                let dismissAction = UIAlertAction(type: .Dismiss, completionHandler: self?.didTapDismissButtonThatClosesCurrentViewController)
-                let errorVC = UIAlertController(actions: [dismissAction], error: userFacingError)
+                let actions = [
+                    UIAlertAction(type: .Dismiss, completionHandler: self?.didTapDismissButtonThatClosesCurrentViewController),
+                    UIAlertAction(type: .EmailSupport, completionHandler: self?.didTapEmailSupportActionButton)
+                ]
+                self?.shouldDismissVCAfterEmailVCDismisses = true
+                let errorVC = UIAlertController(actions: actions, error: userFacingError)
                 self?.presentViewController(errorVC, animated: true, completion: .None)
             }
         }
@@ -348,6 +352,8 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
         self.didTapPurchaseButton(.None)
     }
     
+    private var shouldDismissVCAfterEmailVCDismisses = false
+    
     private func didTapEmailSupportActionButton(action: UIAlertAction) {
         let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
         if let mailVC = emailManager.presentableMailViewController {
@@ -369,7 +375,11 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
 extension PurchaseSplitBillViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.state = .Normal
-        self.dismissViewControllerAnimated(true, completion: .None)
+        controller.dismissViewControllerAnimated(true) {
+            if self.shouldDismissVCAfterEmailVCDismisses == true {
+                self.dismissViewControllerAnimated(true, completion: .None)
+            }
+        }
         if let error = error {
             NSLog("AboutTableViewController: Error while sending email. Error Description: \(error.description)")
         }
