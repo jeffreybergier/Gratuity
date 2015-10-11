@@ -251,8 +251,6 @@ static NSURL *_appleRootCertificateURL = nil;
     if (!p7) return nil;
     
     NSData *data;
-//    NSURL *certificateURL = _appleRootCertificateURL ? : [[NSBundle mainBundle] URLForResource:@"AppleIncRootCertificate" withExtension:@"cer"];
-//    NSData *certificateData = [NSData dataWithContentsOfURL:certificateURL];
     NSData *certificateData = [self Ea5huev8yEash9saf2uG2woY1Ru2drowD9aK7oal1kes8ond5O:[[[krej6fUksh5Oj8doI9hUk3Zec8paSk9uV5lyD4Yar6eD0Jurf3 stringByReplacingOccurrencesOfString:@"<" withString:@""]stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""]];
     if ([self verifyPCKS7:p7 withCertificateData:certificateData])
     {

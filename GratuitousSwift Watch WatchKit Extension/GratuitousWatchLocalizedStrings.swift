@@ -56,6 +56,10 @@ extension PickerInterfaceController {
         NSLocalizedString("Bill",
             comment: "Apple Watch App: PickerInterfaceController: SplitTipMenuIconLabel: Callout that appears above Bill Picker wheel when selected."
         )
+        static let InterfaceTitle =
+        NSLocalizedString("Gratuity",
+            comment: "Apple Watch App: PickerInterfaceController: InterfaceTitle: Gratuity app name for the main interface."
+        )
     }
 }
 

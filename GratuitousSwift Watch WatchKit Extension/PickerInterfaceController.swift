@@ -48,7 +48,7 @@ final class PickerInterfaceController: WKInterfaceController, GratuitousWatchDat
                 self.animationImageView?.stopAnimating()
                 self.mainGroup?.setHidden(false)
                 self.loadingGroup?.setHidden(true)
-                self.setTitle("Gratuity")
+                self.setTitle(LocalizedString.InterfaceTitle)
                 self.billPicker?.focus()
             }
         }
