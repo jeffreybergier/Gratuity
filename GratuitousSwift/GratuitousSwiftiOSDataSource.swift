@@ -35,7 +35,7 @@ final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, 
             return "Euro"
         case .Yen:
             return "Yen"
-        case .None:
+        case .NoSign:
             return "None"
         }
     }
@@ -118,7 +118,7 @@ final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, 
         switch self.defaultsManager.overrideCurrencySymbol {
         case .Default:
             currencyString = self.currencyFormatter.stringFromNumber(number) !! "\(number)"
-        case .None:
+        case .NoSign:
             currencyString = "\(number)"
         default:
             currencyString = "\(defaultsManager.overrideCurrencySymbol.string())\(number)"

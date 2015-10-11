@@ -84,7 +84,7 @@ final class GratuitousWatchDataSource: GratuitousPropertyListPreferencesDelegate
                 } else {
                     fallthrough
                 }
-            case .None:
+            case .NoSign:
                 currencyString = "\(integerValue)"
             default:
                 currencyString = "\(currentCurrencyFormat.string())\(integerValue)"

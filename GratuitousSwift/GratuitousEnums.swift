@@ -26,7 +26,7 @@ enum CustomTransitionStyle: Int {
 }
 
 enum CurrencySign: Int, CustomStringConvertible {
-    case Default = 0, Dollar, Pound, Euro, Yen, None
+    case Default = 0, Dollar, Pound, Euro, Yen, NoSign
     
     func string() -> String {
         switch self {
@@ -40,7 +40,7 @@ enum CurrencySign: Int, CustomStringConvertible {
             return "€"
         case .Yen:
             return "¥"
-        case .None:
+        case .NoSign:
             return ""
         }
     }
@@ -58,7 +58,7 @@ enum CurrencySign: Int, CustomStringConvertible {
                 return "Currency Sign: Euro"
             case .Yen:
                 return "Currency Sign: Yen"
-            case .None:
+            case .NoSign:
                 return "Currency Sign: None"
             }
         }

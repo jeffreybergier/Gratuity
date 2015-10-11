@@ -120,7 +120,7 @@ final class SettingsInterfaceController: WKInterfaceController {
     }
     
     @IBAction private func currencySymbolButtonNoneTapped() {
-        self.dataSource?.defaultsManager.overrideCurrencySymbol = CurrencySign.None
+        self.dataSource?.defaultsManager.overrideCurrencySymbol = CurrencySign.NoSign
         self.updateCurrencySymbolUI()
     }
     
@@ -154,7 +154,7 @@ final class SettingsInterfaceController: WKInterfaceController {
                 self.currencySymbolEuroGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
             case .Yen:
                 self.currencySymbolYenGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
-            case .None:
+            case .NoSign:
                 self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
             }
         }

@@ -257,28 +257,25 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
             //if this is the type of cell, we need to let it know which UILabel is in it
-            if let cell = cell as? GratuitousCurrencySelectorCellTableViewCell {
+            if let cell = cell as? GratuitousCurrencySelectorCellTableViewCell,
                 //this gets called a lot so there is no need to run through the switch unless the cell we're talking to has a nil property.
-                if cell.instanceTextLabel == nil {
-                    switch cell.tag {
-                    case CurrencySign.Default.rawValue:
+                let currencySign = CurrencySign(rawValue: cell.tag) {
+                    switch currencySign {
+                    case .Default:
                         self.textLabelDefault?.text = SettingsTableViewController.LocalizedString.LocalCurrencyCellLabel
                         cell.instanceTextLabel = self.textLabelDefault
-                    case CurrencySign.Dollar.rawValue:
+                    case .Dollar:
                         cell.instanceTextLabel = self.textLabelDollarSign
-                    case CurrencySign.Pound.rawValue:
+                    case .Pound:
                         cell.instanceTextLabel = self.textLabelPoundSign
-                    case CurrencySign.Euro.rawValue:
+                    case .Euro:
                         cell.instanceTextLabel = self.textLabelEuroSign
-                    case CurrencySign.Yen.rawValue:
+                    case .Yen:
                         cell.instanceTextLabel = self.textLabelYenSign
-                    case CurrencySign.None.rawValue:
+                    case .NoSign:
                         self.textLabelNone?.text = SettingsTableViewController.LocalizedString.NoneCurrencyCellLabel
                         cell.instanceTextLabel = self.textLabelNone
-                    default:
-                        break;
                     }
-                }
             }
         }
     }
@@ -297,8 +294,8 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
                 self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Euro)
             case CurrencySign.Yen.rawValue + 1:
                 self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Yen)
-            case CurrencySign.None.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.None)
+            case CurrencySign.NoSign.rawValue + 1:
+                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.NoSign)
             default:
                 break;
             }

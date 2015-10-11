@@ -304,7 +304,7 @@ final class PickerInterfaceController: WKInterfaceController, GratuitousWatchDat
             fileName = "EuroImages.data"
         case .Yen:
             fileName = "YenImages.data"
-        case .None:
+        case .NoSign:
             fileName = "NoneImages.data"
         }
         
