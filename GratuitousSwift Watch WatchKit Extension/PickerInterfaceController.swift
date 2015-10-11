@@ -93,8 +93,8 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
             self.interfaceControllerConfiguredOnce = true
             
             // configure the menu
-            self.addMenuItemWithImageNamed("splitTipMenuIcon", title: NSLocalizedString("Split Bill", comment: ""), action: "splitTipMenuButtonTapped")
-            self.addMenuItemWithImageNamed("settingsMenuIcon", title: NSLocalizedString("Settings", comment: ""), action: "settingsMenuButtonTapped")
+            self.addMenuItemWithImageNamed("splitTipMenuIcon", title: PickerInterfaceController.LocalizedString.SplitTipMenuIconLabel, action: "splitTipMenuButtonTapped")
+            self.addMenuItemWithImageNamed("settingsMenuIcon", title: PickerInterfaceController.LocalizedString.SettingsMenuIconLabel, action: "settingsMenuButtonTapped")
             
             // start the idle timer
             self.resetInterfaceIdleTimer()
@@ -319,12 +319,12 @@ class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourc
                         if index < 100 {
                             let tipItem = WKPickerItem()
                             tipItem.contentImage = wkImage
-                            tipItem.caption = NSLocalizedString("Tip", comment: "Callout that appears above Tip Picker Controller when selected")
+                            tipItem.caption = PickerInterfaceController.LocalizedString.TipItemPickerCaption
                             tipItems += [tipItem]
                         }
                         let billItem = WKPickerItem()
                         billItem.contentImage = wkImage
-                        billItem.caption = NSLocalizedString("Bill", comment: "Callout that appears above Bill Picker Controller when selected")
+                        billItem.caption = PickerInterfaceController.LocalizedString.BillItemPickerCaption
                         billItems += [billItem]
                     }
                 }

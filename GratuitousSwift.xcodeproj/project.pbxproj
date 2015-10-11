@@ -57,7 +57,6 @@
 		73AEA6E31BBB06D0004B16DE /* GratuitousWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6E41BBB06D0004B16DE /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 738484D41B992E1B0044C14C /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
 		73AEA6E51BBB06D0004B16DE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73D46AFD1AC7C9B400057185 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
-		73AEA6E61BBB06D5004B16DE /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 73011BDF1AD04F90001F6D71 /* en.lproj */; settings = {ASSET_TAGS = (); }; };
 		73AEA6E71BBB06DA004B16DE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D711A2A9525002180DD /* Interface.storyboard */; settings = {ASSET_TAGS = (); }; };
 		73AEA6E81BBB06DE004B16DE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D731A2A9525002180DD /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		73AEA6EB1BBB06EE004B16DE /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
@@ -618,7 +617,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				73AEA6E41BBB06D0004B16DE /* fallbackPickerImages.data in Resources */,
-				73AEA6E61BBB06D5004B16DE /* en.lproj in Resources */,
 				73AEA6F11BBB087A004B16DE /* Fuuutuuura-Meeediuuum.ttf in Resources */,
 				73AEA6E51BBB06D0004B16DE /* Images.xcassets in Resources */,
 			);

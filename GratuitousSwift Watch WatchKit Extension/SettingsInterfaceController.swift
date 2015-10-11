@@ -50,7 +50,7 @@ class SettingsInterfaceController: WKInterfaceController {
         super.willActivate()
         
         if self.interfaceControllerIsConfigured == false {
-        self.setTitle(NSLocalizedString("Close Settings", comment: ""))
+        self.setTitle(SettingsInterfaceController.LocalizedString.CloseSettingsTitle)
             // putting this in a background queue allows willActivate to finish, the animation to start.
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
             dispatch_async(backgroundQueue) {
@@ -62,17 +62,17 @@ class SettingsInterfaceController: WKInterfaceController {
     private func configureInterfaceController() {
         dispatch_async(dispatch_get_main_queue()) {
             // configure the titles
-            self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Suggested Tip Percentage", comment: ""), attributes: self.titleTextAttributes))
-            self.currencySymbolTitleLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Currency Symbol", comment: ""), attributes: self.titleTextAttributes))
+            self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: SettingsInterfaceController.LocalizedString.SuggestedTipPercentageHeader, attributes: self.titleTextAttributes))
+            self.currencySymbolTitleLabel?.setAttributedText(NSAttributedString(string: SettingsInterfaceController.LocalizedString.CurrencySymbolHeader, attributes: self.titleTextAttributes))
             
             
             // configure the currency selection titles
-            self.currencySymbolLocalLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("Local", comment: ""), attributes: self.valueTextAttributes))
+            self.currencySymbolLocalLabel?.setAttributedText(NSAttributedString(string: SettingsInterfaceController.LocalizedString.LocalCurrencyRowLabel, attributes: self.valueTextAttributes))
             self.currencySymbolDollarLabel?.setAttributedText(NSAttributedString(string: "$", attributes: self.valueTextAttributes))
             self.currencySymbolPoundLabel?.setAttributedText(NSAttributedString(string: "£", attributes: self.valueTextAttributes))
             self.currencySymbolEuroLabel?.setAttributedText(NSAttributedString(string: "€", attributes: self.valueTextAttributes))
             self.currencySymbolYenLabel?.setAttributedText(NSAttributedString(string: "¥", attributes: self.valueTextAttributes))
-            self.currencySymbolNoneLabel?.setAttributedText(NSAttributedString(string: NSLocalizedString("None", comment: ""), attributes: self.valueTextAttributes))
+            self.currencySymbolNoneLabel?.setAttributedText(NSAttributedString(string: SettingsInterfaceController.LocalizedString.NoneCurrencyRowLabel, attributes: self.valueTextAttributes))
 
             // configure the values that change
             if let dataSource = self.dataSource {
