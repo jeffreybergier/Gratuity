@@ -36,6 +36,7 @@ final class SettingsInterfaceController: WKInterfaceController {
     private weak var dataSource: GratuitousWatchDataSource?
     private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+    private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.splitBillValueText
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -125,7 +126,7 @@ final class SettingsInterfaceController: WKInterfaceController {
         if let dataSource = self.dataSource {
             let suggestedTipPercentage = dataSource.defaultsManager.suggestedTipPercentage
             let suggestedTipPercentageString = dataSource.percentStringFromRawDouble(suggestedTipPercentage)
-            self.suggestedTipPercentageLabel?.setAttributedText(NSAttributedString(string: suggestedTipPercentageString, attributes: self.valueTextAttributes))
+            self.suggestedTipPercentageLabel?.setAttributedText(NSAttributedString(string: suggestedTipPercentageString, attributes: self.largeValueTextAttributes))
         }
     }
     
