@@ -20,8 +20,8 @@ final class SplitTotalInterfaceController: WKInterfaceController {
     
     private var interfaceControllerIsConfigured = false
     
-    private let subtitleTextAttributes = GratuitousUIColor.WatchFonts.subtitleText
-    private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+    private let titleTextAttribute = GratuitousUIColor.WatchFonts.titleText
+    private let valueTextAttributes = GratuitousUIColor.WatchFonts.splitBillValueText
     
     private var totalAmount = 0
     private var dataSource: GratuitousWatchDataSource? {
@@ -66,7 +66,8 @@ final class SplitTotalInterfaceController: WKInterfaceController {
             // interface is now configured
             self.interfaceControllerIsConfigured = true
             
-            let titleString = NSAttributedString(string: SplitTotalInterfaceController.LocalizedString.TitleLabel, attributes: self.subtitleTextAttributes)
+            self.setTitle(SplitTotalInterfaceController.LocalizedString.CloseSplitBillTitle)
+            let titleString = NSAttributedString(string: SplitTotalInterfaceController.LocalizedString.SplitBillTitleLabel, attributes: self.titleTextAttribute)
             self.splitAmountTitleLabel?.setAttributedText(titleString)
             self.configureSplitAmountLabels()
         }

@@ -88,7 +88,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-52" y="-167"/>
+            <point key="canvasLocation" x="-59" y="-167"/>
         </scene>
         <!--Close-->
         <scene sceneID="QVZ-uk-9u4">
@@ -177,7 +177,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="117" y="-117"/>
+            <point key="canvasLocation" x="120" y="-117"/>
         </scene>
         <!--Close-->
         <scene sceneID="N6L-dJ-mY2">
@@ -186,11 +186,11 @@
                     <items>
                         <label alignment="left" text="Suggested Tip Percentage" numberOfLines="0" id="nRC-5a-8ct">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="22"/>
+                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
                         </label>
                         <label alignment="right" text="–%" textAlignment="right" id="5An-PC-g8o">
                             <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                         </label>
                         <group width="1" alignment="left" id="EcG-wP-xkF">
                             <items>
@@ -211,7 +211,7 @@
                         </group>
                         <label alignment="left" text="Currency Symbol" numberOfLines="0" id="MCm-nN-GLi">
                             <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="22"/>
+                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
                         </label>
                         <group alignment="left" id="tDl-Kq-9qy">
                             <items>
@@ -220,7 +220,7 @@
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="Local" textAlignment="left" id="mnK-Ws-IhH">
                                                 <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -241,7 +241,7 @@
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="$" textAlignment="left" id="s2Q-zU-SDp">
                                                 <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -262,7 +262,7 @@
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="£" textAlignment="left" id="3qZ-4S-LId">
                                                 <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -283,7 +283,7 @@
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="€" textAlignment="left" id="HXA-pQ-4Dc">
                                                 <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -304,7 +304,7 @@
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="¥" textAlignment="left" id="TuF-7m-oCw">
                                                 <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -325,7 +325,7 @@
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="None" textAlignment="left" id="dCe-zf-0fa">
                                                 <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
+                                                <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -361,7 +361,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="288" y="5.75"/>
+            <point key="canvasLocation" x="293" y="-19"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.70588235294117641" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

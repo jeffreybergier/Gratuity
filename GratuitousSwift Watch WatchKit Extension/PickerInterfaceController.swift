@@ -261,7 +261,11 @@ final class PickerInterfaceController: WKInterfaceController, GratuitousWatchDat
     }
     
     @objc private func splitTipMenuButtonTapped() {
-        self.presentControllerWithName("SplitTotalInterfaceController", context: self.dataSource)
+        if true == true { //self.dataSource.defaultsManager.splitBillPurchased == true {
+            self.presentControllerWithName("SplitTotalInterfaceController", context: self.dataSource)
+        } else {
+            fatalError()
+        }
     }
     
     // MARK: Handle Loading Picker Items

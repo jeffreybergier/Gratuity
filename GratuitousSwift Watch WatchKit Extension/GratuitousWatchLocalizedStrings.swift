@@ -10,9 +10,13 @@ import Foundation
 
 extension SplitTotalInterfaceController {
     struct LocalizedString {
-        static let TitleLabel =
+        static let SplitBillTitleLabel =
         NSLocalizedString("Split Bill",
             comment: "Apple Watch App: SplitTotalInterfaceController: TitleLabel: Title for Split Bill Feature."
+        )
+        static let CloseSplitBillTitle =
+        NSLocalizedString("Close",
+            comment: "Apple Watch App: SplitTotalInterfaceController: CloseSplitBillTitle: This is the title of the Split Bill screen. The title doubles as the close the button."
         )
     }
 }
@@ -53,11 +57,11 @@ extension SettingsInterfaceController {
             comment: "Apple Watch App: SettingsInterfaceController: CurrencySymbolHeader: Header Text for a group of cells that allow choosing the currency symbol."
         )
         static let LocalCurrencyRowLabel =
-        NSLocalizedString("Local Currency",
+        NSLocalizedString("Local",
             comment: "Apple Watch App: SettingsInterfaceController: LocalCurrencyRowLabel: Cell that tells the system to use the regional currency symbol."
         )
         static let NoneCurrencyRowLabel =
-        NSLocalizedString("No Symbol",
+        NSLocalizedString("None",
             comment: "Apple Watch App: SettingsInterfaceController: NoneCurrencyRowLabel: Cell that tells the system to use no currency symbol."
         )
     }

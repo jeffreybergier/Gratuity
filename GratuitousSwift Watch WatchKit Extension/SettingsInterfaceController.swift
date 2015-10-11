@@ -36,7 +36,6 @@ final class SettingsInterfaceController: WKInterfaceController {
     private weak var dataSource: GratuitousWatchDataSource?
     private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-    private let buttonTextAttributes = GratuitousUIColor.WatchFonts.buttonText
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
