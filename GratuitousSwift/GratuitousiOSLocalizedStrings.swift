@@ -81,7 +81,7 @@ extension NSError {
                 comment: "Error Dialog: Title Text: This is when the purchases were restored successfully, but the split bill feature has never been purchased."
             )
             static let RestoreSucceededSplitBillNotPurchasedRecovery =
-            NSLocalizedString("Purchases were successfully restored but the Split Bill feature has not found. Tap Buy below to purchase the feature.",
+            NSLocalizedString("Purchases were successfully restored but this feature has not been purchased. Tap Buy below to purchase this feature.",
                 comment: "Error Dialog: Description Text: This is when the purchases were restored successfully, but the split bill feature has never been purchased."
             )
             static let RestoreFailedUnknownDescription =
