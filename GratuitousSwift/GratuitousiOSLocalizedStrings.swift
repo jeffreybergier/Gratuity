@@ -6,6 +6,27 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
+extension TipViewController {
+    struct LocalizedString {
+        static let BillAmountHeader =
+        NSLocalizedString("Amount on Bill",
+            comment: "TipViewController: BillAmountHeader: The header above the bill amount selector."
+        )
+        static let SuggestTipHeader =
+        NSLocalizedString("Suggested Tip",
+            comment: "TipViewController: SuggestTipHeader: The header above the tip amount selector"
+        )
+        static let SpltBillButton =
+        NSLocalizedString("Split Bill",
+            comment: "TipViewController: SpltBillButton: The button that opens the split bill feature."
+        )
+        static let SettingsButton =
+        NSLocalizedString("Settings",
+            comment: "TipViewController: SettingsButton: Settings Button. Only shows if Settings Icon does not load from Bundle."
+        )
+    }
+}
+
 extension SettingsTableViewController {
     struct LocalizedString {
         static let SuggestedTipPercentageHeader =

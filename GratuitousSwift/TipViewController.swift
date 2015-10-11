@@ -150,9 +150,9 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.billAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
         
         //configure the text
-        self.billAmountTableViewTitleTextLabel?.text = NSLocalizedString("Amount on Bill", comment: "this is a text label displayed on the main page of the UI above the dollar amounts that user is supposed to select from for the cost of their restaurant bill.")
-        self.tipAmountTableViewTitleTextLabel?.text = NSLocalizedString("Suggested Tip", comment: "this is a text label displayed on the main page of the UI above the tip amounts. The app suggests a tip amount, but they can also override it. This should be text that describes this suggestion is just a suggestion.")
-        self.splitBillButton?.setTitle(NSLocalizedString("Split Bill", comment: "This is the text that is displayed in the Split Bill button on the main view controller."), forState: .Normal)
+        self.billAmountTableViewTitleTextLabel?.text = TipViewController.LocalizedString.BillAmountHeader
+        self.tipAmountTableViewTitleTextLabel?.text = TipViewController.LocalizedString.SuggestTipHeader
+        self.splitBillButton?.setTitle(TipViewController.LocalizedString.SpltBillButton, forState: .Normal)
         
         //prepare the cell select surrounds
         self.prepareCellSelectSurroundView()
@@ -249,15 +249,14 @@ class TipViewController: UIViewController, UITableViewDataSource, UITableViewDel
     private func prepareSettingsButton() {
         self.settingsButton?.setImage(nil, forState: UIControlState.Normal)
         self.settingsButton?.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        self.settingsButton?.setTitle(NSLocalizedString("Settings", comment: "Settings"), forState: UIControlState.Normal)
+        self.settingsButton?.setTitle(TipViewController.LocalizedString.SettingsButton, forState: UIControlState.Normal)
         self.settingsButton?.sizeToFit()
-        if let path = NSBundle.mainBundle().pathForResource("settingsIcon", ofType:"pdf") {
-            if let settingsButton = self.settingsButton {
+        if let path = NSBundle.mainBundle().pathForResource("settingsIcon", ofType:"pdf"),
+            let settingsButton = self.settingsButton {
                 let image = ImageFromPDFFileWithHeight(path, settingsButton.frame.size.height).imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
                 settingsButton.setTitle("", forState: UIControlState.Normal)
                 settingsButton.setImage(image, forState: UIControlState.Normal)
                 settingsButton.sizeToFit()
-            }
         }
     }
     
