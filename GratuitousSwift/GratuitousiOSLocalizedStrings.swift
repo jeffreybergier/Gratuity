@@ -6,6 +6,27 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
+extension WatchInfoViewController {
+    struct LocalizedString {
+        static let ExtraLargeTextLabel =
+        NSLocalizedString("Gratuity",
+            comment: "WatchInfoViewController: ExtraLargeTextLabel: The name of the app, Gratuity."
+        )
+        static let LargeTextLabel =
+        NSLocalizedString("Apple Watch",
+            comment: "WatchInfoViewController: LargeTextLabel: Whatever apple calls the Apple Watch, locally"
+        )
+        static let NavBarTitleLabel =
+        NSLocalizedString("Apple Watch",
+            comment: "WatchInfoViewController: NavBarTitle: Title for view that shows how the Gratuity Apple Watch app works."
+        )
+        static let AboutGratuityForAppleWatch =
+        NSLocalizedString("Did you just open a shiny new Apple Watch? Don't forget to install Gratuity. You can do so in the Apple Watch App on the home screen of your iOS Device.",
+            comment: "WatchInfoViewController: AboutGratuityForAppleWatch: Small Paragraph of text that explains Gratuity for Apple Watch."
+        )
+    }
+}
+
 extension TipViewController {
     struct LocalizedString {
         static let BillAmountHeader =

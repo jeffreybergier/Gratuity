@@ -71,17 +71,20 @@ class WatchInfoViewController: SmallModalScollViewController {
         //configure the large title label
         self.gratuityTitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 1.3, fallbackStyle: .Headline)
         self.gratuityTitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.gratuityTitleLabel?.text = NSLocalizedString("Gratuity", comment: "Large Title of Watch Info View Controller")
+        self.gratuityTitleLabel?.text = WatchInfoViewController.LocalizedString.ExtraLargeTextLabel
         
         //configure the subtitle label
         self.gratuitySubtitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 0.85, fallbackStyle: .Headline)
         self.gratuitySubtitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.gratuitySubtitleLabel?.text = NSLocalizedString("Apple Watch", comment: "Large SubTitle of Watch Info View Controller")
+        self.gratuitySubtitleLabel?.text = WatchInfoViewController.LocalizedString.LargeTextLabel
+        
+        //configure the navbar
+        self.navigationBar?.items?.first?.title = WatchInfoViewController.LocalizedString.NavBarTitleLabel
         
         //configure the paragraph of text
         self.gratuityParagraphLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.gratuityParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.gratuityParagraphLabel?.text = NSLocalizedString("Did you just open a shiny new Apple Watch? Don't forget to install Gratuity. You can do so in the Apple Watch App on the home screen.", comment: "Paragraph that explains how to install the watch app")
+        self.gratuityParagraphLabel?.text = WatchInfoViewController.LocalizedString.AboutGratuityForAppleWatch
         
     }
     
