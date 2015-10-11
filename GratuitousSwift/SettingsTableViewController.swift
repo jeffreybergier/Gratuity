@@ -104,9 +104,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             label?.superview?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         }
         
-        self.headerLabelTipPercentage?.text = NSLocalizedString("Suggested Tip Percentage", comment: "this text is for a section header where the user can set the default tip percentage when they choose a new bill amount").uppercaseString
-        self.headerLabelCurencySymbol?.text = NSLocalizedString("Currency Symbol", comment: "this text is for a section header where the user can override the currency symbol that will be shown in front of the currency amounts in the app").uppercaseString
-        self.headerLabelAboutSaturdayApps?.text = NSLocalizedString("About SaturdayApps", comment: "This is a section header. It contains information about my company, saturday apps").uppercaseString
+        self.headerLabelTipPercentage?.text = SettingsTableViewController.LocalizedString.SuggestedTipPercentageHeader.uppercaseString
+        self.headerLabelCurencySymbol?.text = SettingsTableViewController.LocalizedString.CurrencySymbolHeader.uppercaseString
+        self.headerLabelAboutSaturdayApps?.text = SettingsTableViewController.LocalizedString.AboutHeader.uppercaseString
     }
     
     func didTapDoneButton(sender: UIButton) {
@@ -262,7 +262,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 if cell.instanceTextLabel == nil {
                     switch cell.tag {
                     case CurrencySign.Default.rawValue:
-                        self.textLabelDefault?.text = NSLocalizedString("Local Currency", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use the local currency symbol based on the Locale set in the iphone")
+                        self.textLabelDefault?.text = SettingsTableViewController.LocalizedString.LocalCurrencyCellLabel
                         cell.instanceTextLabel = self.textLabelDefault
                     case CurrencySign.Dollar.rawValue:
                         cell.instanceTextLabel = self.textLabelDollarSign
@@ -273,7 +273,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                     case CurrencySign.Yen.rawValue:
                         cell.instanceTextLabel = self.textLabelYenSign
                     case CurrencySign.None.rawValue:
-                        self.textLabelNone?.text = NSLocalizedString("No Symbol", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use no currency symbol")
+                        self.textLabelNone?.text = SettingsTableViewController.LocalizedString.NoneCurrencyCellLabel
                         cell.instanceTextLabel = self.textLabelNone
                     default:
                         break;
@@ -328,12 +328,12 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         //preparing the paragraph text label
         self.aboutSaturdayAppsParagraphLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.aboutSaturdayAppsParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.aboutSaturdayAppsParagraphLabel?.text = NSLocalizedString("My name is Jeff. I'm a professional designer. I like making Apps in my spare time. The many examples of tip calculators on the App Store didn't match the tipping paradigm I used in restaurants. So I made Gratuity. If you like it, email me or leave a review on the app store.", comment: "")
+        self.aboutSaturdayAppsParagraphLabel?.text = SettingsTableViewController.LocalizedString.AboutSADescriptionLabel
         
         //prepare the buttons
-        self.aboutEmailMeButton?.setTitle(NSLocalizedString("Email Me", comment: "this is the button that users can use to send me an email."), forState: UIControlState.Normal)
-        self.aboutReviewButton?.setTitle(NSLocalizedString("Review This App", comment: "this button takes the user to the app store so they can leave a review"), forState: UIControlState.Normal)
-        self.aboutWatchAppButton?.setTitle(NSLocalizedString("Gratuity for Watch", comment: "this button takes the user to see the apple watch info screen"), forState: UIControlState.Normal)
+        self.aboutEmailMeButton?.setTitle(UIAlertAction.Gratuity.LocalizedString.EmailSupport, forState: UIControlState.Normal)
+        self.aboutReviewButton?.setTitle(SettingsTableViewController.LocalizedString.ReviewThisAppButton, forState: UIControlState.Normal)
+        self.aboutWatchAppButton?.setTitle(SettingsTableViewController.LocalizedString.GratuityForAppleWatchButton, forState: UIControlState.Normal)
         
         //set the background color of all of the different cells. For some reason on ipad, its white instead of clear
         self.aboutMyPictureImageView?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
@@ -344,26 +344,11 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     @IBAction func didTapEmailMeButton(sender: UIButton) {
-        let subject = NSLocalizedString("I love Gratuity", comment: "This is the subject line of support requests. It should say something positive about the app but its mostly gonna be used when people are upset")
-        let body = NSLocalizedString("THISSHOULDBEBLANK", comment: "this is the body line of support requests, it should be blank, but the possibilies are endless")
-        
-        if MFMailComposeViewController.canSendMail() {
-            let mailer = MFMailComposeViewController()
-            mailer.mailComposeDelegate = self
-            mailer.setSubject(subject)
-            mailer.setToRecipients(["support@saturdayapps.com"])
-            mailer.setMessageBody(body, isHTML: false)
-            
-            self.presentViewController(mailer, animated: true, completion: nil)
+        let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
+        if let mailVC = emailManager.presentableMailViewController {
+            self.presentViewController(mailVC, animated: true, completion: .None)
         } else {
-            let mailStringWrongEncoding = NSString(format: "mailto:support@saturdayapps.com?subject=%@&body=%@", subject, body)
-            let mailString = mailStringWrongEncoding.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-            if let mailString = mailString {
-                let mailToURL = NSURL(string: mailString)
-                if let mailToURL = mailToURL {
-                    UIApplication.sharedApplication().openURL(mailToURL)
-                }
-            }
+            emailManager.switchAppForEmailSupport()
         }
     }
     

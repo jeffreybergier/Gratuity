@@ -6,6 +6,43 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
+extension SettingsTableViewController {
+    struct LocalizedString {
+        static let SuggestedTipPercentageHeader =
+        NSLocalizedString("Suggested Tip Percentage",
+            comment: "SettingsTableViewController: SuggestedTipPercentageHeader: Header Text for a group of cells that allow choosing the default tip percentage."
+        )
+        static let CurrencySymbolHeader =
+        NSLocalizedString("Currency Symbol",
+            comment: "SettingsTableViewController: CurrencySymbolHeader: Header Text for a group of cells that allow choosing the currency symbol."
+        )
+        static let AboutHeader =
+        NSLocalizedString("About SaturdayApps",
+            comment: "SettingsTableViewController: AboutHeader: Header Text for a group of cells explains my company SaturdayApps."
+        )
+        static let LocalCurrencyCellLabel =
+        NSLocalizedString("Local Currency",
+            comment: "SettingsTableViewController: LocalCurrencyCellLabel: Cell that tells the system to use the regional currency symbol."
+        )
+        static let NoneCurrencyCellLabel =
+        NSLocalizedString("No Symbol",
+            comment: "SettingsTableViewController: LocalCurrencyCellLabel: Cell that tells the system to use no currency symbol."
+        )
+        static let AboutSADescriptionLabel =
+        NSLocalizedString("My name is Jeff. I'm a professional designer. I like making Apps in my spare time. The many examples of tip calculators on the App Store didn't match the tipping paradigm I used in restaurants. So I made Gratuity. If you like it, please leave a positive review on the app store.",
+            comment: "SettingsTableViewController: AboutSADescriptionLabel: Short description of SaturdayApps and why I made Gratuity."
+        )
+        static let ReviewThisAppButton =
+        NSLocalizedString("Review this App",
+            comment: "SettingsTableViewController: ReviewThisAppButton: Review app button"
+        )
+        static let GratuityForAppleWatchButton =
+        NSLocalizedString("Apple Watch App",
+            comment: "SettingsTableViewController: GratuityForAppleWatchButton: Button to preview Gratuity for Apple Watch"
+        )
+    }
+}
+
 extension PurchaseSplitBillViewController {
     struct LocalizedString {
         static let ExtraLargeTextLabel =
@@ -43,7 +80,7 @@ extension UIAlertAction {
                 comment: "Alert: Action Button: Dismiss Button"
             )
             static let EmailSupport =
-            NSLocalizedString("Email Support",
+            NSLocalizedString("Email Me",
                 comment: "Alert: Action Button: Button to open email view to email support"
             )
             static let Buy =
