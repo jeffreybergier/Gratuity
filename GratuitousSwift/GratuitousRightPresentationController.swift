@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GratuitousRightPresentationController: GratuitousPresentationController {
+final class GratuitousRightPresentationController: GratuitousPresentationController {
     
     lazy var _dimmingView :UIView = {
         let view = UIView()

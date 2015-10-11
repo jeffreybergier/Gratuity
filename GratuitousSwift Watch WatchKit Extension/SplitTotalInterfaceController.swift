@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class SplitTotalInterfaceController: WKInterfaceController {
+final class SplitTotalInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var splitAmountTitleLabel: WKInterfaceLabel?
     

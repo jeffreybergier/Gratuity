@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GratuitousCurrencyStringImageGenerator {
+final class GratuitousCurrencyStringImageGenerator {
         
     func generateCurrencySymbolsForCurrencySign(currencySign: CurrencySign) -> (url: NSURL, fileName: String)? {
         let dataSource = GratuitousiOSDataSource(use: .Temporary)
@@ -44,11 +44,11 @@ class GratuitousCurrencyStringImageGenerator {
         //let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
         let valueTextAttributes = GratuitousUIColor.WatchFonts.pickerItemText
         
-        let imageGenerator = GratuitousLabelImageGenerator()
+        let imageGenerator = JSBAttributedStringImageGenerator()
         var images = [UIImage]()
         for i in 1 ... 250 {
             let string = NSAttributedString(string: dataSource.currencyFormattedString(i), attributes: valueTextAttributes)
-            if let image = imageGenerator.generateImageForAttributedString(string) {
+            if let image = imageGenerator.generateImageForAttributedString(string, scale: 2.0) {
                 images += [image]
             }
         }

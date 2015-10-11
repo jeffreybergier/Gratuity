@@ -8,17 +8,17 @@
 
 import UIKit
 
-class GratuitousLabelImageGenerator {
+class JSBAttributedStringImageGenerator {
     
-    func generateImageForAttributedString(string: NSAttributedString) -> UIImage? {
+    func generateImageForAttributedString(string: NSAttributedString, scale: CGFloat) -> UIImage? {
         view.attributedText = string
-        return self.imageFromView(self.view)
+        return self.imageFromView(self.view, scale: scale)
     }
     
     private let scaleFactor = CGFloat(2.0)
     private let view = UILabel()
     
-    private func imageFromView(inputView: UIView) -> UIImage? {
+    private func imageFromView(inputView: UIView, scale: CGFloat) -> UIImage? {
         inputView.sizeToFit()
         let size = CGSize(width: inputView.bounds.width * scaleFactor, height: inputView.bounds.height * scaleFactor)
         UIGraphicsBeginImageContext(size)
@@ -29,6 +29,6 @@ class GratuitousLabelImageGenerator {
         guard let coreImage = CGBitmapContextCreateImage(context) else { return .None }
         UIGraphicsEndImageContext()
         
-        return UIImage(CGImage: coreImage, scale: 2.0, orientation: UIImageOrientation.Up)
+        return UIImage(CGImage: coreImage, scale: scale, orientation: UIImageOrientation.Up)
     }
 }

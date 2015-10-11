@@ -39,7 +39,7 @@
 		733D02D31BBA4D2800E40EC5 /* GratuitousSwiftiOSDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731633101B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D41BBA4D2800E40EC5 /* GratuitousPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D51BBA4D2800E40EC5 /* GratuitousCurrencyStringImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
-		733D02D61BBA4D2800E40EC5 /* GratuitousLabelImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
+		733D02D61BBA4D2800E40EC5 /* JSBAttributedStringImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F8DD1B8EC5CD009CAB74 /* JSBAttributedStringImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D71BBA4D2D00E40EC5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7382510D19E60EED00CD2B28 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		733D02D81BBA4D4000E40EC5 /* settingsIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */; settings = {ASSET_TAGS = (); }; };
 		733D02D91BBA4D4700E40EC5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382510F19E60EED00CD2B28 /* LaunchScreen.xib */; settings = {ASSET_TAGS = (); }; };
@@ -141,7 +141,7 @@
 		7371F6D21BB5065B00048EC2 /* PurchaseSplitBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseSplitBillViewController.swift; sourceTree = "<group>"; };
 		737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousUIConstant.swift; sourceTree = "<group>"; };
 		7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInterfaceController.swift; sourceTree = "<group>"; };
-		7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousLabelImageGenerator.swift; sourceTree = "<group>"; };
+		7376F8DD1B8EC5CD009CAB74 /* JSBAttributedStringImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBAttributedStringImageGenerator.swift; sourceTree = "<group>"; };
 		737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = settingsIcon.pdf; sourceTree = "<group>"; };
 		7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratuitousAppDelegate.swift; sourceTree = "<group>"; };
 		7382510D19E60EED00CD2B28 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -372,11 +372,11 @@
 			isa = PBXGroup;
 			children = (
 				73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */,
-				732CFE6B1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift */,
 				73A0B5671A8FC56A00D17943 /* SplitTotalInterfaceController.swift */,
 				7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */,
 				73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */,
 				73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */,
+				732CFE6B1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift */,
 				738484D41B992E1B0044C14C /* fallbackPickerImages.data */,
 				73D46AFD1AC7C9B400057185 /* Images.xcassets */,
 				73A18D5D1A2A9525002180DD /* Supporting Files */,
@@ -434,7 +434,7 @@
 				73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */,
 				7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */,
 				7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */,
-				7376F8DD1B8EC5CD009CAB74 /* GratuitousLabelImageGenerator.swift */,
+				7376F8DD1B8EC5CD009CAB74 /* JSBAttributedStringImageGenerator.swift */,
 				73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */,
 			);
 			name = "Custom Files";
@@ -715,7 +715,7 @@
 				733D02C51BBA4D1900E40EC5 /* SmallModalTableViewController.swift in Sources */,
 				73FF9EA51BBE4ED000F9278C /* RMStore.m in Sources */,
 				732CFE6A1BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift in Sources */,
-				733D02D61BBA4D2800E40EC5 /* GratuitousLabelImageGenerator.swift in Sources */,
+				733D02D61BBA4D2800E40EC5 /* JSBAttributedStringImageGenerator.swift in Sources */,
 				733D02CC1BBA4D2800E40EC5 /* GratuitousRightPresentationController.swift in Sources */,
 				733D02C61BBA4D1900E40EC5 /* SmallModalScrollViewController.swift in Sources */,
 				733D02BF1BBA4D0900E40EC5 /* GratuitousGradientView.swift in Sources */,

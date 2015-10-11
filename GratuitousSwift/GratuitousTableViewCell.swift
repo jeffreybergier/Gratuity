@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GratuitousTableViewCell: UITableViewCell {
+final class GratuitousTableViewCell: UITableViewCell {
 
     @IBOutlet weak private var dollarTextLabel: UILabel?
     private var labelTextAttributes = [String(): NSObject()]

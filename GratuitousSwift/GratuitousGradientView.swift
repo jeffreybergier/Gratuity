@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class GratuitousGradientView: UIView {
+final class GratuitousGradientView: UIView {
     
     internal let gradient = CAGradientLayer()
     internal let gradientColors = [

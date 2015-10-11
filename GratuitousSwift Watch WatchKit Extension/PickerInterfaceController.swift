@@ -9,7 +9,7 @@
 import WatchKit
 import Foundation
 
-class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourceDelegate {
+final class PickerInterfaceController: WKInterfaceController, GratuitousWatchDataSourceDelegate {
     
     private let dataSource = GratuitousWatchDataSource()
     

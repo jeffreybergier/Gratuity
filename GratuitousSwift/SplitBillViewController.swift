@@ -6,7 +6,7 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-class SplitBillViewController: SmallModalTableViewController {
+final class SplitBillViewController: SmallModalTableViewController {
     
     private var dataSource: GratuitousiOSDataSource = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).dataSource
     

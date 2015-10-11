@@ -12,7 +12,7 @@ import Fabric
 import Crashlytics
 
 @UIApplicationMain
-class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
+final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     //initialize the window and the storyboard
     var window: UIWindow?

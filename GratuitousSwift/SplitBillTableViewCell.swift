@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SplitBillTableViewCell: UITableViewCell {
+final class SplitBillTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var primaryLabel: UILabel?
     @IBOutlet private weak var secondaryTextLabel: UILabel?

@@ -14,7 +14,7 @@ protocol GratuitousPropertyListPreferencesDelegate: class {
     func dataNeeded(dataNeeded: GratuitousPropertyListPreferences.DataNeeded)
 }
 
-class GratuitousPropertyListPreferences {
+final class GratuitousPropertyListPreferences {
     
     weak var delegate: GratuitousPropertyListPreferencesDelegate?
     

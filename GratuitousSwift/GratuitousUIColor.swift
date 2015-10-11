@@ -145,8 +145,4 @@ struct GratuitousUIColor {
         
         #endif
     }
-    
-    struct WatchColors {
-        
-    }
 }

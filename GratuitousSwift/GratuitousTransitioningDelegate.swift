@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
+final class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
     private let type: GratuitousTransitioningDelegateType
     private let shouldAnimate: Bool

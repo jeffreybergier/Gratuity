@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GratuitousSettingsButtons: UIButton {
+final class GratuitousSettingsButtons: UIButton {
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class SettingsInterfaceController: WKInterfaceController {
+final class SettingsInterfaceController: WKInterfaceController {
     
     @IBOutlet private weak var suggestedTipTitleLabel: WKInterfaceLabel?
     @IBOutlet private weak var currencySymbolTitleLabel: WKInterfaceLabel?

@@ -13,7 +13,7 @@ protocol GratuitousWatchDataSourceDelegate: class {
     func setSmallInterfaceRefreshNeeded()
 }
 
-class GratuitousWatchDataSource: GratuitousPropertyListPreferencesDelegate, GratuitousWatchConnectivityManagerDelegate {
+final class GratuitousWatchDataSource: GratuitousPropertyListPreferencesDelegate, GratuitousWatchConnectivityManagerDelegate {
     // This class mostly exists to reduce the number of times the app has to read and write NSUserDefaults.
     // Reads are saved into Instance Variables in this class
     // If a value is requested and the isntance variable has never been set, the value is read from NSUserDefaults.

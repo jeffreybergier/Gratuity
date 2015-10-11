@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import MessageUI
 
-class PurchaseSplitBillViewController: SmallModalScollViewController {
+final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     // MARK: Instance Variables
     

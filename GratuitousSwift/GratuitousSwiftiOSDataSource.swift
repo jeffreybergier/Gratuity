@@ -13,7 +13,7 @@ protocol GratuitousiOSDataSourceDelegate: class {
     func setInterfaceRefreshNeeded()
 }
 
-class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, GratuitousiOSConnectivityManagerDelegate {
+final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, GratuitousiOSConnectivityManagerDelegate {
     // This class mostly exists to reduce the number of times the app has to read and write NSUserDefaults.
     // Reads are saved into Instance Variables in this class
     // If a value is requested and the isntance variable has never been set, the value is read from NSUserDefaults.

@@ -15,7 +15,7 @@ protocol GratuitousWatchConnectivityManagerDelegate: class {
     func receivedCurrencySymbolsFromiOS()
 }
 
-class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
+final class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
     
     private var requestedDataFromiOS = false
     

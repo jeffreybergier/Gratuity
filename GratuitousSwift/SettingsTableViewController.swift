@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate, GratuitousiOSDataSourceDelegate {
+final class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate, GratuitousiOSDataSourceDelegate {
     
     // MARK: Handle TableViewController
     @IBOutlet private weak var headerLabelTipPercentage: UILabel?

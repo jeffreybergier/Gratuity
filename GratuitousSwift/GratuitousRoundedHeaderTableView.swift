@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GratuitousRoundedHeaderTableView: UIView {
+final class GratuitousRoundedHeaderTableView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         

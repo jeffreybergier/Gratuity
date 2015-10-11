@@ -14,7 +14,7 @@ protocol GratuitousiOSConnectivityManagerDelegate: class {
 }
 
 @available(iOS 9, *)
-class GratuitousiOSConnectivityManager: NSObject, WCSessionDelegate {
+final class GratuitousiOSConnectivityManager: NSObject, WCSessionDelegate {
     
     let session: WCSession? = {
         if WCSession.isSupported() {

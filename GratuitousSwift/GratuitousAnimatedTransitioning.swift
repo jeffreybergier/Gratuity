@@ -22,7 +22,7 @@ extension UINavigationController: CustomAnimatedTransitionable {
     }
 }
 
-class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
+final class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
     
     var style: GratuitousTransitioningDelegateType = .Bottom
     var isPresentation = true

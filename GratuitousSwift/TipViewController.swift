@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GratuitousiOSDataSourceDelegate, CustomAnimatedTransitionable {
+final class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GratuitousiOSDataSourceDelegate, CustomAnimatedTransitionable {
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel?
     @IBOutlet private weak var totalAmountTextLabel: UILabel?

@@ -136,7 +136,7 @@ extension UIAlertAction {
     }
 }
 
-class EmailSupportHandler {
+final class EmailSupportHandler {
     
     enum Type {
         case GenericEmailSupport
