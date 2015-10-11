@@ -10,6 +10,7 @@
 		1042DD9DC4E2CCC9155EA729 /* Pods_Gratuity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3770A3E29597CE25FE9233F2 /* Pods_Gratuity.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		73048CF41BBCEBC400D8EAA6 /* JSBPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */; settings = {ASSET_TAGS = (); }; };
 		732CFE6A1BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */; settings = {ASSET_TAGS = (); }; };
+		732CFE6C1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732CFE6B1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02BA1BBA4CE600E40EC5 /* GratuitousAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02BB1BBA4CFA00E40EC5 /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; settings = {ASSET_TAGS = (); }; };
 		733D02BC1BBA4D0000E40EC5 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512619E60F3900CD2B28 /* TipViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -124,6 +125,7 @@
 		732615E61BA9237C0081598F /* SmallModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallModalViewController.swift; sourceTree = "<group>"; };
 		732615EA1BA9289F0081598F /* SplitBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitBillViewController.swift; sourceTree = "<group>"; };
 		732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousiOSLocalizedStrings.swift; sourceTree = "<group>"; };
+		732CFE6B1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchLocalizedStrings.swift; sourceTree = "<group>"; };
 		7334770E1A26E85000513F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		733D02A61BBA4C2D00E40EC5 /* Gratuity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gratuity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		733D02B81BBA4CAA00E40EC5 /* Gratuity-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Gratuity-Info.plist"; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */,
+				732CFE6B1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift */,
 				73A0B5671A8FC56A00D17943 /* SplitTotalInterfaceController.swift */,
 				7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */,
 				73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */,
@@ -734,6 +737,7 @@
 				73AEA6EB1BBB06EE004B16DE /* GratuitousPropertyListPreferences.swift in Sources */,
 				73AEA6DF1BBB06D0004B16DE /* PickerInterfaceController.swift in Sources */,
 				73AEA6E31BBB06D0004B16DE /* GratuitousWatchConnectivityManager.swift in Sources */,
+				732CFE6C1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift in Sources */,
 				73AEA6EC1BBB06EE004B16DE /* GratuitousEnums.swift in Sources */,
 				73AEA6E11BBB06D0004B16DE /* SettingsInterfaceController.swift in Sources */,
 				73AEA6E01BBB06D0004B16DE /* SplitTotalInterfaceController.swift in Sources */,

@@ -66,7 +66,7 @@ class SplitTotalInterfaceController: WKInterfaceController {
             // interface is now configured
             self.interfaceControllerIsConfigured = true
             
-            let titleString = NSAttributedString(string: NSLocalizedString("Split Bill", comment: "Title of the split interface controller. Should be a word that describes when people split a bill at a restaurant."), attributes: self.subtitleTextAttributes)
+            let titleString = NSAttributedString(string: SplitTotalInterfaceController.LocalizedString.TitleLabel, attributes: self.subtitleTextAttributes)
             self.splitAmountTitleLabel?.setAttributedText(titleString)
             self.configureSplitAmountLabels()
         }
