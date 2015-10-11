@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1042DD9DC4E2CCC9155EA729 /* Pods_Gratuity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3770A3E29597CE25FE9233F2 /* Pods_Gratuity.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		73048CF41BBCEBC400D8EAA6 /* JSBPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */; settings = {ASSET_TAGS = (); }; };
+		732CFE6A1BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02BA1BBA4CE600E40EC5 /* GratuitousAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02BB1BBA4CFA00E40EC5 /* GratuitousSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */; settings = {ASSET_TAGS = (); }; };
 		733D02BC1BBA4D0000E40EC5 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382512619E60F3900CD2B28 /* TipViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -122,6 +123,7 @@
 		7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fuuutuuura-Meeediuuum.ttf"; sourceTree = "<group>"; };
 		732615E61BA9237C0081598F /* SmallModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallModalViewController.swift; sourceTree = "<group>"; };
 		732615EA1BA9289F0081598F /* SplitBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitBillViewController.swift; sourceTree = "<group>"; };
+		732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousiOSLocalizedStrings.swift; sourceTree = "<group>"; };
 		7334770E1A26E85000513F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		733D02A61BBA4C2D00E40EC5 /* Gratuity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gratuity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		733D02B81BBA4CAA00E40EC5 /* Gratuity-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Gratuity-Info.plist"; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */,
+				732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */,
 				734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */,
 				7353346D1A1803FB008530E1 /* TipViewController */,
 				735334711A1804CC008530E1 /* Settings View Controller */,
@@ -710,6 +713,7 @@
 				73FF9EA21BBE4BE400F9278C /* RMAppReceipt.m in Sources */,
 				733D02C51BBA4D1900E40EC5 /* SmallModalTableViewController.swift in Sources */,
 				73FF9EA51BBE4ED000F9278C /* RMStore.m in Sources */,
+				732CFE6A1BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift in Sources */,
 				733D02D61BBA4D2800E40EC5 /* GratuitousLabelImageGenerator.swift in Sources */,
 				733D02CC1BBA4D2800E40EC5 /* GratuitousRightPresentationController.swift in Sources */,
 				733D02C61BBA4D1900E40EC5 /* SmallModalScrollViewController.swift in Sources */,

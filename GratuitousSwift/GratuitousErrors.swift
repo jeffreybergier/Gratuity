@@ -20,14 +20,13 @@ enum StoreKitPurchaseErrorCode: Int {
 
 extension NSError {
     struct GratuitousPurchaseError {
-        static let domainKey = "GratuitousPurchaseError"
+        static let domainKey = NSError.Gratuity.DomainKey
         
         enum ErrorCode: Int {
             case RestorePurchasesAlreadyInProgress = 2001
             case PurchaseAlreadyInProgress = 2018
             case ProductRequestFailed = 2002
             case PurchaseDeferred = 2003
-            case PurchaseFailed = 2004
             case RestoreSucceededSplitBillNotPurchased = 2005
             case RestoreFailedUnknown = 2006
             case RestoreFailedClientInvalid = 2007
@@ -50,35 +49,32 @@ extension NSError {
         let localizedRecoverySuggestion: String
         switch purchaseError {
         case .RestorePurchasesAlreadyInProgress:
-            localizedDescription = NSLocalizedString("Restore in Progress", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("A purchase restore is already in progress. Please wait for the first restore to finish before trying again.", comment: "")
+            localizedDescription = NSError.Gratuity.LocalizedString.RestorePurchasesAlreadyInProgressDescription
+            localizedRecoverySuggestion = NSError.Gratuity.LocalizedString.RestorePurchasesAlreadyInProgressRecovery
         case .PurchaseAlreadyInProgress:
-            localizedDescription = NSLocalizedString("Purchase in Progress", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("This purchase is already in progress. Please wait for the first restore to finish before trying again.", comment: "")
+            localizedDescription = NSError.Gratuity.LocalizedString.PurchaseAlreadyInProgressDescription
+            localizedRecoverySuggestion = NSError.Gratuity.LocalizedString.PurchaseAlreadyInProgressRecovery
         case .ProductRequestFailed:
-            localizedDescription = NSLocalizedString("App Store Error", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("Unable to connect to the App Store. Please check your data connection and try again later.", comment: "")
+            localizedDescription = NSError.Gratuity.LocalizedString.ProductRequestFailedDescription
+            localizedRecoverySuggestion = NSError.Gratuity.LocalizedString.ProductRequestFailedRecovery
         case .PurchaseDeferred:
-            localizedDescription = NSLocalizedString("Successfully Asked Permission", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("While waiting for approval, the feature has been enabled. Note, without approval the feature may disable itself.", comment: "")
-        case .PurchaseFailed:
-            localizedDescription = NSLocalizedString("Purchase Failed", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("The purchased was cancelled or failed. Check your data connection and try again later.", comment: "")
+            localizedDescription = NSError.Gratuity.LocalizedString.PurchaseDeferredDescription
+            localizedRecoverySuggestion = NSError.Gratuity.LocalizedString.PurchaseDeferredRecovery
         case .RestoreSucceededSplitBillNotPurchased:
-            localizedDescription = NSLocalizedString("Purchase Not Found", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("The Split Bill Feature was not found while restoring In-App Purchases. Tap the Buy button to purchase this feature.", comment: "")
+            localizedDescription = NSError.Gratuity.LocalizedString.RestoreSucceededSplitBillNotPurchasedDescription
+            localizedRecoverySuggestion = NSError.Gratuity.LocalizedString.RestoreSucceededSplitBillNotPurchasedRecovery
         case .RestoreFailedUnknown, .RestoreFailedClientInvalid, .RestoreFailedPaymentInvalid, .RestoreFailedProductNotAvailable:
-            localizedDescription = NSLocalizedString("Failed to Restore Purchases", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("An error ocurred while restoring purchases, please check your data connection and try again later.", comment: "")
+            localizedDescription = NSError.Gratuity.LocalizedString.RestoreFailedUnknownDescription
+            localizedRecoverySuggestion = NSError.Gratuity.LocalizedString.RestoreFailedUnknownRecovery
         case .PurchaseFailedUnknown, .PurchaseFailedClientInvalid, .PurchaseFailedPaymentInvalid, .PurchaseFailedProductNotAvailable:
-            localizedDescription = NSLocalizedString("Purchase Failed", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("An error ocurred while purchasing, please check your data connection and try again later.", comment: "")
+            localizedDescription = NSError.Gratuity.LocalizedString.PurchaseFailedUnknownDescription
+            localizedRecoverySuggestion = NSError.Gratuity.LocalizedString.PurchaseFailedUnknownRecovery
         case .RestoreFailedPaymentNotAllowed:
-            localizedDescription = NSLocalizedString("Restore Failed", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("In-App purchases are restricted on this device. Please remove the restriction and try again.", comment: "")
+            localizedDescription = NSError.Gratuity.LocalizedString.RestoreFailedPaymentNotAllowedDescription
+            localizedRecoverySuggestion = NSError.Gratuity.LocalizedString.RestoreFailedPaymentNotAllowedRecovery
         case .PurchaseFailedPaymentNotAllowed:
-            localizedDescription = NSLocalizedString("Purchase Failed", comment: "")
-            localizedRecoverySuggestion = NSLocalizedString("In-App purchases are restricted on this device. Please remove the restriction and try again.", comment: "")
+            localizedDescription = NSError.Gratuity.LocalizedString.PurchaseFailedPaymentNotAllowedDescription
+            localizedRecoverySuggestion = NSError.Gratuity.LocalizedString.PurchaseFailedPaymentNotAllowedRecovery
         }
         
         let userInfo = [
@@ -148,7 +144,7 @@ class EmailSupportHandler {
     
     let subject: String
     let body: String
-    let recipient = "support@saturdayapps.com"
+    let recipient = EmailSupportHandler.Recipient
     
     var presentableMailViewController: MFMailComposeViewController?
 
@@ -156,8 +152,8 @@ class EmailSupportHandler {
         
         switch type {
         case .GenericEmailSupport:
-            self.subject = NSLocalizedString("Gratuity Support", comment: "")
-            self.body = NSLocalizedString("", comment: "")
+            self.subject = EmailSupportHandler.LocalizedString.EmailSubject
+            self.body = EmailSupportHandler.LocalizedString.EmailBody
         }
         
         if MFMailComposeViewController.canSendMail() {
@@ -172,7 +168,7 @@ class EmailSupportHandler {
     }
     
     func switchAppForEmailSupport() {
-        let mailStringWrongEncoding = NSString(format: "mailto:support@saturdayapps.com?subject=%@&body=%@", self.subject, self.body)
+        let mailStringWrongEncoding = NSString(format: "mailto:\(self.recipient)?subject=%@&body=%@", self.subject, self.body)
         let mailString = mailStringWrongEncoding.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         let mailToURL = NSURL(string: mailString!)!
         UIApplication.sharedApplication().openURL(mailToURL)
