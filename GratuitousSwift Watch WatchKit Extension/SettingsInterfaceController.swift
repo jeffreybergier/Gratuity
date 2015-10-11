@@ -49,6 +49,8 @@ final class SettingsInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
+        self.updateUserActivity(HandoffTypes.SettingsInterface.rawValue, userInfo: ["string": "string"], webpageURL: .None)
+        
         if self.interfaceControllerIsConfigured == false {
         self.setTitle(SettingsInterfaceController.LocalizedString.CloseSettingsTitle)
             // putting this in a background queue allows willActivate to finish, the animation to start.
@@ -156,5 +158,11 @@ final class SettingsInterfaceController: WKInterfaceController {
                 self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
             }
         }
+    }
+    
+    override func willDisappear() {
+        super.willDisappear()
+        
+        self.invalidateUserActivity()
     }
 }

@@ -8,6 +8,23 @@
 
 import Foundation
 
+extension SplitTotalPurchaseInterfaceController {
+    struct LocalizedString {
+        static let TitleTextLabel =
+        NSLocalizedString("Split Bill",
+            comment: "Apple Watch App: SplitTotalPurchaseInterfaceController: TitleLabel: Title for Split Bill Feature."
+        )
+        static let SubtitleTextLabel =
+        NSLocalizedString("In-App Purchase",
+            comment: "Apple Watch App: SplitTotalPurchaseInterfaceController: SubtitleLabel: Whatever Apple calls In-App Purchase locally"
+        )
+        static let DescriptionTextLabel =
+        NSLocalizedString("Handoff to your iPhone to purchase.",
+            comment: "Apple Watch App: SplitTotalPurchaseInterfaceController: DescriptionTextLabel: Short instructions to use handoff to buy on your iPhone."
+        )
+    }
+}
+
 extension SplitTotalInterfaceController {
     struct LocalizedString {
         static let SplitBillTitleLabel =

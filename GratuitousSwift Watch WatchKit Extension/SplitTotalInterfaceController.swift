@@ -52,6 +52,8 @@ final class SplitTotalInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
+        self.updateUserActivity(HandoffTypes.SplitBillInterface.rawValue, userInfo: ["string" : "string"], webpageURL: .None)
+        
         if self.interfaceControllerIsConfigured == false {
             // putting this in a background queue allows willActivate to finish, the animation to start.
             let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
@@ -97,5 +99,11 @@ final class SplitTotalInterfaceController: WKInterfaceController {
         self.splitAmount3CurrencyLabel?.setAttributedText(threeString)
         self.splitAmount4CurrencyLabel?.setAttributedText(fourString)
 
+    }
+    
+    override func willDisappear() {
+        super.willDisappear()
+        
+        self.invalidateUserActivity()
     }
 }

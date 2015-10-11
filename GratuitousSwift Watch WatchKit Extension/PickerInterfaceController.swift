@@ -87,6 +87,7 @@ final class PickerInterfaceController: WKInterfaceController, GratuitousWatchDat
     
     override func willActivate() {
         super.willActivate()
+        self.updateUserActivity(HandoffTypes.MainTipInterface.rawValue, userInfo: ["string":"string"], webpageURL: .None)
         self.dataSource.delegate = self
         
         if self.interfaceControllerConfiguredOnce == false {
@@ -204,6 +205,7 @@ final class PickerInterfaceController: WKInterfaceController, GratuitousWatchDat
     
     override func willDisappear() {
         super.willDisappear()
+        self.invalidateUserActivity()
         self.interfaceIdleTimer?.invalidate()
         self.interfaceIdleTimer = nil
     }
@@ -261,10 +263,10 @@ final class PickerInterfaceController: WKInterfaceController, GratuitousWatchDat
     }
     
     @objc private func splitTipMenuButtonTapped() {
-        if true == true { //self.dataSource.defaultsManager.splitBillPurchased == true {
+        if self.dataSource.defaultsManager.splitBillPurchased == true {
             self.presentControllerWithName("SplitTotalInterfaceController", context: self.dataSource)
         } else {
-            fatalError()
+            self.presentControllerWithName("SplitBillPurchaseInterfaceController", context: .None)
         }
     }
     

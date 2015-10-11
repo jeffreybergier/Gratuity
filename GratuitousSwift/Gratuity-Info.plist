@@ -51,6 +51,13 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.saturdayapps.Gratuity.Watch.MainTipInterface</string>
+		<string>com.saturdayapps.Gratuity.Watch.SettingsInterface</string>
+		<string>com.saturdayapps.Gratuity.Watch.SplitBillInterface</string>
+		<string>com.saturdayapps.Gratuity.Watch.SplitBillPurchase</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

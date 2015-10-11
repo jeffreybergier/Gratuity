@@ -76,6 +76,10 @@ struct GratuitousUIColor {
             NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 20, fallbackStyle: UIFontStyle.Subheadline),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
         ]
+        static let bodyText = [
+            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 16, fallbackStyle: UIFontStyle.Subheadline),
+            NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
+        ]
         static let splitBillValueText = [
             NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 27, fallbackStyle: UIFontStyle.Subheadline),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
