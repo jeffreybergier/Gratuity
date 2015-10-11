@@ -24,7 +24,8 @@ struct GratuitousUIColor {
     
     static func lightBackgroundColor() -> UIColor {
         //return UIColor(red: 185.0/255.0, green: 46.0/255.0, blue: 46.0/255.0, alpha: 1.0)
-        return self.lightTextColor()
+        //return self.lightTextColor()
+        return self.ultraLightTextColor()
     }
     
     static func darkBackgroundColor() -> UIColor {
@@ -38,7 +39,7 @@ struct GratuitousUIColor {
     }
     
     static func ultraLightTextColor() -> UIColor {
-        var color = UIColor(red: 180/255.0, green: 0, blue: 0, alpha: 1)
+        var color = UIColor(red: 200/255.0, green: 0, blue: 0, alpha: 1)
         
         if invertColorsIsEnabled() {
             color = UIColor.whiteColor()
@@ -58,14 +59,15 @@ struct GratuitousUIColor {
     }
     
     static func lightTextColor() -> UIColor {
-        var color = UIColor(red: 150.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
-
-        if invertColorsIsEnabled() {
-            color = UIColor.blackColor()
-        }
-        
-        return color
+//        var color = UIColor(red: 150.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+//
+//        if invertColorsIsEnabled() {
+//            color = UIColor.blackColor()
+//        }
+//        
+//        return color
         //return self.lightBackgroundColor()
+        return self.ultraLightTextColor()
     }
     
     static func darkTextColor() -> UIColor {
