@@ -6,6 +6,40 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
+extension UIAlertAction {
+    struct Gratuity {
+        struct LocalizedString {
+            static let Dismiss =
+            NSLocalizedString("Dismiss",
+                comment: "Alert: Action Button: Dismiss Button"
+            )
+            static let EmailSupport =
+            NSLocalizedString("Email Support",
+                comment: "Alert: Action Button: Button to open email view to email support"
+            )
+            static let Buy =
+            NSLocalizedString("Buy",
+                comment: "Alert: Action Button: Buy Button"
+            )
+        }
+    }
+}
+
+extension UIAlertController {
+    struct Gratuity {
+        struct LocalizedString {
+            static let UnknownErrorDescription =
+            NSLocalizedString("Unknown Error",
+                comment: "Abstract: Alert   Title: Unknown Error presented when there was no text in the NSError"
+            )
+            static let UnknownErrorRecovery =
+            NSLocalizedString("An unknown error ocurred. Check your data connection and try again later.",
+                comment: "Abstract: Alert Title: Unknown Error presented when there was no text in the NSError"
+            )
+        }
+    }
+}
+
 extension NSError {
     struct Gratuity {
         static let DomainKey = "GratuitousPurchaseError"

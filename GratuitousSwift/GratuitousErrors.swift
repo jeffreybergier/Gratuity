@@ -100,8 +100,8 @@ extension UIAlertController {
     }
     
     convenience init(actions: [UIAlertAction], error: NSError?) {
-        let localizedDescription = error?.userInfo[NSLocalizedDescriptionKey] as? String ?? NSLocalizedString("Unknown Error", comment: "")
-        let localizedRecoverySuggestion = error?.userInfo[NSLocalizedRecoverySuggestionErrorKey] as? String ?? NSLocalizedString("An unknown error ocurred", comment: "")
+        let localizedDescription = error?.userInfo[NSLocalizedDescriptionKey] as? String ?? UIAlertController.Gratuity.LocalizedString.UnknownErrorDescription
+        let localizedRecoverySuggestion = error?.userInfo[NSLocalizedRecoverySuggestionErrorKey] as? String ?? UIAlertController.Gratuity.LocalizedString.UnknownErrorRecovery
         
         self.init(title: localizedDescription, message: localizedRecoverySuggestion, preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -123,13 +123,13 @@ extension UIAlertAction {
         let style: UIAlertActionStyle
         switch type {
         case .Dismiss:
-            title = NSLocalizedString("Dismiss", comment: "")
+            title = UIAlertAction.Gratuity.LocalizedString.Dismiss
             style = UIAlertActionStyle.Cancel
         case .EmailSupport:
-            title = NSLocalizedString("Email Support", comment: "")
+            title = UIAlertAction.Gratuity.LocalizedString.EmailSupport
             style = UIAlertActionStyle.Default
         case .Buy:
-            title = NSLocalizedString("Buy", comment: "")
+            title = UIAlertAction.Gratuity.LocalizedString.Buy
             style = UIAlertActionStyle.Default
         }
         self.init(title: title, style: style, handler: completionHandler)
