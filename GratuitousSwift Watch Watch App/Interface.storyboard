@@ -190,7 +190,7 @@
                         </label>
                         <label alignment="right" text="–%" textAlignment="right" id="5An-PC-g8o">
                             <color key="textColor" red="0.70588235290000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
+                            <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                         </label>
                         <group width="1" alignment="left" id="EcG-wP-xkF">
                             <items>
