@@ -111,15 +111,15 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
         //configure the large title label
         self.titleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 1.3, fallbackStyle: .Headline)
         self.titleLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.titleLabel?.text = NSLocalizedString("Split Bill", comment: "Large Title of Watch Info View Controller")
+        self.titleLabel?.text = PurchaseSplitBillViewController.LocalizedString.ExtraLargeTextLabel
         
         //configure the subtitle label
         self.subtitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 0.85, fallbackStyle: .Headline)
         self.subtitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.subtitleLabel?.text = NSLocalizedString("In-App Purchase", comment: "Subtitle for the purchase split bill view controller")
+        self.subtitleLabel?.text = PurchaseSplitBillViewController.LocalizedString.LargeTextLabel
         
         //configure the navigation bar
-        self.navigationBar?.items?.first?.title = NSLocalizedString("Split Bill", comment: "Large Title of Watch Info View Controller")
+        self.navigationBar?.items?.first?.title = PurchaseSplitBillViewController.LocalizedString.NavBarTitleLabel
         
         //configure the paragraph of text
         self.descriptionParagraphLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
@@ -131,20 +131,20 @@ class PurchaseSplitBillViewController: SmallModalScollViewController {
         
         // configure the button text
         self.configureDynamicElements()
-        self.restoreButton?.setTitle(NSLocalizedString("Restore Purchases", comment: ""), forState: UIControlState.Normal)
+        self.restoreButton?.setTitle(PurchaseSplitBillViewController.LocalizedString.RestorePurchasesButton, forState: UIControlState.Normal)
     }
     
     private func configureDynamicElements() {
         if let splitBillProduct = self.splitBillProduct {
-            let purchaseString = NSLocalizedString("Purchase", comment: "")
+            let purchaseString = PurchaseSplitBillViewController.LocalizedString.PurchaseButtonText
             self.purchaseButton?.setTitle(purchaseString + " – \(self.priceString)", forState: UIControlState.Normal)
             self.descriptionParagraphLabel?.text = splitBillProduct.localizedDescription ?? ""
             
         } else {
             // need to request the product!!!
-            let downloadingLocalizedString = NSLocalizedString("Downloading...", comment: "")
+            let downloadingLocalizedString = PurchaseSplitBillViewController.LocalizedString.DownloadingAppStoreInfoButtonText
             self.purchaseButton?.setTitle(downloadingLocalizedString, forState: UIControlState.Normal)
-            self.descriptionParagraphLabel?.text = NSLocalizedString("", comment: "")
+            self.descriptionParagraphLabel?.text = ""
         }
     }
     

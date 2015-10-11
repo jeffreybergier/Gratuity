@@ -6,6 +6,35 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
+extension PurchaseSplitBillViewController {
+    struct LocalizedString {
+        static let ExtraLargeTextLabel =
+        NSLocalizedString("Split Bill",
+            comment: "PurchaseSplitBillViewController: ExtraLargeTextLabel: The name of the in-app purchase feature"
+        )
+        static let LargeTextLabel =
+        NSLocalizedString("In-App Purchase",
+            comment: "PurchaseSplitBillViewController: LargeTextLabel: Whatever Apple calls In-App Purchase locally"
+        )
+        static let NavBarTitleLabel =
+        NSLocalizedString("Split Bill",
+            comment: "PurchaseSplitBillViewController: NavBarTitleLabel: The name of the in-app purchase feature"
+        )
+        static let RestorePurchasesButton =
+        NSLocalizedString("Restore Purchases",
+            comment: "PurchaseSplitBillViewController: RestorePurchasesButton: Button that restores all In-App Purchases"
+        )
+        static let PurchaseButtonText =
+        NSLocalizedString("Purchase",
+            comment: "PurchaseSplitBillViewController: PurchaseButtonText: Button to start in-app purchase buy."
+        )
+        static let DownloadingAppStoreInfoButtonText =
+        NSLocalizedString("Downloading...",
+            comment: "PurchaseSplitBillViewController: DownloadingAppStoreInfoButtonText: Downloading text that shows while the price of the in-app purchase is downloading from the app store."
+        )
+    }
+}
+
 extension UIAlertAction {
     struct Gratuity {
         struct LocalizedString {
