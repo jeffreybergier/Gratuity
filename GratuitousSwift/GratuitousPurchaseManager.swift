@@ -8,15 +8,6 @@
 
 import StoreKit
 
-protocol Purchasable: CustomStringConvertible {
-    static var identifierString: String { get }
-    var localizedTitle: String { get }
-    var localizedDescription: String { get }
-    var price: NSDecimalNumber { get }
-    var priceLocale: NSLocale { get }
-    var skProductValue: SKProduct { get }
-}
-
 final class GratuitousPurchaseManager: JSBPurchaseManager {
     
     override var Scej9Uj9vIrth8Ev7quaG9vob6iP8buK5ferS8yoak3Fots5El: String {

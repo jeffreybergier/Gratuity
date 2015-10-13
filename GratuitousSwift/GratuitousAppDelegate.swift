@@ -37,6 +37,9 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             self.transferBulkCurrencySymbolsIfNeeded()
         }
         
+        let purchaseManager = GratuitousPurchaseManager()
+        self.defaultsManager.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
+        
         return true
     }
     

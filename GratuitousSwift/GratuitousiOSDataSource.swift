@@ -19,7 +19,6 @@ final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, 
     // If a value is requested and the isntance variable has never been set, the value is read from NSUserDefaults.
     
     weak var delegate: GratuitousiOSDataSourceDelegate?
-    let purchaseManager: GratuitousPurchaseManager?
     let watchConnectivityManager: AnyObject?
     
     private let currencyFormatter = NSNumberFormatter()
@@ -50,9 +49,7 @@ final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, 
         switch use {
         case .Temporary:
             self.watchConnectivityManager = .None
-            self.purchaseManager = .None
         case .AppLifeTime:
-            self.purchaseManager = GratuitousPurchaseManager()
             if #available(iOS 9, *) {
                 self.watchConnectivityManager = GratuitousiOSConnectivityManager()
             } else {
@@ -76,12 +73,6 @@ final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, 
             self.defaultsManager.delegate = self
             if #available(iOS 9, *) {
                 (self.watchConnectivityManager as? GratuitousiOSConnectivityManager)?.delegate = self
-            }
-            
-            if self.purchaseManager?.verifySplitBillPurchaseTransaction() == true {
-                self.defaultsManager.splitBillPurchased = true
-            } else {
-                self.defaultsManager.splitBillPurchased = false
             }
         }
     }

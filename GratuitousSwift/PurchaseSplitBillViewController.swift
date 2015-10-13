@@ -27,7 +27,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBOutlet private weak var purchaseButtonSpinner: UIActivityIndicatorView?
     @IBOutlet private weak var restoreButtonSpinner: UIActivityIndicatorView?
     
-    private let dataSource = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).dataSource
+    private let purchaseManager = GratuitousPurchaseManager()
     private let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
     
     enum State {
@@ -98,7 +98,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.dataSource.purchaseManager?.beginObserving()
+        self.purchaseManager.beginObserving()
         self.requestSplitBillProductWithCompletionHandler()
         self.state = .SplitBillProductNotFoundInStoreFront
     }
@@ -176,7 +176,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     private func requestSplitBillProductWithCompletionHandler() {
         let request = SKProductsRequest(productIdentifiers: Set([GratuitousPurchaseManager.splitBillPurchaseIdentifier]))
-        self.dataSource.purchaseManager?.initiateRequest(request) { [weak self] request, response, error in
+        self.purchaseManager.initiateRequest(request) { [weak self] request, response, error in
             let guaranteedSplitBillProductArray = response?.products.filter() { product -> Bool in
                 if product.productIdentifier == GratuitousPurchaseManager.splitBillPurchaseIdentifier {
                     return true
@@ -206,7 +206,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBAction private func didTapPurchaseButton(sender: UIButton?) {
         guard let splitBillProduct = self.splitBillProduct else { return }
         self.state = .PurchaseInProgress
-        self.dataSource.purchaseManager?.initiatePurchaseWithPayment(SKPayment(product: splitBillProduct)) { transaction in
+        self.purchaseManager.initiatePurchaseWithPayment(SKPayment(product: splitBillProduct)) { transaction in
             
             // change the UI back to normal state
             self.state = .Normal
@@ -218,15 +218,13 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             } else {
                 // update the preference based on the receipt
                 // the receipt is the source of truth, all the error handling is just sugar coating
-                if let splitBillPurchased = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() {
-                    self.defaultsManager.splitBillPurchased = splitBillPurchased
-                }
+                self.defaultsManager.splitBillPurchased = self.purchaseManager.verifySplitBillPurchaseTransaction()
             }
             
             // We need to finish the transaction unless its in the Deferred or Purchasing state
             switch transaction.transactionState {
             case .Purchased, .Restored, .Failed:
-                self.dataSource.purchaseManager?.finishTransaction(transaction)
+                self.purchaseManager.finishTransaction(transaction)
             case .Deferred, .Purchasing:
                 break //do nothing
             }
@@ -255,19 +253,14 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     @IBAction private func didTapRestoreButton(sender: UIButton?) {
         self.state = .RestoreInProgress
-        self.dataSource.purchaseManager?.restorePurchasesWithCompletionHandler() { queue, error in
+        self.purchaseManager.restorePurchasesWithCompletionHandler() { queue, error in
             
             // change the UI back to normal state
             self.state = .Normal
             // update the preference based on the receipt
             // the receipt is the source of truth, all the error handling is just sugar coating
-            let splitBillPurchased: Bool
-            if let purchased = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() {
-                self.defaultsManager.splitBillPurchased = purchased
-                splitBillPurchased = purchased
-            } else {
-                splitBillPurchased = false
-            }
+            let splitBillPurchased = self.purchaseManager.verifySplitBillPurchaseTransaction()
+            self.defaultsManager.splitBillPurchased = splitBillPurchased
             
             if let error = error {
                 // the restore had some sort of error
@@ -336,7 +329,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     // MARK: Handle Going Away
     
     deinit {
-        self.dataSource.purchaseManager?.endObserving()
+        self.purchaseManager.endObserving()
     }
 }
 
