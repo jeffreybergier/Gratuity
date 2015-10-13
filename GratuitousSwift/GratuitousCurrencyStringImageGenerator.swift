@@ -12,8 +12,7 @@ final class GratuitousCurrencyStringImageGenerator {
         
     func generateCurrencySymbolsForCurrencySign(currencySign: CurrencySign) -> (url: NSURL, fileName: String)? {
         let dataSource = GratuitousiOSDataSource(use: .Temporary)
-        dataSource.defaultsManager.overrideCurrencySymbol = currencySign
-        if let url = self.generateNewCurrencySymbolsFromConfiguredCurrencyFormatter(dataSource),
+        if let url = self.generateNewCurrencySymbol(currencySign, fromDataSource: dataSource),
             let lastPathComponent = url.lastPathComponent {
                 return (url: url, fileName: lastPathComponent)
         } else {
@@ -26,8 +25,7 @@ final class GratuitousCurrencyStringImageGenerator {
         var tuples = [(url: NSURL, fileName: String)]()
         for i in 0 ..< 10 {
             if let currencySign = CurrencySign(rawValue: i) {
-                dataSource.defaultsManager.overrideCurrencySymbol = currencySign
-                if let url = self.generateNewCurrencySymbolsFromConfiguredCurrencyFormatter(dataSource) {
+                if let url = self.generateNewCurrencySymbol(currencySign, fromDataSource: dataSource) {
                     if let lastPathComponent = url.lastPathComponent {
                         tuples += [(url: url, fileName: lastPathComponent)]
                     }
@@ -40,14 +38,14 @@ final class GratuitousCurrencyStringImageGenerator {
     }
     
     
-    private func generateNewCurrencySymbolsFromConfiguredCurrencyFormatter(dataSource: GratuitousiOSDataSource) -> NSURL? {
+    private func generateNewCurrencySymbol(currencySign: CurrencySign, fromDataSource dataSource: GratuitousiOSDataSource) -> NSURL? {
         //let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
         let valueTextAttributes = GratuitousUIColor.WatchFonts.pickerItemText
         
         let imageGenerator = JSBAttributedStringImageGenerator()
         var images = [UIImage]()
         for i in 1 ... 250 {
-            let string = NSAttributedString(string: dataSource.currencyFormattedString(i), attributes: valueTextAttributes)
+            let string = NSAttributedString(string: dataSource.currencyFormattedStringWithCurrencySign(currencySign, amount: i), attributes: valueTextAttributes)
             if let image = imageGenerator.generateImageForAttributedString(string, scale: 2.0) {
                 images += [image]
             }

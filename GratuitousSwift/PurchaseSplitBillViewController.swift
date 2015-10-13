@@ -27,7 +27,8 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBOutlet private weak var purchaseButtonSpinner: UIActivityIndicatorView?
     @IBOutlet private weak var restoreButtonSpinner: UIActivityIndicatorView?
     
-    private var dataSource: GratuitousiOSDataSource = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).dataSource
+    private let dataSource = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).dataSource
+    private let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
     
     enum State {
         case Normal
@@ -213,12 +214,12 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             if transaction.transactionState == .Deferred {
                 // if the transaction is deferred I give temporary access.
                 // the receipt is checked on every launch, so this will get undone if it doesn't get deferred
-                self.dataSource.defaultsManager.splitBillPurchased = true
+                self.defaultsManager.splitBillPurchased = true
             } else {
                 // update the preference based on the receipt
                 // the receipt is the source of truth, all the error handling is just sugar coating
                 if let splitBillPurchased = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() {
-                    self.dataSource.defaultsManager.splitBillPurchased = splitBillPurchased
+                    self.defaultsManager.splitBillPurchased = splitBillPurchased
                 }
             }
             
@@ -262,7 +263,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             // the receipt is the source of truth, all the error handling is just sugar coating
             let splitBillPurchased: Bool
             if let purchased = self.dataSource.purchaseManager?.verifySplitBillPurchaseTransaction() {
-                self.dataSource.defaultsManager.splitBillPurchased = purchased
+                self.defaultsManager.splitBillPurchased = purchased
                 splitBillPurchased = purchased
             } else {
                 splitBillPurchased = false

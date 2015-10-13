@@ -16,7 +16,10 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     //initialize the window and the storyboard
     var window: UIWindow?
-    let dataSource = GratuitousiOSDataSource(use: .AppLifeTime)
+    
+    lazy var dataSource = GratuitousiOSDataSource(use: .AppLifeTime)
+    lazy var defaultsManager: GratuitousPropertyListPreferences = GratuitousPropertyListPreferences()
+    
     private lazy var storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
     private lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right, animate: false)
     private lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom, animate: false)
@@ -123,8 +126,8 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         if let watchConnectivityManager = self.dataSource.watchConnectivityManager as? GratuitousiOSConnectivityManager,
             let session = watchConnectivityManager.session
             where session.paired == true && session.watchAppInstalled == true {
-                if self.dataSource.defaultsManager.freshWatchAppInstall == true {
-                    self.dataSource.defaultsManager.freshWatchAppInstall = false
+                if self.defaultsManager.freshWatchAppInstall == true {
+                    self.defaultsManager.freshWatchAppInstall = false
                     let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
                     dispatch_async(backgroundQueue) {
                         let generator = GratuitousCurrencyStringImageGenerator()
@@ -135,7 +138,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
                 }
         } else {
             // watch app not installed or watch not paired
-            self.dataSource.defaultsManager.freshWatchAppInstall = true
+            self.defaultsManager.freshWatchAppInstall = true
         }
     }
 }

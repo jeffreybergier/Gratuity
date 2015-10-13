@@ -36,7 +36,7 @@
 		733D02D01BBA4D2800E40EC5 /* GratuitousUIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D11BBA4D2800E40EC5 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D21BBA4D2800E40EC5 /* GratuitousiOSConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
-		733D02D31BBA4D2800E40EC5 /* GratuitousSwiftiOSDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731633101B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift */; settings = {ASSET_TAGS = (); }; };
+		733D02D31BBA4D2800E40EC5 /* GratuitousiOSDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731633101B9A0DE80006AE7B /* GratuitousiOSDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D41BBA4D2800E40EC5 /* GratuitousPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D51BBA4D2800E40EC5 /* GratuitousCurrencyStringImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D61BBA4D2800E40EC5 /* JSBAttributedStringImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F8DD1B8EC5CD009CAB74 /* JSBAttributedStringImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
@@ -122,7 +122,7 @@
 		73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchInfoViewController.swift; sourceTree = "<group>"; };
 		73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "gratuityInfoDemoVideo@2x.mov"; sourceTree = "<group>"; };
 		73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBPurchaseManager.swift; sourceTree = "<group>"; };
-		731633101B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSwiftiOSDataSource.swift; sourceTree = "<group>"; };
+		731633101B9A0DE80006AE7B /* GratuitousiOSDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousiOSDataSource.swift; sourceTree = "<group>"; };
 		7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fuuutuuura-Meeediuuum.ttf"; sourceTree = "<group>"; };
 		732615E61BA9237C0081598F /* SmallModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallModalViewController.swift; sourceTree = "<group>"; };
 		732615EA1BA9289F0081598F /* SplitBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitBillViewController.swift; sourceTree = "<group>"; };
@@ -437,7 +437,7 @@
 			children = (
 				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
 				738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */,
-				731633101B9A0DE80006AE7B /* GratuitousSwiftiOSDataSource.swift */,
+				731633101B9A0DE80006AE7B /* GratuitousiOSDataSource.swift */,
 				73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */,
 				7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */,
 				7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */,
@@ -712,7 +712,7 @@
 				733D02D01BBA4D2800E40EC5 /* GratuitousUIConstant.swift in Sources */,
 				733D02BD1BBA4D0900E40EC5 /* GratuitousTableViewCell.swift in Sources */,
 				733D02CE1BBA4D2800E40EC5 /* GratuitousAnimatedTransitioning.swift in Sources */,
-				733D02D31BBA4D2800E40EC5 /* GratuitousSwiftiOSDataSource.swift in Sources */,
+				733D02D31BBA4D2800E40EC5 /* GratuitousiOSDataSource.swift in Sources */,
 				733D02C91BBA4D1F00E40EC5 /* PurchaseSplitBillViewController.swift in Sources */,
 				733D02CF1BBA4D2800E40EC5 /* GratuitousTransitioningDelegate.swift in Sources */,
 				733D02D41BBA4D2800E40EC5 /* GratuitousPurchaseManager.swift in Sources */,

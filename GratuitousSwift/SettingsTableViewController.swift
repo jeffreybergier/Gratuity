@@ -16,7 +16,8 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     @IBOutlet private weak var headerLabelCurencySymbol: UILabel?
     @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel?
     
-    private weak var dataSource = (UIApplication.sharedApplication().delegate as? GratuitousAppDelegate)?.dataSource
+    private let dataSource = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).dataSource
+    private let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
     private var headerLabelsArray: [UILabel?] = []
     private lazy var swipeToDismiss: UISwipeGestureRecognizer = {
         let swipe = UISwipeGestureRecognizer(target: self, action: "didSwipeToDismiss:")
@@ -75,7 +76,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.dataSource?.delegate = self
+        self.dataSource.delegate = self
         
         if let restoreIndexPath = self.restoreScrollPosition {
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
@@ -204,7 +205,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     }
     
     private func readUserDefaultsAndUpdateSlider() {
-        let onDiskTipPercentage = self.dataSource?.defaultsManager.suggestedTipPercentage !! 0.20
+        let onDiskTipPercentage = self.defaultsManager.suggestedTipPercentage
         self.suggestedTipPercentageLabel?.text = "\(Int(round(onDiskTipPercentage * 100)))%"
         self.suggestedTipPercentageSlider?.setValue(Float(onDiskTipPercentage), animated: false)
     }
@@ -217,7 +218,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     @IBAction func didChangeSuggestedTipPercentageSlider(sender: UISlider) {
         //this is only called when the user lets go of the slider
         let newTipPercentage = sender.value
-        self.dataSource?.defaultsManager.suggestedTipPercentage = Double(newTipPercentage)
+        self.defaultsManager.suggestedTipPercentage = Double(newTipPercentage)
         NSNotificationCenter.defaultCenter().postNotificationName("suggestedTipValueUpdated", object: self)
     }
     
@@ -248,9 +249,8 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     }
     
     private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: CurrencySign? = nil) {
-        if let currencyOverride = currencyOverride,
-            let dataSource = self.dataSource {
-                dataSource.defaultsManager.overrideCurrencySymbol = currencyOverride
+        if let currencyOverride = currencyOverride {
+            self.defaultsManager.overrideCurrencySymbol = currencyOverride
         }
     }
     

@@ -267,7 +267,8 @@ final class GratuitousPropertyListPreferences {
         }
         
         var saveToDiskDataCopy: NSData? {
-            return try? NSPropertyListSerialization.dataWithPropertyList(self.saveToDiskDictionaryCopy, format: .XMLFormat_v1_0, options: 0)
+            let dictionary = self.saveToDiskDictionaryCopy
+            return try? NSPropertyListSerialization.dataWithPropertyList(dictionary, format: .XMLFormat_v1_0, options: 0)
         }
         
         init(dictionary: NSDictionary?, fallback: Properties) {

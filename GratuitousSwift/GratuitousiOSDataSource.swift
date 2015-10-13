@@ -19,10 +19,12 @@ final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, 
     // If a value is requested and the isntance variable has never been set, the value is read from NSUserDefaults.
     
     weak var delegate: GratuitousiOSDataSourceDelegate?
-    let defaultsManager: GratuitousPropertyListPreferences = GratuitousPropertyListPreferences()
     let purchaseManager: GratuitousPurchaseManager?
     let watchConnectivityManager: AnyObject?
+    
     private let currencyFormatter = NSNumberFormatter()
+    private let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager 
+    
     var currencyCode: String {
         switch self.defaultsManager.overrideCurrencySymbol {
         case .Default:
@@ -113,15 +115,20 @@ final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, 
         self.currencyFormatter.locale = NSLocale.currentLocale()
     }
     
-    func currencyFormattedString(number: Int) -> String {
+    func currencyFormattedString(amount: Int) -> String {
+        let currentCurrencySymbol = self.defaultsManager.overrideCurrencySymbol
+        return self.currencyFormattedStringWithCurrencySign(currentCurrencySymbol, amount: amount)
+    }
+    
+    func currencyFormattedStringWithCurrencySign(currencySign: CurrencySign, amount: Int) -> String {
         let currencyString: String
-        switch self.defaultsManager.overrideCurrencySymbol {
+        switch currencySign {
         case .Default:
-            currencyString = self.currencyFormatter.stringFromNumber(number) !! "\(number)"
+            currencyString = self.currencyFormatter.stringFromNumber(amount) !! "\(amount)"
         case .NoSign:
-            currencyString = "\(number)"
+            currencyString = "\(amount)"
         default:
-            currencyString = "\(defaultsManager.overrideCurrencySymbol.string())\(number)"
+            currencyString = "\(defaultsManager.overrideCurrencySymbol.string())\(amount)"
         }
         return currencyString
     }

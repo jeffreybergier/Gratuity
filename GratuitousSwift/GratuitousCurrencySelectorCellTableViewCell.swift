@@ -51,7 +51,7 @@ final class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell, Gratui
     
     private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {
         let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
-        if let defaultsManager = appDelegate?.dataSource.defaultsManager {
+        if let defaultsManager = appDelegate?.defaultsManager {
             if defaultsManager.overrideCurrencySymbol.rawValue == self.tag {
                 self.accessoryType = UITableViewCellAccessoryType.Checkmark
                 if self.animatingBorderColor == false {
