@@ -295,10 +295,19 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         switch segue {
         case .SplitBill:
             if self.defaultsManager.splitBillPurchased == true {
+                // if the preferences say its true trust them.
+                // this is for deferred purchases grace period
                 return true
             } else {
-                self.performSegueWithIdentifier(StoryboardSegues.PurchaseSplitBill.rawValue, sender: self)
-                return false
+                // if not true, check the receipt and try again
+                let purchaseManager = GratuitousPurchaseManager()
+                self.defaultsManager.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
+                if self.defaultsManager.splitBillPurchased == true {
+                    return true
+                } else {
+                    self.performSegueWithIdentifier(StoryboardSegues.PurchaseSplitBill.rawValue, sender: self)
+                    return false
+                }
             }
         default:
             return true
