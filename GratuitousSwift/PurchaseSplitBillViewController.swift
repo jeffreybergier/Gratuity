@@ -98,7 +98,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.purchaseManager.beginObserving()
         self.requestSplitBillProductWithCompletionHandler()
         self.state = .SplitBillProductNotFoundInStoreFront
     }
@@ -147,6 +146,12 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             self.purchaseButton?.setTitle(downloadingLocalizedString, forState: UIControlState.Normal)
             self.descriptionParagraphLabel?.text = ""
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.purchaseManager.beginObserving()
     }
     
     // MARK: Purchasing
@@ -328,7 +333,8 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     // MARK: Handle Going Away
     
-    deinit {
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
         self.purchaseManager.endObserving()
     }
 }
