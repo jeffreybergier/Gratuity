@@ -14,15 +14,12 @@ protocol GratuitousiOSDataSourceDelegate: class {
 }
 
 final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, GratuitousiOSConnectivityManagerDelegate {
-    // This class mostly exists to reduce the number of times the app has to read and write NSUserDefaults.
-    // Reads are saved into Instance Variables in this class
-    // If a value is requested and the isntance variable has never been set, the value is read from NSUserDefaults.
     
     weak var delegate: GratuitousiOSDataSourceDelegate?
     let watchConnectivityManager: AnyObject?
     
     private let currencyFormatter = NSNumberFormatter()
-    private let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager 
+    private let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
     
     var currencyCode: String {
         switch self.defaultsManager.overrideCurrencySymbol {
