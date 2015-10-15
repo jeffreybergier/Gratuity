@@ -17,22 +17,26 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     //initialize the window and the storyboard
     var window: UIWindow?
     
+    private var _defaultsManager: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
+        didSet {
+            self.defaultsDiskManager.writeUserDefaultsToPreferencesFile(_defaultsManager)
+        }
+    }
+    
     var defaultsManager: GratuitousUserDefaults {
         get {
             return _defaultsManager
         }
         set {
             if newValue != _defaultsManager {
-                self.defaultsDiskManager.writeDictionaryToPreferencesPLISTOnDisk(newValue.dictionaryCopyForKeys(.All))
+                _defaultsManager = newValue
             }
-            _defaultsManager = newValue
         }
     }
     
     private lazy var storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
     private lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right, animate: false)
     private lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom, animate: false)
-    private lazy var _defaultsManager: GratuitousUserDefaults = GratuitousUserDefaults(dictionary: self.defaultsDiskManager.dictionaryFromPreferencesPLISTOnDisk())
     
     private let defaultsDiskManager = GratuitousUserDefaultsDiskManager()
     private let watchConnectivityManager: AnyObject? = {
@@ -107,6 +111,10 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return vc
+    }
+    
+    func applicationWillResignActive(application: UIApplication) {
+        self.defaultsDiskManager.writeUserDefaultsToPreferencesFile(self.defaultsManager)
     }
     
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {

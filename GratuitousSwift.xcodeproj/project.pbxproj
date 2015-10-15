@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1042DD9DC4E2CCC9155EA729 /* Pods_Gratuity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3770A3E29597CE25FE9233F2 /* Pods_Gratuity.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1749FBD6340FB1C14F683A87 /* Pods_GratuityWatch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FB94AF573C62CCB98EDF8C /* Pods_GratuityWatch_Extension.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		73048CF41BBCEBC400D8EAA6 /* JSBPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */; settings = {ASSET_TAGS = (); }; };
 		732CFE6A1BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */; settings = {ASSET_TAGS = (); }; };
 		732CFE6C1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732CFE6B1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift */; settings = {ASSET_TAGS = (); }; };
@@ -47,7 +48,6 @@
 		733D02E41BBA505600E40EC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */; };
 		735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735DCADB1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; settings = {ASSET_TAGS = (); }; };
-		736262621BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F51BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */; settings = {ASSET_TAGS = (); }; };
@@ -67,6 +67,9 @@
 		73AEA6ED1BBB0732004B16DE /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6F01BBB0877004B16DE /* Fuuutuuura-Meeediuuum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */; settings = {ASSET_TAGS = (); }; };
 		73AEA6F11BBB087A004B16DE /* Fuuutuuura-Meeediuuum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */; settings = {ASSET_TAGS = (); }; };
+		73BA966A1BD0614200CFCEC4 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; settings = {ASSET_TAGS = (); }; };
+		73BA966D1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BA966C1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift */; settings = {ASSET_TAGS = (); }; };
+		73BA966E1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BA966C1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift */; settings = {ASSET_TAGS = (); }; };
 		73F44C5A1BCF444700456E8A /* GratuitousNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C591BCF444700456E8A /* GratuitousNumberFormatter.swift */; settings = {ASSET_TAGS = (); }; };
 		73F44C5C1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */; settings = {ASSET_TAGS = (); }; };
 		73F44C5D1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */; settings = {ASSET_TAGS = (); }; };
@@ -118,7 +121,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1CEF29F22142D1BEB8C26155 /* Pods-GratuityWatch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratuityWatch Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		3770A3E29597CE25FE9233F2 /* Pods_Gratuity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gratuity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		54FB94AF573C62CCB98EDF8C /* Pods_GratuityWatch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GratuityWatch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5624F62AF87021893A8B73B9 /* Pods-Gratuity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gratuity.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity.release.xcconfig"; sourceTree = "<group>"; };
 		59B24410EC519253B452447B /* Pods-Gratuity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gratuity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity.debug.xcconfig"; sourceTree = "<group>"; };
 		73011BDF1AD04F90001F6D71 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
@@ -174,6 +179,7 @@
 		73AEA6EE1BBB07E5004B16DE /* GratuityWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = GratuityWatch.entitlements; path = ../GratuityWatch.entitlements; sourceTree = "<group>"; };
 		73AEA6EF1BBB07F1004B16DE /* GratuityWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GratuityWatch Extension.entitlements"; path = "../GratuityWatch Extension.entitlements"; sourceTree = "<group>"; };
 		73B9BFF019FC629100700608 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		73BA966C1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSBDictionaryPLISTPreferenceManager.swift; path = GratuitousSwift/JSBDictionaryPLISTPreferenceManager.swift; sourceTree = SOURCE_ROOT; };
 		73BE874D1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousRoundedHeaderTableView.swift; sourceTree = "<group>"; };
 		73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitBillTableViewCell.swift; sourceTree = "<group>"; };
 		73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchConnectivityManager.swift; sourceTree = "<group>"; };
@@ -197,6 +203,7 @@
 		73FF9EA11BBE4BE400F9278C /* RMAppReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAppReceipt.m; sourceTree = "<group>"; };
 		73FF9EA31BBE4ED000F9278C /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStore.h; sourceTree = "<group>"; };
 		73FF9EA41BBE4ED000F9278C /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStore.m; sourceTree = "<group>"; };
+		B23D76F07341B402BD7823F1 /* Pods-GratuityWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratuityWatch Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +220,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1749FBD6340FB1C14F683A87 /* Pods_GratuityWatch_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +383,7 @@
 				7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */,
 				73A18D5A1A2A9525002180DD /* WatchKit.framework */,
 				3770A3E29597CE25FE9233F2 /* Pods_Gratuity.framework */,
+				54FB94AF573C62CCB98EDF8C /* Pods_GratuityWatch_Extension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -435,6 +444,7 @@
 				73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */,
 				73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */,
 				736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */,
+				73BA966C1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift */,
 			);
 			name = "Common Files";
 			path = "GratuitousSwift Watch Watch App";
@@ -477,6 +487,8 @@
 			children = (
 				59B24410EC519253B452447B /* Pods-Gratuity.debug.xcconfig */,
 				5624F62AF87021893A8B73B9 /* Pods-Gratuity.release.xcconfig */,
+				1CEF29F22142D1BEB8C26155 /* Pods-GratuityWatch Extension.debug.xcconfig */,
+				B23D76F07341B402BD7823F1 /* Pods-GratuityWatch Extension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -528,9 +540,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73AEA6D91BBB05EC004B16DE /* Build configuration list for PBXNativeTarget "GratuityWatch Extension" */;
 			buildPhases = (
+				800884E44345ECBA58C6D442 /* Check Pods Manifest.lock */,
 				73AEA6C21BBB05EB004B16DE /* Sources */,
 				73AEA6C31BBB05EB004B16DE /* Frameworks */,
 				73AEA6C41BBB05EB004B16DE /* Resources */,
+				D25EEDD411F2D7F13ECC1675 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -684,6 +698,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		800884E44345ECBA58C6D442 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		92268F9152C864934AFB8DA8 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -697,6 +726,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D25EEDD411F2D7F13ECC1675 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -721,6 +765,7 @@
 				733D02C21BBA4D1300E40EC5 /* GratuitousRoundedHeaderTableView.swift in Sources */,
 				733D02D11BBA4D2800E40EC5 /* GratuitousUIColor.swift in Sources */,
 				733D02D01BBA4D2800E40EC5 /* GratuitousUIConstant.swift in Sources */,
+				73BA966D1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift in Sources */,
 				733D02BD1BBA4D0900E40EC5 /* GratuitousTableViewCell.swift in Sources */,
 				733D02CE1BBA4D2800E40EC5 /* GratuitousAnimatedTransitioning.swift in Sources */,
 				733D02C91BBA4D1F00E40EC5 /* PurchaseSplitBillViewController.swift in Sources */,
@@ -757,10 +802,11 @@
 				73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */,
 				73F44C5D1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */,
 				732CFE6C1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift in Sources */,
-				736262621BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */,
+				73BA966A1BD0614200CFCEC4 /* GratuitousUserDefaultsDiskManager.swift in Sources */,
 				73AEA6EC1BBB06EE004B16DE /* GratuitousEnums.swift in Sources */,
 				73AEA6E11BBB06D0004B16DE /* SettingsInterfaceController.swift in Sources */,
 				73AEA6E01BBB06D0004B16DE /* SplitTotalInterfaceController.swift in Sources */,
+				73BA966E1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift in Sources */,
 				73AEA6ED1BBB0732004B16DE /* GratuitousUIColor.swift in Sources */,
 				73AEA6E21BBB06D0004B16DE /* GratuitousWatchDataSource.swift in Sources */,
 			);
@@ -974,6 +1020,7 @@
 		};
 		73AEA6D71BBB05EB004B16DE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CEF29F22142D1BEB8C26155 /* Pods-GratuityWatch Extension.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "GratuityWatch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -993,6 +1040,7 @@
 		};
 		73AEA6D81BBB05EB004B16DE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B23D76F07341B402BD7823F1 /* Pods-GratuityWatch Extension.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "GratuityWatch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";

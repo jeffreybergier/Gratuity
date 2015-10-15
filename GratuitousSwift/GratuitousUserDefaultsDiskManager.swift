@@ -7,65 +7,34 @@
 //
 
 import Foundation
+import XCGLogger
 
 class GratuitousUserDefaultsDiskManager {
     
-    private let fileManager = NSFileManager.defaultManager()
+    private let manager = JSBDictionaryPLISTPreferenceManager()
+    private let log = XCGLogger.defaultInstance()
     
-    func PLISTDataFromDictionary(dictionary: [String : AnyObject]?) -> NSData? {
-        if let dictionary = dictionary {
-            return try? NSPropertyListSerialization.dataWithPropertyList(dictionary, format: .XMLFormat_v1_0, options: 0)
-        }
-        return .None
-    }
-    
-    func writeDictionaryToPreferencesPLISTOnDisk(dictionary: [String : AnyObject]) -> Bool {
-        let preferencesURL = GratuitousUserDefaultsDiskManager.preferencesURL
-        let plistURL = GratuitousUserDefaultsDiskManager.locationOnDisk
-        
+    func writeUserDefaultsToPreferencesFile(defaults: GratuitousUserDefaults) {
         do {
-            if let plistData = self.PLISTDataFromDictionary(dictionary) {
-                if fileManager.fileExistsAtPath(preferencesURL.path!) == false {
-                    try fileManager.createDirectoryAtPath(preferencesURL.path!, withIntermediateDirectories: true, attributes: .None)
-                }
-                try plistData.writeToURL(plistURL, options: .AtomicWrite)
-                print("GratuitousPropertyListPreferences: Successfully Wrote to disk: \(plistURL.path!)")
-                return true
-            } else {
-                return false
-            }
+            try self.manager.writePreferencesDictionary(defaults.dictionaryCopyForKeys(.All), toLocation: .PreferencesPLISTFileWithinPreferencesURL)
         } catch {
-            print("GratuitousPropertyListPreferences: Failed to write PLIST to disk with error: \(error)")
-            return false
+            log.error("Failed to write to disk with error: \(error)")
         }
     }
     
-    func dictionaryFromPreferencesPLISTOnDisk() -> NSDictionary? {
-        let PLISTURL = GratuitousUserDefaultsDiskManager.locationOnDisk
-        
-        let PLISTDictionary: NSDictionary?
+    func dictionaryFromPreferencesFile() -> NSDictionary? {
         do {
-            let PLISTData = try NSData(contentsOfURL: PLISTURL, options: .DataReadingMappedIfSafe)
-            try PLISTDictionary = NSPropertyListSerialization.propertyListWithData(PLISTData, options: .Immutable, format: nil) as? NSDictionary
+            return try self.manager.dictionaryByReadingPLISTFromDiskLocation(.PreferencesPLISTFileWithinPreferencesURL)
         } catch {
-            NSLog("GratuitousPropertyListPreferences: Failed to read existing preferences from disk: \(error)")
-            PLISTDictionary = .None
+            log.error("Failed to read dictionary from disk: \(error)")
+            return .None
         }
-        return PLISTDictionary
     }
-    
-    class var preferencesURL: NSURL {
-        let fileManager = NSFileManager.defaultManager()
-        let libraryURL = fileManager.URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first!
-        let preferencesURL = libraryURL.URLByAppendingPathComponent("Preferences")
-        return preferencesURL
-    }
-    
-    class var locationOnDisk: NSURL {
-        return self.preferencesURL.URLByAppendingPathComponent(Keys.propertyListFileName)
-    }
-    
-    struct Keys {
-        static let propertyListFileName = "com.saturdayapps.gratuity.plist"
+}
+
+extension GratuitousUserDefaults {
+    static func defaultsFromDisk() -> GratuitousUserDefaults {
+        let manager = GratuitousUserDefaultsDiskManager()
+        return GratuitousUserDefaults(dictionary: manager.dictionaryFromPreferencesFile())
     }
 }
