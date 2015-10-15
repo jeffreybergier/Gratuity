@@ -17,48 +17,39 @@ struct GratuitousUserDefaults {
     var suggestedTipPercentage: Double
     var freshWatchAppInstall: Bool
     var splitBillPurchased: Bool
-    
-    var contextDictionaryCopy: [String : AnyObject] {
-        return [
-            Keys.billIndexPathRow : NSNumber(integer: self.billIndexPathRow),
-            Keys.tipIndexPathRow : NSNumber(integer: self.tipIndexPathRow),
-            Keys.overrideCurrencySymbol : NSNumber(integer: self.overrideCurrencySymbol.rawValue),
-            Keys.suggestedTipPercentage : NSNumber(double: self.suggestedTipPercentage),
-            Keys.splitBillPurchased : NSNumber(bool: self.splitBillPurchased)
-        ]
+}
+
+extension GratuitousUserDefaults: Equatable { }
+
+func ==(lhs: GratuitousUserDefaults, rhs: GratuitousUserDefaults) -> Bool {
+    return lhs.dictionaryCopyForKeys(.All) as NSDictionary == rhs.dictionaryCopyForKeys(.All) as NSDictionary
+}
+
+extension GratuitousUserDefaults {
+    enum DictionaryCopyKeys {
+        case All, WatchOnly
     }
     
-    var saveToDiskDictionaryCopy: [String : AnyObject] {
-        return [
-            Keys.billIndexPathRow : NSNumber(integer: self.billIndexPathRow),
-            Keys.tipIndexPathRow : NSNumber(integer: self.tipIndexPathRow),
-            Keys.overrideCurrencySymbol : NSNumber(integer: self.overrideCurrencySymbol.rawValue),
-            Keys.suggestedTipPercentage : NSNumber(double: self.suggestedTipPercentage),
-            Keys.appVersionString : self.appVersionString,
-            Keys.freshWatchAppInstall : NSNumber(bool: self.freshWatchAppInstall),
-            Keys.splitBillPurchased : NSNumber(bool: self.splitBillPurchased)
-        ]
-    }
-    
-    var saveToDiskDataCopy: NSData? {
-        let dictionary = self.saveToDiskDictionaryCopy
-        return try? NSPropertyListSerialization.dataWithPropertyList(dictionary, format: .XMLFormat_v1_0, options: 0)
-    }
-    
-    static func newFromDisk() -> GratuitousUserDefaults {
-        let plistURL = GratuitousUserDefaults.locationOnDisk
-        
-        let plistDictionary: NSDictionary?
-        do {
-            let plistData = try NSData(contentsOfURL: plistURL, options: .DataReadingMappedIfSafe)
-            try plistDictionary = NSPropertyListSerialization.propertyListWithData(plistData, options: .Immutable, format: nil) as? NSDictionary
-        } catch {
-            NSLog("GratuitousPropertyListPreferences: Failed to read existing preferences from disk: \(error)")
-            plistDictionary = .None
+    func dictionaryCopyForKeys(keys: DictionaryCopyKeys) -> [String : AnyObject] {
+        var dictionary = [String : AnyObject]()
+        switch keys {
+        case .All:
+            dictionary[Keys.appVersionString] = self.appVersionString
+            dictionary[Keys.freshWatchAppInstall] = NSNumber(bool: self.freshWatchAppInstall)
+            fallthrough
+        case .WatchOnly:
+            dictionary[Keys.billIndexPathRow] = NSNumber(integer: self.billIndexPathRow)
+            dictionary[Keys.tipIndexPathRow] = NSNumber(integer: self.tipIndexPathRow)
+            dictionary[Keys.overrideCurrencySymbol] = NSNumber(integer: self.overrideCurrencySymbol.rawValue)
+            dictionary[Keys.suggestedTipPercentage] = NSNumber(double: self.suggestedTipPercentage)
+            dictionary[Keys.splitBillPurchased] = NSNumber(bool: self.splitBillPurchased)
         }
-        return GratuitousUserDefaults(dictionary: plistDictionary)
+        return dictionary
     }
-    
+}
+
+extension GratuitousUserDefaults {
+
     init(dictionary: NSDictionary?, fallback: GratuitousUserDefaults) {
         // version 1.0 and 1.0.1 keys
         if let billIndexPathRow = dictionary?[Keys.billIndexPathRow] as? NSNumber {
@@ -150,16 +141,12 @@ struct GratuitousUserDefaults {
         // ignored from disk version. Always set to false on load
         self.currencySymbolsNeeded = false
     }
-    
+}
+
+extension GratuitousUserDefaults {
     struct Keys {
-        #if LOCAL // Local = Not an App Store Bundle Identifier
-        static let localSuiteName = "group.com.saturdayapps.Gratuity.local.storageGroup"
-        #else
         static let localSuiteName = "group.com.saturdayapps.Gratuity.storageGroup"
-        #endif
-        
         static let CFBundleShortVersionString = "CFBundleShortVersionString"
-        static let propertyListFileName = "com.saturdayapps.gratuity.plist"
         
         // version 1.0 and 1.0.1 keys
         static let billIndexPathRow = "billIndexPathRow"
@@ -177,16 +164,5 @@ struct GratuitousUserDefaults {
         static let currencySymbolsNeeded = "currencySymbolsNeeded"
         static let freshWatchAppInstall = "freshWatchAppInstall"
         static let splitBillPurchased = "splitBillPurchased"
-    }
-    
-    static var preferencesURL: NSURL {
-        let fileManager = NSFileManager.defaultManager()
-        let libraryURL = fileManager.URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first!
-        let preferencesURL = libraryURL.URLByAppendingPathComponent("Preferences")
-        return preferencesURL
-    }
-    
-    static var locationOnDisk: NSURL {
-        return GratuitousUserDefaults.preferencesURL.URLByAppendingPathComponent(Keys.propertyListFileName)
     }
 }

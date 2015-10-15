@@ -43,10 +43,11 @@
 		733D02D81BBA4D4000E40EC5 /* settingsIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 737E5DE61A1AFD1C00F0A8C7 /* settingsIcon.pdf */; settings = {ASSET_TAGS = (); }; };
 		733D02D91BBA4D4700E40EC5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7382510F19E60EED00CD2B28 /* LaunchScreen.xib */; settings = {ASSET_TAGS = (); }; };
 		733D02DD1BBA4D6D00E40EC5 /* UIImage+PDFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 73556E641A19711F0079A37D /* UIImage+PDFUtility.m */; settings = {ASSET_TAGS = (); }; };
-		733D02DF1BBA4D8600E40EC5 /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02E01BBA4D8600E40EC5 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02E41BBA505600E40EC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */; };
 		735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735DCADB1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
+		736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; settings = {ASSET_TAGS = (); }; };
+		736262621BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F51BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */; settings = {ASSET_TAGS = (); }; };
@@ -141,6 +142,7 @@
 		73556E641A19711F0079A37D /* UIImage+PDFUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PDFUtility.m"; sourceTree = "<group>"; };
 		735DCADB1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTotalPurchaseInterfaceController.swift; sourceTree = "<group>"; };
 		73621A951BAE563C00593FE4 /* GratuitousAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousUserDefaultsDiskManager.swift; path = ../GratuitousSwift/GratuitousUserDefaultsDiskManager.swift; sourceTree = "<group>"; };
 		736937BD19EF84AA003EEC68 /* GratuitousGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousGradientView.swift; sourceTree = "<group>"; };
 		7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPurchaseManager.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 				73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */,
 				73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */,
 				73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */,
+				736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */,
 			);
 			name = "Common Files";
 			path = "GratuitousSwift Watch Watch App";
@@ -711,6 +714,7 @@
 				73048CF41BBCEBC400D8EAA6 /* JSBPurchaseManager.swift in Sources */,
 				733D02C71BBA4D1F00E40EC5 /* SplitBillViewController.swift in Sources */,
 				733D02CA1BBA4D1F00E40EC5 /* WatchInfoViewController.swift in Sources */,
+				736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */,
 				733D02C01BBA4D1300E40EC5 /* SettingsTableViewController.swift in Sources */,
 				73F44C5C1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */,
 				733D02C11BBA4D1300E40EC5 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
@@ -734,7 +738,6 @@
 				733D02CC1BBA4D2800E40EC5 /* GratuitousRightPresentationController.swift in Sources */,
 				733D02C61BBA4D1900E40EC5 /* SmallModalScrollViewController.swift in Sources */,
 				733D02BF1BBA4D0900E40EC5 /* GratuitousGradientView.swift in Sources */,
-				733D02DF1BBA4D8600E40EC5 /* GratuitousPropertyListPreferences.swift in Sources */,
 				733D02D21BBA4D2800E40EC5 /* GratuitousiOSConnectivityManager.swift in Sources */,
 				733D02C41BBA4D1900E40EC5 /* SmallModalViewController.swift in Sources */,
 				733D02C81BBA4D1F00E40EC5 /* SplitBillTableViewCell.swift in Sources */,
@@ -754,6 +757,7 @@
 				73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */,
 				73F44C5D1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */,
 				732CFE6C1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift in Sources */,
+				736262621BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */,
 				73AEA6EC1BBB06EE004B16DE /* GratuitousEnums.swift in Sources */,
 				73AEA6E11BBB06D0004B16DE /* SettingsInterfaceController.swift in Sources */,
 				73AEA6E01BBB06D0004B16DE /* SplitTotalInterfaceController.swift in Sources */,

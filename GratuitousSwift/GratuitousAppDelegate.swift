@@ -17,16 +17,24 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     //initialize the window and the storyboard
     var window: UIWindow?
     
-    var defaultsManager = GratuitousUserDefaults.newFromDisk() {
-        didSet {
-            NSLog("AppDelegate: New Preferences Set")
+    var defaultsManager: GratuitousUserDefaults {
+        get {
+            return _defaultsManager
+        }
+        set {
+            if newValue != _defaultsManager {
+                self.defaultsDiskManager.writeDictionaryToPreferencesPLISTOnDisk(newValue.dictionaryCopyForKeys(.All))
+            }
+            _defaultsManager = newValue
         }
     }
     
     private lazy var storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
     private lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right, animate: false)
     private lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom, animate: false)
+    private lazy var _defaultsManager: GratuitousUserDefaults = GratuitousUserDefaults(dictionary: self.defaultsDiskManager.dictionaryFromPreferencesPLISTOnDisk())
     
+    private let defaultsDiskManager = GratuitousUserDefaultsDiskManager()
     private let watchConnectivityManager: AnyObject? = {
         if #available(iOS 9, *) {
             return GratuitousiOSConnectivityManager()
@@ -45,7 +53,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         
         if #available(iOS 9, *) {
-            self.transferBulkCurrencySymbolsIfNeeded()
+            //self.transferBulkCurrencySymbolsIfNeeded()
         }
         
         let purchaseManager = GratuitousPurchaseManager()
