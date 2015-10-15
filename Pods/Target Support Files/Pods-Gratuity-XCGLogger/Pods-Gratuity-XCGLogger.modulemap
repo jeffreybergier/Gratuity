@@ -1,5 +1,5 @@
 framework module XCGLogger {
-  umbrella header "XCGLogger-umbrella.h"
+  umbrella header "Pods-Gratuity-XCGLogger-umbrella.h"
 
   export *
   module * { export * }
