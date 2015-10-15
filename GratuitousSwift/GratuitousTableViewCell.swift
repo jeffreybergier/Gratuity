@@ -13,7 +13,10 @@ final class GratuitousTableViewCell: UITableViewCell {
     @IBOutlet weak private var dollarTextLabel: UILabel?
     private var labelTextAttributes = [String(): NSObject()]
     private let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
-    weak var dataSource: GratuitousiOSDataSource?
+    private let currencyFormatter = NSNumberFormatter(style: .RespondsToLocaleChanges)
+    private var currentCurrencySign: CurrencySign {
+        return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager.overrideCurrencySymbol
+    }
     var textSizeAdjustment: CGFloat = 1.0 {
         didSet {
             if (self.labelTextAttributes["NSFont"] != nil) {
@@ -38,7 +41,7 @@ final class GratuitousTableViewCell: UITableViewCell {
     private func didSetBillAmount() {
         let currencyFormattedString: String
         if self.billAmount != 0 {
-            currencyFormattedString = self.dataSource?.currencyFormattedString(self.billAmount) !! ""
+            currencyFormattedString = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: self.billAmount)
         } else {
             currencyFormattedString = ""
         }

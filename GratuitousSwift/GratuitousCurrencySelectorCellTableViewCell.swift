@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-final class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell, GratuitousiOSDataSourceDelegate {
+final class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     
     weak var instanceTextLabel: UILabel? {
         didSet {

@@ -17,12 +17,23 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     //initialize the window and the storyboard
     var window: UIWindow?
     
-    lazy var dataSource = GratuitousiOSDataSource(use: .AppLifeTime)
-    lazy var defaultsManager: GratuitousPropertyListPreferences = GratuitousPropertyListPreferences()
+    var defaultsManager = GratuitousUserDefaults.newFromDisk() {
+        didSet {
+            NSLog("AppDelegate: New Preferences Set")
+        }
+    }
     
     private lazy var storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
     private lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right, animate: false)
     private lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom, animate: false)
+    
+    private let watchConnectivityManager: AnyObject? = {
+        if #available(iOS 9, *) {
+            return GratuitousiOSConnectivityManager()
+        } else {
+            return .None
+        }
+    }()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch
@@ -126,7 +137,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     private func transferBulkCurrencySymbolsIfNeeded() {
         //on first run make a last ditch effort to send a lot of currency symbols to the watch
         //this may prevent waiting on the watch later
-        if let watchConnectivityManager = self.dataSource.watchConnectivityManager as? GratuitousiOSConnectivityManager,
+        if let watchConnectivityManager = self.watchConnectivityManager as? GratuitousiOSConnectivityManager,
             let session = watchConnectivityManager.session
             where session.paired == true && session.watchAppInstalled == true {
                 if self.defaultsManager.freshWatchAppInstall == true {

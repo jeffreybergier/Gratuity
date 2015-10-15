@@ -28,7 +28,14 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBOutlet private weak var restoreButtonSpinner: UIActivityIndicatorView?
     
     private let purchaseManager = GratuitousPurchaseManager()
-    private let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
+    private var defaultsManager: GratuitousUserDefaults {
+        get {
+            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
+        }
+        set {
+            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager = newValue
+        }
+    }
     
     enum State {
         case Normal

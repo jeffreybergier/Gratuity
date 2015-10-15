@@ -14,12 +14,9 @@ final class SplitBillTableViewCell: UITableViewCell {
     @IBOutlet private weak var secondaryTextLabel: UILabel?
     @IBOutlet private weak var primaryImageView: UIImageView?
     
-    private var dataSource: GratuitousiOSDataSource {
-        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate {
-            return appDelegate.dataSource
-        } else {
-            fatalError("SplitBillTableViewCell: Data Source was NIL.")
-        }
+    private let currencyFormatter = NSNumberFormatter(style: .RespondsToLocaleChanges)
+    private var currentCurrencySign: CurrencySign {
+        return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager.overrideCurrencySymbol
     }
     
     var identity: Identity? {
@@ -27,27 +24,27 @@ final class SplitBillTableViewCell: UITableViewCell {
             if let identity = self.identity {
                 switch identity {
                 case .One(let value):
-                    self.primaryLabel?.text = self.dataSource.currencyFormattedString(value)
+                    self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = ""
                     self.primaryImageView?.image = IdentityImage.one
                 case .Two(let value):
-                    self.primaryLabel?.text = self.dataSource.currencyFormattedString(value)
+                    self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = ""
                     self.primaryImageView?.image = IdentityImage.two
                 case .Three(let value):
-                    self.primaryLabel?.text = self.dataSource.currencyFormattedString(value)
+                    self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = ""
                     self.primaryImageView?.image = IdentityImage.three
                 case .Four(let value):
-                    self.primaryLabel?.text = self.dataSource.currencyFormattedString(value)
+                    self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = ""
                     self.primaryImageView?.image = IdentityImage.four
                 case .Five(let value):
-                    self.primaryLabel?.text = self.dataSource.currencyFormattedString(value)
+                    self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = ""
                     self.primaryImageView?.image = IdentityImage.five
                 case .Higher(let value, let divisor):
-                    self.primaryLabel?.text = self.dataSource.currencyFormattedString(value)
+                    self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = "\(divisor)"
                     self.primaryImageView?.image = IdentityImage.one
                 }

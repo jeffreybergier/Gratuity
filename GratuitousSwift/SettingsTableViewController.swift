@@ -9,21 +9,27 @@
 import UIKit
 import MessageUI
 
-final class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate, GratuitousiOSDataSourceDelegate {
+final class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     // MARK: Handle TableViewController
     @IBOutlet private weak var headerLabelTipPercentage: UILabel?
     @IBOutlet private weak var headerLabelCurencySymbol: UILabel?
     @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel?
-    
-    private let dataSource = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).dataSource
-    private let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
+
     private var headerLabelsArray: [UILabel?] = []
     private lazy var swipeToDismiss: UISwipeGestureRecognizer = {
         let swipe = UISwipeGestureRecognizer(target: self, action: "didSwipeToDismiss:")
         swipe.direction = UISwipeGestureRecognizerDirection.Right
         return swipe
-        }()
+    }()
+    private var defaultsManager: GratuitousUserDefaults {
+        get {
+            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
+        }
+        set {
+            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager = newValue
+        }
+    }
     
     override var preferredContentSize: CGSize {
         get {
@@ -75,9 +81,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.dataSource.delegate = self
-        
+                
         if let restoreIndexPath = self.restoreScrollPosition {
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {

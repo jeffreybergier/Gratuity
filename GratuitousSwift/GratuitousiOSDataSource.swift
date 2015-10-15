@@ -9,17 +9,10 @@
 import UIKit
 import StoreKit
 
-protocol GratuitousiOSDataSourceDelegate: class {
-    func setInterfaceRefreshNeeded()
-}
-
-final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, GratuitousiOSConnectivityManagerDelegate {
+final class GratuitousiOSDataSource {
     
-    weak var delegate: GratuitousiOSDataSourceDelegate?
-    let watchConnectivityManager: AnyObject?
     
     private let currencyFormatter = NSNumberFormatter()
-    private let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
     
     var currencyCode: String {
         switch self.defaultsManager.overrideCurrencySymbol {
@@ -43,16 +36,7 @@ final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, 
     }
     
     init(use: Use) {
-        switch use {
-        case .Temporary:
-            self.watchConnectivityManager = .None
-        case .AppLifeTime:
-            if #available(iOS 9, *) {
-                self.watchConnectivityManager = GratuitousiOSConnectivityManager()
-            } else {
-                self.watchConnectivityManager = .None
-            }
-        }
+
         
         self.currencyFormatter.locale = NSLocale.currentLocale()
         self.currencyFormatter.maximumFractionDigits = 0
@@ -68,9 +52,6 @@ final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, 
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: .None)
             
             self.defaultsManager.delegate = self
-            if #available(iOS 9, *) {
-                (self.watchConnectivityManager as? GratuitousiOSConnectivityManager)?.delegate = self
-            }
         }
     }
 
@@ -90,9 +71,6 @@ final class GratuitousiOSDataSource: GratuitousPropertyListPreferencesDelegate, 
     }
     
     func setDataChanged() {
-        if #available(iOS 9, *) {
-            (self.watchConnectivityManager as? GratuitousiOSConnectivityManager)?.updateWatchApplicationContext(self.defaultsManager.model.contextDictionaryCopy)
-        }
     }
     
     func dataNeeded(dataNeeded: GratuitousPropertyListPreferences.DataNeeded) {

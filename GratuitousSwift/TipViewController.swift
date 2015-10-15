@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GratuitousiOSDataSourceDelegate, CustomAnimatedTransitionable {
+final class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CustomAnimatedTransitionable {
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel?
     @IBOutlet private weak var totalAmountTextLabel: UILabel?
@@ -52,11 +52,16 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     private var totalAmountTextLabelAttributes = [String : NSObject]()
     private var tipPercentageTextLabelAttributes = [String : NSObject]()
     private var viewDidAppearOnce = false
+    private var defaultsManager: GratuitousUserDefaults {
+        get {
+            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
+        }
+        set {
+            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager = newValue
+        }
+    }
     
-    private let dataSource = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).dataSource
-    private let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
-
-    
+    private let currencyFormatter = NSNumberFormatter(style: .RespondsToLocaleChanges)
     private let tableViewCellClass = GratuitousTableViewCell.description().componentsSeparatedByString(".").last !! "GratuitousTableViewCell"
     private let billTableViewCellString: String = {
         let className = GratuitousTableViewCell.description().componentsSeparatedByString(".").last
@@ -84,7 +89,6 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        self.dataSource.delegate = self
         self.resetInterfaceIdleTimer()
         
         #if DEBUG
@@ -183,12 +187,6 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         self.prepareTipPercentageTextLabel()
         
         
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.dataSource.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -376,10 +374,11 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     private func updateLargeTextLabels(billAmount billAmount: Int, tipAmount: Int) {
         self.resetInterfaceIdleTimer()
         if billAmount > 0 { //this protects from divide by 0 crashes
+            let currencySign = self.defaultsManager.overrideCurrencySymbol
             let totalAmount = billAmount + tipAmount
             let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
             
-            let currencyFormattedString = self.dataSource.currencyFormattedString(totalAmount)
+            let currencyFormattedString = self.currencyFormatter.currencyFormattedStringWithCurrencySign(currencySign, amount: totalAmount)
             let totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
             let tipPercentageAttributedString = NSAttributedString(string: "\(tipPercentage)%", attributes: self.tipPercentageTextLabelAttributes)
             
@@ -585,9 +584,6 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             }
             
             cell?.textSizeAdjustment = self.lowerTextSizeAdjustment
-            if cell?.dataSource == nil {
-                cell?.dataSource = self.dataSource
-            }
             
             // Need to set the billamount after setting the currency formatter, or else there are bugs.
             switch tableTagEnum {
