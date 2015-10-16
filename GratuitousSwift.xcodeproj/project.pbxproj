@@ -48,6 +48,8 @@
 		733D02E41BBA505600E40EC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */; };
 		735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735DCADB1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; settings = {ASSET_TAGS = (); }; };
+		738C98B11BD19FC000D14F20 /* NSTimer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */; settings = {ASSET_TAGS = (); }; };
+		738C98B21BD19FC000D14F20 /* NSTimer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F51BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */; settings = {ASSET_TAGS = (); }; };
@@ -168,6 +170,7 @@
 		7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GratuitousTableViewCell.xib; sourceTree = "<group>"; };
 		738484D41B992E1B0044C14C /* fallbackPickerImages.data */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fallbackPickerImages.data; sourceTree = "<group>"; };
 		738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousiOSConnectivityManager.swift; path = GratuitousSwift/GratuitousiOSConnectivityManager.swift; sourceTree = SOURCE_ROOT; };
+		738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimer+Closure.swift"; sourceTree = "<group>"; };
 		7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyStringImageGenerator.swift; sourceTree = "<group>"; };
 		73A0B5671A8FC56A00D17943 /* SplitTotalInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTotalInterfaceController.swift; sourceTree = "<group>"; };
 		73A18D5A1A2A9525002180DD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
@@ -490,6 +493,7 @@
 				73FF9EA01BBE4BDC00F9278C /* RMAppReceipt.h */,
 				73FF9EA11BBE4BE400F9278C /* RMAppReceipt.m */,
 				73EC11641BC049A400716CA8 /* AppleIncRootCertificate.cer */,
+				738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */,
 			);
 			name = "Objective-C";
 			sourceTree = "<group>";
@@ -803,6 +807,7 @@
 				733D02C41BBA4D1900E40EC5 /* SmallModalViewController.swift in Sources */,
 				733D02C81BBA4D1F00E40EC5 /* SplitBillTableViewCell.swift in Sources */,
 				73FF9E9F1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m in Sources */,
+				738C98B11BD19FC000D14F20 /* NSTimer+Closure.swift in Sources */,
 				73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -823,6 +828,7 @@
 				73AEA6E11BBB06D0004B16DE /* SettingsInterfaceController.swift in Sources */,
 				73AEA6E01BBB06D0004B16DE /* SplitTotalInterfaceController.swift in Sources */,
 				73BA966E1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift in Sources */,
+				738C98B21BD19FC000D14F20 /* NSTimer+Closure.swift in Sources */,
 				73AEA6ED1BBB0732004B16DE /* GratuitousUIColor.swift in Sources */,
 				73AEA6E21BBB06D0004B16DE /* GratuitousWatchDataSource.swift in Sources */,
 			);

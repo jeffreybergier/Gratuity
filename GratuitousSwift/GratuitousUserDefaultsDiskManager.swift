@@ -14,6 +14,18 @@ class GratuitousUserDefaultsDiskManager {
     private let manager = JSBDictionaryPLISTPreferenceManager()
     private let log = XCGLogger.defaultInstance()
     
+    private var writeTimerAlreadySet = false
+    
+    func writeUserDefaultsToPreferencesFileWithRateLimit(defaults: GratuitousUserDefaults) {
+        if self.writeTimerAlreadySet == false {
+            self.writeTimerAlreadySet = true
+            NSTimer.scheduleWithDelay(3.0) { timer in
+                self.writeTimerAlreadySet = false
+                self.writeUserDefaultsToPreferencesFile(defaults)
+            }
+        }
+    }
+    
     func writeUserDefaultsToPreferencesFile(defaults: GratuitousUserDefaults) {
         do {
             try self.manager.writePreferencesDictionary(defaults.dictionaryCopyForKeys(.All), toLocation: .PreferencesPLISTFileWithinPreferencesURL)

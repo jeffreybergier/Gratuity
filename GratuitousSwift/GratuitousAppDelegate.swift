@@ -21,7 +21,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     var preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
         didSet {
             if oldValue != self.preferences {
-                self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.preferences)
+                self.preferencesDiskManager.writeUserDefaultsToPreferencesFileWithRateLimit(self.preferences)
                 self.preferencesNotificationManager.postNotificationsForChangedDefaults(old: oldValue, new: self.preferences)
             }
         }
