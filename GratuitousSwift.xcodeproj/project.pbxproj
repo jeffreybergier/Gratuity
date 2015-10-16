@@ -71,6 +71,9 @@
 		73BA966D1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BA966C1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift */; settings = {ASSET_TAGS = (); }; };
 		73BA966E1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BA966C1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift */; settings = {ASSET_TAGS = (); }; };
 		73C8BB541BD0879A00D427CB /* GratuitousDefaultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */; settings = {ASSET_TAGS = (); }; };
+		73C8BB561BD0A85900D427CB /* GratuitousAppDelegate+StateRestoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8BB551BD0A85800D427CB /* GratuitousAppDelegate+StateRestoration.swift */; settings = {ASSET_TAGS = (); }; };
+		73C8BB581BD0A9C300D427CB /* GratuitousAppDelegate+Handoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8BB571BD0A9C300D427CB /* GratuitousAppDelegate+Handoff.swift */; settings = {ASSET_TAGS = (); }; };
+		73C8BB5A1BD0AA0B00D427CB /* GratuitousAppDelegate+WatchConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8BB591BD0AA0B00D427CB /* GratuitousAppDelegate+WatchConnectivity.swift */; settings = {ASSET_TAGS = (); }; };
 		73F44C5A1BCF444700456E8A /* GratuitousNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C591BCF444700456E8A /* GratuitousNumberFormatter.swift */; settings = {ASSET_TAGS = (); }; };
 		73F44C5C1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */; settings = {ASSET_TAGS = (); }; };
 		73F44C5D1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */; settings = {ASSET_TAGS = (); }; };
@@ -184,6 +187,9 @@
 		73BE874D1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousRoundedHeaderTableView.swift; sourceTree = "<group>"; };
 		73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitBillTableViewCell.swift; sourceTree = "<group>"; };
 		73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousDefaultsObserver.swift; sourceTree = "<group>"; };
+		73C8BB551BD0A85800D427CB /* GratuitousAppDelegate+StateRestoration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GratuitousAppDelegate+StateRestoration.swift"; sourceTree = "<group>"; };
+		73C8BB571BD0A9C300D427CB /* GratuitousAppDelegate+Handoff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GratuitousAppDelegate+Handoff.swift"; sourceTree = "<group>"; };
+		73C8BB591BD0AA0B00D427CB /* GratuitousAppDelegate+WatchConnectivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GratuitousAppDelegate+WatchConnectivity.swift"; sourceTree = "<group>"; };
 		73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchConnectivityManager.swift; sourceTree = "<group>"; };
 		73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButtons.swift; sourceTree = "<group>"; };
 		73D46AFD1AC7C9B400057185 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -352,8 +358,9 @@
 			isa = PBXGroup;
 			children = (
 				7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */,
-				73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */,
-				732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */,
+				73C8BB551BD0A85800D427CB /* GratuitousAppDelegate+StateRestoration.swift */,
+				73C8BB571BD0A9C300D427CB /* GratuitousAppDelegate+Handoff.swift */,
+				73C8BB591BD0AA0B00D427CB /* GratuitousAppDelegate+WatchConnectivity.swift */,
 				734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */,
 				7353346D1A1803FB008530E1 /* TipViewController */,
 				735334711A1804CC008530E1 /* Settings View Controller */,
@@ -465,6 +472,8 @@
 				7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */,
 				7376F8DD1B8EC5CD009CAB74 /* JSBAttributedStringImageGenerator.swift */,
 				73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */,
+				73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */,
+				732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */,
 			);
 			name = "Custom Files";
 			sourceTree = "<group>";
@@ -755,12 +764,14 @@
 			files = (
 				733D02DD1BBA4D6D00E40EC5 /* UIImage+PDFUtility.m in Sources */,
 				73A5D8F51BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */,
+				73C8BB581BD0A9C300D427CB /* GratuitousAppDelegate+Handoff.swift in Sources */,
 				733D02BC1BBA4D0000E40EC5 /* TipViewController.swift in Sources */,
 				733D02CD1BBA4D2800E40EC5 /* GratuitousPresentationController.swift in Sources */,
 				733D02C31BBA4D1300E40EC5 /* GratuitousSettingsButtons.swift in Sources */,
 				73048CF41BBCEBC400D8EAA6 /* JSBPurchaseManager.swift in Sources */,
 				733D02C71BBA4D1F00E40EC5 /* SplitBillViewController.swift in Sources */,
 				733D02CA1BBA4D1F00E40EC5 /* WatchInfoViewController.swift in Sources */,
+				73C8BB561BD0A85900D427CB /* GratuitousAppDelegate+StateRestoration.swift in Sources */,
 				736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */,
 				733D02C01BBA4D1300E40EC5 /* SettingsTableViewController.swift in Sources */,
 				73F44C5C1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */,
@@ -773,6 +784,7 @@
 				733D02BD1BBA4D0900E40EC5 /* GratuitousTableViewCell.swift in Sources */,
 				733D02CE1BBA4D2800E40EC5 /* GratuitousAnimatedTransitioning.swift in Sources */,
 				733D02C91BBA4D1F00E40EC5 /* PurchaseSplitBillViewController.swift in Sources */,
+				73C8BB5A1BD0AA0B00D427CB /* GratuitousAppDelegate+WatchConnectivity.swift in Sources */,
 				733D02CF1BBA4D2800E40EC5 /* GratuitousTransitioningDelegate.swift in Sources */,
 				733D02D41BBA4D2800E40EC5 /* GratuitousPurchaseManager.swift in Sources */,
 				733D02BA1BBA4CE600E40EC5 /* GratuitousAppDelegate.swift in Sources */,
