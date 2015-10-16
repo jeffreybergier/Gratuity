@@ -42,8 +42,10 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         super.viewDidLoad()
         
         //add necessary notification center observers
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
         
         //set the background color of the view
         self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
@@ -120,7 +122,11 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         }
     }
     
-    func systemTextSizeDidChange(notification: NSNotification) {
+    @objc private func currencySignChanged(notification: NSNotification?) {
+        self.setInterfaceRefreshNeeded()
+    }
+    
+    @objc private func systemTextSizeDidChange(notification: NSNotification) {
         //this takes care of the header cells
         self.prepareHeaderLabelsAndCells()
         
@@ -246,14 +252,10 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
                 }
             }
         }
-        
-        if let presentingViewController = self.presentingViewController as? TipViewController {
-            presentingViewController.refreshInterface()
-        }
     }
     
     private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: CurrencySign? = nil) {
-        if let currencyOverride = currencyOverride {
+        if let currencyOverride = currencyOverride{
             self.defaultsManager.overrideCurrencySymbol = currencyOverride
         }
     }

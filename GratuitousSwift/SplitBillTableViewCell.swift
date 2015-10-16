@@ -76,6 +76,15 @@ final class SplitBillTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.prepareFontsAndColors()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+    }
+    
+    @objc private func currencySignChanged(notification: NSNotification?) {
+        self.currencyFormatter.locale = NSLocale.currentLocale()
+        let currentIdentity = self.identity
+        self.identity = currentIdentity
     }
     
     private func prepareFontsAndColors() {
@@ -93,4 +102,7 @@ final class SplitBillTableViewCell: UITableViewCell {
         self.contentView.backgroundColor = UIColor.blackColor()
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }

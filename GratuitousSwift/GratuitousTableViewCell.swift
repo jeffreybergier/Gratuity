@@ -13,7 +13,7 @@ final class GratuitousTableViewCell: UITableViewCell {
     @IBOutlet weak private var dollarTextLabel: UILabel?
     private var labelTextAttributes = [String(): NSObject()]
     private let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
-    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
+    private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
     private var currentCurrencySign: CurrencySign {
         return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager.overrideCurrencySymbol
     }
@@ -38,6 +38,11 @@ final class GratuitousTableViewCell: UITableViewCell {
         self.prepareLabelTextAttributes()
     }
     
+    @objc private func currencySignChanged(notification: NSNotification) {
+        self.currencyFormatter.locale = NSLocale.currentLocale()
+        self.setInterfaceRefreshNeeded()
+    }
+    
     private func didSetBillAmount() {
         let currencyFormattedString: String
         if self.billAmount != 0 {
@@ -53,6 +58,8 @@ final class GratuitousTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
         
         //configure the font
         if let font = GratuitousUIConstant.originalFontForTableViewCellTextLabels() {
@@ -82,7 +89,6 @@ final class GratuitousTableViewCell: UITableViewCell {
             let attributes = [
                 NSForegroundColorAttributeName : textColor,
                 NSFontAttributeName : font.fontWithSize(font.pointSize * self.textSizeAdjustment),
-                //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
                 NSShadowAttributeName : shadow
             ]
             self.labelTextAttributes = attributes
