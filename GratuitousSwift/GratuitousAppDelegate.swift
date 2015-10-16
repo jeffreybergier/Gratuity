@@ -26,7 +26,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    private let preferencesDiskManager = GratuitousUserDefaultsDiskManager()
+    let preferencesDiskManager = GratuitousUserDefaultsDiskManager()
     private let preferencesNotificationManager = GratuitousDefaultsObserver()
     
     // MARK: State Restoration Properties
@@ -42,30 +42,5 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             return .None
         }
     }()
-    
-    // MARK: iOS App Launch
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch
-        
-        //crashlytics intializer
-        //Fabric.with([Crashlytics()])
-        
-        self.window!.tintColor = GratuitousUIConstant.lightTextColor()
-        self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
-        
-        if #available(iOS 9, *) {
-            self.transferBulkCurrencySymbolsIfNeeded()
-        }
-        
-        let purchaseManager = GratuitousPurchaseManager()
-        self.preferences.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
-        
-        return true
-    }
-    
-    // MARK: iOS App Going to the Background
-    func applicationWillResignActive(application: UIApplication) {
-        self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.preferences)
-    }
 }
 
