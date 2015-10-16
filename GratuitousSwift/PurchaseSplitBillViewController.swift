@@ -28,12 +28,12 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBOutlet private weak var restoreButtonSpinner: UIActivityIndicatorView?
     
     private let purchaseManager = GratuitousPurchaseManager()
-    private var defaultsManager: GratuitousUserDefaults {
+    private var applicationPreferences: GratuitousUserDefaults {
         get {
-            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
+            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences
         }
         set {
-            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager = newValue
+            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences = newValue
         }
     }
     
@@ -226,11 +226,11 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             if transaction.transactionState == .Deferred {
                 // if the transaction is deferred I give temporary access.
                 // the receipt is checked on every launch, so this will get undone if it doesn't get deferred
-                self.defaultsManager.splitBillPurchased = true
+                self.applicationPreferences.splitBillPurchased = true
             } else {
                 // update the preference based on the receipt
                 // the receipt is the source of truth, all the error handling is just sugar coating
-                self.defaultsManager.splitBillPurchased = self.purchaseManager.verifySplitBillPurchaseTransaction()
+                self.applicationPreferences.splitBillPurchased = self.purchaseManager.verifySplitBillPurchaseTransaction()
             }
             
             // We need to finish the transaction unless its in the Deferred or Purchasing state
@@ -272,7 +272,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             // update the preference based on the receipt
             // the receipt is the source of truth, all the error handling is just sugar coating
             let splitBillPurchased = self.purchaseManager.verifySplitBillPurchaseTransaction()
-            self.defaultsManager.splitBillPurchased = splitBillPurchased
+            self.applicationPreferences.splitBillPurchased = splitBillPurchased
             
             if let error = error {
                 // the restore had some sort of error

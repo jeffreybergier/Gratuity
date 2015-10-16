@@ -52,12 +52,12 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     private var totalAmountTextLabelAttributes = [String : NSObject]()
     private var tipPercentageTextLabelAttributes = [String : NSObject]()
     private var viewDidAppearOnce = false
-    private var defaultsManager: GratuitousUserDefaults {
+    private var applicationPreferences: GratuitousUserDefaults {
         get {
-            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
+            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences
         }
         set {
-            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager = newValue
+            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences = newValue
         }
     }
     
@@ -211,13 +211,13 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     private func updateTableViewsFromDisk() {
-        let billAmount = self.defaultsManager.billIndexPathRow + PrivateConstants.ExtraCells - 1
+        let billAmount = self.applicationPreferences.billIndexPathRow + PrivateConstants.ExtraCells - 1
         
         self.billAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: billAmount, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         
         let tipAmount: Int
-        if self.defaultsManager.tipIndexPathRow > 0 {
-            tipAmount = self.defaultsManager.tipIndexPathRow + PrivateConstants.ExtraCells - 1
+        if self.applicationPreferences.tipIndexPathRow > 0 {
+            tipAmount = self.applicationPreferences.tipIndexPathRow + PrivateConstants.ExtraCells - 1
             self.tipAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: tipAmount, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         } else {
             //
@@ -292,15 +292,15 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         
         switch segue {
         case .SplitBill:
-            if self.defaultsManager.splitBillPurchased == true {
+            if self.applicationPreferences.splitBillPurchased == true {
                 // if the preferences say its true trust them.
                 // this is for deferred purchases grace period
                 return true
             } else {
                 // if not true, check the receipt and try again
                 let purchaseManager = GratuitousPurchaseManager()
-                self.defaultsManager.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
-                if self.defaultsManager.splitBillPurchased == true {
+                self.applicationPreferences.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
+                if self.applicationPreferences.splitBillPurchased == true {
                     return true
                 } else {
                     self.performSegueWithIdentifier(StoryboardSegues.PurchaseSplitBill.rawValue, sender: self)
@@ -356,16 +356,15 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     //MARK: Handle Writing to Disk
     
     private func writeToDiskBillTableIndexPath(indexPath: NSIndexPath) {
-        self.defaultsManager.billIndexPathRow = indexPath.row - PrivateConstants.ExtraCells + 1
-        //self.defaultsManager?.tipIndexPathRow = 0
+        self.applicationPreferences.billIndexPathRow = indexPath.row - PrivateConstants.ExtraCells + 1
     }
     
     private func writeToDiskTipTableIndexPath(indexPath: NSIndexPath, WithAutoAdjustment autoAdjustment: Bool) {
         // Auto adjustment lets me know when we are saving an actual value of tip vs just setting the tipamount to 0 or 1 for logic reasons.
         if autoAdjustment == true {
-            self.defaultsManager.tipIndexPathRow = indexPath.row - PrivateConstants.ExtraCells + 1
+            self.applicationPreferences.tipIndexPathRow = indexPath.row - PrivateConstants.ExtraCells + 1
         } else {
-            self.defaultsManager.tipIndexPathRow = indexPath.row
+            self.applicationPreferences.tipIndexPathRow = indexPath.row
         }
     }
     
@@ -379,7 +378,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     private func updateLargeTextLabels(billAmount billAmount: Int, tipAmount: Int) {
         self.resetInterfaceIdleTimer()
         if billAmount > 0 { //this protects from divide by 0 crashes
-            let currencySign = self.defaultsManager.overrideCurrencySymbol
+            let currencySign = self.applicationPreferences.overrideCurrencySymbol
             let totalAmount = billAmount + tipAmount
             let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
             
@@ -401,8 +400,8 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     
     @objc private func interfaceIdleTimerFired(timer: NSTimer?) {
         if self.interfaceRefreshNeeded == true {
-            let billIndex = self.defaultsManager.billIndexPathRow
-            let tipIndex = self.defaultsManager.tipIndexPathRow
+            let billIndex = self.applicationPreferences.billIndexPathRow
+            let tipIndex = self.applicationPreferences.tipIndexPathRow
             self.billAmountTableView?.selectRowAtIndexPath(NSIndexPath(forRow: billIndex + 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             if tipIndex > 0 {
                 self.tipAmountTableView?.selectRowAtIndexPath(NSIndexPath(forRow: tipIndex + 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -422,11 +421,11 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             let tipAmountTableView = self.tipAmountTableView,
             let billIndexPath = self.indexPathInCenterOfTable(billAmountTableView),
             let billCell = billAmountTableView.cellForRowAtIndexPath(billIndexPath) as? GratuitousTableViewCell {
-                let suggestedTipPercentage = self.defaultsManager.suggestedTipPercentage
+                let suggestedTipPercentage = self.applicationPreferences.suggestedTipPercentage
                 let billAmount = billCell.billAmount
                 if billAmount > 0 {
                     let tipAmount: Int
-                    let tipUserDefaults = self.defaultsManager.tipIndexPathRow
+                    let tipUserDefaults = self.applicationPreferences.tipIndexPathRow
                     if let tipIndexPath = self.indexPathInCenterOfTable(tipAmountTableView),
                         let tipCell = tipAmountTableView.cellForRowAtIndexPath(tipIndexPath) as? GratuitousTableViewCell {
                             if tipUserDefaults != 0 {
@@ -526,10 +525,10 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             let billCell = billAmountTableView.cellForRowAtIndexPath(billAmountIndexPath) as? GratuitousTableViewCell,
             let tipCell = tipAmountTableView.cellForRowAtIndexPath(tipAmountIndexPath) as? GratuitousTableViewCell {
                 let billAmount = billCell.billAmount
-                let tipAmount = Int(round((Double(billAmount) * self.defaultsManager.suggestedTipPercentage)))
+                let tipAmount = Int(round((Double(billAmount) * self.applicationPreferences.suggestedTipPercentage)))
                 switch tableTagEnum {
                 case .BillAmount:
-                    if self.defaultsManager.tipIndexPathRow == 0 {
+                    if self.applicationPreferences.tipIndexPathRow == 0 {
                         let cellOffset = billAmountIndexPath.row - billAmount
                         let adjustedTipIndexPathRow = tipAmount + cellOffset
                         if billAmount > 0 { // this stops a crash when the user scrolls past the end of the billtable

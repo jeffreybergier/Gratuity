@@ -22,12 +22,12 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         swipe.direction = UISwipeGestureRecognizerDirection.Right
         return swipe
     }()
-    private var defaultsManager: GratuitousUserDefaults {
+    private var applicationPreferences: GratuitousUserDefaults {
         get {
-            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
+            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences
         }
         set {
-            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager = newValue
+            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences = newValue
         }
     }
     
@@ -215,7 +215,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     }
     
     private func readUserDefaultsAndUpdateSlider() {
-        let onDiskTipPercentage = self.defaultsManager.suggestedTipPercentage
+        let onDiskTipPercentage = self.applicationPreferences.suggestedTipPercentage
         self.suggestedTipPercentageLabel?.text = "\(Int(round(onDiskTipPercentage * 100)))%"
         self.suggestedTipPercentageSlider?.setValue(Float(onDiskTipPercentage), animated: false)
     }
@@ -228,7 +228,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     @IBAction func didChangeSuggestedTipPercentageSlider(sender: UISlider) {
         //this is only called when the user lets go of the slider
         let newTipPercentage = sender.value
-        self.defaultsManager.suggestedTipPercentage = Double(newTipPercentage)
+        self.applicationPreferences.suggestedTipPercentage = Double(newTipPercentage)
         NSNotificationCenter.defaultCenter().postNotificationName("suggestedTipValueUpdated", object: self)
     }
     
@@ -256,7 +256,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     
     private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: CurrencySign? = nil) {
         if let currencyOverride = currencyOverride{
-            self.defaultsManager.overrideCurrencySymbol = currencyOverride
+            self.applicationPreferences.overrideCurrencySymbol = currencyOverride
         }
     }
     

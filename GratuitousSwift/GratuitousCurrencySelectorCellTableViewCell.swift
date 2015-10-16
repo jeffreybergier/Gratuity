@@ -50,9 +50,8 @@ final class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     }
     
     private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {
-        let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
-        if let defaultsManager = appDelegate?.defaultsManager {
-            if defaultsManager.overrideCurrencySymbol.rawValue == self.tag {
+        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
+            where appDelegate.preferences.overrideCurrencySymbol.rawValue == self.tag {
                 self.accessoryType = UITableViewCellAccessoryType.Checkmark
                 if self.animatingBorderColor == false {
                     //if this property is being animated, don't change it
@@ -62,13 +61,12 @@ final class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
                 if timer {
                     NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "slowFadeOutOfBorderAroundCell:", userInfo: nil, repeats: false)
                 }
-            } else {
-                self.accessoryType = UITableViewCellAccessoryType.None
-                if self.animatingBorderColor == false {
-                    self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor //UIColor.blackColor().CGColor
-                }
-                self.accessoryType = UITableViewCellAccessoryType.None
+        } else {
+            self.accessoryType = UITableViewCellAccessoryType.None
+            if self.animatingBorderColor == false {
+                self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor
             }
+            self.accessoryType = UITableViewCellAccessoryType.None
         }
         self.layoutIfNeeded()
     }

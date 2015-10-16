@@ -8,14 +8,14 @@
 
 final class SplitBillViewController: SmallModalTableViewController {
     
-    private let defaultsManager = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager
+    private let applicationPreferences = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences
     
     private var totalAmount: Int {
-        let billAmount = self.defaultsManager.billIndexPathRow
-        let suggestedTipPercentage = self.defaultsManager.suggestedTipPercentage
+        let billAmount = self.applicationPreferences.billIndexPathRow
+        let suggestedTipPercentage = self.applicationPreferences.suggestedTipPercentage
         let tipAmount: Int
-        if self.defaultsManager.tipIndexPathRow != 0 {
-            tipAmount = self.defaultsManager.tipIndexPathRow
+        if self.applicationPreferences.tipIndexPathRow != 0 {
+            tipAmount = self.applicationPreferences.tipIndexPathRow
         } else {
             tipAmount = Int(round(Double(billAmount) * suggestedTipPercentage))
         }

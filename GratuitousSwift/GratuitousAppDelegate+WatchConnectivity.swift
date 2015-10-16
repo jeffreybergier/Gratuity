@@ -14,8 +14,9 @@ extension GratuitousAppDelegate {
         if let watchConnectivityManager = self.watchConnectivityManager as? GratuitousiOSConnectivityManager,
             let session = watchConnectivityManager.session
             where session.paired == true && session.watchAppInstalled == true {
-                if self.defaultsManager.freshWatchAppInstall == true {
-                    self.defaultsManager.freshWatchAppInstall = false
+                
+                if self.preferences.freshWatchAppInstall == true {
+                    self.preferences.freshWatchAppInstall = false
                     let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
                     dispatch_async(backgroundQueue) {
                         let generator = GratuitousCurrencyStringImageGenerator()
@@ -24,9 +25,10 @@ extension GratuitousAppDelegate {
                         }
                     }
                 }
+                
         } else {
             // watch app not installed or watch not paired
-            self.defaultsManager.freshWatchAppInstall = true
+            self.preferences.freshWatchAppInstall = true
         }
     }
 

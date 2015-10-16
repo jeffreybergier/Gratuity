@@ -18,16 +18,16 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     // MARK: App Preferences Management Properties
-    var defaultsManager: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
+    var preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
         didSet {
-            if oldValue != self.defaultsManager {
-                self.defaultsDiskManager.writeUserDefaultsToPreferencesFile(self.defaultsManager)
-                self.defaultsNotificationManager.postNotificationsForChangedDefaults(old: oldValue, new: self.defaultsManager)
+            if oldValue != self.preferences {
+                self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.preferences)
+                self.preferencesNotificationManager.postNotificationsForChangedDefaults(old: oldValue, new: self.preferences)
             }
         }
     }
-    private let defaultsDiskManager = GratuitousUserDefaultsDiskManager()
-    private let defaultsNotificationManager = GratuitousDefaultsObserver()
+    private let preferencesDiskManager = GratuitousUserDefaultsDiskManager()
+    private let preferencesNotificationManager = GratuitousDefaultsObserver()
     
     // MARK: State Restoration Properties
     let storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
@@ -58,14 +58,14 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let purchaseManager = GratuitousPurchaseManager()
-        self.defaultsManager.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
+        self.preferences.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
         
         return true
     }
     
     // MARK: iOS App Going to the Background
     func applicationWillResignActive(application: UIApplication) {
-        self.defaultsDiskManager.writeUserDefaultsToPreferencesFile(self.defaultsManager)
+        self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.preferences)
     }
 }
 
