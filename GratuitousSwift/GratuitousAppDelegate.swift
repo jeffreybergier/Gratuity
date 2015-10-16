@@ -14,31 +14,23 @@ import Crashlytics
 @UIApplicationMain
 final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
-    //initialize the window and the storyboard
     var window: UIWindow?
     
-    private var _defaultsManager: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
+    var defaultsManager: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
         didSet {
-            self.defaultsDiskManager.writeUserDefaultsToPreferencesFile(_defaultsManager)
-        }
-    }
-    
-    var defaultsManager: GratuitousUserDefaults {
-        get {
-            return _defaultsManager
-        }
-        set {
-            if newValue != _defaultsManager {
-                _defaultsManager = newValue
+            if oldValue != self.defaultsManager {
+                self.defaultsDiskManager.writeUserDefaultsToPreferencesFile(self.defaultsManager)
+                self.defaultsNotificationManager.postNotificationsForChangedDefaults(old: oldValue, new: self.defaultsManager)
             }
         }
     }
+    private let defaultsDiskManager = GratuitousUserDefaultsDiskManager()
+    private let defaultsNotificationManager = GratuitousDefaultsObserver()
     
     private lazy var storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
     private lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right, animate: false)
     private lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom, animate: false)
     
-    private let defaultsDiskManager = GratuitousUserDefaultsDiskManager()
     private let watchConnectivityManager: AnyObject? = {
         if #available(iOS 9, *) {
             return GratuitousiOSConnectivityManager()

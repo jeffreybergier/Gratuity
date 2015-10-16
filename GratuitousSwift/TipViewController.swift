@@ -61,7 +61,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    private let currencyFormatter = NSNumberFormatter(style: .RespondsToLocaleChanges)
+    private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
     private let tableViewCellClass = GratuitousTableViewCell.description().componentsSeparatedByString(".").last !! "GratuitousTableViewCell"
     private let billTableViewCellString: String = {
         let className = GratuitousTableViewCell.description().componentsSeparatedByString(".").last
@@ -105,6 +105,8 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         // configure notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name:         GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
         
         //prepare the arrays
         //the weird if statements add a couple extra 0's at the top and bottom of the array
@@ -185,8 +187,6 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         //was previously in viewWillAppear
         self.prepareTotalAmountTextLabel()
         self.prepareTipPercentageTextLabel()
-        
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -370,6 +370,11 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     //MARK: Handle Updating the Big Labels
+    
+    @objc private func currencySignChanged(notification: NSNotification?) {
+        self.currencyFormatter.locale = NSLocale.currentLocale()
+        self.refreshInterface()
+    }
     
     private func updateLargeTextLabels(billAmount billAmount: Int, tipAmount: Int) {
         self.resetInterfaceIdleTimer()

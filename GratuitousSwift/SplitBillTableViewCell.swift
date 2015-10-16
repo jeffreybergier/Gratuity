@@ -14,7 +14,7 @@ final class SplitBillTableViewCell: UITableViewCell {
     @IBOutlet private weak var secondaryTextLabel: UILabel?
     @IBOutlet private weak var primaryImageView: UIImageView?
     
-    private let currencyFormatter = NSNumberFormatter(style: .RespondsToLocaleChanges)
+    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
     private var currentCurrencySign: CurrencySign {
         return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).defaultsManager.overrideCurrencySymbol
     }

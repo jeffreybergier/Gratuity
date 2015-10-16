@@ -10,7 +10,7 @@ import Foundation
 
 final class GratuitousCurrencyStringImageGenerator {
     
-    private let currencyFormatter = NSNumberFormatter(style: .DoNotRespondToLocaleChanges)
+    private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
         
     func generateCurrencySymbolsForCurrencySign(currencySign: CurrencySign) -> (url: NSURL, fileName: String)? {
         if let url = self.generateNewCurrencySymbol(currencySign),

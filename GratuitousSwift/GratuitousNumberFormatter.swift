@@ -8,20 +8,20 @@
 
 import Foundation
 
-extension NSNumberFormatter {
+class GratuitousNumberFormatter: NSNumberFormatter {
     enum Style {
         case RespondsToLocaleChanges
         case DoNotRespondToLocaleChanges
     }
     
-    convenience init(style: Style) {
-        self.init()
+    init(style: Style) {
+        super.init()
         
-        self.locale = NSLocale.currentLocale()
-        self.maximumFractionDigits = 0
-        self.minimumFractionDigits = 0
-        self.alwaysShowsDecimalSeparator = false
-        self.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        self.locale = DefaultKeys.locale
+        self.maximumFractionDigits = DefaultKeys.maximumFractionDigits
+        self.minimumFractionDigits = DefaultKeys.minimumFractionDigits
+        self.alwaysShowsDecimalSeparator = DefaultKeys.alwaysShowsDecimalSeparator
+        self.numberStyle = DefaultKeys.numberStyle
         
         switch style {
         case .RespondsToLocaleChanges:
@@ -39,16 +39,8 @@ extension NSNumberFormatter {
         switch sign {
         case .Default:
             return self.currencyCode
-        case .Dollar:
-            return "$"
-        case .Pound:
-            return "£"
-        case .Euro:
-            return "€"
-        case .Yen:
-            return "Y"
-        case .NoSign:
-            return ""
+        default:
+            return sign.string()
         }
     }
     
@@ -63,5 +55,70 @@ extension NSNumberFormatter {
             currencyString = "\(self.currencyCodeFromCurrencySign(sign))\(amount)"
         }
         return currencyString
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        if let locale = aDecoder.decodeObjectForKey(CoderKeys.locale) as? NSLocale {
+            self.locale = locale
+        } else {
+            self.locale = DefaultKeys.locale
+        }
+        
+        if let maximumFractionDigits = aDecoder.decodeObjectForKey(CoderKeys.maximumFractionDigits) as? NSNumber {
+            self.maximumFractionDigits = maximumFractionDigits.integerValue
+        } else {
+            self.maximumFractionDigits = DefaultKeys.maximumFractionDigits
+        }
+        
+        if let minimumFractionDigits = aDecoder.decodeObjectForKey(CoderKeys.minimumFractionDigits) as? NSNumber {
+            self.minimumFractionDigits = minimumFractionDigits.integerValue
+        } else {
+            self.minimumFractionDigits = DefaultKeys.minimumFractionDigits
+        }
+        
+        if let alwaysShowsDecimalSeparator = aDecoder.decodeObjectForKey(CoderKeys.alwaysShowsDecimalSeparator) as? NSNumber {
+            self.alwaysShowsDecimalSeparator = alwaysShowsDecimalSeparator.boolValue
+        } else {
+            self.alwaysShowsDecimalSeparator = DefaultKeys.alwaysShowsDecimalSeparator
+        }
+        
+        if let numberStyleNumber = aDecoder.decodeObjectForKey(CoderKeys.minimumFractionDigits) as? NSNumber,
+            let numberStyle = NSNumberFormatterStyle(rawValue: numberStyleNumber.unsignedLongValue) {
+                self.numberStyle = numberStyle
+        } else {
+            self.numberStyle = DefaultKeys.numberStyle
+        }
+    }
+    
+    override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
+        
+        aCoder.encodeObject(self.locale, forKey: CoderKeys.locale)
+        aCoder.encodeObject(NSNumber(integer: self.maximumFractionDigits), forKey: CoderKeys.maximumFractionDigits)
+        aCoder.encodeObject(NSNumber(integer: self.minimumFractionDigits), forKey: CoderKeys.minimumFractionDigits)
+        aCoder.encodeObject(NSNumber(bool: self.alwaysShowsDecimalSeparator), forKey: CoderKeys.alwaysShowsDecimalSeparator)
+        aCoder.encodeObject(NSNumber(unsignedLong: self.numberStyle.rawValue), forKey: CoderKeys.numberStyle)
+    }
+    
+    private struct DefaultKeys {
+        static let locale = NSLocale.currentLocale()
+        static let maximumFractionDigits: Int = 0
+        static let minimumFractionDigits: Int = 0
+        static let alwaysShowsDecimalSeparator = false
+        static let numberStyle = NSNumberFormatterStyle.CurrencyStyle
+    }
+    
+    private struct CoderKeys {
+        static let locale = "locale"
+        static let maximumFractionDigits = "maximumFractionDigits"
+        static let minimumFractionDigits = "minimumFractionDigits"
+        static let alwaysShowsDecimalSeparator = "alwaysShowsDecimalSeparator"
+        static let numberStyle = "numberStyle"
     }
 }
