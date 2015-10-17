@@ -39,7 +39,6 @@ final class GratuitousCurrencyStringImageGenerator {
     
     
     private func generateNewCurrencySymbol(currencySign: CurrencySign) -> NSURL? {
-        //let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
         let valueTextAttributes = GratuitousUIColor.WatchFonts.pickerItemText
         
         let imageGenerator = JSBAttributedStringImageGenerator()
