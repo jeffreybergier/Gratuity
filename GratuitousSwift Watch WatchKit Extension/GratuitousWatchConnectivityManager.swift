@@ -77,7 +77,7 @@ final class GratuitousWatchConnectivityManager: NSObject, WCSessionDelegate {
     func session(session: WCSession, didReceiveFile file: WCSessionFile) {
         print("GratuitousWatchConnectivityManager Watch Did Receive File: \(file)")
         if let originalFileName = file.metadata?["fileName"] as? String {
-            let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+            let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first?
             let dataURL = documentsURL.URLByAppendingPathComponent(originalFileName)
             do {
                 let data = try NSData(contentsOfURL: file.fileURL, options: .DataReadingMappedIfSafe)

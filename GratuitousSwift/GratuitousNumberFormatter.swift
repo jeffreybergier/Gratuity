@@ -35,12 +35,21 @@ class GratuitousNumberFormatter: NSNumberFormatter {
         self.locale = NSLocale.currentLocale()
     }
     
-    func currencyCodeFromCurrencySign(sign: CurrencySign) -> String {
+    func currencySymbolFromCurrencySign(sign: CurrencySign) -> String {
         switch sign {
         case .Default:
             return self.currencyCode
         default:
             return sign.string()
+        }
+    }
+    
+    func currencyNameFromCurrencySign(sign: CurrencySign) -> String {
+        switch sign {
+        case .Default:
+            return self.currencyCode
+        default:
+            return sign.stringForFileName()
         }
     }
     
@@ -52,7 +61,7 @@ class GratuitousNumberFormatter: NSNumberFormatter {
         case .NoSign:
             currencyString = "\(amount)"
         default:
-            currencyString = "\(self.currencyCodeFromCurrencySign(sign))\(amount)"
+            currencyString = "\(self.currencySymbolFromCurrencySign(sign))\(amount)"
         }
         return currencyString
     }
@@ -120,5 +129,25 @@ class GratuitousNumberFormatter: NSNumberFormatter {
         static let minimumFractionDigits = "minimumFractionDigits"
         static let alwaysShowsDecimalSeparator = "alwaysShowsDecimalSeparator"
         static let numberStyle = "numberStyle"
+    }
+}
+
+extension CurrencySign {
+    func stringForFileName() -> String {
+        switch self {
+        case .Default:
+            fatalError()
+            return "Default"
+        case .Dollar:
+            return "Dollar"
+        case .Pound:
+            return "Pound"
+        case .Euro:
+            return "Euro"
+        case .Yen:
+            return "Yen"
+        case .NoSign:
+            return "None"
+        }
     }
 }

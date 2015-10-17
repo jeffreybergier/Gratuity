@@ -314,21 +314,21 @@ final class PickerInterfaceController: WKInterfaceController {
     }
     
     private func pickerItemsURL(currencySign: CurrencySign) -> NSURL? {
-        let fileName: String
-        switch currencySign {
-        case .Default:
-            fileName = "\(self.currencyFormatter.currencyCodeFromCurrencySign(currencySign))Images.data"
-        case .Dollar:
-            fileName = "DollarImages.data"
-        case .Pound:
-            fileName = "PoundImages.data"
-        case .Euro:
-            fileName = "EuroImages.data"
-        case .Yen:
-            fileName = "YenImages.data"
-        case .NoSign:
-            fileName = "NoneImages.data"
-        }
+//        let fileName: String
+//        switch currencySign {
+//        case .Default:
+           let fileName = "\(self.currencyFormatter.currencyNameFromCurrencySign(currencySign))Images.data"
+//        case .Dollar:
+//            fileName = "DollarImages.data"
+//        case .Pound:
+//            fileName = "PoundImages.data"
+//        case .Euro:
+//            fileName = "EuroImages.data"
+//        case .Yen:
+//            fileName = "YenImages.data"
+//        case .NoSign:
+//            fileName = "NoneImages.data"
+//        }
         
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
         let dataURL = documentsURL.URLByAppendingPathComponent(fileName)

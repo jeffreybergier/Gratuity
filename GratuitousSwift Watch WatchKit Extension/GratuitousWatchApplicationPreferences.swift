@@ -53,6 +53,7 @@ class GratuitousWatchApplicationPreferences {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySymbolsNeededFromRemote:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolsNeededFromRemote, object: .None)
         
         self.watchConnectivityManager.contextDelegate = self
+        self.watchConnectivityManager.fileTransferDelegate = self
     }
     
     var remoteUpdateRateLimiterSet = false
@@ -88,6 +89,29 @@ extension GratuitousWatchApplicationPreferences: JSBWatchConnectivityContextDele
     }
 }
 
+extension GratuitousWatchApplicationPreferences: JSBWatchConnectivityFileTransferDelegate {
+    func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
+        self.log.warning("Unknown File Transfer: \(fileTransfer) to Remote Device Finished with Error: \(error)")
+    }
+    func session(session: WCSession, didReceiveFile file: WCSessionFile) {
+        self.requestedCurrencySymbols = false
+        self.log.info("DidReceiveFile: \(file)")
+        if let originalFileName = file.metadata?["FileName"] as? String,
+            let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first {
+                let dataURL = documentsURL.URLByAppendingPathComponent(originalFileName)
+                do {
+                    let data = try NSData(contentsOfURL: file.fileURL, options: .DataReadingMappedIfSafe)
+                    try data.writeToURL(dataURL, options: .AtomicWrite)
+                    NSNotificationCenter.defaultCenter().postNotificationName(GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: self, userInfo: self.localPreferences.dictionaryCopyForKeys(.All))
+                } catch {
+                    self.log.error("File Save Failed with Error: \(error)")
+                }
+        } else {
+            self.log.error("No Currency Symbols Found in File: \(file)")
+        }
+    }
+}
+
 extension GratuitousWatchApplicationPreferences {
     @objc private func currencySymbolsNeededFromRemote(notification: NSNotification?) {
         if self.requestedCurrencySymbols == false {
@@ -105,6 +129,6 @@ extension GratuitousWatchApplicationPreferences {
                 }
             )
             self.log.info("Currency Symbols Needed: Message Sent to iOS: \(message)")
-        }
+       }
     }
 }

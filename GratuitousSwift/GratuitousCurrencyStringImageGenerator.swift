@@ -51,7 +51,7 @@ final class GratuitousCurrencyStringImageGenerator {
         }
         let data = NSKeyedArchiver.archivedDataWithRootObject(images)
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-        let dataURL = documentsURL.URLByAppendingPathComponent("\(self.currencyFormatter.currencyCodeFromCurrencySign(currencySign))Images.data")
+        let dataURL = documentsURL.URLByAppendingPathComponent("\(self.currencyFormatter.currencyNameFromCurrencySign(currencySign))Images.data")
         
         do {
             try data.writeToURL(dataURL, options: .AtomicWrite)
