@@ -22,6 +22,11 @@ class GratuitousDefaultsObserver {
         {
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.RemoteContextUpdateNeeded, object: self, userInfo: new.dictionaryCopyForKeys(.WatchOnly))
         }
+        #if os(watchOS)
+        if new.currencySymbolsNeeded == true {
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.CurrencySymbolsNeededFromRemote, object: self, userInfo: new.dictionaryCopyForKeys(.WatchOnly))
+        }
+        #endif
     }
     
     func postNotificationsForRemoteChangedDefaults(old old: GratuitousUserDefaults, new: GratuitousUserDefaults) {
@@ -41,6 +46,7 @@ class GratuitousDefaultsObserver {
         static let CurrencySymbolChanged = "CurrencySymbolChanged"
         static let BillTipValueChangedByRemote = "BillTipValueChanged"
         static let RemoteContextUpdateNeeded = "RemoteConextUpdateNeeded"
+        static let CurrencySymbolsNeededFromRemote = "CurrencySymbolsNeededFromRemote"
     }
 }
 

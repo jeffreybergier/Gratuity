@@ -21,6 +21,7 @@ extension GratuitousAppDelegate {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "remoteContextUpdateNeeded:", name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
 
             (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.contextDelegate = self
+            (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.messageDelegate = self
             //self.transferBulkCurrencySymbolsIfNeeded()
         }
         

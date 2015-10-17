@@ -22,6 +22,9 @@ struct GratuitousUserDefaults {
 extension GratuitousUserDefaults: Equatable { }
 
 func ==(lhs: GratuitousUserDefaults, rhs: GratuitousUserDefaults) -> Bool {
+    if lhs.currencySymbolsNeeded == true || rhs.currencySymbolsNeeded == true {
+        return false
+    }
     return lhs.dictionaryCopyForKeys(.All) as NSDictionary == rhs.dictionaryCopyForKeys(.All) as NSDictionary
 }
 

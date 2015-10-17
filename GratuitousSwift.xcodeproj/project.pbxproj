@@ -47,8 +47,6 @@
 		733D02E41BBA505600E40EC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */; };
 		735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735DCADB1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; settings = {ASSET_TAGS = (); }; };
-		738C98B11BD19FC000D14F20 /* NSTimer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */; settings = {ASSET_TAGS = (); }; };
-		738C98B21BD19FC000D14F20 /* NSTimer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98B41BD1A35100D14F20 /* GratuitousAppDelegate+AppOpenClose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B31BD1A35100D14F20 /* GratuitousAppDelegate+AppOpenClose.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98B71BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98B81BD2068000D14F20 /* GratuitousDefaultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */; settings = {ASSET_TAGS = (); }; };
@@ -56,6 +54,8 @@
 		738C98BB1BD2AE7F00D14F20 /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98BD1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98BF1BD2B6E400D14F20 /* JSBWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
+		738C98C01BD2DE3A00D14F20 /* NSTimer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */; settings = {ASSET_TAGS = (); }; };
+		738C98C11BD2DE3B00D14F20 /* NSTimer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F51BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */; settings = {ASSET_TAGS = (); }; };
@@ -830,7 +830,7 @@
 				733D02C41BBA4D1900E40EC5 /* SmallModalViewController.swift in Sources */,
 				733D02C81BBA4D1F00E40EC5 /* SplitBillTableViewCell.swift in Sources */,
 				73FF9E9F1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m in Sources */,
-				738C98B11BD19FC000D14F20 /* NSTimer+Closure.swift in Sources */,
+				738C98C01BD2DE3A00D14F20 /* NSTimer+Closure.swift in Sources */,
 				73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -841,6 +841,7 @@
 			files = (
 				735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */,
 				73AEA6DF1BBB06D0004B16DE /* PickerInterfaceController.swift in Sources */,
+				738C98C11BD2DE3B00D14F20 /* NSTimer+Closure.swift in Sources */,
 				73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */,
 				738C98BB1BD2AE7F00D14F20 /* GratuitousPropertyListPreferences.swift in Sources */,
 				73F44C5D1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */,
@@ -852,7 +853,6 @@
 				73AEA6E01BBB06D0004B16DE /* SplitTotalInterfaceController.swift in Sources */,
 				73BA966E1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift in Sources */,
 				738C98B91BD2082000D14F20 /* GratuitousNumberFormatter.swift in Sources */,
-				738C98B21BD19FC000D14F20 /* NSTimer+Closure.swift in Sources */,
 				73AEA6ED1BBB0732004B16DE /* GratuitousUIColor.swift in Sources */,
 				738C98BF1BD2B6E400D14F20 /* JSBWatchConnectivityManager.swift in Sources */,
 				738C98B81BD2068000D14F20 /* GratuitousDefaultsObserver.swift in Sources */,

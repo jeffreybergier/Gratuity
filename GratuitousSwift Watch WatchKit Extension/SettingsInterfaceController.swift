@@ -39,7 +39,9 @@ final class SettingsInterfaceController: WKInterfaceController {
     
     private var applicationPreferences: GratuitousUserDefaults {
         get { return GratuitousWatchApplicationPreferences.sharedInstance.localPreferences }
-        set { GratuitousWatchApplicationPreferences.sharedInstance.localPreferences = newValue }
+        set {
+            GratuitousWatchApplicationPreferences.sharedInstance.localPreferences = newValue
+        }
     }
     private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
     

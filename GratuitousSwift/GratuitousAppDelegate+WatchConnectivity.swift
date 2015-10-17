@@ -9,14 +9,13 @@
 import WatchConnectivity
 
 extension GratuitousAppDelegate {
+    @available (iOS 9, *)
     @objc private func remoteContextUpdateNeeded(notification: NSNotification?) {
-        if #available(iOS 9, *) {
-            if self.remoteUpdateRateLimiterSet == false {
-                self.remoteUpdateRateLimiterSet = true
-                NSTimer.scheduleWithDelay(3.0) { timer in
-                    self.remoteUpdateRateLimiterSet = false
-                    self.updateRemoteContext(notification)
-                }
+        if self.remoteUpdateRateLimiterSet == false {
+            self.remoteUpdateRateLimiterSet = true
+            NSTimer.scheduleWithDelay(3.0) { timer in
+                self.remoteUpdateRateLimiterSet = false
+                self.updateRemoteContext(notification)
             }
         }
     }
@@ -36,6 +35,41 @@ extension GratuitousAppDelegate: JSBWatchConnectivityContextDelegate {
     @available(iOS 9.0, *)
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
         self.remotePreferences = GratuitousUserDefaults(dictionary: applicationContext, fallback: self.remotePreferences)
+    }
+}
+
+extension GratuitousAppDelegate: JSBWatchConnectivityMessageDelegate {
+    @available(iOS 9.0, *)
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        if let currencySymbolsNeeded = (message["SymbolImagesRequested"] as? NSNumber)?.boolValue where currencySymbolsNeeded == true {
+            self.log.info("Message Received: SymbolImagesRequested")
+            let currencySign = GratuitousUserDefaults(dictionary: message, fallback: self.localPreferences).overrideCurrencySymbol
+            let imagesGenerated = self.generateAndTransferCurrencySymbolImagesForCurrencySign(currencySign)
+            replyHandler(["GeneratingMessages" : NSNumber(bool: imagesGenerated)])
+        } else {
+            self.log.warning("Received Unknown Message: \(message)")
+        }
+    }
+    @available(iOS 9.0, *)
+    func session(session: WCSession, didReceiveMessageData messageData: NSData, replyHandler: (NSData) -> Void) {
+        self.log.info("Received Unknown MessageData: \(messageData)")
+    }
+    
+    @available(iOS 9.0, *)
+    private func generateAndTransferCurrencySymbolImagesForCurrencySign(currencySign: CurrencySign) -> Bool {
+        let generator = GratuitousCurrencyStringImageGenerator()
+        let tuple = generator.generateCurrencySymbolsForCurrencySign(currencySign)
+        return self.initiateFileTransferToRemote(tuple)
+    }
+    
+    @available(iOS 9.0, *)
+    private func initiateFileTransferToRemote(tuple: (url: NSURL, fileName: String)?) -> Bool {
+        if let tuple = tuple {
+            (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.session?.transferFile(tuple.url, metadata: ["FileName" : tuple.fileName])
+            return true
+        } else {
+            return false
+        }
     }
 }
 

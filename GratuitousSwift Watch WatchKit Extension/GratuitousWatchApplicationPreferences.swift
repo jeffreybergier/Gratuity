@@ -50,13 +50,24 @@ class GratuitousWatchApplicationPreferences {
     
     init() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "remoteContextUpdateNeeded:", name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySymbolsNeededFromRemote:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolsNeededFromRemote, object: .None)
+        
         self.watchConnectivityManager.contextDelegate = self
     }
     
     var remoteUpdateRateLimiterSet = false
+    var requestedCurrencySymbols = false
+    
+    deinit {
+        
+    }
 }
 
-extension GratuitousWatchApplicationPreferences {
+extension GratuitousWatchApplicationPreferences: JSBWatchConnectivityContextDelegate {
+    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+        self.remotePreferences = GratuitousUserDefaults(dictionary: applicationContext, fallback: self.remotePreferences)
+    }
+    
     @objc private func remoteContextUpdateNeeded(notification: NSNotification?) {
         if self.remoteUpdateRateLimiterSet == false {
             self.remoteUpdateRateLimiterSet = true
@@ -77,8 +88,23 @@ extension GratuitousWatchApplicationPreferences {
     }
 }
 
-extension GratuitousWatchApplicationPreferences: JSBWatchConnectivityContextDelegate {
-    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
-        self.remotePreferences = GratuitousUserDefaults(dictionary: applicationContext, fallback: self.remotePreferences)
+extension GratuitousWatchApplicationPreferences {
+    @objc private func currencySymbolsNeededFromRemote(notification: NSNotification?) {
+        if self.requestedCurrencySymbols == false {
+            self.requestedCurrencySymbols = true
+            
+            var message = GratuitousUserDefaults(dictionary: notification?.userInfo, fallback: self.localPreferences).dictionaryCopyForKeys(.WatchOnly)
+            message["SymbolImagesRequested"] = NSNumber(bool: true)
+            
+            self.watchConnectivityManager.session?.sendMessage(message,
+                replyHandler: { reply in
+                    self.log.info("Reply Received: \(reply) for Message: \(message)")
+                },
+                errorHandler: { error in
+                    self.log.error("Error Received: \(error) for Message: \(message)")
+                }
+            )
+            self.log.info("Currency Symbols Needed: Message Sent to iOS: \(message)")
+        }
     }
 }
