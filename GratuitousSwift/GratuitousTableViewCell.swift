@@ -15,7 +15,7 @@ final class GratuitousTableViewCell: UITableViewCell {
     private let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
     private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
     private var currentCurrencySign: CurrencySign {
-        return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences.overrideCurrencySymbol
+        return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences.overrideCurrencySymbol
     }
     var textSizeAdjustment: CGFloat = 1.0 {
         didSet {

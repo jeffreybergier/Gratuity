@@ -563,6 +563,7 @@
 				73AEA6C21BBB05EB004B16DE /* Sources */,
 				73AEA6C31BBB05EB004B16DE /* Frameworks */,
 				73AEA6C41BBB05EB004B16DE /* Resources */,
+				738C98B51BD1A6F300D14F20 /* Copy Pods Frameworks */,
 				D25EEDD411F2D7F13ECC1675 /* Copy Pods Resources */,
 			);
 			buildRules = (
@@ -688,6 +689,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		738C98B51BD1A6F300D14F20 /* Copy Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension-frameworks.sh\"\n";
 		};
 		73FF9E9C1BBE3FAE00F9278C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

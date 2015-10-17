@@ -54,10 +54,10 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     private var viewDidAppearOnce = false
     private var applicationPreferences: GratuitousUserDefaults {
         get {
-            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences
+            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences
         }
         set {
-            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences = newValue
+            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences = newValue
         }
     }
     
@@ -106,7 +106,9 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name:         GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setInterfaceRefreshNeeded:", name: GratuitousDefaultsObserver.NotificationKeys.InterfaceUpdateNeeded, object: .None)
+
         
         //prepare the arrays
         //the weird if statements add a couple extra 0's at the top and bottom of the array
@@ -411,7 +413,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     private var interfaceRefreshNeeded = false
-    func setInterfaceRefreshNeeded() {
+    @objc private func setInterfaceRefreshNeeded(notification: NSNotification? = nil) {
         self.interfaceRefreshNeeded = true
     }
     

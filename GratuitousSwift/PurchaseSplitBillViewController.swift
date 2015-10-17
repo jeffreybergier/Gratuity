@@ -30,10 +30,10 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     private let purchaseManager = GratuitousPurchaseManager()
     private var applicationPreferences: GratuitousUserDefaults {
         get {
-            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences
+            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences
         }
         set {
-            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences = newValue
+            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences = newValue
         }
     }
     

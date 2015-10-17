@@ -8,7 +8,7 @@
 
 final class SplitBillViewController: SmallModalTableViewController {
     
-    private let applicationPreferences = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences
+    private let applicationPreferences = (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences
     
     private var totalAmount: Int {
         let billAmount = self.applicationPreferences.billIndexPathRow

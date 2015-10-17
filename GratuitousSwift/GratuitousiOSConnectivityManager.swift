@@ -9,6 +9,7 @@
 import WatchKit
 import WatchConnectivity
 
+@available (iOS 9, *)
 protocol GratuitousiOSConnectivityManagerDelegate: class {
     func receivedContextFromWatch(context: [String : AnyObject])
 }

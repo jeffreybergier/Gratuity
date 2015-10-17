@@ -16,7 +16,7 @@ final class SplitBillTableViewCell: UITableViewCell {
     
     private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
     private var currentCurrencySign: CurrencySign {
-        return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences.overrideCurrencySymbol
+        return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences.overrideCurrencySymbol
     }
     
     var identity: Identity? {

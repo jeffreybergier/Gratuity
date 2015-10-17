@@ -8,39 +8,59 @@
 
 import Foundation
 
+protocol GratuitousDefaultsWatchDelegate {
+    func updatedWatchPreferences(preferences: GratuitousUserDefaults)
+}
+
 class GratuitousDefaultsObserver {
-    enum DefaultsChange {
-        case CurrencySignChanged
-    }
     
-    func postNotificationsForChangedDefaults(old old: GratuitousUserDefaults, new: GratuitousUserDefaults) {
-        if old.currencySymbolsNeeded != new.currencySymbolsNeeded {
-            
-        }
-        if old.appVersionString != new.appVersionString {
-
-        }
-        if old.billIndexPathRow != new.billIndexPathRow {
-
-        }
-        if old.tipIndexPathRow != new.tipIndexPathRow {
-
-        }
+    var watchDelegate: GratuitousDefaultsWatchDelegate?
+    
+    func postNotificationsForLocallyChangedDefaults(old old: GratuitousUserDefaults, new: GratuitousUserDefaults) {
         if old.overrideCurrencySymbol != new.overrideCurrencySymbol {
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.CurrencySymbolChanged, object: self, userInfo: new.dictionaryCopyForKeys(.All))
         }
-        if old.suggestedTipPercentage != new.suggestedTipPercentage {
-
+        if old.billIndexPathRow != new.billIndexPathRow || old.tipIndexPathRow != new.tipIndexPathRow || old.overrideCurrencySymbol != new.overrideCurrencySymbol || old.suggestedTipPercentage != new.suggestedTipPercentage || old.splitBillPurchased != new.splitBillPurchased {
+            self.watchDelegate!.updatedWatchPreferences(new)
         }
-        if old.freshWatchAppInstall != new.freshWatchAppInstall {
-
+    }
+    
+    func postNotificationsForWatchChangedDefaults(old old: GratuitousUserDefaults, new: GratuitousUserDefaults) {
+        if old.overrideCurrencySymbol != new.overrideCurrencySymbol {
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.CurrencySymbolChanged, object: self, userInfo: new.dictionaryCopyForKeys(.All))
         }
-        if old.splitBillPurchased != new.splitBillPurchased {
-
+        if old.billIndexPathRow != new.billIndexPathRow || old.tipIndexPathRow != new.tipIndexPathRow || old.suggestedTipPercentage != new.suggestedTipPercentage || old.overrideCurrencySymbol != new.overrideCurrencySymbol {
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.InterfaceUpdateNeeded, object: self, userInfo: new.dictionaryCopyForKeys(.All))
         }
     }
     
     struct NotificationKeys {
         static let CurrencySymbolChanged = "CurrencySymbolChanged"
+        static let InterfaceUpdateNeeded = "InterfaceUpdateNeeded"
     }
 }
+
+//    if old.currencySymbolsNeeded != new.currencySymbolsNeeded {
+//
+//    }
+//    if old.appVersionString != new.appVersionString {
+//
+//    }
+//    if old.billIndexPathRow != new.billIndexPathRow {
+//
+//    }
+//    if old.tipIndexPathRow != new.tipIndexPathRow {
+//
+//    }
+//    if old.overrideCurrencySymbol != new.overrideCurrencySymbol {
+//
+//    }
+//    if old.suggestedTipPercentage != new.suggestedTipPercentage {
+//
+//    }
+//    if old.freshWatchAppInstall != new.freshWatchAppInstall {
+//
+//    }
+//    if old.splitBillPurchased != new.splitBillPurchased {
+//
+//    }

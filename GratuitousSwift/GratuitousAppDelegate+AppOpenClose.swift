@@ -17,18 +17,21 @@ extension GratuitousAppDelegate {
         self.window!.tintColor = GratuitousUIConstant.lightTextColor()
         self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         
+        
         if #available(iOS 9, *) {
+            self.preferencesNotificationManager.watchDelegate = self
+            (self.watchConnectivityManager as? GratuitousiOSConnectivityManager)?.delegate = self
             self.transferBulkCurrencySymbolsIfNeeded()
         }
         
         let purchaseManager = GratuitousPurchaseManager()
-        self.preferences.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
+        self.localPreferences.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
         
         return true
     }
     
     // MARK: iOS App Going to the Background
     func applicationWillResignActive(application: UIApplication) {
-        self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.preferences)
+        self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.localPreferences)
     }
 }
