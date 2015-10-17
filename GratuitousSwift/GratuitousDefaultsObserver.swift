@@ -8,28 +8,37 @@
 
 import Foundation
 
-protocol GratuitousDefaultsWatchDelegate {
-    func updatedWatchPreferences(preferences: GratuitousUserDefaults)
+protocol GratuitousDefaultsObserverRemoteDelegate {
+    func receivedRemotePreferences(preferences: GratuitousUserDefaults)
 }
 
 class GratuitousDefaultsObserver {
     
-    var watchDelegate: GratuitousDefaultsWatchDelegate?
+    var remoteDelegate: GratuitousDefaultsObserverRemoteDelegate?
     
     func postNotificationsForLocallyChangedDefaults(old old: GratuitousUserDefaults, new: GratuitousUserDefaults) {
         if old.overrideCurrencySymbol != new.overrideCurrencySymbol {
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.CurrencySymbolChanged, object: self, userInfo: new.dictionaryCopyForKeys(.All))
         }
-        if old.billIndexPathRow != new.billIndexPathRow || old.tipIndexPathRow != new.tipIndexPathRow || old.overrideCurrencySymbol != new.overrideCurrencySymbol || old.suggestedTipPercentage != new.suggestedTipPercentage || old.splitBillPurchased != new.splitBillPurchased {
-            self.watchDelegate!.updatedWatchPreferences(new)
+        if old.billIndexPathRow != new.billIndexPathRow
+            || old.tipIndexPathRow != new.tipIndexPathRow
+            || old.overrideCurrencySymbol != new.overrideCurrencySymbol
+            || old.suggestedTipPercentage != new.suggestedTipPercentage
+            || old.splitBillPurchased != new.splitBillPurchased
+        {
+            self.remoteDelegate?.receivedRemotePreferences(new)
         }
     }
     
-    func postNotificationsForWatchChangedDefaults(old old: GratuitousUserDefaults, new: GratuitousUserDefaults) {
+    func postNotificationsForRemoteChangedDefaults(old old: GratuitousUserDefaults, new: GratuitousUserDefaults) {
         if old.overrideCurrencySymbol != new.overrideCurrencySymbol {
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.CurrencySymbolChanged, object: self, userInfo: new.dictionaryCopyForKeys(.All))
         }
-        if old.billIndexPathRow != new.billIndexPathRow || old.tipIndexPathRow != new.tipIndexPathRow || old.suggestedTipPercentage != new.suggestedTipPercentage || old.overrideCurrencySymbol != new.overrideCurrencySymbol {
+        if old.billIndexPathRow != new.billIndexPathRow
+            || old.tipIndexPathRow != new.tipIndexPathRow
+            || old.suggestedTipPercentage != new.suggestedTipPercentage
+            || old.overrideCurrencySymbol != new.overrideCurrencySymbol
+        {
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.InterfaceUpdateNeeded, object: self, userInfo: new.dictionaryCopyForKeys(.All))
         }
     }

@@ -19,7 +19,7 @@ extension GratuitousAppDelegate {
         
         
         if #available(iOS 9, *) {
-            self.preferencesNotificationManager.watchDelegate = self
+            self.preferencesNotificationManager.remoteDelegate = self
             (self.watchConnectivityManager as? GratuitousiOSConnectivityManager)?.delegate = self
             self.transferBulkCurrencySymbolsIfNeeded()
         }

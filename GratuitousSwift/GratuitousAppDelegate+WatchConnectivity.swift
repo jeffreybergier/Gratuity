@@ -14,8 +14,8 @@ extension GratuitousAppDelegate: GratuitousiOSConnectivityManagerDelegate {
     }
 }
 
-extension GratuitousAppDelegate: GratuitousDefaultsWatchDelegate {
-    func updatedWatchPreferences(preferences: GratuitousUserDefaults) {
+extension GratuitousAppDelegate: GratuitousDefaultsObserverRemoteDelegate {
+    func receivedRemotePreferences(preferences: GratuitousUserDefaults) {
         if #available(iOS 9, *) {
             (self.watchConnectivityManager as! GratuitousiOSConnectivityManager).updateWatchApplicationContext(preferences.dictionaryCopyForKeys(.WatchOnly))
         }

@@ -1,21 +1,14 @@
 //
-//  AppDelegate.swift
+//  GratuitousWatchApplicationPreferences.swift
 //  GratuitousSwift
 //
-//  Created by Jeffrey Bergier on 10/8/14.
-//  Copyright (c) 2014 SaturdayApps. All rights reserved.
+//  Created by Jeffrey Bergier on 10/16/15.
+//  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import UIKit
-import WatchConnectivity
-import Fabric
-import Crashlytics
-
-@UIApplicationMain
-final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
+class GratuitousWatchApplicationPreferences {
     
-    // MARK: Required iOS Properties Properties
-    var window: UIWindow?
+    static let sharedInstance = GratuitousWatchApplicationPreferences()
     
     // MARK: App Preferences Management Properties
     private var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk()
@@ -48,19 +41,4 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     let preferencesDiskManager = GratuitousUserDefaultsDiskManager()
     let preferencesNotificationManager = GratuitousDefaultsObserver()
-    
-    // MARK: State Restoration Properties
-    let storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
-    let presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right, animate: false)
-    let presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom, animate: false)
-    
-    // MARK: Watch Connectivity Properties
-    let watchConnectivityManager: AnyObject? = {
-        if #available(iOS 9, *) {
-            return GratuitousiOSConnectivityManager()
-        } else {
-            return .None
-        }
-    }()
 }
-
