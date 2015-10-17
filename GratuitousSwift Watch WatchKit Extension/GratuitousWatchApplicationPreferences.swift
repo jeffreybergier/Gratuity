@@ -16,29 +16,27 @@ class GratuitousWatchApplicationPreferences {
     private let log = XCGLogger.defaultInstance()
     
     // MARK: App Preferences Management Properties
-    private var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk()
-    var localPreferences: GratuitousUserDefaults {
-        get {
-            return _preferences
+    private var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
+        didSet {
+            self.preferencesDiskManager.writeUserDefaultsToPreferencesFileWithRateLimit(_preferences)
         }
+    }
+    var localPreferences: GratuitousUserDefaults {
+        get { return _preferences }
         set {
             if _preferences != newValue {
                 let oldValue = _preferences
                 _preferences = newValue
-                self.preferencesDiskManager.writeUserDefaultsToPreferencesFileWithRateLimit(newValue)
                 self.preferencesNotificationManager.postNotificationsForLocallyChangedDefaults(old: oldValue, new: newValue)
             }
         }
     }
     var remotePreferences: GratuitousUserDefaults {
-        get {
-            return _preferences
-        }
+        get { return _preferences }
         set {
             if _preferences != newValue {
                 let oldValue = _preferences
                 _preferences = newValue
-                self.preferencesDiskManager.writeUserDefaultsToPreferencesFileWithRateLimit(newValue)
                 self.preferencesNotificationManager.postNotificationsForRemoteChangedDefaults(old: oldValue, new: newValue)
             }
         }

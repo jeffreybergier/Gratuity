@@ -15,30 +15,28 @@ struct GratuitousUserDefaults {
     var tipIndexPathRow: Int
     var overrideCurrencySymbol: CurrencySign
     var suggestedTipPercentage: Double
-    var freshWatchAppInstall: Bool
     var splitBillPurchased: Bool
 }
 
 extension GratuitousUserDefaults: Equatable { }
 
 func ==(lhs: GratuitousUserDefaults, rhs: GratuitousUserDefaults) -> Bool {
-    if lhs.currencySymbolsNeeded == true || rhs.currencySymbolsNeeded == true {
-        return false
-    }
     return lhs.dictionaryCopyForKeys(.All) as NSDictionary == rhs.dictionaryCopyForKeys(.All) as NSDictionary
 }
 
 extension GratuitousUserDefaults {
     enum DictionaryCopyKeys {
-        case All, WatchOnly
+        case All, WatchOnly, AllForDisk
     }
     
     func dictionaryCopyForKeys(keys: DictionaryCopyKeys) -> [String : AnyObject] {
         var dictionary = [String : AnyObject]()
         switch keys {
         case .All:
+            dictionary[Keys.currencySymbolsNeeded] = self.currencySymbolsNeeded
+            fallthrough
+        case .AllForDisk:
             dictionary[Keys.appVersionString] = self.appVersionString
-            dictionary[Keys.freshWatchAppInstall] = NSNumber(bool: self.freshWatchAppInstall)
             fallthrough
         case .WatchOnly:
             dictionary[Keys.billIndexPathRow] = NSNumber(integer: self.billIndexPathRow)
@@ -83,12 +81,6 @@ extension GratuitousUserDefaults {
             self.appVersionString = fallback.appVersionString
         }
         // version 1.2 keys
-        if let freshWatchAppInstall = dictionary?[Keys.freshWatchAppInstall] as? NSNumber {
-            let value = freshWatchAppInstall.boolValue
-            self.freshWatchAppInstall = value
-        } else {
-            self.freshWatchAppInstall = true
-        }
         if let splitBillPurchased = dictionary?[Keys.splitBillPurchased] as? NSNumber {
             let value = splitBillPurchased.boolValue
             self.splitBillPurchased = value
@@ -129,12 +121,6 @@ extension GratuitousUserDefaults {
             self.appVersionString = "1.1.0"
         }
         // version 1.2 keys
-        if let freshWatchAppInstall = dictionary?[Keys.freshWatchAppInstall] as? NSNumber {
-            let value = freshWatchAppInstall.boolValue
-            self.freshWatchAppInstall = value
-        } else {
-            self.freshWatchAppInstall = true
-        }
         if let splitBillPurchased = dictionary?[Keys.splitBillPurchased] as? NSNumber {
             let value = splitBillPurchased.boolValue
             self.splitBillPurchased = value
