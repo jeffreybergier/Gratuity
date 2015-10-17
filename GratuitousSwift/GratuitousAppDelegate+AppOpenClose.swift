@@ -18,11 +18,8 @@ extension GratuitousAppDelegate {
         self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         
         if #available(iOS 9, *) {
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "remoteContextUpdateNeeded:", name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
-
-            (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.contextDelegate = self
-            (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.messageDelegate = self
-            //self.transferBulkCurrencySymbolsIfNeeded()
+            (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.contextDelegate = (self.customWatchCommunicationManager as? GratuitousiOSConnectivityManager)
+            (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.messageDelegate = (self.customWatchCommunicationManager as? GratuitousiOSConnectivityManager)
         }
         
         let purchaseManager = GratuitousPurchaseManager()

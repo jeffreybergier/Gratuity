@@ -6,77 +6,97 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import WatchKit
 import WatchConnectivity
-
+import XCGLogger
 
 @available(iOS 9, *)
-final class GratuitousiOSConnectivityManager: NSObject, WCSessionDelegate {
+final class GratuitousiOSConnectivityManager {
+    private let log = XCGLogger.defaultInstance()
     
-    let session: WCSession? = {
-        if WCSession.isSupported() {
-            return WCSession.defaultSession()
-        } else {
-            return .None
-        }
-    }()
-    
-    weak var delegate: AnyObject? {
-        didSet {
-            if let session = self.session {
-                session.delegate = self
-                session.activateSession()
-            }
-        }
-    }
-        
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
-        var dictionary = message
-        if let overrideCurrencySymbol = dictionary["overrideCurrencySymbol"] as? NSNumber,
-            let currencySymbolsNeeded = dictionary["currencySymbolsNeeded"] as? NSNumber,
-            let currencySign = CurrencySign(rawValue: overrideCurrencySymbol.integerValue)
-            where currencySymbolsNeeded.boolValue == true {
-                let currencyStringImageGenerator = GratuitousCurrencyStringImageGenerator()
-                if let tuple = currencyStringImageGenerator.generateCurrencySymbolsForCurrencySign(currencySign) {
-                    print("CurrencySymbols Needed on Watch: Sending URL: \(tuple.url.path!)")
-                    session.transferFile(tuple.url, metadata: ["fileName" : tuple.fileName])
-                    // assume the file is going to make it
-                    dictionary["currencySymbolsNeeded"] = NSNumber(bool: false)
-                }
-        }
-        replyHandler(dictionary)
+    private var watchConnectivityManager: JSBWatchConnectivityManager {
+        return ((UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).watchConnectivityManager as! JSBWatchConnectivityManager)
     }
     
-    func updateWatchApplicationContext(context: [String : AnyObject]?) {
-        guard let context = context else { return }
-        if let session = self.session where session.paired == true && session.watchAppInstalled {
-            do {
-                print("GratuitousWatchConnectivityManager<iOS>: Updating Watch Application Context")
-                try session.updateApplicationContext(context)
-            } catch {
-                NSLog("GratuitousWatchConnectivityManager<iOS>: Failed Updating iOS Application Context: \(error)")
-            }
-        } else {
-            NSLog("GratuitousWatchConnectivityManager<iOS>: Did Not Attempt to Update Watch. No Watch Paired.")
-        }
+    private var applicationPreferences: GratuitousUserDefaults {
+        get { return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).remotePreferences }
+        set { (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).remotePreferences = newValue }
     }
     
-    func transferBulkData(tuples: [(url: NSURL, fileName: String)]) {
-        if let session = self.session where session.paired == true && session.watchAppInstalled == true {
-            for tuple in tuples {
-                session.transferFile(tuple.url, metadata: ["fileName" : tuple.fileName])
-            }
-        }
+    private var remoteUpdateRateLimiterSet = false
+    
+    init() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "remoteContextUpdateNeeded:", name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+}
 
+@available(iOS 9, *)
+extension GratuitousiOSConnectivityManager {
+    @available (iOS 9, *)
+    @objc private func remoteContextUpdateNeeded(notification: NSNotification?) {
+        if self.remoteUpdateRateLimiterSet == false {
+            self.remoteUpdateRateLimiterSet = true
+            NSTimer.scheduleWithDelay(3.0) { timer in
+                self.remoteUpdateRateLimiterSet = false
+                self.updateRemoteContext(notification)
+            }
+        }
+    }
     
+    @available (iOS 9, *)
+    func updateRemoteContext(notification: NSNotification?) {
+        let context = self.applicationPreferences.dictionaryCopyForKeys(.WatchOnly)
+        do {
+            try self.watchConnectivityManager.session?.updateApplicationContext(context)
+        } catch {
+            self.log.error("Updating Remote Context: \(context) Failed with Error: \(error)")
+        }
+    }
+}
+
+@available(iOS 9, *)
+extension GratuitousiOSConnectivityManager: JSBWatchConnectivityContextDelegate {
+    @available(iOS 9.0, *)
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
-        print("GratuitousWatchConnectivityManager: didReceiveApplicationContext: \(applicationContext)")
-        self.delegate?.receivedContextFromWatch(applicationContext)
+        self.applicationPreferences = GratuitousUserDefaults(dictionary: applicationContext, fallback: self.applicationPreferences)
+    }
+}
+
+@available(iOS 9, *)
+extension GratuitousiOSConnectivityManager: JSBWatchConnectivityMessageDelegate {
+    @available(iOS 9.0, *)
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        if let currencySymbolsNeeded = (message["SymbolImagesRequested"] as? NSNumber)?.boolValue where currencySymbolsNeeded == true {
+            self.log.info("Message Received: SymbolImagesRequested")
+            let currencySign = GratuitousUserDefaults(dictionary: message, fallback: self.applicationPreferences).overrideCurrencySymbol
+            let imagesGenerated = self.generateAndTransferCurrencySymbolImagesForCurrencySign(currencySign)
+            replyHandler(["GeneratingMessages" : NSNumber(bool: imagesGenerated)])
+        } else {
+            self.log.warning("Received Unknown Message: \(message)")
+        }
+    }
+    @available(iOS 9.0, *)
+    func session(session: WCSession, didReceiveMessageData messageData: NSData, replyHandler: (NSData) -> Void) {
+        self.log.info("Received Unknown MessageData: \(messageData)")
     }
     
-    func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
-        print("GratuitousWatchConnectivityManager: didFinishFileTransfer: \(fileTransfer) with error: \(error)")
+    @available(iOS 9.0, *)
+    private func generateAndTransferCurrencySymbolImagesForCurrencySign(currencySign: CurrencySign) -> Bool {
+        let generator = GratuitousCurrencyStringImageGenerator()
+        let tuple = generator.generateCurrencySymbolsForCurrencySign(currencySign)
+        return self.initiateFileTransferToRemote(tuple)
     }
-
+    
+    @available(iOS 9.0, *)
+    private func initiateFileTransferToRemote(tuple: (url: NSURL, fileName: String)?) -> Bool {
+        if let tuple = tuple {
+            self.watchConnectivityManager.session?.transferFile(tuple.url, metadata: ["FileName" : tuple.fileName])
+            return true
+        } else {
+            return false
+        }
+    }
 }

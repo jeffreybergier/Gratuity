@@ -49,28 +49,3 @@ class GratuitousDefaultsObserver {
         static let CurrencySymbolsNeededFromRemote = "CurrencySymbolsNeededFromRemote"
     }
 }
-
-//    if old.currencySymbolsNeeded != new.currencySymbolsNeeded {
-//
-//    }
-//    if old.appVersionString != new.appVersionString {
-//
-//    }
-//    if old.billIndexPathRow != new.billIndexPathRow {
-//
-//    }
-//    if old.tipIndexPathRow != new.tipIndexPathRow {
-//
-//    }
-//    if old.overrideCurrencySymbol != new.overrideCurrencySymbol {
-//
-//    }
-//    if old.suggestedTipPercentage != new.suggestedTipPercentage {
-//
-//    }
-//    if old.freshWatchAppInstall != new.freshWatchAppInstall {
-//
-//    }
-//    if old.splitBillPurchased != new.splitBillPurchased {
-//
-//    }

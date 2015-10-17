@@ -65,11 +65,12 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             return .None
         }
     }()
-    
-    var remoteUpdateRateLimiterSet = false
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
+    let customWatchCommunicationManager: AnyObject? = {
+        if #available(iOS 9, *) {
+            return GratuitousiOSConnectivityManager()
+        } else {
+            return .None
+        }
+    }()
 }
 
