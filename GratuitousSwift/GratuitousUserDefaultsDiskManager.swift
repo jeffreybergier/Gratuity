@@ -40,7 +40,7 @@ class GratuitousUserDefaultsDiskManager {
         do {
             try self.manager.writePreferencesDictionary(defaults.dictionaryCopyForKeys(.AllForDisk), toLocation: .PreferencesPLISTFileWithinPreferencesURL)
         } catch {
-            log.error("Failed to write to disk with error: \(error)")
+            log.error("Failed to write preferences to disk with error: \(error)")
         }
     }
     
@@ -48,7 +48,7 @@ class GratuitousUserDefaultsDiskManager {
         do {
             return try self.manager.dictionaryByReadingPLISTFromDiskLocation(.PreferencesPLISTFileWithinPreferencesURL)
         } catch {
-            log.error("Failed to read dictionary from disk: \(error)")
+            log.error("Failed to read preferences from disk: \(error)")
             return .None
         }
     }
