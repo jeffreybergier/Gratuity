@@ -47,8 +47,8 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    let preferencesDiskManager = GratuitousUserDefaultsDiskManager()
-    let preferencesNotificationManager = GratuitousDefaultsObserver()
+    private let preferencesDiskManager = GratuitousUserDefaultsDiskManager()
+    private let preferencesNotificationManager = GratuitousDefaultsObserver()
     
     // MARK: State Restoration Properties
     let storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
@@ -63,12 +63,38 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             return .None
         }
     }()
-    let customWatchCommunicationManager: AnyObject? = {
+    private let customWatchCommunicationManager: AnyObject? = {
         if #available(iOS 9, *) {
             return GratuitousiOSConnectivityManager()
         } else {
             return .None
         }
     }()
+    
+    // MARK: iOS App Launch
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Override point for customization after application launch
+        
+        //crashlytics intializer
+        //Fabric.with([Crashlytics()])
+        
+        self.window!.tintColor = GratuitousUIConstant.lightTextColor()
+        self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
+        
+        if #available(iOS 9, *) {
+            (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.contextDelegate = (self.customWatchCommunicationManager as? GratuitousiOSConnectivityManager)
+            (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.messageDelegate = (self.customWatchCommunicationManager as? GratuitousiOSConnectivityManager)
+        }
+        
+        let purchaseManager = GratuitousPurchaseManager()
+        self.localPreferences.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
+        
+        return true
+    }
+    
+    // MARK: iOS App Going to the Background
+    func applicationWillResignActive(application: UIApplication) {
+        self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.localPreferences)
+    }
 }
 

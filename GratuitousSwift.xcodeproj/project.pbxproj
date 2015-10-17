@@ -47,11 +47,9 @@
 		733D02E41BBA505600E40EC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */; };
 		735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735DCADB1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; settings = {ASSET_TAGS = (); }; };
-		738C98B41BD1A35100D14F20 /* GratuitousAppDelegate+AppOpenClose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B31BD1A35100D14F20 /* GratuitousAppDelegate+AppOpenClose.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98B71BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98B81BD2068000D14F20 /* GratuitousDefaultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98B91BD2082000D14F20 /* GratuitousNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C591BCF444700456E8A /* GratuitousNumberFormatter.swift */; settings = {ASSET_TAGS = (); }; };
-		738C98BB1BD2AE7F00D14F20 /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98BD1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98BF1BD2B6E400D14F20 /* JSBWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98C01BD2DE3A00D14F20 /* NSTimer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */; settings = {ASSET_TAGS = (); }; };
@@ -140,7 +138,7 @@
 		73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchInfoViewController.swift; sourceTree = "<group>"; };
 		73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "gratuityInfoDemoVideo@2x.mov"; sourceTree = "<group>"; };
 		73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBPurchaseManager.swift; sourceTree = "<group>"; };
-		7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fuuutuuura-Meeediuuum.ttf"; sourceTree = "<group>"; };
+		7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Fuuutuuura-Meeediuuum.ttf"; path = "../GratuitousSwift Watch Watch App/Fuuutuuura-Meeediuuum.ttf"; sourceTree = "<group>"; };
 		732615E61BA9237C0081598F /* SmallModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallModalViewController.swift; sourceTree = "<group>"; };
 		732615EA1BA9289F0081598F /* SplitBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitBillViewController.swift; sourceTree = "<group>"; };
 		732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousiOSLocalizedStrings.swift; sourceTree = "<group>"; };
@@ -173,8 +171,7 @@
 		7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GratuitousTableViewCell.xib; sourceTree = "<group>"; };
 		738484D41B992E1B0044C14C /* fallbackPickerImages.data */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fallbackPickerImages.data; sourceTree = "<group>"; };
 		738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousiOSConnectivityManager.swift; path = GratuitousSwift/GratuitousiOSConnectivityManager.swift; sourceTree = SOURCE_ROOT; };
-		738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimer+Closure.swift"; sourceTree = "<group>"; };
-		738C98B31BD1A35100D14F20 /* GratuitousAppDelegate+AppOpenClose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GratuitousAppDelegate+AppOpenClose.swift"; sourceTree = "<group>"; };
+		738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSTimer+Closure.swift"; path = "../GratuitousSwift/NSTimer+Closure.swift"; sourceTree = "<group>"; };
 		738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchApplicationPreferences.swift; sourceTree = "<group>"; };
 		738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSBWatchConnectivityManager.swift; path = GratuitousSwift/JSBWatchConnectivityManager.swift; sourceTree = SOURCE_ROOT; };
 		738C98C21BD2EAA500D14F20 /* GratuitousWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchConnectivityManager.swift; sourceTree = "<group>"; };
@@ -203,7 +200,6 @@
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
 		73D86F6A1BAF2CA000B098FE /* GratuitousPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPresentationController.swift; sourceTree = "<group>"; };
 		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousEnums.swift; path = ../GratuitousSwift/GratuitousEnums.swift; sourceTree = "<group>"; };
-		73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousPropertyListPreferences.swift; path = ../GratuitousSwift/GratuitousPropertyListPreferences.swift; sourceTree = "<group>"; };
 		73EB5C721BABCA14000F4A99 /* SmallModalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallModalTableViewController.swift; sourceTree = "<group>"; };
 		73EB5C751BABCD35000F4A99 /* SmallModalScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallModalScrollViewController.swift; sourceTree = "<group>"; };
 		73EC11641BC049A400716CA8 /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
@@ -365,7 +361,6 @@
 			isa = PBXGroup;
 			children = (
 				7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */,
-				738C98B31BD1A35100D14F20 /* GratuitousAppDelegate+AppOpenClose.swift */,
 				73C8BB551BD0A85800D427CB /* GratuitousAppDelegate+StateRestoration.swift */,
 				73C8BB571BD0A9C300D427CB /* GratuitousAppDelegate+Handoff.swift */,
 				734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */,
@@ -408,14 +403,15 @@
 		73A18D5C1A2A9525002180DD /* GratuitousSwift Watch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */,
 				73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */,
 				73A0B5671A8FC56A00D17943 /* SplitTotalInterfaceController.swift */,
 				735DCADB1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift */,
 				7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */,
-				738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */,
 				738C98C21BD2EAA500D14F20 /* GratuitousWatchConnectivityManager.swift */,
 				732CFE6B1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift */,
 				738484D41B992E1B0044C14C /* fallbackPickerImages.data */,
+				7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */,
 				73D46AFD1AC7C9B400057185 /* Images.xcassets */,
 				73A18D5D1A2A9525002180DD /* Supporting Files */,
 			);
@@ -454,11 +450,10 @@
 		73A755B31A87F8E80038E023 /* Common Files */ = {
 			isa = PBXGroup;
 			children = (
-				7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */,
 				738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */,
 				73BA966C1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift */,
+				738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */,
 				734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */,
-				73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */,
 				73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */,
 				73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */,
 				73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */,
@@ -473,12 +468,12 @@
 		73A755B71A87FB010038E023 /* Custom Files */ = {
 			isa = PBXGroup;
 			children = (
+				73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */,
+				7376F8DD1B8EC5CD009CAB74 /* JSBAttributedStringImageGenerator.swift */,
 				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
 				738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */,
-				73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */,
 				7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */,
 				7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */,
-				7376F8DD1B8EC5CD009CAB74 /* JSBAttributedStringImageGenerator.swift */,
 				73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */,
 				732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */,
 			);
@@ -497,7 +492,6 @@
 				73FF9EA01BBE4BDC00F9278C /* RMAppReceipt.h */,
 				73FF9EA11BBE4BE400F9278C /* RMAppReceipt.m */,
 				73EC11641BC049A400716CA8 /* AppleIncRootCertificate.cer */,
-				738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */,
 			);
 			name = "Objective-C";
 			sourceTree = "<group>";
@@ -795,7 +789,6 @@
 				733D02C71BBA4D1F00E40EC5 /* SplitBillViewController.swift in Sources */,
 				733D02CA1BBA4D1F00E40EC5 /* WatchInfoViewController.swift in Sources */,
 				73C8BB561BD0A85900D427CB /* GratuitousAppDelegate+StateRestoration.swift in Sources */,
-				738C98B41BD1A35100D14F20 /* GratuitousAppDelegate+AppOpenClose.swift in Sources */,
 				736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */,
 				733D02C01BBA4D1300E40EC5 /* SettingsTableViewController.swift in Sources */,
 				73F44C5C1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */,
@@ -840,7 +833,6 @@
 				73AEA6DF1BBB06D0004B16DE /* PickerInterfaceController.swift in Sources */,
 				738C98C11BD2DE3B00D14F20 /* NSTimer+Closure.swift in Sources */,
 				73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */,
-				738C98BB1BD2AE7F00D14F20 /* GratuitousPropertyListPreferences.swift in Sources */,
 				73F44C5D1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */,
 				732CFE6C1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift in Sources */,
 				73BA966A1BD0614200CFCEC4 /* GratuitousUserDefaultsDiskManager.swift in Sources */,
