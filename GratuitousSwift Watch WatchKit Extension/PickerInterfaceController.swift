@@ -12,12 +12,8 @@ import Foundation
 final class PickerInterfaceController: WKInterfaceController {
     
     private var applicationPreferences: GratuitousUserDefaults {
-        get {
-            return GratuitousWatchApplicationPreferences.sharedInstance.localPreferences
-        }
-        set {
-            GratuitousWatchApplicationPreferences.sharedInstance.localPreferences = newValue
-        }
+        get { return GratuitousWatchApplicationPreferences.sharedInstance.localPreferences }
+        set { GratuitousWatchApplicationPreferences.sharedInstance.localPreferences = newValue }
     }
     private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
     
