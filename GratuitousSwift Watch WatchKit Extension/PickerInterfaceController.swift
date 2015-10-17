@@ -13,7 +13,9 @@ final class PickerInterfaceController: WKInterfaceController {
     
     private var applicationPreferences: GratuitousUserDefaults {
         get { return GratuitousWatchApplicationPreferences.sharedInstance.localPreferences }
-        set { GratuitousWatchApplicationPreferences.sharedInstance.localPreferences = newValue }
+        set {
+            GratuitousWatchApplicationPreferences.sharedInstance.localPreferences = newValue
+        }
     }
     private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
     
@@ -99,6 +101,10 @@ final class PickerInterfaceController: WKInterfaceController {
         
         if self.interfaceControllerConfiguredOnce == false {
             self.interfaceControllerConfiguredOnce = true
+            // configure notifications
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignDidChange:", name: NSCurrentLocaleDidChangeNotification, object: .None)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignDidChange:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "billTipValueChangeByRemote:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
             
             // configure the menu
             self.addMenuItemWithImageNamed("splitTipMenuIcon", title: PickerInterfaceController.LocalizedString.SplitTipMenuIconLabel, action: "splitTipMenuButtonTapped")
@@ -217,6 +223,10 @@ final class PickerInterfaceController: WKInterfaceController {
         self.interfaceIdleTimer = nil
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     // MARK: Handle User Input
 
     @IBAction func billPickerChanged(value: Int) {
@@ -269,6 +279,17 @@ final class PickerInterfaceController: WKInterfaceController {
         } else {
             self.presentControllerWithName("SplitBillPurchaseInterfaceController", context: .None)
         }
+    }
+    
+    // MARK: Handle External UI Updates
+    
+    @objc private func currencySignDidChange(notification: NSNotification?) {
+        self.currencyFormatter.locale = NSLocale.currentLocale()
+        self.largeInterfaceUpdateNeeded = true
+    }
+    
+    @objc private func billTipValueChangeByRemote(notification: NSNotification?) {
+        self.smallInterfaceUpdateNeeded = true
     }
     
     // MARK: Handle Loading Picker Items

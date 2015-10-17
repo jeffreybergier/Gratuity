@@ -9,10 +9,6 @@
 import WatchKit
 import WatchConnectivity
 
-@available (iOS 9, *)
-protocol GratuitousiOSConnectivityManagerDelegate: class {
-    func receivedContextFromWatch(context: [String : AnyObject])
-}
 
 @available(iOS 9, *)
 final class GratuitousiOSConnectivityManager: NSObject, WCSessionDelegate {
@@ -25,7 +21,7 @@ final class GratuitousiOSConnectivityManager: NSObject, WCSessionDelegate {
         }
     }()
     
-    weak var delegate: GratuitousiOSConnectivityManagerDelegate? {
+    weak var delegate: AnyObject? {
         didSet {
             if let session = self.session {
                 session.delegate = self

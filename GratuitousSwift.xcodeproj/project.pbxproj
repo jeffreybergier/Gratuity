@@ -36,7 +36,6 @@
 		733D02CF1BBA4D2800E40EC5 /* GratuitousTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D01BBA4D2800E40EC5 /* GratuitousUIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D11BBA4D2800E40EC5 /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; settings = {ASSET_TAGS = (); }; };
-		733D02D21BBA4D2800E40EC5 /* GratuitousiOSConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D41BBA4D2800E40EC5 /* GratuitousPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D51BBA4D2800E40EC5 /* GratuitousCurrencyStringImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
 		733D02D61BBA4D2800E40EC5 /* JSBAttributedStringImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F8DD1B8EC5CD009CAB74 /* JSBAttributedStringImageGenerator.swift */; settings = {ASSET_TAGS = (); }; };
@@ -54,6 +53,9 @@
 		738C98B71BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98B81BD2068000D14F20 /* GratuitousDefaultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98B91BD2082000D14F20 /* GratuitousNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C591BCF444700456E8A /* GratuitousNumberFormatter.swift */; settings = {ASSET_TAGS = (); }; };
+		738C98BB1BD2AE7F00D14F20 /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
+		738C98BD1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
+		738C98BF1BD2B6E400D14F20 /* JSBWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F51BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */; settings = {ASSET_TAGS = (); }; };
@@ -62,12 +64,10 @@
 		73AEA6DF1BBB06D0004B16DE /* PickerInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6E01BBB06D0004B16DE /* SplitTotalInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0B5671A8FC56A00D17943 /* SplitTotalInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6E11BBB06D0004B16DE /* SettingsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7376F0151AB55AF2002AD1DB /* SettingsInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
-		73AEA6E31BBB06D0004B16DE /* GratuitousWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CA9AE61B90BD28005344FB /* GratuitousWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6E41BBB06D0004B16DE /* fallbackPickerImages.data in Resources */ = {isa = PBXBuildFile; fileRef = 738484D41B992E1B0044C14C /* fallbackPickerImages.data */; settings = {ASSET_TAGS = (); }; };
 		73AEA6E51BBB06D0004B16DE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73D46AFD1AC7C9B400057185 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		73AEA6E71BBB06DA004B16DE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D711A2A9525002180DD /* Interface.storyboard */; settings = {ASSET_TAGS = (); }; };
 		73AEA6E81BBB06DE004B16DE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A18D731A2A9525002180DD /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
-		73AEA6EB1BBB06EE004B16DE /* GratuitousPropertyListPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9B9871B92CC200058DC94 /* GratuitousPropertyListPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6EC1BBB06EE004B16DE /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6ED1BBB0732004B16DE /* GratuitousUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6F01BBB0877004B16DE /* Fuuutuuura-Meeediuuum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */; settings = {ASSET_TAGS = (); }; };
@@ -175,6 +175,7 @@
 		738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimer+Closure.swift"; sourceTree = "<group>"; };
 		738C98B31BD1A35100D14F20 /* GratuitousAppDelegate+AppOpenClose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GratuitousAppDelegate+AppOpenClose.swift"; sourceTree = "<group>"; };
 		738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchApplicationPreferences.swift; sourceTree = "<group>"; };
+		738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSBWatchConnectivityManager.swift; path = GratuitousSwift/JSBWatchConnectivityManager.swift; sourceTree = SOURCE_ROOT; };
 		7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyStringImageGenerator.swift; sourceTree = "<group>"; };
 		73A0B5671A8FC56A00D17943 /* SplitTotalInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTotalInterfaceController.swift; sourceTree = "<group>"; };
 		73A18D5A1A2A9525002180DD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
@@ -464,6 +465,7 @@
 				73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */,
 				73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */,
 				736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */,
+				738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */,
 				73F44C591BCF444700456E8A /* GratuitousNumberFormatter.swift */,
 				73BA966C1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift */,
 			);
@@ -802,6 +804,7 @@
 				73F44C5C1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */,
 				733D02C11BBA4D1300E40EC5 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
 				733D02C21BBA4D1300E40EC5 /* GratuitousRoundedHeaderTableView.swift in Sources */,
+				738C98BD1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift in Sources */,
 				733D02D11BBA4D2800E40EC5 /* GratuitousUIColor.swift in Sources */,
 				733D02D01BBA4D2800E40EC5 /* GratuitousUIConstant.swift in Sources */,
 				73BA966D1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift in Sources */,
@@ -824,7 +827,6 @@
 				733D02CC1BBA4D2800E40EC5 /* GratuitousRightPresentationController.swift in Sources */,
 				733D02C61BBA4D1900E40EC5 /* SmallModalScrollViewController.swift in Sources */,
 				733D02BF1BBA4D0900E40EC5 /* GratuitousGradientView.swift in Sources */,
-				733D02D21BBA4D2800E40EC5 /* GratuitousiOSConnectivityManager.swift in Sources */,
 				733D02C41BBA4D1900E40EC5 /* SmallModalViewController.swift in Sources */,
 				733D02C81BBA4D1F00E40EC5 /* SplitBillTableViewCell.swift in Sources */,
 				73FF9E9F1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m in Sources */,
@@ -838,10 +840,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */,
-				73AEA6EB1BBB06EE004B16DE /* GratuitousPropertyListPreferences.swift in Sources */,
 				73AEA6DF1BBB06D0004B16DE /* PickerInterfaceController.swift in Sources */,
-				73AEA6E31BBB06D0004B16DE /* GratuitousWatchConnectivityManager.swift in Sources */,
 				73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */,
+				738C98BB1BD2AE7F00D14F20 /* GratuitousPropertyListPreferences.swift in Sources */,
 				73F44C5D1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */,
 				732CFE6C1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift in Sources */,
 				73BA966A1BD0614200CFCEC4 /* GratuitousUserDefaultsDiskManager.swift in Sources */,
@@ -853,6 +854,7 @@
 				738C98B91BD2082000D14F20 /* GratuitousNumberFormatter.swift in Sources */,
 				738C98B21BD19FC000D14F20 /* NSTimer+Closure.swift in Sources */,
 				73AEA6ED1BBB0732004B16DE /* GratuitousUIColor.swift in Sources */,
+				738C98BF1BD2B6E400D14F20 /* JSBWatchConnectivityManager.swift in Sources */,
 				738C98B81BD2068000D14F20 /* GratuitousDefaultsObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

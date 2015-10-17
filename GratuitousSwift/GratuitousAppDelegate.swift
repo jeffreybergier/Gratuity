@@ -10,12 +10,15 @@ import UIKit
 import WatchConnectivity
 import Fabric
 import Crashlytics
+import XCGLogger
 
 @UIApplicationMain
 final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: Required iOS Properties Properties
     var window: UIWindow?
+    
+    let log = XCGLogger.defaultInstance()
     
     // MARK: App Preferences Management Properties
     private var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk()
@@ -57,10 +60,16 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Watch Connectivity Properties
     let watchConnectivityManager: AnyObject? = {
         if #available(iOS 9, *) {
-            return GratuitousiOSConnectivityManager()
+            return JSBWatchConnectivityManager()
         } else {
             return .None
         }
     }()
+    
+    var remoteUpdateRateLimiterSet = false
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }
 

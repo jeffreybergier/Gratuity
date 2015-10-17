@@ -8,13 +8,7 @@
 
 import Foundation
 
-protocol GratuitousDefaultsObserverRemoteDelegate {
-    func receivedRemotePreferences(preferences: GratuitousUserDefaults)
-}
-
 class GratuitousDefaultsObserver {
-    
-    var remoteDelegate: GratuitousDefaultsObserverRemoteDelegate?
     
     func postNotificationsForLocallyChangedDefaults(old old: GratuitousUserDefaults, new: GratuitousUserDefaults) {
         if old.overrideCurrencySymbol != new.overrideCurrencySymbol {
@@ -26,7 +20,7 @@ class GratuitousDefaultsObserver {
             || old.suggestedTipPercentage != new.suggestedTipPercentage
             || old.splitBillPurchased != new.splitBillPurchased
         {
-            self.remoteDelegate?.receivedRemotePreferences(new)
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.RemoteContextUpdateNeeded, object: self, userInfo: new.dictionaryCopyForKeys(.WatchOnly))
         }
     }
     
@@ -39,13 +33,14 @@ class GratuitousDefaultsObserver {
             || old.suggestedTipPercentage != new.suggestedTipPercentage
             || old.overrideCurrencySymbol != new.overrideCurrencySymbol
         {
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.InterfaceUpdateNeeded, object: self, userInfo: new.dictionaryCopyForKeys(.All))
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.BillTipValueChangedByRemote, object: self, userInfo: new.dictionaryCopyForKeys(.All))
         }
     }
     
     struct NotificationKeys {
         static let CurrencySymbolChanged = "CurrencySymbolChanged"
-        static let InterfaceUpdateNeeded = "InterfaceUpdateNeeded"
+        static let BillTipValueChangedByRemote = "BillTipValueChanged"
+        static let RemoteContextUpdateNeeded = "RemoteConextUpdateNeeded"
     }
 }
 

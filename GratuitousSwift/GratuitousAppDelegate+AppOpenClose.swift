@@ -3,7 +3,7 @@
 //  GratuitousSwift
 //
 //  Created by Jeffrey Bergier on 10/16/15.
-//  Copyright © 2015 SaturdayApps. All rights reserved.
+//  Copyright © 2015 SaturdayApps. All rights reserved
 //
 
 extension GratuitousAppDelegate {
@@ -17,11 +17,11 @@ extension GratuitousAppDelegate {
         self.window!.tintColor = GratuitousUIConstant.lightTextColor()
         self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         
-        
         if #available(iOS 9, *) {
-            self.preferencesNotificationManager.remoteDelegate = self
-            (self.watchConnectivityManager as? GratuitousiOSConnectivityManager)?.delegate = self
-            self.transferBulkCurrencySymbolsIfNeeded()
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "remoteContextUpdateNeeded:", name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
+
+            (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.contextDelegate = self
+            //self.transferBulkCurrencySymbolsIfNeeded()
         }
         
         let purchaseManager = GratuitousPurchaseManager()
