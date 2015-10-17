@@ -262,7 +262,18 @@ extension UIFont {
 // Crediting http://blog.human-friendly.com/theanswer-equals-maybeanswer-or-a-good-alternative
 
 infix operator !! { associativity right precedence 110 }
-public func !!<A>(lhs:A?, @autoclosure rhs:()->A)->A {
+func !!<A>(lhs:A?, @autoclosure rhs:()->A)->A {
     assert(lhs != nil)
     return lhs ?? rhs()
 }
+
+infix operator /? { associativity right precedence 160 }
+
+func /?(top: Double, bottom: Double) -> Double? {
+    let division = top/bottom
+    if isinf(division) == false && isnan(division) == false {
+        return division
+    }
+    return .None
+}
+

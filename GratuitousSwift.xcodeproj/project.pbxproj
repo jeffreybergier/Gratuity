@@ -54,7 +54,6 @@
 		738C98B71BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98B81BD2068000D14F20 /* GratuitousDefaultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98B91BD2082000D14F20 /* GratuitousNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C591BCF444700456E8A /* GratuitousNumberFormatter.swift */; settings = {ASSET_TAGS = (); }; };
-		738C98BA1BD2087800D14F20 /* GratuitousWatchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A18D7F1A2A9661002180DD /* GratuitousWatchDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F51BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */; settings = {ASSET_TAGS = (); }; };
@@ -847,7 +846,6 @@
 				732CFE6C1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift in Sources */,
 				73BA966A1BD0614200CFCEC4 /* GratuitousUserDefaultsDiskManager.swift in Sources */,
 				73AEA6EC1BBB06EE004B16DE /* GratuitousEnums.swift in Sources */,
-				738C98BA1BD2087800D14F20 /* GratuitousWatchDataSource.swift in Sources */,
 				73AEA6E11BBB06D0004B16DE /* SettingsInterfaceController.swift in Sources */,
 				738C98B71BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift in Sources */,
 				73AEA6E01BBB06D0004B16DE /* SplitTotalInterfaceController.swift in Sources */,

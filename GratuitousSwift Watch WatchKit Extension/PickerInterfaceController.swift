@@ -153,7 +153,7 @@ final class PickerInterfaceController: WKInterfaceController {
         }
         let suggestTipPercentage = self.applicationPreferences.suggestedTipPercentage
         let tipAmount = Int(round(Double(billAmount) * suggestTipPercentage))
-        let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
+        let actualTipPercentage = Double(tipAmount) /? Double(billAmount)
         self.currentBillAmount = billAmount + tipAmount
         self.currentTipPercentage = actualTipPercentage
         
@@ -169,7 +169,7 @@ final class PickerInterfaceController: WKInterfaceController {
             } else {
                 tipAmount = self.items?.tipItems.count ?? self.applicationPreferences.tipIndexPathRow
             }
-            let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
+            let actualTipPercentage = Double(tipAmount) /? Double(billAmount)
             self.currentBillAmount = billAmount + tipAmount
             self.currentTipPercentage = actualTipPercentage
             
@@ -234,7 +234,7 @@ final class PickerInterfaceController: WKInterfaceController {
         
         self.resetInterfaceIdleTimer()
         
-        let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
+        let actualTipPercentage = Double(tipAmount) /? Double(billAmount)
         self.currentBillAmount = billAmount + tipAmount
         self.currentTipPercentage = actualTipPercentage
         
@@ -252,7 +252,7 @@ final class PickerInterfaceController: WKInterfaceController {
         
         let billAmount = self.applicationPreferences.billIndexPathRow
         let tipAmount = value + 1
-        let actualTipPercentage = GratuitousWatchDataSource.optionalDivision(top: Double(tipAmount), bottom: Double(billAmount))
+        let actualTipPercentage = Double(tipAmount) /? Double(billAmount)
         self.currentBillAmount = billAmount + tipAmount
         self.currentTipPercentage = actualTipPercentage
         
