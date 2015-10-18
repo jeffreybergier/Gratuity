@@ -50,30 +50,32 @@ final class GratuitousGradientView: UIView {
     }
     
     @objc private func invertColorsDidChange(notification: NSNotification) {
-        //I know this is lazy... but it will rarely happen because its only when someone switches to inverted colors.
-        //we can waste the extra ram for that one rare session.
-        if UIAccessibilityIsInvertColorsEnabled() {
-            var unusualGradientColors = [
-                GratuitousUIConstant.darkBackgroundColor().CGColor, GratuitousUIConstant.darkBackgroundColor().CGColor,
-                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.6).CGColor,
-                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.5).CGColor,
-                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.4).CGColor
-            ]
-            if self.isUpsideDown {
-                unusualGradientColors = Array(unusualGradientColors.reverse())
+        dispatch_async(dispatch_get_main_queue()) {
+            //I know this is lazy... but it will rarely happen because its only when someone switches to inverted colors.
+            //we can waste the extra ram for that one rare session.
+            if UIAccessibilityIsInvertColorsEnabled() {
+                var unusualGradientColors = [
+                    GratuitousUIConstant.darkBackgroundColor().CGColor, GratuitousUIConstant.darkBackgroundColor().CGColor,
+                    GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.6).CGColor,
+                    GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.5).CGColor,
+                    GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.4).CGColor
+                ]
+                if self.isUpsideDown {
+                    unusualGradientColors = Array(unusualGradientColors.reverse())
+                }
+                self.gradient.colors = unusualGradientColors
+            } else {
+                var unusualGradientColors = [
+                    GratuitousUIConstant.darkBackgroundColor().CGColor, GratuitousUIConstant.darkBackgroundColor().CGColor,
+                    GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.6).CGColor,
+                    GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.5).CGColor,
+                    GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.4).CGColor
+                ]
+                if self.isUpsideDown {
+                    unusualGradientColors = Array(unusualGradientColors.reverse())
+                }
+                self.gradient.colors = unusualGradientColors
             }
-            self.gradient.colors = unusualGradientColors
-        } else {
-            var unusualGradientColors = [
-                GratuitousUIConstant.darkBackgroundColor().CGColor, GratuitousUIConstant.darkBackgroundColor().CGColor,
-                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.6).CGColor,
-                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.5).CGColor,
-                GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.4).CGColor
-            ]
-            if self.isUpsideDown {
-                unusualGradientColors = Array(unusualGradientColors.reverse())
-            }
-            self.gradient.colors = unusualGradientColors
         }
     }
     

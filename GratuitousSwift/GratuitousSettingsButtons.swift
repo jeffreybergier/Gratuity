@@ -60,8 +60,10 @@ final class GratuitousSettingsButtons: UIButton {
         
     }
     
-    func systemTextSizeDidChange(notification: NSNotification) {
-        self.prepareButtonAppearance()
+    @objc private func systemTextSizeDidChange(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.prepareButtonAppearance()
+        }
     }
     
     deinit {

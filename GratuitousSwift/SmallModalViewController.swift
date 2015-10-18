@@ -50,8 +50,10 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
     }
     
     @objc private func systemTextSizeDidChange(notification: NSNotification) {
-        self.configureDynamicTextLabels()
-        self.switchOnScreenSizeToDetermineBorderSurround()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.configureDynamicTextLabels()
+            self.switchOnScreenSizeToDetermineBorderSurround()
+        }
     }
     
     func configureDynamicTextLabels() {

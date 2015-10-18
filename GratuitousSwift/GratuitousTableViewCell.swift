@@ -33,14 +33,18 @@ final class GratuitousTableViewCell: UITableViewCell {
         self.didSetBillAmount()
     }
     
-    @objc private func invertColorsDidChange(notification: NSNotification) {
-        self.contentView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-        self.prepareLabelTextAttributes()
+    @objc private func invertColorsDidChange(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.contentView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+            self.prepareLabelTextAttributes()
+        }
     }
     
-    @objc private func currencySignChanged(notification: NSNotification) {
-        self.currencyFormatter.locale = NSLocale.currentLocale()
-        self.setInterfaceRefreshNeeded()
+    @objc private func currencySignChanged(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.currencyFormatter.locale = NSLocale.currentLocale()
+            self.setInterfaceRefreshNeeded()
+        }
     }
     
     private func didSetBillAmount() {

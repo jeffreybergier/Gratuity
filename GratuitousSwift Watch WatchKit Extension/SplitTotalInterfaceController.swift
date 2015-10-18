@@ -77,8 +77,10 @@ final class SplitTotalInterfaceController: WKInterfaceController {
     }
     
     @objc private func currencySignChanged(notification: NSNotification?) {
-        self.currencyFormatter.locale = NSLocale.currentLocale()
-        self.updateLabelText()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.currencyFormatter.locale = NSLocale.currentLocale()
+            self.updateLabelText()
+        }
     }
     
     override func willDisappear() {

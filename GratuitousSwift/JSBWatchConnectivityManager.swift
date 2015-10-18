@@ -39,14 +39,22 @@ protocol JSBWatchConnectivityMessageDelegate: class {
 }
 
 @available (iOS 9, watchOS 2, *)
-protocol JSBWatchConnectivityUserInfoDelegate: class {
+protocol JSBWatchConnectivityUserInfoSenderDelegate: class {
     func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: NSError?)
+}
+
+@available (iOS 9, watchOS 2, *)
+protocol JSBWatchConnectivityUserInfoReceiverDelegate: class {
     func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject])
 }
 
 @available (iOS 9, watchOS 2, *)
-protocol JSBWatchConnectivityFileTransferDelegate: class {
+protocol JSBWatchConnectivityFileTransferSenderDelegate: class {
     func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?)
+}
+
+@available (iOS 9, watchOS 2, *)
+protocol JSBWatchConnectivityFileTransferReceiverDelegate: class {
     func session(session: WCSession, didReceiveFile file: WCSessionFile)
 }
 
@@ -74,8 +82,10 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
     
     weak var contextDelegate: JSBWatchConnectivityContextDelegate?
     weak var messageDelegate: JSBWatchConnectivityMessageDelegate?
-    weak var userInfoDelegate: JSBWatchConnectivityUserInfoDelegate?
-    weak var fileTransferDelegate: JSBWatchConnectivityFileTransferDelegate?
+    weak var userInfoSenderDelegate: JSBWatchConnectivityUserInfoSenderDelegate?
+    weak var userInfoReceiverDelegate: JSBWatchConnectivityUserInfoReceiverDelegate?
+    weak var fileTransferSenderDelegate: JSBWatchConnectivityFileTransferSenderDelegate?
+    weak var fileTransferReceiverDelegate: JSBWatchConnectivityFileTransferReceiverDelegate?
     
     // MARK: iOS App State For Watch
     
@@ -161,37 +171,37 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
     
     /** Called on the sending side after the user info transfer has successfully completed or failed with an error. Will be called on next launch if the sender was not running when the user info finished. */
     func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: NSError?) {
-        if let delegate = self.userInfoDelegate {
+        if let delegate = self.userInfoSenderDelegate {
             delegate.session(session, didFinishUserInfoTransfer: userInfoTransfer, error: error)
         } else {
-            self.log.info("UserInfoDelegate Not Set. Ignoring UserInfo Transfer Finished: \(userInfoTransfer) with Error: \(error)")
+            self.log.info("UserInfoSenderDelegate Not Set. Ignoring UserInfo Transfer Finished: \(userInfoTransfer) with Error: \(error)")
         }
     }
     
     /** Called on the delegate of the receiver. Will be called on startup if the user info finished transferring when the receiver was not running. */
     func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
-        if let delegate = self.userInfoDelegate {
+        if let delegate = self.userInfoReceiverDelegate {
             delegate.session(session, didReceiveUserInfo: userInfo)
         } else {
-            self.log.info("UserInfoDelegate Not Set. Ignoring Incoming UserInfo: \(userInfo)")
+            self.log.info("UserInfoReceiverDelegate Not Set. Ignoring Incoming UserInfo: \(userInfo)")
         }
     }
     
     /** Called on the sending side after the file transfer has successfully completed or failed with an error. Will be called on next launch if the sender was not running when the transfer finished. */
     func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
-        if let delegate = self.fileTransferDelegate {
+        if let delegate = self.fileTransferSenderDelegate {
             delegate.session(session, didFinishFileTransfer: fileTransfer, error: error)
         } else {
-            self.log.info("FileTransferDelegate Not Set. Ignoring File Transfer Finished: \(fileTransfer) with Error: \(error)")
+            self.log.info("FileTransferSenderDelegate Not Set. Ignoring File Transfer Finished: \(fileTransfer) with Error: \(error)")
         }
     }
     
     /** Called on the delegate of the receiver. Will be called on startup if the file finished transferring when the receiver was not running. The incoming file will be located in the Documents/Inbox/ folder when being delivered. The receiver must take ownership of the file by moving it to another location. The system will remove any content that has not been moved when this delegate method returns. */
     func session(session: WCSession, didReceiveFile file: WCSessionFile) {
-        if let delegate = self.fileTransferDelegate {
+        if let delegate = self.fileTransferReceiverDelegate {
             delegate.session(session, didReceiveFile: file)
         } else {
-            self.log.info("FileTransferDelegate Not Set. Ignoring Incoming File: \(file)")
+            self.log.info("FileTransferReceiverDelegate Not Set. Ignoring Incoming File: \(file)")
         }
     }
 }

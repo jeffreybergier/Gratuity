@@ -87,6 +87,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 9, *) {
             (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.contextDelegate = (self.customWatchCommunicationManager as? GratuitousiOSConnectivityManager)
             (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.messageDelegate = (self.customWatchCommunicationManager as? GratuitousiOSConnectivityManager)
+            (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.fileTransferSenderDelegate = (self.customWatchCommunicationManager as? GratuitousiOSConnectivityManager)
         }
         
         let purchaseManager = GratuitousPurchaseManager()

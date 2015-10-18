@@ -52,6 +52,6 @@ class GratuitousWatchApplicationPreferences {
     
     init() {
         self.watchConnectivityManager.contextDelegate = self.customiOSCommunicationManager
-        self.watchConnectivityManager.fileTransferDelegate = self.customiOSCommunicationManager
+        self.watchConnectivityManager.fileTransferReceiverDelegate = self.customiOSCommunicationManager
     }
 }

@@ -369,8 +369,10 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     //MARK: Handle Updating the Big Labels
     
     @objc private func currencySignChanged(notification: NSNotification?) {
-        self.currencyFormatter.locale = NSLocale.currentLocale()
-        self.refreshInterface()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.currencyFormatter.locale = NSLocale.currentLocale()
+            self.refreshInterface()
+        }
     }
     
     private func updateLargeTextLabels(billAmount billAmount: Int, tipAmount: Int) {
@@ -413,7 +415,9 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     
     private var interfaceRefreshNeeded = false
     @objc private func setInterfaceRefreshNeeded(notification: NSNotification? = nil) {
-        self.interfaceRefreshNeeded = true
+        dispatch_async(dispatch_get_main_queue()) {
+            self.interfaceRefreshNeeded = true
+        }
     }
     
     func refreshInterface() {
@@ -636,45 +640,49 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     
     //MARK: Handle Text Size Adjustment and Label Attributed Strings
     
-    @objc private func systemTextSizeDidChange(notification: NSNotification) {
-        //adjust text size
-        self.lowerTextSizeAdjustment = GratuitousUIConstant.correctCellTextSize().textSizeAdjustment()
-        self.selectedTableViewCellOutlineViewHeightConstraint?.constant = GratuitousUIConstant.correctCellTextSize().rowHeight()
-        self.largeTextWidthLandscapeOnlyConstraint?.constant = GratuitousUIConstant.largeTextLandscapeConstant()
-        
-        //estimated row height
-        self.billAmountTableView?.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
-        self.tipAmountTableView?.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
-        
-        //update the view
-        self.prepareSettingsButton()
-        self.billAmountTableView?.reloadData()
-        self.tipAmountTableView?.reloadData()
-        
-        //reload the tables
-        self.updateTableViewsFromDisk()
+    @objc private func systemTextSizeDidChange(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            //adjust text size
+            self.lowerTextSizeAdjustment = GratuitousUIConstant.correctCellTextSize().textSizeAdjustment()
+            self.selectedTableViewCellOutlineViewHeightConstraint?.constant = GratuitousUIConstant.correctCellTextSize().rowHeight()
+            self.largeTextWidthLandscapeOnlyConstraint?.constant = GratuitousUIConstant.largeTextLandscapeConstant()
+            
+            //estimated row height
+            self.billAmountTableView?.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
+            self.tipAmountTableView?.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
+            
+            //update the view
+            self.prepareSettingsButton()
+            self.billAmountTableView?.reloadData()
+            self.tipAmountTableView?.reloadData()
+            
+            //reload the tables
+            self.updateTableViewsFromDisk()
+        }
     }
     
-    @objc private func invertColorsDidChange(notification: NSNotification) {
-        //configure color of view
-        self.view.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-        self.tipPercentageTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.totalAmountTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.tipAmountTableViewTitleTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
-        self.billAmountTableViewTitleTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
-        self.tipAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
-        self.billAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
-        
-        //change the status bar
-        //this line of code doesn't actually work, but maybe it will some day?
-        UIApplication.sharedApplication().statusBarStyle = self.preferredStatusBarStyle()
-        
-        //update the surround view
-        self.prepareCellSelectSurroundView()
-        
-        //update the colors for the text attributes
-        self.totalAmountTextLabelAttributes["NSColor"] = GratuitousUIConstant.lightTextColor()
-        self.tipPercentageTextLabelAttributes["NSColor"] = GratuitousUIConstant.lightTextColor()
+    @objc private func invertColorsDidChange(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            //configure color of view
+            self.view.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+            self.tipPercentageTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+            self.totalAmountTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+            self.tipAmountTableViewTitleTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
+            self.billAmountTableViewTitleTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
+            self.tipAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+            self.billAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+            
+            //change the status bar
+            //this line of code doesn't actually work, but maybe it will some day?
+            UIApplication.sharedApplication().statusBarStyle = self.preferredStatusBarStyle()
+            
+            //update the surround view
+            self.prepareCellSelectSurroundView()
+            
+            //update the colors for the text attributes
+            self.totalAmountTextLabelAttributes["NSColor"] = GratuitousUIConstant.lightTextColor()
+            self.tipPercentageTextLabelAttributes["NSColor"] = GratuitousUIConstant.lightTextColor()
+        }
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {

@@ -58,7 +58,7 @@ extension GratuitousWatchConnectivityManager: JSBWatchConnectivityContextDelegat
     }
 }
 
-extension GratuitousWatchConnectivityManager: JSBWatchConnectivityFileTransferDelegate {
+extension GratuitousWatchConnectivityManager: JSBWatchConnectivityFileTransferReceiverDelegate {
     func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
         self.log.warning("Unknown File Transfer: \(fileTransfer) to Remote Device Finished with Error: \(error)")
     }

@@ -94,9 +94,20 @@ extension GratuitousiOSConnectivityManager: JSBWatchConnectivityMessageDelegate 
     private func initiateFileTransferToRemote(tuple: (url: NSURL, fileName: String)?) -> Bool {
         if let tuple = tuple {
             self.watchConnectivityManager.session?.transferFile(tuple.url, metadata: ["FileName" : tuple.fileName])
+            self.applicationPreferences.currencySymbolsNeeded = false
             return true
         } else {
             return false
+        }
+    }
+}
+
+@available(iOS 9, *)
+extension GratuitousiOSConnectivityManager: JSBWatchConnectivityFileTransferSenderDelegate {
+    func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
+        self.applicationPreferences.currencySymbolsNeeded = false
+        if let error = error {
+            self.log.error("File Transfer Failed with Error: \(error)")
         }
     }
 }

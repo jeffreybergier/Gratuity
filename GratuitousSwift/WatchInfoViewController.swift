@@ -94,9 +94,11 @@ final class WatchInfoViewController: SmallModalScollViewController {
         
     }
     
-    @objc private func videoPlaybackFinished(notification: NSNotification) {
-        if let videoPlayer = self.videoPlayer {
-            videoPlayer.player.seekToTime(kCMTimeZero)
+    @objc private func videoPlaybackFinished(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            if let videoPlayer = self.videoPlayer {
+                videoPlayer.player.seekToTime(kCMTimeZero)
+            }
         }
     }
 }

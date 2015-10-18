@@ -85,11 +85,15 @@ final class SettingsInterfaceController: WKInterfaceController {
     }
     
     @objc private func currencySignChanged(notification: NSNotification?) {
-        self.updateCurrencySymbolUI()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.updateCurrencySymbolUI()
+        }
     }
     
     @objc private func percentageMyHaveChanged(notification: NSNotification?) {
-        self.updateSuggestedTipPercentageUI()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.updateSuggestedTipPercentageUI()
+        }
     }
     
     @IBAction private func suggestedTipSliderDidChange(value: Float) {

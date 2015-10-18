@@ -295,12 +295,16 @@ final class PickerInterfaceController: WKInterfaceController {
     // MARK: Handle External UI Updates
     
     @objc private func currencySignDidChange(notification: NSNotification?) {
-        self.currencyFormatter.locale = NSLocale.currentLocale()
-        self.largeInterfaceUpdateNeeded = true
+        dispatch_async(dispatch_get_main_queue()) {
+            self.currencyFormatter.locale = NSLocale.currentLocale()
+            self.largeInterfaceUpdateNeeded = true
+        }
     }
     
     @objc private func billTipValueChangeByRemote(notification: NSNotification?) {
-        self.smallInterfaceUpdateNeeded = true
+        dispatch_async(dispatch_get_main_queue()) {
+            self.smallInterfaceUpdateNeeded = true
+        }
     }
     
     // MARK: Handle Loading Picker Items

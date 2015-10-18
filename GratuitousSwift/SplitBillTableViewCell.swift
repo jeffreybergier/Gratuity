@@ -82,9 +82,11 @@ final class SplitBillTableViewCell: UITableViewCell {
     }
     
     @objc private func currencySignChanged(notification: NSNotification?) {
-        self.currencyFormatter.locale = NSLocale.currentLocale()
-        let currentIdentity = self.identity
-        self.identity = currentIdentity
+        dispatch_async(dispatch_get_main_queue()) {
+            self.currencyFormatter.locale = NSLocale.currentLocale()
+            let currentIdentity = self.identity
+            self.identity = currentIdentity
+        }
     }
     
     private func prepareFontsAndColors() {
