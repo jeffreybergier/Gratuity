@@ -23,12 +23,8 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         return swipe
     }()
     private var applicationPreferences: GratuitousUserDefaults {
-        get {
-            return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences
-        }
-        set {
-            (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences = newValue
-        }
+        get { return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences }
+        set { (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferencesSetLocally = newValue }
     }
     
     override var preferredContentSize: CGSize {

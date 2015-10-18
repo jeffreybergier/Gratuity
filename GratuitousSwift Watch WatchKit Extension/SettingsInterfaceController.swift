@@ -38,8 +38,8 @@ final class SettingsInterfaceController: WKInterfaceController {
     private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.splitBillValueText
     
     private var applicationPreferences: GratuitousUserDefaults {
-        get { return GratuitousWatchApplicationPreferences.sharedInstance.localPreferences }
-        set { GratuitousWatchApplicationPreferences.sharedInstance.localPreferences = newValue }
+        get { return GratuitousWatchApplicationPreferences.sharedInstance.preferences }
+        set { GratuitousWatchApplicationPreferences.sharedInstance.preferencesSetLocally = newValue }
     }
     private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
     

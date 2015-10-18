@@ -12,8 +12,8 @@ import Foundation
 final class PickerInterfaceController: WKInterfaceController {
     
     private var applicationPreferences: GratuitousUserDefaults {
-        get { return GratuitousWatchApplicationPreferences.sharedInstance.localPreferences }
-        set { GratuitousWatchApplicationPreferences.sharedInstance.localPreferences = newValue }
+        get { return GratuitousWatchApplicationPreferences.sharedInstance.preferences }
+        set { GratuitousWatchApplicationPreferences.sharedInstance.preferencesSetLocally = newValue }
     }
     private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
     
@@ -60,7 +60,6 @@ final class PickerInterfaceController: WKInterfaceController {
     
     private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.hugeValueText
     private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-    private var pickerCurrencySign: CurrencySign?
     private var currentBillAmount = 0 {
         didSet {
             let currencyString = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.applicationPreferences.overrideCurrencySymbol, amount: self.currentBillAmount)
@@ -296,16 +295,14 @@ final class PickerInterfaceController: WKInterfaceController {
         if let url = self.pickerItemsURL(currencySymbol),
             let data = NSData(contentsOfURL: url),
             let items = self.parsePickerItemsFromData(data) {
-                self.pickerCurrencySign = currencySymbol
+                self.applicationPreferences.currencySymbolsNeeded = false
                 return items
         } else if let fallbackDataURL = NSBundle.mainBundle().URLForResource("fallbackPickerImages", withExtension: "data"),
             let fallbackData = NSData(contentsOfURL: fallbackDataURL),
             let items = self.parsePickerItemsFromData(fallbackData) {
                 self.applicationPreferences.currencySymbolsNeeded = true
-                self.pickerCurrencySign = nil
                 return items
         } else {
-            self.pickerCurrencySign = nil
             self.applicationPreferences.currencySymbolsNeeded = true
             return .None
         }

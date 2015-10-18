@@ -51,7 +51,7 @@ final class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
     
     private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {
         if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
-            where appDelegate.localPreferences.overrideCurrencySymbol.rawValue == self.tag {
+            where appDelegate.preferencesSetLocally.overrideCurrencySymbol.rawValue == self.tag {
                 self.accessoryType = UITableViewCellAccessoryType.Checkmark
                 if self.animatingBorderColor == false {
                     //if this property is being animated, don't change it

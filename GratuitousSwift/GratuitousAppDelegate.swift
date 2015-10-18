@@ -26,8 +26,11 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             self.preferencesDiskManager.writeUserDefaultsToPreferencesFileWithRateLimit(_preferences)
         }
     }
-    var localPreferences: GratuitousUserDefaults {
-        get { return _preferences }
+    var preferences: GratuitousUserDefaults {
+        return _preferences
+    }
+    var preferencesSetLocally: GratuitousUserDefaults {
+        get { return self.preferences }
         set {
             if _preferences != newValue {
                 let oldValue = _preferences
@@ -36,8 +39,8 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    var remotePreferences: GratuitousUserDefaults {
-        get { return _preferences }
+    var preferencesSetRemotely: GratuitousUserDefaults {
+        get { return self.preferences }
         set {
             if _preferences != newValue {
                 let oldValue = _preferences
@@ -87,14 +90,14 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let purchaseManager = GratuitousPurchaseManager()
-        self.localPreferences.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
+        self.preferencesSetLocally.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
         
         return true
     }
     
     // MARK: iOS App Going to the Background
     func applicationWillResignActive(application: UIApplication) {
-        self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.localPreferences)
+        self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.preferences)
     }
 }
 

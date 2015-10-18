@@ -22,7 +22,7 @@ final class SplitTotalInterfaceController: WKInterfaceController {
     private let valueTextAttributes = GratuitousUIColor.WatchFonts.splitBillValueText
     
     private var applicationPreferences: GratuitousUserDefaults {
-        return GratuitousWatchApplicationPreferences.sharedInstance.localPreferences
+        return GratuitousWatchApplicationPreferences.sharedInstance.preferences
     }
     private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
     

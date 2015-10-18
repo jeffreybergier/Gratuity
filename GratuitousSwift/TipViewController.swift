@@ -53,8 +53,8 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     private var tipPercentageTextLabelAttributes = [String : NSObject]()
     private var viewDidAppearOnce = false
     private var applicationPreferences: GratuitousUserDefaults {
-        get { return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences }
-        set { (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences = newValue }
+        get { return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences }
+        set { (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferencesSetLocally = newValue }
     }
     
     private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)

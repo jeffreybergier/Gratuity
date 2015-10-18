@@ -18,8 +18,8 @@ final class GratuitousiOSConnectivityManager {
     }
     
     private var applicationPreferences: GratuitousUserDefaults {
-        get { return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).remotePreferences }
-        set { (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).remotePreferences = newValue }
+        get { return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences }
+        set { (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferencesSetRemotely = newValue }
     }
     
     private var remoteUpdateRateLimiterSet = false

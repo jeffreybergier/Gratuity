@@ -14,9 +14,9 @@ class GratuitousUserDefaultsDiskManager {
     private var applicationPreferences: GratuitousUserDefaults {
         get {
             #if os(watchOS)
-                return GratuitousWatchApplicationPreferences.sharedInstance.localPreferences
+                return GratuitousWatchApplicationPreferences.sharedInstance.preferences
             #elseif os(iOS)
-                return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).localPreferences
+                return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences
             #endif
         }
     }

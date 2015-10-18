@@ -21,8 +21,11 @@ class GratuitousWatchApplicationPreferences {
             self.preferencesDiskManager.writeUserDefaultsToPreferencesFileWithRateLimit(_preferences)
         }
     }
-    var localPreferences: GratuitousUserDefaults {
-        get { return _preferences }
+    var preferences: GratuitousUserDefaults {
+        return _preferences
+    }
+    var preferencesSetLocally: GratuitousUserDefaults {
+        get { fatalError(); return _preferences }
         set {
             if _preferences != newValue {
                 let oldValue = _preferences
@@ -31,8 +34,8 @@ class GratuitousWatchApplicationPreferences {
             }
         }
     }
-    var remotePreferences: GratuitousUserDefaults {
-        get { return _preferences }
+    var preferencesSetRemotely: GratuitousUserDefaults {
+        get { fatalError();return _preferences }
         set {
             if _preferences != newValue {
                 let oldValue = _preferences

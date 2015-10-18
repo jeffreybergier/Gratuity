@@ -13,8 +13,8 @@ final class GratuitousWatchConnectivityManager {
     private let log = XCGLogger.defaultInstance()
     
     private var applicationPreferences: GratuitousUserDefaults {
-        get { return GratuitousWatchApplicationPreferences.sharedInstance.remotePreferences }
-        set { GratuitousWatchApplicationPreferences.sharedInstance.remotePreferences = newValue }
+        get { return GratuitousWatchApplicationPreferences.sharedInstance.preferences }
+        set { GratuitousWatchApplicationPreferences.sharedInstance.preferencesSetRemotely = newValue }
     }
     private var watchConnectivityManager: JSBWatchConnectivityManager {
         return GratuitousWatchApplicationPreferences.sharedInstance.watchConnectivityManager
