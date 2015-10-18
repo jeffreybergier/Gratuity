@@ -25,7 +25,7 @@ class GratuitousWatchApplicationPreferences {
         return _preferences
     }
     var preferencesSetLocally: GratuitousUserDefaults {
-        get { fatalError(); return _preferences }
+        get { return _preferences }
         set {
             if _preferences != newValue {
                 let oldValue = _preferences
@@ -35,7 +35,7 @@ class GratuitousWatchApplicationPreferences {
         }
     }
     var preferencesSetRemotely: GratuitousUserDefaults {
-        get { fatalError();return _preferences }
+        get { return _preferences }
         set {
             if _preferences != newValue {
                 let oldValue = _preferences
