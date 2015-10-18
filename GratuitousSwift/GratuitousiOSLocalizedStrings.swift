@@ -85,6 +85,15 @@ extension SettingsTableViewController {
     }
 }
 
+extension SplitBillViewController {
+    struct LocalizedString {
+        static let TitleLabel =
+        NSLocalizedString("Split Bill",
+            comment: "SplitBillViewController: TitleLabel: Title of the view controller that shows in the navigation bar."
+        )
+    }
+}
+
 extension PurchaseSplitBillViewController {
     struct LocalizedString {
         static let ExtraLargeTextLabel =

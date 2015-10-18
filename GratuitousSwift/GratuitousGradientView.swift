@@ -76,4 +76,8 @@ final class GratuitousGradientView: UIView {
             self.gradient.colors = unusualGradientColors
         }
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }

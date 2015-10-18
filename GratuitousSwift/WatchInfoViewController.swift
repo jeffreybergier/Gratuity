@@ -62,6 +62,12 @@ final class WatchInfoViewController: SmallModalScollViewController {
         }
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     override func configureDynamicTextLabels() {
         super.configureDynamicTextLabels()
         

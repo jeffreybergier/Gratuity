@@ -42,6 +42,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "percentageMyHaveChanged:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
         
         //set the background color of the view
         self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
@@ -118,31 +119,42 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         }
     }
     
-    @objc private func currencySignChanged(notification: NSNotification?) {
-        self.setInterfaceRefreshNeeded()
+    @objc private func percentageMyHaveChanged(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.prepareTipPercentageSliderAndLabels()
+            self.readUserDefaultsAndUpdateSlider()
+        }
     }
     
-    @objc private func systemTextSizeDidChange(notification: NSNotification) {
-        //this takes care of the header cells
-        self.prepareHeaderLabelsAndCells()
-        
-        //set the background color of the view
-        self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        self.tableView.tintColor = GratuitousUIConstant.lightTextColor()
-        
-        //update the percentage slider
-        self.prepareTipPercentageSliderAndLabels()
-        
-        //prepare the tip percentage label that sits on the right of the slider
-        self.suggestedTipPercentageLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.suggestedTipPercentageLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        self.navigationController?.navigationBar.barTintColor = nil
-        
-        //prepare the about area of the table
-        self.prepareAboutPictureButtonsAndParagraph()
-        
-        //prepare the currency override cells
-        self.prepareCurrencyIndicatorCells()
+    @objc private func currencySignChanged(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.setInterfaceRefreshNeeded()
+        }
+    }
+    
+    @objc private func systemTextSizeDidChange(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            //this takes care of the header cells
+            self.prepareHeaderLabelsAndCells()
+            
+            //set the background color of the view
+            self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
+            self.tableView.tintColor = GratuitousUIConstant.lightTextColor()
+            
+            //update the percentage slider
+            self.prepareTipPercentageSliderAndLabels()
+            
+            //prepare the tip percentage label that sits on the right of the slider
+            self.suggestedTipPercentageLabel?.textColor = GratuitousUIConstant.lightTextColor()
+            self.suggestedTipPercentageLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+            self.navigationController?.navigationBar.barTintColor = nil
+            
+            //prepare the about area of the table
+            self.prepareAboutPictureButtonsAndParagraph()
+            
+            //prepare the currency override cells
+            self.prepareCurrencyIndicatorCells()
+        }
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -194,7 +206,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         return image
         }()
     
-    func prepareTipPercentageSliderAndLabels() {
+    private func prepareTipPercentageSliderAndLabels() {
         //set the text color for the tip percentage
         self.suggestedTipPercentageLabel?.textColor = GratuitousUIConstant.lightTextColor()
         

@@ -17,7 +17,7 @@ final class PickerInterfaceController: WKInterfaceController {
             GratuitousWatchApplicationPreferences.sharedInstance.preferencesSetLocally = newValue
         }
     }
-    private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
+    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
     
     @IBOutlet private var loadingGroup: WKInterfaceGroup?
     @IBOutlet private var mainGroup: WKInterfaceGroup?

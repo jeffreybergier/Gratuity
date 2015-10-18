@@ -41,7 +41,6 @@ final class SettingsInterfaceController: WKInterfaceController {
         get { return GratuitousWatchApplicationPreferences.sharedInstance.preferences }
         set { GratuitousWatchApplicationPreferences.sharedInstance.preferencesSetLocally = newValue }
     }
-    private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
     
     override func willActivate() {
         super.willActivate()
@@ -60,10 +59,12 @@ final class SettingsInterfaceController: WKInterfaceController {
     
     private func configureInterfaceController() {
         dispatch_async(dispatch_get_main_queue()) {
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "percentageMyHaveChanged:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+            
             // configure the titles
             self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: SettingsInterfaceController.LocalizedString.SuggestedTipPercentageHeader, attributes: self.titleTextAttributes))
             self.currencySymbolTitleLabel?.setAttributedText(NSAttributedString(string: SettingsInterfaceController.LocalizedString.CurrencySymbolHeader, attributes: self.titleTextAttributes))
-            
             
             // configure the currency selection titles
             self.currencySymbolLocalLabel?.setAttributedText(NSAttributedString(string: SettingsInterfaceController.LocalizedString.LocalCurrencyRowLabel, attributes: self.valueTextAttributes))
@@ -81,6 +82,14 @@ final class SettingsInterfaceController: WKInterfaceController {
             // this probably isn't needed, but no need to run this code a second time.
             self.interfaceControllerIsConfigured = true
         }
+    }
+    
+    @objc private func currencySignChanged(notification: NSNotification?) {
+        self.updateCurrencySymbolUI()
+    }
+    
+    @objc private func percentageMyHaveChanged(notification: NSNotification?) {
+        self.updateSuggestedTipPercentageUI()
     }
     
     @IBAction private func suggestedTipSliderDidChange(value: Float) {
@@ -155,5 +164,9 @@ final class SettingsInterfaceController: WKInterfaceController {
         super.willDisappear()
         
         self.invalidateUserActivity()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

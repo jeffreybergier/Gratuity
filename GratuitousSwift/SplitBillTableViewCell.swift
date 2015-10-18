@@ -91,7 +91,14 @@ final class SplitBillTableViewCell: UITableViewCell {
         let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         let headlineFontSize = headlineFont.pointSize
         let bigFuturaFont = UIFont.futura(style: Futura.Medium, size: headlineFontSize * 2.5, fallbackStyle: UIFontStyle.Headline)
-        let normalFont = UIFont.preferredFontForTextStyle(UIFontStyle.Headline.description).fontWithSize(headlineFontSize * 1.5)
+        
+        var normalFont = UIFont.preferredFontForTextStyle(UIFontStyle.Headline.description).fontWithSize(headlineFontSize * 1.5)
+        if #available(iOS 9.0, *) {
+            let traits = normalFont.fontDescriptor().objectForKey(UIFontDescriptorTraitsAttribute) as? NSDictionary
+            let weight = CGFloat((traits?[UIFontWeightTrait] as? NSNumber)?.floatValue !! 0.3)
+            let monospaceFont = UIFont.monospacedDigitSystemFontOfSize(normalFont.pointSize, weight: weight)
+            normalFont = monospaceFont
+        }
         
         self.primaryLabel?.font = bigFuturaFont
         self.secondaryTextLabel?.font = normalFont

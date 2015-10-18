@@ -13,7 +13,7 @@ final class GratuitousTableViewCell: UITableViewCell {
     @IBOutlet weak private var dollarTextLabel: UILabel?
     private var labelTextAttributes = [String(): NSObject()]
     private let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
-    private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
+    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
     private var currentCurrencySign: CurrencySign {
         return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences.overrideCurrencySymbol
     }

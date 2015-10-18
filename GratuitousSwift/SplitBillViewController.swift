@@ -31,6 +31,8 @@ final class SplitBillViewController: SmallModalTableViewController {
         
         self.tableView?.estimatedRowHeight = 100
         self.tableView?.rowHeight = UITableViewAutomaticDimension
+        
+        self.navigationBar?.items?.first?.title = LocalizedString.TitleLabel
     }
     
     private func roundedDivisionWithTop(top: Int, bottom: Int) -> Int {

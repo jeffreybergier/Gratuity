@@ -57,7 +57,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         set { (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferencesSetLocally = newValue }
     }
     
-    private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
+    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
     private let tableViewCellClass = GratuitousTableViewCell.description().componentsSeparatedByString(".").last !! "GratuitousTableViewCell"
     private let billTableViewCellString: String = {
         let className = GratuitousTableViewCell.description().componentsSeparatedByString(".").last
