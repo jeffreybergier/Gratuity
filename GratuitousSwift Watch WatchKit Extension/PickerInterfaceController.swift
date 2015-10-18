@@ -13,7 +13,9 @@ final class PickerInterfaceController: WKInterfaceController {
     
     private var applicationPreferences: GratuitousUserDefaults {
         get { return GratuitousWatchApplicationPreferences.sharedInstance.preferences }
-        set { GratuitousWatchApplicationPreferences.sharedInstance.preferencesSetLocally = newValue }
+        set {
+            GratuitousWatchApplicationPreferences.sharedInstance.preferencesSetLocally = newValue
+        }
     }
     private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
     
@@ -26,6 +28,8 @@ final class PickerInterfaceController: WKInterfaceController {
     private var interfaceControllerConfiguredOnce = false
     
     private var interfaceIdleTimer: NSTimer?
+    private var billIndexPathRow: Int?
+    private var tipIndexPathRow: Int?
     
     private var items: (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
         didSet {
@@ -204,6 +208,22 @@ final class PickerInterfaceController: WKInterfaceController {
     }
     
     @objc private func interfaceIdleTimerFired(timer: NSTimer?) {
+        var preferences = self.applicationPreferences
+        var preferencesChanged = false
+        if let billIndexPathRow = self.billIndexPathRow {
+            preferences.billIndexPathRow = billIndexPathRow
+            preferencesChanged = true
+        }
+        if let tipIndexPathRow = self.tipIndexPathRow {
+            preferences.tipIndexPathRow = tipIndexPathRow
+            preferencesChanged = true
+        }
+        if preferencesChanged == true {
+            self.applicationPreferences = preferences
+        }
+        self.billIndexPathRow = .None
+        self.tipIndexPathRow = .None
+        
         if self.largeInterfaceUpdateNeeded == true {
             self.configurePickerItems()
         } else if self.smallInterfaceUpdateNeeded == true {
@@ -233,10 +253,7 @@ final class PickerInterfaceController: WKInterfaceController {
         
         self.tipPicker?.setSelectedItemIndex(tipAmount - 1)
         if self.smallInterfaceUpdateNeeded == false {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.30 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                self.applicationPreferences.billIndexPathRow = value + 1
-            }
+            self.billIndexPathRow = value + 1
         }
         
         self.resetInterfaceIdleTimer()
@@ -249,10 +266,7 @@ final class PickerInterfaceController: WKInterfaceController {
     
     @IBAction func tipPickerChanged(value: Int) {
         if self.smallInterfaceUpdateNeeded == false {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.20 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                self.applicationPreferences.tipIndexPathRow = value + 1
-            }
+            self.tipIndexPathRow = value + 1
         }
         
         self.resetInterfaceIdleTimer()
@@ -309,22 +323,7 @@ final class PickerInterfaceController: WKInterfaceController {
     }
     
     private func pickerItemsURL(currencySign: CurrencySign) -> NSURL? {
-//        let fileName: String
-//        switch currencySign {
-//        case .Default:
-           let fileName = "\(self.currencyFormatter.currencyNameFromCurrencySign(currencySign))Images.data"
-//        case .Dollar:
-//            fileName = "DollarImages.data"
-//        case .Pound:
-//            fileName = "PoundImages.data"
-//        case .Euro:
-//            fileName = "EuroImages.data"
-//        case .Yen:
-//            fileName = "YenImages.data"
-//        case .NoSign:
-//            fileName = "NoneImages.data"
-//        }
-        
+        let fileName = "\(self.currencyFormatter.currencyNameFromCurrencySign(currencySign))Images.data"
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
         let dataURL = documentsURL.URLByAppendingPathComponent(fileName)
         
@@ -360,6 +359,6 @@ final class PickerInterfaceController: WKInterfaceController {
 
 extension NSTimer {
     class func interfaceIdleTimer(object: AnyObject) -> NSTimer {
-        return NSTimer.scheduledTimerWithTimeInterval(5.0, target: object, selector: "interfaceIdleTimerFired:", userInfo: nil, repeats: true)
+        return NSTimer.scheduledTimerWithTimeInterval(3.0, target: object, selector: "interfaceIdleTimerFired:", userInfo: nil, repeats: true)
     }
 }

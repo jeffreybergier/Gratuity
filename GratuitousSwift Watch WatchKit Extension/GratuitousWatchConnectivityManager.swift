@@ -64,17 +64,20 @@ extension GratuitousWatchConnectivityManager: JSBWatchConnectivityFileTransferDe
     }
     func session(session: WCSession, didReceiveFile file: WCSessionFile) {
         self.requestedCurrencySymbols = false
-        if let originalFileName = file.metadata?["FileName"] as? String,
-            let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first {
-                let dataURL = documentsURL.URLByAppendingPathComponent(originalFileName)
+        if let symbolFileName = file.metadata?["FileName"] as? String, let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first {
+            let destinationURL = documentsURL.URLByAppendingPathComponent(symbolFileName)
+            if NSFileManager.defaultManager().fileExistsAtPath(destinationURL.path!) == false {
                 self.log.info("Did Receive Currency Files from Remote")
                 do {
                     let data = try NSData(contentsOfURL: file.fileURL, options: .DataReadingMappedIfSafe)
-                    try data.writeToURL(dataURL, options: .AtomicWrite)
+                    try data.writeToURL(destinationURL, options: .AtomicWrite)
                     NSNotificationCenter.defaultCenter().postNotificationName(GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: self, userInfo: self.applicationPreferences.dictionaryCopyForKeys(.All))
                 } catch {
                     self.log.error("File Save Failed with Error: \(error)")
                 }
+            } else {
+                self.log.info("Did Receive Currency Files from Remote. However, they already exist locally")
+            }
         } else {
             self.log.error("No Currency Symbols Found in Received File")
         }

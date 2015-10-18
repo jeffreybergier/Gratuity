@@ -18,7 +18,7 @@ class GratuitousWatchApplicationPreferences {
     // MARK: App Preferences Management Properties
     private var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
         didSet {
-            self.preferencesDiskManager.writeUserDefaultsToPreferencesFileWithRateLimit(_preferences)
+            self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(_preferences)
         }
     }
     var preferences: GratuitousUserDefaults {
