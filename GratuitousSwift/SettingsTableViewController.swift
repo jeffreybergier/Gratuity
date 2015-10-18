@@ -15,6 +15,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     @IBOutlet private weak var headerLabelTipPercentage: UILabel?
     @IBOutlet private weak var headerLabelCurencySymbol: UILabel?
     @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel?
+    @IBOutlet private weak var headerLabelInAppPurchases: UILabel?
 
     private var headerLabelsArray: [UILabel?] = []
     private lazy var swipeToDismiss: UISwipeGestureRecognizer = {
@@ -42,7 +43,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "percentageMyHaveChanged:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "percentageMayHaveChanged:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
         
         //set the background color of the view
         self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
@@ -67,6 +68,9 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         
         //add the dismiss gesture recognizer to the view
         self.view.addGestureRecognizer(self.swipeToDismiss)
+        
+        //prepare in-app purchases cells
+        self.prepareInAppPurchaseCells()
         
         //configure the border color of my picture in the about screen
         self.prepareAboutPictureButtonsAndParagraph()
@@ -98,6 +102,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         self.headerLabelsArray = [
             self.headerLabelTipPercentage,
             self.headerLabelCurencySymbol,
+            self.headerLabelInAppPurchases,
             self.headerLabelAboutSaturdayApps
         ]
         
@@ -111,6 +116,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         self.headerLabelTipPercentage?.text = SettingsTableViewController.LocalizedString.SuggestedTipPercentageHeader.uppercaseString
         self.headerLabelCurencySymbol?.text = SettingsTableViewController.LocalizedString.CurrencySymbolHeader.uppercaseString
         self.headerLabelAboutSaturdayApps?.text = SettingsTableViewController.LocalizedString.AboutHeader.uppercaseString
+        self.headerLabelInAppPurchases?.text = SettingsTableViewController.LocalizedString.InAppPurchaseHeader.uppercaseString
     }
     
     func didTapDoneButton(sender: UIButton) {
@@ -119,10 +125,11 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         }
     }
     
-    @objc private func percentageMyHaveChanged(notification: NSNotification?) {
+    @objc private func percentageMayHaveChanged(notification: NSNotification?) {
         dispatch_async(dispatch_get_main_queue()) {
             self.prepareTipPercentageSliderAndLabels()
             self.readUserDefaultsAndUpdateSlider()
+            self.prepareInAppPurchaseCells()
         }
     }
     
@@ -148,6 +155,9 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
             self.suggestedTipPercentageLabel?.textColor = GratuitousUIConstant.lightTextColor()
             self.suggestedTipPercentageLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
             self.navigationController?.navigationBar.barTintColor = nil
+            
+            //prepare the in-app purchases cells
+            self.prepareInAppPurchaseCells()
             
             //prepare the about area of the table
             self.prepareAboutPictureButtonsAndParagraph()
@@ -318,6 +328,24 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
+    
+    // MARK: Handle In-App Purchase Cells
+    
+    @IBOutlet private weak var splitBillPurchaseLabel: UILabel?
+    @IBOutlet private weak var splitBillPurchaseCell: UITableViewCell?
+    
+    private func prepareInAppPurchaseCells() {
+        self.splitBillPurchaseLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.splitBillPurchaseLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.splitBillPurchaseLabel?.text = SettingsTableViewController.LocalizedString.SplitBillInAppPurchaseCellLabel
+        
+        if self.applicationPreferences.splitBillPurchased == true {
+            self.splitBillPurchaseCell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+        } else {
+            self.splitBillPurchaseCell?.accessoryType = UITableViewCellAccessoryType.None
+        }
+    }
+    
     
     // MARK: Handle About Information
     @IBOutlet private weak var aboutMyPictureImageView: UIImageView?

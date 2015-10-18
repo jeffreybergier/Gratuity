@@ -54,13 +54,21 @@ extension SettingsTableViewController {
         NSLocalizedString("Suggested Tip Percentage",
             comment: "SettingsTableViewController: SuggestedTipPercentageHeader: Header Text for a group of cells that allow choosing the default tip percentage."
         )
+        static let SplitBillInAppPurchaseCellLabel =
+        NSLocalizedString("Split Bill Feature",
+            comment: "SettingsTableViewController: SplitBillInAppPurchaseCellLabel: Label Text for the In-App Purchase Cell. This cell tells the user whether the feature is purchased or not."
+        )
         static let CurrencySymbolHeader =
         NSLocalizedString("Currency Symbol",
             comment: "SettingsTableViewController: CurrencySymbolHeader: Header Text for a group of cells that allow choosing the currency symbol."
         )
         static let AboutHeader =
         NSLocalizedString("About SaturdayApps",
-            comment: "SettingsTableViewController: AboutHeader: Header Text for a group of cells explains my company SaturdayApps."
+            comment: "SettingsTableViewController: AboutHeader: Header Text for a group of cells that explains my company SaturdayApps."
+        )
+        static let InAppPurchaseHeader =
+        NSLocalizedString("In-App Purchases",
+            comment: "SettingsTableViewController: InAppPurchaseHeader: Header Text for a group of cells where possible In-App Purchases are listed."
         )
         static let LocalCurrencyCellLabel =
         NSLocalizedString("Local Currency",
