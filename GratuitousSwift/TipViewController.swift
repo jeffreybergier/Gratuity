@@ -402,7 +402,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             let tipIndex = self.applicationPreferences.tipIndexPathRow
             self.billAmountTableView?.selectRowAtIndexPath(NSIndexPath(forRow: billIndex + 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             if tipIndex > 0 {
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
                 dispatch_after(delayTime, dispatch_get_main_queue()) {
                     self.tipAmountTableView?.selectRowAtIndexPath(NSIndexPath(forRow: tipIndex + 1, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                 }
