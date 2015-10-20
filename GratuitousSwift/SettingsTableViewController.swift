@@ -129,7 +129,6 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         dispatch_async(dispatch_get_main_queue()) {
             self.prepareTipPercentageSliderAndLabels()
             self.readUserDefaultsAndUpdateSlider()
-            self.prepareInAppPurchaseCells()
         }
     }
     
@@ -287,18 +286,18 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
                     switch currencySign {
                     case .Default:
                         self.textLabelDefault?.text = SettingsTableViewController.LocalizedString.LocalCurrencyCellLabel
-                        cell.instanceTextLabel = self.textLabelDefault
+                        cell.animatableTextLabel = self.textLabelDefault
                     case .Dollar:
-                        cell.instanceTextLabel = self.textLabelDollarSign
+                        cell.animatableTextLabel = self.textLabelDollarSign
                     case .Pound:
-                        cell.instanceTextLabel = self.textLabelPoundSign
+                        cell.animatableTextLabel = self.textLabelPoundSign
                     case .Euro:
-                        cell.instanceTextLabel = self.textLabelEuroSign
+                        cell.animatableTextLabel = self.textLabelEuroSign
                     case .Yen:
-                        cell.instanceTextLabel = self.textLabelYenSign
+                        cell.animatableTextLabel = self.textLabelYenSign
                     case .NoSign:
                         self.textLabelNone?.text = SettingsTableViewController.LocalizedString.NoneCurrencyCellLabel
-                        cell.instanceTextLabel = self.textLabelNone
+                        cell.animatableTextLabel = self.textLabelNone
                     }
             }
         }
@@ -321,10 +320,22 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
             case CurrencySign.NoSign.rawValue + 1:
                 self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.NoSign)
             default:
-                break;
+                break
+            }
+        case 2:
+            switch indexPath.row {
+            case 1: // row of splitBill purchase
+                let presentingVC = self.presentingViewController
+                let purchaseSegue = self.applicationPreferences.splitBillPurchased == true ? TipViewController.StoryboardSegues.SplitBill : TipViewController.StoryboardSegues.PurchaseSplitBill
+                self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                    presentingVC?.performSegueWithIdentifier(purchaseSegue.rawValue, sender: self)
+                })
+            default:
+                break
             }
         default:
-            break;
+            print(indexPath)
+            break
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
@@ -332,18 +343,11 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     // MARK: Handle In-App Purchase Cells
     
     @IBOutlet private weak var splitBillPurchaseLabel: UILabel?
-    @IBOutlet private weak var splitBillPurchaseCell: UITableViewCell?
     
     private func prepareInAppPurchaseCells() {
         self.splitBillPurchaseLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.splitBillPurchaseLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.splitBillPurchaseLabel?.text = SettingsTableViewController.LocalizedString.SplitBillInAppPurchaseCellLabel
-        
-        if self.applicationPreferences.splitBillPurchased == true {
-            self.splitBillPurchaseCell?.accessoryType = UITableViewCellAccessoryType.Checkmark
-        } else {
-            self.splitBillPurchaseCell?.accessoryType = UITableViewCellAccessoryType.None
-        }
     }
     
     
@@ -400,11 +404,9 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     }
     
     @IBAction func didTapAppleWatchButton(sender: UIButton) {
-        let presentingVC = self.presentingViewController as? TipViewController
+        let presentingVC = self.presentingViewController
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            if let presentingVC = presentingVC {
-                presentingVC.performSegueWithIdentifier(TipViewController.StoryboardSegues.WatchInfo.rawValue, sender: self)
-            }
+            presentingVC?.performSegueWithIdentifier(TipViewController.StoryboardSegues.WatchInfo.rawValue, sender: self)
         })
     }
     

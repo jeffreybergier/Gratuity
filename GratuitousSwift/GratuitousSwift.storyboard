@@ -680,7 +680,7 @@
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="pMk-mR-JBk">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="pMk-mR-JBk" customClass="GratuitousSplitBillPurchaseTableViewCell" customModule="Gratuity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="579" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pMk-mR-JBk" id="cw7-8O-SA6">
@@ -694,14 +694,17 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="251" misplaced="YES" image="faces1" translatesAutoresizingMaskIntoConstraints="NO" id="2Py-lW-ucw">
-                                                    <rect key="frame" x="528" y="9" width="25" height="25"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="251" image="lockIcon" translatesAutoresizingMaskIntoConstraints="NO" id="2Py-lW-ucw">
+                                                    <rect key="frame" x="541" y="11.5" width="0.0" height="20"/>
                                                     <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" id="wAX-jg-9Zq"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="2Py-lW-ucw" secondAttribute="trailing" id="8om-mD-YHw"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="2Py-lW-ucw" secondAttribute="trailing" constant="12" id="8om-mD-YHw"/>
                                                 <constraint firstItem="2Py-lW-ucw" firstAttribute="centerY" secondItem="cw7-8O-SA6" secondAttribute="centerY" id="HR2-S4-tHW"/>
                                                 <constraint firstItem="PNP-vt-mMk" firstAttribute="top" secondItem="cw7-8O-SA6" secondAttribute="topMargin" priority="750" constant="4" id="Hwi-qY-cPl"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="2Py-lW-ucw" secondAttribute="bottom" priority="750" id="UfK-HY-Z09"/>
@@ -714,6 +717,11 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="lockIconTrailingConstraint" destination="8om-mD-YHw" id="dgN-YO-Ewc"/>
+                                            <outlet property="lockIconWidthConstraint" destination="wAX-jg-9Zq" id="0GQ-Qi-ndH"/>
+                                            <outlet property="purchaseTextLabel" destination="PNP-vt-mMk" id="dEs-Nz-gc9"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -942,8 +950,7 @@
                         <outlet property="headerLabelCurencySymbol" destination="Rhq-zL-B07" id="d6z-aa-JNO"/>
                         <outlet property="headerLabelInAppPurchases" destination="msZ-OL-4Gk" id="Xfc-ls-egk"/>
                         <outlet property="headerLabelTipPercentage" destination="nf5-Rb-Dqy" id="eyb-tC-g0U"/>
-                        <outlet property="splitBillPurchaseCell" destination="pMk-mR-JBk" id="xa3-Kn-VMf"/>
-                        <outlet property="splitBillPurchaseLabel" destination="PNP-vt-mMk" id="m7z-RM-UTn"/>
+                        <outlet property="splitBillPurchaseLabel" destination="PNP-vt-mMk" id="Yjk-L0-CGX"/>
                         <outlet property="suggestedTipPercentageLabel" destination="n9y-uL-XxO" id="h9e-4L-vpG"/>
                         <outlet property="suggestedTipPercentageSlider" destination="aGj-HE-HCm" id="Bp3-fS-mjo"/>
                         <outlet property="textLabelDefault" destination="ghA-h8-HMd" id="Zbq-Dj-cqF"/>
@@ -1515,6 +1522,7 @@
     <resources>
         <image name="embarassingFacePic" width="946" height="946"/>
         <image name="faces1" width="24" height="30"/>
+        <image name="lockIcon" width="18" height="20"/>
         <image name="splitBillScreenshot" width="324" height="405"/>
     </resources>
 </document>
