@@ -821,107 +821,95 @@
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="QL2-aC-rQR">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="QL2-aC-rQR" customClass="GratuitousDisclosureTableViewCell" customModule="Gratuity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="775" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QL2-aC-rQR" id="ZV4-Qm-aN9">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sec-o8-Mzc" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
-                                                    <rect key="frame" x="243" y="4" width="114" height="36"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91J-WX-zO4">
+                                                    <rect key="frame" x="20" y="12.5" width="65.5" height="19.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <inset key="contentEdgeInsets" minX="24" minY="8" maxX="24" maxY="8"/>
-                                                    <state key="normal" title="Email Me">
-                                                        <color key="titleColor" red="0.15686274510000001" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="didTapEmailMeButton:" destination="rPE-iu-epa" eventType="touchUpInside" id="PXt-X9-hAW"/>
-                                                    </connections>
-                                                </button>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstItem="sec-o8-Mzc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZV4-Qm-aN9" secondAttribute="topMargin" priority="750" constant="4" id="0IW-OI-F68"/>
-                                                <constraint firstAttribute="centerX" secondItem="sec-o8-Mzc" secondAttribute="centerX" id="4Eh-5h-Bod"/>
-                                                <constraint firstItem="sec-o8-Mzc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZV4-Qm-aN9" secondAttribute="leadingMargin" constant="12" id="Eig-gQ-Ikt"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="sec-o8-Mzc" secondAttribute="bottom" priority="750" constant="4" id="Fkj-nZ-HSe"/>
-                                                <constraint firstAttribute="centerY" secondItem="sec-o8-Mzc" secondAttribute="centerY" id="YQY-8J-g02"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="sec-o8-Mzc" secondAttribute="trailing" constant="12" id="ZSE-d0-ars"/>
+                                                <constraint firstItem="91J-WX-zO4" firstAttribute="centerY" secondItem="ZV4-Qm-aN9" secondAttribute="centerY" id="Cy6-bD-gC1"/>
+                                                <constraint firstItem="91J-WX-zO4" firstAttribute="leading" secondItem="ZV4-Qm-aN9" secondAttribute="leadingMargin" constant="12" id="Gt0-Xw-zau"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="91J-WX-zO4" secondAttribute="trailing" constant="12" id="dEs-gO-HQK"/>
+                                                <constraint firstItem="91J-WX-zO4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZV4-Qm-aN9" secondAttribute="topMargin" priority="750" constant="4" id="iYT-KF-c86"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="91J-WX-zO4" secondAttribute="bottom" priority="750" constant="4" id="yHr-gi-31x"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="cellTextLabel" destination="91J-WX-zO4" id="oML-7F-M8b"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="3YW-kN-8BR">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="kG2-BB-Fib" customClass="GratuitousDisclosureTableViewCell" customModule="Gratuity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="819" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3YW-kN-8BR" id="eVP-cu-OfJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kG2-BB-Fib" id="6He-kr-oQ0">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OwA-MO-K0L" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
-                                                    <rect key="frame" x="216" y="4" width="168" height="36"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Review This App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqn-hV-MZ6">
+                                                    <rect key="frame" x="20" y="12.5" width="65.5" height="19.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <inset key="contentEdgeInsets" minX="24" minY="8" maxX="24" maxY="8"/>
-                                                    <state key="normal" title="Review This App">
-                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="didTapReviewThisAppButton:" destination="rPE-iu-epa" eventType="touchUpInside" id="4yD-Fr-k1X"/>
-                                                    </connections>
-                                                </button>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="centerX" secondItem="OwA-MO-K0L" secondAttribute="centerX" id="05q-XF-wHh"/>
-                                                <constraint firstItem="OwA-MO-K0L" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eVP-cu-OfJ" secondAttribute="leadingMargin" constant="12" id="Hqw-Zv-JP7"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="OwA-MO-K0L" secondAttribute="bottom" priority="750" constant="4" id="LKB-MT-yPJ"/>
-                                                <constraint firstAttribute="centerY" secondItem="OwA-MO-K0L" secondAttribute="centerY" id="Ppy-wy-xDX"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="OwA-MO-K0L" secondAttribute="trailing" constant="12" id="f4C-dO-D1s"/>
-                                                <constraint firstItem="OwA-MO-K0L" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eVP-cu-OfJ" secondAttribute="topMargin" priority="750" constant="4" id="yVu-po-Mii"/>
+                                                <constraint firstItem="dqn-hV-MZ6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6He-kr-oQ0" secondAttribute="topMargin" priority="750" constant="4" id="17j-IG-l4m"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="dqn-hV-MZ6" secondAttribute="bottom" priority="750" constant="4" id="IYy-38-8KN"/>
+                                                <constraint firstItem="dqn-hV-MZ6" firstAttribute="centerY" secondItem="6He-kr-oQ0" secondAttribute="centerY" id="edf-9U-RRK"/>
+                                                <constraint firstItem="dqn-hV-MZ6" firstAttribute="leading" secondItem="6He-kr-oQ0" secondAttribute="leadingMargin" constant="12" id="rYw-p1-EsI"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="dqn-hV-MZ6" secondAttribute="trailing" constant="12" id="uMu-fB-1Ri"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="cellTextLabel" destination="dqn-hV-MZ6" id="AcW-DG-xKo"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="luE-tq-pXd">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="IhF-Nx-YSO" customClass="GratuitousDisclosureTableViewCell" customModule="Gratuity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="863" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="luE-tq-pXd" id="Csk-Qh-3xn">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IhF-Nx-YSO" id="Qky-y6-p1V">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7IP-77-68H" customClass="GratuitousSettingsButtons" customModule="Gratuity" customModuleProvider="target">
-                                                    <rect key="frame" x="210" y="4" width="181" height="36"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Apple Watch App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dih-g1-phg">
+                                                    <rect key="frame" x="20" y="12.5" width="65.5" height="19.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <inset key="contentEdgeInsets" minX="24" minY="8" maxX="24" maxY="8"/>
-                                                    <state key="normal" title="Gratuity for Watch">
-                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="didTapAppleWatchButton:" destination="rPE-iu-epa" eventType="touchUpInside" id="Wih-p1-kuz"/>
-                                                    </connections>
-                                                </button>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="7IP-77-68H" secondAttribute="bottom" priority="750" constant="4" id="RYF-sB-fLD"/>
-                                                <constraint firstItem="7IP-77-68H" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Csk-Qh-3xn" secondAttribute="topMargin" priority="750" constant="4" id="W3I-KN-vLb"/>
-                                                <constraint firstAttribute="centerY" secondItem="7IP-77-68H" secondAttribute="centerY" id="fPO-rr-Bka"/>
-                                                <constraint firstItem="7IP-77-68H" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Csk-Qh-3xn" secondAttribute="leadingMargin" constant="12" id="m40-cQ-Dp5"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="7IP-77-68H" secondAttribute="trailing" constant="12" id="p09-7Q-1Wg"/>
-                                                <constraint firstAttribute="centerX" secondItem="7IP-77-68H" secondAttribute="centerX" id="rP6-LJ-3Je"/>
+                                                <constraint firstItem="dih-g1-phg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Qky-y6-p1V" secondAttribute="topMargin" priority="750" constant="4" id="DR3-LL-bCr"/>
+                                                <constraint firstItem="dih-g1-phg" firstAttribute="centerY" secondItem="Qky-y6-p1V" secondAttribute="centerY" id="QAb-Qd-DLH"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="dih-g1-phg" secondAttribute="trailing" constant="12" id="Tkg-id-gBH"/>
+                                                <constraint firstItem="dih-g1-phg" firstAttribute="leading" secondItem="Qky-y6-p1V" secondAttribute="leadingMargin" constant="12" id="W2D-Km-Irf"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="dih-g1-phg" secondAttribute="bottom" priority="750" constant="4" id="ppi-wH-86t"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="cellTextLabel" destination="dih-g1-phg" id="Yp9-CL-u9c"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -941,11 +929,11 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1200"/>
                     <connections>
-                        <outlet property="aboutEmailMeButton" destination="sec-o8-Mzc" id="bgU-Im-bQS"/>
+                        <outlet property="aboutEmailMeLabel" destination="91J-WX-zO4" id="3bb-y0-PFI"/>
                         <outlet property="aboutMyPictureImageView" destination="Qdc-6t-Cq7" id="RwF-Zh-E6l"/>
-                        <outlet property="aboutReviewButton" destination="OwA-MO-K0L" id="amg-Zy-KpP"/>
+                        <outlet property="aboutReviewLabel" destination="dqn-hV-MZ6" id="8Lc-dy-sFq"/>
                         <outlet property="aboutSaturdayAppsParagraphLabel" destination="FOz-DK-eig" id="h01-g5-YdX"/>
-                        <outlet property="aboutWatchAppButton" destination="7IP-77-68H" id="LyC-9W-k1b"/>
+                        <outlet property="aboutWatchAppLabel" destination="dih-g1-phg" id="AqY-Ck-Ioh"/>
                         <outlet property="headerLabelAboutSaturdayApps" destination="CQ4-3s-gcG" id="sA2-QA-yNC"/>
                         <outlet property="headerLabelCurencySymbol" destination="Rhq-zL-B07" id="d6z-aa-JNO"/>
                         <outlet property="headerLabelInAppPurchases" destination="msZ-OL-4Gk" id="Xfc-ls-egk"/>

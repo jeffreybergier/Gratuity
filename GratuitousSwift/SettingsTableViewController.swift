@@ -333,6 +333,29 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
             default:
                 break
             }
+        case 3: // about section
+            switch indexPath.row {
+            case 3: // Email Me Row
+                let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
+                if let mailVC = emailManager.presentableMailViewController {
+                    self.presentViewController(mailVC, animated: true, completion: .None)
+                } else {
+                    emailManager.switchAppForEmailSupport()
+                }
+            case 4: // Review this app row
+                let appStoreString = String(format: "itms-apps://itunes.apple.com/app/id%d", self.applicationID)
+                let appStoreURL = NSURL(string: appStoreString)
+                if let appStoreURL = appStoreURL {
+                    UIApplication.sharedApplication().openURL(appStoreURL)
+                }
+            case 5: // Apple Watch Row
+                let presentingVC = self.presentingViewController
+                self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                    presentingVC?.performSegueWithIdentifier(TipViewController.StoryboardSegues.WatchInfo.rawValue, sender: self)
+                })
+            default:
+                break
+            }
         default:
             print(indexPath)
             break
@@ -354,9 +377,9 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     // MARK: Handle About Information
     @IBOutlet private weak var aboutMyPictureImageView: UIImageView?
     @IBOutlet private weak var aboutSaturdayAppsParagraphLabel: UILabel?
-    @IBOutlet private weak var aboutEmailMeButton: UIButton?
-    @IBOutlet private weak var aboutReviewButton: UIButton?
-    @IBOutlet private weak var aboutWatchAppButton: UIButton?
+    @IBOutlet private weak var aboutEmailMeLabel: UILabel?
+    @IBOutlet private weak var aboutReviewLabel: UILabel?
+    @IBOutlet private weak var aboutWatchAppLabel: UILabel?
     
     private let applicationID = 933679671
     
@@ -373,43 +396,27 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         self.aboutSaturdayAppsParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.aboutSaturdayAppsParagraphLabel?.text = SettingsTableViewController.LocalizedString.AboutSADescriptionLabel
         
-        //prepare the buttons
-        self.aboutEmailMeButton?.setTitle(UIAlertAction.Gratuity.LocalizedString.EmailSupport, forState: UIControlState.Normal)
-        self.aboutReviewButton?.setTitle(SettingsTableViewController.LocalizedString.ReviewThisAppButton, forState: UIControlState.Normal)
-        self.aboutWatchAppButton?.setTitle(SettingsTableViewController.LocalizedString.GratuityForAppleWatchButton, forState: UIControlState.Normal)
+        //prepare the labels
+        let labelFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        let labelTextColor = GratuitousUIConstant.lightTextColor()
+
+        self.aboutEmailMeLabel?.font = labelFont
+        self.aboutReviewLabel?.font = labelFont
+        self.aboutWatchAppLabel?.font = labelFont
+        
+        self.aboutEmailMeLabel?.textColor = labelTextColor
+        self.aboutReviewLabel?.textColor = labelTextColor
+        self.aboutWatchAppLabel?.textColor = labelTextColor
+        
+        self.aboutEmailMeLabel?.text = UIAlertAction.Gratuity.LocalizedString.EmailSupport
+        self.aboutReviewLabel?.text = SettingsTableViewController.LocalizedString.ReviewThisAppButton
+        self.aboutWatchAppLabel?.text = SettingsTableViewController.LocalizedString.GratuityForAppleWatchButton
         
         //set the background color of all of the different cells. For some reason on ipad, its white instead of clear
         self.aboutMyPictureImageView?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         self.aboutSaturdayAppsParagraphLabel?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        self.aboutEmailMeButton?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        self.aboutReviewButton?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        self.aboutWatchAppButton?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
     }
-    
-    @IBAction func didTapEmailMeButton(sender: UIButton) {
-        let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
-        if let mailVC = emailManager.presentableMailViewController {
-            self.presentViewController(mailVC, animated: true, completion: .None)
-        } else {
-            emailManager.switchAppForEmailSupport()
-        }
-    }
-    
-    @IBAction func didTapReviewThisAppButton(sender: UIButton) {
-        let appStoreString = String(format: "itms-apps://itunes.apple.com/app/id%d", self.applicationID)
-        let appStoreURL = NSURL(string: appStoreString)
-        if let appStoreURL = appStoreURL {
-            UIApplication.sharedApplication().openURL(appStoreURL)
-        }
-    }
-    
-    @IBAction func didTapAppleWatchButton(sender: UIButton) {
-        let presentingVC = self.presentingViewController
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            presentingVC?.performSegueWithIdentifier(TipViewController.StoryboardSegues.WatchInfo.rawValue, sender: self)
-        })
-    }
-    
+
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         if let presentedViewController = self.presentedViewController {
             presentedViewController.dismissViewControllerAnimated(true, completion: nil)

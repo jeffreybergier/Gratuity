@@ -80,6 +80,7 @@
 		73C8BB581BD0A9C300D427CB /* GratuitousAppDelegate+Handoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8BB571BD0A9C300D427CB /* GratuitousAppDelegate+Handoff.swift */; settings = {ASSET_TAGS = (); }; };
 		73D680931BD6AC6C00A013F9 /* GratuitousSplitBillPurchaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D680921BD6AC6C00A013F9 /* GratuitousSplitBillPurchaseTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		73D680951BD6BA8900A013F9 /* GratuitousSelectFadeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D680941BD6BA8900A013F9 /* GratuitousSelectFadeTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		73D680971BD6C9F500A013F9 /* GratuitousDisclosureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D680961BD6C9F500A013F9 /* GratuitousDisclosureTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		73F44C5A1BCF444700456E8A /* GratuitousNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C591BCF444700456E8A /* GratuitousNumberFormatter.swift */; settings = {ASSET_TAGS = (); }; };
 		73F44C5C1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */; settings = {ASSET_TAGS = (); }; };
 		73F44C5D1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */; settings = {ASSET_TAGS = (); }; };
@@ -202,6 +203,7 @@
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
 		73D680921BD6AC6C00A013F9 /* GratuitousSplitBillPurchaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSplitBillPurchaseTableViewCell.swift; sourceTree = "<group>"; };
 		73D680941BD6BA8900A013F9 /* GratuitousSelectFadeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSelectFadeTableViewCell.swift; sourceTree = "<group>"; };
+		73D680961BD6C9F500A013F9 /* GratuitousDisclosureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousDisclosureTableViewCell.swift; sourceTree = "<group>"; };
 		73D86F6A1BAF2CA000B098FE /* GratuitousPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousPresentationController.swift; sourceTree = "<group>"; };
 		73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousEnums.swift; path = ../GratuitousSwift/GratuitousEnums.swift; sourceTree = "<group>"; };
 		73EB5C721BABCA14000F4A99 /* SmallModalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallModalTableViewController.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				73D680941BD6BA8900A013F9 /* GratuitousSelectFadeTableViewCell.swift */,
 				73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */,
 				73D680921BD6AC6C00A013F9 /* GratuitousSplitBillPurchaseTableViewCell.swift */,
+				73D680961BD6C9F500A013F9 /* GratuitousDisclosureTableViewCell.swift */,
 				73BE874D1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift */,
 				73D403A11A0C7D36007247E0 /* GratuitousSettingsButtons.swift */,
 			);
@@ -806,6 +809,7 @@
 				733D02D01BBA4D2800E40EC5 /* GratuitousUIConstant.swift in Sources */,
 				73D680951BD6BA8900A013F9 /* GratuitousSelectFadeTableViewCell.swift in Sources */,
 				73BA966D1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift in Sources */,
+				73D680971BD6C9F500A013F9 /* GratuitousDisclosureTableViewCell.swift in Sources */,
 				73C8BB541BD0879A00D427CB /* GratuitousDefaultsObserver.swift in Sources */,
 				733D02BD1BBA4D0900E40EC5 /* GratuitousTableViewCell.swift in Sources */,
 				733D02CE1BBA4D2800E40EC5 /* GratuitousAnimatedTransitioning.swift in Sources */,
