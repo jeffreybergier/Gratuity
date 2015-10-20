@@ -35,6 +35,11 @@ final class SplitBillViewController: SmallModalTableViewController {
         self.navigationBar?.items?.first?.title = LocalizedString.TitleLabel
     }
     
+    override func configureDynamicTextLabels() {
+        super.configureDynamicTextLabels()
+        self.tableView?.reloadData()
+    }
+    
     private func roundedDivisionWithTop(top: Int, bottom: Int) -> Int {
         let division = Double(top)/Double(bottom)
         if isinf(division) == false && isnan(division) == false {

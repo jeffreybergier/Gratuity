@@ -89,6 +89,12 @@ final class SplitBillTableViewCell: UITableViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.prepareFontsAndColors()
+    }
+    
     private func prepareFontsAndColors() {
         let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         let headlineFontSize = headlineFont.pointSize
