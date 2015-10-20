@@ -25,7 +25,7 @@ class GratuitousSplitBillPurchaseTableViewCell: GratuitousSelectFadeTableViewCel
         didSet {
             switch self.viewSourceOfTruth {
             case .LockShowing:
-                self.lockIconTrailingConstraint?.constant = 12
+                self.lockIconTrailingConstraint?.constant = 10
                 self.lockIconWidthConstraint?.active = false
                 self.accessoryType = .None
             case .CheckMarkShowing:
