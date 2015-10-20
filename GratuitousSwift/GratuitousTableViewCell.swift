@@ -33,13 +33,6 @@ final class GratuitousTableViewCell: UITableViewCell {
         self.didSetBillAmount()
     }
     
-    @objc private func invertColorsDidChange(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.contentView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-            self.prepareLabelTextAttributes()
-        }
-    }
-    
     @objc private func currencySignChanged(notification: NSNotification?) {
         dispatch_async(dispatch_get_main_queue()) {
             self.currencyFormatter.locale = NSLocale.currentLocale()
@@ -61,7 +54,6 @@ final class GratuitousTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
         

@@ -9,50 +9,35 @@
 import UIKit
 
 struct GratuitousUIColor {
-    
-    private static func invertColorsIsEnabled() -> Bool {
-        var invertColors = false
-        
-        #if os(iOS)
-            if UIAccessibilityIsInvertColorsEnabled() {
-                invertColors = true
-            }
-        #endif
-        
-        return invertColors
-    }
+//    
+//    private static func invertColorsIsEnabled() -> Bool {
+//        var invertColors = false
+//        
+//        #if os(iOS)
+//            if UIAccessibilityIsInvertColorsEnabled() {
+//                invertColors = true
+//            }
+//        #endif
+//        
+//        return invertColors
+//    }
     
     static func lightBackgroundColor() -> UIColor {
         return self.ultraLightTextColor()
     }
     
     static func darkBackgroundColor() -> UIColor {
-        var color = UIColor(red: 30.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
-        
-        if invertColorsIsEnabled() {
-            color = UIColor.whiteColor()
-        }
-        
+        let color = UIColor(red: 30.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         return color
     }
     
     static func ultraLightTextColor() -> UIColor {
-        var color = UIColor(red: 200/255.0, green: 0, blue: 0, alpha: 1)
-        
-        if invertColorsIsEnabled() {
-            color = UIColor.whiteColor()
-        }
-        
+        let color = UIColor(red: 200/255.0, green: 0, blue: 0, alpha: 1)
         return color
     }
     
     static func mediumBackgroundColor() -> UIColor {
-        var color = UIColor(red: 100/255.0, green: 0, blue: 0, alpha: 1)
-        
-        if invertColorsIsEnabled() {
-            color = UIColor.darkGrayColor()
-        }
-        
+        let color = UIColor(red: 100/255.0, green: 0, blue: 0, alpha: 1)
         return color
     }
     

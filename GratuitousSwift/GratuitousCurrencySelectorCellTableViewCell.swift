@@ -17,24 +17,8 @@ final class GratuitousCurrencySelectorCellTableViewCell: GratuitousSelectFadeTab
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
-        
-    }
-    
     func setInterfaceRefreshNeeded() {
         self.readUserDefaultsAndSetCheckmarkWithTimer(true)
-    }
-    
-    @objc private func systemTextSizeDidChange(notification:NSNotification) {
-        self.prepareTextLabel()
-        self.layer.borderWidth = GratuitousUIConstant.thinBorderWidth()
-        self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-        self.readUserDefaultsAndSetCheckmarkWithTimer(true)
-        self.layoutIfNeeded()
     }
     
     private func prepareTextLabel() {

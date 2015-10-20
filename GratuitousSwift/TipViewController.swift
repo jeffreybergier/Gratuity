@@ -100,7 +100,6 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         
         // configure notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setInterfaceRefreshNeeded:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
@@ -160,7 +159,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         //configure the text
         self.billAmountTableViewTitleTextLabel?.text = TipViewController.LocalizedString.BillAmountHeader
         self.tipAmountTableViewTitleTextLabel?.text = TipViewController.LocalizedString.SuggestTipHeader
-        self.splitBillButton?.setTitle(TipViewController.LocalizedString.SpltBillButton, forState: .Normal)
+        self.prepareSplitBillButton()
         
         //prepare the cell select surrounds
         self.prepareCellSelectSurroundView()
@@ -458,6 +457,9 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
+    private func prepareSplitBillButton() {
+        self.splitBillButton?.setTitle(TipViewController.LocalizedString.SpltBillButton, forState: .Normal)
+    }
     
     //MARK: Handle Table View User Input
     
@@ -627,11 +629,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     //MARK: View Controller Preferences
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        if UIAccessibilityIsInvertColorsEnabled() {
-            return UIStatusBarStyle.Default
-        } else {
-            return UIStatusBarStyle.LightContent
-        }
+        return UIStatusBarStyle.LightContent
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
@@ -653,35 +651,12 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             
             //update the view
             self.prepareSettingsButton()
+            self.prepareSplitBillButton()
             self.billAmountTableView?.reloadData()
             self.tipAmountTableView?.reloadData()
             
             //reload the tables
             self.updateTableViewsFromDisk()
-        }
-    }
-    
-    @objc private func invertColorsDidChange(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
-            //configure color of view
-            self.view.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-            self.tipPercentageTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
-            self.totalAmountTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
-            self.tipAmountTableViewTitleTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
-            self.billAmountTableViewTitleTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
-            self.tipAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
-            self.billAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
-            
-            //change the status bar
-            //this line of code doesn't actually work, but maybe it will some day?
-            UIApplication.sharedApplication().statusBarStyle = self.preferredStatusBarStyle()
-            
-            //update the surround view
-            self.prepareCellSelectSurroundView()
-            
-            //update the colors for the text attributes
-            self.totalAmountTextLabelAttributes["NSColor"] = GratuitousUIConstant.lightTextColor()
-            self.tipPercentageTextLabelAttributes["NSColor"] = GratuitousUIConstant.lightTextColor()
         }
     }
     
