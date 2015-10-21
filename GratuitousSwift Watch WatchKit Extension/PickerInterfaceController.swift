@@ -284,7 +284,7 @@ final class PickerInterfaceController: WKInterfaceController {
     }
     
     @objc private func splitTipMenuButtonTapped() {
-        if true == true { //self.applicationPreferences.splitBillPurchased == true {
+        if self.applicationPreferences.splitBillPurchased == true {
             self.presentControllerWithName("SplitTotalInterfaceController", context: .None)
         } else {
             self.presentControllerWithName("SplitBillPurchaseInterfaceController", context: .None)
