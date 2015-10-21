@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-import UIKit
-import WatchConnectivity
 import Fabric
 import Crashlytics
 import XCGLogger

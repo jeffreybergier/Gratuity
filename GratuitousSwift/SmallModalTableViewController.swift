@@ -6,8 +6,6 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import UIKit
-
 class SmallModalTableViewController: SmallModalViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView?

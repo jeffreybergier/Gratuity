@@ -6,8 +6,6 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import StoreKit
-
 final class GratuitousPurchaseManager: JSBPurchaseManager {
     
     override var Scej9Uj9vIrth8Ev7quaG9vob6iP8buK5ferS8yoak3Fots5El: String {

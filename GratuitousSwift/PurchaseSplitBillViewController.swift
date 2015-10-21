@@ -6,9 +6,8 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import UIKit
-import AVFoundation
 import MessageUI
+import XCGLogger
 
 final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
@@ -26,6 +25,8 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBOutlet private weak var restoreButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
     @IBOutlet private weak var purchaseButtonSpinner: UIActivityIndicatorView?
     @IBOutlet private weak var restoreButtonSpinner: UIActivityIndicatorView?
+    
+    private let log = XCGLogger.defaultInstance()
     
     private let purchaseManager = GratuitousPurchaseManager()
     private var applicationPreferences: GratuitousUserDefaults {
@@ -353,7 +354,7 @@ extension PurchaseSplitBillViewController: MFMailComposeViewControllerDelegate {
             }
         }
         if let error = error {
-            NSLog("AboutTableViewController: Error while sending email. Error Description: \(error.description)")
+            self.log.error("Error while sending email. Error Description: \(error.description)")
         }
     }
 }

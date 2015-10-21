@@ -136,7 +136,6 @@ extension CurrencySign {
     func stringForFileName() -> String {
         switch self {
         case .Default:
-            fatalError()
             return "Default"
         case .Dollar:
             return "Dollar"

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-import UIKit
 import MessageUI
+import XCGLogger
 
 final class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
@@ -16,6 +16,8 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     @IBOutlet private weak var headerLabelCurencySymbol: UILabel?
     @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel?
     @IBOutlet private weak var headerLabelInAppPurchases: UILabel?
+    
+    private let log = XCGLogger.defaultInstance()
 
     private var headerLabelsArray: [UILabel?] = []
     private lazy var swipeToDismiss: UISwipeGestureRecognizer = {
@@ -356,7 +358,6 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
                 break
             }
         default:
-            print(indexPath)
             break
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
@@ -421,7 +422,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
             presentedViewController.dismissViewControllerAnimated(true, completion: nil)
         }
         if let error = error {
-            NSLog("AboutTableViewController: Error while sending email. Error Description: \(error.description)")
+            self.log.error("Error while sending email. Error Description: \(error.description)")
         }
     }
     

@@ -6,11 +6,12 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import Foundation
+import XCGLogger
 
 final class GratuitousCurrencyStringImageGenerator {
     
     private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
+    private let log = XCGLogger.defaultInstance()
         
     func generateCurrencySymbolsForCurrencySign(currencySign: CurrencySign) -> (url: NSURL, fileName: String)? {
         if let url = self.generateNewCurrencySymbol(currencySign),
@@ -57,7 +58,7 @@ final class GratuitousCurrencyStringImageGenerator {
             try data.writeToURL(dataURL, options: .AtomicWrite)
             return dataURL
         } catch {
-            NSLog("GratuitousCurrencyStringImageGenerator: Failed to save <\(self.currencyFormatter.currencySymbol)> Currency Images to Disk: \(dataURL.path!)")
+            self.log.error("Failed to save <\(self.currencyFormatter.currencySymbol)> Currency Images to Disk: \(dataURL.path!)")
             return .None
         }
     }

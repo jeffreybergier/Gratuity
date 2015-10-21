@@ -6,8 +6,6 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import StoreKit
-
 class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
     private let paymentQueue = SKPaymentQueue.defaultQueue()
@@ -116,7 +114,6 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
     // Sent when the transaction array has changed (additions or state changes).  Client should check state of transactions and finish as appropriate.
     func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
-            print("PurchaseManager: Transaction: \(transaction) changed to state \(transaction.transactionState) with error: \(transaction.error)")
             switch transaction.transactionState {
             case .Purchasing:
                 break // do nothing and wait
@@ -134,9 +131,7 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
     }
     
     func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
-        for transaction in transactions {
-            print("PurchaseManager: Transaction: \(transaction) in state \(transaction.transactionState) Removed from Queue with error: \(transaction.error)")
-        }
+        
     }
     
     func finishTransaction(transaction: SKPaymentTransaction) {

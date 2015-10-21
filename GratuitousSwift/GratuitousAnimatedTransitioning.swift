@@ -6,8 +6,6 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import UIKit
-
 @objc enum GratuitousTransitioningDelegateType: Int {
     case Bottom, Right, NotApplicable
 }

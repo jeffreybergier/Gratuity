@@ -9,18 +9,6 @@
 import UIKit
 
 struct GratuitousUIColor {
-//    
-//    private static func invertColorsIsEnabled() -> Bool {
-//        var invertColors = false
-//        
-//        #if os(iOS)
-//            if UIAccessibilityIsInvertColorsEnabled() {
-//                invertColors = true
-//            }
-//        #endif
-//        
-//        return invertColors
-//    }
     
     static func lightBackgroundColor() -> UIColor {
         return self.ultraLightTextColor()

@@ -89,11 +89,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
     
     // MARK: iOS App State For Watch
     
-    var watchState: WatchState = .NotSupported {
-        didSet {
-            print("JSBWatchConnectivityManager: Watch State Did Change to: \(self.watchState)")
-        }
-    }
+    var watchState: WatchState = .NotSupported
     
     /** Called when any of the Watch state properties change */
     #if os(iOS)

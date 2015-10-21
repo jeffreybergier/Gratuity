@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-import UIKit
-
 final class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CustomAnimatedTransitionable {
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel?
@@ -310,10 +308,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let animatableDestinationViewController = segue.destinationViewController as? CustomAnimatedTransitionable else {
-            NSLog("TipViewController<PrepareForSegue>: Destination View Controller does not conform to CustomAnimatedTransitionable: \(segue.destinationViewController)")
-            return
-        }
+        guard let animatableDestinationViewController = segue.destinationViewController as? CustomAnimatedTransitionable else { return }
         
         switch animatableDestinationViewController.customTransitionType {
         case .Right:

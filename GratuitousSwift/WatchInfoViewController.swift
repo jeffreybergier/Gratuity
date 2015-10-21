@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 SaturdayApps. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
 
 final class WatchInfoViewController: SmallModalScollViewController {

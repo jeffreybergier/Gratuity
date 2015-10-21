@@ -56,8 +56,6 @@
 		738C98C11BD2DE3B00D14F20 /* NSTimer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98C31BD2EAA500D14F20 /* GratuitousWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98C21BD2EAA500D14F20 /* GratuitousWatchConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
 		738C98C41BD2EEC800D14F20 /* GratuitousiOSConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */; settings = {ASSET_TAGS = (); }; };
-		73A5D8F51BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
-		73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */; settings = {ASSET_TAGS = (); }; };
 		73AEA6C71BBB05EB004B16DE /* GratuityWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73AEA6C61BBB05EB004B16DE /* GratuityWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		73AEA6D41BBB05EB004B16DE /* GratuityWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 73AEA6BA1BBB05EB004B16DE /* GratuityWatch.app */; };
@@ -183,7 +181,6 @@
 		73A18D5A1A2A9525002180DD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		73A18D711A2A9525002180DD /* Interface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
 		73A18D731A2A9525002180DD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousHandoffTypes.swift; sourceTree = "<group>"; };
 		73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousErrors.swift; sourceTree = "<group>"; };
 		73AEA6BA1BBB05EB004B16DE /* GratuityWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratuityWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AEA6C61BBB05EB004B16DE /* GratuityWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GratuityWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -464,7 +461,6 @@
 				738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */,
 				734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */,
 				73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */,
-				73A5D8F41BCB11FC0043295B /* GratuitousHandoffTypes.swift */,
 				73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */,
 				73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */,
 				736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */,
@@ -789,7 +785,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				733D02DD1BBA4D6D00E40EC5 /* UIImage+PDFUtility.m in Sources */,
-				73A5D8F51BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */,
 				73C8BB581BD0A9C300D427CB /* GratuitousAppDelegate+Handoff.swift in Sources */,
 				733D02BC1BBA4D0000E40EC5 /* TipViewController.swift in Sources */,
 				733D02CD1BBA4D2800E40EC5 /* GratuitousPresentationController.swift in Sources */,
@@ -844,7 +839,6 @@
 				735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */,
 				73AEA6DF1BBB06D0004B16DE /* PickerInterfaceController.swift in Sources */,
 				738C98C11BD2DE3B00D14F20 /* NSTimer+Closure.swift in Sources */,
-				73A5D8F61BCB11FC0043295B /* GratuitousHandoffTypes.swift in Sources */,
 				73F44C5D1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */,
 				732CFE6C1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift in Sources */,
 				73BA966A1BD0614200CFCEC4 /* GratuitousUserDefaultsDiskManager.swift in Sources */,

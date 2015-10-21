@@ -8,8 +8,11 @@
 
 import UIKit
 
-func delay(delay: NSTimeInterval, closure:() -> ()) {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
+enum HandoffTypes: String {
+    case MainTipInterface = "com.saturdayapps.Gratuity.Watch.MainTipInterface"
+    case SettingsInterface = "com.saturdayapps.Gratuity.Watch.SettingsInterface"
+    case SplitBillInterface = "com.saturdayapps.Gratuity.Watch.SplitBillInterface"
+    case SplitBillPurchase = "com.saturdayapps.Gratuity.Watch.SplitBillPurchase"
 }
 
 struct WatchNotification {

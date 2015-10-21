@@ -6,9 +6,6 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-import UIKit
-import QuartzCore
-
 final class GratuitousGradientView: UIView {
     
     internal let gradient = CAGradientLayer()

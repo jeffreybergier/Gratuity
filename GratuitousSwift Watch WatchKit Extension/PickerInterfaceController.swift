@@ -7,7 +7,6 @@
 //
 
 import WatchKit
-import Foundation
 
 final class PickerInterfaceController: WKInterfaceController {
     

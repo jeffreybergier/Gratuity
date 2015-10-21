@@ -6,7 +6,6 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import WatchConnectivity
 import XCGLogger
 
 class GratuitousWatchApplicationPreferences {
