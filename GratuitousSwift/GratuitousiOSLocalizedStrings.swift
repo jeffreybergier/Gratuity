@@ -17,7 +17,7 @@ extension WatchInfoViewController {
             comment: "WatchInfoViewController: LargeTextLabel: Whatever apple calls the Apple Watch, locally"
         )
         static let NavBarTitleLabel =
-        NSLocalizedString("Apple Watch",
+        NSLocalizedString("Gratuity",
             comment: "WatchInfoViewController: NavBarTitle: Title for view that shows how the Gratuity Apple Watch app works."
         )
         static let AboutGratuityForAppleWatch =

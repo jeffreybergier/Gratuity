@@ -992,33 +992,46 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPR-iu-zel">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="606.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="398.5"/>
                                                 <subviews>
-                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gF-6N-FII">
-                                                        <rect key="frame" x="140" y="93.5" width="320" height="568"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1e-UF-a4J">
+                                                        <rect key="frame" x="213" y="164.5" width="174" height="214"/>
+                                                        <subviews>
+                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gF-6N-FII">
+                                                                <rect key="frame" x="10" y="10" width="154" height="194"/>
+                                                                <animations/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="154" id="7ya-QF-H72"/>
+                                                                    <constraint firstAttribute="height" constant="194" id="maH-TD-qxK"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
                                                         <animations/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="320" id="7ya-QF-H72"/>
-                                                            <constraint firstAttribute="height" constant="568" id="maH-TD-qxK"/>
+                                                            <constraint firstItem="4gF-6N-FII" firstAttribute="centerX" secondItem="c1e-UF-a4J" secondAttribute="centerX" id="Nh8-oz-wYv"/>
+                                                            <constraint firstItem="4gF-6N-FII" firstAttribute="centerY" secondItem="c1e-UF-a4J" secondAttribute="centerY" id="ep1-XW-JRZ"/>
+                                                            <constraint firstAttribute="height" secondItem="4gF-6N-FII" secondAttribute="height" constant="20" id="g5G-yj-AUb"/>
+                                                            <constraint firstAttribute="width" secondItem="4gF-6N-FII" secondAttribute="width" constant="20" id="xOP-Ac-M3h"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gratuity" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSE-Uh-TGD">
-                                                        <rect key="frame" x="20" y="24" width="560" height="34"/>
+                                                        <rect key="frame" x="20" y="20" width="560" height="34"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                                         <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apple Watch" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7i-VU-1If">
-                                                        <rect key="frame" x="20" y="54" width="560" height="34"/>
+                                                        <rect key="frame" x="20" y="50" width="560" height="34"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                                         <color key="textColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwR-uM-jLF">
-                                                        <rect key="frame" x="12" y="104" width="580" height="44.5"/>
+                                                        <rect key="frame" x="12" y="100" width="580" height="44.5"/>
                                                         <animations/>
                                                         <string key="text">Did you just open a shiny new Apple Watch? Don't forget to install Gratuity. You can do so in the Apple Watch app on your iPhone.</string>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
@@ -1031,14 +1044,14 @@
                                                 <constraints>
                                                     <constraint firstItem="i7i-VU-1If" firstAttribute="leading" secondItem="IPR-iu-zel" secondAttribute="leading" constant="20" symbolic="YES" id="1Ta-C1-oGt"/>
                                                     <constraint firstAttribute="trailing" secondItem="oSE-Uh-TGD" secondAttribute="trailing" constant="20" symbolic="YES" id="1oo-0T-19t"/>
-                                                    <constraint firstItem="oSE-Uh-TGD" firstAttribute="top" secondItem="IPR-iu-zel" secondAttribute="top" constant="24" id="Bmu-eM-0y0"/>
+                                                    <constraint firstItem="oSE-Uh-TGD" firstAttribute="top" secondItem="IPR-iu-zel" secondAttribute="top" constant="20" symbolic="YES" id="Bmu-eM-0y0"/>
                                                     <constraint firstItem="fwR-uM-jLF" firstAttribute="leading" secondItem="IPR-iu-zel" secondAttribute="leading" constant="12" id="C1q-4L-691"/>
-                                                    <constraint firstAttribute="centerX" secondItem="4gF-6N-FII" secondAttribute="centerX" id="Dl6-Vu-vXE"/>
+                                                    <constraint firstItem="c1e-UF-a4J" firstAttribute="top" secondItem="fwR-uM-jLF" secondAttribute="bottom" constant="20" id="GnQ-QY-m9x"/>
                                                     <constraint firstAttribute="trailing" secondItem="fwR-uM-jLF" secondAttribute="trailing" constant="8" id="Jsn-zo-ZQX"/>
-                                                    <constraint firstAttribute="bottom" secondItem="4gF-6N-FII" secondAttribute="bottom" constant="-55" id="Jwj-81-TKe"/>
+                                                    <constraint firstAttribute="bottom" secondItem="c1e-UF-a4J" secondAttribute="bottom" constant="20" symbolic="YES" id="NV3-LZ-Pth"/>
                                                     <constraint firstAttribute="trailing" secondItem="i7i-VU-1If" secondAttribute="trailing" constant="20" symbolic="YES" id="St3-yz-Y8y"/>
+                                                    <constraint firstItem="c1e-UF-a4J" firstAttribute="centerX" secondItem="IPR-iu-zel" secondAttribute="centerX" id="h1c-oT-4Ks"/>
                                                     <constraint firstItem="oSE-Uh-TGD" firstAttribute="leading" secondItem="IPR-iu-zel" secondAttribute="leading" constant="20" symbolic="YES" id="jVs-2e-W7l"/>
-                                                    <constraint firstItem="4gF-6N-FII" firstAttribute="top" secondItem="fwR-uM-jLF" secondAttribute="bottom" constant="-55" id="uML-jl-Ej9"/>
                                                     <constraint firstItem="fwR-uM-jLF" firstAttribute="top" secondItem="i7i-VU-1If" secondAttribute="bottom" constant="16" id="z8Q-G1-09S"/>
                                                     <constraint firstItem="i7i-VU-1If" firstAttribute="top" secondItem="oSE-Uh-TGD" secondAttribute="bottom" constant="-4" id="zpN-5F-Ryf"/>
                                                 </constraints>
@@ -1098,6 +1111,7 @@
                         <outlet property="gratuityTitleLabel" destination="oSE-Uh-TGD" id="Wwo-H8-EGj"/>
                         <outlet property="navigationBar" destination="Z7s-S4-LFO" id="4s9-rC-cBQ"/>
                         <outlet property="scrollView" destination="ri1-EA-AF8" id="nzF-7B-YC4"/>
+                        <outlet property="videoPlayerSurroundView" destination="c1e-UF-a4J" id="cQZ-o3-3O9"/>
                         <outlet property="videoPlayerView" destination="4gF-6N-FII" id="sKx-Gp-ymw"/>
                     </connections>
                 </viewController>

@@ -14,6 +14,7 @@ final class WatchInfoViewController: SmallModalScollViewController {
     @IBOutlet private weak var gratuityTitleLabel: UILabel?
     @IBOutlet private weak var gratuityParagraphLabel: UILabel?
     @IBOutlet private weak var gratuitySubtitleLabel: UILabel?
+    @IBOutlet private weak var videoPlayerSurroundView: UIView?
     
     private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
         if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mov") {
@@ -28,6 +29,10 @@ final class WatchInfoViewController: SmallModalScollViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.videoPlayerSurroundView?.layer.borderWidth = 1
+        self.videoPlayerSurroundView?.layer.cornerRadius = 8
+        self.videoPlayerSurroundView?.layer.borderColor = GratuitousUIColor.lightTextColor().CGColor
         
         if let videoPlayer = self.videoPlayer {
             let player = videoPlayer.player
