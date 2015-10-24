@@ -23,6 +23,31 @@ class GratuitousDisclosureTableViewCell: GratuitousSelectFadeTableViewCell {
         }
     }
     
+    override func setSelected(selected: Bool, animated: Bool) {
+        let selectionAnimationDuration = animated == true ? GratuitousUIConstant.animationDuration() : 0.0001
+        let deselectionAnimationDuration = animated == true ? GratuitousUIConstant.animationDuration() * 3 : 0.0001
+        switch selected {
+        case true:
+            UIView.animateWithDuration(selectionAnimationDuration,
+                delay: 0.0,
+                options: UIViewAnimationOptions.BeginFromCurrentState,
+                animations: {
+                    self.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+                    self.animatableTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
+                },
+                completion: .None)
+        case false:
+            UIView.animateWithDuration(deselectionAnimationDuration,
+                delay: 0.0,
+                options: UIViewAnimationOptions.BeginFromCurrentState,
+                animations: {
+                    self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+                    self.animatableTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+                },
+                completion: .None)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

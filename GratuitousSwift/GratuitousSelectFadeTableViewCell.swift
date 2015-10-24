@@ -20,26 +20,6 @@ class GratuitousSelectFadeTableViewCell: UITableViewCell {
         self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
     }
     
-    func slowFadeOutOfBorderAroundCell(timer: NSTimer?) {
-        timer?.invalidate()
-        
-        if self.animatingBorderColor == false {
-            //wow animations in Core Animation are so much harder than UIViewAnimations
-            let colorAnimation = CABasicAnimation(keyPath: "borderColor")
-            colorAnimation.fromValue = GratuitousUIConstant.lightBackgroundColor().CGColor
-            colorAnimation.toValue = GratuitousUIConstant.darkBackgroundColor().CGColor
-            self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor
-            
-            let animationGroup = CAAnimationGroup()
-            animationGroup.duration = GratuitousUIConstant.animationDuration() * 3
-            animationGroup.animations = [colorAnimation]
-            animationGroup.delegate = self
-            animationGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            
-            self.layer.addAnimation(animationGroup, forKey: "borderColor")
-        }
-    }
-    
     override func animationDidStart(anim: CAAnimation) {
         self.animatingBorderColor = true
     }
@@ -92,7 +72,7 @@ class GratuitousSelectFadeTableViewCell: UITableViewCell {
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(false, animated: animated)
+        super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
         if selected {

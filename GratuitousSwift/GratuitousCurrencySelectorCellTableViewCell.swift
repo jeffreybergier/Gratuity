@@ -15,17 +15,17 @@ final class GratuitousCurrencySelectorCellTableViewCell: GratuitousSelectFadeTab
     }
     
     func setInterfaceRefreshNeeded() {
-        self.readUserDefaultsAndSetCheckmarkWithTimer(true)
+        self.readUserDefaultsAndSetCheckmark()
     }
     
     private func prepareTextLabel() {
-        self.readUserDefaultsAndSetCheckmarkWithTimer(false)
+        self.readUserDefaultsAndSetCheckmark()
         self.animatableTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.animatableTextLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.layoutIfNeeded()
     }
     
-    private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {
+    private func readUserDefaultsAndSetCheckmark() {
         if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
             where appDelegate.preferencesSetLocally.overrideCurrencySymbol.rawValue == self.tag {
                 self.accessoryType = UITableViewCellAccessoryType.Checkmark
@@ -34,9 +34,6 @@ final class GratuitousCurrencySelectorCellTableViewCell: GratuitousSelectFadeTab
                     self.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
                 }
                 self.accessoryType = UITableViewCellAccessoryType.Checkmark
-                if timer {
-                    NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "slowFadeOutOfBorderAroundCell:", userInfo: nil, repeats: false)
-                }
         } else {
             self.accessoryType = UITableViewCellAccessoryType.None
             if self.animatingBorderColor == false {

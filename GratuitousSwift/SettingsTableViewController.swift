@@ -45,6 +45,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "percentageMayHaveChanged:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: .None)
         
         //set the background color of the view
         self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
@@ -96,6 +97,12 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         
         //prepare the currency override cells
         self.setInterfaceRefreshNeeded()
+    }
+    
+    @objc private func applicationDidBecomeActive(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.viewWillAppear(true)
+        }
     }
     
     private func prepareHeaderLabelsAndCells() {
@@ -360,7 +367,6 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         default:
             break
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
     
     // MARK: Handle In-App Purchase Cells
