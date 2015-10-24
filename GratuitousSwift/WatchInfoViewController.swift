@@ -10,11 +10,11 @@ import AVFoundation
 
 final class WatchInfoViewController: SmallModalScollViewController {
     
-    @IBOutlet private weak var videoPlayerView: UIView?
     @IBOutlet private weak var gratuityTitleLabel: UILabel?
     @IBOutlet private weak var gratuityParagraphLabel: UILabel?
     @IBOutlet private weak var gratuitySubtitleLabel: UILabel?
     @IBOutlet private weak var videoPlayerSurroundView: UIView?
+    @IBOutlet private weak var videoPlayerView: UIView?
     
     private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
         if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mov") {

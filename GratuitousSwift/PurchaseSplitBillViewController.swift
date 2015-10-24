@@ -8,6 +8,7 @@
 
 import MessageUI
 import XCGLogger
+import AVFoundation
 
 final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
@@ -19,12 +20,24 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBOutlet private weak var purchaseButton: GratuitousBorderedButton?
     @IBOutlet private weak var restoreButton: GratuitousBorderedButton?
     @IBOutlet private weak var modalBlockingView: UIView?
-    @IBOutlet private weak var splitBillScreenshotImageView: UIImageView?
     @IBOutlet private var descriptionParagraphHeightConstraint: NSLayoutConstraint?
     @IBOutlet private weak var purchaseButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
     @IBOutlet private weak var restoreButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
     @IBOutlet private weak var purchaseButtonSpinner: UIActivityIndicatorView?
     @IBOutlet private weak var restoreButtonSpinner: UIActivityIndicatorView?
+    @IBOutlet private weak var videoPlayerSurroundView: UIView?
+    @IBOutlet private weak var videoPlayerView: UIView?
+    
+    private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
+        if let moviePath = NSBundle.mainBundle().pathForResource("gratuityiOSDemoVideo@2x", ofType: "mp4") {
+            let player = AVPlayer(URL: NSURL.fileURLWithPath(moviePath))
+            player.allowsExternalPlayback = false
+            player.actionAtItemEnd = AVPlayerActionAtItemEnd.None // cause the player to loop
+            let playerLayer = AVPlayerLayer(player: player)
+            return (player, playerLayer)
+        }
+        return nil
+    }()
     
     private let log = XCGLogger.defaultInstance()
     
@@ -105,6 +118,31 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         self.purchaseManager.beginObserving()
         self.requestSplitBillProductWithCompletionHandler()
         self.state = .SplitBillProductNotFoundInStoreFront
+        
+        self.videoPlayerSurroundView?.layer.borderWidth = 1
+        self.videoPlayerSurroundView?.layer.cornerRadius = 8
+        self.videoPlayerSurroundView?.layer.borderColor = GratuitousUIColor.lightTextColor().CGColor
+        
+        if let videoPlayer = self.videoPlayer {
+            let player = videoPlayer.player
+            let layer = videoPlayer.layer
+            
+            let desiredSize = self.videoPlayerView?.frame.size
+            var desiredFrame = CGRect(x: 0, y: 0, width: 640, height: 1136)
+            if let desiredSize = desiredSize {
+                desiredFrame = CGRect(origin: CGPointZero, size: desiredSize)
+            }
+            
+            layer.frame = desiredFrame
+            layer.backgroundColor = UIColor.blackColor().CGColor
+            layer.videoGravity = AVLayerVideoGravityResizeAspect
+            
+            self.videoPlayerView?.layer.addSublayer(layer)
+            self.videoPlayerView?.clipsToBounds = true
+            
+            player.play()
+        }
+
     }
     
     override func configureDynamicTextLabels() {
@@ -150,6 +188,23 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             let downloadingLocalizedString = PurchaseSplitBillViewController.LocalizedString.DownloadingAppStoreInfoButtonText
             self.purchaseButton?.setTitle(downloadingLocalizedString, forState: UIControlState.Normal)
             self.descriptionParagraphLabel?.text = ""
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let videoPlayer = self.videoPlayer {
+            videoPlayer.player.seekToTime(kCMTimeZero)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoPlaybackFinished:", name: AVPlayerItemDidPlayToEndTimeNotification, object: videoPlayer.player.currentItem)
+        }
+    }
+    
+    @objc private func videoPlaybackFinished(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            if let videoPlayer = self.videoPlayer {
+                videoPlayer.player.seekToTime(kCMTimeZero)
+            }
         }
     }
     
@@ -334,6 +389,8 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     deinit {

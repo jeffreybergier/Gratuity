@@ -45,6 +45,7 @@
 		733D02DD1BBA4D6D00E40EC5 /* UIImage+PDFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 73556E641A19711F0079A37D /* UIImage+PDFUtility.m */; };
 		733D02E01BBA4D8600E40EC5 /* GratuitousEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E35AF11A0D33DA009A2F97 /* GratuitousEnums.swift */; };
 		733D02E41BBA505600E40EC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */; };
+		733D71351BDC251E009EA8E5 /* gratuityiOSDemoVideo@2x.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 733D71341BDC251E009EA8E5 /* gratuityiOSDemoVideo@2x.mp4 */; };
 		735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735DCADB1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift */; };
 		736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; };
 		738C98B71BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */; };
@@ -148,6 +149,7 @@
 		733D02A61BBA4C2D00E40EC5 /* Gratuity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gratuity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		733D02B81BBA4CAA00E40EC5 /* Gratuity-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Gratuity-Info.plist"; sourceTree = "<group>"; };
 		733D02E51BBA505E00E40EC5 /* Gratuity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Gratuity.entitlements; path = ../Gratuity.entitlements; sourceTree = "<group>"; };
+		733D71341BDC251E009EA8E5 /* gratuityiOSDemoVideo@2x.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gratuityiOSDemoVideo@2x.mp4"; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
 		734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousUIColor.swift; path = ../GratuitousSwift/GratuitousUIColor.swift; sourceTree = "<group>"; };
 		73556E621A19711E0079A37D /* GratuitousSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GratuitousSwift-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				7371F6D21BB5065B00048EC2 /* PurchaseSplitBillViewController.swift */,
+				733D71341BDC251E009EA8E5 /* gratuityiOSDemoVideo@2x.mp4 */,
 			);
 			name = "Purchase Split Bill View Controller";
 			sourceTree = "<group>";
@@ -583,7 +586,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = SaturdayApps;
 				TargetAttributes = {
 					733D02A51BBA4C2D00E40EC5 = {
@@ -645,6 +648,7 @@
 			files = (
 				733D02D81BBA4D4000E40EC5 /* settingsIcon.pdf in Resources */,
 				733D02D71BBA4D2D00E40EC5 /* Images.xcassets in Resources */,
+				733D71351BDC251E009EA8E5 /* gratuityiOSDemoVideo@2x.mp4 in Resources */,
 				733D02D91BBA4D4700E40EC5 /* LaunchScreen.xib in Resources */,
 				733D02BB1BBA4CFA00E40EC5 /* GratuitousSwift.storyboard in Resources */,
 				733D02BE1BBA4D0900E40EC5 /* GratuitousTableViewCell.xib in Resources */,
@@ -960,6 +964,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
