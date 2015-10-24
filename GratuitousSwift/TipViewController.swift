@@ -245,8 +245,9 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     
     private func prepareSettingsButton() {
         self.settingsButton?.setImage(nil, forState: UIControlState.Normal)
-        self.settingsButton?.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.settingsButton?.titleLabel?.font = UIFont.preferredFontForTextStyle(self.splitBillButton?.titleStyle.description !! UIFontStyle.Body.description)
         self.settingsButton?.setTitle(TipViewController.LocalizedString.SettingsButton, forState: UIControlState.Normal)
+        self.prepareSplitBillButton()
         self.settingsButton?.sizeToFit()
         if let path = NSBundle.mainBundle().pathForResource("settingsIcon", ofType:"pdf"),
             let settingsButton = self.settingsButton {
@@ -455,6 +456,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     private func prepareSplitBillButton() {
         self.splitBillButton?.titleStyle = UIFontStyle.Body
         self.splitBillButton?.setTitle(TipViewController.LocalizedString.SpltBillButton, forState: .Normal)
+        self.splitBillButton?.sizeToFit()
     }
     
     //MARK: Handle Table View User Input
