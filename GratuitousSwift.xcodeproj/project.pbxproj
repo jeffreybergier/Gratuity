@@ -21,7 +21,7 @@
 		733D02C01BBA4D1300E40EC5 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B9BFF019FC629100700608 /* SettingsTableViewController.swift */; };
 		733D02C11BBA4D1300E40EC5 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */; };
 		733D02C21BBA4D1300E40EC5 /* GratuitousRoundedHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BE874D1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift */; };
-		733D02C31BBA4D1300E40EC5 /* GratuitousSettingsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousSettingsButton.swift */; };
+		733D02C31BBA4D1300E40EC5 /* GratuitousBorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D403A11A0C7D36007247E0 /* GratuitousBorderedButton.swift */; };
 		733D02C41BBA4D1900E40EC5 /* SmallModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732615E61BA9237C0081598F /* SmallModalViewController.swift */; };
 		733D02C51BBA4D1900E40EC5 /* SmallModalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB5C721BABCA14000F4A99 /* SmallModalTableViewController.swift */; };
 		733D02C61BBA4D1900E40EC5 /* SmallModalScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB5C751BABCD35000F4A99 /* SmallModalScrollViewController.swift */; };
@@ -195,7 +195,7 @@
 		73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousDefaultsObserver.swift; path = ../GratuitousSwift/GratuitousDefaultsObserver.swift; sourceTree = "<group>"; };
 		73C8BB551BD0A85800D427CB /* GratuitousAppDelegate+StateRestoration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GratuitousAppDelegate+StateRestoration.swift"; sourceTree = "<group>"; };
 		73C8BB571BD0A9C300D427CB /* GratuitousAppDelegate+Handoff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GratuitousAppDelegate+Handoff.swift"; sourceTree = "<group>"; };
-		73D403A11A0C7D36007247E0 /* GratuitousSettingsButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSettingsButton.swift; sourceTree = "<group>"; };
+		73D403A11A0C7D36007247E0 /* GratuitousBorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousBorderedButton.swift; sourceTree = "<group>"; };
 		73D46AFD1AC7C9B400057185 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		73D653451A071DAF005D1968 /* GratuitousCurrencySelectorCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencySelectorCellTableViewCell.swift; sourceTree = "<group>"; };
 		73D680921BD6AC6C00A013F9 /* GratuitousSplitBillPurchaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousSplitBillPurchaseTableViewCell.swift; sourceTree = "<group>"; };
@@ -307,7 +307,7 @@
 				73D680921BD6AC6C00A013F9 /* GratuitousSplitBillPurchaseTableViewCell.swift */,
 				73D680961BD6C9F500A013F9 /* GratuitousDisclosureTableViewCell.swift */,
 				73BE874D1BAF679C00994DE8 /* GratuitousRoundedHeaderTableView.swift */,
-				73D403A11A0C7D36007247E0 /* GratuitousSettingsButton.swift */,
+				73D403A11A0C7D36007247E0 /* GratuitousBorderedButton.swift */,
 			);
 			name = "Settings Subclasses";
 			sourceTree = "<group>";
@@ -789,7 +789,7 @@
 				733D02BC1BBA4D0000E40EC5 /* TipViewController.swift in Sources */,
 				733D02CD1BBA4D2800E40EC5 /* GratuitousPresentationController.swift in Sources */,
 				73D680931BD6AC6C00A013F9 /* GratuitousSplitBillPurchaseTableViewCell.swift in Sources */,
-				733D02C31BBA4D1300E40EC5 /* GratuitousSettingsButton.swift in Sources */,
+				733D02C31BBA4D1300E40EC5 /* GratuitousBorderedButton.swift in Sources */,
 				73048CF41BBCEBC400D8EAA6 /* JSBPurchaseManager.swift in Sources */,
 				733D02C71BBA4D1F00E40EC5 /* SplitBillViewController.swift in Sources */,
 				733D02CA1BBA4D1F00E40EC5 /* WatchInfoViewController.swift in Sources */,

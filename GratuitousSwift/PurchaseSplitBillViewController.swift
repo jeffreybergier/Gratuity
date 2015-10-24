@@ -16,8 +16,8 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBOutlet private weak var titleLabel: UILabel?
     @IBOutlet private weak var descriptionParagraphLabel: UILabel?
     @IBOutlet private weak var subtitleLabel: UILabel?
-    @IBOutlet private weak var purchaseButton: GratuitousSettingsButton?
-    @IBOutlet private weak var restoreButton: GratuitousSettingsButton?
+    @IBOutlet private weak var purchaseButton: GratuitousBorderedButton?
+    @IBOutlet private weak var restoreButton: GratuitousBorderedButton?
     @IBOutlet private weak var modalBlockingView: UIView?
     @IBOutlet private weak var splitBillScreenshotImageView: UIImageView?
     @IBOutlet private var descriptionParagraphHeightConstraint: NSLayoutConstraint?

@@ -26,7 +26,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet private weak var tableContainerView: UIView?
     @IBOutlet private weak var bottomButtonsContainerView: UIView?
     @IBOutlet private weak var settingsButton: UIButton?
-    @IBOutlet private weak var splitBillButton: GratuitousSettingsButton?
+    @IBOutlet private weak var splitBillButton: GratuitousBorderedButton?
     
     private struct PrivateConstants {
         static let MaxBillAmount = 2000

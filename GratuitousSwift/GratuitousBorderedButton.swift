@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-final class GratuitousSettingsButton: UIButton {
+final class GratuitousBorderedButton: UIButton {
     
     var titleStyle = UIFontStyle.Headline {
         didSet {
-            self.prepareButtonAppearance()
+            self.prepareTitleLabelFont()
         }
     }
     
@@ -35,11 +35,13 @@ final class GratuitousSettingsButton: UIButton {
         }
     }
     
-    private func prepareButtonAppearance() {
-        self.tintColor = GratuitousUIConstant.lightTextColor()
+    private func prepareTitleLabelFont() {
         self.titleLabel?.font = UIFont.preferredFontForTextStyle(self.titleStyle.description)
-        self.adjustsImageWhenHighlighted = false
+    }
+    
+    private func prepareButtonAppearance() {
         self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+        self.prepareTitleLabelFont()
         
         self.setTitleColor(GratuitousUIConstant.lightTextColor(), forState: UIControlState.Normal)
         self.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
@@ -47,14 +49,6 @@ final class GratuitousSettingsButton: UIButton {
         self.layer.borderColor = GratuitousUIConstant.lightTextColor().CGColor
         self.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
         self.layer.cornerRadius = 6.0
-        
-        
-        print("reversesTitleShadowWhenHighlighted: \(self.reversesTitleShadowWhenHighlighted)")
-        print("adjustsImageWhenHighlighted: \(self.adjustsImageWhenHighlighted)")
-        print("adjustsImageWhenDisabled: \(self.adjustsImageWhenDisabled)")
-        print("showsTouchWhenHighlighted: \(self.showsTouchWhenHighlighted)")
-        print("buttonType: \(self.buttonType)")
-
     }
     
     func highlightButton() {
@@ -81,7 +75,7 @@ final class GratuitousSettingsButton: UIButton {
     
     @objc private func systemTextSizeDidChange(notification: NSNotification?) {
         dispatch_async(dispatch_get_main_queue()) {
-            self.prepareButtonAppearance()
+            self.prepareTitleLabelFont()
         }
     }
     
