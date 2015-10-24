@@ -9,7 +9,7 @@
 extension GratuitousAppDelegate {
     func application(application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
         if self.window?.rootViewController?.presentedViewController == .None {
-            UIApplication.sharedApplication().ignoreSnapshotOnNextApplicationLaunch()
+            return false
         }
         return true
     }
