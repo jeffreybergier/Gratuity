@@ -26,7 +26,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet private weak var tableContainerView: UIView?
     @IBOutlet private weak var bottomButtonsContainerView: UIView?
     @IBOutlet private weak var settingsButton: UIButton?
-    @IBOutlet private weak var splitBillButton: UIButton?
+    @IBOutlet private weak var splitBillButton: GratuitousSettingsButton?
     
     private struct PrivateConstants {
         static let MaxBillAmount = 2000
@@ -453,6 +453,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     private func prepareSplitBillButton() {
+        self.splitBillButton?.titleStyle = UIFontStyle.Body
         self.splitBillButton?.setTitle(TipViewController.LocalizedString.SpltBillButton, forState: .Normal)
     }
     

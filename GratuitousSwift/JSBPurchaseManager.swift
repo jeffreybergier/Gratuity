@@ -18,6 +18,13 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
     
     func endObserving() {
         self.paymentQueue.removeTransactionObserver(self)
+        for (key, _) in self.productsRequestsInProgress {
+            key.cancel()
+            key.delegate = .None
+        }
+        self.productsRequestsInProgress = [ : ]
+        self.latestPurchasesRestoreCompletionHandler = .None
+        self.purchasesInProgress = [ : ]
     }
     
     // MARK: Receipt verification

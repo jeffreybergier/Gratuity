@@ -16,8 +16,8 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBOutlet private weak var titleLabel: UILabel?
     @IBOutlet private weak var descriptionParagraphLabel: UILabel?
     @IBOutlet private weak var subtitleLabel: UILabel?
-    @IBOutlet private weak var purchaseButton: UIButton?
-    @IBOutlet private weak var restoreButton: UIButton?
+    @IBOutlet private weak var purchaseButton: GratuitousSettingsButton?
+    @IBOutlet private weak var restoreButton: GratuitousSettingsButton?
     @IBOutlet private weak var modalBlockingView: UIView?
     @IBOutlet private weak var splitBillScreenshotImageView: UIImageView?
     @IBOutlet private var descriptionParagraphHeightConstraint: NSLayoutConstraint?
@@ -102,6 +102,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.purchaseManager.beginObserving()
         self.requestSplitBillProductWithCompletionHandler()
         self.state = .SplitBillProductNotFoundInStoreFront
     }
@@ -130,8 +131,8 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         self.descriptionParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
         
         //configure the button text
-        self.purchaseButton?.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        self.restoreButton?.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        self.purchaseButton?.titleStyle = .Headline
+        self.restoreButton?.titleStyle = .Subheadline
         
         // configure the button text
         self.configureDynamicElements()
@@ -150,12 +151,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             self.purchaseButton?.setTitle(downloadingLocalizedString, forState: UIControlState.Normal)
             self.descriptionParagraphLabel?.text = ""
         }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.purchaseManager.beginObserving()
     }
     
     // MARK: Purchasing
@@ -339,6 +334,9 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
+    }
+    
+    deinit {
         self.purchaseManager.endObserving()
     }
 }
