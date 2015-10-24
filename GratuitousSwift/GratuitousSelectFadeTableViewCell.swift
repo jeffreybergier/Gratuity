@@ -73,28 +73,27 @@ class GratuitousSelectFadeTableViewCell: UITableViewCell {
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-        if selected {
-            UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
+        let selectionAnimationDuration = animated == true ? GratuitousUIConstant.animationDuration() : 0.0001
+        let deselectionAnimationDuration = animated == true ? GratuitousUIConstant.animationDuration() * 3 : 0.0001
+        switch selected {
+        case true:
+            UIView.animateWithDuration(selectionAnimationDuration,
                 delay: 0.0,
                 options: UIViewAnimationOptions.BeginFromCurrentState,
                 animations: {
                     self.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
                     self.animatableTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
                 },
-                completion: { finished in
-                    UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
-                        delay: 0.0,
-                        options: UIViewAnimationOptions.BeginFromCurrentState,
-                        animations: {
-                            self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-                            self.animatableTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
-                        },
-                        completion: { finished in
-                    })
-            })
+                completion: .None)
+        case false:
+            UIView.animateWithDuration(deselectionAnimationDuration,
+                delay: 0.0,
+                options: UIViewAnimationOptions.BeginFromCurrentState,
+                animations: {
+                    self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+                    self.animatableTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+                },
+                completion: .None)
         }
-        
     }
 }

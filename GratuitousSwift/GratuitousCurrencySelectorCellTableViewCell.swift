@@ -25,6 +25,31 @@ final class GratuitousCurrencySelectorCellTableViewCell: GratuitousSelectFadeTab
         self.layoutIfNeeded()
     }
     
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: false)
+        
+        // Configure the view for the selected state
+        if selected {
+            UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
+                delay: 0.0,
+                options: UIViewAnimationOptions.BeginFromCurrentState,
+                animations: {
+                    self.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+                    self.animatableTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
+                },
+                completion: { finished in
+                    UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
+                        delay: 0.0,
+                        options: UIViewAnimationOptions.BeginFromCurrentState,
+                        animations: {
+                            self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+                            self.animatableTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+                        },
+                        completion: .None)
+            })
+        }
+    }
+    
     private func readUserDefaultsAndSetCheckmark() {
         if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
             where appDelegate.preferencesSetLocally.overrideCurrencySymbol.rawValue == self.tag {
