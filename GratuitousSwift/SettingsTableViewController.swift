@@ -8,6 +8,7 @@
 
 import MessageUI
 import XCGLogger
+import Crashlytics
 
 final class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
@@ -97,6 +98,12 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         
         //prepare the currency override cells
         self.setInterfaceRefreshNeeded()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Answers.logContentViewWithName(AnswersString.ViewDidAppear, contentType: .None, contentId: .None, customAttributes: .None)
     }
     
     @objc private func applicationDidBecomeActive(notification: NSNotification?) {
@@ -251,6 +258,11 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     }
     
     @IBAction func didChangeSuggestedTipPercentageSlider(sender: UISlider) {
+        let attributes = [
+            "OldValue" : NSNumber(integer: Int(round(self.applicationPreferences.suggestedTipPercentage * 100))),
+            "NewValue" : NSNumber(integer: Int(round(sender.value * 100)))
+        ]
+        Answers.logCustomEventWithName(AnswersString.DidChangeTipPercentage, customAttributes: attributes)
         //this is only called when the user lets go of the slider
         let newTipPercentage = sender.value
         self.applicationPreferences.suggestedTipPercentage = Double(newTipPercentage)
@@ -314,21 +326,28 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section {
         case 1:
+            let newValue: CurrencySign?
+            let oldValue = self.applicationPreferences.overrideCurrencySymbol
             switch indexPath.row {
             case CurrencySign.Default.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Default)
+                newValue = .Default
             case CurrencySign.Dollar.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Dollar)
+                newValue = .Dollar
             case CurrencySign.Pound.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Pound)
+                newValue = .Pound
             case CurrencySign.Euro.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Euro)
+                newValue = .Euro
             case CurrencySign.Yen.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Yen)
+                newValue = .Yen
             case CurrencySign.NoSign.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.NoSign)
+                newValue = .NoSign
             default:
-                break
+                newValue = .None
+            }
+            if let newValue = newValue {
+                self.writeCurrencyOverrideUserDefaultToDisk(newValue)
+                let attributes = ["NewValue" : newValue.descriptionForAnswers, "OldValue" : oldValue.descriptionForAnswers]
+                Answers.logCustomEventWithName(AnswersString.DidChangeCurrencySymbol, customAttributes: attributes)
             }
         case 2:
             switch indexPath.row {
@@ -346,14 +365,17 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
             case 3: // Email Me Row
                 let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
                 if let mailVC = emailManager.presentableMailViewController {
+                    Answers.logContentViewWithName(AnswersString.DidOpenInternalEmail, contentType: .None, contentId: .None, customAttributes: .None)
                     self.presentViewController(mailVC, animated: true, completion: .None)
                 } else {
+                    Answers.logContentViewWithName(AnswersString.DidOpenExternalEmail, contentType: .None, contentId: .None, customAttributes: .None)
                     emailManager.switchAppForEmailSupport()
                 }
             case 4: // Review this app row
                 let appStoreString = String(format: "itms-apps://itunes.apple.com/app/id%d", self.applicationID)
                 let appStoreURL = NSURL(string: appStoreString)
                 if let appStoreURL = appStoreURL {
+                    Answers.logContentViewWithName(AnswersString.DidTapReview, contentType: .None, contentId: .None, customAttributes: .None)
                     UIApplication.sharedApplication().openURL(appStoreURL)
                 }
             case 5: // Apple Watch Row
@@ -428,7 +450,20 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
             presentedViewController.dismissViewControllerAnimated(true, completion: nil)
         }
         if let error = error {
-            self.log.error("Error while sending email. Error Description: \(error.description)")
+            self.log.error("Error while sending email. Error Description: \(error.localizedDescription)")
+        }
+        
+        switch result {
+        case MFMailComposeResultCancelled:
+            Answers.logCustomEventWithName(AnswersString.DidCancelEmail, customAttributes: error?.dictionaryForAnswers)
+        case MFMailComposeResultSent:
+            Answers.logCustomEventWithName(AnswersString.DidSendEmail, customAttributes: error?.dictionaryForAnswers)
+        case MFMailComposeResultSaved:
+            Answers.logCustomEventWithName(AnswersString.DidSaveEmail, customAttributes: error?.dictionaryForAnswers)
+        case MFMailComposeResultFailed:
+            Answers.logCustomEventWithName(AnswersString.DidFailEmail, customAttributes: error?.dictionaryForAnswers)
+        default:
+            break
         }
     }
     

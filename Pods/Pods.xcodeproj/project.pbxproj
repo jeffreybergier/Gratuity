@@ -24,14 +24,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B5FF7CBD76C45647F9E700785F4D02AD /* PBXContainerItemProxy */ = {
+		AE11520AB5CF74398B6AA0671A00919F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = DD2BA66BB4D6C155E08E08F9DD26EA8D;
 			remoteInfo = "Pods-GratuityWatch Extension-XCGLogger";
 		};
-		C0859FF3E3DDED558CD3BDC24CA17547 /* PBXContainerItemProxy */ = {
+		CBF8AA3E0960CB7FB395FB3CF72117B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -515,7 +515,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				8D511C4EC7E61AC6E65982E686678D9C /* PBXTargetDependency */,
+				0DEBDAFA08BAC2C72726CA0CD4D2F88A /* PBXTargetDependency */,
 			);
 			name = "Pods-Gratuity";
 			productName = "Pods-Gratuity";
@@ -550,7 +550,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				2B3DEB012D1660F492ABB5156BB30A3F /* PBXTargetDependency */,
+				536664066A20BC246CCA5CB005A61E2A /* PBXTargetDependency */,
 			);
 			name = "Pods-GratuityWatch Extension";
 			productName = "Pods-GratuityWatch Extension";
@@ -641,17 +641,17 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2B3DEB012D1660F492ABB5156BB30A3F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-GratuityWatch Extension-XCGLogger";
-			target = DD2BA66BB4D6C155E08E08F9DD26EA8D /* Pods-GratuityWatch Extension-XCGLogger */;
-			targetProxy = B5FF7CBD76C45647F9E700785F4D02AD /* PBXContainerItemProxy */;
-		};
-		8D511C4EC7E61AC6E65982E686678D9C /* PBXTargetDependency */ = {
+		0DEBDAFA08BAC2C72726CA0CD4D2F88A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-Gratuity-XCGLogger";
 			target = 49AB3753BDD7FA1F7907B4DF91A5AE3B /* Pods-Gratuity-XCGLogger */;
-			targetProxy = C0859FF3E3DDED558CD3BDC24CA17547 /* PBXContainerItemProxy */;
+			targetProxy = CBF8AA3E0960CB7FB395FB3CF72117B5 /* PBXContainerItemProxy */;
+		};
+		536664066A20BC246CCA5CB005A61E2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-GratuityWatch Extension-XCGLogger";
+			target = DD2BA66BB4D6C155E08E08F9DD26EA8D /* Pods-GratuityWatch Extension-XCGLogger */;
+			targetProxy = AE11520AB5CF74398B6AA0671A00919F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

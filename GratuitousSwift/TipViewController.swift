@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
+import Crashlytics
+
 final class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CustomAnimatedTransitionable {
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel?
@@ -203,6 +205,8 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             // Launch the apple watch info screen if needed
             self.viewDidAppearOnce = true
         }
+        
+        Answers.logContentViewWithName(AnswersString.ViewDidAppear, contentType: .None, contentId: .None, customAttributes: .None)
     }
 
     private func updateTableViewsFromDisk() {

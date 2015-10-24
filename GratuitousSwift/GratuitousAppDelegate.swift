@@ -77,7 +77,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch
         
         //crashlytics intializer
-        //Fabric.with([Crashlytics()])
+        //Fabric.with([Crashlytics(), Answers()])
         
         self.window!.tintColor = GratuitousUIConstant.lightTextColor()
         self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
@@ -91,12 +91,15 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         let purchaseManager = GratuitousPurchaseManager()
         self.preferencesSetLocally.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
         
+        Answers.logCustomEventWithName(AnswersString.Launched, customAttributes: self.preferences.dictionaryCopyForKeys(.AllForDisk))
+        
         return true
     }
     
     // MARK: iOS App Going to the Background
     func applicationWillResignActive(application: UIApplication) {
         self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.preferences)
+        Answers.logCustomEventWithName(AnswersString.Backgrounded, customAttributes: self.preferences.dictionaryCopyForKeys(.AllForDisk))
     }
 }
 

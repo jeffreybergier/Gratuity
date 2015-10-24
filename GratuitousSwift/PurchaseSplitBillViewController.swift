@@ -9,6 +9,7 @@
 import MessageUI
 import XCGLogger
 import AVFoundation
+import Crashlytics
 
 final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
@@ -198,6 +199,12 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             videoPlayer.player.seekToTime(kCMTimeZero)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoPlaybackFinished:", name: AVPlayerItemDidPlayToEndTimeNotification, object: videoPlayer.player.currentItem)
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Answers.logContentViewWithName(AnswersString.ViewDidAppear, contentType: .None, contentId: .None, customAttributes: .None)
     }
     
     @objc private func videoPlaybackFinished(notification: NSNotification?) {
