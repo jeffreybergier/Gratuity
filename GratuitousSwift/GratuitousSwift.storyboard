@@ -833,7 +833,7 @@
                                                     <rect key="frame" x="20" y="12.5" width="65.5" height="19.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -863,7 +863,7 @@
                                                     <rect key="frame" x="20" y="12.5" width="120" height="19.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -893,7 +893,7 @@
                                                     <rect key="frame" x="20" y="12.5" width="126" height="19.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1324,13 +1324,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VcH-d6-Leh">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="910"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="790"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nab-s4-Ij3">
-                                                        <rect key="frame" x="96" y="88" width="408" height="718"/>
+                                                        <rect key="frame" x="129" y="88" width="342" height="598"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAp-Bv-GWl">
-                                                                <rect key="frame" x="4" y="4" width="400" height="710"/>
+                                                                <rect key="frame" x="6" y="6" width="330" height="586"/>
                                                                 <animations/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <constraints>
@@ -1342,13 +1342,13 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstItem="LAp-Bv-GWl" firstAttribute="centerX" secondItem="nab-s4-Ij3" secondAttribute="centerX" id="Gd1-Up-phI"/>
-                                                            <constraint firstAttribute="width" secondItem="LAp-Bv-GWl" secondAttribute="width" constant="8" id="ZuE-ub-OGP"/>
+                                                            <constraint firstAttribute="width" secondItem="LAp-Bv-GWl" secondAttribute="width" constant="12" id="ZuE-ub-OGP"/>
                                                             <constraint firstItem="LAp-Bv-GWl" firstAttribute="centerY" secondItem="nab-s4-Ij3" secondAttribute="centerY" id="gaE-oC-bXW"/>
-                                                            <constraint firstAttribute="height" secondItem="LAp-Bv-GWl" secondAttribute="height" constant="8" id="hhU-ew-86w"/>
+                                                            <constraint firstAttribute="height" secondItem="LAp-Bv-GWl" secondAttribute="height" constant="12" id="hhU-ew-86w"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNc-kG-LyJ" customClass="GratuitousBorderedButton" customModule="Gratuity" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="814" width="560" height="34"/>
+                                                        <rect key="frame" x="20" y="694" width="560" height="34"/>
                                                         <animations/>
                                                         <state key="normal" title="Buy - 99¢"/>
                                                         <connections>
@@ -1356,7 +1356,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Wa-65-IUU" customClass="GratuitousBorderedButton" customModule="Gratuity" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="856" width="560" height="34"/>
+                                                        <rect key="frame" x="20" y="736" width="560" height="34"/>
                                                         <animations/>
                                                         <state key="normal" title="Restore Purchases"/>
                                                         <connections>
@@ -1389,15 +1389,15 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eWY-xc-2FU">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="910"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="790"/>
                                                         <animations/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </view>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUf-Pn-b7v">
-                                                        <rect key="frame" x="580" y="821" width="0.0" height="20"/>
+                                                        <rect key="frame" x="580" y="701" width="0.0" height="20"/>
                                                         <subviews>
                                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="nL4-5q-tKU">
-                                                                <rect key="frame" x="-10" y="0.0" width="20" height="20"/>
+                                                                <rect key="frame" x="-10" y="0.5" width="20" height="20"/>
                                                                 <animations/>
                                                             </activityIndicatorView>
                                                         </subviews>
@@ -1412,10 +1412,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m3Q-eV-EgW">
-                                                        <rect key="frame" x="580" y="863" width="0.0" height="20"/>
+                                                        <rect key="frame" x="580" y="743" width="0.0" height="20"/>
                                                         <subviews>
                                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="I0s-PC-Pew">
-                                                                <rect key="frame" x="-10" y="0.0" width="20" height="20"/>
+                                                                <rect key="frame" x="-10" y="0.5" width="20" height="20"/>
                                                                 <animations/>
                                                             </activityIndicatorView>
                                                         </subviews>
@@ -1496,7 +1496,7 @@
                                     <constraint firstAttribute="trailing" secondItem="xoS-6e-CiA" secondAttribute="trailing" id="Deh-SD-bZ6"/>
                                     <constraint firstAttribute="centerX" secondItem="u3v-oh-tY6" secondAttribute="centerX" id="Gf8-rW-83z"/>
                                     <constraint firstItem="u3v-oh-tY6" firstAttribute="height" secondItem="tXF-3g-8Mi" secondAttribute="height" id="bNH-Lm-7E0"/>
-                                    <constraint firstItem="LAp-Bv-GWl" firstAttribute="width" secondItem="tXF-3g-8Mi" secondAttribute="width" multiplier="2/3" id="dRm-8l-ZeR"/>
+                                    <constraint firstItem="LAp-Bv-GWl" firstAttribute="width" secondItem="tXF-3g-8Mi" secondAttribute="width" multiplier="0.55" id="dRm-8l-ZeR"/>
                                     <constraint firstAttribute="centerY" secondItem="u3v-oh-tY6" secondAttribute="centerY" id="hN4-pw-ktx"/>
                                     <constraint firstItem="u3v-oh-tY6" firstAttribute="width" secondItem="tXF-3g-8Mi" secondAttribute="width" id="yYy-IZ-IJh"/>
                                 </constraints>

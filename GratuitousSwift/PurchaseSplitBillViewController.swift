@@ -125,7 +125,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         self.videoPlayerSurroundView?.layer.borderColor = GratuitousUIColor.lightTextColor().CGColor
         
         if let videoPlayer = self.videoPlayer {
-            let player = videoPlayer.player
             let layer = videoPlayer.layer
             
             let desiredSize = self.videoPlayerView?.frame.size
@@ -140,8 +139,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             
             self.videoPlayerView?.layer.addSublayer(layer)
             self.videoPlayerView?.clipsToBounds = true
-            
-            player.play()
         }
 
     }
@@ -209,8 +206,11 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     @objc private func videoPlaybackFinished(notification: NSNotification?) {
         dispatch_async(dispatch_get_main_queue()) {
-            if let videoPlayer = self.videoPlayer {
-                videoPlayer.player.seekToTime(kCMTimeZero)
+            self.videoPlayer?.player.pause()
+            self.videoPlayer?.player.seekToTime(kCMTimeZero)
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.videoPlayer?.player.play()
             }
         }
     }
@@ -264,6 +264,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                 self?.presentViewController(errorVC, animated: true, completion: .None)
             }
             self?.state = .Normal
+            self?.videoPlayer?.player.play()
         }
     }
     
