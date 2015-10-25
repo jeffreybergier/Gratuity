@@ -16,6 +16,7 @@ extension GratuitousAppDelegate {
 extension TipViewController {
     struct AnswersString {
         static let ViewDidAppear = "iOS-TipViewController"
+        static let NewTipCalculated = "iOS-TipVCNewTipCalculated"
     }
 }
 

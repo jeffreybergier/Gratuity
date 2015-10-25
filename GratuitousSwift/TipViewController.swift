@@ -519,6 +519,30 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
                     tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                 }
         }
+        self.postNewCalculationToAnswers()
+    }
+    
+    private func postNewCalculationToAnswers() {
+        let billAmount = self.applicationPreferences.billIndexPathRow
+        let tipAmount: Int
+        let tipPercentage: Int
+        if self.applicationPreferences.tipIndexPathRow > 0 {
+            tipAmount = self.applicationPreferences.tipIndexPathRow
+            tipPercentage = Int(round((Double(self.applicationPreferences.tipIndexPathRow) / Double(billAmount)) * 100))
+        } else {
+            tipAmount = Int(round(self.applicationPreferences.suggestedTipPercentage * Double(billAmount)))
+            tipPercentage = Int(round(self.applicationPreferences.suggestedTipPercentage * 100))
+        }
+        let totalAmount = billAmount + tipAmount
+        
+        let answersAttributes = [
+            "BillAmount" : NSNumber(integer: billAmount),
+            "TipAmount" : NSNumber(integer: tipAmount),
+            "TipPercentage" : NSNumber(integer: tipPercentage),
+            "TotalAmount" : NSNumber(integer: totalAmount),
+            "TipLocale" : self.currencyFormatter.locale.localeIdentifier
+        ]
+        Answers.logCustomEventWithName(AnswersString.NewTipCalculated, customAttributes: answersAttributes)
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
