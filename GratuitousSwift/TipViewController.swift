@@ -535,13 +535,19 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         }
         let totalAmount = billAmount + tipAmount
         
-        let answersAttributes = [
+        var answersAttributes = [
             "BillAmount" : NSNumber(integer: billAmount),
             "TipAmount" : NSNumber(integer: tipAmount),
             "TipPercentage" : NSNumber(integer: tipPercentage),
             "TotalAmount" : NSNumber(integer: totalAmount),
-            "TipLocale" : self.currencyFormatter.locale.localeIdentifier
+            "SystemLocale" : self.currencyFormatter.locale.localeIdentifier
         ]
+        answersAttributes["LocationZipCode"] = self.applicationPreferences.lastLocation?.zipCode
+        answersAttributes["LocationCity"] = self.applicationPreferences.lastLocation?.city
+        answersAttributes["LocationRegion"] = self.applicationPreferences.lastLocation?.region
+        answersAttributes["LocationCountry"] = self.applicationPreferences.lastLocation?.country
+        answersAttributes["LocationCountryCode"] = self.applicationPreferences.lastLocation?.countryCode
+        
         Answers.logCustomEventWithName(AnswersString.NewTipCalculated, customAttributes: answersAttributes)
     }
     

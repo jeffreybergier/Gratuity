@@ -91,7 +91,13 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         let purchaseManager = GratuitousPurchaseManager()
         self.preferencesSetLocally.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
         
-        Answers.logCustomEventWithName(AnswersString.Launched, customAttributes: self.preferences.dictionaryCopyForKeys(.AllForDisk))
+        let locator = GratuitousIPGeolocator()
+        locator.getIPLocation() { location in
+            if let location = location {
+                self.preferencesSetLocally.lastLocation = location
+            }
+            Answers.logCustomEventWithName(AnswersString.Launched, customAttributes: self.preferences.dictionaryCopyForKeys(.ForDisk))
+        }
         
         return true
     }
@@ -99,7 +105,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: iOS App Going to the Background
     func applicationWillResignActive(application: UIApplication) {
         self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.preferences)
-        Answers.logCustomEventWithName(AnswersString.Backgrounded, customAttributes: self.preferences.dictionaryCopyForKeys(.AllForDisk))
+        Answers.logCustomEventWithName(AnswersString.Backgrounded, customAttributes: self.preferences.dictionaryCopyForKeys(.ForDisk))
     }
 }
 

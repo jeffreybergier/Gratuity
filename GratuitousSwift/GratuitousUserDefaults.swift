@@ -16,29 +16,67 @@ struct GratuitousUserDefaults {
     var overrideCurrencySymbol: CurrencySign
     var suggestedTipPercentage: Double
     var splitBillPurchased: Bool
+    var lastLocation: Location?
 }
 
 extension GratuitousUserDefaults: Equatable { }
 
 func ==(lhs: GratuitousUserDefaults, rhs: GratuitousUserDefaults) -> Bool {
-    return lhs.dictionaryCopyForKeys(.All) as NSDictionary == rhs.dictionaryCopyForKeys(.All) as NSDictionary
+    return lhs.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded) as NSDictionary == rhs.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded) as NSDictionary
+}
+
+struct Location {
+    var zipCode: String?
+    var city: String?
+    var region: String?
+    var country: String?
+    var countryCode: String?
+    
+    func containsAnyValues() -> Bool {
+        if let _ = self.zipCode {
+            return true
+        }
+        if let _ = self.city {
+            return true
+        }
+        if let _ = self.region {
+            return true
+        }
+        if let _ = self.country {
+            return true
+        }
+        if let _ = self.countryCode {
+            return true
+        }
+        return false
+    }
+}
+
+extension Location: CustomStringConvertible {
+    var description: String {
+        return "Location: ZipCode: \(self.zipCode), City: \(self.city), Region: \(self.region), Country: \(self.country), CountryCode: \(self.countryCode)"
+    }
 }
 
 extension GratuitousUserDefaults {
     enum DictionaryCopyKeys {
-        case All, WatchOnly, AllForDisk
+        case ForCurrencySymbolsNeeded, ForWatch, ForDisk
     }
     
     func dictionaryCopyForKeys(keys: DictionaryCopyKeys) -> [String : AnyObject] {
         var dictionary = [String : AnyObject]()
         switch keys {
-        case .All:
+        case .ForCurrencySymbolsNeeded:
             dictionary[Keys.currencySymbolsNeeded] = self.currencySymbolsNeeded
             fallthrough
-        case .AllForDisk:
+        case .ForDisk:
             dictionary[Keys.appVersionString] = self.appVersionString
+            dictionary[Keys.locationZipCode] = self.lastLocation?.zipCode
+            dictionary[Keys.locationCity] = self.lastLocation?.city
+            dictionary[Keys.locationCountry] = self.lastLocation?.country
+            dictionary[Keys.locationCountryCode] = self.lastLocation?.countryCode
             fallthrough
-        case .WatchOnly:
+        case .ForWatch:
             dictionary[Keys.billIndexPathRow] = NSNumber(integer: self.billIndexPathRow)
             dictionary[Keys.tipIndexPathRow] = NSNumber(integer: self.tipIndexPathRow)
             dictionary[Keys.overrideCurrencySymbol] = NSNumber(integer: self.overrideCurrencySymbol.rawValue)
@@ -87,6 +125,36 @@ extension GratuitousUserDefaults {
         } else {
             splitBillPurchased = false
         }
+        
+        var lastLocationFromDictionary = Location()
+        if let zipCode = dictionary?[Keys.locationZipCode] as? String {
+            lastLocationFromDictionary.zipCode = zipCode
+        } else {
+            lastLocationFromDictionary.zipCode = fallback.lastLocation?.zipCode
+        }
+        if let city = dictionary?[Keys.locationCity] as? String {
+            lastLocationFromDictionary.city = city
+        } else {
+            lastLocationFromDictionary.city = fallback.lastLocation?.city
+        }
+        if let region = dictionary?[Keys.locationRegion] as? String {
+            lastLocationFromDictionary.region = region
+        } else {
+            lastLocationFromDictionary.region = fallback.lastLocation?.region
+        }
+        if let country = dictionary?[Keys.locationCountry] as? String {
+            lastLocationFromDictionary.country = country
+        } else {
+            lastLocationFromDictionary.country = fallback.lastLocation?.country
+        }
+        if let countryCode = dictionary?[Keys.locationCountryCode] as? String {
+            lastLocationFromDictionary.countryCode = countryCode
+        } else {
+            lastLocationFromDictionary.countryCode = fallback.lastLocation?.countryCode
+        }
+        if lastLocationFromDictionary.containsAnyValues() {
+            self.lastLocation = lastLocationFromDictionary
+        }
         // ignored from disk version. Always set to false on load
         self.currencySymbolsNeeded = fallback.currencySymbolsNeeded
     }
@@ -127,6 +195,26 @@ extension GratuitousUserDefaults {
         } else {
             splitBillPurchased = false
         }
+        
+        var lastLocationFromDictionary = Location()
+        if let zipCode = dictionary?[Keys.locationZipCode] as? String {
+            lastLocationFromDictionary.zipCode = zipCode
+        }
+        if let city = dictionary?[Keys.locationCity] as? String {
+            lastLocationFromDictionary.city = city
+        }
+        if let region = dictionary?[Keys.locationRegion] as? String {
+            lastLocationFromDictionary.region = region
+        }
+        if let country = dictionary?[Keys.locationCountry] as? String {
+            lastLocationFromDictionary.country = country
+        }
+        if let countryCode = dictionary?[Keys.locationCountryCode] as? String {
+            lastLocationFromDictionary.countryCode = countryCode
+        }
+        if lastLocationFromDictionary.containsAnyValues() {
+            self.lastLocation = lastLocationFromDictionary
+        }
         // ignored from disk version. Always set to false on load
         self.currencySymbolsNeeded = false
     }
@@ -153,5 +241,11 @@ extension GratuitousUserDefaults {
         static let currencySymbolsNeeded = "currencySymbolsNeeded"
         static let freshWatchAppInstall = "freshWatchAppInstall"
         static let splitBillPurchased = "splitBillPurchased"
+        static let locationZipCode = "locationZipCode"
+        static let locationCity = "locationCity"
+        static let locationRegion = "locationRegion"
+        static let locationCountry = "locationCountry"
+        static let locationCountryCode = "locationCountryCode"
+
     }
 }

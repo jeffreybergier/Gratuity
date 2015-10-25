@@ -12,7 +12,7 @@ class GratuitousDefaultsObserver {
     
     func postNotificationsForLocallyChangedDefaults(old old: GratuitousUserDefaults, new: GratuitousUserDefaults) {
         if old.overrideCurrencySymbol != new.overrideCurrencySymbol {
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.CurrencySymbolChanged, object: self, userInfo: new.dictionaryCopyForKeys(.All))
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.CurrencySymbolChanged, object: self, userInfo: new.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded))
         }
         if old.billIndexPathRow != new.billIndexPathRow
             || old.tipIndexPathRow != new.tipIndexPathRow
@@ -20,25 +20,25 @@ class GratuitousDefaultsObserver {
             || old.suggestedTipPercentage != new.suggestedTipPercentage
             || old.splitBillPurchased != new.splitBillPurchased
         {
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.RemoteContextUpdateNeeded, object: self, userInfo: new.dictionaryCopyForKeys(.WatchOnly))
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.RemoteContextUpdateNeeded, object: self, userInfo: new.dictionaryCopyForKeys(.ForWatch))
         }
         #if os(watchOS)
         if new.currencySymbolsNeeded == true {
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.CurrencySymbolsNeededFromRemote, object: self, userInfo: new.dictionaryCopyForKeys(.WatchOnly))
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.CurrencySymbolsNeededFromRemote, object: self, userInfo: new.dictionaryCopyForKeys(.ForWatch))
         }
         #endif
     }
     
     func postNotificationsForRemoteChangedDefaults(old old: GratuitousUserDefaults, new: GratuitousUserDefaults) {
         if old.overrideCurrencySymbol != new.overrideCurrencySymbol {
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.CurrencySymbolChanged, object: self, userInfo: new.dictionaryCopyForKeys(.All))
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.CurrencySymbolChanged, object: self, userInfo: new.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded))
         }
         if old.billIndexPathRow != new.billIndexPathRow
             || old.tipIndexPathRow != new.tipIndexPathRow
             || old.suggestedTipPercentage != new.suggestedTipPercentage
             || old.overrideCurrencySymbol != new.overrideCurrencySymbol
         {
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.BillTipValueChangedByRemote, object: self, userInfo: new.dictionaryCopyForKeys(.All))
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.BillTipValueChangedByRemote, object: self, userInfo: new.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded))
         }
     }
     

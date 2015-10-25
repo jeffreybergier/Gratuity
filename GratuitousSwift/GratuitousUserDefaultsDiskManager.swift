@@ -42,7 +42,7 @@ class GratuitousUserDefaultsDiskManager {
         let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
         dispatch_async(backgroundQueue) {
             do {
-                try self.manager.writePreferencesDictionary(defaults.dictionaryCopyForKeys(.AllForDisk), toLocation: .PreferencesPLISTFileWithinPreferencesURL)
+                try self.manager.writePreferencesDictionary(defaults.dictionaryCopyForKeys(.ForDisk), toLocation: .PreferencesPLISTFileWithinPreferencesURL)
             } catch {
                 self.log.error("Failed to write preferences to disk with error: \(error)")
             }

@@ -49,7 +49,7 @@ extension GratuitousWatchConnectivityManager: JSBWatchConnectivityContextDelegat
     }
     
     private func updateRemoteContext(notification: NSNotification?) {
-        let context = self.applicationPreferences.dictionaryCopyForKeys(.WatchOnly)
+        let context = self.applicationPreferences.dictionaryCopyForKeys(.ForWatch)
         do {
             try self.watchConnectivityManager.session?.updateApplicationContext(context)
         } catch {
@@ -71,7 +71,7 @@ extension GratuitousWatchConnectivityManager: JSBWatchConnectivityFileTransferRe
                 do {
                     let data = try NSData(contentsOfURL: file.fileURL, options: .DataReadingMappedIfSafe)
                     try data.writeToURL(destinationURL, options: .AtomicWrite)
-                    NSNotificationCenter.defaultCenter().postNotificationName(GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: self, userInfo: self.applicationPreferences.dictionaryCopyForKeys(.All))
+                    NSNotificationCenter.defaultCenter().postNotificationName(GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: self, userInfo: self.applicationPreferences.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded))
                 } catch {
                     self.log.error("File Save Failed with Error: \(error)")
                 }
@@ -89,7 +89,7 @@ extension GratuitousWatchConnectivityManager {
         if self.requestedCurrencySymbols == false {
             self.requestedCurrencySymbols = true
             
-            var message = GratuitousUserDefaults(dictionary: notification?.userInfo, fallback: self.applicationPreferences).dictionaryCopyForKeys(.WatchOnly)
+            var message = GratuitousUserDefaults(dictionary: notification?.userInfo, fallback: self.applicationPreferences).dictionaryCopyForKeys(.ForWatch)
             message["SymbolImagesRequested"] = NSNumber(bool: true)
             
             self.watchConnectivityManager.session?.sendMessage(message,

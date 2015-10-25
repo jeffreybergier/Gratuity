@@ -47,6 +47,7 @@
 		733D02E41BBA505600E40EC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */; };
 		733D71351BDC251E009EA8E5 /* gratuityiOSDemoVideo@2x.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 733D71341BDC251E009EA8E5 /* gratuityiOSDemoVideo@2x.mp4 */; };
 		733D71371BDC31E7009EA8E5 /* GratuitousCrashlyticsAnswersStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733D71361BDC31E7009EA8E5 /* GratuitousCrashlyticsAnswersStrings.swift */; };
+		733D71391BDC5D04009EA8E5 /* GratuitousIPGeolocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733D71381BDC5D04009EA8E5 /* GratuitousIPGeolocator.swift */; };
 		735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735DCADB1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift */; };
 		736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; };
 		738C98B71BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */; };
@@ -81,6 +82,7 @@
 		73D680931BD6AC6C00A013F9 /* GratuitousSplitBillPurchaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D680921BD6AC6C00A013F9 /* GratuitousSplitBillPurchaseTableViewCell.swift */; };
 		73D680951BD6BA8900A013F9 /* GratuitousSelectFadeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D680941BD6BA8900A013F9 /* GratuitousSelectFadeTableViewCell.swift */; };
 		73D680971BD6C9F500A013F9 /* GratuitousDisclosureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D680961BD6C9F500A013F9 /* GratuitousDisclosureTableViewCell.swift */; };
+		73EE521E1BDC82AA008692B9 /* FCIPAddressGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EE521D1BDC82AA008692B9 /* FCIPAddressGeocoder.m */; };
 		73F44C5A1BCF444700456E8A /* GratuitousNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C591BCF444700456E8A /* GratuitousNumberFormatter.swift */; };
 		73F44C5C1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */; };
 		73F44C5D1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */; };
@@ -152,6 +154,7 @@
 		733D02E51BBA505E00E40EC5 /* Gratuity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Gratuity.entitlements; path = ../Gratuity.entitlements; sourceTree = "<group>"; };
 		733D71341BDC251E009EA8E5 /* gratuityiOSDemoVideo@2x.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gratuityiOSDemoVideo@2x.mp4"; sourceTree = "<group>"; };
 		733D71361BDC31E7009EA8E5 /* GratuitousCrashlyticsAnswersStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCrashlyticsAnswersStrings.swift; sourceTree = "<group>"; };
+		733D71381BDC5D04009EA8E5 /* GratuitousIPGeolocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousIPGeolocator.swift; sourceTree = "<group>"; };
 		734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GratuitousSwift.storyboard; sourceTree = "<group>"; };
 		734A7C591AA8347C008823B6 /* GratuitousUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousUIColor.swift; path = ../GratuitousSwift/GratuitousUIColor.swift; sourceTree = "<group>"; };
 		73556E621A19711E0079A37D /* GratuitousSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GratuitousSwift-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 		73EC11641BC049A400716CA8 /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
 		73EDC4BC1A1807AA006AA72D /* GratuitousRightPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousRightPresentationController.swift; sourceTree = "<group>"; };
 		73EDC4C01A181726006AA72D /* GratuitousTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTransitioningDelegate.swift; sourceTree = "<group>"; };
+		73EE521C1BDC82AA008692B9 /* FCIPAddressGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCIPAddressGeocoder.h; sourceTree = "<group>"; };
+		73EE521D1BDC82AA008692B9 /* FCIPAddressGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCIPAddressGeocoder.m; sourceTree = "<group>"; };
 		73F44C591BCF444700456E8A /* GratuitousNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousNumberFormatter.swift; path = ../GratuitousSwift/GratuitousNumberFormatter.swift; sourceTree = "<group>"; };
 		73F44C5B1BCF6E9100456E8A /* GratuitousUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousUserDefaults.swift; path = GratuitousSwift/GratuitousUserDefaults.swift; sourceTree = SOURCE_ROOT; };
 		73FB7E8F1B8A4B38001A47FC /* PickerInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerInterfaceController.swift; sourceTree = "<group>"; };
@@ -480,6 +485,7 @@
 			children = (
 				73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */,
 				7376F8DD1B8EC5CD009CAB74 /* JSBAttributedStringImageGenerator.swift */,
+				733D71381BDC5D04009EA8E5 /* GratuitousIPGeolocator.swift */,
 				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
 				738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */,
 				7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */,
@@ -502,6 +508,8 @@
 				73FF9E9E1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m */,
 				73FF9EA01BBE4BDC00F9278C /* RMAppReceipt.h */,
 				73FF9EA11BBE4BE400F9278C /* RMAppReceipt.m */,
+				73EE521C1BDC82AA008692B9 /* FCIPAddressGeocoder.h */,
+				73EE521D1BDC82AA008692B9 /* FCIPAddressGeocoder.m */,
 				73EC11641BC049A400716CA8 /* AppleIncRootCertificate.cer */,
 			);
 			name = "Objective-C";
@@ -807,6 +815,7 @@
 				73F44C5C1BCF6E9200456E8A /* GratuitousUserDefaults.swift in Sources */,
 				733D02C11BBA4D1300E40EC5 /* GratuitousCurrencySelectorCellTableViewCell.swift in Sources */,
 				733D02C21BBA4D1300E40EC5 /* GratuitousRoundedHeaderTableView.swift in Sources */,
+				73EE521E1BDC82AA008692B9 /* FCIPAddressGeocoder.m in Sources */,
 				738C98BD1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift in Sources */,
 				733D02D11BBA4D2800E40EC5 /* GratuitousUIColor.swift in Sources */,
 				733D02D01BBA4D2800E40EC5 /* GratuitousUIConstant.swift in Sources */,
@@ -819,6 +828,7 @@
 				733D02C91BBA4D1F00E40EC5 /* PurchaseSplitBillViewController.swift in Sources */,
 				733D02CF1BBA4D2800E40EC5 /* GratuitousTransitioningDelegate.swift in Sources */,
 				733D02D41BBA4D2800E40EC5 /* GratuitousPurchaseManager.swift in Sources */,
+				733D71391BDC5D04009EA8E5 /* GratuitousIPGeolocator.swift in Sources */,
 				733D02BA1BBA4CE600E40EC5 /* GratuitousAppDelegate.swift in Sources */,
 				733D02E01BBA4D8600E40EC5 /* GratuitousEnums.swift in Sources */,
 				733D02D51BBA4D2800E40EC5 /* GratuitousCurrencyStringImageGenerator.swift in Sources */,

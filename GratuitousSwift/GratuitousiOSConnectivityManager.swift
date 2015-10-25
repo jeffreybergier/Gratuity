@@ -48,7 +48,7 @@ extension GratuitousiOSConnectivityManager {
     
     @available (iOS 9, *)
     func updateRemoteContext(notification: NSNotification?) {
-        let context = self.applicationPreferences.dictionaryCopyForKeys(.WatchOnly)
+        let context = self.applicationPreferences.dictionaryCopyForKeys(.ForWatch)
         do {
             try self.watchConnectivityManager.session?.updateApplicationContext(context)
         } catch {
