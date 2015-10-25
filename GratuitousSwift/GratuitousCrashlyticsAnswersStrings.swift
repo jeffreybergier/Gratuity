@@ -24,8 +24,8 @@ extension SettingsTableViewController {
         static let ViewDidAppear = "iOS-SettingsTableViewController"
         static let DidChangeTipPercentage = "iOS-DidChangeTipPercentage"
         static let DidChangeCurrencySymbol = "iOS-DidChangeCurrencySymbol"
-        static let DidOpenInternalEmail = "iOS-DidOpenInternalEmail"
-        static let DidOpenExternalEmail = "iOS-DidOpenExternalEmail"
+        static let DidOpenInternalEmail = "iOS-SettingsDidOpenInternalEmail"
+        static let DidOpenExternalEmail = "iOS-SettingsDidOpenExternalEmail"
         static let DidTapReview = "iOS-DidTapReview"
         static let DidSendEmail = "iOS-SettingsEmailDidSend"
         static let DidCancelEmail = "iOS-SettingsEmailDidCancel"
@@ -43,12 +43,20 @@ extension SplitBillViewController {
 extension PurchaseSplitBillViewController {
     struct AnswersString {
         static let ViewDidAppear = "iOS-PurchaseSplitBillViewController"
-        static let DidStartRestore = "iOS-DidStartRestore"
         static let DidStartPurchase = "iOS-DidStartPurchase"
-        static let RestoreSucceeded = "iOS-RestoreSucceeded"
-        static let RestoreFailed = "iOS-RestoreFailed"
-        static let PurchaseSucceeded = "iOS-PurchaseSucceeded"
+        static let PurchaseSucceededAlreadyBought = "iOS-PurchaseSucceededAlreadyBought"
+        static let PurchaseSucceededNotBoughtBefore = "iOS-PurchaseSucceededNotBoughtBefore"
         static let PurchaseFailed = "iOS-PurchaseFailed"
+        static let DidStartRestore = "iOS-DidStartRestore"
+        static let RestoreSucceededAlreadyBought = "iOS-RestoreSucceededAlreadyBought"
+        static let RestoreSucceededNotBought = "iOS-RestoreSucceededNotBought"
+        static let RestoreFailed = "iOS-RestoreFailed"
+        static let DidOpenInternalEmail = "iOS-PurchaseVCDidOpenInternalEmail"
+        static let DidOpenExternalEmail = "iOS-PurchaseVCDidOpenExternalEmail"
+        static let DidSendEmail = "iOS-PurchaseVCEmailDidSend"
+        static let DidCancelEmail = "iOS-PurchaseVCEmailDidCancel"
+        static let DidSaveEmail = "iOS-PurchaseVCEmailDidSave"
+        static let DidFailEmail = "iOS-PurchaseEmailDidFail"
     }
 }
 

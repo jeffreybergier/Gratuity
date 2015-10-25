@@ -15,16 +15,27 @@ final class GratuitousPurchaseManager: JSBPurchaseManager {
     
     // MARK: Receipt Verification
     
-    func verifySplitBillPurchaseTransaction() -> Bool {
-        if let receipt = RMAppReceipt.bundleReceipt() where self.verifyAppReceiptAgainstAppleCertificate() == true {
-            var verified = false
-            for purchase in receipt.inAppPurchases {
+    func splitBillPurchaseData() -> NSDate? {
+        if let receipt = self.splitBillReceipt() {
+            return receipt.purchaseDate
+        }
+        return .None
+    }
+    
+    func splitBillReceipt() -> RMAppReceiptIAP? {
+        if let receipt = RMAppReceipt.bundleReceipt(), let purchases = receipt.inAppPurchases where self.verifyAppReceiptAgainstAppleCertificate() == true {
+            for purchase in purchases {
                 if purchase.productIdentifier == GratuitousPurchaseManager.splitBillPurchaseIdentifier {
-                    verified = true
-                    break
+                    return purchase
                 }
             }
-            return verified
+        }
+        return .None
+    }
+    
+    func verifySplitBillPurchaseTransaction() -> Bool {
+        if let _ = self.splitBillReceipt() {
+            return true
         } else {
             return false
         }
