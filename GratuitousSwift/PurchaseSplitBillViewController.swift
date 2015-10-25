@@ -127,13 +127,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         if let videoPlayer = self.videoPlayer {
             let layer = videoPlayer.layer
             
-            let desiredSize = self.videoPlayerView?.frame.size
-            var desiredFrame = CGRect(x: 0, y: 0, width: 640, height: 1136)
-            if let desiredSize = desiredSize {
-                desiredFrame = CGRect(origin: CGPointZero, size: desiredSize)
-            }
-            
-            layer.frame = desiredFrame
+            self.updateViewPlayerBounds()
             layer.backgroundColor = UIColor.blackColor().CGColor
             layer.videoGravity = AVLayerVideoGravityResizeAspect
             
@@ -189,9 +183,18 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         }
     }
     
+    private func updateViewPlayerBounds() -> Bool {
+        if let videoPlayerViewBounds = self.videoPlayerView?.bounds, let videoLayer = self.videoPlayer?.layer {
+            videoLayer.frame = videoPlayerViewBounds
+            return true
+        } else {
+            return false
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.updateViewPlayerBounds()
         if let videoPlayer = self.videoPlayer {
             videoPlayer.player.seekToTime(kCMTimeZero)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoPlaybackFinished:", name: AVPlayerItemDidPlayToEndTimeNotification, object: videoPlayer.player.currentItem)
@@ -200,7 +203,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.updateViewPlayerBounds()
         Answers.logContentViewWithName(AnswersString.ViewDidAppear, contentType: .None, contentId: .None, customAttributes: .None)
     }
     
@@ -213,6 +216,11 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                 self.videoPlayer?.player.play()
             }
         }
+    }
+    
+    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+        coordinator.animateAlongsideTransition({ context in self.updateViewPlayerBounds() }, completion: .None)
     }
     
     // MARK: Purchasing
@@ -264,7 +272,10 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                 self?.presentViewController(errorVC, animated: true, completion: .None)
             }
             self?.state = .Normal
-            self?.videoPlayer?.player.play()
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self?.videoPlayer?.player.play()
+            }
         }
     }
     
