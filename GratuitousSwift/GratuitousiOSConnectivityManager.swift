@@ -48,11 +48,17 @@ extension GratuitousiOSConnectivityManager {
     
     @available (iOS 9, *)
     func updateRemoteContext(notification: NSNotification?) {
-        let context = self.applicationPreferences.dictionaryCopyForKeys(.ForWatch)
-        do {
-            try self.watchConnectivityManager.session?.updateApplicationContext(context)
-        } catch {
-            self.log.error("Updating Remote Context: \(context) Failed with Error: \(error)")
+        switch self.watchConnectivityManager.watchState {
+        case .NotSupported, .NotPaired, .PairedWatchAppNotInstalled, .NotReachableWatchAppNotInstalled, .ReachableWatchAppNotInstalled:
+            // do nothing
+            break
+        case .PairedWatchAppInstalled, .NotReachableWatchAppInstalled, .ReachableWatchAppInstalled:
+            let context = self.applicationPreferences.dictionaryCopyForKeys(.ForWatch)
+            do {
+                try self.watchConnectivityManager.session?.updateApplicationContext(context)
+            } catch {
+                self.log.error("Updating Remote Context: \(context) Failed with Error: \(error)")
+            }
         }
     }
 }
@@ -92,12 +98,17 @@ extension GratuitousiOSConnectivityManager: JSBWatchConnectivityMessageDelegate 
     
     @available(iOS 9.0, *)
     private func initiateFileTransferToRemote(tuple: (url: NSURL, fileName: String)?) -> Bool {
-        if let tuple = tuple {
-            self.watchConnectivityManager.session?.transferFile(tuple.url, metadata: ["FileName" : tuple.fileName])
-            self.applicationPreferences.currencySymbolsNeeded = false
-            return true
-        } else {
+        self.applicationPreferences.currencySymbolsNeeded = false
+        switch self.watchConnectivityManager.watchState {
+        case .NotSupported, .NotPaired, .PairedWatchAppNotInstalled, .NotReachableWatchAppNotInstalled, .ReachableWatchAppNotInstalled:
             return false
+        case .PairedWatchAppInstalled, .NotReachableWatchAppInstalled, .ReachableWatchAppInstalled:
+            if let tuple = tuple {
+                self.watchConnectivityManager.session?.transferFile(tuple.url, metadata: ["FileName" : tuple.fileName])
+                return true
+            } else {
+                return false
+            }
         }
     }
 }
