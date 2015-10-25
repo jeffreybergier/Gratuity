@@ -77,10 +77,10 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch
         
         //crashlytics intializer
-        //Fabric.with([Crashlytics(), Answers()])
+        Fabric.with([Crashlytics.self(), Answers.self()])
         
-        self.window!.tintColor = GratuitousUIConstant.lightTextColor()
-        self.window!.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
+        self.window?.tintColor = GratuitousUIConstant.lightTextColor()
+        self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
         
         if #available(iOS 9, *) {
             (self.watchConnectivityManager as? JSBWatchConnectivityManager)?.contextDelegate = (self.customWatchCommunicationManager as? GratuitousiOSConnectivityManager)
@@ -91,8 +91,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         let purchaseManager = GratuitousPurchaseManager()
         self.preferencesSetLocally.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
         
-        let locator = GratuitousIPGeolocator()
-        locator.getIPLocation() { location in
+        GratuitousIPGeolocator().getIPLocation() { location in
             if let location = location {
                 self.preferencesSetLocally.lastLocation = location
             }
