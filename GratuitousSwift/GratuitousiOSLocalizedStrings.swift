@@ -9,7 +9,7 @@
 extension WatchInfoViewController {
     struct LocalizedString {
         static let ExtraLargeTextLabel =
-        NSLocalizedString("Gratuity",
+        NSLocalizedString("1 - Gratuity",
             comment: "WatchInfoViewController: ExtraLargeTextLabel: The name of the app, Gratuity."
         )
         static let LargeTextLabel =
@@ -17,7 +17,7 @@ extension WatchInfoViewController {
             comment: "WatchInfoViewController: LargeTextLabel: Whatever apple calls the Apple Watch, locally"
         )
         static let NavBarTitleLabel =
-        NSLocalizedString("Gratuity",
+        NSLocalizedString("3 - Gratuity",
             comment: "WatchInfoViewController: NavBarTitle: Title for view that shows how the Gratuity Apple Watch app works."
         )
         static let AboutGratuityForAppleWatch =
@@ -38,11 +38,11 @@ extension TipViewController {
             comment: "TipViewController: SuggestTipHeader: The header above the tip amount selector"
         )
         static let SpltBillButton =
-        NSLocalizedString("Split Bill",
+        NSLocalizedString("3 - Split Bill",
             comment: "TipViewController: SpltBillButton: The button that opens the split bill feature."
         )
         static let SettingsButton =
-        NSLocalizedString("Settings",
+        NSLocalizedString("2 - Settings",
             comment: "TipViewController: SettingsButton: Settings Button. Only shows if Settings Icon does not load from Bundle."
         )
     }
@@ -51,7 +51,7 @@ extension TipViewController {
 extension SettingsTableViewController {
     struct LocalizedString {
         static let SuggestedTipPercentageHeader =
-        NSLocalizedString("Suggested Tip Percentage",
+        NSLocalizedString("2 - Suggested Tip Percentage",
             comment: "SettingsTableViewController: SuggestedTipPercentageHeader: Header Text for a group of cells that allow choosing the default tip percentage."
         )
         static let SplitBillInAppPurchaseCellLabel =
@@ -59,7 +59,7 @@ extension SettingsTableViewController {
             comment: "SettingsTableViewController: SplitBillInAppPurchaseCellLabel: Label Text for the In-App Purchase Cell. This cell tells the user whether the feature is purchased or not."
         )
         static let CurrencySymbolHeader =
-        NSLocalizedString("Currency Symbol",
+        NSLocalizedString("2 - Currency Symbol",
             comment: "SettingsTableViewController: CurrencySymbolHeader: Header Text for a group of cells that allow choosing the currency symbol."
         )
         static let AboutHeader =
@@ -96,7 +96,7 @@ extension SettingsTableViewController {
 extension SplitBillViewController {
     struct LocalizedString {
         static let TitleLabel =
-        NSLocalizedString("Split Bill",
+        NSLocalizedString("7 - Split Bill",
             comment: "SplitBillViewController: TitleLabel: Title of the view controller that shows in the navigation bar."
         )
     }
@@ -105,15 +105,15 @@ extension SplitBillViewController {
 extension PurchaseSplitBillViewController {
     struct LocalizedString {
         static let ExtraLargeTextLabel =
-        NSLocalizedString("Split Bill",
+        NSLocalizedString("6 - Split Bill",
             comment: "PurchaseSplitBillViewController: ExtraLargeTextLabel: The name of the in-app purchase feature"
         )
         static let LargeTextLabel =
-        NSLocalizedString("In-App Purchase",
+        NSLocalizedString("2 - In-App Purchase",
             comment: "PurchaseSplitBillViewController: LargeTextLabel: Whatever Apple calls In-App Purchase locally"
         )
         static let NavBarTitleLabel =
-        NSLocalizedString("Split Bill",
+        NSLocalizedString("4 - Split Bill",
             comment: "PurchaseSplitBillViewController: NavBarTitleLabel: The name of the in-app purchase feature"
         )
         static let RestorePurchasesButton =
@@ -186,11 +186,11 @@ extension NSError {
                 comment: "Error Dialog: Title Description: If a purchase is in progress already. The warning instructs the user to wait for the first purchase to finish."
             )
             static let ProductRequestFailedDescription =
-            NSLocalizedString("App Store Error",
+            NSLocalizedString("1 - App Store Error",
                 comment: "Error Dialog: Title Text: This is a generic App Store Connection error. It instructs the user to check their connection and try again later."
             )
             static let ProductRequestFailedRecovery =
-            NSLocalizedString("Unable to connect to the App Store. Please check your data connection and try again later.",
+            NSLocalizedString("1 - Unable to connect to the App Store. Please check your data connection and try again later.",
                 comment: "Error Dialog: Description Text: This is a generic App Store Connection error. It instructs the user to check their connection and try again later."
             )
             static let PurchaseDeferredDescription =
@@ -210,19 +210,19 @@ extension NSError {
                 comment: "Error Dialog: Description Text: This is when the purchases were restored successfully, but the split bill feature has never been purchased."
             )
             static let RestoreFailedUnknownDescription =
-            NSLocalizedString("App Store Error",
+            NSLocalizedString("2 - App Store Error",
                 comment: "Error Dialog: Title Text: When there is an unknown error connecting to the app store during a purchase restore."
             )
             static let RestoreFailedUnknownRecovery =
-            NSLocalizedString("Unable to connect to the App Store. Please check your data connection and try again later.",
+            NSLocalizedString("2 - Unable to connect to the App Store. Please check your data connection and try again later.",
                 comment: "Error Dialog: Description Text: When there is an unknown error connecting to the app store during a purchase restore."
             )
             static let PurchaseFailedUnknownDescription =
-            NSLocalizedString("App Store Error",
+            NSLocalizedString("3 - App Store Error",
                 comment: "Error Dialog: Title Text: When there is an unknown error connecting to the app store during a purchase"
             )
             static let PurchaseFailedUnknownRecovery =
-            NSLocalizedString("Unable to connect to the App Store. Please check your data connection and try again later.",
+            NSLocalizedString("3 - Unable to connect to the App Store. Please check your data connection and try again later.",
                 comment: "Error Dialog: Description Text: When there is an unknown error connecting to the app store during a purchase."
             )
             static let RestoreFailedPaymentNotAllowedDescription =

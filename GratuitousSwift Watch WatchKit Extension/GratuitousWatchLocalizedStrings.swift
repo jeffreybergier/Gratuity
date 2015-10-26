@@ -11,11 +11,11 @@ import Foundation
 extension SplitTotalPurchaseInterfaceController {
     struct LocalizedString {
         static let TitleTextLabel =
-        NSLocalizedString("Split Bill",
+        NSLocalizedString("1 - Split Bill",
             comment: "Apple Watch App: SplitTotalPurchaseInterfaceController: TitleLabel: Title for Split Bill Feature."
         )
         static let SubtitleTextLabel =
-        NSLocalizedString("In-App Purchase",
+        NSLocalizedString("1 - In-App Purchase",
             comment: "Apple Watch App: SplitTotalPurchaseInterfaceController: SubtitleLabel: Whatever Apple calls In-App Purchase locally"
         )
         static let DescriptionTextLabel =
@@ -28,11 +28,11 @@ extension SplitTotalPurchaseInterfaceController {
 extension SplitTotalInterfaceController {
     struct LocalizedString {
         static let SplitBillTitleLabel =
-        NSLocalizedString("Split Bill",
+        NSLocalizedString("2 - Split Bill",
             comment: "Apple Watch App: SplitTotalInterfaceController: TitleLabel: Title for Split Bill Feature."
         )
         static let CloseSplitBillTitle =
-        NSLocalizedString("Close",
+        NSLocalizedString("1 - Close",
             comment: "Apple Watch App: SplitTotalInterfaceController: CloseSplitBillTitle: This is the title of the Split Bill screen. The title doubles as the close the button."
         )
     }
@@ -41,11 +41,11 @@ extension SplitTotalInterfaceController {
 extension PickerInterfaceController {
     struct LocalizedString {
         static let SplitTipMenuIconLabel =
-        NSLocalizedString("Split Bill",
+        NSLocalizedString("5 - Split Bill",
             comment: "Apple Watch App: PickerInterfaceController: SplitTipMenuIconLabel: Text for the menu item that opens the split tip feature."
         )
         static let SettingsMenuIconLabel =
-        NSLocalizedString("Settings",
+        NSLocalizedString("1 - Settings",
             comment: "Apple Watch App: PickerInterfaceController: SplitTipMenuIconLabel: Text for the menu item that opens the settings screen."
         )
         static let TipItemPickerCaption =
@@ -57,7 +57,7 @@ extension PickerInterfaceController {
             comment: "Apple Watch App: PickerInterfaceController: SplitTipMenuIconLabel: Callout that appears above Bill Picker wheel when selected."
         )
         static let InterfaceTitle =
-        NSLocalizedString("Gratuity",
+        NSLocalizedString("2 - Gratuity",
             comment: "Apple Watch App: PickerInterfaceController: InterfaceTitle: Gratuity app name for the main interface."
         )
     }
@@ -66,15 +66,15 @@ extension PickerInterfaceController {
 extension SettingsInterfaceController {
     struct LocalizedString {
         static let CloseSettingsTitle =
-        NSLocalizedString("Close",
+        NSLocalizedString("2 - Close",
             comment: "Apple Watch App: SettingsInterfaceController: CloseSettingsTitle: This is the title of the Settings screen. The title doubles as the close the button."
         )
         static let SuggestedTipPercentageHeader =
-        NSLocalizedString("Suggested Tip Percentage",
+        NSLocalizedString("1 - Suggested Tip Percentage",
             comment: "Apple Watch App: SettingsInterfaceController: SuggestedTipPercentageHeader: Header Text for a group of cells that allow choosing the default tip percentage."
         )
         static let CurrencySymbolHeader =
-        NSLocalizedString("Currency Symbol",
+        NSLocalizedString("1 - Currency Symbol",
             comment: "Apple Watch App: SettingsInterfaceController: CurrencySymbolHeader: Header Text for a group of cells that allow choosing the currency symbol."
         )
         static let LocalCurrencyRowLabel =

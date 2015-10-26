@@ -48,6 +48,8 @@
 		733D71351BDC251E009EA8E5 /* gratuityiOSDemoVideo@2x.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 733D71341BDC251E009EA8E5 /* gratuityiOSDemoVideo@2x.mp4 */; };
 		733D71371BDC31E7009EA8E5 /* GratuitousCrashlyticsAnswersStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733D71361BDC31E7009EA8E5 /* GratuitousCrashlyticsAnswersStrings.swift */; };
 		733D71391BDC5D04009EA8E5 /* GratuitousIPGeolocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733D71381BDC5D04009EA8E5 /* GratuitousIPGeolocator.swift */; };
+		734D5BBB1BDD9AA700F3C24C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7334770D1A26E85000513F1F /* Localizable.strings */; };
+		734D5BBD1BDD9E6300F3C24C /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 73011BDF1AD04F90001F6D71 /* en.lproj */; };
 		735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735DCADB1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift */; };
 		736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; };
 		738C98B71BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */; };
@@ -662,6 +664,7 @@
 				733D71351BDC251E009EA8E5 /* gratuityiOSDemoVideo@2x.mp4 in Resources */,
 				733D02D91BBA4D4700E40EC5 /* LaunchScreen.xib in Resources */,
 				733D02BB1BBA4CFA00E40EC5 /* GratuitousSwift.storyboard in Resources */,
+				734D5BBB1BDD9AA700F3C24C /* Localizable.strings in Resources */,
 				733D02BE1BBA4D0900E40EC5 /* GratuitousTableViewCell.xib in Resources */,
 				733D02CB1BBA4D1F00E40EC5 /* gratuityInfoDemoVideo@2x.mov in Resources */,
 			);
@@ -681,6 +684,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				734D5BBD1BDD9E6300F3C24C /* en.lproj in Resources */,
 				73AEA6E41BBB06D0004B16DE /* fallbackPickerImages.data in Resources */,
 				73AEA6F11BBB087A004B16DE /* Fuuutuuura-Meeediuuum.ttf in Resources */,
 				73AEA6E51BBB06D0004B16DE /* Images.xcassets in Resources */,
