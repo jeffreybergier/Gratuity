@@ -310,7 +310,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             
             // lets present stuff to the user
             let answersError: NSError?
-            if let userFacingErrorTuple = self.errorErrorForPurchaseTransaction(transaction) {
+            if let userFacingErrorTuple = self.errorForPurchaseTransaction(transaction) {
                 // an error ocurred, lets show it to the user.
                 let alertVC = UIAlertController(actions: userFacingErrorTuple.userAlertActions, error: userFacingErrorTuple.userFacingError)
                 if let _ = self.presentingViewController {
@@ -481,7 +481,7 @@ extension PurchaseSplitBillViewController: MFMailComposeViewControllerDelegate {
 
 extension PurchaseSplitBillViewController {
     private typealias UserFacingError = (userFacingError: NSError, userAlertActions: [UIAlertAction])
-    private func errorErrorForPurchaseTransaction(transaction: SKPaymentTransaction) -> UserFacingError? {
+    private func errorForPurchaseTransaction(transaction: SKPaymentTransaction) -> UserFacingError? {
         let userFacingError: NSError?
         let userAlertActions: [UIAlertAction]
         
@@ -510,11 +510,8 @@ extension PurchaseSplitBillViewController {
                         UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
                     ]
                 case .PaymentNotAllowed:
-                    userFacingError = NSError(purchaseError: .PurchaseFailedPaymentNotAllowed)
-                    userAlertActions = [
-                        UIAlertAction(type: .Dismiss, completionHandler: .None),
-                        UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
-                    ]
+                    userFacingError = .None
+                    userAlertActions = []
                 case .ProductNotAvailable:
                     userFacingError = NSError(purchaseError: .PurchaseFailedProductNotAvailable)
                     userAlertActions = [
@@ -597,11 +594,8 @@ extension PurchaseSplitBillViewController {
                         UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
                     ]
                 case .PaymentNotAllowed:
-                    userFacingError = NSError(purchaseError: .RestoreFailedPaymentNotAllowed)
-                    userAlertActions = [
-                        UIAlertAction(type: .Dismiss, completionHandler: .None),
-                        UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
-                    ]
+                    userFacingError = .None
+                    userAlertActions = []
                 case .ProductNotAvailable:
                     userFacingError = NSError(purchaseError: .RestoreFailedProductNotAvailable)
                     userAlertActions = [
