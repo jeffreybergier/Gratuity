@@ -79,7 +79,7 @@ extension SettingsTableViewController {
             comment: "SettingsTableViewController: LocalCurrencyCellLabel: Cell that tells the system to use no currency symbol."
         )
         static let AboutSADescriptionLabel =
-        NSLocalizedString("i016 - My name is Jeff. I'm a professional designer. I like making Apps in my spare time. The many examples of tip calculators on the App Store didn't match the tipping paradigm I used in restaurants. So I made Gratuity. If you like it, please leave a positive review on the app store.",
+        NSLocalizedString("i016 - I'm Jeff, a professional UX designer and iOS developer. I like making small and polished apps in my spare time. The many examples of tip calculators on the App Store didn't match the tipping paradigm I used in restaurants. So I made Gratuity. If you like it, please leave a positive review on the app store.",
             comment: "SettingsTableViewController: AboutSADescriptionLabel: Short description of SaturdayApps and why I made Gratuity."
         )
         static let ReviewThisAppButton =
@@ -139,7 +139,7 @@ extension UIAlertAction {
                 comment: "Alert: Action Button: Dismiss Button"
             )
             static let EmailSupport =
-            NSLocalizedString("i027 - Email Me",
+            NSLocalizedString("i027 - Email Support",
                 comment: "Alert: Action Button: Button to open email view to email support"
             )
             static let Buy =
@@ -155,7 +155,7 @@ extension UIAlertController {
         struct LocalizedString {
             static let UnknownErrorDescription =
             NSLocalizedString("i029 - Unknown Error",
-                comment: "Abstract: Alert   Title: Unknown Error presented when there was no text in the NSError"
+                comment: "Abstract: Alert Title: Unknown Error presented when there was no text in the NSError"
             )
             static let UnknownErrorRecovery =
             NSLocalizedString("i030 - An unknown error ocurred. Check your data connection and try again later.",
@@ -174,7 +174,7 @@ extension NSError {
                 comment: "Error Dialog: Title Text: If a restore is in progress already. The warning instructs the user to wait for the first restore to finish."
             )
             static let RestorePurchasesAlreadyInProgressRecovery =
-            NSLocalizedString("i032 - A purchase restore is already in progress. Please wait for the first restore to finish before trying again.",
+            NSLocalizedString("i032 - Purchases are in the process of being restored. Please wait for the first restore to finish before trying again.",
                 comment: "Error Dialog: Description Text: If a restore is in progress already. The warning instructs the user to wait for the first restore to finish."
             )
             static let PurchaseAlreadyInProgressDescription =
@@ -190,7 +190,7 @@ extension NSError {
                 comment: "Error Dialog: Title Text: This is a generic App Store Connection error. It instructs the user to check their connection and try again later."
             )
             static let ProductRequestFailedRecovery =
-            NSLocalizedString("i036 - Unable to connect to the App Store. Please check your data connection and try again later.",
+            NSLocalizedString("i036 - There was an error while communicating with the App Store. Please check your data connection and try again later.",
                 comment: "Error Dialog: Description Text: This is a generic App Store Connection error. It instructs the user to check their connection and try again later."
             )
             static let PurchaseDeferredDescription =
@@ -210,19 +210,19 @@ extension NSError {
                 comment: "Error Dialog: Description Text: This is when the purchases were restored successfully, but the split bill feature has never been purchased."
             )
             static let RestoreFailedUnknownDescription =
-            NSLocalizedString("i041 - App Store Error",
+            NSLocalizedString("i041 - Restore Failed",
                 comment: "Error Dialog: Title Text: When there is an unknown error connecting to the app store during a purchase restore."
             )
             static let RestoreFailedUnknownRecovery =
-            NSLocalizedString("i042 - Unable to connect to the App Store. Please check your data connection and try again later.",
+            NSLocalizedString("i042 - There was an error while communicating with the App Store. Please check your data connection and try again later.",
                 comment: "Error Dialog: Description Text: When there is an unknown error connecting to the app store during a purchase restore."
             )
             static let PurchaseFailedUnknownDescription =
-            NSLocalizedString("i043 - App Store Error",
+            NSLocalizedString("i043 - Purchase Failed",
                 comment: "Error Dialog: Title Text: When there is an unknown error connecting to the app store during a purchase"
             )
             static let PurchaseFailedUnknownRecovery =
-            NSLocalizedString("i044 - Unable to connect to the App Store. Please check your data connection and try again later.",
+            NSLocalizedString("i044 - There was an error while communicating with the App Store. Please check your data connection and try again later.",
                 comment: "Error Dialog: Description Text: When there is an unknown error connecting to the app store during a purchase."
             )
             static let RestoreFailedPaymentNotAllowedDescription =
@@ -249,7 +249,7 @@ extension EmailSupportHandler {
     static let Recipient = "support@saturdayapps.com"
     struct LocalizedString {
         static let EmailSubject =
-        NSLocalizedString("i049 - Gratuity Support",
+        NSLocalizedString("i050 - Gratuity Support",
             comment: "Support Email: Subject"
         )
         static let EmailBody =
