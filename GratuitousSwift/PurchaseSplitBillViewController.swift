@@ -204,6 +204,10 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.updateViewPlayerBounds()
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.videoPlayer?.player.play()
+        }
         Answers.logContentViewWithName(AnswersString.ViewDidAppear, contentType: .None, contentId: .None, customAttributes: .None)
     }
     
@@ -272,10 +276,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                 self?.presentViewController(errorVC, animated: true, completion: .None)
             }
             self?.state = .Normal
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                self?.videoPlayer?.player.play()
-            }
         }
     }
     
