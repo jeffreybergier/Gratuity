@@ -21,23 +21,16 @@ final class PickerInterfaceController: WKInterfaceController {
     @IBOutlet private var loadingGroup: WKInterfaceGroup?
     @IBOutlet private var mainGroup: WKInterfaceGroup?
     @IBOutlet private weak var animationImageView: WKInterfaceImage?
+    @IBOutlet private var tipPercentageLabel: WKInterfaceLabel?
+    @IBOutlet private var billAmountLabel: WKInterfaceLabel?
+    @IBOutlet private var tipPicker: WKInterfacePicker?
+    @IBOutlet private var billPicker: WKInterfacePicker?
     
-    private var largeInterfaceUpdateNeeded = true
-    private var smallInterfaceUpdateNeeded = true
+    private var largeInterfaceUpdateNeeded = false
+    private var smallInterfaceUpdateNeeded = false
     private var interfaceControllerConfiguredOnce = false
     
     private var interfaceIdleTimer: NSTimer?
-    private var billIndexPathRow: Int?
-    private var tipIndexPathRow: Int?
-    
-    private var items: (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
-        didSet {
-            if let items = self.items {
-                self.billPicker?.setItems(items.billItems)
-                self.tipPicker?.setItems(items.tipItems)
-            }
-        }
-    }
     
     private enum InterfaceState {
         case Loading, Loaded
@@ -63,27 +56,6 @@ final class PickerInterfaceController: WKInterfaceController {
     
     private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.hugeValueText
     private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-    private var currentBillAmount = 0 {
-        didSet {
-            let currencyString = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.applicationPreferences.overrideCurrencySymbol, amount: self.currentBillAmount)
-            let attributedString = NSAttributedString(string: currencyString, attributes: self.largeValueTextAttributes)
-            self.billAmountLabel?.setAttributedText(attributedString)
-        }
-    }
-    private var currentTipPercentage: Double? = 0.0 {
-        didSet {
-            let tipPercentage = (self.currentTipPercentage !! 0) * 100
-            let roundedPercentage = Int(round(tipPercentage))
-            let percentageString = "\(roundedPercentage)%"
-            let attributedString = NSAttributedString(string: percentageString, attributes: self.smallValueTextAttributes)
-            self.tipPercentageLabel?.setAttributedText(attributedString)
-        }
-    }
-    
-    @IBOutlet private var tipPercentageLabel: WKInterfaceLabel?
-    @IBOutlet private var billAmountLabel: WKInterfaceLabel?
-    @IBOutlet private var tipPicker: WKInterfacePicker?
-    @IBOutlet private var billPicker: WKInterfacePicker?
     
     private func resetInterfaceIdleTimer() {
         if let existingTimer = self.interfaceIdleTimer {
@@ -141,93 +113,39 @@ final class PickerInterfaceController: WKInterfaceController {
                 // dispatch back to the main queue to do the UI work
                 dispatch_async(dispatch_get_main_queue()) {
                     // this operation takes the longest
-                    self.items = items
-                    self.updateInterfaceLabels()
+                    self.billPicker?.setItems(items.billItems)
+                    self.tipPicker?.setItems(items.tipItems)
+                    self.updateBillPicker()
+                    self.updateTipPicker()
+                    self.updateBigLabels()
+                    self.interfaceState = .Loaded
                 }
             }
         }
     }
     
-    private func updateInterfaceLabels() {
-        self.smallInterfaceUpdateNeeded = true
-        // set the text in the UI
-        let billAmount: Int
-        if self.applicationPreferences.billIndexPathRow < self.items?.billItems.count {
-            billAmount = self.applicationPreferences.billIndexPathRow
-        } else {
-            billAmount = self.items?.billItems.count ?? self.applicationPreferences.billIndexPathRow
-        }
-        let suggestTipPercentage = self.applicationPreferences.suggestedTipPercentage
-        let tipAmount = Int(round(Double(billAmount) * suggestTipPercentage))
-        let actualTipPercentage = Double(tipAmount) /? Double(billAmount)
-        self.currentBillAmount = billAmount + tipAmount
-        self.currentTipPercentage = actualTipPercentage
-        
-        // set the billpicker
-        self.billPicker?.setSelectedItemIndex(billAmount - 1)
-        
-        // if there is a manual tip amount set
-        if self.applicationPreferences.tipIndexPathRow != 0 {
-            // set the text in the UI
-            let tipAmount: Int
-            if self.applicationPreferences.tipIndexPathRow < self.items?.tipItems.count {
-                tipAmount = self.applicationPreferences.tipIndexPathRow
-            } else {
-                tipAmount = self.items?.tipItems.count ?? self.applicationPreferences.tipIndexPathRow
-            }
-            let actualTipPercentage = Double(tipAmount) /? Double(billAmount)
-            self.currentBillAmount = billAmount + tipAmount
-            self.currentTipPercentage = actualTipPercentage
-            
-            self.tipPicker?.setSelectedItemIndex(tipAmount - 1)
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                // restore the UI state
-                self.smallInterfaceUpdateNeeded = false
-                self.interfaceState = .Loaded
-            }
-        } else {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                // restore the ui state
-                self.smallInterfaceUpdateNeeded = false
-                self.interfaceState = .Loaded
-            }
-        }
-
+    var billPickerUpdatedProgrammatically = false
+    private func updateBillPicker() {
+        self.billPickerUpdatedProgrammatically = true
+        let c = Calculations(preferences: self.applicationPreferences)
+        self.billPicker?.setSelectedItemIndex(c.billAmount - 1)
     }
     
-    func setLargeInterfaceRefreshNeeded() {
-        self.largeInterfaceUpdateNeeded = true
-        self.smallInterfaceUpdateNeeded = true
+    var tipPickerUpdatedProgrammatically = false
+    private func updateTipPicker() {
+        self.tipPickerUpdatedProgrammatically = true
+        let c = Calculations(preferences: self.applicationPreferences)
+        self.tipPicker?.setSelectedItemIndex(c.tipAmount - 1)
     }
     
-    func setSmallInterfaceRefreshNeeded() {
-        self.smallInterfaceUpdateNeeded = true
-    }
-    
-    @objc private func interfaceIdleTimerFired(timer: NSTimer?) {
-        var preferences = self.applicationPreferences
-        var preferencesChanged = false
-        if let billIndexPathRow = self.billIndexPathRow {
-            preferences.billIndexPathRow = billIndexPathRow
-            preferencesChanged = true
-        }
-        if let tipIndexPathRow = self.tipIndexPathRow {
-            preferences.tipIndexPathRow = tipIndexPathRow
-            preferencesChanged = true
-        }
-        if preferencesChanged == true {
-            self.applicationPreferences = preferences
-        }
-        self.billIndexPathRow = .None
-        self.tipIndexPathRow = .None
-        
-        if self.largeInterfaceUpdateNeeded == true {
-            self.configurePickerItems()
-        } else if self.smallInterfaceUpdateNeeded == true {
-            self.updateInterfaceLabels()
-        }
+    private func updateBigLabels() {
+        let c = Calculations(preferences: self.applicationPreferences)
+        let billAmountString = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.applicationPreferences.overrideCurrencySymbol, amount: c.totalAmount)
+        let largeLabelString = NSAttributedString(string: billAmountString, attributes: self.largeValueTextAttributes)
+        let tipPercentageString = "\(c.tipPercentage)\(self.currencyFormatter.percentSymbol)"
+        let smallLabelString = NSAttributedString(string: tipPercentageString, attributes: self.smallValueTextAttributes)
+        self.billAmountLabel?.setAttributedText(largeLabelString)
+        self.tipPercentageLabel?.setAttributedText(smallLabelString)
     }
     
     // MARK: Handle Going Away
@@ -246,37 +164,23 @@ final class PickerInterfaceController: WKInterfaceController {
     // MARK: Handle User Input
 
     @IBAction func billPickerChanged(value: Int) {
-        let billAmount = value + 1
-        let suggestTipPercentage = self.applicationPreferences.suggestedTipPercentage
-        let tipAmount = Int(round(Double(billAmount) * suggestTipPercentage))
-        
-        self.tipPicker?.setSelectedItemIndex(tipAmount - 1)
-        if self.smallInterfaceUpdateNeeded == false {
-            self.billIndexPathRow = value + 1
+        if self.billPickerUpdatedProgrammatically == false {
+            self.applicationPreferences.billIndexPathRow = value + 1
+            self.applicationPreferences.tipIndexPathRow = 0
+            self.updateBigLabels()
+            self.updateTipPicker()
         }
-        
         self.resetInterfaceIdleTimer()
-        
-        let actualTipPercentage = Double(tipAmount) /? Double(billAmount)
-        self.currentBillAmount = billAmount + tipAmount
-        self.currentTipPercentage = actualTipPercentage
-        
+        self.billPickerUpdatedProgrammatically = false
     }
     
     @IBAction func tipPickerChanged(value: Int) {
-        if self.smallInterfaceUpdateNeeded == false {
-            self.tipIndexPathRow = value + 1
+        if self.tipPickerUpdatedProgrammatically == false {
+            self.applicationPreferences.tipIndexPathRow = value + 1
+            self.updateBigLabels()
         }
-        
         self.resetInterfaceIdleTimer()
-        
-        let billAmount = self.applicationPreferences.billIndexPathRow
-        let tipAmount = value + 1
-        let actualTipPercentage = Double(tipAmount) /? Double(billAmount)
-        self.currentBillAmount = billAmount + tipAmount
-        self.currentTipPercentage = actualTipPercentage
-        
-        self.smallInterfaceUpdateNeeded = false
+        self.tipPickerUpdatedProgrammatically = false
     }
     
     @objc private func settingsMenuButtonTapped() {
@@ -296,13 +200,34 @@ final class PickerInterfaceController: WKInterfaceController {
     @objc private func currencySignDidChange(notification: NSNotification?) {
         dispatch_async(dispatch_get_main_queue()) {
             self.currencyFormatter.locale = NSLocale.currentLocale()
-            self.largeInterfaceUpdateNeeded = true
+            self.setLargeInterfaceRefreshNeeded()
         }
     }
     
     @objc private func billTipValueChangeByRemote(notification: NSNotification?) {
         dispatch_async(dispatch_get_main_queue()) {
-            self.smallInterfaceUpdateNeeded = true
+            self.setSmallInterfaceRefreshNeeded()
+        }
+    }
+    
+    func setLargeInterfaceRefreshNeeded() {
+        self.largeInterfaceUpdateNeeded = true
+        self.smallInterfaceUpdateNeeded = true
+    }
+    
+    func setSmallInterfaceRefreshNeeded() {
+        self.smallInterfaceUpdateNeeded = true
+    }
+    
+    @objc private func interfaceIdleTimerFired(timer: NSTimer?) {
+        if self.largeInterfaceUpdateNeeded == true {
+            self.largeInterfaceUpdateNeeded = false
+            self.configurePickerItems()
+        } else if self.smallInterfaceUpdateNeeded == true {
+            self.smallInterfaceUpdateNeeded = false
+            self.updateBigLabels()
+            self.updateTipPicker()
+            self.updateBillPicker()
         }
     }
     
