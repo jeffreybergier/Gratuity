@@ -695,6 +695,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B3070A8828BC4FCACCE4472B73FFB400 /* Pods-GratuityWatch Extension.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -721,6 +722,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 36645C9F8B853164771AD2DBF56FB1CB /* Pods-Gratuity-XCGLogger-Private.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 3.0.0;
 				DEFINES_MODULE = YES;
@@ -788,6 +790,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 21EDF2475F83D48076E104D122579971 /* Pods-GratuityWatch Extension-XCGLogger-Private.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CURRENT_PROJECT_VERSION = 3.0.0;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 3;
@@ -813,6 +816,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AE97B76C25B8628241DB16C1D46B8BAB /* Pods-GratuityWatch Extension.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -840,6 +844,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0CAC58AB83DE9E487E76356B69FFE1E1 /* Pods-Gratuity.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -869,6 +874,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D376748B89E23CF1CA9D7B752A09CC1D /* Pods-Gratuity.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -899,6 +905,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 36645C9F8B853164771AD2DBF56FB1CB /* Pods-Gratuity-XCGLogger-Private.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 3.0.0;
 				DEFINES_MODULE = YES;
@@ -927,6 +934,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 21EDF2475F83D48076E104D122579971 /* Pods-GratuityWatch Extension-XCGLogger-Private.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CURRENT_PROJECT_VERSION = 3.0.0;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 3;
