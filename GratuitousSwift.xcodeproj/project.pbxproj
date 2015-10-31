@@ -607,7 +607,7 @@
 						DevelopmentTeam = V6ESYGU6CV;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -619,7 +619,7 @@
 						DevelopmentTeam = V6ESYGU6CV;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -628,7 +628,7 @@
 						DevelopmentTeam = V6ESYGU6CV;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
