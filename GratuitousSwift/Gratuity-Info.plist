@@ -43,13 +43,6 @@
 		<string>com.saturdayapps.Gratuity.Watch.SplitBillInterface</string>
 		<string>com.saturdayapps.Gratuity.Watch.SplitBillPurchase</string>
 	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>bluetooth-central</string>
-		<string>external-accessory</string>
-		<string>fetch</string>
-		<string>remote-notification</string>
-	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
