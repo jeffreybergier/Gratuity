@@ -8,7 +8,7 @@
 
 import Crashlytics
 
-final class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CustomAnimatedTransitionable {
+final class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CustomAnimatedTransitionable, UIViewControllerPreviewingDelegate {
     
     @IBOutlet private weak var tipPercentageTextLabel: UILabel?
     @IBOutlet private weak var totalAmountTextLabel: UILabel?
@@ -86,17 +86,6 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         // Do any additional setup after loading the view.
         
         self.resetInterfaceIdleTimer()
-        
-        #if DEBUG
-            // add a crash button to the view to test crashlytics
-            let crashButton = UIButton(frame: CGRect(x: 12, y: 20, width: 10, height: 10))
-            crashButton.setTitle("Cause Crash", forState: UIControlState.Normal)
-            let crashDate = NSDate(timeIntervalSinceNow: 0)
-            let crashSelector = Selector("causeCrash: InTipViewController: Date: \(crashDate)")
-            crashButton.addTarget(self, action: crashSelector, forControlEvents: UIControlEvents.TouchUpInside)
-            crashButton.sizeToFit()
-            self.view.addSubview(crashButton)
-        #endif
         
         // configure notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
@@ -184,6 +173,13 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         //was previously in viewWillAppear
         self.prepareTotalAmountTextLabel()
         self.prepareTipPercentageTextLabel()
+        
+        //register for 3d touch
+        if #available(iOS 9.0, *) {
+            if(traitCollection.forceTouchCapability == .Available) {
+                self.registerForPreviewingWithDelegate(self, sourceView: self.view)
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -266,10 +262,18 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     
     @IBAction private func didTapBillAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
         self.billAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: 0 + PrivateConstants.ExtraCells, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.4 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.scrollViewDidStopMovingForWhateverReason(self.billAmountTableView!)
+        }
     }
     
     @IBAction private func didTapTipAmountTableViewScrollToTop(sender: UITapGestureRecognizer) {
         self.tipAmountTableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: 0 + PrivateConstants.ExtraCells, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.4 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.scrollViewDidStopMovingForWhateverReason(self.tipAmountTableView!)
+        }
     }
     
     @IBAction private func unwindToViewController(segue: UIStoryboardSegue) {
@@ -348,6 +352,38 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             completion: { finished in
                 //do nothing
         })
+    }
+    
+    //MARK: Handle 3D Touch
+    
+    @available(iOS 9.0, *)
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        let purchased: Bool
+        if self.applicationPreferences.splitBillPurchased == true {
+            // if the preferences say its true trust them.
+            // this is for deferred purchases grace period
+            purchased = true
+        } else {
+            // if not true, check the receipt and try again
+            let purchaseManager = GratuitousPurchaseManager()
+            self.applicationPreferences.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
+            purchased = self.applicationPreferences.splitBillPurchased
+        }
+        
+        if purchased == true {
+            if let vc = self.storyboard?.instantiateViewControllerWithIdentifier("SplitBillViewController") {
+                let splitBillButtonRect = self.splitBillButton?.frame !! self.view.frame
+                previewingContext.sourceRect = splitBillButtonRect
+                return vc
+            }
+        }
+
+        return .None
+    }
+    
+    @available(iOS 9.0, *)
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        self.showViewController(viewControllerToCommit, sender: self)
     }
     
     //MARK: Handle Writing to Disk
@@ -476,6 +512,10 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
                 tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             }
             self.bigTextLabelsShouldPresent(false)
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.4 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.scrollViewDidStopMovingForWhateverReason(tableView)
+            }
         }
     }
     
@@ -522,26 +562,6 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         self.postNewCalculationToAnswers()
     }
     
-    private func postNewCalculationToAnswers() {
-        let c = DefaultsCalculations(preferences: self.applicationPreferences)
-        
-        var answersAttributes = [
-            "BillAmount" : NSNumber(integer: c.billAmount),
-            "TipAmount" : NSNumber(integer: c.tipAmount),
-            "TipPercentage" : NSNumber(integer: c.tipPercentage),
-            "TotalAmount" : NSNumber(integer: c.totalAmount),
-            "SystemLocale" : self.currencyFormatter.locale.localeIdentifier
-        ]
-    
-        answersAttributes["LocationZipCode"] = self.applicationPreferences.lastLocation?.zipCode
-        answersAttributes["LocationCity"] = self.applicationPreferences.lastLocation?.city
-        answersAttributes["LocationRegion"] = self.applicationPreferences.lastLocation?.region
-        answersAttributes["LocationCountry"] = self.applicationPreferences.lastLocation?.country
-        answersAttributes["LocationCountryCode"] = self.applicationPreferences.lastLocation?.countryCode
-        
-        Answers.logCustomEventWithName(AnswersString.NewTipCalculated, customAttributes: answersAttributes)
-    }
-    
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         self.bigTextLabelsShouldPresent(false)
         if let tag = TableTagIdentifier(rawValue: scrollView.tag) {
@@ -581,6 +601,26 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
                     self.updateLargeTextLabels(billAmount: billAmount, tipAmount: tipAmount)
                 }
         }
+    }
+    
+    private func postNewCalculationToAnswers() {
+        let c = DefaultsCalculations(preferences: self.applicationPreferences)
+        
+        var answersAttributes = [
+            "BillAmount" : NSNumber(integer: c.billAmount),
+            "TipAmount" : NSNumber(integer: c.tipAmount),
+            "TipPercentage" : NSNumber(integer: c.tipPercentage),
+            "TotalAmount" : NSNumber(integer: c.totalAmount),
+            "SystemLocale" : self.currencyFormatter.locale.localeIdentifier
+        ]
+        
+        answersAttributes["LocationZipCode"] = self.applicationPreferences.lastLocation?.zipCode
+        answersAttributes["LocationCity"] = self.applicationPreferences.lastLocation?.city
+        answersAttributes["LocationRegion"] = self.applicationPreferences.lastLocation?.region
+        answersAttributes["LocationCountry"] = self.applicationPreferences.lastLocation?.country
+        answersAttributes["LocationCountryCode"] = self.applicationPreferences.lastLocation?.countryCode
+        
+        Answers.logCustomEventWithName(AnswersString.NewTipCalculated, customAttributes: answersAttributes)
     }
     
     //MARK: Handle Table View Delegate DataSourceStuff
