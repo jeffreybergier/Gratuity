@@ -16,46 +16,13 @@ struct GratuitousUserDefaults {
     var overrideCurrencySymbol: CurrencySign
     var suggestedTipPercentage: Double
     var splitBillPurchased: Bool
-    var lastLocation: Location?
+    var lastLocation: JSBIPLocation?
 }
 
 extension GratuitousUserDefaults: Equatable { }
 
 func ==(lhs: GratuitousUserDefaults, rhs: GratuitousUserDefaults) -> Bool {
     return lhs.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded) as NSDictionary == rhs.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded) as NSDictionary
-}
-
-struct Location {
-    var zipCode: String?
-    var city: String?
-    var region: String?
-    var country: String?
-    var countryCode: String?
-    
-    func containsAnyValues() -> Bool {
-        if let _ = self.zipCode {
-            return true
-        }
-        if let _ = self.city {
-            return true
-        }
-        if let _ = self.region {
-            return true
-        }
-        if let _ = self.country {
-            return true
-        }
-        if let _ = self.countryCode {
-            return true
-        }
-        return false
-    }
-}
-
-extension Location: CustomStringConvertible {
-    var description: String {
-        return "Location: ZipCode: \(self.zipCode), City: \(self.city), Region: \(self.region), Country: \(self.country), CountryCode: \(self.countryCode)"
-    }
 }
 
 extension GratuitousUserDefaults {
@@ -126,7 +93,7 @@ extension GratuitousUserDefaults {
             splitBillPurchased = false
         }
         
-        var lastLocationFromDictionary = Location()
+        var lastLocationFromDictionary = JSBIPLocation()
         if let zipCode = dictionary?[Keys.locationZipCode] as? String {
             lastLocationFromDictionary.zipCode = zipCode
         } else {
@@ -152,7 +119,7 @@ extension GratuitousUserDefaults {
         } else {
             lastLocationFromDictionary.countryCode = fallback.lastLocation?.countryCode
         }
-        if lastLocationFromDictionary.containsAnyValues() {
+        if lastLocationFromDictionary.isEmpty == false {
             self.lastLocation = lastLocationFromDictionary
         }
         // ignored from disk version. Always set to false on load
@@ -196,7 +163,7 @@ extension GratuitousUserDefaults {
             splitBillPurchased = false
         }
         
-        var lastLocationFromDictionary = Location()
+        var lastLocationFromDictionary = JSBIPLocation()
         if let zipCode = dictionary?[Keys.locationZipCode] as? String {
             lastLocationFromDictionary.zipCode = zipCode
         }
@@ -212,7 +179,7 @@ extension GratuitousUserDefaults {
         if let countryCode = dictionary?[Keys.locationCountryCode] as? String {
             lastLocationFromDictionary.countryCode = countryCode
         }
-        if lastLocationFromDictionary.containsAnyValues() {
+        if lastLocationFromDictionary.isEmpty == false {
             self.lastLocation = lastLocationFromDictionary
         }
         // ignored from disk version. Always set to false on load

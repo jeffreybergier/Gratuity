@@ -91,8 +91,8 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         let purchaseManager = GratuitousPurchaseManager()
         self.preferencesSetLocally.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
         
-        GratuitousIPGeolocator().getIPLocation() { location in
-            if let location = location {
+        JSBIPGeocoder(service: JSBIPGeoService.All).geocode() { (location, error) in
+            if let location = location as? JSBIPLocation {
                 self.preferencesSetLocally.lastLocation = location
             }
             Answers.logCustomEventWithName(AnswersString.Launched, customAttributes: self.preferences.dictionaryCopyForKeys(.ForDisk))
