@@ -54,27 +54,3 @@ class GratuitousWatchApplicationPreferences {
         self.watchConnectivityManager.fileTransferReceiverDelegate = self.customiOSCommunicationManager
     }
 }
-
-struct Calculations {
-    var tipAmount: Int
-    var billAmount: Int
-    var tipPercentage: Int
-    var totalAmount: Int
-    
-    init(preferences: GratuitousUserDefaults) {
-        let billAmount = preferences.billIndexPathRow
-        let tipAmount: Int
-        if preferences.tipIndexPathRow > 0 {
-            tipAmount = preferences.tipIndexPathRow
-        } else {
-            tipAmount = Int(round(Double(billAmount) * preferences.suggestedTipPercentage))
-        }
-        
-        let tipPercentage = Int(round((Double(tipAmount) / Double(billAmount)) * 100))
-        
-        self.tipPercentage = tipPercentage
-        self.tipAmount = tipAmount
-        self.billAmount = billAmount
-        self.totalAmount = billAmount + tipAmount
-    }
-}

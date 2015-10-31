@@ -523,25 +523,16 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     private func postNewCalculationToAnswers() {
-        let billAmount = self.applicationPreferences.billIndexPathRow
-        let tipAmount: Int
-        let tipPercentage: Int
-        if self.applicationPreferences.tipIndexPathRow > 0 {
-            tipAmount = self.applicationPreferences.tipIndexPathRow
-            tipPercentage = Int(round((Double(self.applicationPreferences.tipIndexPathRow) / Double(billAmount)) * 100))
-        } else {
-            tipAmount = Int(round(self.applicationPreferences.suggestedTipPercentage * Double(billAmount)))
-            tipPercentage = Int(round(self.applicationPreferences.suggestedTipPercentage * 100))
-        }
-        let totalAmount = billAmount + tipAmount
+        let c = DefaultsCalculations(preferences: self.applicationPreferences)
         
         var answersAttributes = [
-            "BillAmount" : NSNumber(integer: billAmount),
-            "TipAmount" : NSNumber(integer: tipAmount),
-            "TipPercentage" : NSNumber(integer: tipPercentage),
-            "TotalAmount" : NSNumber(integer: totalAmount),
+            "BillAmount" : NSNumber(integer: c.billAmount),
+            "TipAmount" : NSNumber(integer: c.tipAmount),
+            "TipPercentage" : NSNumber(integer: c.tipPercentage),
+            "TotalAmount" : NSNumber(integer: c.totalAmount),
             "SystemLocale" : self.currencyFormatter.locale.localeIdentifier
         ]
+    
         answersAttributes["LocationZipCode"] = self.applicationPreferences.lastLocation?.zipCode
         answersAttributes["LocationCity"] = self.applicationPreferences.lastLocation?.city
         answersAttributes["LocationRegion"] = self.applicationPreferences.lastLocation?.region

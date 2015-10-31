@@ -216,3 +216,55 @@ extension GratuitousUserDefaults {
 
     }
 }
+
+struct DefaultsCalculations {
+    var tipAmount: Int
+    var billAmount: Int
+    var tipPercentage: Int
+    var totalAmount: Int
+    
+    init(preferences: GratuitousUserDefaults) {
+        let billAmount = preferences.billIndexPathRow
+        let tipAmount: Int
+        if preferences.tipIndexPathRow > 0 {
+            tipAmount = preferences.tipIndexPathRow
+        } else {
+            tipAmount = Int(round(Double(billAmount) * preferences.suggestedTipPercentage))
+        }
+        
+        let tipPercentage = Int(round((Double(tipAmount) / Double(billAmount)) * 100))
+        
+        self.tipPercentage = tipPercentage
+        self.tipAmount = tipAmount
+        self.billAmount = billAmount
+        self.totalAmount = billAmount + tipAmount
+    }
+}
+
+extension DefaultsCalculations: Equatable { }
+func ==(lhs: DefaultsCalculations, rhs: DefaultsCalculations) -> Bool {
+    var equal = true
+    
+    if lhs.tipAmount != rhs.tipAmount {
+        equal = false
+    }
+    if lhs.billAmount != rhs.billAmount {
+        equal = false
+    }
+    if lhs.tipPercentage != rhs.tipPercentage {
+        equal = false
+    }
+    if lhs.totalAmount != rhs.totalAmount {
+        equal = false
+    }
+    
+    return equal
+}
+
+func !=(lhs: DefaultsCalculations, rhs: DefaultsCalculations) -> Bool {
+    if lhs == rhs {
+        return false
+    } else {
+        return true
+    }
+}

@@ -127,19 +127,19 @@ final class PickerInterfaceController: WKInterfaceController {
     var billPickerUpdatedProgrammatically = false
     private func updateBillPicker() {
         self.billPickerUpdatedProgrammatically = true
-        let c = Calculations(preferences: self.applicationPreferences)
+        let c = DefaultsCalculations(preferences: self.applicationPreferences)
         self.billPicker?.setSelectedItemIndex(c.billAmount - 1)
     }
     
     var tipPickerUpdatedProgrammatically = false
     private func updateTipPicker() {
         self.tipPickerUpdatedProgrammatically = true
-        let c = Calculations(preferences: self.applicationPreferences)
+        let c = DefaultsCalculations(preferences: self.applicationPreferences)
         self.tipPicker?.setSelectedItemIndex(c.tipAmount - 1)
     }
     
     private func updateBigLabels() {
-        let c = Calculations(preferences: self.applicationPreferences)
+        let c = DefaultsCalculations(preferences: self.applicationPreferences)
         let billAmountString = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.applicationPreferences.overrideCurrencySymbol, amount: c.totalAmount)
         let largeLabelString = NSAttributedString(string: billAmountString, attributes: self.largeValueTextAttributes)
         let tipPercentageString = "\(c.tipPercentage)\(self.currencyFormatter.percentSymbol)"

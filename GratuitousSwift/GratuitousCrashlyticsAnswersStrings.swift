@@ -10,6 +10,7 @@ extension GratuitousAppDelegate {
     struct AnswersString {
         static let Launched = "iOS-ApplicationDidFinishLaunchingWithOptions"
         static let Backgrounded = "iOS-ApplicationWillResignActive"
+        static let NewWatchTipCalculated = "wOS-TipVCNewTipCalculated"
     }
 }
 

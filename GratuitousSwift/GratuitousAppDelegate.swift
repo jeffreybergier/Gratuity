@@ -43,6 +43,11 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             if _preferences != newValue {
                 let oldValue = _preferences
                 _preferences = newValue
+                let oldC = DefaultsCalculations(preferences: oldValue)
+                let newC = DefaultsCalculations(preferences: newValue)
+                if oldC != newC {
+                    self.postNewCalculationToAnswers(newValue)
+                }
                 self.preferencesNotificationManager.postNotificationsForRemoteChangedDefaults(old: oldValue, new: newValue)
             }
         }
@@ -99,6 +104,27 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    // MARK: Watch Calculations Analytics
+    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
+    private func postNewCalculationToAnswers(preferences: GratuitousUserDefaults) {
+        let c = DefaultsCalculations(preferences: preferences)
+        
+        var answersAttributes = [
+            "BillAmount" : NSNumber(integer: c.billAmount),
+            "TipAmount" : NSNumber(integer: c.tipAmount),
+            "TipPercentage" : NSNumber(integer: c.tipPercentage),
+            "TotalAmount" : NSNumber(integer: c.totalAmount),
+            "SystemLocale" : self.currencyFormatter.locale.localeIdentifier
+        ]
+        answersAttributes["LocationZipCode"] = self.preferences.lastLocation?.zipCode
+        answersAttributes["LocationCity"] = self.preferences.lastLocation?.city
+        answersAttributes["LocationRegion"] = self.preferences.lastLocation?.region
+        answersAttributes["LocationCountry"] = self.preferences.lastLocation?.country
+        answersAttributes["LocationCountryCode"] = self.preferences.lastLocation?.countryCode
+        
+        Answers.logCustomEventWithName(AnswersString.NewWatchTipCalculated, customAttributes: answersAttributes)
     }
     
     // MARK: iOS App Going to the Background
