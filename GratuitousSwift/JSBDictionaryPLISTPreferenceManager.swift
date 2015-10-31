@@ -12,7 +12,7 @@ class JSBDictionaryPLISTPreferenceManager {
     
     private let fileManager = NSFileManager.defaultManager()
     
-    func writePreferencesDictionary(dictionary: NSDictionary, toLocation location: Location) throws {
+    func writePreferencesDictionary(dictionary: NSDictionary, toLocation location: UserFileLocation, protection: NSDataWritingOptions = .DataWritingFileProtectionNone) throws {
         let fullURL: NSURL
         switch location {
         case .PreferencesPLISTFileWithinPreferencesURL:
@@ -30,13 +30,13 @@ class JSBDictionaryPLISTPreferenceManager {
             if self.fileManager.fileExistsAtPath(fullURL.URLByDeletingLastPathComponent!.path!) == false {
                 try self.fileManager.createDirectoryAtPath(fullURL.URLByDeletingLastPathComponent!.path!, withIntermediateDirectories: true, attributes: .None)
             }
-            try data.writeToURL(fullURL, options: .AtomicWrite)
+            try data.writeToURL(fullURL, options: [.AtomicWrite, protection])
         } catch {
             throw error
         }
     }
     
-    func dictionaryByReadingPLISTFromDiskLocation(location: Location) throws -> NSDictionary? {
+    func dictionaryByReadingPLISTFromDiskLocation(location: UserFileLocation) throws -> NSDictionary? {
         let url: NSURL
         switch location {
         case .PreferencesPLISTFileWithinPreferencesURL:
@@ -58,7 +58,7 @@ class JSBDictionaryPLISTPreferenceManager {
         }
     }
     
-    enum Location {
+    enum UserFileLocation {
         case PreferencesPLISTFileWithinPreferencesURL
         case AppDirectoryWithinAppSupportDirectory(lastPathComponent: String)
         case CachesDirectory(lastPathComponent: String)
