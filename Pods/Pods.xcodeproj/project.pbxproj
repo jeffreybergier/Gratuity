@@ -7,35 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AEB9F7BA8F35F1E884D1E1412964438 /* Pods-Gratuity-XCGLogger-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6277D8DA2118E01A64884C1B2C73C418 /* Pods-Gratuity-XCGLogger-dummy.m */; };
-		36AC7C57034CCCCD2EC0CBD1DAD7347D /* Pods-GratuityWatch Extension-XCGLogger-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBC198EA55068C7374B56E0CA6D5908 /* Pods-GratuityWatch Extension-XCGLogger-dummy.m */; };
-		381FE5E52FCF29F26222B643394076E5 /* Pods-GratuityWatch Extension-XCGLogger-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5667564A1F7E93EDA7D4A567A97F2115 /* Pods-GratuityWatch Extension-XCGLogger-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4A5C32144A419E15C2FDBEA3EE1C0B83 /* Pods-Gratuity-XCGLogger-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B5DE8C5C340EF860FC3CE60C953D8FF3 /* Pods-Gratuity-XCGLogger-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5397710341974BBAD7BE00C690925B46 /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D924056D44D2F161C642535C473CE8 /* XCGLogger.swift */; };
-		A2B3EEC3AB925F42AC3316916A17B9BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175FE15301C3695BC08123C2921E77FE /* Foundation.framework */; };
-		B8E698FD96904C60493C9BB280B124F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9384A659A5B1493CA743FE94F7FF0C /* Foundation.framework */; };
-		C66F515A0B6C24C1A1140CD8B321EA3C /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D924056D44D2F161C642535C473CE8 /* XCGLogger.swift */; };
-		CC663129A6656536BB3EEE157582DEB6 /* Pods-Gratuity-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F738E2E44BDDEF61A56096079D409277 /* Pods-Gratuity-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D786DACFE1331793BCEC7DD9AFDA32E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9384A659A5B1493CA743FE94F7FF0C /* Foundation.framework */; };
-		EA508F1AEACBD247D5504E4B52381C04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175FE15301C3695BC08123C2921E77FE /* Foundation.framework */; };
-		EE43700EA526D4E8187BAAA581991F87 /* Pods-GratuityWatch Extension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BBEF2CACFB2137803FA1FDADB5511DC /* Pods-GratuityWatch Extension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F40F8A44DD43286E101FCA0643374E45 /* Pods-GratuityWatch Extension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B355E77F285642697AE683D6A22CD529 /* Pods-GratuityWatch Extension-dummy.m */; };
-		F49B2C0304465BDA8BC0EEA8D3940AB6 /* Pods-Gratuity-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B74F03DC02563CB23A8EC915A847F8FA /* Pods-Gratuity-dummy.m */; };
+		0B83DD3EF8A7A580F2CE09C1A0A4FA14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D79CDBEF832FB5A2106CDDC44C55D38 /* Foundation.framework */; };
+		1F8316CEC61F310B5F60161EC90F9E50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6B89BDF4940B4AF9D57D7449055DAA /* Foundation.framework */; };
+		42CDA5A17DDE4532B2C18A3E6CB05E09 /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6668CCB9C495B35F194E8270BDB2ECA3 /* XCGLogger.swift */; };
+		6FE9536CD98067C008015F88BDBAE60A /* Pods-Gratuity-XCGLogger-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CD8098D2D1CD38D07878083CB7DD4288 /* Pods-Gratuity-XCGLogger-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		71EF26B9561F99692AD9A07876505485 /* Pods-Gratuity-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D16F80E5E492054EF214D0D1A91909D /* Pods-Gratuity-dummy.m */; };
+		9FB81117E6B480E80562E1823B9C27B1 /* Pods-GratuityWatch Extension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C29163129D92294106A3D073B8B2AF21 /* Pods-GratuityWatch Extension-dummy.m */; };
+		A3487681F3EBE1FD15F8C14E2D185EE7 /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6668CCB9C495B35F194E8270BDB2ECA3 /* XCGLogger.swift */; };
+		A671C0016639C099B3D28F8EB86DD1EA /* Pods-GratuityWatch Extension-XCGLogger-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5936E53E19F4618AB00F63E7D9F8EF90 /* Pods-GratuityWatch Extension-XCGLogger-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B9FA5A3EC79C024A9C095C1DE8665E58 /* Pods-Gratuity-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F43945692C20B31A1236C6DD61FF030 /* Pods-Gratuity-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD6C5704ACCFAB8A3D8FDDCEF69A063D /* Pods-GratuityWatch Extension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 74EB5B79E0245710A63695A60AB3E3AB /* Pods-GratuityWatch Extension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE89DB8F8B48B1CAD2B07224D4AF8FA5 /* Pods-Gratuity-XCGLogger-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4650256185E127AFE2298B88BC3C26 /* Pods-Gratuity-XCGLogger-dummy.m */; };
+		F87644B08E5B0BC69B2007BD0F13BA57 /* Pods-GratuityWatch Extension-XCGLogger-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D635DABA141E5C305C509CEA8EEC47 /* Pods-GratuityWatch Extension-XCGLogger-dummy.m */; };
+		FD672262E9C3C8D44B972291F231A71F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6B89BDF4940B4AF9D57D7449055DAA /* Foundation.framework */; };
+		FD7892D15D2671C706B01DDFE762E184 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D79CDBEF832FB5A2106CDDC44C55D38 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7CCB2F3733DF43D5A79115A708FD50C1 /* PBXContainerItemProxy */ = {
+		DB485CE034D9D84D202D79325CA6A65D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DD2BA66BB4D6C155E08E08F9DD26EA8D;
+			remoteGlobalIDString = 908C1077DC0CC9416CD928068DB73BCB;
 			remoteInfo = "Pods-GratuityWatch Extension-XCGLogger";
 		};
-		81789B39B1D4533CE97BB525CECF5EC9 /* PBXContainerItemProxy */ = {
+		F6AD4C72482C364C5932D1368431C0D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 49AB3753BDD7FA1F7907B4DF91A5AE3B;
+			remoteGlobalIDString = C54009512A314D13B136D7D8DDDB2DA9;
 			remoteInfo = "Pods-Gratuity-XCGLogger";
 		};
 /* End PBXContainerItemProxy section */
@@ -46,154 +46,151 @@
 		06B1433A7ABF498B0F14B32495093C3A /* des_old.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = des_old.h; path = "include-ios/openssl/des_old.h"; sourceTree = "<group>"; };
 		09F3D811273500F8D14D8A940BB99BB4 /* libcrypto.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libcrypto.a; path = "lib-ios/libcrypto.a"; sourceTree = "<group>"; };
 		0C90F9282FA1E1BAF384CA35201120F0 /* opensslv.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslv.h; path = "include-ios/openssl/opensslv.h"; sourceTree = "<group>"; };
-		0CAC58AB83DE9E487E76356B69FFE1E1 /* Pods-Gratuity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Gratuity.release.xcconfig"; sourceTree = "<group>"; };
+		0D16F80E5E492054EF214D0D1A91909D /* Pods-Gratuity-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Gratuity-dummy.m"; sourceTree = "<group>"; };
 		0EC3D7DF5025702623F3C812ECFCC411 /* asn1_mac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1_mac.h; path = "include-ios/openssl/asn1_mac.h"; sourceTree = "<group>"; };
 		10168516A8ADCF1C7FEF91109EE4051A /* x509.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509.h; path = "include-ios/openssl/x509.h"; sourceTree = "<group>"; };
 		106F1F0BF8768F4FCA00E1898711A866 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		146AFDA42D1E710B83DDDDF0CE79ED3D /* Pods-GratuityWatch Extension-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GratuityWatch Extension-acknowledgements.plist"; sourceTree = "<group>"; };
-		175FE15301C3695BC08123C2921E77FE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		1A42AB9FCEAF6BC6899B7DF683336F23 /* conf_api.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = conf_api.h; path = "include-ios/openssl/conf_api.h"; sourceTree = "<group>"; };
 		1AFD1FC277C39F72111EC66C4A8FBC2A /* ecdh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ecdh.h; path = "include-ios/openssl/ecdh.h"; sourceTree = "<group>"; };
 		1C2EF4E65A8B0AAE43972E5456E1828B /* tls1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = tls1.h; path = "include-ios/openssl/tls1.h"; sourceTree = "<group>"; };
 		1C7D3C1AC9B6B143CED5A559D65E72E6 /* ui.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ui.h; path = "include-ios/openssl/ui.h"; sourceTree = "<group>"; };
 		1D801D0F0CED26E25EF3F67A37D2EEB9 /* err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = err.h; path = "include-ios/openssl/err.h"; sourceTree = "<group>"; };
 		2105A5EA993468CF8EC8040123A39AE1 /* Pods-Gratuity-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Gratuity-frameworks.sh"; sourceTree = "<group>"; };
-		21EDF2475F83D48076E104D122579971 /* Pods-GratuityWatch Extension-XCGLogger-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratuityWatch Extension-XCGLogger-Private.xcconfig"; path = "../Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger-Private.xcconfig"; sourceTree = "<group>"; };
-		2587D8173C5C451F5E7C50EE6E6DE698 /* Pods-Gratuity-XCGLogger.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Gratuity-XCGLogger.modulemap"; sourceTree = "<group>"; };
+		2145E0566711D84492FE1AB8E3BA9211 /* Pods-Gratuity-XCGLogger.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Gratuity-XCGLogger.modulemap"; sourceTree = "<group>"; };
 		2639D711AA367E139B68B8CAD4EEEB39 /* dsa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dsa.h; path = "include-ios/openssl/dsa.h"; sourceTree = "<group>"; };
 		2A5CE8D8DA45D165CC44EE6A46CFFFE9 /* Pods-Gratuity-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Gratuity-acknowledgements.plist"; sourceTree = "<group>"; };
 		2ABC8669091078D1C7A410B573084137 /* pem2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pem2.h; path = "include-ios/openssl/pem2.h"; sourceTree = "<group>"; };
 		2F9622CFE5D847B7CC4592B45B64152C /* buffer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = buffer.h; path = "include-ios/openssl/buffer.h"; sourceTree = "<group>"; };
-		3515164E27AAFB4CFB89999829DCE537 /* Pods-GratuityWatch Extension-XCGLogger.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; name = "Pods-GratuityWatch Extension-XCGLogger.modulemap"; path = "../Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger.modulemap"; sourceTree = "<group>"; };
-		36645C9F8B853164771AD2DBF56FB1CB /* Pods-Gratuity-XCGLogger-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Gratuity-XCGLogger-Private.xcconfig"; sourceTree = "<group>"; };
+		33FEA8E0555618B8A9B3EAF2A954AC37 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../Pods-GratuityWatch Extension-XCGLogger/Info.plist"; sourceTree = "<group>"; };
 		3890F49D6D50E24593BA4AC2275B7648 /* bn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bn.h; path = "include-ios/openssl/bn.h"; sourceTree = "<group>"; };
 		38C06726D5EE8CECDAF2EB1D184E3AA4 /* Pods-GratuityWatch Extension-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GratuityWatch Extension-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3993E4601BE0A33D1FFB35A8C42AC5F4 /* Pods-GratuityWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GratuityWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
 		3C5FB1EBC9B04818F3CE7304ECD15FD9 /* Pods-GratuityWatch Extension-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GratuityWatch Extension-frameworks.sh"; sourceTree = "<group>"; };
 		3D5B742BDFDB1569882AC7A3FF1D3861 /* idea.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = idea.h; path = "include-ios/openssl/idea.h"; sourceTree = "<group>"; };
+		40D20FBCD4D570DF65B0D984C72602E2 /* Pods-GratuityWatch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GratuityWatch Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		42D36BA7316DEE2CD59CB25F7BB105DC /* pkcs12.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs12.h; path = "include-ios/openssl/pkcs12.h"; sourceTree = "<group>"; };
 		446908F4B9337AF5309C60592D1D76BB /* srp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = srp.h; path = "include-ios/openssl/srp.h"; sourceTree = "<group>"; };
 		4868EADB658597797704F9E815D1B2C0 /* ssl23.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl23.h; path = "include-ios/openssl/ssl23.h"; sourceTree = "<group>"; };
-		4930148AEA8704864C06E9D8DFFB45F6 /* Pods-Gratuity-XCGLogger.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Gratuity-XCGLogger.xcconfig"; sourceTree = "<group>"; };
 		4AA6926543A19B7C549D0EA260ADAAE7 /* Pods-Gratuity-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Gratuity-acknowledgements.markdown"; sourceTree = "<group>"; };
-		4BBEF2CACFB2137803FA1FDADB5511DC /* Pods-GratuityWatch Extension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GratuityWatch Extension-umbrella.h"; sourceTree = "<group>"; };
-		4F9384A659A5B1493CA743FE94F7FF0C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		4FC230989DB3F2915F890AD463A06C3E /* hmac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = hmac.h; path = "include-ios/openssl/hmac.h"; sourceTree = "<group>"; };
 		4FD9122CEDD998A4E40CC984FE2E3F65 /* cms.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cms.h; path = "include-ios/openssl/cms.h"; sourceTree = "<group>"; };
 		53B2C113CECC60A7761FD96C3B074B89 /* crypto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto.h; path = "include-ios/openssl/crypto.h"; sourceTree = "<group>"; };
 		55D79513AF871FE1FD367E754C444B71 /* blowfish.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = blowfish.h; path = "include-ios/openssl/blowfish.h"; sourceTree = "<group>"; };
-		5667564A1F7E93EDA7D4A567A97F2115 /* Pods-GratuityWatch Extension-XCGLogger-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-GratuityWatch Extension-XCGLogger-umbrella.h"; path = "../Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger-umbrella.h"; sourceTree = "<group>"; };
 		587ACB2DB573DA5D00751434D875E5F0 /* asn1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1.h; path = "include-ios/openssl/asn1.h"; sourceTree = "<group>"; };
+		5936E53E19F4618AB00F63E7D9F8EF90 /* Pods-GratuityWatch Extension-XCGLogger-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-GratuityWatch Extension-XCGLogger-umbrella.h"; path = "../Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger-umbrella.h"; sourceTree = "<group>"; };
 		5994446647E4071B2F9E97BE95FA6095 /* camellia.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = camellia.h; path = "include-ios/openssl/camellia.h"; sourceTree = "<group>"; };
+		5AE40E5FC86ED3220E20E2CFC93959F6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BE8A2F8495E8BACD7086A914CFBFB7F /* ts.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ts.h; path = "include-ios/openssl/ts.h"; sourceTree = "<group>"; };
 		5EB9787209D6EFA1B17336F3FE8E0B66 /* Pods-GratuityWatch Extension-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GratuityWatch Extension-resources.sh"; sourceTree = "<group>"; };
-		60A43E3D7A3EE5F12289A29F1603CE8C /* XCGLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCGLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6277D8DA2118E01A64884C1B2C73C418 /* Pods-Gratuity-XCGLogger-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Gratuity-XCGLogger-dummy.m"; sourceTree = "<group>"; };
-		65CB14F3209D4A127BAD5B20AD0D6BFB /* Pods_Gratuity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gratuity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6617A4EE5900031C0777AD0A437A3A8E /* ebcdic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ebcdic.h; path = "include-ios/openssl/ebcdic.h"; sourceTree = "<group>"; };
+		6668CCB9C495B35F194E8270BDB2ECA3 /* XCGLogger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = XCGLogger.swift; path = XCGLogger/Library/XCGLogger/XCGLogger.swift; sourceTree = "<group>"; };
 		66A34B9A33C5189DF45A002438A83E06 /* mdc2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mdc2.h; path = "include-ios/openssl/mdc2.h"; sourceTree = "<group>"; };
 		69171C94A6C47C0DA9282DD6D132B21A /* engine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = engine.h; path = "include-ios/openssl/engine.h"; sourceTree = "<group>"; };
 		6A1CE94002CD70187AE4038F80684D39 /* x509_vfy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509_vfy.h; path = "include-ios/openssl/x509_vfy.h"; sourceTree = "<group>"; };
+		6D3BA886DD2745764183D34E62023674 /* Pods-GratuityWatch Extension-XCGLogger-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-GratuityWatch Extension-XCGLogger-prefix.pch"; path = "../Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger-prefix.pch"; sourceTree = "<group>"; };
+		6D79CDBEF832FB5A2106CDDC44C55D38 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		71557B38F9F3AB9A1FAB50D92846D0E6 /* ssl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl.h; path = "include-ios/openssl/ssl.h"; sourceTree = "<group>"; };
 		73B52EBC5F7C0228CBF18D431CC599E2 /* md4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = md4.h; path = "include-ios/openssl/md4.h"; sourceTree = "<group>"; };
+		74EB5B79E0245710A63695A60AB3E3AB /* Pods-GratuityWatch Extension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GratuityWatch Extension-umbrella.h"; sourceTree = "<group>"; };
+		75248006FB53ACEA39C451A83E38A83C /* XCGLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCGLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76A22B435C8751F59DA97F2A79DE7F61 /* bio.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bio.h; path = "include-ios/openssl/bio.h"; sourceTree = "<group>"; };
 		7801B3998554B00F89916D105E68BA99 /* Pods-Gratuity.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Gratuity.modulemap"; sourceTree = "<group>"; };
 		7B9111C91D295C55FDAD27EE1F889CFE /* srtp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = srtp.h; path = "include-ios/openssl/srtp.h"; sourceTree = "<group>"; };
 		7D26F6ACBA164DD7CF6DCBA572B3DE47 /* ui_compat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ui_compat.h; path = "include-ios/openssl/ui_compat.h"; sourceTree = "<group>"; };
-		7FBC198EA55068C7374B56E0CA6D5908 /* Pods-GratuityWatch Extension-XCGLogger-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-GratuityWatch Extension-XCGLogger-dummy.m"; path = "../Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger-dummy.m"; sourceTree = "<group>"; };
 		81B1872BA43C6C0A3E6557947FD2BAD9 /* lhash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lhash.h; path = "include-ios/openssl/lhash.h"; sourceTree = "<group>"; };
-		8260FE6679A30EC5011EDBD0F35FC8BC /* XCGLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCGLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F7CE2798E25778557983906B0C9030 /* objects.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = objects.h; path = "include-ios/openssl/objects.h"; sourceTree = "<group>"; };
 		85EF08065F9F19CE7D4BD3BB79640681 /* sha.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sha.h; path = "include-ios/openssl/sha.h"; sourceTree = "<group>"; };
 		8711BD228A6461C738EA3A231E04D5D1 /* kssl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = kssl.h; path = "include-ios/openssl/kssl.h"; sourceTree = "<group>"; };
 		8A2D0340C2DC9C096C8931A44ADF1FB5 /* aes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = aes.h; path = "include-ios/openssl/aes.h"; sourceTree = "<group>"; };
-		8A39FB690ED5497D6863B3C921F286DD /* Pods-GratuityWatch Extension-XCGLogger.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratuityWatch Extension-XCGLogger.xcconfig"; path = "../Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger.xcconfig"; sourceTree = "<group>"; };
+		8C6B89BDF4940B4AF9D57D7449055DAA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		8CB31A870A8508A9423E2146CBDB3794 /* obj_mac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = obj_mac.h; path = "include-ios/openssl/obj_mac.h"; sourceTree = "<group>"; };
+		8D4650256185E127AFE2298B88BC3C26 /* Pods-Gratuity-XCGLogger-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Gratuity-XCGLogger-dummy.m"; sourceTree = "<group>"; };
+		8F43945692C20B31A1236C6DD61FF030 /* Pods-Gratuity-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Gratuity-umbrella.h"; sourceTree = "<group>"; };
 		9092DB3C7E34238E38EADD2CF76AE908 /* seed.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = seed.h; path = "include-ios/openssl/seed.h"; sourceTree = "<group>"; };
 		909963464E9BB36E1A8E10E34F911730 /* ssl3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl3.h; path = "include-ios/openssl/ssl3.h"; sourceTree = "<group>"; };
 		95B45E3CCE1CDBDC0F0D1F8365C78069 /* ec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ec.h; path = "include-ios/openssl/ec.h"; sourceTree = "<group>"; };
-		96E7205F31DE44EAC7F1C45ABA0DBD8E /* Pods_GratuityWatch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GratuityWatch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98DEC67D4B74C51B97B8F4B0FAB04E6D /* md5.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = md5.h; path = "include-ios/openssl/md5.h"; sourceTree = "<group>"; };
 		99D6B25798C0C6C830F180008116F3D1 /* des.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = des.h; path = "include-ios/openssl/des.h"; sourceTree = "<group>"; };
-		9C93738D409B52FE0AD1D76BAB1CE22C /* Pods-Gratuity-XCGLogger-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Gratuity-XCGLogger-prefix.pch"; sourceTree = "<group>"; };
+		9FF2BEF8E393A6A45F3CF5C18CB926CA /* Pods-GratuityWatch Extension-XCGLogger.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratuityWatch Extension-XCGLogger.xcconfig"; path = "../Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger.xcconfig"; sourceTree = "<group>"; };
 		A1339A959FF3981F7D8C57C75CFCAE8A /* symhacks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = symhacks.h; path = "include-ios/openssl/symhacks.h"; sourceTree = "<group>"; };
 		A2CF989125045E91B5A0A1522F49DCB3 /* ossl_typ.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ossl_typ.h; path = "include-ios/openssl/ossl_typ.h"; sourceTree = "<group>"; };
-		A50B0F9E4271EF5AEA25FA073072963D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../Pods-GratuityWatch Extension-XCGLogger/Info.plist"; sourceTree = "<group>"; };
+		A2D635DABA141E5C305C509CEA8EEC47 /* Pods-GratuityWatch Extension-XCGLogger-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-GratuityWatch Extension-XCGLogger-dummy.m"; path = "../Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger-dummy.m"; sourceTree = "<group>"; };
 		A72C1BB6166607552B5D811952886B58 /* Pods-Gratuity-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Gratuity-resources.sh"; sourceTree = "<group>"; };
-		A7D924056D44D2F161C642535C473CE8 /* XCGLogger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = XCGLogger.swift; path = XCGLogger/Library/XCGLogger/XCGLogger.swift; sourceTree = "<group>"; };
 		AAC31317DCE6A2832BB51AC2EE82EE28 /* evp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = evp.h; path = "include-ios/openssl/evp.h"; sourceTree = "<group>"; };
 		AD975BBFFA4179301938FD0AE74D51C0 /* asn1t.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1t.h; path = "include-ios/openssl/asn1t.h"; sourceTree = "<group>"; };
-		AE97B76C25B8628241DB16C1D46B8BAB /* Pods-GratuityWatch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GratuityWatch Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		AF80BDE483F465801190F822E693CC41 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		B3070A8828BC4FCACCE4472B73FFB400 /* Pods-GratuityWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GratuityWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
-		B355E77F285642697AE683D6A22CD529 /* Pods-GratuityWatch Extension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GratuityWatch Extension-dummy.m"; sourceTree = "<group>"; };
-		B5DE8C5C340EF860FC3CE60C953D8FF3 /* Pods-Gratuity-XCGLogger-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Gratuity-XCGLogger-umbrella.h"; sourceTree = "<group>"; };
-		B74F03DC02563CB23A8EC915A847F8FA /* Pods-Gratuity-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Gratuity-dummy.m"; sourceTree = "<group>"; };
+		B097CC6EC4A4086069DC1C99E9A6D1C0 /* Pods-Gratuity-XCGLogger-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Gratuity-XCGLogger-prefix.pch"; sourceTree = "<group>"; };
 		B80A76190CC112EE0294F8599821F531 /* rand.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rand.h; path = "include-ios/openssl/rand.h"; sourceTree = "<group>"; };
 		B81A2473FC13794922C3E6842B492561 /* pem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pem.h; path = "include-ios/openssl/pem.h"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BB16F86EDC9407E88E27AC97E8EA918B /* ocsp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ocsp.h; path = "include-ios/openssl/ocsp.h"; sourceTree = "<group>"; };
 		BBED6BB712AA53E74A7D291ED64B010E /* txt_db.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = txt_db.h; path = "include-ios/openssl/txt_db.h"; sourceTree = "<group>"; };
 		BF7EF1523B4C4F30B606FD94F2B98DAE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C29163129D92294106A3D073B8B2AF21 /* Pods-GratuityWatch Extension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GratuityWatch Extension-dummy.m"; sourceTree = "<group>"; };
 		C30EE6340B23768EC952595C258749F2 /* pqueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pqueue.h; path = "include-ios/openssl/pqueue.h"; sourceTree = "<group>"; };
 		C4AD20A7CC3D2A54589EC69B5916C853 /* modes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = modes.h; path = "include-ios/openssl/modes.h"; sourceTree = "<group>"; };
+		C626CB01E1984B4938A305C92A1C1F07 /* Pods-Gratuity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Gratuity.release.xcconfig"; sourceTree = "<group>"; };
 		C6FC534B1B17A92CE1EE51ED4B9CA273 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C7F3C81B3F9FCAAFA54E90820469A0CA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9106809AE833573FBE95066C5EE7D0B /* Pods-GratuityWatch Extension-XCGLogger.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; name = "Pods-GratuityWatch Extension-XCGLogger.modulemap"; path = "../Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger.modulemap"; sourceTree = "<group>"; };
 		CB2DC672A91354D4E2DD30EB23A2F688 /* cmac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cmac.h; path = "include-ios/openssl/cmac.h"; sourceTree = "<group>"; };
 		CC4B8D5A16A7691F3541E9655CBBF0F4 /* dh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dh.h; path = "include-ios/openssl/dh.h"; sourceTree = "<group>"; };
 		CC8E4BEE2DB19E5E3E4CCD851860627B /* ssl2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl2.h; path = "include-ios/openssl/ssl2.h"; sourceTree = "<group>"; };
+		CD8098D2D1CD38D07878083CB7DD4288 /* Pods-Gratuity-XCGLogger-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Gratuity-XCGLogger-umbrella.h"; sourceTree = "<group>"; };
 		CD980DEA9D513EA204F7BDF2EF6B642E /* libssl.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libssl.a; path = "lib-ios/libssl.a"; sourceTree = "<group>"; };
-		D27A6F5F697DE97F4ADFFF8A10224D64 /* Pods-GratuityWatch Extension-XCGLogger-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-GratuityWatch Extension-XCGLogger-prefix.pch"; path = "../Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger-prefix.pch"; sourceTree = "<group>"; };
 		D31F96999BF7AB9A456CBDE12FCE0331 /* comp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = comp.h; path = "include-ios/openssl/comp.h"; sourceTree = "<group>"; };
-		D376748B89E23CF1CA9D7B752A09CC1D /* Pods-Gratuity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Gratuity.debug.xcconfig"; sourceTree = "<group>"; };
+		D38EE3FD1945128FF595264925C1DAD1 /* Pods-Gratuity-XCGLogger.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Gratuity-XCGLogger.xcconfig"; sourceTree = "<group>"; };
 		D3A437A5A6D81E3144E352DFDD1640B3 /* stack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = stack.h; path = "include-ios/openssl/stack.h"; sourceTree = "<group>"; };
 		D76E948C56859AFA1BE633206349F524 /* x509v3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509v3.h; path = "include-ios/openssl/x509v3.h"; sourceTree = "<group>"; };
 		DABDFA5508555B1926A703E72C1A8497 /* ecdsa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ecdsa.h; path = "include-ios/openssl/ecdsa.h"; sourceTree = "<group>"; };
 		DCC13BF2446C8D180F7261206A2D6339 /* rc4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rc4.h; path = "include-ios/openssl/rc4.h"; sourceTree = "<group>"; };
 		DD96E2C8197508BAFE8649D37EDEAD6A /* ripemd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ripemd.h; path = "include-ios/openssl/ripemd.h"; sourceTree = "<group>"; };
 		E05DC1C8AD0C4DA00F1B321D4307F6A9 /* conf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = conf.h; path = "include-ios/openssl/conf.h"; sourceTree = "<group>"; };
+		E19B8C06F7DE99CFC3CD7985C248AF52 /* Pods_Gratuity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gratuity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E702ED09B0030613194F80534A775B6D /* cast.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cast.h; path = "include-ios/openssl/cast.h"; sourceTree = "<group>"; };
+		E81BA58B5F48B912A4BE8ED731B96524 /* Pods-Gratuity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Gratuity.debug.xcconfig"; sourceTree = "<group>"; };
 		ED107DF02EFD26B36A9ABF6EFB7B941B /* whrlpool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = whrlpool.h; path = "include-ios/openssl/whrlpool.h"; sourceTree = "<group>"; };
 		EE1774369FC464D42FAC10FFF0173828 /* opensslconf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf.h; path = "include-ios/openssl/opensslconf.h"; sourceTree = "<group>"; };
 		EFC4D5591B0D9915B2F460CDF2D4D4F4 /* rsa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rsa.h; path = "include-ios/openssl/rsa.h"; sourceTree = "<group>"; };
 		F309CA568D5701231C5FC0D4A9394BB4 /* Pods-GratuityWatch Extension.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-GratuityWatch Extension.modulemap"; sourceTree = "<group>"; };
 		F442598BF322319199E33878D21F9C79 /* dso.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dso.h; path = "include-ios/openssl/dso.h"; sourceTree = "<group>"; };
 		F623F3C012CFB66B9F7207E315307254 /* safestack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = safestack.h; path = "include-ios/openssl/safestack.h"; sourceTree = "<group>"; };
-		F738E2E44BDDEF61A56096079D409277 /* Pods-Gratuity-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Gratuity-umbrella.h"; sourceTree = "<group>"; };
 		F94117430B4CD34BCA0179AAF0D90F73 /* krb5_asn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = krb5_asn.h; path = "include-ios/openssl/krb5_asn.h"; sourceTree = "<group>"; };
 		F971F0C502EDB38DC63AC919DAABD2CB /* dtls1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dtls1.h; path = "include-ios/openssl/dtls1.h"; sourceTree = "<group>"; };
 		F9D0584170FC16184D2107A740E710BC /* pkcs7.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs7.h; path = "include-ios/openssl/pkcs7.h"; sourceTree = "<group>"; };
+		FD8683EED78D146C5DEB44131A8D3203 /* Pods_GratuityWatch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GratuityWatch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0988B0931C2D543BA841D1FF78C4AD22 /* Frameworks */ = {
+		062C4EE713DF3C3CC498CCC1DBDF2074 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8E698FD96904C60493C9BB280B124F2 /* Foundation.framework in Frameworks */,
+				FD672262E9C3C8D44B972291F231A71F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1709A10A8EEB2164688EE21821C68D86 /* Frameworks */ = {
+		615F94418C46D6F9F68996BB3A438969 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D786DACFE1331793BCEC7DD9AFDA32E7 /* Foundation.framework in Frameworks */,
+				FD7892D15D2671C706B01DDFE762E184 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5408F4A957FF5719F1CEF4C14D1C194 /* Frameworks */ = {
+		66FDA468B5F991D74923F530D5A5728E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA508F1AEACBD247D5504E4B52381C04 /* Foundation.framework in Frameworks */,
+				0B83DD3EF8A7A580F2CE09C1A0A4FA14 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A6EDA17CE38E22371E02477E87732639 /* Frameworks */ = {
+		DF34B734468D8A0655B9472C44D73F00 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2B3EEC3AB925F42AC3316916A17B9BE /* Foundation.framework in Frameworks */,
+				1F8316CEC61F310B5F60161EC90F9E50 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,43 +205,12 @@
 			path = Crashlytics;
 			sourceTree = "<group>";
 		};
-		0CA45A00AB687D70B4A922C12443142E /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				C7F3C81B3F9FCAAFA54E90820469A0CA /* Info.plist */,
-				A50B0F9E4271EF5AEA25FA073072963D /* Info.plist */,
-				2587D8173C5C451F5E7C50EE6E6DE698 /* Pods-Gratuity-XCGLogger.modulemap */,
-				4930148AEA8704864C06E9D8DFFB45F6 /* Pods-Gratuity-XCGLogger.xcconfig */,
-				36645C9F8B853164771AD2DBF56FB1CB /* Pods-Gratuity-XCGLogger-Private.xcconfig */,
-				6277D8DA2118E01A64884C1B2C73C418 /* Pods-Gratuity-XCGLogger-dummy.m */,
-				9C93738D409B52FE0AD1D76BAB1CE22C /* Pods-Gratuity-XCGLogger-prefix.pch */,
-				B5DE8C5C340EF860FC3CE60C953D8FF3 /* Pods-Gratuity-XCGLogger-umbrella.h */,
-				3515164E27AAFB4CFB89999829DCE537 /* Pods-GratuityWatch Extension-XCGLogger.modulemap */,
-				8A39FB690ED5497D6863B3C921F286DD /* Pods-GratuityWatch Extension-XCGLogger.xcconfig */,
-				21EDF2475F83D48076E104D122579971 /* Pods-GratuityWatch Extension-XCGLogger-Private.xcconfig */,
-				7FBC198EA55068C7374B56E0CA6D5908 /* Pods-GratuityWatch Extension-XCGLogger-dummy.m */,
-				D27A6F5F697DE97F4ADFFF8A10224D64 /* Pods-GratuityWatch Extension-XCGLogger-prefix.pch */,
-				5667564A1F7E93EDA7D4A567A97F2115 /* Pods-GratuityWatch Extension-XCGLogger-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Pods-Gratuity-XCGLogger";
-			sourceTree = "<group>";
-		};
 		22BB6FBAA091A8D673AC5BA653B2C8E8 /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				B565E0F562FD2BC4343BC564C61B8AEE /* Frameworks */,
 			);
 			name = Base;
-			sourceTree = "<group>";
-		};
-		2B71127496498657EBCAEFF0BEE4C5A9 /* XCGLogger */ = {
-			isa = PBXGroup;
-			children = (
-				A7D924056D44D2F161C642535C473CE8 /* XCGLogger.swift */,
-				0CA45A00AB687D70B4A922C12443142E /* Support Files */,
-			);
-			path = XCGLogger;
 			sourceTree = "<group>";
 		};
 		2E0065EAE5CB725E774E43E83171DA79 /* Fabric */ = {
@@ -338,10 +304,40 @@
 			path = "OpenSSL-Universal";
 			sourceTree = "<group>";
 		};
+		44A9BB64A70749BA1FA16EAC8586BE01 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E19B8C06F7DE99CFC3CD7985C248AF52 /* Pods_Gratuity.framework */,
+				FD8683EED78D146C5DEB44131A8D3203 /* Pods_GratuityWatch_Extension.framework */,
+				75248006FB53ACEA39C451A83E38A83C /* XCGLogger.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4870170CD666398232B2770E6106339F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				33FEA8E0555618B8A9B3EAF2A954AC37 /* Info.plist */,
+				5AE40E5FC86ED3220E20E2CFC93959F6 /* Info.plist */,
+				2145E0566711D84492FE1AB8E3BA9211 /* Pods-Gratuity-XCGLogger.modulemap */,
+				D38EE3FD1945128FF595264925C1DAD1 /* Pods-Gratuity-XCGLogger.xcconfig */,
+				8D4650256185E127AFE2298B88BC3C26 /* Pods-Gratuity-XCGLogger-dummy.m */,
+				B097CC6EC4A4086069DC1C99E9A6D1C0 /* Pods-Gratuity-XCGLogger-prefix.pch */,
+				CD8098D2D1CD38D07878083CB7DD4288 /* Pods-Gratuity-XCGLogger-umbrella.h */,
+				C9106809AE833573FBE95066C5EE7D0B /* Pods-GratuityWatch Extension-XCGLogger.modulemap */,
+				9FF2BEF8E393A6A45F3CF5C18CB926CA /* Pods-GratuityWatch Extension-XCGLogger.xcconfig */,
+				A2D635DABA141E5C305C509CEA8EEC47 /* Pods-GratuityWatch Extension-XCGLogger-dummy.m */,
+				6D3BA886DD2745764183D34E62023674 /* Pods-GratuityWatch Extension-XCGLogger-prefix.pch */,
+				5936E53E19F4618AB00F63E7D9F8EF90 /* Pods-GratuityWatch Extension-XCGLogger-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Gratuity-XCGLogger";
+			sourceTree = "<group>";
+		};
 		5122A3F52D800E80BACD9CC992713105 /* watchOS */ = {
 			isa = PBXGroup;
 			children = (
-				175FE15301C3695BC08123C2921E77FE /* Foundation.framework */,
+				8C6B89BDF4940B4AF9D57D7449055DAA /* Foundation.framework */,
 			);
 			name = watchOS;
 			sourceTree = "<group>";
@@ -360,7 +356,7 @@
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				8F91EE078EA3977443D1BDC2601132EF /* Frameworks */,
 				DF353CA56BB52C653F60671C81BD75EA /* Pods */,
-				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
+				44A9BB64A70749BA1FA16EAC8586BE01 /* Products */,
 				9B2026814523B7BC986FE8FF69D0A74B /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -368,7 +364,7 @@
 		8F91EE078EA3977443D1BDC2601132EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D198B77EEC4D69C49F1FE4EBB1CCDE99 /* iOS */,
+				BEA166D13A2FBD7DDAD7CEE0F68399FD /* iOS */,
 				5122A3F52D800E80BACD9CC992713105 /* watchOS */,
 			);
 			name = Frameworks;
@@ -390,12 +386,12 @@
 				7801B3998554B00F89916D105E68BA99 /* Pods-Gratuity.modulemap */,
 				4AA6926543A19B7C549D0EA260ADAAE7 /* Pods-Gratuity-acknowledgements.markdown */,
 				2A5CE8D8DA45D165CC44EE6A46CFFFE9 /* Pods-Gratuity-acknowledgements.plist */,
-				B74F03DC02563CB23A8EC915A847F8FA /* Pods-Gratuity-dummy.m */,
+				0D16F80E5E492054EF214D0D1A91909D /* Pods-Gratuity-dummy.m */,
 				2105A5EA993468CF8EC8040123A39AE1 /* Pods-Gratuity-frameworks.sh */,
 				A72C1BB6166607552B5D811952886B58 /* Pods-Gratuity-resources.sh */,
-				F738E2E44BDDEF61A56096079D409277 /* Pods-Gratuity-umbrella.h */,
-				D376748B89E23CF1CA9D7B752A09CC1D /* Pods-Gratuity.debug.xcconfig */,
-				0CAC58AB83DE9E487E76356B69FFE1E1 /* Pods-Gratuity.release.xcconfig */,
+				8F43945692C20B31A1236C6DD61FF030 /* Pods-Gratuity-umbrella.h */,
+				E81BA58B5F48B912A4BE8ED731B96524 /* Pods-Gratuity.debug.xcconfig */,
+				C626CB01E1984B4938A305C92A1C1F07 /* Pods-Gratuity.release.xcconfig */,
 			);
 			name = "Pods-Gratuity";
 			path = "Target Support Files/Pods-Gratuity";
@@ -418,6 +414,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BEA166D13A2FBD7DDAD7CEE0F68399FD /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6D79CDBEF832FB5A2106CDDC44C55D38 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		C6ABB0FD064F98A2E36464CAB24C8603 /* Pods-GratuityWatch Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,34 +429,15 @@
 				F309CA568D5701231C5FC0D4A9394BB4 /* Pods-GratuityWatch Extension.modulemap */,
 				38C06726D5EE8CECDAF2EB1D184E3AA4 /* Pods-GratuityWatch Extension-acknowledgements.markdown */,
 				146AFDA42D1E710B83DDDDF0CE79ED3D /* Pods-GratuityWatch Extension-acknowledgements.plist */,
-				B355E77F285642697AE683D6A22CD529 /* Pods-GratuityWatch Extension-dummy.m */,
+				C29163129D92294106A3D073B8B2AF21 /* Pods-GratuityWatch Extension-dummy.m */,
 				3C5FB1EBC9B04818F3CE7304ECD15FD9 /* Pods-GratuityWatch Extension-frameworks.sh */,
 				5EB9787209D6EFA1B17336F3FE8E0B66 /* Pods-GratuityWatch Extension-resources.sh */,
-				4BBEF2CACFB2137803FA1FDADB5511DC /* Pods-GratuityWatch Extension-umbrella.h */,
-				AE97B76C25B8628241DB16C1D46B8BAB /* Pods-GratuityWatch Extension.debug.xcconfig */,
-				B3070A8828BC4FCACCE4472B73FFB400 /* Pods-GratuityWatch Extension.release.xcconfig */,
+				74EB5B79E0245710A63695A60AB3E3AB /* Pods-GratuityWatch Extension-umbrella.h */,
+				40D20FBCD4D570DF65B0D984C72602E2 /* Pods-GratuityWatch Extension.debug.xcconfig */,
+				3993E4601BE0A33D1FFB35A8C42AC5F4 /* Pods-GratuityWatch Extension.release.xcconfig */,
 			);
 			name = "Pods-GratuityWatch Extension";
 			path = "Target Support Files/Pods-GratuityWatch Extension";
-			sourceTree = "<group>";
-		};
-		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				65CB14F3209D4A127BAD5B20AD0D6BFB /* Pods_Gratuity.framework */,
-				96E7205F31DE44EAC7F1C45ABA0DBD8E /* Pods_GratuityWatch_Extension.framework */,
-				60A43E3D7A3EE5F12289A29F1603CE8C /* XCGLogger.framework */,
-				8260FE6679A30EC5011EDBD0F35FC8BC /* XCGLogger.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D198B77EEC4D69C49F1FE4EBB1CCDE99 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				4F9384A659A5B1493CA743FE94F7FF0C /* Foundation.framework */,
-			);
-			name = iOS;
 			sourceTree = "<group>";
 		};
 		DF353CA56BB52C653F60671C81BD75EA /* Pods */ = {
@@ -461,109 +446,83 @@
 				0A9B2A095BF42B05439C61659FC0EBE6 /* Crashlytics */,
 				2E0065EAE5CB725E774E43E83171DA79 /* Fabric */,
 				3304343EA544DB63B433E7CD99A34B74 /* OpenSSL-Universal */,
-				2B71127496498657EBCAEFF0BEE4C5A9 /* XCGLogger */,
+				FD2551674CB53E2C4621222373F05BFE /* XCGLogger */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FD2551674CB53E2C4621222373F05BFE /* XCGLogger */ = {
+			isa = PBXGroup;
+			children = (
+				6668CCB9C495B35F194E8270BDB2ECA3 /* XCGLogger.swift */,
+				4870170CD666398232B2770E6106339F /* Support Files */,
+			);
+			path = XCGLogger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		0ED14FDBBF7503394958C6FDB3DCE73E /* Headers */ = {
+		3A261DE5B44E7DC9310AB021948CD184 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC663129A6656536BB3EEE157582DEB6 /* Pods-Gratuity-umbrella.h in Headers */,
+				A671C0016639C099B3D28F8EB86DD1EA /* Pods-GratuityWatch Extension-XCGLogger-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		62ABB1C3A49792709E23EBEC4E55C235 /* Headers */ = {
+		3B98D357FF2360EE54459D7CBDDCE118 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE43700EA526D4E8187BAAA581991F87 /* Pods-GratuityWatch Extension-umbrella.h in Headers */,
+				B9FA5A3EC79C024A9C095C1DE8665E58 /* Pods-Gratuity-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CF06EFCA919832EAE594C8BCA0C89A42 /* Headers */ = {
+		C0F0AB5106E33EF93B08584B7D5E0C20 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A5C32144A419E15C2FDBEA3EE1C0B83 /* Pods-Gratuity-XCGLogger-umbrella.h in Headers */,
+				BD6C5704ACCFAB8A3D8FDDCEF69A063D /* Pods-GratuityWatch Extension-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FB7F06DFAD32D3360C8309A5BCEBAF86 /* Headers */ = {
+		FBE214B97861A7DD95C32326796C3CBD /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				381FE5E52FCF29F26222B643394076E5 /* Pods-GratuityWatch Extension-XCGLogger-umbrella.h in Headers */,
+				6FE9536CD98067C008015F88BDBAE60A /* Pods-Gratuity-XCGLogger-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0BF1DEE475C202CE045120B339B3A199 /* Pods-Gratuity */ = {
+		8F95736C8FB64434FA5F64379AD8A56B /* Pods-GratuityWatch Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 46926251F43BA3A5796BF7EA756EFAEB /* Build configuration list for PBXNativeTarget "Pods-Gratuity" */;
+			buildConfigurationList = 1F257966A8AB015199A4E9C222773432 /* Build configuration list for PBXNativeTarget "Pods-GratuityWatch Extension" */;
 			buildPhases = (
-				823701B757EC0CD732C577085D40E43B /* Sources */,
-				1709A10A8EEB2164688EE21821C68D86 /* Frameworks */,
-				0ED14FDBBF7503394958C6FDB3DCE73E /* Headers */,
+				3BC83546BCF5F76EC802FA328BA34D85 /* Sources */,
+				DF34B734468D8A0655B9472C44D73F00 /* Frameworks */,
+				C0F0AB5106E33EF93B08584B7D5E0C20 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E381537F60688282F4FD572286C18160 /* PBXTargetDependency */,
-			);
-			name = "Pods-Gratuity";
-			productName = "Pods-Gratuity";
-			productReference = 65CB14F3209D4A127BAD5B20AD0D6BFB /* Pods_Gratuity.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		49AB3753BDD7FA1F7907B4DF91A5AE3B /* Pods-Gratuity-XCGLogger */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1120EE0FDD7B8B9259738BB8D0D9A940 /* Build configuration list for PBXNativeTarget "Pods-Gratuity-XCGLogger" */;
-			buildPhases = (
-				AB21DB527260C7F391B5760C15CA52EA /* Sources */,
-				0988B0931C2D543BA841D1FF78C4AD22 /* Frameworks */,
-				CF06EFCA919832EAE594C8BCA0C89A42 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-Gratuity-XCGLogger";
-			productName = "Pods-Gratuity-XCGLogger";
-			productReference = 8260FE6679A30EC5011EDBD0F35FC8BC /* XCGLogger.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		C2FB645BEB1891BBC22820CAC778A68A /* Pods-GratuityWatch Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BDD613EE3E32CF2DD0336A7A40498DDD /* Build configuration list for PBXNativeTarget "Pods-GratuityWatch Extension" */;
-			buildPhases = (
-				899A94C595DC138723730017D8376D08 /* Sources */,
-				A5408F4A957FF5719F1CEF4C14D1C194 /* Frameworks */,
-				62ABB1C3A49792709E23EBEC4E55C235 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8498CF4046A871F6CBBCCC4B537DD56A /* PBXTargetDependency */,
+				6F0CFBE43E329356EC0A3431D49C66B8 /* PBXTargetDependency */,
 			);
 			name = "Pods-GratuityWatch Extension";
 			productName = "Pods-GratuityWatch Extension";
-			productReference = 96E7205F31DE44EAC7F1C45ABA0DBD8E /* Pods_GratuityWatch_Extension.framework */;
+			productReference = FD8683EED78D146C5DEB44131A8D3203 /* Pods_GratuityWatch_Extension.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		DD2BA66BB4D6C155E08E08F9DD26EA8D /* Pods-GratuityWatch Extension-XCGLogger */ = {
+		908C1077DC0CC9416CD928068DB73BCB /* Pods-GratuityWatch Extension-XCGLogger */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 28F527194FB7E91A6DD8D45B04FBE85A /* Build configuration list for PBXNativeTarget "Pods-GratuityWatch Extension-XCGLogger" */;
+			buildConfigurationList = 33F07817799CE811AB18EA994B019A41 /* Build configuration list for PBXNativeTarget "Pods-GratuityWatch Extension-XCGLogger" */;
 			buildPhases = (
-				2600FC0422CBD2B4951ACA843AC007DA /* Sources */,
-				A6EDA17CE38E22371E02477E87732639 /* Frameworks */,
-				FB7F06DFAD32D3360C8309A5BCEBAF86 /* Headers */,
+				B97DED3F9F048E4897A13A690BF3FE83 /* Sources */,
+				062C4EE713DF3C3CC498CCC1DBDF2074 /* Frameworks */,
+				3A261DE5B44E7DC9310AB021948CD184 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -571,7 +530,42 @@
 			);
 			name = "Pods-GratuityWatch Extension-XCGLogger";
 			productName = "Pods-GratuityWatch Extension-XCGLogger";
-			productReference = 60A43E3D7A3EE5F12289A29F1603CE8C /* XCGLogger.framework */;
+			productReference = 75248006FB53ACEA39C451A83E38A83C /* XCGLogger.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C54009512A314D13B136D7D8DDDB2DA9 /* Pods-Gratuity-XCGLogger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96140A2D6187C921C28C1BB919A28D2C /* Build configuration list for PBXNativeTarget "Pods-Gratuity-XCGLogger" */;
+			buildPhases = (
+				C655C6DCADF8F326BEBE49ACB17867FE /* Sources */,
+				66FDA468B5F991D74923F530D5A5728E /* Frameworks */,
+				FBE214B97861A7DD95C32326796C3CBD /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Gratuity-XCGLogger";
+			productName = "Pods-Gratuity-XCGLogger";
+			productReference = 75248006FB53ACEA39C451A83E38A83C /* XCGLogger.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E9DB569A7ADB2E0D2562FF7843D3A20C /* Pods-Gratuity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E98A26CE75BFAC2C3E9599C006A465C4 /* Build configuration list for PBXNativeTarget "Pods-Gratuity" */;
+			buildPhases = (
+				1B2294468EA6DC6D837C567723CBA115 /* Sources */,
+				615F94418C46D6F9F68996BB3A438969 /* Frameworks */,
+				3B98D357FF2360EE54459D7CBDDCE118 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5282C760E0F24FEEA15A111144D2497D /* PBXTargetDependency */,
+			);
+			name = "Pods-Gratuity";
+			productName = "Pods-Gratuity";
+			productReference = E19B8C06F7DE99CFC3CD7985C248AF52 /* Pods_Gratuity.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -591,71 +585,129 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = CCA510CFBEA2D207524CDA0D73C3B561 /* Products */;
+			productRefGroup = 44A9BB64A70749BA1FA16EAC8586BE01 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0BF1DEE475C202CE045120B339B3A199 /* Pods-Gratuity */,
-				49AB3753BDD7FA1F7907B4DF91A5AE3B /* Pods-Gratuity-XCGLogger */,
-				C2FB645BEB1891BBC22820CAC778A68A /* Pods-GratuityWatch Extension */,
-				DD2BA66BB4D6C155E08E08F9DD26EA8D /* Pods-GratuityWatch Extension-XCGLogger */,
+				E9DB569A7ADB2E0D2562FF7843D3A20C /* Pods-Gratuity */,
+				C54009512A314D13B136D7D8DDDB2DA9 /* Pods-Gratuity-XCGLogger */,
+				8F95736C8FB64434FA5F64379AD8A56B /* Pods-GratuityWatch Extension */,
+				908C1077DC0CC9416CD928068DB73BCB /* Pods-GratuityWatch Extension-XCGLogger */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2600FC0422CBD2B4951ACA843AC007DA /* Sources */ = {
+		1B2294468EA6DC6D837C567723CBA115 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36AC7C57034CCCCD2EC0CBD1DAD7347D /* Pods-GratuityWatch Extension-XCGLogger-dummy.m in Sources */,
-				5397710341974BBAD7BE00C690925B46 /* XCGLogger.swift in Sources */,
+				71EF26B9561F99692AD9A07876505485 /* Pods-Gratuity-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		823701B757EC0CD732C577085D40E43B /* Sources */ = {
+		3BC83546BCF5F76EC802FA328BA34D85 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F49B2C0304465BDA8BC0EEA8D3940AB6 /* Pods-Gratuity-dummy.m in Sources */,
+				9FB81117E6B480E80562E1823B9C27B1 /* Pods-GratuityWatch Extension-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		899A94C595DC138723730017D8376D08 /* Sources */ = {
+		B97DED3F9F048E4897A13A690BF3FE83 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F40F8A44DD43286E101FCA0643374E45 /* Pods-GratuityWatch Extension-dummy.m in Sources */,
+				F87644B08E5B0BC69B2007BD0F13BA57 /* Pods-GratuityWatch Extension-XCGLogger-dummy.m in Sources */,
+				A3487681F3EBE1FD15F8C14E2D185EE7 /* XCGLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB21DB527260C7F391B5760C15CA52EA /* Sources */ = {
+		C655C6DCADF8F326BEBE49ACB17867FE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AEB9F7BA8F35F1E884D1E1412964438 /* Pods-Gratuity-XCGLogger-dummy.m in Sources */,
-				C66F515A0B6C24C1A1140CD8B321EA3C /* XCGLogger.swift in Sources */,
+				DE89DB8F8B48B1CAD2B07224D4AF8FA5 /* Pods-Gratuity-XCGLogger-dummy.m in Sources */,
+				42CDA5A17DDE4532B2C18A3E6CB05E09 /* XCGLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8498CF4046A871F6CBBCCC4B537DD56A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-GratuityWatch Extension-XCGLogger";
-			target = DD2BA66BB4D6C155E08E08F9DD26EA8D /* Pods-GratuityWatch Extension-XCGLogger */;
-			targetProxy = 7CCB2F3733DF43D5A79115A708FD50C1 /* PBXContainerItemProxy */;
-		};
-		E381537F60688282F4FD572286C18160 /* PBXTargetDependency */ = {
+		5282C760E0F24FEEA15A111144D2497D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-Gratuity-XCGLogger";
-			target = 49AB3753BDD7FA1F7907B4DF91A5AE3B /* Pods-Gratuity-XCGLogger */;
-			targetProxy = 81789B39B1D4533CE97BB525CECF5EC9 /* PBXContainerItemProxy */;
+			target = C54009512A314D13B136D7D8DDDB2DA9 /* Pods-Gratuity-XCGLogger */;
+			targetProxy = F6AD4C72482C364C5932D1368431C0D4 /* PBXContainerItemProxy */;
+		};
+		6F0CFBE43E329356EC0A3431D49C66B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-GratuityWatch Extension-XCGLogger";
+			target = 908C1077DC0CC9416CD928068DB73BCB /* Pods-GratuityWatch Extension-XCGLogger */;
+			targetProxy = DB485CE034D9D84D202D79325CA6A65D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		03DE5ADC49BBFB1C9459357026DB3CD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E81BA58B5F48B912A4BE8ED731B96524 /* Pods-Gratuity.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Gratuity/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Gratuity/Pods-Gratuity.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_Gratuity;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		076095912B637E9F06D23BD66E1DA263 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D38EE3FD1945128FF595264925C1DAD1 /* Pods-Gratuity-XCGLogger.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Gratuity-XCGLogger/Pods-Gratuity-XCGLogger-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-Gratuity-XCGLogger/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-Gratuity-XCGLogger/Pods-Gratuity-XCGLogger.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = XCGLogger;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		0A586B374BB3CB24B75F2792BCCE0065 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -691,43 +743,15 @@
 			};
 			name = Release;
 		};
-		11D43F4958557FDE8E67E1DC30AD1F20 /* Release */ = {
+		242DFDA0610FDBF6EA50950881622FDF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3070A8828BC4FCACCE4472B73FFB400 /* Pods-GratuityWatch Extension.release.xcconfig */;
+			baseConfigurationReference = D38EE3FD1945128FF595264925C1DAD1 /* Pods-Gratuity-XCGLogger.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-GratuityWatch Extension/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods_GratuityWatch_Extension;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		12D12A83090C8D54427E00A15F65DF27 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36645C9F8B853164771AD2DBF56FB1CB /* Pods-Gratuity-XCGLogger-Private.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 3.0.0;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 3;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-Gratuity-XCGLogger/Pods-Gratuity-XCGLogger-prefix.pch";
@@ -736,15 +760,16 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Pods-Gratuity-XCGLogger/Pods-Gratuity-XCGLogger.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = XCGLogger;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		327D4CEA9BA5981596302BCF8D279563 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -786,15 +811,45 @@
 			};
 			name = Debug;
 		};
-		3A05FE0A14D0160DBC81E44B26225BA5 /* Debug */ = {
+		3AFD1794BAC9731B980F42AA87B1915A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21EDF2475F83D48076E104D122579971 /* Pods-GratuityWatch Extension-XCGLogger-Private.xcconfig */;
+			baseConfigurationReference = C626CB01E1984B4938A305C92A1C1F07 /* Pods-Gratuity.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Gratuity/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Gratuity/Pods-Gratuity.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_Gratuity;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8C8C27205FA45BEC4B264CE8C5EC6415 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FF2BEF8E393A6A45F3CF5C18CB926CA /* Pods-GratuityWatch Extension-XCGLogger.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CURRENT_PROJECT_VERSION = 3.0.0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 3;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger-prefix.pch";
@@ -812,9 +867,9 @@
 			};
 			name = Debug;
 		};
-		568893E1B78EF2BED69A3CEA3302512A /* Debug */ = {
+		AB66044D3964504C446164C8DB58A663 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE97B76C25B8628241DB16C1D46B8BAB /* Pods-GratuityWatch Extension.debug.xcconfig */;
+			baseConfigurationReference = 40D20FBCD4D570DF65B0D984C72602E2 /* Pods-GratuityWatch Extension.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -825,6 +880,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-GratuityWatch Extension/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
@@ -840,105 +896,15 @@
 			};
 			name = Debug;
 		};
-		8F5E5C24B29AF8BF5A0DC497450F9171 /* Release */ = {
+		ED96CBE3B72498114DEEA42CAB770073 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0CAC58AB83DE9E487E76356B69FFE1E1 /* Pods-Gratuity.release.xcconfig */;
+			baseConfigurationReference = 9FF2BEF8E393A6A45F3CF5C18CB926CA /* Pods-GratuityWatch Extension-XCGLogger.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Gratuity/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-Gratuity/Pods-Gratuity.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods_Gratuity;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		A7222961ECE54B0BED7EFDF258D9CA23 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D376748B89E23CF1CA9D7B752A09CC1D /* Pods-Gratuity.debug.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Gratuity/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-Gratuity/Pods-Gratuity.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods_Gratuity;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		B94D659FB9C9618C5C2E9B620179A8ED /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36645C9F8B853164771AD2DBF56FB1CB /* Pods-Gratuity-XCGLogger-Private.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 3.0.0;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 3;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-Gratuity-XCGLogger/Pods-Gratuity-XCGLogger-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-Gratuity-XCGLogger/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-Gratuity-XCGLogger/Pods-Gratuity-XCGLogger.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = XCGLogger;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		EE264C14E1C6E61DEE182525CE828752 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21EDF2475F83D48076E104D122579971 /* Pods-GratuityWatch Extension-XCGLogger-Private.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CURRENT_PROJECT_VERSION = 3.0.0;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 3;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-GratuityWatch Extension-XCGLogger/Pods-GratuityWatch Extension-XCGLogger-prefix.pch";
@@ -955,23 +921,42 @@
 			};
 			name = Release;
 		};
+		F1F9B54F75E4473AD2B6E267DE94FC60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3993E4601BE0A33D1FFB35A8C42AC5F4 /* Pods-GratuityWatch Extension.release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-GratuityWatch Extension/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_GratuityWatch_Extension;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1120EE0FDD7B8B9259738BB8D0D9A940 /* Build configuration list for PBXNativeTarget "Pods-Gratuity-XCGLogger" */ = {
+		1F257966A8AB015199A4E9C222773432 /* Build configuration list for PBXNativeTarget "Pods-GratuityWatch Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B94D659FB9C9618C5C2E9B620179A8ED /* Debug */,
-				12D12A83090C8D54427E00A15F65DF27 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		28F527194FB7E91A6DD8D45B04FBE85A /* Build configuration list for PBXNativeTarget "Pods-GratuityWatch Extension-XCGLogger" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3A05FE0A14D0160DBC81E44B26225BA5 /* Debug */,
-				EE264C14E1C6E61DEE182525CE828752 /* Release */,
+				AB66044D3964504C446164C8DB58A663 /* Debug */,
+				F1F9B54F75E4473AD2B6E267DE94FC60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -985,20 +970,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46926251F43BA3A5796BF7EA756EFAEB /* Build configuration list for PBXNativeTarget "Pods-Gratuity" */ = {
+		33F07817799CE811AB18EA994B019A41 /* Build configuration list for PBXNativeTarget "Pods-GratuityWatch Extension-XCGLogger" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A7222961ECE54B0BED7EFDF258D9CA23 /* Debug */,
-				8F5E5C24B29AF8BF5A0DC497450F9171 /* Release */,
+				8C8C27205FA45BEC4B264CE8C5EC6415 /* Debug */,
+				ED96CBE3B72498114DEEA42CAB770073 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BDD613EE3E32CF2DD0336A7A40498DDD /* Build configuration list for PBXNativeTarget "Pods-GratuityWatch Extension" */ = {
+		96140A2D6187C921C28C1BB919A28D2C /* Build configuration list for PBXNativeTarget "Pods-Gratuity-XCGLogger" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				568893E1B78EF2BED69A3CEA3302512A /* Debug */,
-				11D43F4958557FDE8E67E1DC30AD1F20 /* Release */,
+				242DFDA0610FDBF6EA50950881622FDF /* Debug */,
+				076095912B637E9F06D23BD66E1DA263 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E98A26CE75BFAC2C3E9599C006A465C4 /* Build configuration list for PBXNativeTarget "Pods-Gratuity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03DE5ADC49BBFB1C9459357026DB3CD6 /* Debug */,
+				3AFD1794BAC9731B980F42AA87B1915A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

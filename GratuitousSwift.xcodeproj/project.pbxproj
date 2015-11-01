@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1042DD9DC4E2CCC9155EA729 /* Pods_Gratuity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3770A3E29597CE25FE9233F2 /* Pods_Gratuity.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		1749FBD6340FB1C14F683A87 /* Pods_GratuityWatch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FB94AF573C62CCB98EDF8C /* Pods_GratuityWatch_Extension.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1042DD9DC4E2CCC9155EA729 /* Pods_Gratuity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3770A3E29597CE25FE9233F2 /* Pods_Gratuity.framework */; };
+		1749FBD6340FB1C14F683A87 /* Pods_GratuityWatch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FB94AF573C62CCB98EDF8C /* Pods_GratuityWatch_Extension.framework */; };
 		73048CF41BBCEBC400D8EAA6 /* JSBPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */; };
 		732CFE6A1BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */; };
 		732CFE6C1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732CFE6B1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift */; };
@@ -577,6 +577,7 @@
 				73AEA6C41BBB05EB004B16DE /* Resources */,
 				738C98B51BD1A6F300D14F20 /* Copy Pods Frameworks */,
 				D25EEDD411F2D7F13ECC1675 /* Copy Pods Resources */,
+				3ED746BBC45D539E0B37B903 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -699,6 +700,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3ED746BBC45D539E0B37B903 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6CF66C05130F8888AC0315C7 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -727,6 +743,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		73FF9E9C1BBE3FAE00F9278C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1058,7 +1075,7 @@
 				CODE_SIGN_ENTITLEMENTS = GratuityWatch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = GratuityWatch_Extension;
@@ -1080,7 +1097,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = GratuityWatch_Extension;
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch Watch App/Gratuity-Watch-Info.plist";
