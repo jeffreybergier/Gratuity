@@ -18,7 +18,7 @@ final class WatchInfoViewController: SmallModalScollViewController {
     @IBOutlet private weak var videoPlayerView: UIView?
     
     private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
-        if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mov") {
+        if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mp4") {
             let player = AVPlayer(URL: NSURL.fileURLWithPath(moviePath))
             player.allowsExternalPlayback = false
             player.actionAtItemEnd = AVPlayerActionAtItemEnd.None // cause the player to loop

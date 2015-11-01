@@ -29,7 +29,6 @@
 		733D02C81BBA4D1F00E40EC5 /* SplitBillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BF48531BAA4CAF007CAD8E /* SplitBillTableViewCell.swift */; };
 		733D02C91BBA4D1F00E40EC5 /* PurchaseSplitBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7371F6D21BB5065B00048EC2 /* PurchaseSplitBillViewController.swift */; };
 		733D02CA1BBA4D1F00E40EC5 /* WatchInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */; };
-		733D02CB1BBA4D1F00E40EC5 /* gratuityInfoDemoVideo@2x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */; };
 		733D02CC1BBA4D2800E40EC5 /* GratuitousRightPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDC4BC1A1807AA006AA72D /* GratuitousRightPresentationController.swift */; };
 		733D02CD1BBA4D2800E40EC5 /* GratuitousPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D86F6A1BAF2CA000B098FE /* GratuitousPresentationController.swift */; };
 		733D02CE1BBA4D2800E40EC5 /* GratuitousAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73621A951BAE563C00593FE4 /* GratuitousAnimatedTransitioning.swift */; };
@@ -53,6 +52,7 @@
 		736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; };
 		7382AAF31BE4536C003BFFB1 /* JSBIPGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382AAF21BE4536C003BFFB1 /* JSBIPGeocoder.swift */; };
 		7382AAF41BE458D5003BFFB1 /* JSBIPGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382AAF21BE4536C003BFFB1 /* JSBIPGeocoder.swift */; };
+		73884D531BE59C57002DA92A /* gratuityInfoDemoVideo@2x.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 73884D521BE59C57002DA92A /* gratuityInfoDemoVideo@2x.mp4 */; };
 		738C98B71BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */; };
 		738C98B81BD2068000D14F20 /* GratuitousDefaultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */; };
 		738C98B91BD2082000D14F20 /* GratuitousNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F44C591BCF444700456E8A /* GratuitousNumberFormatter.swift */; };
@@ -143,7 +143,6 @@
 		59B24410EC519253B452447B /* Pods-Gratuity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gratuity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity.debug.xcconfig"; sourceTree = "<group>"; };
 		73011BDF1AD04F90001F6D71 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 		73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchInfoViewController.swift; sourceTree = "<group>"; };
-		73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "gratuityInfoDemoVideo@2x.mov"; sourceTree = "<group>"; };
 		73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBPurchaseManager.swift; sourceTree = "<group>"; };
 		7320A5421ACDA6AE001C10B0 /* Fuuutuuura-Meeediuuum.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Fuuutuuura-Meeediuuum.ttf"; path = "../GratuitousSwift Watch Watch App/Fuuutuuura-Meeediuuum.ttf"; sourceTree = "<group>"; };
 		732615E61BA9237C0081598F /* SmallModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallModalViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +180,7 @@
 		7382AAF21BE4536C003BFFB1 /* JSBIPGeocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBIPGeocoder.swift; sourceTree = "<group>"; };
 		738484D41B992E1B0044C14C /* fallbackPickerImages.data */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fallbackPickerImages.data; sourceTree = "<group>"; };
 		738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousiOSConnectivityManager.swift; path = GratuitousSwift/GratuitousiOSConnectivityManager.swift; sourceTree = SOURCE_ROOT; };
+		73884D521BE59C57002DA92A /* gratuityInfoDemoVideo@2x.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gratuityInfoDemoVideo@2x.mp4"; sourceTree = "<group>"; };
 		738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSTimer+Closure.swift"; path = "../GratuitousSwift/NSTimer+Closure.swift"; sourceTree = "<group>"; };
 		738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchApplicationPreferences.swift; sourceTree = "<group>"; };
 		738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSBWatchConnectivityManager.swift; path = GratuitousSwift/JSBWatchConnectivityManager.swift; sourceTree = SOURCE_ROOT; };
@@ -254,7 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */,
-				73011BEB1AD0C3C2001F6D71 /* gratuityInfoDemoVideo@2x.mov */,
+				73884D521BE59C57002DA92A /* gratuityInfoDemoVideo@2x.mp4 */,
 			);
 			name = "Watch Info View Controller";
 			sourceTree = "<group>";
@@ -670,8 +670,8 @@
 				733D02D91BBA4D4700E40EC5 /* LaunchScreen.xib in Resources */,
 				733D02BB1BBA4CFA00E40EC5 /* GratuitousSwift.storyboard in Resources */,
 				734D5BBB1BDD9AA700F3C24C /* Localizable.strings in Resources */,
+				73884D531BE59C57002DA92A /* gratuityInfoDemoVideo@2x.mp4 in Resources */,
 				733D02BE1BBA4D0900E40EC5 /* GratuitousTableViewCell.xib in Resources */,
-				733D02CB1BBA4D1F00E40EC5 /* gratuityInfoDemoVideo@2x.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
