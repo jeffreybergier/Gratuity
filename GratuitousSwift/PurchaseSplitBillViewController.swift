@@ -215,7 +215,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         dispatch_async(dispatch_get_main_queue()) {
             self.videoPlayer?.player.pause()
             self.videoPlayer?.player.seekToTime(kCMTimeZero)
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
                 self.videoPlayer?.player.play()
             }
