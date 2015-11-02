@@ -11,6 +11,10 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
     @IBOutlet weak var contentView: UIView?
     @IBOutlet weak var navigationBar: UINavigationBar?
     
+    private var borderHidden = false
+    private var peekMode = false
+    private var doneButton: UIBarButtonItem?
+    
     var customTransitionType: GratuitousTransitioningDelegateType {
         return .Bottom
     }
@@ -20,14 +24,23 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         self.configureDynamicTextLabels()
+        
+        if self.peekMode == true {
+            self.doneButton = self.navigationBar?.items?.last?.rightBarButtonItem
+            self.navigationBar?.items?.last?.rightBarButtonItem = .None
+        }
+
     }
     
     override var preferredContentSize: CGSize {
         get {
-            return CGSize(width: 320, height: 568)
+            return _preferredContentSize
         }
-        set { }
+        set {
+            _preferredContentSize = newValue
+        }
     }
+    private var _preferredContentSize = CGSize(width: 320, height: 568)
     
     @objc private func dismissViewControllerGestureTriggered(sender: UIGestureRecognizer?) {
         guard let sender = sender else { return }
@@ -45,6 +58,27 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
         // just in case this is not called by the trait collection changing
         self.navigationBarHeightDidChange()
         self.switchOnScreenSizeToDetermineBorderSurround()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // just in case this is not called by the trait collection changing
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.03 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.navigationBarHeightDidChange()
+        }
+        self.switchOnScreenSizeToDetermineBorderSurround()
+    }
+    
+    func setPeekModeEnabled() {
+        self.preferredContentSize = CGSize(width: 320, height: 400)
+        self.borderHidden = true
+        self.peekMode = true
+    }
+    
+    func setPopModeEnabled() {
+        self.navigationBar?.items?.last?.rightBarButtonItem = self.doneButton
     }
     
     @objc private func systemTextSizeDidChange(notification: NSNotification) {
@@ -79,7 +113,7 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
         let shorterThanScreen = self.view.bounds.height < UIScreen.mainScreen().bounds.size.height
         let narrowerThanScreen = self.view.bounds.width < UIScreen.mainScreen().bounds.size.width
         
-        if shorterThanScreen || narrowerThanScreen {
+        if (shorterThanScreen || narrowerThanScreen) && self.borderHidden == false {
             self.showBorder()
         } else {
             self.hideBorder()
@@ -104,12 +138,8 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
         return UIStatusBarStyle.LightContent
     }
     
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return UIInterfaceOrientation.Portrait
-    }
-    
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+        return [UIInterfaceOrientationMask.Portrait, UIInterfaceOrientationMask.Landscape, UIInterfaceOrientationMask.PortraitUpsideDown]
     }
     
     deinit {

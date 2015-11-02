@@ -371,9 +371,11 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         if purchased == true {
-            if let vc = self.storyboard?.instantiateViewControllerWithIdentifier("SplitBillViewController") {
-                let splitBillButtonRect = self.splitBillButton?.frame !! self.view.frame
-                previewingContext.sourceRect = splitBillButtonRect
+            if let vc = self.storyboard?.instantiateViewControllerWithIdentifier("SplitBillViewController") as? SmallModalViewController {
+                if let buttonFrame = self.splitBillButton?.frame {
+                    previewingContext.sourceRect = self.view.convertRect(buttonFrame, fromView: self.splitBillButton?.superview)
+                }
+                vc.setPeekModeEnabled()
                 return vc
             }
         }
@@ -383,7 +385,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     
     @available(iOS 9.0, *)
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        self.showViewController(viewControllerToCommit, sender: self)
+        self.performSegueWithIdentifier(StoryboardSegues.SplitBill.rawValue, sender: self)
     }
     
     //MARK: Handle Writing to Disk
