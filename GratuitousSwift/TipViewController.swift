@@ -385,7 +385,10 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     
     @available(iOS 9.0, *)
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        self.performSegueWithIdentifier(StoryboardSegues.SplitBill.rawValue, sender: self)
+        viewControllerToCommit.transitioningDelegate = self.presentationBottomTransitionerDelegate
+        viewControllerToCommit.modalPresentationStyle = UIModalPresentationStyle.Custom
+        (viewControllerToCommit as? SmallModalViewController)?.setPopModeEnabled()
+        self.presentViewController(viewControllerToCommit, animated: true, completion: .None)
     }
     
     //MARK: Handle Writing to Disk

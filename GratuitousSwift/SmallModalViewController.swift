@@ -78,7 +78,10 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
     }
     
     func setPopModeEnabled() {
+        self.preferredContentSize = CGSize(width: 320, height: 568)
         self.navigationBar?.items?.last?.rightBarButtonItem = self.doneButton
+        self.borderHidden = false
+        self.peekMode = false
     }
     
     @objc private func systemTextSizeDidChange(notification: NSNotification) {
