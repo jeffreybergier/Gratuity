@@ -2,38 +2,47 @@
 //  GratuitousPresentationController.swift
 //  GratuitousSwift
 //
-//  Created by Jeffrey Bergier on 11/15/14.
-//  Copyright (c) 2014 SaturdayApps. All rights reserved.
+//  Created by Jeffrey Bergier on 9/20/15.
+//  Copyright © 2015 SaturdayApps. All rights reserved.
 //
-
-import UIKit
 
 class GratuitousPresentationController: UIPresentationController {
     
-    private lazy var dimmingView :UIView = {
-        let view = UIView()
+    private lazy var _dimmingView: UIView = {
+        let dimView = UIView()
         let tap = UITapGestureRecognizer(target:self, action:"dimmingViewTapped:")
         let swipe = UISwipeGestureRecognizer(target:self, action:"dimmingViewTapped:")
-        swipe.direction = UISwipeGestureRecognizerDirection.Right
-
-        view.backgroundColor = UIColor(white: 0.0, alpha: 0.7)
-        view.alpha = 0.0
-        view.addGestureRecognizer(tap)
-        view.addGestureRecognizer(swipe)
+        swipe.direction = UISwipeGestureRecognizerDirection.Down
         
-        return view
-        }()
+        dimView.backgroundColor = UIColor(white: 0.0, alpha: 0.7)
+        dimView.alpha = 0.0
+        dimView.addGestureRecognizer(swipe)
+        dimView.addGestureRecognizer(tap)
+        
+        return dimView
+    }()
+    
+    var dimmingView: UIView {
+        let dimmingView = _dimmingView
+        return dimmingView
+    }
+    
+    func dimmingViewTapped(sender: UITapGestureRecognizer) {
+        if sender.state == UIGestureRecognizerState.Ended {
+            self.presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
     
     override func presentationTransitionWillBegin() {
-        self.dimmingView.frame = self.containerView.bounds
+        self.dimmingView.frame = self.containerView!.bounds
         self.dimmingView.alpha = 0.0
         
-        self.containerView.insertSubview(self.dimmingView, atIndex: 0)
+        self.containerView!.insertSubview(self.dimmingView, atIndex: 0)
         
         if let transitionCoordinator = self.presentedViewController.transitionCoordinator() {
             transitionCoordinator.animateAlongsideTransition({
                 (UIViewControllerTransitionCoordinatorContext) -> Void in
-                    self.dimmingView.alpha = 1.0
+                self.dimmingView.alpha = 1.0
                 },
                 completion: nil)
         } else {
@@ -45,7 +54,7 @@ class GratuitousPresentationController: UIPresentationController {
         if let transitionCoordinator = self.presentedViewController.transitionCoordinator() {
             transitionCoordinator.animateAlongsideTransition({
                 (UIViewControllerTransitionCoordinatorContext) -> Void in
-                    self.dimmingView.alpha = 0.0
+                self.dimmingView.alpha = 0.0
                 },
                 completion: nil)
         } else {
@@ -53,62 +62,54 @@ class GratuitousPresentationController: UIPresentationController {
         }
     }
     
+    override func sizeForChildContentContainer(container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
+        let modifier: CGFloat
+        switch UIApplication.sharedApplication().preferredContentSizeCategory {
+        case UIContentSizeCategoryExtraLarge:
+            modifier = 10
+        case UIContentSizeCategoryExtraExtraLarge:
+            modifier = 20
+        case UIContentSizeCategoryExtraExtraExtraLarge:
+            modifier = 40
+        case UIContentSizeCategoryAccessibilityMedium:
+            modifier = 90
+        case UIContentSizeCategoryAccessibilityLarge:
+            modifier = 150
+        case UIContentSizeCategoryAccessibilityExtraLarge:
+            modifier = 300
+        case UIContentSizeCategoryAccessibilityExtraExtraLarge:
+            modifier = 5000
+        case UIContentSizeCategoryAccessibilityExtraExtraExtraLarge:
+            modifier = 5000
+        default:
+            modifier = 0
+        }
+        
+        let toContainerPreferredSize = container.preferredContentSize
+        let toWidth: CGFloat
+        if toContainerPreferredSize.width + modifier > parentSize.width {
+            toWidth = parentSize.width
+        } else {
+            toWidth = toContainerPreferredSize.width + modifier
+        }
+
+        let toHeight: CGFloat
+        if toContainerPreferredSize.height + (modifier * 1.4) > parentSize.height {
+            toHeight = parentSize.height
+        } else {
+            toHeight = toContainerPreferredSize.height + (modifier * 1.4)
+        }
+        let contentViewSize = CGSize(width: toWidth, height: toHeight)
+        return contentViewSize
+    }
+    
     override func adaptivePresentationStyle() -> UIModalPresentationStyle {
         return UIModalPresentationStyle.Custom
     }
     
-    override func sizeForChildContentContainer(container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        var divisionConstant = CGFloat(1.0)
-        var textSizeAdjustment = CGFloat(0.0)
-        let deviceScreen = GratuitousUIConstant.deviceScreen()
-        
-        if deviceScreen.smallDeviceLandscape {
-            divisionConstant = 1.4
-        }
-        
-        if deviceScreen.largeDevice {
-            if deviceScreen.largeDeviceLandscape {
-                divisionConstant = 1.9
-            } else {
-                divisionConstant = 1.2
-            }
-        }
-        
-        if deviceScreen.padIdiom {
-            if deviceScreen.largeDeviceLandscape {
-                divisionConstant = 2.7
-            } else {
-                divisionConstant = 2.3
-            }
-        }
-        
-        switch UIApplication.sharedApplication().preferredContentSizeCategory {
-        case UIContentSizeCategoryExtraExtraExtraLarge:
-            textSizeAdjustment = 0.25
-        case UIContentSizeCategoryAccessibilityMedium:
-            textSizeAdjustment = 0.5
-        case UIContentSizeCategoryAccessibilityLarge:
-            textSizeAdjustment = 0.75
-        case UIContentSizeCategoryAccessibilityExtraLarge:
-            textSizeAdjustment = 1.0
-        case UIContentSizeCategoryAccessibilityExtraExtraLarge:
-            textSizeAdjustment = 1.25
-        case UIContentSizeCategoryAccessibilityExtraExtraExtraLarge:
-            textSizeAdjustment = 1.5
-        default:
-            break
-        }
-        
-        let divisionCalculation = (divisionConstant - textSizeAdjustment < 1.0) ? (1.0) : (divisionConstant - textSizeAdjustment)
-        
-        let floatWidth = Float(parentSize.width / divisionCalculation)
-        let cgWidth = CGFloat(floorf(floatWidth))
-        return CGSizeMake(cgWidth, parentSize.height)
-    }
-    
     override func containerViewWillLayoutSubviews() {
-        self.dimmingView.frame = self.containerView.bounds
-        self.presentedView().frame = self.frameOfPresentedViewInContainerView()
+        self.dimmingView.frame = self.containerView!.bounds
+        self.presentedView()?.frame = self.frameOfPresentedViewInContainerView()
     }
     
     override func shouldPresentInFullscreen() -> Bool {
@@ -116,17 +117,13 @@ class GratuitousPresentationController: UIPresentationController {
     }
     
     override func frameOfPresentedViewInContainerView() -> CGRect {
-        var presentedViewFrame = CGRectZero
+        let toSize = self.sizeForChildContentContainer(self.presentedViewController, withParentContainerSize: self.containerView!.bounds.size)
         
-        presentedViewFrame.size = self.sizeForChildContentContainer(self.presentedViewController, withParentContainerSize: self.containerView.bounds.size)
-        presentedViewFrame.origin.x = self.containerView.bounds.size.width - presentedViewFrame.size.width
+        let originX = ((self.containerView!.bounds.size.width - toSize.width) / 2)
+        let originY = ((self.containerView!.bounds.size.height - toSize.height) / 2)
+        let contentViewPoint = CGPoint(x: originX, y: originY)
         
-        return presentedViewFrame
-    }
-    
-    func dimmingViewTapped(sender: UITapGestureRecognizer) {
-        if sender.state == UIGestureRecognizerState.Ended {
-            self.presentingViewController.dismissViewControllerAnimated(true, completion: nil)
-        }
+        let rect = CGRect(origin: contentViewPoint, size: toSize)
+        return rect
     }
 }

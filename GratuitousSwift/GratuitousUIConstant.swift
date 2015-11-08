@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-import UIKit
-
 struct GratuitousUIConstant {
     
     // bridging to another class that the watch app can use in order to reduce refactoring

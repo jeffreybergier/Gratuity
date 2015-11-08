@@ -6,167 +6,67 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-import UIKit
-import QuartzCore
-
-class GratuitousCurrencySelectorCellTableViewCell: UITableViewCell {
+final class GratuitousCurrencySelectorCellTableViewCell: GratuitousSelectFadeTableViewCell {
     
-    weak var instanceTextLabel: UILabel? {
+    override weak var animatableTextLabel: UILabel? {
         didSet {
             self.prepareTextLabel()
         }
     }
-    var animatingBorderColor = false
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        self.layer.borderWidth = GratuitousUIConstant.thinBorderWidth()
-        self.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "overrideCurrencySymbolUpdatedOnDisk:", name: "overrideCurrencySymbolUpdatedOnDisk", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
-    }
-    
-    @objc private func overrideCurrencySymbolUpdatedOnDisk(notification: NSNotification?) {
-        self.readUserDefaultsAndSetCheckmarkWithTimer(true)
-    }
-    
-    @objc private func systemTextSizeDidChange(notification:NSNotification) {
-        self.prepareTextLabel()
-        self.layer.borderWidth = GratuitousUIConstant.thinBorderWidth()
-        self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-        self.readUserDefaultsAndSetCheckmarkWithTimer(true)
-        self.layoutIfNeeded()
+    func setInterfaceRefreshNeeded() {
+        self.readUserDefaultsAndSetCheckmark()
     }
     
     private func prepareTextLabel() {
-        self.instanceTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.instanceTextLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.readUserDefaultsAndSetCheckmark()
+        self.animatableTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.animatableTextLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.layoutIfNeeded()
     }
     
-    private func readUserDefaultsAndSetCheckmarkWithTimer(timer: Bool) {
-        let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
-        if let defaultsManager = appDelegate?.defaultsManager {
-            if defaultsManager.overrideCurrencySymbol.rawValue == self.tag {
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: false)
+        
+        // Configure the view for the selected state
+        if selected {
+            UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
+                delay: 0.0,
+                options: UIViewAnimationOptions.BeginFromCurrentState,
+                animations: {
+                    self.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+                    self.animatableTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
+                },
+                completion: { finished in
+                    UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
+                        delay: 0.0,
+                        options: UIViewAnimationOptions.BeginFromCurrentState,
+                        animations: {
+                            self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
+                            self.animatableTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
+                        },
+                        completion: .None)
+            })
+        }
+    }
+    
+    private func readUserDefaultsAndSetCheckmark() {
+        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
+            where appDelegate.preferencesSetLocally.overrideCurrencySymbol.rawValue == self.tag {
                 self.accessoryType = UITableViewCellAccessoryType.Checkmark
                 if self.animatingBorderColor == false {
                     //if this property is being animated, don't change it
                     self.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
                 }
                 self.accessoryType = UITableViewCellAccessoryType.Checkmark
-                if timer {
-                    let slowFadeOutTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "slowFadeOutOfBorderAroundCell:", userInfo: nil, repeats: false)
-                }
-            } else {
-                self.accessoryType = UITableViewCellAccessoryType.None
-                if self.animatingBorderColor == false {
-                    self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor //UIColor.blackColor().CGColor
-                }
-                self.accessoryType = UITableViewCellAccessoryType.None
+        } else {
+            self.accessoryType = UITableViewCellAccessoryType.None
+            if self.animatingBorderColor == false {
+                self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor
             }
+            self.accessoryType = UITableViewCellAccessoryType.None
         }
         self.layoutIfNeeded()
-    }
-    
-    func slowFadeOutOfBorderAroundCell(timer: NSTimer?) {
-        timer?.invalidate()
-        
-        if self.animatingBorderColor == false {
-            //wow animations in Core Animation are so much harder than UIViewAnimations
-            let colorAnimation = CABasicAnimation(keyPath: "borderColor")
-            colorAnimation.fromValue = GratuitousUIConstant.lightBackgroundColor().CGColor
-            colorAnimation.toValue = GratuitousUIConstant.darkBackgroundColor().CGColor
-            self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor //UIColor.blackColor().CGColor
-            
-            let animationGroup = CAAnimationGroup()
-            animationGroup.duration = GratuitousUIConstant.animationDuration() * 3
-            animationGroup.animations = [colorAnimation]
-            animationGroup.delegate = self
-            animationGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            
-            self.layer.addAnimation(animationGroup, forKey: "borderColor")
-        }
-    }
-    
-    override func animationDidStart(anim: CAAnimation?) {
-        self.animatingBorderColor = true
-    }
-    
-    override func animationDidStop(anim: CAAnimation?, finished flag: Bool) {
-        //this timer was needed because this seems to get called slightly too soon and if the user touched the same cell again it would repeat the animation and it was jarring.
-        let timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "cgAnimationDidFinish:", userInfo: nil, repeats: false)
-    }
-    
-    func cgAnimationDidFinish(timer: NSTimer?) {
-        timer?.invalidate()
-        
-        self.animatingBorderColor = false
-    }
-    
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        super.touchesBegan(touches, withEvent: event)
-        UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
-            delay: 0.0,
-            options: UIViewAnimationOptions.BeginFromCurrentState,
-            animations: {
-                self.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
-                self.instanceTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
-            },
-            completion: { finished in })
-    }
-    
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        super.touchesEnded(touches, withEvent: event)
-        UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
-            delay: 0.0,
-            options: UIViewAnimationOptions.BeginFromCurrentState,
-            animations: {
-                self.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-                self.instanceTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
-            },
-            completion: { finished in })
-    }
-
-    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent?) {
-        super.touchesCancelled(touches, withEvent: event)
-        UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
-            delay: 0.0,
-            options: UIViewAnimationOptions.BeginFromCurrentState,
-            animations: {
-                self.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-                self.instanceTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
-            },
-            completion: { finished in })
-    }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(false, animated: animated)
-        
-            // Configure the view for the selected state
-            if selected {
-                UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
-                    delay: 0.0,
-                    options: UIViewAnimationOptions.BeginFromCurrentState,
-                    animations: {
-                        self.backgroundColor = GratuitousUIConstant.lightBackgroundColor()//.colorWithAlphaComponent(0.8)
-                        self.instanceTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
-                    },
-                    completion: { finished in
-                        UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
-                            delay: 0.0,
-                            options: UIViewAnimationOptions.BeginFromCurrentState,
-                            animations: {
-                                self.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-                                self.instanceTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
-                            },
-                            completion: { finished in
-                        })
-                })
-            }
-    
     }
     
     deinit {

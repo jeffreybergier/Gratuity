@@ -6,14 +6,15 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-import UIKit
-
-class GratuitousTableViewCell: UITableViewCell {
+final class GratuitousTableViewCell: UITableViewCell {
 
     @IBOutlet weak private var dollarTextLabel: UILabel?
-    private var labelTextAttributes = [NSString(): NSObject()]
+    private var labelTextAttributes = [String(): NSObject()]
     private let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
-    weak var currencyFormatter: GratuitousCurrencyFormatter?
+    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
+    private var currentCurrencySign: CurrencySign {
+        return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences.overrideCurrencySymbol
+    }
     var textSizeAdjustment: CGFloat = 1.0 {
         didSet {
             if (self.labelTextAttributes["NSFont"] != nil) {
@@ -26,19 +27,21 @@ class GratuitousTableViewCell: UITableViewCell {
             self.didSetBillAmount()
         }}
     
-    func localeDidChangeUpdateTextField(notification: NSNotification) {
+    func setInterfaceRefreshNeeded() {
         self.didSetBillAmount()
     }
     
-    func invertColorsDidChange(notification: NSNotification) {
-        self.contentView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
-        self.prepareLabelTextAttributes()
+    @objc private func currencySignChanged(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.currencyFormatter.locale = NSLocale.currentLocale()
+            self.setInterfaceRefreshNeeded()
+        }
     }
     
     private func didSetBillAmount() {
         let currencyFormattedString: String
         if self.billAmount != 0 {
-            currencyFormattedString = self.currencyFormatter?.currencyFormattedString(self.billAmount) !! ""
+            currencyFormattedString = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: self.billAmount)
         } else {
             currencyFormattedString = ""
         }
@@ -49,8 +52,8 @@ class GratuitousTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeUpdateTextField:", name: "currencyFormatterReadyReloadView", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "invertColorsDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
         
         //configure the font
         if let font = GratuitousUIConstant.originalFontForTableViewCellTextLabels() {
@@ -79,8 +82,7 @@ class GratuitousTableViewCell: UITableViewCell {
         if let font = self.originalFont {
             let attributes = [
                 NSForegroundColorAttributeName : textColor,
-                NSFontAttributeName : font,
-                //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
+                NSFontAttributeName : font.fontWithSize(font.pointSize * self.textSizeAdjustment),
                 NSShadowAttributeName : shadow
             ]
             self.labelTextAttributes = attributes

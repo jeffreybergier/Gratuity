@@ -6,38 +6,54 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-import UIKit
 import MessageUI
+import XCGLogger
+import Crashlytics
 
-class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+final class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     // MARK: Handle TableViewController
     @IBOutlet private weak var headerLabelTipPercentage: UILabel?
     @IBOutlet private weak var headerLabelCurencySymbol: UILabel?
     @IBOutlet private weak var headerLabelAboutSaturdayApps: UILabel?
+    @IBOutlet private weak var headerLabelInAppPurchases: UILabel?
     
-    private weak var defaultsManager = (UIApplication.sharedApplication().delegate as? GratuitousAppDelegate)?.defaultsManager
+    private let log = XCGLogger.defaultInstance()
+
     private var headerLabelsArray: [UILabel?] = []
     private lazy var swipeToDismiss: UISwipeGestureRecognizer = {
         let swipe = UISwipeGestureRecognizer(target: self, action: "didSwipeToDismiss:")
         swipe.direction = UISwipeGestureRecognizerDirection.Right
         return swipe
-        }()
+    }()
+    private var applicationPreferences: GratuitousUserDefaults {
+        get { return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences }
+        set { (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferencesSetLocally = newValue }
+    }
+    
+    override var preferredContentSize: CGSize {
+        get {
+            return CGSize(width: 320, height: UIScreen.mainScreen().bounds.height)
+        }
+        set { }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //add necessary notification center observers
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "readUserDefaultsAndUpdateSlider:", name: "suggestedTipValueUpdated", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIAccessibilityInvertColorsStatusDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "percentageMayHaveChanged:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: .None)
         
         //set the background color of the view
         self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         
         //tell the tableview to have dynamic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         
         //set the colors for the navigation controller
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
@@ -56,6 +72,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         //add the dismiss gesture recognizer to the view
         self.view.addGestureRecognizer(self.swipeToDismiss)
         
+        //prepare in-app purchases cells
+        self.prepareInAppPurchaseCells()
+        
         //configure the border color of my picture in the about screen
         self.prepareAboutPictureButtonsAndParagraph()
         
@@ -63,7 +82,34 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.prepareHeaderLabelsAndCells()
         
         //lastly, read the defaults from disk and update the UI
-        self.readUserDefaultsAndUpdateSlider(nil)
+        self.readUserDefaultsAndUpdateSlider()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+                
+        if let restoreIndexPath = self.restoreScrollPosition {
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.tableView.scrollToRowAtIndexPath(restoreIndexPath, atScrollPosition: .Top, animated: true)
+                self.restoreScrollPosition = .None
+            }
+        }
+        
+        //prepare the currency override cells
+        self.setInterfaceRefreshNeeded()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Answers.logContentViewWithName(AnswersString.ViewDidAppear, contentType: .None, contentId: .None, customAttributes: .None)
+    }
+    
+    @objc private func applicationDidBecomeActive(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.viewWillAppear(true)
+        }
     }
     
     private func prepareHeaderLabelsAndCells() {
@@ -71,6 +117,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.headerLabelsArray = [
             self.headerLabelTipPercentage,
             self.headerLabelCurencySymbol,
+            self.headerLabelInAppPurchases,
             self.headerLabelAboutSaturdayApps
         ]
         
@@ -81,55 +128,69 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             label?.superview?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         }
         
-        self.headerLabelTipPercentage?.text = NSLocalizedString("Suggested Tip Percentage", comment: "this text is for a section header where the user can set the default tip percentage when they choose a new bill amount").uppercaseString
-        self.headerLabelCurencySymbol?.text = NSLocalizedString("Currency Symbol", comment: "this text is for a section header where the user can override the currency symbol that will be shown in front of the currency amounts in the app").uppercaseString
-        self.headerLabelAboutSaturdayApps?.text = NSLocalizedString("About SaturdayApps", comment: "This is a section header. It contains information about my company, saturday apps").uppercaseString
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //prepare the currency override cells
-        self.prepareCurrencyIndicatorCells()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.tableView.reloadData()
+        self.headerLabelTipPercentage?.text = SettingsTableViewController.LocalizedString.SuggestedTipPercentageHeader.uppercaseString
+        self.headerLabelCurencySymbol?.text = SettingsTableViewController.LocalizedString.CurrencySymbolHeader.uppercaseString
+        self.headerLabelAboutSaturdayApps?.text = SettingsTableViewController.LocalizedString.AboutHeader.uppercaseString
+        self.headerLabelInAppPurchases?.text = SettingsTableViewController.LocalizedString.InAppPurchaseHeader.uppercaseString
     }
     
     func didTapDoneButton(sender: UIButton) {
-        if let presentingViewController = self.presentingViewController {
+        if let _ = self.presentingViewController {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
-    func systemTextSizeDidChange(notification: NSNotification) {
-        //this takes care of the header cells
-        self.prepareHeaderLabelsAndCells()
-        
-        //set the background color of the view
-        self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        self.tableView.tintColor = GratuitousUIConstant.lightTextColor()
-        
-        //update the percentage slider
-        self.prepareTipPercentageSliderAndLabels()
-        
-        //prepare the tip percentage label that sits on the right of the slider
-        self.suggestedTipPercentageLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.suggestedTipPercentageLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        self.navigationController?.navigationBar.barTintColor = nil
-        
-        //prepare the about area of the table
-        self.prepareAboutPictureButtonsAndParagraph()
-        
-        //prepare the currency override cells
-        self.prepareCurrencyIndicatorCells()
+    @objc private func percentageMayHaveChanged(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.prepareTipPercentageSliderAndLabels()
+            self.readUserDefaultsAndUpdateSlider()
+        }
+    }
+    
+    @objc private func currencySignChanged(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.setInterfaceRefreshNeeded()
+        }
+    }
+    
+    @objc private func systemTextSizeDidChange(notification: NSNotification?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            //this takes care of the header cells
+            self.prepareHeaderLabelsAndCells()
+            
+            //set the background color of the view
+            self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
+            self.tableView.tintColor = GratuitousUIConstant.lightTextColor()
+            
+            //update the percentage slider
+            self.prepareTipPercentageSliderAndLabels()
+            
+            //prepare the tip percentage label that sits on the right of the slider
+            self.suggestedTipPercentageLabel?.textColor = GratuitousUIConstant.lightTextColor()
+            self.suggestedTipPercentageLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+            self.navigationController?.navigationBar.barTintColor = nil
+            
+            //prepare the in-app purchases cells
+            self.prepareInAppPurchaseCells()
+            
+            //prepare the about area of the table
+            self.prepareAboutPictureButtonsAndParagraph()
+            
+            //prepare the currency override cells
+            self.prepareCurrencyIndicatorCells()
+        }
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     // MARK: Handle Percentage Slider
@@ -163,13 +224,13 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         CGContextStrokeEllipseInRect(currentContext, circleRect)
         
         // Create Image
-        let cgImage = CGBitmapContextCreateImage(currentContext)
+        let cgImage = CGBitmapContextCreateImage(currentContext)!
         let image = UIImage(CGImage: cgImage, scale: scale, orientation: UIImageOrientation.Up)
         
         return image
         }()
     
-    func prepareTipPercentageSliderAndLabels() {
+    private func prepareTipPercentageSliderAndLabels() {
         //set the text color for the tip percentage
         self.suggestedTipPercentageLabel?.textColor = GratuitousUIConstant.lightTextColor()
         
@@ -185,8 +246,8 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         self.suggestedTipPercentageSlider?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
     }
     
-    func readUserDefaultsAndUpdateSlider(notification: NSNotification?) {
-        let onDiskTipPercentage = self.defaultsManager?.suggestedTipPercentage !! 0.20
+    private func readUserDefaultsAndUpdateSlider() {
+        let onDiskTipPercentage = self.applicationPreferences.suggestedTipPercentage
         self.suggestedTipPercentageLabel?.text = "\(Int(round(onDiskTipPercentage * 100)))%"
         self.suggestedTipPercentageSlider?.setValue(Float(onDiskTipPercentage), animated: false)
     }
@@ -197,9 +258,14 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     @IBAction func didChangeSuggestedTipPercentageSlider(sender: UISlider) {
+        let attributes = [
+            "OldValue" : NSNumber(integer: Int(round(self.applicationPreferences.suggestedTipPercentage * 100))),
+            "NewValue" : NSNumber(integer: Int(round(sender.value * 100)))
+        ]
+        Answers.logCustomEventWithName(AnswersString.DidChangeTipPercentage, customAttributes: attributes)
         //this is only called when the user lets go of the slider
         let newTipPercentage = sender.value
-        self.defaultsManager?.suggestedTipPercentage = Double(newTipPercentage)
+        self.applicationPreferences.suggestedTipPercentage = Double(newTipPercentage)
         NSNotificationCenter.defaultCenter().postNotificationName("suggestedTipValueUpdated", object: self)
     }
     
@@ -211,45 +277,48 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     @IBOutlet private weak var textLabelYenSign: UILabel?
     @IBOutlet private weak var textLabelNone: UILabel?
     
-    func prepareCurrencyIndicatorCells() {
+    private func prepareCurrencyIndicatorCells() {
         self.writeCurrencyOverrideUserDefaultToDisk()
     }
     
-    private func writeCurrencyOverrideUserDefaultToDisk(_ currencyOverride: CurrencySign? = nil) {
-        if let currencyOverride = currencyOverride {
-            if let defaultsManager = self.defaultsManager {
-                defaultsManager.overrideCurrencySymbol = currencyOverride
+    func setInterfaceRefreshNeeded() {
+        if let cells = self.tableView?.visibleCells {
+            cells.forEach() { genericCell in
+                if let cell = genericCell as? GratuitousCurrencySelectorCellTableViewCell {
+                    cell.setInterfaceRefreshNeeded()
+                }
             }
         }
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("overrideCurrencySymbolUpdatedOnDisk", object: self)
+    }
+    
+    private func writeCurrencyOverrideUserDefaultToDisk(currencyOverride: CurrencySign? = nil) {
+        if let currencyOverride = currencyOverride{
+            self.applicationPreferences.overrideCurrencySymbol = currencyOverride
+        }
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
             //if this is the type of cell, we need to let it know which UILabel is in it
-            if let cell = cell as? GratuitousCurrencySelectorCellTableViewCell {
+            if let cell = cell as? GratuitousCurrencySelectorCellTableViewCell,
                 //this gets called a lot so there is no need to run through the switch unless the cell we're talking to has a nil property.
-                if cell.instanceTextLabel == nil {
-                    switch cell.tag {
-                    case CurrencySign.Default.rawValue:
-                        self.textLabelDefault?.text = NSLocalizedString("Local Currency", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use the local currency symbol based on the Locale set in the iphone")
-                        cell.instanceTextLabel = self.textLabelDefault
-                    case CurrencySign.Dollar.rawValue:
-                        cell.instanceTextLabel = self.textLabelDollarSign
-                    case CurrencySign.Pound.rawValue:
-                        cell.instanceTextLabel = self.textLabelPoundSign
-                    case CurrencySign.Euro.rawValue:
-                        cell.instanceTextLabel = self.textLabelEuroSign
-                    case CurrencySign.Yen.rawValue:
-                        cell.instanceTextLabel = self.textLabelYenSign
-                    case CurrencySign.None.rawValue:
-                        self.textLabelNone?.text = NSLocalizedString("No Symbol", comment: "This is a selector so the user can choose which currency symbol to show in the tip calculator. This option tells the app to use no currency symbol")
-                        cell.instanceTextLabel = self.textLabelNone
-                    default:
-                        break;
+                let currencySign = CurrencySign(rawValue: cell.tag) {
+                    switch currencySign {
+                    case .Default:
+                        self.textLabelDefault?.text = SettingsTableViewController.LocalizedString.LocalCurrencyCellLabel
+                        cell.animatableTextLabel = self.textLabelDefault
+                    case .Dollar:
+                        cell.animatableTextLabel = self.textLabelDollarSign
+                    case .Pound:
+                        cell.animatableTextLabel = self.textLabelPoundSign
+                    case .Euro:
+                        cell.animatableTextLabel = self.textLabelEuroSign
+                    case .Yen:
+                        cell.animatableTextLabel = self.textLabelYenSign
+                    case .NoSign:
+                        self.textLabelNone?.text = SettingsTableViewController.LocalizedString.NoneCurrencyCellLabel
+                        cell.animatableTextLabel = self.textLabelNone
                     }
-                }
             }
         }
     }
@@ -257,34 +326,88 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section {
         case 1:
+            let newValue: CurrencySign?
+            let oldValue = self.applicationPreferences.overrideCurrencySymbol
             switch indexPath.row {
             case CurrencySign.Default.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Default)
+                newValue = .Default
             case CurrencySign.Dollar.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Dollar)
+                newValue = .Dollar
             case CurrencySign.Pound.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Pound)
+                newValue = .Pound
             case CurrencySign.Euro.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Euro)
+                newValue = .Euro
             case CurrencySign.Yen.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.Yen)
-            case CurrencySign.None.rawValue + 1:
-                self.writeCurrencyOverrideUserDefaultToDisk(CurrencySign.None)
+                newValue = .Yen
+            case CurrencySign.NoSign.rawValue + 1:
+                newValue = .NoSign
             default:
-                break;
+                newValue = .None
+            }
+            if let newValue = newValue {
+                self.writeCurrencyOverrideUserDefaultToDisk(newValue)
+                let attributes = ["NewValue" : newValue.descriptionForAnswers, "OldValue" : oldValue.descriptionForAnswers]
+                Answers.logCustomEventWithName(AnswersString.DidChangeCurrencySymbol, customAttributes: attributes)
+            }
+        case 2:
+            switch indexPath.row {
+            case 1: // row of splitBill purchase
+                let presentingVC = self.presentingViewController
+                let purchaseSegue = self.applicationPreferences.splitBillPurchased == true ? TipViewController.StoryboardSegues.SplitBill : TipViewController.StoryboardSegues.PurchaseSplitBill
+                self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                    presentingVC?.performSegueWithIdentifier(purchaseSegue.rawValue, sender: self)
+                })
+            default:
+                break
+            }
+        case 3: // about section
+            switch indexPath.row {
+            case 3: // Email Me Row
+                let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
+                if let mailVC = emailManager.presentableMailViewController {
+                    Answers.logContentViewWithName(AnswersString.DidOpenInternalEmail, contentType: .None, contentId: .None, customAttributes: .None)
+                    self.presentViewController(mailVC, animated: true, completion: .None)
+                } else {
+                    Answers.logContentViewWithName(AnswersString.DidOpenExternalEmail, contentType: .None, contentId: .None, customAttributes: .None)
+                    emailManager.switchAppForEmailSupport()
+                }
+            case 4: // Review this app row
+                let appStoreString = String(format: "itms-apps://itunes.apple.com/app/id%d", self.applicationID)
+                let appStoreURL = NSURL(string: appStoreString)
+                if let appStoreURL = appStoreURL {
+                    Answers.logContentViewWithName(AnswersString.DidTapReview, contentType: .None, contentId: .None, customAttributes: .None)
+                    UIApplication.sharedApplication().openURL(appStoreURL)
+                }
+            case 5: // Apple Watch Row
+                let presentingVC = self.presentingViewController
+                self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                    presentingVC?.performSegueWithIdentifier(TipViewController.StoryboardSegues.WatchInfo.rawValue, sender: self)
+                })
+            default:
+                break
             }
         default:
-            break;
+            break
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
+    
+    // MARK: Handle In-App Purchase Cells
+    
+    @IBOutlet private weak var splitBillPurchaseLabel: UILabel?
+    
+    private func prepareInAppPurchaseCells() {
+        self.splitBillPurchaseLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.splitBillPurchaseLabel?.textColor = GratuitousUIConstant.lightTextColor()
+        self.splitBillPurchaseLabel?.text = SettingsTableViewController.LocalizedString.SplitBillInAppPurchaseCellLabel
+    }
+    
     
     // MARK: Handle About Information
     @IBOutlet private weak var aboutMyPictureImageView: UIImageView?
     @IBOutlet private weak var aboutSaturdayAppsParagraphLabel: UILabel?
-    @IBOutlet private weak var aboutEmailMeButton: UIButton?
-    @IBOutlet private weak var aboutReviewButton: UIButton?
-    @IBOutlet private weak var aboutWatchAppButton: UIButton?
+    @IBOutlet private weak var aboutEmailMeLabel: UILabel?
+    @IBOutlet private weak var aboutReviewLabel: UILabel?
+    @IBOutlet private weak var aboutWatchAppLabel: UILabel?
     
     private let applicationID = 933679671
     
@@ -299,68 +422,48 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         //preparing the paragraph text label
         self.aboutSaturdayAppsParagraphLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.aboutSaturdayAppsParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.aboutSaturdayAppsParagraphLabel?.text = NSLocalizedString("My name is Jeff. I'm a professional designer. I like making Apps in my spare time. The many examples of tip calculators on the App Store didn't match the tipping paradigm I used in restaurants. So I made Gratuity. If you like it, email me or leave a review on the app store.", comment: "")
+        self.aboutSaturdayAppsParagraphLabel?.text = SettingsTableViewController.LocalizedString.AboutSADescriptionLabel
         
-        //prepare the buttons
-        self.aboutEmailMeButton?.setTitle(NSLocalizedString("Email Me", comment: "this is the button that users can use to send me an email."), forState: UIControlState.Normal)
-        self.aboutReviewButton?.setTitle(NSLocalizedString("Review This App", comment: "this button takes the user to the app store so they can leave a review"), forState: UIControlState.Normal)
-        self.aboutWatchAppButton?.setTitle(NSLocalizedString("Gratuity for Watch", comment: "this button takes the user to see the apple watch info screen"), forState: UIControlState.Normal)
+        //prepare the labels
+        let labelFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        let labelTextColor = GratuitousUIConstant.lightTextColor()
+
+        self.aboutEmailMeLabel?.font = labelFont
+        self.aboutReviewLabel?.font = labelFont
+        self.aboutWatchAppLabel?.font = labelFont
+        
+        self.aboutEmailMeLabel?.textColor = labelTextColor
+        self.aboutReviewLabel?.textColor = labelTextColor
+        self.aboutWatchAppLabel?.textColor = labelTextColor
+        
+        self.aboutEmailMeLabel?.text = UIAlertAction.Gratuity.LocalizedString.EmailSupport
+        self.aboutReviewLabel?.text = SettingsTableViewController.LocalizedString.ReviewThisAppButton
+        self.aboutWatchAppLabel?.text = SettingsTableViewController.LocalizedString.GratuityForAppleWatchButton
         
         //set the background color of all of the different cells. For some reason on ipad, its white instead of clear
         self.aboutMyPictureImageView?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
         self.aboutSaturdayAppsParagraphLabel?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        self.aboutEmailMeButton?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        self.aboutReviewButton?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
-        self.aboutWatchAppButton?.superview?.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()
     }
-    
-    @IBAction func didTapEmailMeButton(sender: UIButton) {
-        let subject = NSLocalizedString("I love Gratuity", comment: "This is the subject line of support requests. It should say something positive about the app but its mostly gonna be used when people are upset")
-        let body = NSLocalizedString("THISSHOULDBEBLANK", comment: "this is the body line of support requests, it should be blank, but the possibilies are endless")
-        
-        if MFMailComposeViewController.canSendMail() {
-            let mailer = MFMailComposeViewController()
-            mailer.mailComposeDelegate = self
-            mailer.setSubject(subject)
-            mailer.setToRecipients(["support@saturdayapps.com"])
-            mailer.setMessageBody(body, isHTML: false)
-            
-            self.presentViewController(mailer, animated: true, completion: nil)
-        } else {
-            let mailStringWrongEncoding = NSString(format: "mailto:support@saturdayapps.com?subject=%@&body=%@", subject, body)
-            let mailString = mailStringWrongEncoding.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-            if let mailString = mailString {
-                let mailToURL = NSURL(string: mailString)
-                if let mailToURL = mailToURL {
-                    UIApplication.sharedApplication().openURL(mailToURL)
-                }
-            }
-        }
-    }
-    
-    @IBAction func didTapReviewThisAppButton(sender: UIButton) {
-        let appStoreString = String(format: "itms-apps://itunes.apple.com/app/id%d", self.applicationID)
-        let appStoreURL = NSURL(string: appStoreString)
-        if let appStoreURL = appStoreURL {
-            UIApplication.sharedApplication().openURL(appStoreURL)
-        }
-    }
-    
-    @IBAction func didTapAppleWatchButton(sender: UIButton) {
-        let presentingVC = self.presentingViewController as? TipViewController
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            if let presentingVC = presentingVC {
-                presentingVC.performSegueWithIdentifier("watchInfoModalDialogSegue", sender: self)
-            }
-        })
-    }
-    
-    func mailComposeController(controller: MFMailComposeViewController?, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         if let presentedViewController = self.presentedViewController {
             presentedViewController.dismissViewControllerAnimated(true, completion: nil)
         }
         if let error = error {
-            NSLog("AboutTableViewController: Error while sending email. Error Description: \(error.description)")
+            self.log.error("Error while sending email. Error Description: \(error.localizedDescription)")
+        }
+        
+        switch result {
+        case MFMailComposeResultCancelled:
+            Answers.logCustomEventWithName(AnswersString.DidCancelEmail, customAttributes: error?.dictionaryForAnswers)
+        case MFMailComposeResultSent:
+            Answers.logCustomEventWithName(AnswersString.DidSendEmail, customAttributes: error?.dictionaryForAnswers)
+        case MFMailComposeResultSaved:
+            Answers.logCustomEventWithName(AnswersString.DidSaveEmail, customAttributes: error?.dictionaryForAnswers)
+        case MFMailComposeResultFailed:
+            Answers.logCustomEventWithName(AnswersString.DidFailEmail, customAttributes: error?.dictionaryForAnswers)
+        default:
+            break
         }
     }
     
@@ -376,6 +479,26 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             self.tableView.reloadData()
         })
         
+    }
+    
+    // MARK: Handle state restoration
+    
+    private var restoreScrollPosition: NSIndexPath?
+    
+    override func decodeRestorableStateWithCoder(coder: NSCoder) {
+        self.restoreScrollPosition = coder.decodeObjectForKey(RestoreKeys.ScrollToCellKey) as? NSIndexPath
+        super.decodeRestorableStateWithCoder(coder)
+    }
+    
+    override func encodeRestorableStateWithCoder(coder: NSCoder) {
+        if let indexPath = self.tableView.indexPathsForVisibleRows?.first {
+            coder.encodeObject(indexPath, forKey: RestoreKeys.ScrollToCellKey)
+        }
+        super.encodeRestorableStateWithCoder(coder)
+    }
+    
+    struct RestoreKeys {
+        static let ScrollToCellKey = "ScrollToCellKey"
     }
     
     // MARK: Handle View Going Away

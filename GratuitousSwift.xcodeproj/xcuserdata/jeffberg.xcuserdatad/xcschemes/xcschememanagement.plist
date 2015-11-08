@@ -4,50 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Phone App Local Debug.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>Phone App Local Release.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>Phone App Store Debug.xcscheme</key>
+		<key>Gratuity.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>Phone App Store Release.xcscheme</key>
+		<key>GratuityWatch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
-		</dict>
-		<key>Watch App Local Debug.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
-		<key>Watch App Local Release.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
-		</dict>
-		<key>Watch App Store Debug.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>Watch App Store Release.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>731375651ABF3D910074E2F2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>733D02A51BBA4C2D00E40EC5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -83,6 +58,16 @@
 			<true/>
 		</dict>
 		<key>73A18D691A2A9525002180DD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>73AEA6B91BBB05EB004B16DE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>73AEA6C51BBB05EB004B16DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
