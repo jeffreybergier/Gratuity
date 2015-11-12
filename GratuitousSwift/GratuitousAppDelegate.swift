@@ -82,7 +82,13 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch
         
         //crashlytics intializer
-        Fabric.with([Crashlytics.self(), Answers.self()])
+        #if DEBUG
+            self.log.info("Debug Build: Not Loading Fabric")
+        #endif
+        #if RELEASE
+            self.log.info("Release Build: Loading Fabric")
+            Fabric.with([Crashlytics.self(), Answers.self()])
+        #endif
         
         self.window?.tintColor = GratuitousUIConstant.lightTextColor()
         self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
