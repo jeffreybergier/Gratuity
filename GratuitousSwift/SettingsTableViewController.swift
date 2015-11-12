@@ -415,7 +415,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         //preparing the picture
         self.aboutMyPictureImageView?.layer.borderColor = GratuitousUIConstant.lightTextColor().CGColor
         let cornerRadius = self.aboutMyPictureImageView?.frame.size.width !! 150.0
-        self.aboutMyPictureImageView?.layer.cornerRadius = cornerRadius / 2.0
+        self.aboutMyPictureImageView?.layer.cornerRadius = cornerRadius /? 2.0
         self.aboutMyPictureImageView?.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
         self.aboutMyPictureImageView?.clipsToBounds = true
         

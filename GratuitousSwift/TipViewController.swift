@@ -420,7 +420,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         if billAmount > 0 { //this protects from divide by 0 crashes
             let currencySign = self.applicationPreferences.overrideCurrencySymbol
             let totalAmount = billAmount + tipAmount
-            let tipPercentage = Int(round(Double(tipAmount) / Double(billAmount) * 100))
+            let tipPercentage = Int(round(Double(tipAmount) /? Double(billAmount) * 100))
             
             let currencyFormattedString = self.currencyFormatter.currencyFormattedStringWithCurrencySign(currencySign, amount: totalAmount)
             let totalAmountAttributedString = NSAttributedString(string: currencyFormattedString, attributes: self.totalAmountTextLabelAttributes)
@@ -634,8 +634,8 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         let indexPath: NSIndexPath?
         
         var point = tableView.frame.origin
-        point.x += tableView.frame.size.width / 2
-        point.y += tableView.frame.size.height / 2
+        point.x = floor(point.x) + floor(tableView.frame.size.width /? 2)
+        point.y = floor(point.y) + floor(tableView.frame.size.height /? 2)
         point = tableView.convertPoint(point, fromView: tableView.superview)
         if let optionalIndexPath = tableView.indexPathForRowAtPoint(point) {
             indexPath = optionalIndexPath

@@ -56,10 +56,10 @@ final class SplitTotalInterfaceController: WKInterfaceController {
         
         // MARK: Divide up Total Amount
         let zero = totalAmount
-        let one = Int(round(Double(totalAmount) / 2))
-        let two = Int(round(Double(totalAmount) / 3))
-        let three = Int(round(Double(totalAmount) / 4))
-        let four = Int(round(Double(totalAmount) / 5))
+        let one = Int(round(Double(totalAmount) /? 2))
+        let two = Int(round(Double(totalAmount) /? 3))
+        let three = Int(round(Double(totalAmount) /? 4))
+        let four = Int(round(Double(totalAmount) /? 5))
         
         // prepare the attributed text
         let zeroString = NSAttributedString(string: self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.applicationPreferences.overrideCurrencySymbol, amount: zero), attributes: self.valueTextAttributes)

@@ -272,11 +272,27 @@ func !!<A>(lhs:A?, @autoclosure rhs:()->A)->A {
 
 infix operator /? { associativity right precedence 160 }
 
-func /?(top: Double, bottom: Double) -> Double? {
+func /?(top: Double, bottom: Double) -> Double {
     let division = top/bottom
     if isinf(division) == false && isnan(division) == false {
         return division
     }
-    return .None
+    return 0
+}
+
+func /?(top: CGFloat, bottom: CGFloat) -> CGFloat {
+    let division = top/bottom
+    if isinf(division) == false && isnan(division) == false {
+        return division
+    }
+    return 0
+}
+
+func /?(top: Float, bottom: Float) -> Float {
+    let division = top/bottom
+    if isinf(division) == false && isnan(division) == false {
+        return division
+    }
+    return 0
 }
 

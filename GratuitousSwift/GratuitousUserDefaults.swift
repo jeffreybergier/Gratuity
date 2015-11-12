@@ -231,8 +231,7 @@ struct DefaultsCalculations {
         } else {
             tipAmount = Int(round(Double(billAmount) * preferences.suggestedTipPercentage))
         }
-        
-        let tipPercentage = Int(round((Double(tipAmount) / Double(billAmount)) * 100))
+        let tipPercentage = Int(round(Double(tipAmount) /? Double(billAmount)))
         
         self.tipPercentage = tipPercentage
         self.tipAmount = tipAmount
