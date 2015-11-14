@@ -54,123 +54,78 @@ extension GratuitousUserDefaults {
 
 extension GratuitousUserDefaults {
 
-    init(dictionary: NSDictionary?, fallback: GratuitousUserDefaults) {
+    init(dictionary: NSDictionary?, fallback: GratuitousUserDefaults? = .None) {
         // version 1.0 and 1.0.1 keys
         if let billIndexPathRow = dictionary?[Keys.billIndexPathRow] as? NSNumber {
             self.billIndexPathRow = billIndexPathRow.integerValue
-        } else {
-            self.billIndexPathRow = fallback.billIndexPathRow
-        }
-        if let tipIndexPathRow = dictionary?[Keys.tipIndexPathRow] as? NSNumber {
-            self.tipIndexPathRow = tipIndexPathRow.integerValue
-        } else {
-            self.tipIndexPathRow = fallback.tipIndexPathRow
-        }
-        if let overrideCurrencySymbol = dictionary?[Keys.overrideCurrencySymbol] as? NSNumber,
-            symbolEnum = CurrencySign(rawValue: overrideCurrencySymbol.integerValue) {
-                self.overrideCurrencySymbol = symbolEnum
-        } else {
-            self.overrideCurrencySymbol = fallback.overrideCurrencySymbol
-        }
-        if let suggestedTipPercentage = dictionary?[Keys.suggestedTipPercentage] as? NSNumber {
-            self.suggestedTipPercentage = suggestedTipPercentage.doubleValue
-        } else {
-            self.suggestedTipPercentage = fallback.suggestedTipPercentage
-        }
-        // version 1.2 keys
-        if let splitBillPurchased = dictionary?[Keys.splitBillPurchased] as? NSNumber {
-            let value = splitBillPurchased.boolValue
-            self.splitBillPurchased = value
-        } else {
-            splitBillPurchased = false
-        }
-        
-        var lastLocationFromDictionary = JSBIPLocation()
-        if let zipCode = dictionary?[Keys.locationZipCode] as? String {
-            lastLocationFromDictionary.zipCode = zipCode
-        } else {
-            lastLocationFromDictionary.zipCode = fallback.lastLocation?.zipCode
-        }
-        if let city = dictionary?[Keys.locationCity] as? String {
-            lastLocationFromDictionary.city = city
-        } else {
-            lastLocationFromDictionary.city = fallback.lastLocation?.city
-        }
-        if let region = dictionary?[Keys.locationRegion] as? String {
-            lastLocationFromDictionary.region = region
-        } else {
-            lastLocationFromDictionary.region = fallback.lastLocation?.region
-        }
-        if let country = dictionary?[Keys.locationCountry] as? String {
-            lastLocationFromDictionary.country = country
-        } else {
-            lastLocationFromDictionary.country = fallback.lastLocation?.country
-        }
-        if let countryCode = dictionary?[Keys.locationCountryCode] as? String {
-            lastLocationFromDictionary.countryCode = countryCode
-        } else {
-            lastLocationFromDictionary.countryCode = fallback.lastLocation?.countryCode
-        }
-        if lastLocationFromDictionary.isEmpty == false {
-            self.lastLocation = lastLocationFromDictionary
-        }
-        // ignored from disk version. Always set to false on load
-        self.currencySymbolsNeeded = fallback.currencySymbolsNeeded
-    }
-    
-    init(dictionary: NSDictionary?) {
-        // version 1.0 and 1.0.1 keys
-        if let billIndexPathRow = dictionary?[Keys.billIndexPathRow] as? NSNumber {
-            self.billIndexPathRow = billIndexPathRow.integerValue
+        } else if let billIndexPathRow = fallback?.billIndexPathRow {
+            self.billIndexPathRow = billIndexPathRow
         } else {
             self.billIndexPathRow = 25
         }
         if let tipIndexPathRow = dictionary?[Keys.tipIndexPathRow] as? NSNumber {
             self.tipIndexPathRow = tipIndexPathRow.integerValue
+        } else if let tipIndexPathRow = fallback?.tipIndexPathRow {
+            self.tipIndexPathRow = tipIndexPathRow
         } else {
             self.tipIndexPathRow = 0
         }
         if let overrideCurrencySymbol = dictionary?[Keys.overrideCurrencySymbol] as? NSNumber,
             symbolEnum = CurrencySign(rawValue: overrideCurrencySymbol.integerValue) {
                 self.overrideCurrencySymbol = symbolEnum
+        } else if let overrideCurrencySymbol = fallback?.overrideCurrencySymbol {
+            self.overrideCurrencySymbol = overrideCurrencySymbol
         } else {
             self.overrideCurrencySymbol = .Default
         }
         if let suggestedTipPercentage = dictionary?[Keys.suggestedTipPercentage] as? NSNumber {
             self.suggestedTipPercentage = suggestedTipPercentage.doubleValue
+        } else if let suggestedTipPercentage = fallback?.suggestedTipPercentage {
+            self.suggestedTipPercentage = suggestedTipPercentage
         } else {
             self.suggestedTipPercentage = 0.2
         }
-        
         // version 1.2 keys
         if let splitBillPurchased = dictionary?[Keys.splitBillPurchased] as? NSNumber {
             let value = splitBillPurchased.boolValue
             self.splitBillPurchased = value
+        } else if let splitBillPurchased = fallback?.splitBillPurchased {
+            self.splitBillPurchased = splitBillPurchased
         } else {
-            splitBillPurchased = false
+            self.splitBillPurchased = false
         }
         
         var lastLocationFromDictionary = JSBIPLocation()
         if let zipCode = dictionary?[Keys.locationZipCode] as? String {
             lastLocationFromDictionary.zipCode = zipCode
+        } else {
+            lastLocationFromDictionary.zipCode = fallback?.lastLocation?.zipCode
         }
         if let city = dictionary?[Keys.locationCity] as? String {
             lastLocationFromDictionary.city = city
+        } else {
+            lastLocationFromDictionary.city = fallback?.lastLocation?.city
         }
         if let region = dictionary?[Keys.locationRegion] as? String {
             lastLocationFromDictionary.region = region
+        } else {
+            lastLocationFromDictionary.region = fallback?.lastLocation?.region
         }
         if let country = dictionary?[Keys.locationCountry] as? String {
             lastLocationFromDictionary.country = country
+        } else {
+            lastLocationFromDictionary.country = fallback?.lastLocation?.country
         }
         if let countryCode = dictionary?[Keys.locationCountryCode] as? String {
             lastLocationFromDictionary.countryCode = countryCode
+        } else {
+            lastLocationFromDictionary.countryCode = fallback?.lastLocation?.countryCode
         }
         if lastLocationFromDictionary.isEmpty == false {
             self.lastLocation = lastLocationFromDictionary
         }
         // ignored from disk version. Always set to false on load
-        self.currencySymbolsNeeded = false
+        self.currencySymbolsNeeded = fallback?.currencySymbolsNeeded ?? false
     }
 }
 
