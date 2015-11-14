@@ -83,9 +83,11 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         
         //crashlytics intializer
         #if DEBUG
+            self.log.setup(.Verbose, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .None, fileLogLevel: .None)
             self.log.info("Debug Build: Not Loading Fabric")
         #endif
         #if RELEASE
+            self.log.setup(.Warning, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .None, fileLogLevel: .None)
             self.log.info("Release Build: Loading Fabric")
             Fabric.with([Crashlytics.self(), Answers.self()])
         #endif
