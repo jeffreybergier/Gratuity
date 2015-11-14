@@ -10,7 +10,6 @@ import Foundation
 
 struct GratuitousUserDefaults {
     var currencySymbolsNeeded: Bool
-    var appVersionString: String
     var billIndexPathRow: Int
     var tipIndexPathRow: Int
     var overrideCurrencySymbol: CurrencySign
@@ -37,7 +36,6 @@ extension GratuitousUserDefaults {
             dictionary[Keys.currencySymbolsNeeded] = self.currencySymbolsNeeded
             fallthrough
         case .ForDisk:
-            dictionary[Keys.appVersionString] = self.appVersionString
             dictionary[Keys.locationZipCode] = self.lastLocation?.zipCode
             dictionary[Keys.locationCity] = self.lastLocation?.city
             dictionary[Keys.locationCountry] = self.lastLocation?.country
@@ -78,12 +76,6 @@ extension GratuitousUserDefaults {
             self.suggestedTipPercentage = suggestedTipPercentage.doubleValue
         } else {
             self.suggestedTipPercentage = fallback.suggestedTipPercentage
-        }
-        // version 1.1 keys
-        if let appVersionString = dictionary?[Keys.appVersionString] as? String {
-            self.appVersionString = appVersionString
-        } else {
-            self.appVersionString = fallback.appVersionString
         }
         // version 1.2 keys
         if let splitBillPurchased = dictionary?[Keys.splitBillPurchased] as? NSNumber {
@@ -149,12 +141,7 @@ extension GratuitousUserDefaults {
         } else {
             self.suggestedTipPercentage = 0.2
         }
-        // version 1.1 keys
-        if let appVersionString = dictionary?[Keys.appVersionString] as? String {
-            self.appVersionString = appVersionString
-        } else {
-            self.appVersionString = "1.1.0"
-        }
+        
         // version 1.2 keys
         if let splitBillPurchased = dictionary?[Keys.splitBillPurchased] as? NSNumber {
             let value = splitBillPurchased.boolValue
@@ -199,7 +186,6 @@ extension GratuitousUserDefaults {
         static let suggestedTipPercentage = "suggestedTipPercentage"
         
         // version 1.1 keys
-        static let appVersionString = "appVersionString"
         static let showTutorialAtLaunch = "showTutorialAtLaunch"
         static let watchInfoViewControllerShouldAppear = "watchInfoViewControllerShouldAppear"
         static let watchInfoViewControllerWasDismissed = "watchInfoViewControllerWasDismissed"
@@ -231,7 +217,8 @@ struct DefaultsCalculations {
         } else {
             tipAmount = Int(round(Double(billAmount) * preferences.suggestedTipPercentage))
         }
-        let tipPercentage = Int(round(Double(tipAmount) /? Double(billAmount)))
+        let rawTipPercentage = Double(tipAmount) /? Double(billAmount)
+        let tipPercentage = Int(round(rawTipPercentage * 100))
         
         self.tipPercentage = tipPercentage
         self.tipAmount = tipAmount
