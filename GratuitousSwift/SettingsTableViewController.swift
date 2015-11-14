@@ -41,6 +41,8 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = LocalizedString.SettingsTitle
+        
         //add necessary notification center observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)

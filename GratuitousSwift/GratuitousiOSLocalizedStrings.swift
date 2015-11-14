@@ -90,6 +90,10 @@ extension SettingsTableViewController {
         NSLocalizedString("i018 - Apple Watch App",
             comment: "SettingsTableViewController: GratuityForAppleWatchButton: Button to preview Gratuity for Apple Watch"
         )
+        static let SettingsTitle =
+        NSLocalizedString("i051 - Settings",
+            comment: "SettingsTableViewController: TitleForNavBar: Title of settings view controller that appears in its navigation controller navbar."
+        )
     }
 }
 
