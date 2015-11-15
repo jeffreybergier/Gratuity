@@ -14,7 +14,7 @@ class GratuitousSelectFadeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.layer.cornerRadius = 6.0
+        self.layer.cornerRadius = GratuitousUIConstant.cornerRadius
         self.layer.borderWidth = GratuitousUIConstant.thinBorderWidth()
         self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor
         self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()

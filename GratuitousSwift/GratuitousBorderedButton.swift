@@ -48,7 +48,7 @@ final class GratuitousBorderedButton: UIButton {
         
         self.layer.borderColor = GratuitousUIConstant.lightTextColor().CGColor
         self.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
-        self.layer.cornerRadius = 6.0
+        self.layer.cornerRadius = GratuitousUIConstant.cornerRadius
     }
     
     func highlightButton() {

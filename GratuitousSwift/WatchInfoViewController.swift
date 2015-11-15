@@ -32,7 +32,7 @@ final class WatchInfoViewController: SmallModalScollViewController {
         super.viewDidLoad()
         
         self.videoPlayerSurroundView?.layer.borderWidth = 1
-        self.videoPlayerSurroundView?.layer.cornerRadius = 8
+        self.videoPlayerSurroundView?.layer.cornerRadius = GratuitousUIConstant.cornerRadius
         self.videoPlayerSurroundView?.layer.borderColor = GratuitousUIColor.lightTextColor().CGColor
         
         if let videoPlayer = self.videoPlayer {

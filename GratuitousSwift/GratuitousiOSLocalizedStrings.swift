@@ -30,11 +30,11 @@ extension WatchInfoViewController {
 extension TipViewController {
     struct LocalizedString {
         static let BillAmountHeader =
-        NSLocalizedString("i005 - Amount on Bill",
+        NSLocalizedString("i005 - Bill",
             comment: "TipViewController: BillAmountHeader: The header above the bill amount selector."
         )
         static let SuggestTipHeader =
-        NSLocalizedString("i006 - Suggested Tip",
+        NSLocalizedString("i006 - Tip",
             comment: "TipViewController: SuggestTipHeader: The header above the tip amount selector"
         )
         static let SpltBillButton =

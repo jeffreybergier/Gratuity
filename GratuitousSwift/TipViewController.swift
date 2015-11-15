@@ -144,8 +144,12 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         self.billAmountTableViewTitleTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
         self.tipAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
         self.billAmountTableViewTitleTextLabelView?.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
+        self.billAmountTableViewTitleTextLabelView?.layer.cornerRadius = GratuitousUIConstant.cornerRadius
+        self.tipAmountTableViewTitleTextLabelView?.layer.cornerRadius = GratuitousUIConstant.cornerRadius
         
         //configure the text
+        self.billAmountTableViewTitleTextLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        self.tipAmountTableViewTitleTextLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         self.billAmountTableViewTitleTextLabel?.text = TipViewController.LocalizedString.BillAmountHeader
         self.tipAmountTableViewTitleTextLabel?.text = TipViewController.LocalizedString.SuggestTipHeader
         self.prepareSplitBillButton()
@@ -712,6 +716,8 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             self.lowerTextSizeAdjustment = GratuitousUIConstant.correctCellTextSize().textSizeAdjustment()
             self.selectedTableViewCellOutlineViewHeightConstraint?.constant = GratuitousUIConstant.correctCellTextSize().rowHeight()
             self.largeTextWidthLandscapeOnlyConstraint?.constant = GratuitousUIConstant.largeTextLandscapeConstant()
+            self.billAmountTableViewTitleTextLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+            self.tipAmountTableViewTitleTextLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
             
             //estimated row height
             self.billAmountTableView?.estimatedRowHeight = GratuitousUIConstant.correctCellTextSize().rowHeight()
