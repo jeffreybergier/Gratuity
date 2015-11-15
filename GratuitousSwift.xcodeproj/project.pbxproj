@@ -62,6 +62,7 @@
 		738C98C11BD2DE3B00D14F20 /* NSTimer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B01BD19FC000D14F20 /* NSTimer+Closure.swift */; };
 		738C98C31BD2EAA500D14F20 /* GratuitousWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98C21BD2EAA500D14F20 /* GratuitousWatchConnectivityManager.swift */; };
 		738C98C41BD2EEC800D14F20 /* GratuitousiOSConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */; };
+		739350F51BF8F66A00A0623F /* GratuitousAppDelegate+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739350F41BF8F66900A0623F /* GratuitousAppDelegate+OpenURL.swift */; };
 		73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A87ACD1BC1C2AC006802F7 /* GratuitousErrors.swift */; };
 		73AEA6C71BBB05EB004B16DE /* GratuityWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 73AEA6C61BBB05EB004B16DE /* GratuityWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		73AEA6D41BBB05EB004B16DE /* GratuityWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 73AEA6BA1BBB05EB004B16DE /* GratuityWatch.app */; };
@@ -185,6 +186,7 @@
 		738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchApplicationPreferences.swift; sourceTree = "<group>"; };
 		738C98BC1BD2B1B600D14F20 /* JSBWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSBWatchConnectivityManager.swift; path = GratuitousSwift/JSBWatchConnectivityManager.swift; sourceTree = SOURCE_ROOT; };
 		738C98C21BD2EAA500D14F20 /* GratuitousWatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousWatchConnectivityManager.swift; sourceTree = "<group>"; };
+		739350F41BF8F66900A0623F /* GratuitousAppDelegate+OpenURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GratuitousAppDelegate+OpenURL.swift"; sourceTree = "<group>"; };
 		7399D9BD1B9689260005D172 /* GratuitousCurrencyStringImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousCurrencyStringImageGenerator.swift; sourceTree = "<group>"; };
 		73A0B5671A8FC56A00D17943 /* SplitTotalInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTotalInterfaceController.swift; sourceTree = "<group>"; };
 		73A18D5A1A2A9525002180DD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
@@ -379,6 +381,7 @@
 				7382510619E60EED00CD2B28 /* GratuitousAppDelegate.swift */,
 				73C8BB551BD0A85800D427CB /* GratuitousAppDelegate+StateRestoration.swift */,
 				73C8BB571BD0A9C300D427CB /* GratuitousAppDelegate+Handoff.swift */,
+				739350F41BF8F66900A0623F /* GratuitousAppDelegate+OpenURL.swift */,
 				734171AE19E77BEF00405C7B /* GratuitousSwift.storyboard */,
 				7353346D1A1803FB008530E1 /* TipViewController */,
 				735334711A1804CC008530E1 /* Settings View Controller */,
@@ -866,6 +869,7 @@
 				733D02CC1BBA4D2800E40EC5 /* GratuitousRightPresentationController.swift in Sources */,
 				733D02C61BBA4D1900E40EC5 /* SmallModalScrollViewController.swift in Sources */,
 				733D02BF1BBA4D0900E40EC5 /* GratuitousGradientView.swift in Sources */,
+				739350F51BF8F66A00A0623F /* GratuitousAppDelegate+OpenURL.swift in Sources */,
 				7382AAF31BE4536C003BFFB1 /* JSBIPGeocoder.swift in Sources */,
 				733D02C41BBA4D1900E40EC5 /* SmallModalViewController.swift in Sources */,
 				733D02C81BBA4D1F00E40EC5 /* SplitBillTableViewCell.swift in Sources */,
