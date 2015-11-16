@@ -119,8 +119,8 @@ class GratuitousPresentationController: UIPresentationController {
     override func frameOfPresentedViewInContainerView() -> CGRect {
         let toSize = self.sizeForChildContentContainer(self.presentedViewController, withParentContainerSize: self.containerView!.bounds.size)
         
-        let originX = ((self.containerView!.bounds.size.width - toSize.width) / 2)
-        let originY = ((self.containerView!.bounds.size.height - toSize.height) / 2)
+        let originX = floor((self.containerView!.bounds.size.width - toSize.width) /? 2)
+        let originY = floor((self.containerView!.bounds.size.height - toSize.height) /? 2)
         let contentViewPoint = CGPoint(x: originX, y: originY)
         
         let rect = CGRect(origin: contentViewPoint, size: toSize)

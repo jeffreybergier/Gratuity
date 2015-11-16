@@ -8,6 +8,8 @@
 
 struct GratuitousUIConstant {
     
+    static let cornerRadius = CGFloat(6.0)
+    
     // bridging to another class that the watch app can use in order to reduce refactoring
     static func lightBackgroundColor() -> UIColor {
         return GratuitousUIColor.lightTextColor()

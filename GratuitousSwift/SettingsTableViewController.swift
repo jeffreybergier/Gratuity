@@ -41,6 +41,8 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = LocalizedString.SettingsTitle
+        
         //add necessary notification center observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
@@ -415,7 +417,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         //preparing the picture
         self.aboutMyPictureImageView?.layer.borderColor = GratuitousUIConstant.lightTextColor().CGColor
         let cornerRadius = self.aboutMyPictureImageView?.frame.size.width !! 150.0
-        self.aboutMyPictureImageView?.layer.cornerRadius = cornerRadius / 2.0
+        self.aboutMyPictureImageView?.layer.cornerRadius = cornerRadius /? 2.0
         self.aboutMyPictureImageView?.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
         self.aboutMyPictureImageView?.clipsToBounds = true
         

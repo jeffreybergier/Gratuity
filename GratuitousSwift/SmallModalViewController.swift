@@ -133,7 +133,7 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
     private func showBorder() {
         self.contentView?.layer.borderColor = GratuitousUIColor.mediumBackgroundColor().CGColor
         self.contentView?.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
-        self.contentView?.layer.cornerRadius = 6
+        self.contentView?.layer.cornerRadius = GratuitousUIConstant.cornerRadius
         self.contentView?.clipsToBounds = true
     }
     

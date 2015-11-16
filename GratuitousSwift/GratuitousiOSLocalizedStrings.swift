@@ -30,11 +30,11 @@ extension WatchInfoViewController {
 extension TipViewController {
     struct LocalizedString {
         static let BillAmountHeader =
-        NSLocalizedString("i005 - Amount on Bill",
+        NSLocalizedString("i005 - Bill",
             comment: "TipViewController: BillAmountHeader: The header above the bill amount selector."
         )
         static let SuggestTipHeader =
-        NSLocalizedString("i006 - Suggested Tip",
+        NSLocalizedString("i006 - Tip",
             comment: "TipViewController: SuggestTipHeader: The header above the tip amount selector"
         )
         static let SpltBillButton =
@@ -89,6 +89,10 @@ extension SettingsTableViewController {
         static let GratuityForAppleWatchButton =
         NSLocalizedString("i018 - Apple Watch App",
             comment: "SettingsTableViewController: GratuityForAppleWatchButton: Button to preview Gratuity for Apple Watch"
+        )
+        static let SettingsTitle =
+        NSLocalizedString("i051 - Settings",
+            comment: "SettingsTableViewController: TitleForNavBar: Title of settings view controller that appears in its navigation controller navbar."
         )
     }
 }

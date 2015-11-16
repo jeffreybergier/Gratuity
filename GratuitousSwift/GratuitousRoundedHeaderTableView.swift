@@ -11,6 +11,6 @@ final class GratuitousRoundedHeaderTableView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.layer.cornerRadius = 6.0
+        self.layer.cornerRadius = GratuitousUIConstant.cornerRadius
     }
 }

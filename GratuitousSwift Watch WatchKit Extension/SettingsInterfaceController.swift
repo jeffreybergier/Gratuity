@@ -97,7 +97,7 @@ final class SettingsInterfaceController: WKInterfaceController {
     }
     
     @IBAction private func suggestedTipSliderDidChange(value: Float) {
-        let adjustedValue = value / 100
+        let adjustedValue = value /? 100
         self.applicationPreferences.suggestedTipPercentage = Double(adjustedValue)
         self.updateSuggestedTipPercentageUI()
     }
