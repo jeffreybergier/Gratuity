@@ -9,22 +9,22 @@
 import UIKit
 
 extension GratuitousAppDelegate {
-    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         let handled: Bool
         let completion: () -> Void
         if let handoff = HandoffTypes(rawValue: userActivity.activityType) {
             switch handoff {
             case .SplitBillPurchase:
-                completion = { self.window?.rootViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.PurchaseSplitBill.rawValue, sender: self) }
+                completion = { self.window?.rootViewController?.performSegue(withIdentifier: TipViewController.StoryboardSegues.PurchaseSplitBill.rawValue, sender: self) }
                 handled = true
             case .MainTipInterface:
                 completion = { }
                 handled = true
             case .SettingsInterface:
-                completion = { self.window?.rootViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.Settings.rawValue, sender: self) }
+                completion = { self.window?.rootViewController?.performSegue(withIdentifier: TipViewController.StoryboardSegues.Settings.rawValue, sender: self) }
                 handled = true
             case .SplitBillInterface:
-                completion = { self.window?.rootViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self) }
+                completion = { self.window?.rootViewController?.performSegue(withIdentifier: TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self) }
                 handled = true
             }
         } else {
@@ -33,7 +33,7 @@ extension GratuitousAppDelegate {
         }
         
         if let presentedVC = self.window?.rootViewController?.presentedViewController {
-            presentedVC.dismissViewControllerAnimated(true, completion: completion)
+            presentedVC.dismiss(animated: true, completion: completion)
         } else {
             completion()
         }

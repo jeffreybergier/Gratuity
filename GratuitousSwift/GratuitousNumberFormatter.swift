@@ -8,13 +8,14 @@
 
 import Foundation
 
-class GratuitousNumberFormatter: NSNumberFormatter {
-    enum Style {
-        case RespondsToLocaleChanges
-        case DoNotRespondToLocaleChanges
+class GratuitousNumberFormatter: NumberFormatter {
+    
+    enum Style2 {
+        case respondsToLocaleChanges
+        case doNotRespondToLocaleChanges
     }
     
-    init(style: Style) {
+    init(style: GratuitousNumberFormatter.Style2) {
         super.init()
         
         self.locale = DefaultKeys.locale
@@ -24,41 +25,41 @@ class GratuitousNumberFormatter: NSNumberFormatter {
         self.numberStyle = DefaultKeys.numberStyle
         
         switch style {
-        case .RespondsToLocaleChanges:
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.localeDidChangeInSystem(_:)), name: NSCurrentLocaleDidChangeNotification, object: .None)
-        case .DoNotRespondToLocaleChanges:
+        case .respondsToLocaleChanges:
+            NotificationCenter.default.addObserver(self, selector: #selector(self.localeDidChangeInSystem(_:)), name: NSLocale.currentLocaleDidChangeNotification, object: .none)
+        case .doNotRespondToLocaleChanges:
             break
         }
     }
     
-    @objc private func localeDidChangeInSystem(notification: NSNotification?) {
-        self.locale = NSLocale.currentLocale()
+    @objc fileprivate func localeDidChangeInSystem(_ notification: Notification?) {
+        self.locale = Locale.current
     }
     
-    func currencySymbolFromCurrencySign(sign: CurrencySign) -> String {
+    func currencySymbolFromCurrencySign(_ sign: CurrencySign) -> String {
         switch sign {
-        case .Default:
+        case .default:
             return self.currencyCode
         default:
             return sign.string()
         }
     }
     
-    func currencyNameFromCurrencySign(sign: CurrencySign) -> String {
+    func currencyNameFromCurrencySign(_ sign: CurrencySign) -> String {
         switch sign {
-        case .Default:
+        case .default:
             return self.currencyCode
         default:
             return sign.stringForFileName()
         }
     }
     
-    func currencyFormattedStringWithCurrencySign(sign: CurrencySign, amount: Int) -> String {
+    func currencyFormattedStringWithCurrencySign(_ sign: CurrencySign, amount: Int) -> String {
         let currencyString: String
         switch sign {
-        case .Default:
-            currencyString = self.stringFromNumber(amount) !! "\(amount)"
-        case .NoSign:
+        case .default:
+            currencyString = self.string(from: NSNumber(value: amount)) !! "\(amount)"
+        case .noSign:
             currencyString = "\(amount)"
         default:
             currencyString = "\(self.currencySymbolFromCurrencySign(sign))\(amount)"
@@ -67,63 +68,63 @@ class GratuitousNumberFormatter: NSNumberFormatter {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        if let locale = aDecoder.decodeObjectForKey(CoderKeys.locale) as? NSLocale {
+        if let locale = aDecoder.decodeObject(forKey: CoderKeys.locale) as? Locale {
             self.locale = locale
         } else {
             self.locale = DefaultKeys.locale
         }
         
-        if let maximumFractionDigits = aDecoder.decodeObjectForKey(CoderKeys.maximumFractionDigits) as? NSNumber {
-            self.maximumFractionDigits = maximumFractionDigits.integerValue
+        if let maximumFractionDigits = aDecoder.decodeObject(forKey: CoderKeys.maximumFractionDigits) as? NSNumber {
+            self.maximumFractionDigits = maximumFractionDigits.intValue
         } else {
             self.maximumFractionDigits = DefaultKeys.maximumFractionDigits
         }
         
-        if let minimumFractionDigits = aDecoder.decodeObjectForKey(CoderKeys.minimumFractionDigits) as? NSNumber {
-            self.minimumFractionDigits = minimumFractionDigits.integerValue
+        if let minimumFractionDigits = aDecoder.decodeObject(forKey: CoderKeys.minimumFractionDigits) as? NSNumber {
+            self.minimumFractionDigits = minimumFractionDigits.intValue
         } else {
             self.minimumFractionDigits = DefaultKeys.minimumFractionDigits
         }
         
-        if let alwaysShowsDecimalSeparator = aDecoder.decodeObjectForKey(CoderKeys.alwaysShowsDecimalSeparator) as? NSNumber {
+        if let alwaysShowsDecimalSeparator = aDecoder.decodeObject(forKey: CoderKeys.alwaysShowsDecimalSeparator) as? NSNumber {
             self.alwaysShowsDecimalSeparator = alwaysShowsDecimalSeparator.boolValue
         } else {
             self.alwaysShowsDecimalSeparator = DefaultKeys.alwaysShowsDecimalSeparator
         }
         
-        if let numberStyleNumber = aDecoder.decodeObjectForKey(CoderKeys.minimumFractionDigits) as? NSNumber,
-            let numberStyle = NSNumberFormatterStyle(rawValue: numberStyleNumber.unsignedLongValue) {
+        if let numberStyleNumber = aDecoder.decodeObject(forKey: CoderKeys.minimumFractionDigits) as? NSNumber,
+            let numberStyle = NumberFormatter.Style(rawValue: numberStyleNumber.uintValue) {
                 self.numberStyle = numberStyle
         } else {
             self.numberStyle = DefaultKeys.numberStyle
         }
     }
     
-    override func encodeWithCoder(aCoder: NSCoder) {
-        super.encodeWithCoder(aCoder)
+    override func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
         
-        aCoder.encodeObject(self.locale, forKey: CoderKeys.locale)
-        aCoder.encodeObject(NSNumber(integer: self.maximumFractionDigits), forKey: CoderKeys.maximumFractionDigits)
-        aCoder.encodeObject(NSNumber(integer: self.minimumFractionDigits), forKey: CoderKeys.minimumFractionDigits)
-        aCoder.encodeObject(NSNumber(bool: self.alwaysShowsDecimalSeparator), forKey: CoderKeys.alwaysShowsDecimalSeparator)
-        aCoder.encodeObject(NSNumber(unsignedLong: self.numberStyle.rawValue), forKey: CoderKeys.numberStyle)
+        aCoder.encode(self.locale, forKey: CoderKeys.locale)
+        aCoder.encode(NSNumber(value: self.maximumFractionDigits as Int), forKey: CoderKeys.maximumFractionDigits)
+        aCoder.encode(NSNumber(value: self.minimumFractionDigits as Int), forKey: CoderKeys.minimumFractionDigits)
+        aCoder.encode(NSNumber(value: self.alwaysShowsDecimalSeparator as Bool), forKey: CoderKeys.alwaysShowsDecimalSeparator)
+        aCoder.encode(NSNumber(value: self.numberStyle.rawValue as UInt), forKey: CoderKeys.numberStyle)
     }
     
-    private struct DefaultKeys {
-        static let locale = NSLocale.currentLocale()
+    fileprivate struct DefaultKeys {
+        static let locale = Locale.current
         static let maximumFractionDigits: Int = 0
         static let minimumFractionDigits: Int = 0
         static let alwaysShowsDecimalSeparator = false
-        static let numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        static let numberStyle = NumberFormatter.Style.currency
     }
     
-    private struct CoderKeys {
+    fileprivate struct CoderKeys {
         static let locale = "locale"
         static let maximumFractionDigits = "maximumFractionDigits"
         static let minimumFractionDigits = "minimumFractionDigits"
@@ -135,17 +136,17 @@ class GratuitousNumberFormatter: NSNumberFormatter {
 extension CurrencySign {
     func stringForFileName() -> String {
         switch self {
-        case .Default:
+        case .default:
             return "Default"
-        case .Dollar:
+        case .dollar:
             return "Dollar"
-        case .Pound:
+        case .pound:
             return "Pound"
-        case .Euro:
+        case .euro:
             return "Euro"
-        case .Yen:
+        case .yen:
             return "Yen"
-        case .NoSign:
+        case .noSign:
             return "None"
         }
     }

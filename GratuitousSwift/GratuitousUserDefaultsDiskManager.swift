@@ -10,17 +10,17 @@ import Foundation
 
 class GratuitousUserDefaultsDiskManager {
     
-    private var applicationPreferences: GratuitousUserDefaults {
+    fileprivate var applicationPreferences: GratuitousUserDefaults {
         get {
             #if os(watchOS)
                 return GratuitousWatchApplicationPreferences.sharedInstance.preferences
             #elseif os(iOS)
-                return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences
+                return (UIApplication.shared.delegate as! GratuitousAppDelegate).preferences
             #endif
         }
     }
     
-    private let manager = JSBDictionaryPLISTPreferenceManager()
+    fileprivate let manager = JSBDictionaryPLISTPreferenceManager()
     
     //private var writeTimerAlreadySet = false
     
@@ -37,11 +37,13 @@ class GratuitousUserDefaultsDiskManager {
     }
     */
     
-    func writeUserDefaultsToPreferencesFile(defaults: GratuitousUserDefaults) {
-        let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
-        dispatch_async(backgroundQueue) {
+    func writeUserDefaultsToPreferencesFile(_ defaults: GratuitousUserDefaults) {
+        let backgroundQueue = DispatchQueue.global(qos: .userInteractive)
+        backgroundQueue.async {
             do {
-                try self.manager.writePreferencesDictionary(defaults.dictionaryCopyForKeys(.ForDisk), toLocation: .PreferencesPLISTFileWithinPreferencesURL, protection: .DataWritingFileProtectionComplete)
+                try self.manager.writePreferencesDictionary(defaults.dictionaryCopyForKeys(.forDisk) as NSDictionary,
+                                                            toLocation: .preferencesPLISTFileWithinPreferencesURL,
+                                                            protection: .completeFileProtection)
             } catch {
                 log?.error("Failed to write preferences to disk with error: \(error)")
             }
@@ -50,10 +52,10 @@ class GratuitousUserDefaultsDiskManager {
     
     func dictionaryFromPreferencesFile() -> NSDictionary? {
         do {
-            return try self.manager.dictionaryByReadingPLISTFromDiskLocation(.PreferencesPLISTFileWithinPreferencesURL)
+            return try self.manager.dictionaryByReadingPLISTFromDiskLocation(.preferencesPLISTFileWithinPreferencesURL)
         } catch {
             log?.error("Failed to read preferences from disk: \(error)")
-            return .None
+            return .none
         }
     }
 }

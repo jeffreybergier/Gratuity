@@ -9,7 +9,7 @@
 import UIKit
 
 @objc enum GratuitousTransitioningDelegateType: Int {
-    case Bottom, Right, NotApplicable
+    case bottom, right, notApplicable
 }
 
 @objc protocol CustomAnimatedTransitionable {
@@ -18,18 +18,18 @@ import UIKit
 
 extension UINavigationController: CustomAnimatedTransitionable {
     var customTransitionType: GratuitousTransitioningDelegateType {
-        return .Right
+        return .right
     }
 }
 
 final class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
     
-    var style: GratuitousTransitioningDelegateType = .Bottom
+    var style: GratuitousTransitioningDelegateType = .bottom
     var isPresentation = true
     var shouldAnimate = true
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-        let duration: NSTimeInterval
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        let duration: TimeInterval
         if self.isPresentation == false || self.shouldAnimate == true {
             duration = GratuitousUIConstant.animationDuration() * 2
         } else {
@@ -38,14 +38,15 @@ final class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedT
         return duration
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        guard let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) else { return }
-        guard let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) else { return }
-        guard let transitionContextContainerView = transitionContext.containerView() else { return }
-        
-        let fromView = fromVC.view
-        let toView = toVC.view
-        
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        guard
+            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
+            let fromView = fromVC.view,
+            let toView = toVC.view
+        else { return }
+        let transitionContextContainerView = transitionContext.containerView
+    
         if self.isPresentation == true {
             transitionContextContainerView.addSubview(toView)
         }
@@ -55,11 +56,11 @@ final class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedT
         let animatingOutVC = self.isPresentation ? fromVC : toVC
         let animatingOutView = animatingOutVC.view
         
-        let appearedFrame = CGRectMake(
-            transitionContext.finalFrameForViewController(animatingInVC).origin.x,
-            transitionContext.finalFrameForViewController(animatingInVC).origin.y,
-            transitionContext.finalFrameForViewController(animatingInVC).width,
-            transitionContext.finalFrameForViewController(animatingInVC).height
+        let appearedFrame = CGRect(
+            x: transitionContext.finalFrame(for: animatingInVC).origin.x,
+            y: transitionContext.finalFrame(for: animatingInVC).origin.y,
+            width: transitionContext.finalFrame(for: animatingInVC).width,
+            height: transitionContext.finalFrame(for: animatingInVC).height
         )
         
         let originX: CGFloat
@@ -67,7 +68,7 @@ final class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedT
         let transformTX: CGFloat
         let transformTY: CGFloat
         switch self.style {
-        case .Bottom:
+        case .bottom:
             originX = appearedFrame.origin.x
             originY = transitionContextContainerView.bounds.height
             transformTX = 0
@@ -88,12 +89,12 @@ final class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedT
         
         let initialFrame = self.isPresentation ? dismissedFrame : appearedFrame
         let finalFrame = self.isPresentation ? appearedFrame : dismissedFrame
-        let animatingInTransform = self.isPresentation ? CGAffineTransformIdentity : CGAffineTransformScale(animatingInView.transform, 0.9, 0.9)
-        let animatingOutScaleTransform = CGAffineTransformScale(animatingOutView.transform, 0.8, 0.8)
-        let animatingOutTransform = self.isPresentation ? CGAffineTransformTranslate(animatingOutScaleTransform, transformTX, transformTY) : CGAffineTransformIdentity
+        let animatingInTransform = self.isPresentation ? CGAffineTransform.identity : animatingInView?.transform.scaledBy(x: 0.9, y: 0.9)
+        let animatingOutScaleTransform = animatingOutView?.transform.scaledBy(x: 0.8, y: 0.8)
+        let animatingOutTransform = self.isPresentation ? animatingOutScaleTransform?.translatedBy(x: transformTX, y: transformTY) : CGAffineTransform.identity
         
-        animatingInView.frame = initialFrame
-        animatingInView.transform = self.isPresentation ? CGAffineTransformScale(animatingInView.transform, 0.9, 0.9) : CGAffineTransformIdentity
+        animatingInView?.frame = initialFrame
+        animatingInView?.transform = self.isPresentation ? (animatingInView?.transform.scaledBy(x: 0.9, y: 0.9))! : CGAffineTransform.identity
         
         let springDamping: CGFloat = self.isPresentation ? 0.8 : 0.6
         let springVelocity: CGFloat = self.isPresentation ? 1.0 : 1.8
@@ -101,15 +102,15 @@ final class GratuitousAnimatedTransitioning: NSObject, UIViewControllerAnimatedT
         toVC.viewWillAppear(true)
         fromVC.viewWillDisappear(true)
         
-        UIView.animateWithDuration(self.transitionDuration(transitionContext),
+        UIView.animate(withDuration: self.transitionDuration(using: transitionContext),
             delay: 0.0,
             usingSpringWithDamping: springDamping,
             initialSpringVelocity: springVelocity,
-            options: [UIViewAnimationOptions.AllowUserInteraction, UIViewAnimationOptions.BeginFromCurrentState],
+            options: [UIViewAnimationOptions.allowUserInteraction, UIViewAnimationOptions.beginFromCurrentState],
             animations: {
-                animatingInView.frame = finalFrame
-                animatingInView.transform = animatingInTransform
-                animatingOutView.transform = animatingOutTransform
+                animatingInView?.frame = finalFrame
+                animatingInView?.transform = animatingInTransform!
+                animatingOutView?.transform = animatingOutTransform!
             },
             completion: { finished in
                 toVC.viewDidAppear(true)

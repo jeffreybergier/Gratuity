@@ -14,97 +14,97 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     // MARK: Instance Variables
     
-    @IBOutlet private weak var titleLabel: UILabel?
-    @IBOutlet private weak var descriptionParagraphLabel: UILabel?
-    @IBOutlet private weak var subtitleLabel: UILabel?
-    @IBOutlet private weak var purchaseButton: GratuitousBorderedButton?
-    @IBOutlet private weak var restoreButton: GratuitousBorderedButton?
-    @IBOutlet private weak var modalBlockingView: UIView?
-    @IBOutlet private var descriptionParagraphHeightConstraint: NSLayoutConstraint?
-    @IBOutlet private weak var purchaseButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
-    @IBOutlet private weak var restoreButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
-    @IBOutlet private weak var purchaseButtonSpinner: UIActivityIndicatorView?
-    @IBOutlet private weak var restoreButtonSpinner: UIActivityIndicatorView?
-    @IBOutlet private weak var videoPlayerSurroundView: UIView?
-    @IBOutlet private weak var videoPlayerView: UIView?
+    @IBOutlet fileprivate weak var titleLabel: UILabel?
+    @IBOutlet fileprivate weak var descriptionParagraphLabel: UILabel?
+    @IBOutlet fileprivate weak var subtitleLabel: UILabel?
+    @IBOutlet fileprivate weak var purchaseButton: GratuitousBorderedButton?
+    @IBOutlet fileprivate weak var restoreButton: GratuitousBorderedButton?
+    @IBOutlet fileprivate weak var modalBlockingView: UIView?
+    @IBOutlet fileprivate var descriptionParagraphHeightConstraint: NSLayoutConstraint?
+    @IBOutlet fileprivate weak var purchaseButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
+    @IBOutlet fileprivate weak var restoreButtonSpinnerWidthConstraint: NSLayoutConstraint? // need to be strong or else they are released when inactive
+    @IBOutlet fileprivate weak var purchaseButtonSpinner: UIActivityIndicatorView?
+    @IBOutlet fileprivate weak var restoreButtonSpinner: UIActivityIndicatorView?
+    @IBOutlet fileprivate weak var videoPlayerSurroundView: UIView?
+    @IBOutlet fileprivate weak var videoPlayerView: UIView?
     
-    private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
-        if let moviePath = NSBundle.mainBundle().pathForResource("gratuityiOSDemoVideo@2x", ofType: "mp4") {
-            let player = AVPlayer(URL: NSURL.fileURLWithPath(moviePath))
+    fileprivate let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
+        if let moviePath = Bundle.main.path(forResource: "gratuityiOSDemoVideo@2x", ofType: "mp4") {
+            let player = AVPlayer(url: URL(fileURLWithPath: moviePath))
             player.allowsExternalPlayback = false
-            player.actionAtItemEnd = AVPlayerActionAtItemEnd.None // cause the player to loop
+            player.actionAtItemEnd = AVPlayerActionAtItemEnd.none // cause the player to loop
             let playerLayer = AVPlayerLayer(player: player)
             return (player, playerLayer)
         }
         return nil
     }()
         
-    private let purchaseManager = GratuitousPurchaseManager()
-    private var applicationPreferences: GratuitousUserDefaults {
-        get { return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences }
-        set { (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferencesSetLocally = newValue }
+    fileprivate let purchaseManager = GratuitousPurchaseManager()
+    fileprivate var applicationPreferences: GratuitousUserDefaults {
+        get { return (UIApplication.shared.delegate as! GratuitousAppDelegate).preferences }
+        set { (UIApplication.shared.delegate as! GratuitousAppDelegate).preferencesSetLocally = newValue }
     }
     
     enum State {
-        case Normal
-        case RestoreInProgress
-        case PurchaseInProgress
-        case SplitBillProductNotFoundInStoreFront
+        case normal
+        case restoreInProgress
+        case purchaseInProgress
+        case splitBillProductNotFoundInStoreFront
     }
     
-    private var state = State.Normal {
+    fileprivate var state = State.normal {
         didSet {
-            UIView.animateWithDuration(GratuitousUIConstant.animationDuration()) {
+            UIView.animate(withDuration: GratuitousUIConstant.animationDuration(), animations: {
                 let modalPresentAlpha = CGFloat(0.5)
                 let modalInvisibleAlpha = CGFloat(0.0)
                 switch self.state {
-                case .Normal:
+                case .normal:
                     self.restoreButtonSpinnerWidthConstraint?.constant = 0
                     self.purchaseButtonSpinnerWidthConstraint?.constant = 0
                     self.purchaseButtonSpinner?.alpha = 0
                     self.restoreButtonSpinner?.alpha = 0
-                    self.purchaseButton?.enabled = true
-                    self.restoreButton?.enabled = true
+                    self.purchaseButton?.isEnabled = true
+                    self.restoreButton?.isEnabled = true
                     self.purchaseButton?.alpha = 1
                     self.restoreButton?.alpha = 1
-                    self.descriptionParagraphHeightConstraint?.active = false
+                    self.descriptionParagraphHeightConstraint?.isActive = false
                     self.modalBlockingView?.alpha = modalInvisibleAlpha
-                case .RestoreInProgress:
+                case .restoreInProgress:
                     self.restoreButtonSpinnerWidthConstraint?.constant = 40
                     self.purchaseButtonSpinnerWidthConstraint?.constant = 0
                     self.purchaseButtonSpinner?.alpha = 0
                     self.restoreButtonSpinner?.alpha = 1
-                    self.purchaseButton?.enabled = false
-                    self.restoreButton?.enabled = false
+                    self.purchaseButton?.isEnabled = false
+                    self.restoreButton?.isEnabled = false
                     self.purchaseButton?.alpha = 1
                     self.restoreButton?.alpha = 1
-                    self.descriptionParagraphHeightConstraint?.active = false
+                    self.descriptionParagraphHeightConstraint?.isActive = false
                     self.modalBlockingView?.alpha = modalPresentAlpha
-                case .PurchaseInProgress:
+                case .purchaseInProgress:
                     self.restoreButtonSpinnerWidthConstraint?.constant = 0
                     self.purchaseButtonSpinnerWidthConstraint?.constant = 40
                     self.purchaseButtonSpinner?.alpha = 1
                     self.restoreButtonSpinner?.alpha = 0
-                    self.purchaseButton?.enabled = false
-                    self.restoreButton?.enabled = false
+                    self.purchaseButton?.isEnabled = false
+                    self.restoreButton?.isEnabled = false
                     self.purchaseButton?.alpha = 1
                     self.restoreButton?.alpha = 1
-                    self.descriptionParagraphHeightConstraint?.active = false
+                    self.descriptionParagraphHeightConstraint?.isActive = false
                     self.modalBlockingView?.alpha = modalPresentAlpha
-                case .SplitBillProductNotFoundInStoreFront:
+                case .splitBillProductNotFoundInStoreFront:
                     self.restoreButtonSpinnerWidthConstraint?.constant = 0
                     self.purchaseButtonSpinnerWidthConstraint?.constant = 40
                     self.purchaseButtonSpinner?.alpha = 1
                     self.restoreButtonSpinner?.alpha = 0
-                    self.purchaseButton?.enabled = false
-                    self.restoreButton?.enabled = false
+                    self.purchaseButton?.isEnabled = false
+                    self.restoreButton?.isEnabled = false
                     self.purchaseButton?.alpha = 0.6
                     self.restoreButton?.alpha = 0
-                    self.descriptionParagraphHeightConstraint?.active = true
+                    self.descriptionParagraphHeightConstraint?.isActive = true
                     self.modalBlockingView?.alpha = modalInvisibleAlpha
                 }
                 self.view.layoutIfNeeded()
-            }
+            }) 
         }
     }
     
@@ -115,17 +115,17 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         
         self.purchaseManager.beginObserving()
         self.requestSplitBillProductWithCompletionHandler()
-        self.state = .SplitBillProductNotFoundInStoreFront
+        self.state = .splitBillProductNotFoundInStoreFront
         
         self.videoPlayerSurroundView?.layer.borderWidth = 1
         self.videoPlayerSurroundView?.layer.cornerRadius = GratuitousUIConstant.cornerRadius
-        self.videoPlayerSurroundView?.layer.borderColor = GratuitousUIColor.lightTextColor().CGColor
+        self.videoPlayerSurroundView?.layer.borderColor = GratuitousUIColor.lightTextColor().cgColor
         
         if let videoPlayer = self.videoPlayer {
             let layer = videoPlayer.layer
             
             self.updateViewPlayerBounds()
-            layer.backgroundColor = UIColor.blackColor().CGColor
+            layer.backgroundColor = UIColor.black.cgColor
             layer.videoGravity = AVLayerVideoGravityResizeAspect
             
             self.videoPlayerView?.layer.addSublayer(layer)
@@ -137,16 +137,16 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     override func configureDynamicTextLabels() {
         super.configureDynamicTextLabels()
         
-        let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        let headlineFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
         let headlineFontSize = headlineFont.pointSize * 2
         
         //configure the large title label
-        self.titleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 1.3, fallbackStyle: .Headline)
+        self.titleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 1.3, fallbackStyle: .headline)
         self.titleLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.titleLabel?.text = PurchaseSplitBillViewController.LocalizedString.ExtraLargeTextLabel
         
         //configure the subtitle label
-        self.subtitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 0.85, fallbackStyle: .Headline)
+        self.subtitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 0.85, fallbackStyle: .headline)
         self.subtitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.subtitleLabel?.text = PurchaseSplitBillViewController.LocalizedString.LargeTextLabel
         
@@ -154,33 +154,33 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         self.navigationBar?.items?.first?.title = PurchaseSplitBillViewController.LocalizedString.NavBarTitleLabel
         
         //configure the paragraph of text
-        self.descriptionParagraphLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.descriptionParagraphLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         self.descriptionParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
         
         //configure the button text
-        self.purchaseButton?.titleStyle = .Headline
-        self.restoreButton?.titleStyle = .Subheadline
+        self.purchaseButton?.titleStyle = .headline
+        self.restoreButton?.titleStyle = .subheadline
         
         // configure the button text
         self.configureDynamicElements()
-        self.restoreButton?.setTitle(PurchaseSplitBillViewController.LocalizedString.RestorePurchasesButton, forState: UIControlState.Normal)
+        self.restoreButton?.setTitle(PurchaseSplitBillViewController.LocalizedString.RestorePurchasesButton, for: UIControlState())
     }
     
-    private func configureDynamicElements() {
+    fileprivate func configureDynamicElements() {
         if let splitBillProduct = self.splitBillProduct {
             let purchaseString = PurchaseSplitBillViewController.LocalizedString.PurchaseButtonText
-            self.purchaseButton?.setTitle(purchaseString + " – \(self.priceString)", forState: UIControlState.Normal)
+            self.purchaseButton?.setTitle(purchaseString + " – \(self.priceString)", for: UIControlState())
             self.descriptionParagraphLabel?.text = splitBillProduct.localizedDescription ?? ""
             
         } else {
             // need to request the product!!!
             let downloadingLocalizedString = PurchaseSplitBillViewController.LocalizedString.DownloadingAppStoreInfoButtonText
-            self.purchaseButton?.setTitle(downloadingLocalizedString, forState: UIControlState.Normal)
+            self.purchaseButton?.setTitle(downloadingLocalizedString, for: UIControlState())
             self.descriptionParagraphLabel?.text = ""
         }
     }
     
-    private func updateViewPlayerBounds() -> Bool {
+    fileprivate func updateViewPlayerBounds() -> Bool {
         if let videoPlayerViewBounds = self.videoPlayerView?.bounds, let videoLayer = self.videoPlayer?.layer {
             videoLayer.frame = videoPlayerViewBounds
             return true
@@ -189,66 +189,66 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.updateViewPlayerBounds()
         if let videoPlayer = self.videoPlayer {
-            videoPlayer.player.seekToTime(kCMTimeZero)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.videoPlaybackFinished(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: videoPlayer.player.currentItem)
+            videoPlayer.player.seek(to: kCMTimeZero)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.videoPlaybackFinished(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoPlayer.player.currentItem)
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.updateViewPlayerBounds()
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        let delayTime = DispatchTime.now() + Double(Int64(1.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
             self.videoPlayer?.player.play()
         }
     }
     
-    @objc private func videoPlaybackFinished(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
+    @objc fileprivate func videoPlaybackFinished(_ notification: Notification?) {
+        DispatchQueue.main.async {
             self.videoPlayer?.player.pause()
-            self.videoPlayer?.player.seekToTime(kCMTimeZero)
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.videoPlayer?.player.seek(to: kCMTimeZero)
+            let delayTime = DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.videoPlayer?.player.play()
             }
         }
     }
     
-    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
-        coordinator.animateAlongsideTransition({ context in self.updateViewPlayerBounds() }, completion: .None)
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        coordinator.animate(alongsideTransition: { context in self.updateViewPlayerBounds() }, completion: .none)
     }
     
     // MARK: Purchasing
     
-    private let priceNumberFormatter: NSNumberFormatter = {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+    fileprivate let priceNumberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = NumberFormatter.Style.currency
         return formatter
     }()
     
-    private var priceString: String {
+    fileprivate var priceString: String {
         let priceString: String?
         if let splitBillProduct = self.splitBillProduct {
             self.priceNumberFormatter.locale = splitBillProduct.priceLocale
-            priceString = self.priceNumberFormatter.stringFromNumber(splitBillProduct.price)
+            priceString = self.priceNumberFormatter.string(from: splitBillProduct.price)
         } else {
-            priceString = .None
+            priceString = .none
         }
         return priceString ?? ""
     }
     
-    private var splitBillProduct: SKProduct? {
+    fileprivate var splitBillProduct: SKProduct? {
         didSet {
             self.configureDynamicElements()
         }
     }
     
-    private func requestSplitBillProductWithCompletionHandler() {
+    fileprivate func requestSplitBillProductWithCompletionHandler() {
         let request = SKProductsRequest(productIdentifiers: Set([GratuitousPurchaseManager.splitBillPurchaseIdentifier]))
         self.purchaseManager.initiateRequest(request) { [weak self] request, response, error in
             let guaranteedSplitBillProductArray = response?.products.filter() { product -> Bool in
@@ -262,30 +262,30 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             if let splitBillProduct = guaranteedSplitBillProductArray?.first {
                 self?.splitBillProduct = splitBillProduct
             } else {
-                let userFacingError = NSError(purchaseError: .ProductRequestFailed)
+                let userFacingError = NSError(purchaseError: .productRequestFailed)
                 let actions = [
-                    UIAlertAction(type: .Dismiss, completionHandler: self?.didTapDismissButtonThatClosesCurrentViewController),
-                    UIAlertAction(type: .EmailSupport, completionHandler: self?.didTapEmailSupportActionButton)
+                    UIAlertAction(kind: .dismiss, completionHandler: self?.didTapDismissButtonThatClosesCurrentViewController),
+                    UIAlertAction(kind: .emailSupport, completionHandler: self?.didTapEmailSupportActionButton)
                 ]
                 self?.shouldDismissVCAfterEmailVCDismisses = true
                 let errorVC = UIAlertController(actions: actions, error: userFacingError)
-                self?.presentViewController(errorVC, animated: true, completion: .None)
+                self?.present(errorVC, animated: true, completion: .none)
             }
-            self?.state = .Normal
+            self?.state = .normal
         }
     }
     
     // MARK: Handle User Input
     
-    @IBAction private func didTapPurchaseButton(sender: UIButton?) {
+    @IBAction fileprivate func didTapPurchaseButton(_ sender: UIButton?) {
         guard let splitBillProduct = self.splitBillProduct else { return }
-        self.state = .PurchaseInProgress
+        self.state = .purchaseInProgress
         self.purchaseManager.initiatePurchaseWithPayment(SKPayment(product: splitBillProduct)) { transaction in
             // change the UI back to normal state
-            self.state = .Normal
+            self.state = .normal
             // update the preferences
             let purchased = self.purchaseManager.verifySplitBillPurchaseTransaction()
-            if transaction.transactionState == .Deferred {
+            if transaction.transactionState == .deferred {
                 // if the transaction is deferred I give temporary access.
                 // the receipt is checked on every launch, so this will get undone if it doesn't get deferred
                 self.applicationPreferences.splitBillPurchased = true
@@ -297,9 +297,9 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             
             // We need to finish the transaction unless its in the Deferred or Purchasing state
             switch transaction.transactionState {
-            case .Purchased, .Restored, .Failed:
+            case .purchased, .restored, .failed:
                 self.purchaseManager.finishTransaction(transaction)
-            case .Deferred, .Purchasing:
+            case .deferred, .purchasing:
                 break //do nothing
             }
             
@@ -309,34 +309,34 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                 let alertVC = UIAlertController(actions: userFacingErrorTuple.userAlertActions, error: userFacingErrorTuple.userFacingError)
                 if let _ = self.presentingViewController {
                     // if this view controller has been dismissed, I don't want to try and present this error, it will fail anwyway
-                    self.presentViewController(alertVC, animated: true, completion: .None)
+                    self.present(alertVC, animated: true, completion: .none)
                 }
             } else {
                 switch transaction.transactionState {
-                case .Purchased, .Restored:
+                case .purchased, .restored:
                     let presentingViewController = self.presentingViewController
-                    self.dismissViewControllerAnimated(true, completion: {
-                        presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
+                    self.dismiss(animated: true, completion: {
+                        presentingViewController?.performSegue(withIdentifier: TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
                     })
-                case .Deferred, .Failed, .Purchasing:
+                case .deferred, .failed, .purchasing:
                     break //do nothing
                 }
             }
         }
     }
     
-    private func dateIsToday(queryDate: NSDate) -> Bool {
-        let calendar = NSCalendar.currentCalendar()
+    fileprivate func dateIsToday(_ queryDate: Date) -> Bool {
+        let calendar = Calendar.current
         calendar.isDateInToday(queryDate)
         return false
     }
     
-    @IBAction private func didTapRestoreButton(sender: UIButton?) {
-        self.state = .RestoreInProgress
+    @IBAction fileprivate func didTapRestoreButton(_ sender: UIButton?) {
+        self.state = .restoreInProgress
         self.purchaseManager.restorePurchasesWithCompletionHandler() { queue, error in
             
             // change the UI back to normal state
-            self.state = .Normal
+            self.state = .normal
             // update the preference based on the receipt
             // the receipt is the source of truth, all the error handling is just sugar coating
             let splitBillPurchased = self.purchaseManager.verifySplitBillPurchaseTransaction()
@@ -349,7 +349,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                     let alertVC = UIAlertController(actions: userFacingErrorTuple.userAlertActions, error: userFacingErrorTuple.userFacingError)
                     if let _ = self.presentingViewController {
                         // if this view controller has been dismissed, I don't want to try and present this error, it will fail anwyway
-                        self.presentViewController(alertVC, animated: true, completion: .None)
+                        self.present(alertVC, animated: true, completion: .none)
                     }
                 }
             } else {
@@ -357,21 +357,21 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                 if splitBillPurchased == true {
                     // the purchase was restored by the restore attempt
                     let presentingViewController = self.presentingViewController
-                    self.dismissViewControllerAnimated(true) {
-                        presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
+                    self.dismiss(animated: true) {
+                        presentingViewController?.performSegue(withIdentifier: TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
                     }
                 } else {
                     // the restoration was successful, but the customer never purchased the product
                     let actions = [
-                        UIAlertAction(type: .Dismiss, completionHandler: .None),
-                        UIAlertAction(type: .Buy, completionHandler: self.didTapAlertBuyButton),
-                        UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                        UIAlertAction(kind: .dismiss, completionHandler: .none),
+                        UIAlertAction(kind: .buy, completionHandler: self.didTapAlertBuyButton),
+                        UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                     ]
-                    let error = NSError(purchaseError: .RestoreSucceededSplitBillNotPurchased)
+                    let error = NSError(purchaseError: .restoreSucceededSplitBillNotPurchased)
                     let alertVC = UIAlertController(actions: actions, error: error)
                     if let _ = self.presentingViewController {
                         // if this view controller has been dismissed, I don't want to try and present this error, it will fail anwyway
-                        self.presentViewController(alertVC, animated: true, completion: nil)
+                        self.present(alertVC, animated: true, completion: nil)
                     }
                 }
             }
@@ -380,27 +380,27 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     // MARK: Callbacks for UIAlertViewController
     
-    private func didTapDismisseAlertButtonForDeferredPurchase(action: UIAlertAction) {
+    fileprivate func didTapDismisseAlertButtonForDeferredPurchase(_ action: UIAlertAction) {
         let presentingViewController = self.presentingViewController
-        self.dismissViewControllerAnimated(true, completion: {
-            presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
+        self.dismiss(animated: true, completion: {
+            presentingViewController?.performSegue(withIdentifier: TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
         })
     }
     
-    private func didTapDismissButtonThatClosesCurrentViewController(action: UIAlertAction) {
-        self.dismissViewControllerAnimated(true, completion: .None)
+    fileprivate func didTapDismissButtonThatClosesCurrentViewController(_ action: UIAlertAction) {
+        self.dismiss(animated: true, completion: .none)
     }
     
-    private func didTapAlertBuyButton(action: UIAlertAction) {
-        self.didTapPurchaseButton(.None)
+    fileprivate func didTapAlertBuyButton(_ action: UIAlertAction) {
+        self.didTapPurchaseButton(.none)
     }
     
-    private var shouldDismissVCAfterEmailVCDismisses = false
+    fileprivate var shouldDismissVCAfterEmailVCDismisses = false
     
-    private func didTapEmailSupportActionButton(action: UIAlertAction) {
-        let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
+    fileprivate func didTapEmailSupportActionButton(_ action: UIAlertAction) {
+        let emailManager = EmailSupportHandler(kind: .genericEmailSupport, delegate: self)
         if let mailVC = emailManager.presentableMailViewController {
-            self.presentViewController(mailVC, animated: true, completion: .None)
+            self.present(mailVC, animated: true, completion: .none)
         } else {
             emailManager.switchAppForEmailSupport()
         }
@@ -408,10 +408,10 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     // MARK: Handle Going Away
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     deinit {
@@ -422,15 +422,15 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
 // MARK: MFMailComposeViewControllerDelegate
 
 extension PurchaseSplitBillViewController: MFMailComposeViewControllerDelegate {
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        self.state = .Normal
-        controller.dismissViewControllerAnimated(true) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.state = .normal
+        controller.dismiss(animated: true) {
             if self.shouldDismissVCAfterEmailVCDismisses == true {
-                self.dismissViewControllerAnimated(true, completion: .None)
+                self.dismiss(animated: true, completion: .none)
             }
         }
         if let error = error {
-            log?.error("Error while sending email. Error Description: \(error.description)")
+            log?.error("Error while sending email. Error Description: \(error)")
         }
     }
 }
@@ -438,80 +438,80 @@ extension PurchaseSplitBillViewController: MFMailComposeViewControllerDelegate {
 // MARK: Crazy Error Code Logic for Purchases and Restores
 
 extension PurchaseSplitBillViewController {
-    private typealias UserFacingError = (userFacingError: NSError, userAlertActions: [UIAlertAction])
-    private func errorForPurchaseTransaction(transaction: SKPaymentTransaction) -> UserFacingError? {
+    fileprivate typealias UserFacingError = (userFacingError: NSError, userAlertActions: [UIAlertAction])
+    fileprivate func errorForPurchaseTransaction(_ transaction: SKPaymentTransaction) -> UserFacingError? {
         let userFacingError: NSError?
         let userAlertActions: [UIAlertAction]
         
-        if let error = transaction.error {
+        if let error = transaction.error as NSError? {
             if let reason = StoreKitPurchaseErrorCode(rawValue: error.code) {
                 switch reason {
-                case .Unknown:
-                    userFacingError = NSError(purchaseError: .PurchaseFailedUnknown)
+                case .unknown:
+                    userFacingError = NSError(purchaseError: .purchaseFailedUnknown)
                     userAlertActions = [
-                        UIAlertAction(type: .Dismiss, completionHandler: .None),
-                        UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                        UIAlertAction(kind: .dismiss, completionHandler: .none),
+                        UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                     ]
-                case .ClientInvalid:
-                    userFacingError = NSError(purchaseError: .PurchaseFailedClientInvalid)
+                case .clientInvalid:
+                    userFacingError = NSError(purchaseError: .purchaseFailedClientInvalid)
                     userAlertActions = [
-                        UIAlertAction(type: .Dismiss, completionHandler: .None),
-                        UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                        UIAlertAction(kind: .dismiss, completionHandler: .none),
+                        UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                     ]
-                case .PaymentCancelled:
-                    userFacingError = .None
+                case .paymentCancelled:
+                    userFacingError = .none
                     userAlertActions = []
-                case .PaymentInvalid:
-                    userFacingError = NSError(purchaseError: .PurchaseFailedPaymentInvalid)
+                case .paymentInvalid:
+                    userFacingError = NSError(purchaseError: .purchaseFailedPaymentInvalid)
                     userAlertActions = [
-                        UIAlertAction(type: .Dismiss, completionHandler: .None),
-                        UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                        UIAlertAction(kind: .dismiss, completionHandler: .none),
+                        UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                     ]
-                case .PaymentNotAllowed:
-                    userFacingError = .None
+                case .paymentNotAllowed:
+                    userFacingError = .none
                     userAlertActions = []
-                case .ProductNotAvailable:
-                    userFacingError = NSError(purchaseError: .PurchaseFailedProductNotAvailable)
+                case .productNotAvailable:
+                    userFacingError = NSError(purchaseError: .purchaseFailedProductNotAvailable)
                     userAlertActions = [
-                        UIAlertAction(type: .Dismiss, completionHandler: .None),
-                        UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                        UIAlertAction(kind: .dismiss, completionHandler: .none),
+                        UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                     ]
                 }
             } else {
                 // there was an error but it didn't match one of the known codes
                 if error.isaGratuitousPurchaseError() == true {
                     // if we already custom crafted this error, we can show it to the user
-                    userFacingError = error
+                    userFacingError = error as NSError
                 } else {
                     // otherwise we'll give a generic failure
-                    userFacingError = NSError(purchaseError: .RestoreFailedUnknown)
+                    userFacingError = NSError(purchaseError: .restoreFailedUnknown)
                 }
                 userAlertActions = [
-                    UIAlertAction(type: .Dismiss, completionHandler: .None),
-                    UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                    UIAlertAction(kind: .dismiss, completionHandler: .none),
+                    UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                 ]
             }
         } else {
             // there was no error, so lets check the transaction state
             switch transaction.transactionState {
-            case .Purchased, .Restored:
+            case .purchased, .restored:
                 // true true success
-                userFacingError = .None
+                userFacingError = .none
                 userAlertActions = []
-            case .Deferred:
+            case .deferred:
                 // Deferred for parents to approve, granting temporary access
-                userFacingError = NSError(purchaseError: .PurchaseDeferred)
-                userAlertActions = [UIAlertAction(type: .Dismiss, completionHandler: self.didTapDismisseAlertButtonForDeferredPurchase)]
-            case .Failed:
+                userFacingError = NSError(purchaseError: .purchaseDeferred)
+                userAlertActions = [UIAlertAction(kind: .dismiss, completionHandler: self.didTapDismisseAlertButtonForDeferredPurchase)]
+            case .failed:
                 // not sure how we made it this far, but thats OK, unknown error
-                userFacingError = NSError(purchaseError: .PurchaseFailedUnknown)
+                userFacingError = NSError(purchaseError: .purchaseFailedUnknown)
                 userAlertActions = [
-                    UIAlertAction(type: .Dismiss, completionHandler: .None),
-                    UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                    UIAlertAction(kind: .dismiss, completionHandler: .none),
+                    UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                 ]
-            case .Purchasing:
+            case .purchasing:
                 // should not ever see this but will do nothing because most likely stuff is still in progress
-                userFacingError = .None
+                userFacingError = .none
                 userAlertActions = []
             }
         }
@@ -519,46 +519,46 @@ extension PurchaseSplitBillViewController {
         if let userFacingError = userFacingError {
             return (userFacingError: userFacingError, userAlertActions: userAlertActions)
         } else {
-            return .None
+            return .none
         }
     }
     
-    private func errorFromRestoreError(error: NSError?) -> UserFacingError? {
+    fileprivate func errorFromRestoreError(_ error: NSError?) -> UserFacingError? {
         let userFacingError: NSError?
         let userAlertActions: [UIAlertAction]
         
         if let error = error {
             if let reason = StoreKitPurchaseErrorCode(rawValue: error.code) {
                 switch reason {
-                case .Unknown:
-                    userFacingError = NSError(purchaseError: .RestoreFailedUnknown)
+                case .unknown:
+                    userFacingError = NSError(purchaseError: .restoreFailedUnknown)
                     userAlertActions = [
-                        UIAlertAction(type: .Dismiss, completionHandler: .None),
-                        UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                        UIAlertAction(kind: .dismiss, completionHandler: .none),
+                        UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                     ]
-                case .ClientInvalid:
-                    userFacingError = NSError(purchaseError: .RestoreFailedClientInvalid)
+                case .clientInvalid:
+                    userFacingError = NSError(purchaseError: .restoreFailedClientInvalid)
                     userAlertActions = [
-                        UIAlertAction(type: .Dismiss, completionHandler: .None),
-                        UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                        UIAlertAction(kind: .dismiss, completionHandler: .none),
+                        UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                     ]
-                case .PaymentCancelled:
-                    userFacingError = .None
+                case .paymentCancelled:
+                    userFacingError = .none
                     userAlertActions = []
-                case .PaymentInvalid:
-                    userFacingError = NSError(purchaseError: .RestoreFailedPaymentInvalid)
+                case .paymentInvalid:
+                    userFacingError = NSError(purchaseError: .restoreFailedPaymentInvalid)
                     userAlertActions = [
-                        UIAlertAction(type: .Dismiss, completionHandler: .None),
-                        UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                        UIAlertAction(kind: .dismiss, completionHandler: .none),
+                        UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                     ]
-                case .PaymentNotAllowed:
-                    userFacingError = .None
+                case .paymentNotAllowed:
+                    userFacingError = .none
                     userAlertActions = []
-                case .ProductNotAvailable:
-                    userFacingError = NSError(purchaseError: .RestoreFailedProductNotAvailable)
+                case .productNotAvailable:
+                    userFacingError = NSError(purchaseError: .restoreFailedProductNotAvailable)
                     userAlertActions = [
-                        UIAlertAction(type: .Dismiss, completionHandler: .None),
-                        UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                        UIAlertAction(kind: .dismiss, completionHandler: .none),
+                        UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                     ]
                 }
             } else {
@@ -568,23 +568,23 @@ extension PurchaseSplitBillViewController {
                     userFacingError = error
                 } else {
                     // otherwise we'll give a generic failure
-                    userFacingError = NSError(purchaseError: .RestoreFailedUnknown)
+                    userFacingError = NSError(purchaseError: .restoreFailedUnknown)
                 }
                 userAlertActions = [
-                    UIAlertAction(type: .Dismiss, completionHandler: .None),
-                    UIAlertAction(type: .EmailSupport, completionHandler: self.didTapEmailSupportActionButton)
+                    UIAlertAction(kind: .dismiss, completionHandler: .none),
+                    UIAlertAction(kind: .emailSupport, completionHandler: self.didTapEmailSupportActionButton)
                 ]
             }
         } else {
             // there was no error, there's probably not an issue.
-            userFacingError = .None
+            userFacingError = .none
             userAlertActions = []
         }
         
         if let userFacingError = userFacingError {
             return (userFacingError: userFacingError, userAlertActions: userAlertActions)
         } else {
-            return .None
+            return .none
         }
     }
 }

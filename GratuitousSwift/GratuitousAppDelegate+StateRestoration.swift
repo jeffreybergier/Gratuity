@@ -9,46 +9,45 @@
 import UIKit
 
 extension GratuitousAppDelegate {
-    func application(application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
-        if self.window?.rootViewController?.presentedViewController == .None {
+    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        if self.window?.rootViewController?.presentedViewController == .none {
             return false
         }
         return true
     }
     
-    func application(application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
-        if let coderVersion = coder.decodeObjectForKey(UIApplicationStateRestorationBundleVersionKey) as? String,
-            let bundleVersion = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String
-            where coderVersion == bundleVersion {
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        if let coderVersion = coder.decodeObject(forKey: UIApplicationStateRestorationBundleVersionKey) as? String,
+            let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String, coderVersion == bundleVersion {
                 return true
         } else {
             return false
         }
     }
     
-    func application(application: UIApplication, viewControllerWithRestorationIdentifierPath identifierComponents: [AnyObject], coder: NSCoder) -> UIViewController? {
-        guard let viewControllerID = identifierComponents.last as? String else { return .None }
+    func application(_ application: UIApplication, viewControllerWithRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+        guard let viewControllerID = identifierComponents.last as? String else { return .none }
         
         let vc: UIViewController?
         switch viewControllerID {
         case "TipViewController":
-            vc = .None // do nothing because this is the main view controller
+            vc = .none // do nothing because this is the main view controller
         case "SettingsTableViewController":
-            vc = .None // do nothing because we actually need to customize the nav controller for this view controller
+            vc = .none // do nothing because we actually need to customize the nav controller for this view controller
         default:
-            vc = self.storyboard.instantiateViewControllerWithIdentifier(viewControllerID)
+            vc = self.storyboard.instantiateViewController(withIdentifier: viewControllerID)
         }
         
         if let vc = vc,
             let transitionable = vc as? CustomAnimatedTransitionable {
                 switch transitionable.customTransitionType {
-                case .Right:
+                case .right:
                     vc.transitioningDelegate = self.presentationRightTransitionerDelegate
-                    vc.modalPresentationStyle = UIModalPresentationStyle.Custom
-                case .Bottom:
+                    vc.modalPresentationStyle = UIModalPresentationStyle.custom
+                case .bottom:
                     vc.transitioningDelegate = self.presentationBottomTransitionerDelegate
-                    vc.modalPresentationStyle = UIModalPresentationStyle.Custom
-                case .NotApplicable:
+                    vc.modalPresentationStyle = UIModalPresentationStyle.custom
+                case .notApplicable:
                     break
                 }
         }

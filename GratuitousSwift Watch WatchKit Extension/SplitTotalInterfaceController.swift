@@ -10,29 +10,29 @@ import WatchKit
 
 final class SplitTotalInterfaceController: WKInterfaceController {
     
-    @IBOutlet private weak var splitAmountTitleLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var splitAmountTitleLabel: WKInterfaceLabel?
     
-    @IBOutlet private weak var splitAmount0CurrencyLabel: WKInterfaceLabel?
-    @IBOutlet private weak var splitAmount1CurrencyLabel: WKInterfaceLabel?
-    @IBOutlet private weak var splitAmount2CurrencyLabel: WKInterfaceLabel?
-    @IBOutlet private weak var splitAmount3CurrencyLabel: WKInterfaceLabel?
-    @IBOutlet private weak var splitAmount4CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var splitAmount0CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var splitAmount1CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var splitAmount2CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var splitAmount3CurrencyLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var splitAmount4CurrencyLabel: WKInterfaceLabel?
     
-    private let titleTextAttribute = GratuitousUIColor.WatchFonts.titleText
-    private let valueTextAttributes = GratuitousUIColor.WatchFonts.splitBillValueText
+    fileprivate let titleTextAttribute = GratuitousUIColor.WatchFonts.titleText
+    fileprivate let valueTextAttributes = GratuitousUIColor.WatchFonts.splitBillValueText
     
-    private var applicationPreferences: GratuitousUserDefaults {
+    fileprivate var applicationPreferences: GratuitousUserDefaults {
         return GratuitousWatchApplicationPreferences.sharedInstance.preferences
     }
-    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
+    fileprivate let currencyFormatter = GratuitousNumberFormatter(style: .respondsToLocaleChanges)
     
     override func willActivate() {
         super.willActivate()
         // MARK: Configure notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSNotification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged), object: .none)
         
         // MARK: Configure Handoff
-        self.updateUserActivity(HandoffTypes.SplitBillInterface.rawValue, userInfo: ["string" : "string"], webpageURL: .None)
+        self.updateUserActivity(HandoffTypes.SplitBillInterface.rawValue, userInfo: ["string" : "string"], webpageURL: .none)
         
         // MARK: Configure Title
         self.setTitle(SplitTotalInterfaceController.LocalizedString.CloseSplitBillTitle)
@@ -43,7 +43,7 @@ final class SplitTotalInterfaceController: WKInterfaceController {
         self.updateLabelText()
     }
     
-    private func updateLabelText() {
+    fileprivate func updateLabelText() {
         // MARK: Calculate Total Amount
         let billAmount = self.applicationPreferences.billIndexPathRow
         let tipAmount: Int
@@ -76,9 +76,9 @@ final class SplitTotalInterfaceController: WKInterfaceController {
         self.splitAmount4CurrencyLabel?.setAttributedText(fourString)
     }
     
-    @objc private func currencySignChanged(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.currencyFormatter.locale = NSLocale.currentLocale()
+    @objc fileprivate func currencySignChanged(_ notification: Notification?) {
+        DispatchQueue.main.async {
+            self.currencyFormatter.locale = Locale.current
             self.updateLabelText()
         }
     }
@@ -87,6 +87,6 @@ final class SplitTotalInterfaceController: WKInterfaceController {
         super.willDisappear()
         
         self.invalidateUserActivity()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }

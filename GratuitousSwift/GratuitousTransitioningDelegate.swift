@@ -10,18 +10,18 @@ import UIKit
 
 final class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
-    private let type: GratuitousTransitioningDelegateType
-    private let shouldAnimate: Bool
+    fileprivate let type: GratuitousTransitioningDelegateType
+    fileprivate let shouldAnimate: Bool
     
     lazy var rightAnimationController: GratuitousAnimatedTransitioning = {
         let a = GratuitousAnimatedTransitioning()
-        a.style = .Right
+        a.style = .right
         a.shouldAnimate = self.shouldAnimate
         return a
     }()
     lazy var bottomAnimationController: GratuitousAnimatedTransitioning = {
         let a = GratuitousAnimatedTransitioning()
-        a.style = .Bottom
+        a.style = .bottom
         a.shouldAnimate = self.shouldAnimate
         return a
     }()
@@ -31,27 +31,27 @@ final class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitio
         self.shouldAnimate = animate
     }
         
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         
         switch self.type {
-        case .Right:
-            return GratuitousRightPresentationController(presentedViewController: presented, presentingViewController: presenting)
-        case .Bottom:
-            return GratuitousPresentationController(presentedViewController: presented, presentingViewController: presenting)
-        case .NotApplicable:
-            return .None
+        case .right:
+            return GratuitousRightPresentationController(presentedViewController: presented, presenting: presenting)
+        case .bottom:
+            return GratuitousPresentationController(presentedViewController: presented, presenting: presenting)
+        case .notApplicable:
+            return .none
         }
     }
     
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         let animationController: GratuitousAnimatedTransitioning?
         switch self.type {
-        case .Bottom:
+        case .bottom:
             animationController = self.bottomAnimationController
-        case .Right:
+        case .right:
             animationController = self.rightAnimationController
-        case .NotApplicable:
+        case .notApplicable:
             animationController = nil
         }
         animationController?.isPresentation = true
@@ -59,14 +59,14 @@ final class GratuitousTransitioningDelegate: NSObject, UIViewControllerTransitio
         return animationController
     }
     
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let animationController: UIViewControllerAnimatedTransitioning?
         switch self.type {
-        case .Bottom:
+        case .bottom:
             animationController = self.bottomAnimationController
-        case .Right:
+        case .right:
             animationController = self.rightAnimationController
-        case .NotApplicable:
+        case .notApplicable:
             animationController = nil
         }
         (animationController as! GratuitousAnimatedTransitioning).isPresentation = false

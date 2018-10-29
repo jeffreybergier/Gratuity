@@ -14,7 +14,7 @@ final class GratuitousRightPresentationController: GratuitousPresentationControl
         let view = UIView()
         let tap = UITapGestureRecognizer(target:self, action:#selector(self.dimmingViewTapped(_:)))
         let swipe = UISwipeGestureRecognizer(target:self, action:#selector(self.dimmingViewTapped(_:)))
-        swipe.direction = UISwipeGestureRecognizerDirection.Right
+        swipe.direction = UISwipeGestureRecognizerDirection.right
         
         view.backgroundColor = UIColor(white: 0.0, alpha: 0.7)
         view.alpha = 0.0
@@ -29,8 +29,8 @@ final class GratuitousRightPresentationController: GratuitousPresentationControl
         return dimmingView
     }
     
-    override func frameOfPresentedViewInContainerView() -> CGRect {
-        let size = self.sizeForChildContentContainer(self.presentedViewController, withParentContainerSize: self.containerView!.bounds.size)
+    override var frameOfPresentedViewInContainerView : CGRect {
+        let size = self.size(forChildContentContainer: self.presentedViewController, withParentContainerSize: self.containerView!.bounds.size)
         let point = CGPoint(x: self.containerView!.bounds.size.width - size.width, y: 0)
         
         let rect = CGRect(origin: point, size: size)

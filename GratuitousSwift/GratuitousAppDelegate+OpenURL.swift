@@ -9,13 +9,13 @@
 import UIKit
 
 extension GratuitousAppDelegate {
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        let components = NSURLComponents(URL: url, resolvingAgainstBaseURL: true)
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         
         var attributes = [String : String]()
         attributes["sourceApp"] = sourceApplication
         attributes["URLHost"] = components?.host
-        components?.queryItems?.enumerate().forEach() { (index, qItem) in
+        components?.queryItems?.enumerated().forEach() { (index, qItem) in
             attributes["q\(index+1)-\(qItem.name)"] = qItem.value
         }
                 

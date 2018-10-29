@@ -10,11 +10,11 @@ import UIKit
 
 final class SplitBillViewController: SmallModalTableViewController {
     
-    private var applicationPreferences: GratuitousUserDefaults {
-        return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences
+    fileprivate var applicationPreferences: GratuitousUserDefaults {
+        return (UIApplication.shared.delegate as! GratuitousAppDelegate).preferences
     }
     
-    private var totalAmount: Int {
+    fileprivate var totalAmount: Int {
         let billAmount = self.applicationPreferences.billIndexPathRow
         let suggestedTipPercentage = self.applicationPreferences.suggestedTipPercentage
         let tipAmount: Int
@@ -42,15 +42,15 @@ final class SplitBillViewController: SmallModalTableViewController {
         self.tableView?.reloadData()
     }
     
-    private func roundedDivisionWithTop(top: Int, bottom: Int) -> Int {
+    fileprivate func roundedDivisionWithTop(_ top: Int, bottom: Int) -> Int {
         let division = Double(top)/Double(bottom)
-        if isinf(division) == false && isnan(division) == false {
+        if division.isInfinite == false && division.isNaN == false {
             return Int(round(division))
         }
         return 0
     }
     
-    private func determineTableRowCount() -> Int {
+    fileprivate func determineTableRowCount() -> Int {
         for i in 1 ..< 100 {
             if self.roundedDivisionWithTop(self.totalAmount, bottom: i) <= 6 {
                 return i
@@ -59,38 +59,38 @@ final class SplitBillViewController: SmallModalTableViewController {
         return 100
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.determineTableRowCount()
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0 ..< 5:
-            return tableView.dequeueReusableCellWithIdentifier("DetailSingleLabel")!
+            return tableView.dequeueReusableCell(withIdentifier: "DetailSingleLabel")!
         default:
-            return tableView.dequeueReusableCellWithIdentifier("DetailBiLabel")!
+            return tableView.dequeueReusableCell(withIdentifier: "DetailBiLabel")!
         }
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
         guard let cell = cell as? SplitBillTableViewCell else { return }
         switch indexPath.row {
         case 0:
-            cell.identity = SplitBillTableViewCell.Identity.One(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
+            cell.identity = SplitBillTableViewCell.Identity.one(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
         case 1:
-            cell.identity = SplitBillTableViewCell.Identity.Two(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
+            cell.identity = SplitBillTableViewCell.Identity.two(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
         case 2:
-            cell.identity = SplitBillTableViewCell.Identity.Three(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
+            cell.identity = SplitBillTableViewCell.Identity.three(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
         case 3:
-            cell.identity = SplitBillTableViewCell.Identity.Four(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
+            cell.identity = SplitBillTableViewCell.Identity.four(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
         case 4:
-            cell.identity = SplitBillTableViewCell.Identity.Five(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
+            cell.identity = SplitBillTableViewCell.Identity.five(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1))
         default:
-            cell.identity = SplitBillTableViewCell.Identity.Higher(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1), divisor: indexPath.row + 1)
+            cell.identity = SplitBillTableViewCell.Identity.higher(value: self.roundedDivisionWithTop(self.totalAmount, bottom: indexPath.row + 1), divisor: indexPath.row + 1)
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
 }

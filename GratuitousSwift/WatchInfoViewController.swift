@@ -11,17 +11,17 @@ import UIKit
 
 final class WatchInfoViewController: SmallModalScollViewController {
     
-    @IBOutlet private weak var gratuityTitleLabel: UILabel?
-    @IBOutlet private weak var gratuityParagraphLabel: UILabel?
-    @IBOutlet private weak var gratuitySubtitleLabel: UILabel?
-    @IBOutlet private weak var videoPlayerSurroundView: UIView?
-    @IBOutlet private weak var videoPlayerView: UIView?
+    @IBOutlet fileprivate weak var gratuityTitleLabel: UILabel?
+    @IBOutlet fileprivate weak var gratuityParagraphLabel: UILabel?
+    @IBOutlet fileprivate weak var gratuitySubtitleLabel: UILabel?
+    @IBOutlet fileprivate weak var videoPlayerSurroundView: UIView?
+    @IBOutlet fileprivate weak var videoPlayerView: UIView?
     
-    private let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
-        if let moviePath = NSBundle.mainBundle().pathForResource("gratuityInfoDemoVideo@2x", ofType: "mp4") {
-            let player = AVPlayer(URL: NSURL.fileURLWithPath(moviePath))
+    fileprivate let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
+        if let moviePath = Bundle.main.path(forResource: "gratuityInfoDemoVideo@2x", ofType: "mp4") {
+            let player = AVPlayer(url: URL(fileURLWithPath: moviePath))
             player.allowsExternalPlayback = false
-            player.actionAtItemEnd = AVPlayerActionAtItemEnd.None // cause the player to loop
+            player.actionAtItemEnd = AVPlayerActionAtItemEnd.none // cause the player to loop
             let playerLayer = AVPlayerLayer(player: player)
             return (player, playerLayer)
         }
@@ -33,7 +33,7 @@ final class WatchInfoViewController: SmallModalScollViewController {
         
         self.videoPlayerSurroundView?.layer.borderWidth = 1
         self.videoPlayerSurroundView?.layer.cornerRadius = GratuitousUIConstant.cornerRadius
-        self.videoPlayerSurroundView?.layer.borderColor = GratuitousUIColor.lightTextColor().CGColor
+        self.videoPlayerSurroundView?.layer.borderColor = GratuitousUIColor.lightTextColor().cgColor
         
         if let videoPlayer = self.videoPlayer {
             let player = videoPlayer.player
@@ -42,11 +42,11 @@ final class WatchInfoViewController: SmallModalScollViewController {
             let desiredSize = self.videoPlayerView?.frame.size
             var desiredFrame = CGRect(x: 0, y: 0, width: 640, height: 1136)
             if let desiredSize = desiredSize {
-                desiredFrame = CGRect(origin: CGPointZero, size: desiredSize)
+                desiredFrame = CGRect(origin: CGPoint.zero, size: desiredSize)
             }
             
             layer.frame = desiredFrame
-            layer.backgroundColor = UIColor.blackColor().CGColor
+            layer.backgroundColor = UIColor.black.cgColor
             layer.videoGravity = AVLayerVideoGravityResizeAspect
             
             self.videoPlayerView?.layer.addSublayer(layer)
@@ -56,34 +56,34 @@ final class WatchInfoViewController: SmallModalScollViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if let videoPlayer = self.videoPlayer {
-            videoPlayer.player.seekToTime(kCMTimeZero)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.videoPlaybackFinished(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: videoPlayer.player.currentItem)
+            videoPlayer.player.seek(to: kCMTimeZero)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.videoPlaybackFinished(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoPlayer.player.currentItem)
         }
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func configureDynamicTextLabels() {
         super.configureDynamicTextLabels()
         
-        let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        let headlineFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
         let headlineFontSize = headlineFont.pointSize * 2
         
         //configure the large title label
-        self.gratuityTitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 1.3, fallbackStyle: .Headline)
+        self.gratuityTitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 1.3, fallbackStyle: .headline)
         self.gratuityTitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.gratuityTitleLabel?.text = WatchInfoViewController.LocalizedString.ExtraLargeTextLabel
         
         //configure the subtitle label
-        self.gratuitySubtitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 0.85, fallbackStyle: .Headline)
+        self.gratuitySubtitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 0.85, fallbackStyle: .headline)
         self.gratuitySubtitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.gratuitySubtitleLabel?.text = WatchInfoViewController.LocalizedString.LargeTextLabel
         
@@ -91,16 +91,16 @@ final class WatchInfoViewController: SmallModalScollViewController {
         self.navigationBar?.items?.first?.title = WatchInfoViewController.LocalizedString.NavBarTitleLabel
         
         //configure the paragraph of text
-        self.gratuityParagraphLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.gratuityParagraphLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         self.gratuityParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.gratuityParagraphLabel?.text = WatchInfoViewController.LocalizedString.AboutGratuityForAppleWatch
         
     }
     
-    @objc private func videoPlaybackFinished(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
+    @objc fileprivate func videoPlaybackFinished(_ notification: Notification?) {
+        DispatchQueue.main.async {
             if let videoPlayer = self.videoPlayer {
-                videoPlayer.player.seekToTime(kCMTimeZero)
+                videoPlayer.player.seek(to: kCMTimeZero)
             }
         }
     }

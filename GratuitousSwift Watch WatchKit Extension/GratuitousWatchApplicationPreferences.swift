@@ -13,7 +13,7 @@ class GratuitousWatchApplicationPreferences {
     static let sharedInstance = GratuitousWatchApplicationPreferences()
         
     // MARK: App Preferences Management Properties
-    private var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
+    fileprivate var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
         didSet {
             self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(_preferences)
         }

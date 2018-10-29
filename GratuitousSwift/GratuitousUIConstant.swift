@@ -63,12 +63,12 @@ struct GratuitousUIConstant {
         var smallDeviceLandscape = false
         var largeDeviceLandscape = false
         
-        if UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width {
-            if UIScreen.mainScreen().bounds.size.width > 321.0 {
+        if UIScreen.main.bounds.size.height > UIScreen.main.bounds.size.width {
+            if UIScreen.main.bounds.size.width > 321.0 {
                 largeDevice = true
             }
         } else {
-            if UIScreen.mainScreen().bounds.size.height > 321.0 {
+            if UIScreen.main.bounds.size.height > 321.0 {
                 largeDevice = true
                 largeDeviceLandscape = true
             } else {
@@ -76,7 +76,7 @@ struct GratuitousUIConstant {
             }
         }
         
-        if UIScreen.mainScreen().traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+        if UIScreen.main.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
             padIdiom = true
         }
         
@@ -87,23 +87,23 @@ struct GratuitousUIConstant {
         var constant: CGFloat = 0
         
         //then adjust for the preferred text size
-        if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryLarge {
+        if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.large {
             constant = 0
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.extraLarge {
             constant = 0
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.extraExtraLarge {
             constant = 50
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraExtraExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.extraExtraExtraLarge {
             constant = 50
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityMedium {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.accessibilityMedium {
             constant = 100
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.accessibilityLarge {
             constant = 100
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.accessibilityExtraLarge {
             constant = 100
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.accessibilityExtraExtraLarge {
             constant = 150
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraExtraExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.accessibilityExtraExtraExtraLarge {
             constant = 150
         }
         
@@ -113,7 +113,7 @@ struct GratuitousUIConstant {
     
     static func actualScreenSizeBasedOnWidth() -> ActualScreenSizeBasedOnWidth {
         var actualScreenWidthEnum = ActualScreenSizeBasedOnWidth.iPhone4or5
-        let actualScreenWidth = (UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
+        let actualScreenWidth = (UIScreen.main.bounds.size.height > UIScreen.main.bounds.size.width) ? UIScreen.main.bounds.size.width : UIScreen.main.bounds.size.height
         if actualScreenWidth > 767 {
             actualScreenWidthEnum = ActualScreenSizeBasedOnWidth.iPad
         } else if actualScreenWidth > 413 {
@@ -129,7 +129,7 @@ struct GratuitousUIConstant {
     static func correctCellTextSize() -> TableViewTextSizeAdjustedForDynamicType {
         var screenEnum = TableViewTextSizeAdjustedForDynamicType.iPhone4or5
         var textSizeAdjustment = 0
-        let actualScreenWidth = (UIScreen.mainScreen().bounds.size.height > UIScreen.mainScreen().bounds.size.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
+        let actualScreenWidth = (UIScreen.main.bounds.size.height > UIScreen.main.bounds.size.width) ? UIScreen.main.bounds.size.width : UIScreen.main.bounds.size.height
         
         //go through the real screen sizes
         if actualScreenWidth > 767 {
@@ -143,23 +143,23 @@ struct GratuitousUIConstant {
         }
         
         //then adjust for the preferred text size
-        if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryLarge {
+        if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.large {
             textSizeAdjustment = 0
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.extraLarge {
             textSizeAdjustment = 0
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.extraExtraLarge {
             textSizeAdjustment = 1
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryExtraExtraExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.extraExtraExtraLarge {
             textSizeAdjustment = 1
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityMedium {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.accessibilityMedium {
             textSizeAdjustment = 2
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.accessibilityLarge {
             textSizeAdjustment = 2
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.accessibilityExtraLarge {
             textSizeAdjustment = 2
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.accessibilityExtraExtraLarge {
             textSizeAdjustment = 3
-        } else if UIApplication.sharedApplication().preferredContentSizeCategory == UIContentSizeCategoryAccessibilityExtraExtraExtraLarge {
+        } else if UIApplication.shared.preferredContentSizeCategory == UIContentSizeCategory.accessibilityExtraExtraExtraLarge {
             textSizeAdjustment = 3
         }
         

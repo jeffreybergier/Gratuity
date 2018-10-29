@@ -10,30 +10,30 @@ import UIKit
 
 class GratuitousSplitBillPurchaseTableViewCell: GratuitousSelectFadeTableViewCell {
     
-    private var applicationPreferences: GratuitousUserDefaults {
-        return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences
+    fileprivate var applicationPreferences: GratuitousUserDefaults {
+        return (UIApplication.shared.delegate as! GratuitousAppDelegate).preferences
     }
     
-    @IBOutlet private var lockIconTrailingConstraint: NSLayoutConstraint?
-    @IBOutlet private var lockIconWidthConstraint: NSLayoutConstraint?
-    @IBOutlet private var purchaseTextLabel: UILabel?
+    @IBOutlet fileprivate var lockIconTrailingConstraint: NSLayoutConstraint?
+    @IBOutlet fileprivate var lockIconWidthConstraint: NSLayoutConstraint?
+    @IBOutlet fileprivate var purchaseTextLabel: UILabel?
     
     enum UIState {
-        case LockShowing
-        case CheckMarkShowing
+        case lockShowing
+        case checkMarkShowing
     }
     
-    private var viewSourceOfTruth = UIState.LockShowing {
+    fileprivate var viewSourceOfTruth = UIState.lockShowing {
         didSet {
             switch self.viewSourceOfTruth {
-            case .LockShowing:
+            case .lockShowing:
                 self.lockIconTrailingConstraint?.constant = 10
-                self.lockIconWidthConstraint?.active = false
-                self.accessoryType = .None
-            case .CheckMarkShowing:
+                self.lockIconWidthConstraint?.isActive = false
+                self.accessoryType = .none
+            case .checkMarkShowing:
                 self.lockIconTrailingConstraint?.constant = 0
-                self.lockIconWidthConstraint?.active = true
-                self.accessoryType = .Checkmark
+                self.lockIconWidthConstraint?.isActive = true
+                self.accessoryType = .checkmark
             }
             self.layoutIfNeeded()
         }
@@ -44,28 +44,28 @@ class GratuitousSplitBillPurchaseTableViewCell: GratuitousSelectFadeTableViewCel
         
         self.animatableTextLabel = self.purchaseTextLabel
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.purchaseStateMayHaveChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.purchaseStateMayHaveChanged(_:)), name: NSNotification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote), object: .none)
         
         self.verifySplitBillPurchaseAndUpdateUI()
     }
     
-    private func verifySplitBillPurchaseAndUpdateUI() {
+    fileprivate func verifySplitBillPurchaseAndUpdateUI() {
         if self.applicationPreferences.splitBillPurchased == true {
-            self.viewSourceOfTruth = .CheckMarkShowing
+            self.viewSourceOfTruth = .checkMarkShowing
         } else {
-            self.viewSourceOfTruth = .LockShowing
+            self.viewSourceOfTruth = .lockShowing
         }
     }
     
-    @objc private func purchaseStateMayHaveChanged(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
-            UIView.animateWithDuration(0.3) {
+    @objc fileprivate func purchaseStateMayHaveChanged(_ notification: Notification?) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.verifySplitBillPurchaseAndUpdateUI()
-            }
+            }) 
         }
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }

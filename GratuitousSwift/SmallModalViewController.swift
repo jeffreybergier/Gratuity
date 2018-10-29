@@ -13,23 +13,23 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
     @IBOutlet weak var contentView: UIView?
     @IBOutlet weak var navigationBar: UINavigationBar?
     
-    private var borderHidden = false
-    private var peekMode = false
-    private var doneButton: UIBarButtonItem?
+    fileprivate var borderHidden = false
+    fileprivate var peekMode = false
+    fileprivate var doneButton: UIBarButtonItem?
     
     var customTransitionType: GratuitousTransitioningDelegateType {
-        return .Bottom
+        return .bottom
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.systemTextSizeDidChange(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.systemTextSizeDidChange(_:)), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
         self.configureDynamicTextLabels()
         
         if self.peekMode == true {
             self.doneButton = self.navigationBar?.items?.last?.rightBarButtonItem
-            self.navigationBar?.items?.last?.rightBarButtonItem = .None
+            self.navigationBar?.items?.last?.rightBarButtonItem = .none
         }
 
     }
@@ -42,19 +42,19 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
             _preferredContentSize = newValue
         }
     }
-    private var _preferredContentSize = CGSize(width: 320, height: 568)
+    fileprivate var _preferredContentSize = CGSize(width: 320, height: 568)
     
-    @objc private func dismissViewControllerGestureTriggered(sender: UIGestureRecognizer?) {
+    @objc fileprivate func dismissViewControllerGestureTriggered(_ sender: UIGestureRecognizer?) {
         guard let sender = sender else { return }
         switch sender.state {
-        case .Ended:
-            self.dismissViewControllerAnimated(true, completion: .None)
+        case .ended:
+            self.dismiss(animated: true, completion: .none)
         default:
             return
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // just in case this is not called by the trait collection changing
@@ -62,12 +62,12 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
         self.switchOnScreenSizeToDetermineBorderSurround()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // just in case this is not called by the trait collection changing
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.03 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        let delayTime = DispatchTime.now() + Double(Int64(0.03 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
             self.navigationBarHeightDidChange()
         }
         self.switchOnScreenSizeToDetermineBorderSurround()
@@ -86,8 +86,8 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
         self.peekMode = false
     }
     
-    @objc private func systemTextSizeDidChange(notification: NSNotification) {
-        dispatch_async(dispatch_get_main_queue()) {
+    @objc fileprivate func systemTextSizeDidChange(_ notification: Notification) {
+        DispatchQueue.main.async {
             self.configureDynamicTextLabels()
             self.switchOnScreenSizeToDetermineBorderSurround()
         }
@@ -97,11 +97,11 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
         
     }
     
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        let delayTime = DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
             // needs to be called slightly after animation to work
             self.navigationBarHeightDidChange()
         }
@@ -114,9 +114,9 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
         self.navigationBar?.sizeToFitWithStatusBar()
     }
     
-    private func switchOnScreenSizeToDetermineBorderSurround() {
-        let shorterThanScreen = self.view.bounds.height < UIScreen.mainScreen().bounds.size.height
-        let narrowerThanScreen = self.view.bounds.width < UIScreen.mainScreen().bounds.size.width
+    fileprivate func switchOnScreenSizeToDetermineBorderSurround() {
+        let shorterThanScreen = self.view.bounds.height < UIScreen.main.bounds.size.height
+        let narrowerThanScreen = self.view.bounds.width < UIScreen.main.bounds.size.width
         
         if (shorterThanScreen || narrowerThanScreen) && self.borderHidden == false {
             self.showBorder()
@@ -125,30 +125,30 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
         }
     }
     
-    private func hideBorder() {
-        self.contentView?.layer.borderColor = GratuitousUIColor.mediumBackgroundColor().CGColor
+    fileprivate func hideBorder() {
+        self.contentView?.layer.borderColor = GratuitousUIColor.mediumBackgroundColor().cgColor
         self.contentView?.layer.borderWidth = 0
         self.contentView?.layer.cornerRadius = 0
         self.contentView?.clipsToBounds = true
     }
     
-    private func showBorder() {
-        self.contentView?.layer.borderColor = GratuitousUIColor.mediumBackgroundColor().CGColor
+    fileprivate func showBorder() {
+        self.contentView?.layer.borderColor = GratuitousUIColor.mediumBackgroundColor().cgColor
         self.contentView?.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
         self.contentView?.layer.cornerRadius = GratuitousUIConstant.cornerRadius
         self.contentView?.clipsToBounds = true
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return [UIInterfaceOrientationMask.Portrait, UIInterfaceOrientationMask.Landscape, UIInterfaceOrientationMask.PortraitUpsideDown]
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.portrait, UIInterfaceOrientationMask.landscape, UIInterfaceOrientationMask.portraitUpsideDown]
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -156,8 +156,8 @@ extension UINavigationBar {
     func sizeToFitWithStatusBar() {
         self.layoutSubviews()
         self.sizeToFit()
-        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        let frameInWindowCoordinates = self.convertRect(self.frame, toView: .None)
+        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+        let frameInWindowCoordinates = self.convert(self.frame, to: .none)
         if frameInWindowCoordinates.origin.y <= statusBarHeight {
             //navbar is touching status bar
             let navBarHeight = self.frame.size.height

@@ -10,18 +10,18 @@ import UIKit
 
 final class GratuitousTableViewCell: UITableViewCell {
 
-    @IBOutlet weak private var dollarTextLabel: UILabel?
-    private var labelTextAttributes = [String(): NSObject()]
-    private let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
-    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
-    private var currentCurrencySign: CurrencySign {
-        return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences.overrideCurrencySymbol
+    @IBOutlet weak fileprivate var dollarTextLabel: UILabel?
+    fileprivate var labelTextAttributes = [String(): NSObject()]
+    fileprivate let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
+    fileprivate let currencyFormatter = GratuitousNumberFormatter(style: .respondsToLocaleChanges)
+    fileprivate var currentCurrencySign: CurrencySign {
+        return (UIApplication.shared.delegate as! GratuitousAppDelegate).preferences.overrideCurrencySymbol
     }
     var textSizeAdjustment: CGFloat = 1.0 {
         didSet {
             if (self.labelTextAttributes["NSFont"] != nil) {
                 if let originalFont = self.originalFont {
-                    let updatedFont = originalFont.fontWithSize(originalFont.pointSize * self.textSizeAdjustment)
+                    let updatedFont = originalFont.withSize(originalFont.pointSize * self.textSizeAdjustment)
                     self.labelTextAttributes["NSFont"] = updatedFont
                 }}}}
     var billAmount: Int = 0 {
@@ -33,14 +33,14 @@ final class GratuitousTableViewCell: UITableViewCell {
         self.didSetBillAmount()
     }
     
-    @objc private func currencySignChanged(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.currencyFormatter.locale = NSLocale.currentLocale()
+    @objc fileprivate func currencySignChanged(_ notification: Notification?) {
+        DispatchQueue.main.async {
+            self.currencyFormatter.locale = Locale.current
             self.setInterfaceRefreshNeeded()
         }
     }
     
-    private func didSetBillAmount() {
+    fileprivate func didSetBillAmount() {
         let currencyFormattedString: String
         if self.billAmount != 0 {
             currencyFormattedString = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: self.billAmount)
@@ -54,8 +54,8 @@ final class GratuitousTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSCurrentLocaleDidChangeNotification, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSLocale.currentLocaleDidChangeNotification, object: .none)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSNotification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged), object: .none)
         
         //configure the font
         if let font = GratuitousUIConstant.originalFontForTableViewCellTextLabels() {
@@ -63,7 +63,7 @@ final class GratuitousTableViewCell: UITableViewCell {
         }
         
         //the default selection styles are so fucking shitty
-        self.selectionStyle = UITableViewCellSelectionStyle.None
+        self.selectionStyle = UITableViewCellSelectionStyle.none
         
         //configure the colors
         self.contentView.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
@@ -73,18 +73,18 @@ final class GratuitousTableViewCell: UITableViewCell {
         self.prepareLabelTextAttributes()
     }
     
-    private func prepareLabelTextAttributes() {
+    fileprivate func prepareLabelTextAttributes() {
         //configure the not selected text attributes
         let textColor = GratuitousUIConstant.lightTextColor()
         let text = self.dollarTextLabel?.text !! "Label" //Label string is what comes out of the NIB
         let shadow = NSShadow()
         shadow.shadowColor = GratuitousUIConstant.textShadowColor()
         shadow.shadowBlurRadius = 1.5
-        shadow.shadowOffset = CGSizeMake(0.5, 0.5)
+        shadow.shadowOffset = CGSize(width: 0.5, height: 0.5)
         if let font = self.originalFont {
             let attributes = [
                 NSForegroundColorAttributeName : textColor,
-                NSFontAttributeName : font.fontWithSize(font.pointSize * self.textSizeAdjustment),
+                NSFontAttributeName : font.withSize(font.pointSize * self.textSizeAdjustment),
                 NSShadowAttributeName : shadow
             ]
             self.labelTextAttributes = attributes
@@ -96,7 +96,7 @@ final class GratuitousTableViewCell: UITableViewCell {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
 }

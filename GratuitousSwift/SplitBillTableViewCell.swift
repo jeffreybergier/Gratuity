@@ -10,40 +10,40 @@ import UIKit
 
 final class SplitBillTableViewCell: UITableViewCell {
     
-    @IBOutlet private weak var primaryLabel: UILabel?
-    @IBOutlet private weak var secondaryTextLabel: UILabel?
-    @IBOutlet private weak var primaryImageView: UIImageView?
+    @IBOutlet fileprivate weak var primaryLabel: UILabel?
+    @IBOutlet fileprivate weak var secondaryTextLabel: UILabel?
+    @IBOutlet fileprivate weak var primaryImageView: UIImageView?
     
-    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
-    private var currentCurrencySign: CurrencySign {
-        return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences.overrideCurrencySymbol
+    fileprivate let currencyFormatter = GratuitousNumberFormatter(style: .respondsToLocaleChanges)
+    fileprivate var currentCurrencySign: CurrencySign {
+        return (UIApplication.shared.delegate as! GratuitousAppDelegate).preferences.overrideCurrencySymbol
     }
     
     var identity: Identity? {
         didSet {
             if let identity = self.identity {
                 switch identity {
-                case .One(let value):
+                case .one(let value):
                     self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = ""
                     self.primaryImageView?.image = IdentityImage.one
-                case .Two(let value):
+                case .two(let value):
                     self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = ""
                     self.primaryImageView?.image = IdentityImage.two
-                case .Three(let value):
+                case .three(let value):
                     self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = ""
                     self.primaryImageView?.image = IdentityImage.three
-                case .Four(let value):
+                case .four(let value):
                     self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = ""
                     self.primaryImageView?.image = IdentityImage.four
-                case .Five(let value):
+                case .five(let value):
                     self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = ""
                     self.primaryImageView?.image = IdentityImage.five
-                case .Higher(let value, let divisor):
+                case .higher(let value, let divisor):
                     self.primaryLabel?.text = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.currentCurrencySign, amount: value)
                     self.secondaryTextLabel?.text = "\(divisor)"
                     self.primaryImageView?.image = IdentityImage.one
@@ -51,18 +51,18 @@ final class SplitBillTableViewCell: UITableViewCell {
             } else {
                 self.primaryLabel?.text = ""
                 self.secondaryTextLabel?.text = ""
-                self.primaryImageView?.image = .None
+                self.primaryImageView?.image = .none
             }
         }
     }
     
     enum Identity {
-        case One(value: Int)
-        case Two(value: Int)
-        case Three(value: Int)
-        case Four(value: Int)
-        case Five(value: Int)
-        case Higher(value: Int, divisor: Int)
+        case one(value: Int)
+        case two(value: Int)
+        case three(value: Int)
+        case four(value: Int)
+        case five(value: Int)
+        case higher(value: Int, divisor: Int)
     }
     
     struct IdentityImage {
@@ -77,13 +77,13 @@ final class SplitBillTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.prepareFontsAndColors()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSCurrentLocaleDidChangeNotification, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSLocale.currentLocaleDidChangeNotification, object: .none)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSNotification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged), object: .none)
     }
     
-    @objc private func currencySignChanged(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.currencyFormatter.locale = NSLocale.currentLocale()
+    @objc fileprivate func currencySignChanged(_ notification: Notification?) {
+        DispatchQueue.main.async {
+            self.currencyFormatter.locale = Locale.current
             let currentIdentity = self.identity
             self.identity = currentIdentity
         }
@@ -95,16 +95,16 @@ final class SplitBillTableViewCell: UITableViewCell {
         self.prepareFontsAndColors()
     }
     
-    private func prepareFontsAndColors() {
-        let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+    fileprivate func prepareFontsAndColors() {
+        let headlineFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
         let headlineFontSize = headlineFont.pointSize
-        let bigFuturaFont = UIFont.futura(style: Futura.Medium, size: headlineFontSize * 2.5, fallbackStyle: UIFontStyle.Headline)
+        let bigFuturaFont = UIFont.futura(style: Futura.Medium, size: headlineFontSize * 2.5, fallbackStyle: UIFontStyle.headline)
         
-        var normalFont = UIFont.preferredFontForTextStyle(UIFontStyle.Headline.description).fontWithSize(headlineFontSize * 1.5)
+        var normalFont = UIFont.preferredFont(forTextStyle: .headline).withSize(headlineFontSize * 1.5)
         if #available(iOS 9.0, *) {
-            let traits = normalFont.fontDescriptor().objectForKey(UIFontDescriptorTraitsAttribute) as? NSDictionary
+            let traits = normalFont.fontDescriptor.object(forKey: UIFontDescriptorTraitsAttribute) as? NSDictionary
             let weight = CGFloat((traits?[UIFontWeightTrait] as? NSNumber)?.floatValue !! 0.3)
-            let monospaceFont = UIFont.monospacedDigitSystemFontOfSize(normalFont.pointSize, weight: weight)
+            let monospaceFont = UIFont.monospacedDigitSystemFont(ofSize: normalFont.pointSize, weight: weight)
             normalFont = monospaceFont
         }
         
@@ -114,10 +114,10 @@ final class SplitBillTableViewCell: UITableViewCell {
         self.primaryLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.secondaryTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
         
-        self.contentView.backgroundColor = UIColor.blackColor()
+        self.contentView.backgroundColor = UIColor.black
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }

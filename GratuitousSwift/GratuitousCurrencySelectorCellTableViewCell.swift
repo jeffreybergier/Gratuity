@@ -20,58 +20,57 @@ final class GratuitousCurrencySelectorCellTableViewCell: GratuitousSelectFadeTab
         self.readUserDefaultsAndSetCheckmark()
     }
     
-    private func prepareTextLabel() {
+    fileprivate func prepareTextLabel() {
         self.readUserDefaultsAndSetCheckmark()
         self.animatableTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
-        self.animatableTextLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.animatableTextLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         self.layoutIfNeeded()
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: false)
         
         // Configure the view for the selected state
         if selected {
-            UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
+            UIView.animate(withDuration: GratuitousUIConstant.animationDuration(),
                 delay: 0.0,
-                options: UIViewAnimationOptions.BeginFromCurrentState,
+                options: UIViewAnimationOptions.beginFromCurrentState,
                 animations: {
                     self.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
                     self.animatableTextLabel?.textColor = GratuitousUIConstant.darkTextColor()
                 },
                 completion: { finished in
-                    UIView.animateWithDuration(GratuitousUIConstant.animationDuration(),
+                    UIView.animate(withDuration: GratuitousUIConstant.animationDuration(),
                         delay: 0.0,
-                        options: UIViewAnimationOptions.BeginFromCurrentState,
+                        options: UIViewAnimationOptions.beginFromCurrentState,
                         animations: {
                             self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
                             self.animatableTextLabel?.textColor = GratuitousUIConstant.lightTextColor()
                         },
-                        completion: .None)
+                        completion: .none)
             })
         }
     }
     
-    private func readUserDefaultsAndSetCheckmark() {
-        if let appDelegate = UIApplication.sharedApplication().delegate as? GratuitousAppDelegate
-            where appDelegate.preferencesSetLocally.overrideCurrencySymbol.rawValue == self.tag {
-                self.accessoryType = UITableViewCellAccessoryType.Checkmark
+    fileprivate func readUserDefaultsAndSetCheckmark() {
+        if let appDelegate = UIApplication.shared.delegate as? GratuitousAppDelegate, appDelegate.preferencesSetLocally.overrideCurrencySymbol.rawValue == self.tag {
+                self.accessoryType = UITableViewCellAccessoryType.checkmark
                 if self.animatingBorderColor == false {
                     //if this property is being animated, don't change it
-                    self.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().CGColor
+                    self.layer.borderColor = GratuitousUIConstant.lightBackgroundColor().cgColor
                 }
-                self.accessoryType = UITableViewCellAccessoryType.Checkmark
+                self.accessoryType = UITableViewCellAccessoryType.checkmark
         } else {
-            self.accessoryType = UITableViewCellAccessoryType.None
+            self.accessoryType = UITableViewCellAccessoryType.none
             if self.animatingBorderColor == false {
-                self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().CGColor
+                self.layer.borderColor = GratuitousUIConstant.darkBackgroundColor().cgColor
             }
-            self.accessoryType = UITableViewCellAccessoryType.None
+            self.accessoryType = UITableViewCellAccessoryType.none
         }
         self.layoutIfNeeded()
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }

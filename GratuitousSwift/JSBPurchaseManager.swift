@@ -11,22 +11,22 @@ import UIKit
 
 class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
-    private let paymentQueue = SKPaymentQueue.defaultQueue()
+    fileprivate let paymentQueue = SKPaymentQueue.default()
     
     // MARK: Set Observer
     
     func beginObserving() {
-        self.paymentQueue.addTransactionObserver(self)
+        self.paymentQueue.add(self)
     }
     
     func endObserving() {
-        self.paymentQueue.removeTransactionObserver(self)
+        self.paymentQueue.remove(self)
         for (key, _) in self.productsRequestsInProgress {
             key.cancel()
-            key.delegate = .None
+            key.delegate = .none
         }
         self.productsRequestsInProgress = [ : ]
-        self.latestPurchasesRestoreCompletionHandler = .None
+        self.latestPurchasesRestoreCompletionHandler = .none
         self.purchasesInProgress = [ : ]
     }
     
@@ -45,61 +45,61 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
     
     // MARK: Product Request
     
-    private var productsRequestsInProgress = [SKRequest : ProductsRequestCompletionHandler]()
+    fileprivate var productsRequestsInProgress = [SKRequest : ProductsRequestCompletionHandler]()
     
-    func initiateRequest(request: SKProductsRequest, completionHandler: (request: SKProductsRequest, response: SKProductsResponse?, error: NSError?) -> ()) {
+    func initiateRequest(_ request: SKProductsRequest, completionHandler: @escaping (_ request: SKProductsRequest, _ response: SKProductsResponse?, _ error: NSError?) -> ()) {
         self.productsRequestsInProgress[request] = completionHandler
         request.delegate = self
         request.start()
     }
     
-    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         if let completionHandler = self.productsRequestsInProgress[request] {
-            completionHandler(request: request, response: response, error: .None)
+            completionHandler(request, response, .none)
         }
-        self.productsRequestsInProgress.removeValueForKey(request)
+        self.productsRequestsInProgress.removeValue(forKey: request)
     }
     
-    func request(request: SKRequest, didFailWithError error: NSError) {
+    func request(_ request: SKRequest, didFailWithError error: Error) {
         if let completionHandler = self.productsRequestsInProgress[request], let productsRequest = request as? SKProductsRequest {
-            completionHandler(request: productsRequest, response: .None, error: error)
+            completionHandler(productsRequest, .none, error as NSError)
         }
-        self.productsRequestsInProgress.removeValueForKey(request)
+        self.productsRequestsInProgress.removeValue(forKey: request)
     }
     
-    private typealias ProductsRequestCompletionHandler = (request: SKProductsRequest, response: SKProductsResponse?, error: NSError?) -> ()
+    fileprivate typealias ProductsRequestCompletionHandler = (_ request: SKProductsRequest, _ response: SKProductsResponse?, _ error: NSError?) -> ()
     
     // MARK: Restore Purchases
     
-    private var latestPurchasesRestoreCompletionHandler: PurchasesRestoreCompletionHandler?
+    fileprivate var latestPurchasesRestoreCompletionHandler: PurchasesRestoreCompletionHandler?
     
-    func restorePurchasesWithCompletionHandler(completionHandler: (queue: SKPaymentQueue?, error: NSError?) -> ()) {
+    func restorePurchasesWithCompletionHandler(_ completionHandler: @escaping (_ queue: SKPaymentQueue?, _ error: NSError?) -> ()) {
         if let _ = self.latestPurchasesRestoreCompletionHandler {
-            completionHandler(queue: .None, error: NSError(purchaseError: .RestorePurchasesAlreadyInProgress))
+            completionHandler(.none, NSError(purchaseError: .restorePurchasesAlreadyInProgress))
         } else {
             self.latestPurchasesRestoreCompletionHandler = completionHandler
             self.paymentQueue.restoreCompletedTransactions()
         }
     }
     
-    func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError) {
-        self.latestPurchasesRestoreCompletionHandler?(queue: queue, error: error)
-        self.latestPurchasesRestoreCompletionHandler = .None
+    func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+        self.latestPurchasesRestoreCompletionHandler?(queue, error as NSError)
+        self.latestPurchasesRestoreCompletionHandler = .none
     }
     
-    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
-        self.latestPurchasesRestoreCompletionHandler?(queue: queue, error: .None)
-        self.latestPurchasesRestoreCompletionHandler = .None
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        self.latestPurchasesRestoreCompletionHandler?(queue, .none)
+        self.latestPurchasesRestoreCompletionHandler = .none
     }
     
-    private typealias PurchasesRestoreCompletionHandler = (queue: SKPaymentQueue?, error: NSError?) -> ()
+    fileprivate typealias PurchasesRestoreCompletionHandler = (_ queue: SKPaymentQueue?, _ error: NSError?) -> ()
     
     // MARK: Purchasing Items
     
-    private var purchasesInProgress = [SKPayment : PurchasePaymentCompletionHandler]()
+    fileprivate var purchasesInProgress = [SKPayment : PurchasePaymentCompletionHandler]()
     
-    private class BogusTransaction: SKPaymentTransaction {
-        override var error: NSError? {
+    fileprivate class BogusTransaction: SKPaymentTransaction {
+        override var error: Error? {
             get {
                 return _error
             }
@@ -107,30 +107,30 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
                 _error = newValue
             }
         }
-        private var _error: NSError?
+        fileprivate var _error: Error?
     }
     
-    func initiatePurchaseWithPayment(payment: SKPayment, completionHandler: (transaction: SKPaymentTransaction) -> ()) {
+    func initiatePurchaseWithPayment(_ payment: SKPayment, completionHandler: @escaping (_ transaction: SKPaymentTransaction) -> ()) {
         if let existingCompletionHandler = self.purchasesInProgress[payment] {
             let bogusTransaction = BogusTransaction()
-            bogusTransaction.error = NSError(purchaseError: .PurchaseAlreadyInProgress)
-            existingCompletionHandler(transaction: bogusTransaction)
+            bogusTransaction.error = NSError(purchaseError: .purchaseAlreadyInProgress)
+            existingCompletionHandler(bogusTransaction)
         } else {
             self.purchasesInProgress[payment] = completionHandler
-            self.paymentQueue.addPayment(payment)
+            self.paymentQueue.add(payment)
         }
     }
     
     // Sent when the transaction array has changed (additions or state changes).  Client should check state of transactions and finish as appropriate.
-    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch transaction.transactionState {
-            case .Purchasing:
+            case .purchasing:
                 break // do nothing and wait
-            case .Purchased, .Restored, .Failed, .Deferred:
+            case .purchased, .restored, .failed, .deferred:
                 if let completionHandler = self.purchasesInProgress[transaction.payment] {
-                    completionHandler(transaction: transaction)
-                    self.purchasesInProgress.removeValueForKey(transaction.payment)
+                    completionHandler(transaction)
+                    self.purchasesInProgress.removeValue(forKey: transaction.payment)
                 } else {
                     // we know finish can never get called on these transactions because there is no completion handler
                     // doing it now in a last ditch effort to prevent errors
@@ -140,29 +140,29 @@ class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransact
         }
     }
     
-    func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
+    func paymentQueue(_ queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
         
     }
     
-    func finishTransaction(transaction: SKPaymentTransaction) {
+    func finishTransaction(_ transaction: SKPaymentTransaction) {
         self.paymentQueue.finishTransaction(transaction)
     }
     
-    private typealias PurchasePaymentCompletionHandler = (transaction: SKPaymentTransaction) -> ()
+    fileprivate typealias PurchasePaymentCompletionHandler = (_ transaction: SKPaymentTransaction) -> ()
 }
 
 extension SKPaymentTransactionState: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Deferred:
+        case .deferred:
             return "SKPaymentTransactionState.Deferred"
-        case .Failed:
+        case .failed:
             return "SKPaymentTransactionState.Failed"
-        case .Purchased:
+        case .purchased:
             return "SKPaymentTransactionState.Purchased"
-        case .Purchasing:
+        case .purchasing:
             return "SKPaymentTransactionState.Purchasing"
-        case .Restored:
+        case .restored:
             return "SKPaymentTransactionState.Restored"
         }
     }

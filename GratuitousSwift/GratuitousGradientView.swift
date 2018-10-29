@@ -12,15 +12,15 @@ final class GratuitousGradientView: UIView {
     
     internal let gradient = CAGradientLayer()
     internal let gradientColors = [
-        GratuitousUIConstant.darkBackgroundColor().CGColor, GratuitousUIConstant.darkBackgroundColor().CGColor,
-        GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.6).CGColor,
-        GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.5).CGColor,
-        GratuitousUIConstant.darkBackgroundColor().colorWithAlphaComponent(0.4).CGColor
+        GratuitousUIConstant.darkBackgroundColor().cgColor, GratuitousUIConstant.darkBackgroundColor().cgColor,
+        GratuitousUIConstant.darkBackgroundColor().withAlphaComponent(0.6).cgColor,
+        GratuitousUIConstant.darkBackgroundColor().withAlphaComponent(0.5).cgColor,
+        GratuitousUIConstant.darkBackgroundColor().withAlphaComponent(0.4).cgColor
     ]
     
     var isUpsideDown:Bool = false {
         didSet {
-            let colorArray = Array(self.gradientColors.reverse())
+            let colorArray = Array(self.gradientColors.reversed())
             self.gradient.colors = colorArray
         }
     }
@@ -35,11 +35,11 @@ final class GratuitousGradientView: UIView {
         self.commonInitializer()
     }
     
-    private func commonInitializer() {
-        self.backgroundColor = UIColor.clearColor()
+    fileprivate func commonInitializer() {
+        self.backgroundColor = UIColor.clear
         self.gradient.frame = self.bounds
         self.gradient.colors = self.gradientColors
-        self.layer.insertSublayer(self.gradient, atIndex: 0)
+        self.layer.insertSublayer(self.gradient, at: 0)
     }
     
     override func layoutSubviews() {

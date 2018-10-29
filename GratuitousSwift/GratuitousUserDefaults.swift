@@ -21,32 +21,32 @@ struct GratuitousUserDefaults {
 extension GratuitousUserDefaults: Equatable { }
 
 func ==(lhs: GratuitousUserDefaults, rhs: GratuitousUserDefaults) -> Bool {
-    return lhs.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded) as NSDictionary == rhs.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded) as NSDictionary
+    return lhs.dictionaryCopyForKeys(.forCurrencySymbolsNeeded) as NSDictionary == rhs.dictionaryCopyForKeys(.forCurrencySymbolsNeeded) as NSDictionary
 }
 
 extension GratuitousUserDefaults {
     enum DictionaryCopyKeys {
-        case ForCurrencySymbolsNeeded, ForWatch, ForDisk
+        case forCurrencySymbolsNeeded, forWatch, forDisk
     }
     
-    func dictionaryCopyForKeys(keys: DictionaryCopyKeys) -> [String : AnyObject] {
+    func dictionaryCopyForKeys(_ keys: DictionaryCopyKeys) -> [String : AnyObject] {
         var dictionary = [String : AnyObject]()
         switch keys {
-        case .ForCurrencySymbolsNeeded:
-            dictionary[Keys.currencySymbolsNeeded] = self.currencySymbolsNeeded
+        case .forCurrencySymbolsNeeded:
+            dictionary[Keys.currencySymbolsNeeded] = self.currencySymbolsNeeded as AnyObject
             fallthrough
-        case .ForDisk:
-            dictionary[Keys.locationZipCode] = self.lastLocation?.zipCode
-            dictionary[Keys.locationCity] = self.lastLocation?.city
-            dictionary[Keys.locationCountry] = self.lastLocation?.country
-            dictionary[Keys.locationCountryCode] = self.lastLocation?.countryCode
+        case .forDisk:
+            dictionary[Keys.locationZipCode] = self.lastLocation?.zipCode as AnyObject
+            dictionary[Keys.locationCity] = self.lastLocation?.city as AnyObject
+            dictionary[Keys.locationCountry] = self.lastLocation?.country as AnyObject
+            dictionary[Keys.locationCountryCode] = self.lastLocation?.countryCode as AnyObject
             fallthrough
-        case .ForWatch:
-            dictionary[Keys.billIndexPathRow] = NSNumber(integer: self.billIndexPathRow)
-            dictionary[Keys.tipIndexPathRow] = NSNumber(integer: self.tipIndexPathRow)
-            dictionary[Keys.overrideCurrencySymbol] = NSNumber(integer: self.overrideCurrencySymbol.rawValue)
-            dictionary[Keys.suggestedTipPercentage] = NSNumber(double: self.suggestedTipPercentage)
-            dictionary[Keys.splitBillPurchased] = NSNumber(bool: self.splitBillPurchased)
+        case .forWatch:
+            dictionary[Keys.billIndexPathRow] = NSNumber(value: self.billIndexPathRow as Int)
+            dictionary[Keys.tipIndexPathRow] = NSNumber(value: self.tipIndexPathRow as Int)
+            dictionary[Keys.overrideCurrencySymbol] = NSNumber(value: self.overrideCurrencySymbol.rawValue as Int)
+            dictionary[Keys.suggestedTipPercentage] = NSNumber(value: self.suggestedTipPercentage as Double)
+            dictionary[Keys.splitBillPurchased] = NSNumber(value: self.splitBillPurchased as Bool)
         }
         return dictionary
     }
@@ -54,29 +54,29 @@ extension GratuitousUserDefaults {
 
 extension GratuitousUserDefaults {
 
-    init(dictionary: NSDictionary?, fallback: GratuitousUserDefaults? = .None) {
+    init(dictionary: NSDictionary?, fallback: GratuitousUserDefaults? = .none) {
         // version 1.0 and 1.0.1 keys
         if let billIndexPathRow = dictionary?[Keys.billIndexPathRow] as? NSNumber {
-            self.billIndexPathRow = billIndexPathRow.integerValue
+            self.billIndexPathRow = billIndexPathRow.intValue
         } else if let billIndexPathRow = fallback?.billIndexPathRow {
             self.billIndexPathRow = billIndexPathRow
         } else {
             self.billIndexPathRow = 25
         }
         if let tipIndexPathRow = dictionary?[Keys.tipIndexPathRow] as? NSNumber {
-            self.tipIndexPathRow = tipIndexPathRow.integerValue
+            self.tipIndexPathRow = tipIndexPathRow.intValue
         } else if let tipIndexPathRow = fallback?.tipIndexPathRow {
             self.tipIndexPathRow = tipIndexPathRow
         } else {
             self.tipIndexPathRow = 0
         }
         if let overrideCurrencySymbol = dictionary?[Keys.overrideCurrencySymbol] as? NSNumber,
-            symbolEnum = CurrencySign(rawValue: overrideCurrencySymbol.integerValue) {
+            let symbolEnum = CurrencySign(rawValue: overrideCurrencySymbol.intValue) {
                 self.overrideCurrencySymbol = symbolEnum
         } else if let overrideCurrencySymbol = fallback?.overrideCurrencySymbol {
             self.overrideCurrencySymbol = overrideCurrencySymbol
         } else {
-            self.overrideCurrencySymbol = .Default
+            self.overrideCurrencySymbol = .default
         }
         if let suggestedTipPercentage = dictionary?[Keys.suggestedTipPercentage] as? NSNumber {
             self.suggestedTipPercentage = suggestedTipPercentage.doubleValue

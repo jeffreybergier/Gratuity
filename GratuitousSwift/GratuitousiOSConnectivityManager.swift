@@ -11,33 +11,33 @@ import WatchConnectivity
 @available(iOS 9, *)
 final class GratuitousiOSConnectivityManager {
     
-    private var watchConnectivityManager: JSBWatchConnectivityManager {
-        return ((UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).watchConnectivityManager as! JSBWatchConnectivityManager)
+    fileprivate var watchConnectivityManager: JSBWatchConnectivityManager {
+        return ((UIApplication.shared.delegate as! GratuitousAppDelegate).watchConnectivityManager as! JSBWatchConnectivityManager)
     }
     
-    private var applicationPreferences: GratuitousUserDefaults {
-        get { return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences }
-        set { (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferencesSetRemotely = newValue }
+    fileprivate var applicationPreferences: GratuitousUserDefaults {
+        get { return (UIApplication.shared.delegate as! GratuitousAppDelegate).preferences }
+        set { (UIApplication.shared.delegate as! GratuitousAppDelegate).preferencesSetRemotely = newValue }
     }
     
-    private var remoteUpdateRateLimiterSet = false
+    fileprivate var remoteUpdateRateLimiterSet = false
     
     init() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.remoteContextUpdateNeeded(_:)), name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.remoteContextUpdateNeeded(_:)), name: NSNotification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded), object: .none)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
 @available(iOS 9, *)
 extension GratuitousiOSConnectivityManager {
     @available (iOS 9, *)
-    @objc private func remoteContextUpdateNeeded(notification: NSNotification?) {
+    @objc fileprivate func remoteContextUpdateNeeded(_ notification: Notification?) {
         if self.remoteUpdateRateLimiterSet == false {
             self.remoteUpdateRateLimiterSet = true
-            NSTimer.scheduleWithDelay(3.0) { timer in
+            Timer.scheduleWithDelay(3.0) { timer in
                 self.remoteUpdateRateLimiterSet = false
                 self.updateRemoteContext(notification)
             }
@@ -45,13 +45,13 @@ extension GratuitousiOSConnectivityManager {
     }
     
     @available (iOS 9, *)
-    func updateRemoteContext(notification: NSNotification?) {
+    func updateRemoteContext(_ notification: Notification?) {
         switch self.watchConnectivityManager.watchState {
-        case .NotSupported, .NotPaired, .PairedWatchAppNotInstalled, .NotReachableWatchAppNotInstalled, .ReachableWatchAppNotInstalled:
+        case .notSupported, .notPaired, .pairedWatchAppNotInstalled, .notReachableWatchAppNotInstalled, .reachableWatchAppNotInstalled:
             // do nothing
             break
-        case .PairedWatchAppInstalled, .NotReachableWatchAppInstalled, .ReachableWatchAppInstalled:
-            let context = self.applicationPreferences.dictionaryCopyForKeys(.ForWatch)
+        case .pairedWatchAppInstalled, .notReachableWatchAppInstalled, .reachableWatchAppInstalled:
+            let context = self.applicationPreferences.dictionaryCopyForKeys(.forWatch)
             do {
                 try self.watchConnectivityManager.session?.updateApplicationContext(context)
             } catch {
@@ -64,43 +64,43 @@ extension GratuitousiOSConnectivityManager {
 @available(iOS 9, *)
 extension GratuitousiOSConnectivityManager: JSBWatchConnectivityContextDelegate {
     @available(iOS 9.0, *)
-    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
-        self.applicationPreferences = GratuitousUserDefaults(dictionary: applicationContext, fallback: self.applicationPreferences)
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+        self.applicationPreferences = GratuitousUserDefaults(dictionary: applicationContext as NSDictionary, fallback: self.applicationPreferences)
     }
 }
 
 @available(iOS 9, *)
 extension GratuitousiOSConnectivityManager: JSBWatchConnectivityMessageDelegate {
     @available(iOS 9.0, *)
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
-        if let currencySymbolsNeeded = (message["SymbolImagesRequested"] as? NSNumber)?.boolValue where currencySymbolsNeeded == true {
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Swift.Void) {
+        if let currencySymbolsNeeded = (message["SymbolImagesRequested"] as? NSNumber)?.boolValue, currencySymbolsNeeded == true {
             log?.info("Message Received: SymbolImagesRequested")
-            let currencySign = GratuitousUserDefaults(dictionary: message, fallback: self.applicationPreferences).overrideCurrencySymbol
+            let currencySign = GratuitousUserDefaults(dictionary: message as NSDictionary, fallback: self.applicationPreferences).overrideCurrencySymbol
             let imagesGenerated = self.generateAndTransferCurrencySymbolImagesForCurrencySign(currencySign)
-            replyHandler(["GeneratingMessages" : NSNumber(bool: imagesGenerated)])
+            replyHandler(["GeneratingMessages" : NSNumber(value: imagesGenerated as Bool)])
         } else {
             log?.warning("Received Unknown Message: \(message)")
         }
     }
     @available(iOS 9.0, *)
-    func session(session: WCSession, didReceiveMessageData messageData: NSData, replyHandler: (NSData) -> Void) {
+    func session(_ session: WCSession, didReceiveMessageData messageData: Data, replyHandler: @escaping (Data) -> Swift.Void) {
         log?.info("Received Unknown MessageData: \(messageData)")
     }
     
     @available(iOS 9.0, *)
-    private func generateAndTransferCurrencySymbolImagesForCurrencySign(currencySign: CurrencySign) -> Bool {
+    fileprivate func generateAndTransferCurrencySymbolImagesForCurrencySign(_ currencySign: CurrencySign) -> Bool {
         let generator = GratuitousCurrencyStringImageGenerator()
         let tuple = generator.generateCurrencySymbolsForCurrencySign(currencySign)
         return self.initiateFileTransferToRemote(tuple)
     }
     
     @available(iOS 9.0, *)
-    private func initiateFileTransferToRemote(tuple: (url: NSURL, fileName: String)?) -> Bool {
+    fileprivate func initiateFileTransferToRemote(_ tuple: (url: URL, fileName: String)?) -> Bool {
         self.applicationPreferences.currencySymbolsNeeded = false
         switch self.watchConnectivityManager.watchState {
-        case .NotSupported, .NotPaired, .PairedWatchAppNotInstalled, .NotReachableWatchAppNotInstalled, .ReachableWatchAppNotInstalled:
+        case .notSupported, .notPaired, .pairedWatchAppNotInstalled, .notReachableWatchAppNotInstalled, .reachableWatchAppNotInstalled:
             return false
-        case .PairedWatchAppInstalled, .NotReachableWatchAppInstalled, .ReachableWatchAppInstalled:
+        case .pairedWatchAppInstalled, .notReachableWatchAppInstalled, .reachableWatchAppInstalled:
             if let tuple = tuple {
                 self.watchConnectivityManager.session?.transferFile(tuple.url, metadata: ["FileName" : tuple.fileName])
                 return true
@@ -113,7 +113,7 @@ extension GratuitousiOSConnectivityManager: JSBWatchConnectivityMessageDelegate 
 
 @available(iOS 9, *)
 extension GratuitousiOSConnectivityManager: JSBWatchConnectivityFileTransferSenderDelegate {
-    func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
+    func session(_ session: WCSession, didFinish fileTransfer: WCSessionFileTransfer, error: Error?) {
         self.applicationPreferences.currencySymbolsNeeded = false
         if let error = error {
             log?.error("File Transfer Failed with Error: \(error)")

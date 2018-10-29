@@ -10,17 +10,17 @@ import UIKit
 
 class GratuitousDisclosureTableViewCell: GratuitousSelectFadeTableViewCell {
     
-    @IBOutlet private weak var cellTextLabel: UILabel?
-    private weak var disclosureButton: UIButton? {
+    @IBOutlet fileprivate weak var cellTextLabel: UILabel?
+    fileprivate weak var disclosureButton: UIButton? {
         didSet {
-            if let originalImage = self.disclosureButton?.backgroundImageForState(.Normal) {
-                let templateImage = originalImage.imageWithRenderingMode(.AlwaysTemplate)
-                self.disclosureButton?.setBackgroundImage(templateImage, forState: .Normal)
-                self.disclosureButton?.setBackgroundImage(templateImage, forState: .Highlighted)
-                self.disclosureButton?.setBackgroundImage(templateImage, forState: .Disabled)
-                self.disclosureButton?.setBackgroundImage(templateImage, forState: .Selected)
-                self.disclosureButton?.setBackgroundImage(templateImage, forState: .Application)
-                self.disclosureButton?.setBackgroundImage(templateImage, forState: .Reserved)
+            if let originalImage = self.disclosureButton?.backgroundImage(for: UIControlState()) {
+                let templateImage = originalImage.withRenderingMode(.alwaysTemplate)
+                self.disclosureButton?.setBackgroundImage(templateImage, for: UIControlState())
+                self.disclosureButton?.setBackgroundImage(templateImage, for: .highlighted)
+                self.disclosureButton?.setBackgroundImage(templateImage, for: .disabled)
+                self.disclosureButton?.setBackgroundImage(templateImage, for: .selected)
+                self.disclosureButton?.setBackgroundImage(templateImage, for: .application)
+                self.disclosureButton?.setBackgroundImage(templateImage, for: .reserved)
             }
         }
     }

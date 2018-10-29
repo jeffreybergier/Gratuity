@@ -10,7 +10,7 @@ import UIKit
 
 final class GratuitousBorderedButton: UIButton {
     
-    var titleStyle = UIFontStyle.Headline {
+    var titleStyle = UIFontTextStyle.headline {
         didSet {
             self.prepareTitleLabelFont()
         }
@@ -19,15 +19,14 @@ final class GratuitousBorderedButton: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.systemTextSizeDidChange(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        self.addObserver(self, forKeyPath: "highlighted", options: [.New, .Old], context: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.systemTextSizeDidChange(_:)), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
+        self.addObserver(self, forKeyPath: "highlighted", options: [.new, .old], context: nil)
         
         self.prepareButtonAppearance()
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if let oldValue = (change?["old"] as? NSNumber)?.boolValue, let newValue = (change?["new"] as? NSNumber)?.boolValue
-            where newValue != oldValue && keyPath == "highlighted" {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let oldValue = (change?[.oldKey] as? NSNumber)?.boolValue, let newValue = (change?[.newKey] as? NSNumber)?.boolValue, newValue != oldValue && keyPath == "highlighted" {
                 switch newValue {
                 case true:
                     self.highlightButton()
@@ -37,18 +36,18 @@ final class GratuitousBorderedButton: UIButton {
         }
     }
     
-    private func prepareTitleLabelFont() {
-        self.titleLabel?.font = UIFont.preferredFontForTextStyle(self.titleStyle.description)
+    fileprivate func prepareTitleLabelFont() {
+        self.titleLabel?.font = UIFont.preferredFont(forTextStyle: self.titleStyle)
     }
     
-    private func prepareButtonAppearance() {
+    fileprivate func prepareButtonAppearance() {
         self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
         self.prepareTitleLabelFont()
         
-        self.setTitleColor(GratuitousUIConstant.lightTextColor(), forState: UIControlState.Normal)
-        self.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+        self.setTitleColor(GratuitousUIConstant.lightTextColor(), for: UIControlState())
+        self.setTitleColor(UIColor.black, for: UIControlState.highlighted)
         
-        self.layer.borderColor = GratuitousUIConstant.lightTextColor().CGColor
+        self.layer.borderColor = GratuitousUIConstant.lightTextColor().cgColor
         self.layer.borderWidth = GratuitousUIConstant.thickBorderWidth()
         self.layer.cornerRadius = GratuitousUIConstant.cornerRadius
     }
@@ -58,31 +57,31 @@ final class GratuitousBorderedButton: UIButton {
     }
     
     func unhighlightButton() {
-        UIView.animateWithDuration(0.0001,
+        UIView.animate(withDuration: 0.0001,
             delay: 0.0,
-            options: UIViewAnimationOptions.BeginFromCurrentState,
+            options: UIViewAnimationOptions.beginFromCurrentState,
             animations: {
                 self.backgroundColor = GratuitousUIConstant.lightBackgroundColor()
             },
             completion: { finished in
-                UIView.animateWithDuration(GratuitousUIConstant.animationDuration()*2,
+                UIView.animate(withDuration: GratuitousUIConstant.animationDuration()*2,
                     delay: 0.0,
-                    options: UIViewAnimationOptions.BeginFromCurrentState,
+                    options: UIViewAnimationOptions.beginFromCurrentState,
                     animations: {
                         self.backgroundColor = GratuitousUIConstant.darkBackgroundColor()
                     },
-                    completion: .None)
+                    completion: .none)
         })
     }
     
-    @objc private func systemTextSizeDidChange(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
+    @objc fileprivate func systemTextSizeDidChange(_ notification: Notification?) {
+        DispatchQueue.main.async {
             self.prepareTitleLabelFont()
         }
     }
     
     deinit {
         self.removeObserver(self, forKeyPath: "highlighted")
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }

@@ -10,35 +10,32 @@ import Foundation
 
 final class GratuitousCurrencyStringImageGenerator {
     
-    private let currencyFormatter = GratuitousNumberFormatter(style: .DoNotRespondToLocaleChanges)
+    fileprivate let currencyFormatter = GratuitousNumberFormatter(style: .doNotRespondToLocaleChanges)
     
-    func generateCurrencySymbolsForCurrencySign(currencySign: CurrencySign) -> (url: NSURL, fileName: String)? {
-        if let url = self.generateNewCurrencySymbol(currencySign),
-            let lastPathComponent = url.lastPathComponent {
-                return (url: url, fileName: lastPathComponent)
+    func generateCurrencySymbolsForCurrencySign(_ currencySign: CurrencySign) -> (url: URL, fileName: String)? {
+        if let url = self.generateNewCurrencySymbol(currencySign) {
+            return (url: url, fileName: url.lastPathComponent)
         } else {
-            return .None
+            return .none
         }
     }
     
-    func generateAllCurrencySymbols() -> [(url: NSURL, fileName: String)]? {
-        var tuples = [(url: NSURL, fileName: String)]()
+    func generateAllCurrencySymbols() -> [(url: URL, fileName: String)]? {
+        var tuples = [(url: URL, fileName: String)]()
         for i in 0 ..< 10 {
             if let currencySign = CurrencySign(rawValue: i) {
                 if let url = self.generateNewCurrencySymbol(currencySign) {
-                    if let lastPathComponent = url.lastPathComponent {
-                        tuples += [(url: url, fileName: lastPathComponent)]
-                    }
+                    tuples += [(url: url, fileName: url.lastPathComponent)]
                 }
             } else {
                 break
             }
         }
-        if tuples.isEmpty == false { return tuples } else { return .None }
+        if tuples.isEmpty == false { return tuples } else { return .none }
     }
     
     
-    private func generateNewCurrencySymbol(currencySign: CurrencySign) -> NSURL? {
+    fileprivate func generateNewCurrencySymbol(_ currencySign: CurrencySign) -> URL? {
         let valueTextAttributes = GratuitousUIColor.WatchFonts.pickerItemText
         
         let imageGenerator = JSBAttributedStringImageGenerator()
@@ -49,16 +46,16 @@ final class GratuitousCurrencyStringImageGenerator {
                 images += [image]
             }
         }
-        let data = NSKeyedArchiver.archivedDataWithRootObject(images)
-        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-        let dataURL = documentsURL.URLByAppendingPathComponent("\(self.currencyFormatter.currencyNameFromCurrencySign(currencySign))Images.data")
+        let data = NSKeyedArchiver.archivedData(withRootObject: images)
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let dataURL = documentsURL.appendingPathComponent("\(self.currencyFormatter.currencyNameFromCurrencySign(currencySign))Images.data")
         
         do {
-            try data.writeToURL(dataURL, options: .AtomicWrite)
+            try data.write(to: dataURL, options: .atomicWrite)
             return dataURL
         } catch {
-            log?.error("Failed to save <\(self.currencyFormatter.currencySymbol)> Currency Images to Disk: \(dataURL.path!)")
-            return .None
+            log?.error("Failed to save <\(self.currencyFormatter.currencySymbol)> Currency Images to Disk: \(dataURL.path)")
+            return .none
         }
     }
 

@@ -46,23 +46,23 @@ struct GratuitousUIColor {
         #if os(watchOS)
         
         static let titleText = [
-            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 20, fallbackStyle: UIFontStyle.Subheadline),
+            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 20, fallbackStyle: UIFontStyle.subheadline),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
         ]
         static let bodyText = [
-            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 16, fallbackStyle: UIFontStyle.Subheadline),
+            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 16, fallbackStyle: UIFontStyle.subheadline),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
         ]
         static let splitBillValueText = [
-            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 27, fallbackStyle: UIFontStyle.Subheadline),
+            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 27, fallbackStyle: UIFontStyle.subheadline),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
         ]
         static let valueText = [
-            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 24, fallbackStyle: UIFontStyle.Subheadline),
+            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 24, fallbackStyle: UIFontStyle.subheadline),
             NSForegroundColorAttributeName : GratuitousUIColor.ultraLightTextColor()
         ]
         static let hugeValueText = [
-            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 40, fallbackStyle: UIFontStyle.Headline),
+            NSFontAttributeName : UIFont.fuuutuuura(style: Fuuutuuura.Medium, size: 40, fallbackStyle: UIFontStyle.headline),
             NSForegroundColorAttributeName : GratuitousUIColor.ultraLightTextColor()
         ]
         
@@ -71,31 +71,31 @@ struct GratuitousUIColor {
         #if os(iOS)
         
         static let tutorialTitleText = [
-            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 21.5, fallbackStyle: UIFontStyle.Subheadline),
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 21.5, fallbackStyle: UIFontStyle.subheadline),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
         ]
         static let titleText = [
-            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Subheadline),
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.subheadline),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
         ]
         static let subtitleText = [
-            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 20, fallbackStyle: UIFontStyle.Subheadline),
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 20, fallbackStyle: UIFontStyle.subheadline),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
         ]
         static let buttonText = [
-            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 20, fallbackStyle: UIFontStyle.Headline),
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 20, fallbackStyle: UIFontStyle.headline),
             NSForegroundColorAttributeName : GratuitousUIColor.ultraLightTextColor()
         ]
         static let valueText = [
-            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 27, fallbackStyle: UIFontStyle.Body),
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 27, fallbackStyle: UIFontStyle.body),
             NSForegroundColorAttributeName : GratuitousUIColor.ultraLightTextColor()
         ]
         static let smallValueText = [
-            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.Body),
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 22, fallbackStyle: UIFontStyle.body),
             NSForegroundColorAttributeName : GratuitousUIColor.lightTextColor()
         ]
         static let pickerItemText = [
-            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 24, fallbackStyle: UIFontStyle.Body),
+            NSFontAttributeName : UIFont.futura(style: Futura.Medium, size: 24, fallbackStyle: UIFontStyle.body),
             NSForegroundColorAttributeName : GratuitousUIColor.ultraLightTextColor()
         ]
         

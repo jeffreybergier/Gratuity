@@ -10,41 +10,41 @@ import WatchKit
 
 final class PickerInterfaceController: WKInterfaceController {
     
-    private var applicationPreferences: GratuitousUserDefaults {
+    fileprivate var applicationPreferences: GratuitousUserDefaults {
         get { return GratuitousWatchApplicationPreferences.sharedInstance.preferences }
         set {
             GratuitousWatchApplicationPreferences.sharedInstance.preferencesSetLocally = newValue
         }
     }
-    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
+    fileprivate let currencyFormatter = GratuitousNumberFormatter(style: .respondsToLocaleChanges)
     
-    @IBOutlet private var loadingGroup: WKInterfaceGroup?
-    @IBOutlet private var mainGroup: WKInterfaceGroup?
-    @IBOutlet private weak var animationImageView: WKInterfaceImage?
-    @IBOutlet private var tipPercentageLabel: WKInterfaceLabel?
-    @IBOutlet private var billAmountLabel: WKInterfaceLabel?
-    @IBOutlet private var tipPicker: WKInterfacePicker?
-    @IBOutlet private var billPicker: WKInterfacePicker?
+    @IBOutlet fileprivate var loadingGroup: WKInterfaceGroup?
+    @IBOutlet fileprivate var mainGroup: WKInterfaceGroup?
+    @IBOutlet fileprivate weak var animationImageView: WKInterfaceImage?
+    @IBOutlet fileprivate var tipPercentageLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate var billAmountLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate var tipPicker: WKInterfacePicker?
+    @IBOutlet fileprivate var billPicker: WKInterfacePicker?
     
-    private var largeInterfaceUpdateNeeded = false
-    private var smallInterfaceUpdateNeeded = false
-    private var interfaceControllerConfiguredOnce = false
+    fileprivate var largeInterfaceUpdateNeeded = false
+    fileprivate var smallInterfaceUpdateNeeded = false
+    fileprivate var interfaceControllerConfiguredOnce = false
     
-    private var interfaceIdleTimer: NSTimer?
+    fileprivate var interfaceIdleTimer: Timer?
     
-    private enum InterfaceState {
-        case Loading, Loaded
+    fileprivate enum InterfaceState {
+        case loading, loaded
     }
     
-    private var interfaceState: InterfaceState = .Loading {
+    fileprivate var interfaceState: InterfaceState = .loading {
         didSet {
             switch self.interfaceState {
-            case .Loading:
-                self.animationImageView?.startAnimatingWithImagesInRange(NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
+            case .loading:
+                self.animationImageView?.startAnimatingWithImages(in: NSRange(location: 0, length: 39), duration: 2, repeatCount: Int.max)
                 self.mainGroup?.setHidden(true)
                 self.loadingGroup?.setHidden(false)
                 self.setTitle("")
-            case .Loaded:
+            case .loaded:
                 self.animationImageView?.stopAnimating()
                 self.mainGroup?.setHidden(false)
                 self.loadingGroup?.setHidden(true)
@@ -54,33 +54,33 @@ final class PickerInterfaceController: WKInterfaceController {
         }
     }
     
-    private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.hugeValueText
-    private let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+    fileprivate let largeValueTextAttributes = GratuitousUIColor.WatchFonts.hugeValueText
+    fileprivate let smallValueTextAttributes = GratuitousUIColor.WatchFonts.valueText
     
-    private func resetInterfaceIdleTimer() {
+    fileprivate func resetInterfaceIdleTimer() {
         if let existingTimer = self.interfaceIdleTimer {
             existingTimer.invalidate()
             self.interfaceIdleTimer = nil
         }
-        self.interfaceIdleTimer = NSTimer.interfaceIdleTimer(self)
+        self.interfaceIdleTimer = Timer.interfaceIdleTimer(self)
     }
     
     // MARK: Initialize
     
     override func willActivate() {
         super.willActivate()
-        self.updateUserActivity(HandoffTypes.MainTipInterface.rawValue, userInfo: ["string":"string"], webpageURL: .None)
+        self.updateUserActivity(HandoffTypes.MainTipInterface.rawValue, userInfo: ["string":"string"], webpageURL: .none)
         
         if self.interfaceControllerConfiguredOnce == false {
             self.interfaceControllerConfiguredOnce = true
             // configure notifications
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignDidChange(_:)), name: NSCurrentLocaleDidChangeNotification, object: .None)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignDidChange(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.billTipValueChangeByRemote(_:)), name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.currencySignDidChange(_:)), name: NSLocale.currentLocaleDidChangeNotification, object: .none)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.currencySignDidChange(_:)), name: NSNotification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged), object: .none)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.billTipValueChangeByRemote(_:)), name: NSNotification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote), object: .none)
             
             // configure the menu
-            self.addMenuItemWithImageNamed("splitTipMenuIcon", title: PickerInterfaceController.LocalizedString.SplitTipMenuIconLabel, action: #selector(self.splitTipMenuButtonTapped))
-            self.addMenuItemWithImageNamed("settingsMenuIcon", title: PickerInterfaceController.LocalizedString.SettingsMenuIconLabel, action: #selector(self.settingsMenuButtonTapped))
+            self.addMenuItem(withImageNamed: "splitTipMenuIcon", title: PickerInterfaceController.LocalizedString.SplitTipMenuIconLabel, action: #selector(self.splitTipMenuButtonTapped))
+            self.addMenuItem(withImageNamed: "settingsMenuIcon", title: PickerInterfaceController.LocalizedString.SettingsMenuIconLabel, action: #selector(self.settingsMenuButtonTapped))
             
             // start the idle timer
             self.resetInterfaceIdleTimer()
@@ -97,9 +97,9 @@ final class PickerInterfaceController: WKInterfaceController {
         }
     }
     
-    private func configurePickerItems() {
+    fileprivate func configurePickerItems() {
         // set the UI into a loading state
-        self.interfaceState = .Loading
+        self.interfaceState = .loading
         
         // tell the timer the interface is loaded
         // sometimes it takes longer to load than the timer allows
@@ -107,38 +107,38 @@ final class PickerInterfaceController: WKInterfaceController {
         self.largeInterfaceUpdateNeeded = false
         
         // dispatch the background for the long running items read from disk operation
-        let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
-        dispatch_async(backgroundQueue) {
+        let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
+        backgroundQueue.async {
             if let items = self.accessiblePickerItems(self.applicationPreferences.overrideCurrencySymbol) {
                 // dispatch back to the main queue to do the UI work
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     // this operation takes the longest
                     self.billPicker?.setItems(items.billItems)
                     self.tipPicker?.setItems(items.tipItems)
                     self.updateBillPicker()
                     self.updateTipPicker()
                     self.updateBigLabels()
-                    self.interfaceState = .Loaded
+                    self.interfaceState = .loaded
                 }
             }
         }
     }
     
     var billPickerUpdatedProgrammatically = false
-    private func updateBillPicker() {
+    fileprivate func updateBillPicker() {
         self.billPickerUpdatedProgrammatically = true
         let c = DefaultsCalculations(preferences: self.applicationPreferences)
         self.billPicker?.setSelectedItemIndex(c.billAmount - 1)
     }
     
     var tipPickerUpdatedProgrammatically = false
-    private func updateTipPicker() {
+    fileprivate func updateTipPicker() {
         self.tipPickerUpdatedProgrammatically = true
         let c = DefaultsCalculations(preferences: self.applicationPreferences)
         self.tipPicker?.setSelectedItemIndex(c.tipAmount - 1)
     }
     
-    private func updateBigLabels() {
+    fileprivate func updateBigLabels() {
         let c = DefaultsCalculations(preferences: self.applicationPreferences)
         let billAmountString = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.applicationPreferences.overrideCurrencySymbol, amount: c.totalAmount)
         let largeLabelString = NSAttributedString(string: billAmountString, attributes: self.largeValueTextAttributes)
@@ -158,12 +158,12 @@ final class PickerInterfaceController: WKInterfaceController {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: Handle User Input
 
-    @IBAction func billPickerChanged(value: Int) {
+    @IBAction func billPickerChanged(_ value: Int) {
         if self.billPickerUpdatedProgrammatically == false {
             self.applicationPreferences.billIndexPathRow = value + 1
             self.applicationPreferences.tipIndexPathRow = 0
@@ -174,7 +174,7 @@ final class PickerInterfaceController: WKInterfaceController {
         self.billPickerUpdatedProgrammatically = false
     }
     
-    @IBAction func tipPickerChanged(value: Int) {
+    @IBAction func tipPickerChanged(_ value: Int) {
         if self.tipPickerUpdatedProgrammatically == false {
             self.applicationPreferences.tipIndexPathRow = value + 1
             self.updateBigLabels()
@@ -183,29 +183,29 @@ final class PickerInterfaceController: WKInterfaceController {
         self.tipPickerUpdatedProgrammatically = false
     }
     
-    @objc private func settingsMenuButtonTapped() {
-        self.presentControllerWithName("SettingsInterfaceController", context: .None)
+    @objc fileprivate func settingsMenuButtonTapped() {
+        self.presentController(withName: "SettingsInterfaceController", context: .none)
     }
     
-    @objc private func splitTipMenuButtonTapped() {
+    @objc fileprivate func splitTipMenuButtonTapped() {
         if self.applicationPreferences.splitBillPurchased == true {
-            self.presentControllerWithName("SplitTotalInterfaceController", context: .None)
+            self.presentController(withName: "SplitTotalInterfaceController", context: .none)
         } else {
-            self.presentControllerWithName("SplitBillPurchaseInterfaceController", context: .None)
+            self.presentController(withName: "SplitBillPurchaseInterfaceController", context: .none)
         }
     }
     
     // MARK: Handle External UI Updates
     
-    @objc private func currencySignDidChange(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.currencyFormatter.locale = NSLocale.currentLocale()
+    @objc fileprivate func currencySignDidChange(_ notification: Notification?) {
+        DispatchQueue.main.async {
+            self.currencyFormatter.locale = Locale.current
             self.setLargeInterfaceRefreshNeeded()
         }
     }
     
-    @objc private func billTipValueChangeByRemote(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
+    @objc fileprivate func billTipValueChangeByRemote(_ notification: Notification?) {
+        DispatchQueue.main.async {
             self.setSmallInterfaceRefreshNeeded()
         }
     }
@@ -219,7 +219,7 @@ final class PickerInterfaceController: WKInterfaceController {
         self.smallInterfaceUpdateNeeded = true
     }
     
-    @objc private func interfaceIdleTimerFired(timer: NSTimer?) {
+    @objc fileprivate func interfaceIdleTimerFired(_ timer: Timer?) {
         if self.largeInterfaceUpdateNeeded == true {
             self.largeInterfaceUpdateNeeded = false
             self.configurePickerItems()
@@ -233,37 +233,37 @@ final class PickerInterfaceController: WKInterfaceController {
     
     // MARK: Handle Loading Picker Items
     
-    private func accessiblePickerItems(currencySymbol: CurrencySign) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
+    fileprivate func accessiblePickerItems(_ currencySymbol: CurrencySign) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
         if let url = self.pickerItemsURL(currencySymbol),
-            let data = NSData(contentsOfURL: url),
+            let data = try? Data(contentsOf: url),
             let items = self.parsePickerItemsFromData(data) {
                 self.applicationPreferences.currencySymbolsNeeded = false
                 return items
-        } else if let fallbackDataURL = NSBundle.mainBundle().URLForResource("fallbackPickerImages", withExtension: "data"),
-            let fallbackData = NSData(contentsOfURL: fallbackDataURL),
+        } else if let fallbackDataURL = Bundle.main.url(forResource: "fallbackPickerImages", withExtension: "data"),
+            let fallbackData = try? Data(contentsOf: fallbackDataURL),
             let items = self.parsePickerItemsFromData(fallbackData) {
                 self.applicationPreferences.currencySymbolsNeeded = true
                 return items
         } else {
             self.applicationPreferences.currencySymbolsNeeded = true
-            return .None
+            return .none
         }
     }
     
-    private func pickerItemsURL(currencySign: CurrencySign) -> NSURL? {
+    fileprivate func pickerItemsURL(_ currencySign: CurrencySign) -> URL? {
         let fileName = "\(self.currencyFormatter.currencyNameFromCurrencySign(currencySign))Images.data"
-        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-        let dataURL = documentsURL.URLByAppendingPathComponent(fileName)
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let dataURL = documentsURL.appendingPathComponent(fileName)
         
-        if NSFileManager.defaultManager().fileExistsAtPath(dataURL.path!) == true { return dataURL } else { return .None }
+        if FileManager.default.fileExists(atPath: dataURL.path) == true { return dataURL } else { return .none }
     }
     
-    private func parsePickerItemsFromData(data: NSData?) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
+    fileprivate func parsePickerItemsFromData(_ data: Data?) -> (billItems: [WKPickerItem], tipItems: [WKPickerItem])? {
         var billItems = [WKPickerItem]()
         var tipItems = [WKPickerItem]()
         if let data = data,
-            let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSArray {
-                for (index, object) in array.enumerate() {
+            let array = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSArray {
+                for (index, object) in array.enumerated() {
                     if let image = object as? UIImage {
                         let wkImage = WKImage(image: image)
                         if index < 100 {
@@ -281,12 +281,12 @@ final class PickerInterfaceController: WKInterfaceController {
         }
         let returnValue = (billItems: billItems, tipItems: tipItems)
         
-        if billItems.isEmpty == false { return returnValue } else { return .None }
+        if billItems.isEmpty == false { return returnValue } else { return .none }
     }
 }
 
-extension NSTimer {
-    class func interfaceIdleTimer(object: AnyObject) -> NSTimer {
-        return NSTimer.scheduledTimerWithTimeInterval(3.0, target: object, selector: #selector(PickerInterfaceController.interfaceIdleTimerFired(_:)), userInfo: nil, repeats: true)
+extension Timer {
+    class func interfaceIdleTimer(_ object: AnyObject) -> Timer {
+        return Timer.scheduledTimer(timeInterval: 3.0, target: object, selector: #selector(PickerInterfaceController.interfaceIdleTimerFired(_:)), userInfo: nil, repeats: true)
     }
 }

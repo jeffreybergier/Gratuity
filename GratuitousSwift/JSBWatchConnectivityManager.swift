@@ -16,48 +16,41 @@
 import WatchConnectivity
 
 enum WatchState {
-    case NotSupported
-    case NotPaired
-    case PairedWatchAppInstalled
-    case PairedWatchAppNotInstalled
-    case NotReachableWatchAppInstalled
-    case NotReachableWatchAppNotInstalled
-    case ReachableWatchAppInstalled
-    case ReachableWatchAppNotInstalled
+    case notSupported
+    case notPaired
+    case pairedWatchAppInstalled
+    case pairedWatchAppNotInstalled
+    case notReachableWatchAppInstalled
+    case notReachableWatchAppNotInstalled
+    case reachableWatchAppInstalled
+    case reachableWatchAppNotInstalled
 }
 
-@available (iOS 9, watchOS 2, *)
 protocol JSBWatchConnectivityContextDelegate: class {
-    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject])
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject])
 }
 
-@available (iOS 9, watchOS 2, *)
 protocol JSBWatchConnectivityMessageDelegate: class {
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void)
-    func session(session: WCSession, didReceiveMessageData messageData: NSData, replyHandler: (NSData) -> Void)
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Swift.Void)
+    func session(_ session: WCSession, didReceiveMessageData messageData: Data, replyHandler: @escaping (Data) -> Swift.Void)
 }
 
-@available (iOS 9, watchOS 2, *)
 protocol JSBWatchConnectivityUserInfoSenderDelegate: class {
-    func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: NSError?)
+    func session(_ session: WCSession, didFinish userInfoTransfer: WCSessionUserInfoTransfer, error: Error?)
 }
 
-@available (iOS 9, watchOS 2, *)
 protocol JSBWatchConnectivityUserInfoReceiverDelegate: class {
-    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject])
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any])
 }
 
-@available (iOS 9, watchOS 2, *)
 protocol JSBWatchConnectivityFileTransferSenderDelegate: class {
-    func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?)
+    func session(_ session: WCSession, didFinish fileTransfer: WCSessionFileTransfer, error: Error?)
 }
 
-@available (iOS 9, watchOS 2, *)
 protocol JSBWatchConnectivityFileTransferReceiverDelegate: class {
-    func session(session: WCSession, didReceiveFile file: WCSessionFile)
+    func session(_ session: WCSession, didReceive file: WCSessionFile)
 }
 
-@available (iOS 9, watchOS 2, *)
 class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
     
     // MARK: Session Activation
@@ -66,14 +59,14 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
         super.init()
         
         self.session?.delegate = self
-        self.session?.activateSession()
+        self.session?.activate()
     }
     
     let session: WCSession? = {
         if WCSession.isSupported() {
-            return WCSession.defaultSession()
+            return WCSession.default()
         } else {
-            return .None
+            return .none
         }
     }()
     
@@ -86,53 +79,66 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
     
     // MARK: iOS App State For Watch
     
-    var watchState: WatchState = .NotSupported
+    var watchState: WatchState = .notSupported
     
     /** Called when any of the Watch state properties change */
     #if os(iOS)
-    func sessionWatchStateDidChange(session: WCSession) {
-        var newState = WatchState.NotSupported
-        if session.paired == true {
-            if session.watchAppInstalled == true {
-                newState = .PairedWatchAppInstalled
+    func sessionWatchStateDidChange(_ session: WCSession) {
+        var newState = WatchState.notSupported
+        if session.isPaired == true {
+            if session.isWatchAppInstalled == true {
+                newState = .pairedWatchAppInstalled
             } else {
-                newState = .PairedWatchAppNotInstalled
+                newState = .pairedWatchAppNotInstalled
             }
         } else {
-            newState = .NotPaired
+            newState = .notPaired
         }
-        if session.reachable == true {
-            if session.watchAppInstalled == true {
-                newState = .ReachableWatchAppInstalled
+        if session.isReachable == true {
+            if session.isWatchAppInstalled == true {
+                newState = .reachableWatchAppInstalled
             } else {
-                newState = .ReachableWatchAppNotInstalled
+                newState = .reachableWatchAppNotInstalled
             }
         } else {
-            if session.watchAppInstalled == true {
-                newState = .NotReachableWatchAppInstalled
+            if session.isWatchAppInstalled == true {
+                newState = .notReachableWatchAppInstalled
             } else {
-                newState = .NotReachableWatchAppNotInstalled
+                newState = .notReachableWatchAppNotInstalled
             }
         }
         self.watchState = newState
     }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        //
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        //
+    }
     #endif
+    
+    @available(watchOS 2.2, *)
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        //
+    }
     
     // MARK: Incoming Interactive Messaging
     
     /** ------------------------- Interactive Messaging ------------------------- */
     
     /** Called when the reachable state of the counterpart app changes. The receiver should check the reachable property on receiving this delegate callback. */
-    func sessionReachabilityDidChange(session: WCSession) {
-        if session.reachable == true {
-            self.watchState = .ReachableWatchAppInstalled
+    func sessionReachabilityDidChange(_ session: WCSession) {
+        if session.isReachable == true {
+            self.watchState = .reachableWatchAppInstalled
         } else {
-            self.watchState = .NotReachableWatchAppInstalled
+            self.watchState = .notReachableWatchAppInstalled
         }
     }
     
     /** Called on the delegate of the receiver when the sender sends a message that expects a reply. Will be called on startup if the incoming message caused the receiver to launch. */
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
         if let delegate = self.messageDelegate {
             delegate.session(session, didReceiveMessage: message, replyHandler: replyHandler)
         } else {
@@ -141,7 +147,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
     }
     
     /** Called on the delegate of the receiver when the sender sends message data that expects a reply. Will be called on startup if the incoming message data caused the receiver to launch. */
-    func session(session: WCSession, didReceiveMessageData messageData: NSData, replyHandler: (NSData) -> Void) {
+    func session(_ session: WCSession, didReceiveMessageData messageData: Data, replyHandler: @escaping (Data) -> Void) {
         if let delegate = self.messageDelegate {
             delegate.session(session, didReceiveMessageData: messageData, replyHandler: replyHandler)
         } else {
@@ -154,45 +160,45 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
     /** -------------------------- Background Transfers ------------------------- */
     
     /** Called on the delegate of the receiver. Will be called on startup if an applicationContext is available. */
-    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
         if let delegate = self.contextDelegate {
-            delegate.session(session, didReceiveApplicationContext: applicationContext)
+            delegate.session(session, didReceiveApplicationContext: applicationContext as [String : AnyObject])
         } else {
             log?.info("ContextDelegate Not Set: Ignoring Incoming Application Context: \(applicationContext)")
         }
     }
     
     /** Called on the sending side after the user info transfer has successfully completed or failed with an error. Will be called on next launch if the sender was not running when the user info finished. */
-    func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: NSError?) {
+    func session(_ session: WCSession, didFinish userInfoTransfer: WCSessionUserInfoTransfer, error: Error?) {
         if let delegate = self.userInfoSenderDelegate {
-            delegate.session(session, didFinishUserInfoTransfer: userInfoTransfer, error: error)
+            delegate.session(session, didFinish: userInfoTransfer, error: error)
         } else {
             log?.info("UserInfoSenderDelegate Not Set. Ignoring UserInfo Transfer Finished: \(userInfoTransfer) with Error: \(error)")
         }
     }
     
     /** Called on the delegate of the receiver. Will be called on startup if the user info finished transferring when the receiver was not running. */
-    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
         if let delegate = self.userInfoReceiverDelegate {
-            delegate.session(session, didReceiveUserInfo: userInfo)
+            delegate.session(session, didReceiveUserInfo: userInfo as [String : AnyObject])
         } else {
             log?.info("UserInfoReceiverDelegate Not Set. Ignoring Incoming UserInfo: \(userInfo)")
         }
     }
     
     /** Called on the sending side after the file transfer has successfully completed or failed with an error. Will be called on next launch if the sender was not running when the transfer finished. */
-    func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
+    func session(_ session: WCSession, didFinish fileTransfer: WCSessionFileTransfer, error: Error?) {
         if let delegate = self.fileTransferSenderDelegate {
-            delegate.session(session, didFinishFileTransfer: fileTransfer, error: error)
+            delegate.session(session, didFinish: fileTransfer, error: error)
         } else {
             log?.info("FileTransferSenderDelegate Not Set. Ignoring File Transfer Finished: \(fileTransfer) with Error: \(error)")
         }
     }
     
     /** Called on the delegate of the receiver. Will be called on startup if the file finished transferring when the receiver was not running. The incoming file will be located in the Documents/Inbox/ folder when being delivered. The receiver must take ownership of the file by moving it to another location. The system will remove any content that has not been moved when this delegate method returns. */
-    func session(session: WCSession, didReceiveFile file: WCSessionFile) {
+    func session(_ session: WCSession, didReceive file: WCSessionFile) {
         if let delegate = self.fileTransferReceiverDelegate {
-            delegate.session(session, didReceiveFile: file)
+            delegate.session(session, didReceive: file)
         } else {
             log?.info("FileTransferReceiverDelegate Not Set. Ignoring Incoming File: \(file)")
         }

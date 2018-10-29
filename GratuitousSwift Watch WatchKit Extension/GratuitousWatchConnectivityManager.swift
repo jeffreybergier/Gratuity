@@ -10,16 +10,16 @@ import WatchConnectivity
 
 final class GratuitousWatchConnectivityManager {
     
-    private var applicationPreferences: GratuitousUserDefaults {
+    fileprivate var applicationPreferences: GratuitousUserDefaults {
         get { return GratuitousWatchApplicationPreferences.sharedInstance.preferences }
         set { GratuitousWatchApplicationPreferences.sharedInstance.preferencesSetRemotely = newValue }
     }
-    private var watchConnectivityManager: JSBWatchConnectivityManager {
+    fileprivate var watchConnectivityManager: JSBWatchConnectivityManager {
         return GratuitousWatchApplicationPreferences.sharedInstance.watchConnectivityManager
     }
     
-    private var remoteUpdateRateLimiterSet = false
-    private var requestedCurrencySymbols = false
+    fileprivate var remoteUpdateRateLimiterSet = false
+    fileprivate var requestedCurrencySymbols = false
     
     init() {
         /*
@@ -30,32 +30,32 @@ final class GratuitousWatchConnectivityManager {
             self.log.setup(.Warning, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .None, fileLogLevel: .None)
         #endif
         */
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.remoteContextUpdateNeeded(_:)), name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySymbolsNeededFromRemote(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolsNeededFromRemote, object: .None)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.remoteContextUpdateNeeded(_:)), name: NSNotification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded), object: .none)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currencySymbolsNeededFromRemote(_:)), name: NSNotification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolsNeededFromRemote), object: .none)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
 extension GratuitousWatchConnectivityManager: JSBWatchConnectivityContextDelegate {
-    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
-        self.applicationPreferences = GratuitousUserDefaults(dictionary: applicationContext, fallback: self.applicationPreferences)
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+        self.applicationPreferences = GratuitousUserDefaults(dictionary: applicationContext as NSDictionary, fallback: self.applicationPreferences)
     }
     
-    @objc private func remoteContextUpdateNeeded(notification: NSNotification?) {
+    @objc fileprivate func remoteContextUpdateNeeded(_ notification: Notification?) {
         if self.remoteUpdateRateLimiterSet == false {
             self.remoteUpdateRateLimiterSet = true
-            NSTimer.scheduleWithDelay(3.0) { timer in
+            Timer.scheduleWithDelay(3.0) { timer in
                 self.remoteUpdateRateLimiterSet = false
                 self.updateRemoteContext(notification)
             }
         }
     }
     
-    private func updateRemoteContext(notification: NSNotification?) {
-        let context = self.applicationPreferences.dictionaryCopyForKeys(.ForWatch)
+    fileprivate func updateRemoteContext(_ notification: Notification?) {
+        let context = self.applicationPreferences.dictionaryCopyForKeys(.forWatch)
         do {
             try self.watchConnectivityManager.session?.updateApplicationContext(context)
         } catch {
@@ -65,19 +65,19 @@ extension GratuitousWatchConnectivityManager: JSBWatchConnectivityContextDelegat
 }
 
 extension GratuitousWatchConnectivityManager: JSBWatchConnectivityFileTransferReceiverDelegate {
-    func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
+    func session(_ session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
         log?.warning("Unknown File Transfer: \(fileTransfer) to Remote Device Finished with Error: \(error)")
     }
-    func session(session: WCSession, didReceiveFile file: WCSessionFile) {
+    func session(_ session: WCSession, didReceive file: WCSessionFile) {
         self.requestedCurrencySymbols = false
-        if let symbolFileName = file.metadata?["FileName"] as? String, let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first {
-            let destinationURL = documentsURL.URLByAppendingPathComponent(symbolFileName)
-            if NSFileManager.defaultManager().fileExistsAtPath(destinationURL.path!) == false {
+        if let symbolFileName = file.metadata?["FileName"] as? String, let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let destinationURL = documentsURL.appendingPathComponent(symbolFileName)
+            if FileManager.default.fileExists(atPath: destinationURL.path) == false {
                 log?.info("Did Receive Currency Files from Remote")
                 do {
-                    let data = try NSData(contentsOfURL: file.fileURL, options: .DataReadingMappedIfSafe)
-                    try data.writeToURL(destinationURL, options: .AtomicWrite)
-                    NSNotificationCenter.defaultCenter().postNotificationName(GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: self, userInfo: self.applicationPreferences.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded))
+                    let data = try Data(contentsOf: file.fileURL, options: .mappedIfSafe)
+                    try data.write(to: destinationURL, options: .atomicWrite)
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged), object: self, userInfo: self.applicationPreferences.dictionaryCopyForKeys(.forCurrencySymbolsNeeded))
                 } catch {
                     log?.error("File Save Failed with Error: \(error)")
                 }
@@ -91,12 +91,12 @@ extension GratuitousWatchConnectivityManager: JSBWatchConnectivityFileTransferRe
 }
 
 extension GratuitousWatchConnectivityManager {
-    @objc private func currencySymbolsNeededFromRemote(notification: NSNotification?) {
+    @objc fileprivate func currencySymbolsNeededFromRemote(_ notification: Notification?) {
         if self.requestedCurrencySymbols == false {
             self.requestedCurrencySymbols = true
             
-            var message = GratuitousUserDefaults(dictionary: notification?.userInfo, fallback: self.applicationPreferences).dictionaryCopyForKeys(.ForWatch)
-            message["SymbolImagesRequested"] = NSNumber(bool: true)
+            var message = GratuitousUserDefaults(dictionary: notification?.userInfo as! NSDictionary, fallback: self.applicationPreferences).dictionaryCopyForKeys(.forWatch)
+            message["SymbolImagesRequested"] = NSNumber(value: true as Bool)
             
             self.watchConnectivityManager.session?.sendMessage(message,
                 replyHandler: { reply in

@@ -74,17 +74,17 @@ extension WatchInfoViewController {
 extension CurrencySign {
     var descriptionForAnswers: String {
         switch self {
-        case .Default:
+        case .default:
             return "LocalCurrency"
-        case .Dollar:
+        case .dollar:
             return "Dollar"
-        case .Pound:
+        case .pound:
             return "Pound"
-        case .Euro:
+        case .euro:
             return "Euro"
-        case .Yen:
+        case .yen:
             return "Yen"
-        case .NoSign:
+        case .noSign:
             return "None"
         }
     }
@@ -93,16 +93,16 @@ extension CurrencySign {
 extension NSError {
     var dictionaryForAnswers: [String : AnyObject]? {
         var attributes = [String : AnyObject]()
-        attributes["ErrorLocalizedDescription"] = self.localizedDescription
-        attributes["ErrorLocalizedFailureReason"] = self.localizedFailureReason
-        attributes["ErrorLocalizedRecoveryOptions"] = self.localizedRecoveryOptions
-        attributes["ErrorLocalizedRecoverySuggestion"] = self.localizedRecoverySuggestion
-        attributes["ErrorDomain"] = self.domain
-        attributes["ErrorCode"] = NSNumber(integer: self.code)
+        attributes["ErrorLocalizedDescription"] = self.localizedDescription as AnyObject
+        attributes["ErrorLocalizedFailureReason"] = self.localizedFailureReason as AnyObject
+        attributes["ErrorLocalizedRecoveryOptions"] = self.localizedRecoveryOptions as AnyObject
+        attributes["ErrorLocalizedRecoverySuggestion"] = self.localizedRecoverySuggestion as AnyObject
+        attributes["ErrorDomain"] = self.domain as AnyObject
+        attributes["ErrorCode"] = NSNumber(value: self.code as Int)
         if (attributes as NSDictionary).count > 0 {
             return attributes
         } else {
-            return .None
+            return .none
         }
     }
 }

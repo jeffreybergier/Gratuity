@@ -21,29 +21,29 @@ struct WatchNotification {
 }
 
 enum CustomTransitionMode: Int {
-    case Present = 0, Dismiss
+    case present = 0, dismiss
 }
 
 enum CustomTransitionStyle: Int {
-    case Modal = 0, Popover
+    case modal = 0, popover
 }
 
 enum CurrencySign: Int, CustomStringConvertible {
-    case Default = 0, Dollar, Pound, Euro, Yen, NoSign
+    case `default` = 0, dollar, pound, euro, yen, noSign
     
     func string() -> String {
         switch self {
-        case .Default:
+        case .default:
             return ""
-        case .Dollar:
+        case .dollar:
             return "$"
-        case .Pound:
+        case .pound:
             return "£"
-        case .Euro:
+        case .euro:
             return "€"
-        case .Yen:
+        case .yen:
             return "¥"
-        case .NoSign:
+        case .noSign:
             return ""
         }
     }
@@ -51,17 +51,17 @@ enum CurrencySign: Int, CustomStringConvertible {
     var description: String {
         get {
             switch self {
-            case .Default:
+            case .default:
                 return "Currency Sign: Default"
-            case .Dollar:
+            case .dollar:
                 return "Currency Sign: Dollar"
-            case .Pound:
+            case .pound:
                 return "Currency Sign: Pound"
-            case .Euro:
+            case .euro:
                 return "Currency Sign: Euro"
-            case .Yen:
+            case .yen:
                 return "Currency Sign: Yen"
-            case .NoSign:
+            case .noSign:
                 return "Currency Sign: None"
             }
         }
@@ -132,23 +132,23 @@ enum ThreeButtonStepperInterfaceContext: String, CustomStringConvertible {
 }
 
 enum CorrectWatchInterface: Int, CustomStringConvertible {
-    case CrownScroller = 0, ThreeButtonStepper
+    case crownScroller = 0, threeButtonStepper
     
     var description: String {
         switch self {
-        case .CrownScroller:
+        case .crownScroller:
             return "CorrectWatchInterface Enum: CrownScrollInfinite"
-        case .ThreeButtonStepper:
+        case .threeButtonStepper:
             return "CorrectWatchInterface Enum: ThreeButtonStepper"
         }
     }
     
-    static func interfaceStateFromString(string: String) -> CorrectWatchInterface? {
+    static func interfaceStateFromString(_ string: String) -> CorrectWatchInterface? {
         switch string {
         case "CrownScroller":
-            return CorrectWatchInterface.CrownScroller
+            return CorrectWatchInterface.crownScroller
         case "ThreeButtonStepper":
-            return CorrectWatchInterface.ThreeButtonStepper
+            return CorrectWatchInterface.threeButtonStepper
         default:
             return nil
         }
@@ -162,7 +162,7 @@ enum Fuuutuuura: String, CustomStringConvertible, Hashable {
     
     var description: String {
         switch self {
-        case Medium:
+        case .Medium:
             return "Fuuutuuura-Meeediuuum"
         }
     }
@@ -184,13 +184,13 @@ enum Futura: String, CustomStringConvertible, Hashable {
     
     var description: String {
         switch self {
-        case Medium:
+        case .Medium:
             return "Futura-Medium"
-        case MediumItalic:
+        case .MediumItalic:
             return "Futura-MediumItalic"
-        case CondensedMedium:
+        case .CondensedMedium:
             return "Futura-CondensedMedium"
-        case CondensedExtraBold:
+        case .CondensedExtraBold:
             return"Futura-CondensedExtraBold"
         }
     }
@@ -203,27 +203,27 @@ enum Futura: String, CustomStringConvertible, Hashable {
 #endif
 
 enum UIFontStyle: CustomStringConvertible, Hashable {
-    case Headline
-    case Body
-    case Caption1
-    case Caption2
-    case Footnote
-    case Subheadline
+    case headline
+    case body
+    case caption1
+    case caption2
+    case footnote
+    case subheadline
     
     var description: String {
         switch self {
-        case .Headline:
-            return UIFontTextStyleHeadline
-        case Body:
-            return UIFontTextStyleBody
-        case Caption1:
-            return UIFontTextStyleCaption1
-        case Caption2:
-            return UIFontTextStyleCaption2
-        case Footnote:
-            return UIFontTextStyleFootnote
-        case Subheadline:
-            return UIFontTextStyleSubheadline
+        case .headline:
+            return UIFontTextStyle.headline.rawValue
+        case .body:
+            return UIFontTextStyle.body.rawValue
+        case .caption1:
+            return UIFontTextStyle.caption1.rawValue
+        case .caption2:
+            return UIFontTextStyle.caption2.rawValue
+        case .footnote:
+            return UIFontTextStyle.footnote.rawValue
+        case .subheadline:
+            return UIFontTextStyle.subheadline.rawValue
         }
     }
     
@@ -240,8 +240,8 @@ extension UIFont {
         self.init(name: futuraStyle.rawValue, size: size)
     }
     
-    class func futura(style style: Futura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
-        return UIFont(futuraStyle: style, size: size) !! UIFont.preferredFontForTextStyle(fallbackStyle.description)
+    class func futura(style: Futura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
+        return UIFont(futuraStyle: style, size: size) !! UIFont.preferredFont(forTextStyle: UIFontTextStyle(rawValue: fallbackStyle.description))
     }
     
     #endif
@@ -252,8 +252,8 @@ extension UIFont {
         self.init(name: fuuutuuuraStyle.rawValue, size: size)
     }
     
-    class func fuuutuuura(style style: Fuuutuuura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
-        return UIFont(fuuutuuuraStyle: style, size: size) !! UIFont.preferredFontForTextStyle(fallbackStyle.description)
+    class func fuuutuuura(style: Fuuutuuura, size: CGFloat, fallbackStyle: UIFontStyle) -> UIFont {
+        return UIFont(fuuutuuuraStyle: style, size: size) !! UIFont.preferredFont(forTextStyle: UIFontTextStyle(rawValue: fallbackStyle.description))
     }
     
     #endif
@@ -265,7 +265,7 @@ extension UIFont {
 // Crediting http://blog.human-friendly.com/theanswer-equals-maybeanswer-or-a-good-alternative
 
 infix operator !! { associativity right precedence 110 }
-func !!<A>(lhs:A?, @autoclosure rhs:()->A)->A {
+func !!<A>(lhs:A?, rhs:@autoclosure ()->A)->A {
     assert(lhs != nil)
     return lhs ?? rhs()
 }
@@ -274,7 +274,7 @@ infix operator /? { associativity right precedence 160 }
 
 func /?(top: Double, bottom: Double) -> Double {
     let division = top/bottom
-    if isinf(division) == false && isnan(division) == false {
+    if division.isInfinite == false && division.isNaN == false {
         return division
     }
     return 0
@@ -282,7 +282,7 @@ func /?(top: Double, bottom: Double) -> Double {
 
 func /?(top: CGFloat, bottom: CGFloat) -> CGFloat {
     let division = top/bottom
-    if isinf(division) == false && isnan(division) == false {
+    if division.isInfinite == false && division.isNaN == false {
         return division
     }
     return 0
@@ -290,7 +290,7 @@ func /?(top: CGFloat, bottom: CGFloat) -> CGFloat {
 
 func /?(top: Float, bottom: Float) -> Float {
     let division = top/bottom
-    if isinf(division) == false && isnan(division) == false {
+    if division.isInfinite == false && division.isNaN == false {
         return division
     }
     return 0

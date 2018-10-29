@@ -9,23 +9,23 @@
 import Foundation
 
 public enum JSBIPGeoService {
-    case Any
-    case All
-    case FreeGeoIP
-    case Telize
+    case any
+    case all
+    case freeGeoIP
+    case telize
 }
 
 public protocol JSBIPGeocoderServiceable {
-    var urls: [NSURL] { get }
+    var urls: [URL] { get }
     var exhaustive: Bool { get}
 }
 
 extension JSBIPGeoService: JSBIPGeocoderServiceable {
-    public var urls: [NSURL] {
+    public var urls: [URL] {
         switch self {
-        case .Telize:
+        case .telize:
             return [self.telizeURL]
-        case .FreeGeoIP:
+        case .freeGeoIP:
             return [self.freeGeoIPURL]
         default:
             return [self.freeGeoIPURL, self.telizeURL]
@@ -34,20 +34,20 @@ extension JSBIPGeoService: JSBIPGeocoderServiceable {
     
     public var exhaustive: Bool {
         switch self {
-        case .All:
+        case .all:
             return true
         default:
             return false
         }
     }
     
-    private var freeGeoIPURL: NSURL! { return NSURL(string: "https://freegeoip.net/json/") }
-    private var telizeURL: NSURL! { return NSURL(string: "https://www.telize.com/geoip/") }
+    fileprivate var freeGeoIPURL: URL! { return URL(string: "https://freegeoip.net/json/") }
+    fileprivate var telizeURL: URL! { return URL(string: "https://www.telize.com/geoip/") }
 }
 
 public protocol JSBIPGeocoderLocatable {
     var isEmpty: Bool { get }
-    mutating func addJSONDictionary(dictionary: NSDictionary)
+    mutating func addJSONDictionary(_ dictionary: NSDictionary)
 }
 
 public struct JSBIPLocation: JSBIPGeocoderLocatable {
@@ -115,7 +115,7 @@ public struct JSBIPLocation: JSBIPGeocoderLocatable {
 }
 
 extension JSBIPLocation {
-    mutating public func addJSONDictionary(dictionary: NSDictionary) {
+    mutating public func addJSONDictionary(_ dictionary: NSDictionary) {
         
         //case .FreeGeoIP:
         if let ip = dictionary["ip"] as? String {

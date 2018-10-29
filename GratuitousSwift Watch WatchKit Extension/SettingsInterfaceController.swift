@@ -10,34 +10,34 @@ import WatchKit
 
 final class SettingsInterfaceController: WKInterfaceController {
     
-    @IBOutlet private weak var suggestedTipTitleLabel: WKInterfaceLabel?
-    @IBOutlet private weak var currencySymbolTitleLabel: WKInterfaceLabel?
-    @IBOutlet private weak var suggestedTipPercentageLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var suggestedTipTitleLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var currencySymbolTitleLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var suggestedTipPercentageLabel: WKInterfaceLabel?
     
-    @IBOutlet private weak var suggestedTipSlider: WKInterfaceSlider?
+    @IBOutlet fileprivate weak var suggestedTipSlider: WKInterfaceSlider?
     
-    @IBOutlet private weak var currencySymbolLocalLabel: WKInterfaceLabel?
-    @IBOutlet private weak var currencySymbolDollarLabel: WKInterfaceLabel?
-    @IBOutlet private weak var currencySymbolPoundLabel: WKInterfaceLabel?
-    @IBOutlet private weak var currencySymbolEuroLabel: WKInterfaceLabel?
-    @IBOutlet private weak var currencySymbolYenLabel: WKInterfaceLabel?
-    @IBOutlet private weak var currencySymbolNoneLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var currencySymbolLocalLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var currencySymbolDollarLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var currencySymbolPoundLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var currencySymbolEuroLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var currencySymbolYenLabel: WKInterfaceLabel?
+    @IBOutlet fileprivate weak var currencySymbolNoneLabel: WKInterfaceLabel?
     
-    @IBOutlet private weak var suggestedTipGroup: WKInterfaceGroup?
-    @IBOutlet private weak var currencySymbolLocalGroup: WKInterfaceGroup?
-    @IBOutlet private weak var currencySymbolDollarGroup: WKInterfaceGroup?
-    @IBOutlet private weak var currencySymbolPoundGroup: WKInterfaceGroup?
-    @IBOutlet private weak var currencySymbolEuroGroup: WKInterfaceGroup?
-    @IBOutlet private weak var currencySymbolYenGroup: WKInterfaceGroup?
-    @IBOutlet private weak var currencySymbolNoneGroup: WKInterfaceGroup?
+    @IBOutlet fileprivate weak var suggestedTipGroup: WKInterfaceGroup?
+    @IBOutlet fileprivate weak var currencySymbolLocalGroup: WKInterfaceGroup?
+    @IBOutlet fileprivate weak var currencySymbolDollarGroup: WKInterfaceGroup?
+    @IBOutlet fileprivate weak var currencySymbolPoundGroup: WKInterfaceGroup?
+    @IBOutlet fileprivate weak var currencySymbolEuroGroup: WKInterfaceGroup?
+    @IBOutlet fileprivate weak var currencySymbolYenGroup: WKInterfaceGroup?
+    @IBOutlet fileprivate weak var currencySymbolNoneGroup: WKInterfaceGroup?
 
-    private var interfaceControllerIsConfigured = false
+    fileprivate var interfaceControllerIsConfigured = false
     
-    private let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
-    private let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
-    private let largeValueTextAttributes = GratuitousUIColor.WatchFonts.splitBillValueText
+    fileprivate let titleTextAttributes = GratuitousUIColor.WatchFonts.titleText
+    fileprivate let valueTextAttributes = GratuitousUIColor.WatchFonts.valueText
+    fileprivate let largeValueTextAttributes = GratuitousUIColor.WatchFonts.splitBillValueText
     
-    private var applicationPreferences: GratuitousUserDefaults {
+    fileprivate var applicationPreferences: GratuitousUserDefaults {
         get { return GratuitousWatchApplicationPreferences.sharedInstance.preferences }
         set { GratuitousWatchApplicationPreferences.sharedInstance.preferencesSetLocally = newValue }
     }
@@ -45,22 +45,22 @@ final class SettingsInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         
-        self.updateUserActivity(HandoffTypes.SettingsInterface.rawValue, userInfo: ["string": "string"], webpageURL: .None)
+        self.updateUserActivity(HandoffTypes.SettingsInterface.rawValue, userInfo: ["string": "string"], webpageURL: .none)
         
         if self.interfaceControllerIsConfigured == false {
         self.setTitle(SettingsInterfaceController.LocalizedString.CloseSettingsTitle)
             // putting this in a background queue allows willActivate to finish, the animation to start.
-            let backgroundQueue = dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
-            dispatch_async(backgroundQueue) {
+            let backgroundQueue = DispatchQueue.global(qos: .userInteractive)
+            backgroundQueue.async {
                 self.configureInterfaceController()
             }
         }
     }
     
-    private func configureInterfaceController() {
-        dispatch_async(dispatch_get_main_queue()) {
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.percentageMyHaveChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+    fileprivate func configureInterfaceController() {
+        DispatchQueue.main.async {
+            NotificationCenter.default.addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSNotification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged), object: .none)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.percentageMyHaveChanged(_:)), name: NSNotification.Name(rawValue: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote), object: .none)
             
             // configure the titles
             self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: SettingsInterfaceController.LocalizedString.SuggestedTipPercentageHeader, attributes: self.titleTextAttributes))
@@ -84,61 +84,61 @@ final class SettingsInterfaceController: WKInterfaceController {
         }
     }
     
-    @objc private func currencySignChanged(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
+    @objc fileprivate func currencySignChanged(_ notification: Notification?) {
+        DispatchQueue.main.async {
             self.updateCurrencySymbolUI()
         }
     }
     
-    @objc private func percentageMyHaveChanged(notification: NSNotification?) {
-        dispatch_async(dispatch_get_main_queue()) {
+    @objc fileprivate func percentageMyHaveChanged(_ notification: Notification?) {
+        DispatchQueue.main.async {
             self.updateSuggestedTipPercentageUI()
         }
     }
     
-    @IBAction private func suggestedTipSliderDidChange(value: Float) {
+    @IBAction fileprivate func suggestedTipSliderDidChange(_ value: Float) {
         let adjustedValue = value /? 100
         self.applicationPreferences.suggestedTipPercentage = Double(adjustedValue)
         self.updateSuggestedTipPercentageUI()
     }
     
-    @IBAction private func currencySymbolButtonLocalTapped() {
-        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.Default
+    @IBAction fileprivate func currencySymbolButtonLocalTapped() {
+        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.default
         self.updateCurrencySymbolUI()
     }
     
-    @IBAction private func currencySymbolButtonDollarTapped() {
-        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.Dollar
+    @IBAction fileprivate func currencySymbolButtonDollarTapped() {
+        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.dollar
         self.updateCurrencySymbolUI()
     }
     
-    @IBAction private func currencySymbolButtonPoundTapped() {
-        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.Pound
+    @IBAction fileprivate func currencySymbolButtonPoundTapped() {
+        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.pound
         self.updateCurrencySymbolUI()
     }
     
-    @IBAction private func currencySymbolButtonEuroTapped() {
-        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.Euro
+    @IBAction fileprivate func currencySymbolButtonEuroTapped() {
+        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.euro
         self.updateCurrencySymbolUI()
     }
     
-    @IBAction private func currencySymbolButtonYenTapped() {
-        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.Yen
+    @IBAction fileprivate func currencySymbolButtonYenTapped() {
+        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.yen
         self.updateCurrencySymbolUI()
     }
     
-    @IBAction private func currencySymbolButtonNoneTapped() {
-        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.NoSign
+    @IBAction fileprivate func currencySymbolButtonNoneTapped() {
+        self.applicationPreferences.overrideCurrencySymbol = CurrencySign.noSign
         self.updateCurrencySymbolUI()
     }
     
-    private func updateSuggestedTipPercentageUI() {
+    fileprivate func updateSuggestedTipPercentageUI() {
         let suggestedTipPercentage = Int(round(self.applicationPreferences.suggestedTipPercentage * 100))
         let suggestedTipPercentageString = "\(suggestedTipPercentage)%"
         self.suggestedTipPercentageLabel?.setAttributedText(NSAttributedString(string: suggestedTipPercentageString, attributes: self.largeValueTextAttributes))
     }
     
-    private func updateCurrencySymbolUI() {
+    fileprivate func updateCurrencySymbolUI() {
         // set the colors all to the defaults
         self.currencySymbolLocalGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
         self.currencySymbolDollarGroup?.setBackgroundColor(GratuitousUIColor.mediumBackgroundColor())
@@ -149,17 +149,17 @@ final class SettingsInterfaceController: WKInterfaceController {
         
         let currencySign = self.applicationPreferences.overrideCurrencySymbol
         switch currencySign {
-        case .Default:
+        case .default:
             self.currencySymbolLocalGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
-        case .Dollar:
+        case .dollar:
             self.currencySymbolDollarGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
-        case .Pound:
+        case .pound:
             self.currencySymbolPoundGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
-        case .Euro:
+        case .euro:
             self.currencySymbolEuroGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
-        case .Yen:
+        case .yen:
             self.currencySymbolYenGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
-        case .NoSign:
+        case .noSign:
             self.currencySymbolNoneGroup?.setBackgroundColor(GratuitousUIColor.ultraLightTextColor())
         }
     }
@@ -171,6 +171,6 @@ final class SettingsInterfaceController: WKInterfaceController {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }

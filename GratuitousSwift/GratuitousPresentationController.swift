@@ -10,11 +10,11 @@ import UIKit
 
 class GratuitousPresentationController: UIPresentationController {
     
-    private lazy var _dimmingView: UIView = {
+    fileprivate lazy var _dimmingView: UIView = {
         let dimView = UIView()
         let tap = UITapGestureRecognizer(target:self, action:#selector(self.dimmingViewTapped(_:)))
         let swipe = UISwipeGestureRecognizer(target:self, action:#selector(self.dimmingViewTapped(_:)))
-        swipe.direction = UISwipeGestureRecognizerDirection.Down
+        swipe.direction = UISwipeGestureRecognizerDirection.down
         
         dimView.backgroundColor = UIColor(white: 0.0, alpha: 0.7)
         dimView.alpha = 0.0
@@ -29,9 +29,9 @@ class GratuitousPresentationController: UIPresentationController {
         return dimmingView
     }
     
-    func dimmingViewTapped(sender: UITapGestureRecognizer) {
-        if sender.state == UIGestureRecognizerState.Ended {
-            self.presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+    func dimmingViewTapped(_ sender: UITapGestureRecognizer) {
+        if sender.state == UIGestureRecognizerState.ended {
+            self.presentingViewController.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -39,10 +39,10 @@ class GratuitousPresentationController: UIPresentationController {
         self.dimmingView.frame = self.containerView!.bounds
         self.dimmingView.alpha = 0.0
         
-        self.containerView!.insertSubview(self.dimmingView, atIndex: 0)
+        self.containerView!.insertSubview(self.dimmingView, at: 0)
         
-        if let transitionCoordinator = self.presentedViewController.transitionCoordinator() {
-            transitionCoordinator.animateAlongsideTransition({
+        if let transitionCoordinator = self.presentedViewController.transitionCoordinator {
+            transitionCoordinator.animate(alongsideTransition: {
                 (UIViewControllerTransitionCoordinatorContext) -> Void in
                 self.dimmingView.alpha = 1.0
                 },
@@ -53,8 +53,8 @@ class GratuitousPresentationController: UIPresentationController {
     }
     
     override func dismissalTransitionWillBegin() {
-        if let transitionCoordinator = self.presentedViewController.transitionCoordinator() {
-            transitionCoordinator.animateAlongsideTransition({
+        if let transitionCoordinator = self.presentedViewController.transitionCoordinator {
+            transitionCoordinator.animate(alongsideTransition: {
                 (UIViewControllerTransitionCoordinatorContext) -> Void in
                 self.dimmingView.alpha = 0.0
                 },
@@ -64,24 +64,24 @@ class GratuitousPresentationController: UIPresentationController {
         }
     }
     
-    override func sizeForChildContentContainer(container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
+    override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         let modifier: CGFloat
-        switch UIApplication.sharedApplication().preferredContentSizeCategory {
-        case UIContentSizeCategoryExtraLarge:
+        switch UIApplication.shared.preferredContentSizeCategory {
+        case UIContentSizeCategory.extraLarge:
             modifier = 10
-        case UIContentSizeCategoryExtraExtraLarge:
+        case UIContentSizeCategory.extraExtraLarge:
             modifier = 20
-        case UIContentSizeCategoryExtraExtraExtraLarge:
+        case UIContentSizeCategory.extraExtraExtraLarge:
             modifier = 40
-        case UIContentSizeCategoryAccessibilityMedium:
+        case UIContentSizeCategory.accessibilityMedium:
             modifier = 90
-        case UIContentSizeCategoryAccessibilityLarge:
+        case UIContentSizeCategory.accessibilityLarge:
             modifier = 150
-        case UIContentSizeCategoryAccessibilityExtraLarge:
+        case UIContentSizeCategory.accessibilityExtraLarge:
             modifier = 300
-        case UIContentSizeCategoryAccessibilityExtraExtraLarge:
+        case UIContentSizeCategory.accessibilityExtraExtraLarge:
             modifier = 5000
-        case UIContentSizeCategoryAccessibilityExtraExtraExtraLarge:
+        case UIContentSizeCategory.accessibilityExtraExtraExtraLarge:
             modifier = 5000
         default:
             modifier = 0
@@ -105,21 +105,21 @@ class GratuitousPresentationController: UIPresentationController {
         return contentViewSize
     }
     
-    override func adaptivePresentationStyle() -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.Custom
+    override var adaptivePresentationStyle : UIModalPresentationStyle {
+        return UIModalPresentationStyle.custom
     }
     
     override func containerViewWillLayoutSubviews() {
         self.dimmingView.frame = self.containerView!.bounds
-        self.presentedView()?.frame = self.frameOfPresentedViewInContainerView()
+        self.presentedView?.frame = self.frameOfPresentedViewInContainerView
     }
     
-    override func shouldPresentInFullscreen() -> Bool {
+    override var shouldPresentInFullscreen : Bool {
         return true
     }
     
-    override func frameOfPresentedViewInContainerView() -> CGRect {
-        let toSize = self.sizeForChildContentContainer(self.presentedViewController, withParentContainerSize: self.containerView!.bounds.size)
+    override var frameOfPresentedViewInContainerView : CGRect {
+        let toSize = self.size(forChildContentContainer: self.presentedViewController, withParentContainerSize: self.containerView!.bounds.size)
         
         let originX = floor((self.containerView!.bounds.size.width - toSize.width) /? 2)
         let originY = floor((self.containerView!.bounds.size.height - toSize.height) /? 2)

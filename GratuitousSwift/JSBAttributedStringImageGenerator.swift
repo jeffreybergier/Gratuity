@@ -10,25 +10,25 @@ import UIKit
 
 class JSBAttributedStringImageGenerator {
     
-    func generateImageForAttributedString(string: NSAttributedString, scale: CGFloat) -> UIImage? {
+    func generateImageForAttributedString(_ string: NSAttributedString, scale: CGFloat) -> UIImage? {
         view.attributedText = string
         return self.imageFromView(self.view, scale: scale)
     }
     
-    private let scaleFactor = CGFloat(2.0)
-    private let view = UILabel()
+    fileprivate let scaleFactor = CGFloat(2.0)
+    fileprivate let view = UILabel()
     
-    private func imageFromView(inputView: UIView, scale: CGFloat) -> UIImage? {
+    fileprivate func imageFromView(_ inputView: UIView, scale: CGFloat) -> UIImage? {
         inputView.sizeToFit()
         let size = CGSize(width: inputView.bounds.width * scaleFactor, height: inputView.bounds.height * scaleFactor)
         UIGraphicsBeginImageContext(size)
         
-        guard let context = UIGraphicsGetCurrentContext() else { return .None }
-        CGContextScaleCTM(context, scaleFactor, scaleFactor)
-        inputView.layer.renderInContext(context)
-        guard let coreImage = CGBitmapContextCreateImage(context) else { return .None }
+        guard let context = UIGraphicsGetCurrentContext() else { return .none }
+        context.scaleBy(x: scaleFactor, y: scaleFactor)
+        inputView.layer.render(in: context)
+        guard let coreImage = context.makeImage() else { return .none }
         UIGraphicsEndImageContext()
         
-        return UIImage(CGImage: coreImage, scale: scale, orientation: UIImageOrientation.Up)
+        return UIImage(cgImage: coreImage, scale: scale, orientation: UIImageOrientation.up)
     }
 }

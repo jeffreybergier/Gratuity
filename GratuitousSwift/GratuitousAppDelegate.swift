@@ -15,7 +15,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
         
     // MARK: App Preferences Management Properties
-    private var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
+    fileprivate var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
         didSet {
             self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(_preferences)
         }
@@ -49,32 +49,32 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private let preferencesDiskManager = GratuitousUserDefaultsDiskManager()
-    private let preferencesNotificationManager = GratuitousDefaultsObserver()
+    fileprivate let preferencesDiskManager = GratuitousUserDefaultsDiskManager()
+    fileprivate let preferencesNotificationManager = GratuitousDefaultsObserver()
     
     // MARK: State Restoration Properties
     let storyboard: UIStoryboard = UIStoryboard(name: "GratuitousSwift", bundle: nil)
-    let presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .Right, animate: false)
-    let presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .Bottom, animate: false)
+    let presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .right, animate: false)
+    let presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .bottom, animate: false)
     
     // MARK: Watch Connectivity Properties
     let watchConnectivityManager: AnyObject? = {
         if #available(iOS 9, *) {
             return JSBWatchConnectivityManager()
         } else {
-            return .None
+            return .none
         }
     }()
-    private let customWatchCommunicationManager: AnyObject? = {
+    fileprivate let customWatchCommunicationManager: AnyObject? = {
         if #available(iOS 9, *) {
             return GratuitousiOSConnectivityManager()
         } else {
-            return .None
+            return .none
         }
     }()
     
     // MARK: iOS App Launch
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch
         
         /*
@@ -106,16 +106,16 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: Watch Calculations Analytics
-    private let currencyFormatter = GratuitousNumberFormatter(style: .RespondsToLocaleChanges)
-    private func postNewCalculationToAnswers(preferences: GratuitousUserDefaults) {
+    fileprivate let currencyFormatter = GratuitousNumberFormatter(style: .respondsToLocaleChanges)
+    fileprivate func postNewCalculationToAnswers(_ preferences: GratuitousUserDefaults) {
         let c = DefaultsCalculations(preferences: preferences)
         
-        var answersAttributes = [
-            "BillAmount" : NSNumber(integer: c.billAmount),
-            "TipAmount" : NSNumber(integer: c.tipAmount),
-            "TipPercentage" : NSNumber(integer: c.tipPercentage),
-            "TotalAmount" : NSNumber(integer: c.totalAmount),
-            "SystemLocale" : self.currencyFormatter.locale.localeIdentifier
+        var answersAttributes: [String : Any] = [
+            "BillAmount" : NSNumber(value: c.billAmount as Int),
+            "TipAmount" : NSNumber(value: c.tipAmount as Int),
+            "TipPercentage" : NSNumber(value: c.tipPercentage as Int),
+            "TotalAmount" : NSNumber(value: c.totalAmount as Int),
+            "SystemLocale" : self.currencyFormatter.locale.identifier
         ]
         answersAttributes["LocationZipCode"] = self.preferences.lastLocation?.zipCode
         answersAttributes["LocationCity"] = self.preferences.lastLocation?.city
@@ -125,7 +125,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: iOS App Going to the Background
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.preferences)
     }
 }
