@@ -1,31 +1,16 @@
 PODS:
-  - Crashlytics (3.4.0):
-    - Fabric (~> 1.6.0)
-  - Fabric (1.6.0):
-    - Fabric/Base (= 1.6.0)
-  - Fabric/Base (1.6.0)
   - OpenSSL-Universal (1.0.1.k)
-  - XCGLogger (3.0)
 
 DEPENDENCIES:
-  - Crashlytics (~> 3.3)
-  - Fabric (~> 1.5)
   - OpenSSL-Universal (= 1.0.1.k)
-  - XCGLogger (~> 3.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Crashlytics
-    - Fabric
     - OpenSSL-Universal
-    - XCGLogger
 
 SPEC CHECKSUMS:
-  Crashlytics: 1ee87895c37472eb3f01f409ea1654a464d2f8d4
-  Fabric: d737eda3a26ac940a5430230eedb35f16b226131
   OpenSSL-Universal: 5b864c8eb334c8e78f44e4b2eb294ee2c1891c23
-  XCGLogger: 5802533aff8bafc8b3b9776ab8972576f31d0a4e
 
-PODFILE CHECKSUM: 84b7f65dcc2c4f028464a8fd2e102d5984fdb860
+PODFILE CHECKSUM: 71fbc23ba61d479ba3a4a4a45036bd6caa01c4c5
 
 COCOAPODS: 1.5.3
