@@ -975,7 +975,7 @@
 				CODE_SIGN_ENTITLEMENTS = GratuityWatch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = GratuityWatch_Extension;
@@ -997,7 +997,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = GratuityWatch_Extension;
 				INFOPLIST_FILE = "$(SRCROOT)/GratuitousSwift Watch Watch App/Gratuity-Watch-Info.plist";
