@@ -25,7 +25,7 @@ class GratuitousNumberFormatter: NSNumberFormatter {
         
         switch style {
         case .RespondsToLocaleChanges:
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeDidChangeInSystem:", name: NSCurrentLocaleDidChangeNotification, object: .None)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.localeDidChangeInSystem(_:)), name: NSCurrentLocaleDidChangeNotification, object: .None)
         case .DoNotRespondToLocaleChanges:
             break
         }

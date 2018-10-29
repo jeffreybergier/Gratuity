@@ -30,8 +30,8 @@ final class GratuitousWatchConnectivityManager {
         #if RELEASE
             self.log.setup(.Warning, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .None, fileLogLevel: .None)
         #endif
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "remoteContextUpdateNeeded:", name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySymbolsNeededFromRemote:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolsNeededFromRemote, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.remoteContextUpdateNeeded(_:)), name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySymbolsNeededFromRemote(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolsNeededFromRemote, object: .None)
     }
     
     deinit {

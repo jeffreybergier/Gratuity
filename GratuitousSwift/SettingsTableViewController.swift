@@ -22,7 +22,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
 
     private var headerLabelsArray: [UILabel?] = []
     private lazy var swipeToDismiss: UISwipeGestureRecognizer = {
-        let swipe = UISwipeGestureRecognizer(target: self, action: "didSwipeToDismiss:")
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(self.didSwipeToDismiss(_:)))
         swipe.direction = UISwipeGestureRecognizerDirection.Right
         return swipe
     }()
@@ -44,11 +44,11 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         self.title = LocalizedString.SettingsTitle
         
         //add necessary notification center observers
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "percentageMayHaveChanged:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.systemTextSizeDidChange(_:)), name: UIContentSizeCategoryDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSCurrentLocaleDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.percentageMayHaveChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.applicationDidBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: .None)
         
         //set the background color of the view
         self.tableView.backgroundColor = GratuitousUIConstant.darkBackgroundColor() //UIColor.blackColor()

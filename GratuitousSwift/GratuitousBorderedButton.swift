@@ -17,7 +17,7 @@ final class GratuitousBorderedButton: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.systemTextSizeDidChange(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
         self.addObserver(self, forKeyPath: "highlighted", options: [.New, .Old], context: nil)
         
         self.prepareButtonAppearance()

@@ -59,8 +59,8 @@ final class SettingsInterfaceController: WKInterfaceController {
     
     private func configureInterfaceController() {
         dispatch_async(dispatch_get_main_queue()) {
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "percentageMyHaveChanged:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.percentageMyHaveChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
             
             // configure the titles
             self.suggestedTipTitleLabel?.setAttributedText(NSAttributedString(string: SettingsInterfaceController.LocalizedString.SuggestedTipPercentageHeader, attributes: self.titleTextAttributes))

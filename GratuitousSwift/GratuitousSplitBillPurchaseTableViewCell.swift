@@ -42,7 +42,7 @@ class GratuitousSplitBillPurchaseTableViewCell: GratuitousSelectFadeTableViewCel
         
         self.animatableTextLabel = self.purchaseTextLabel
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "purchaseStateMayHaveChanged:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.purchaseStateMayHaveChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
         
         self.verifySplitBillPurchaseAndUpdateUI()
     }

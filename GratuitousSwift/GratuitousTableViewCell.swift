@@ -52,8 +52,8 @@ final class GratuitousTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSCurrentLocaleDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
         
         //configure the font
         if let font = GratuitousUIConstant.originalFontForTableViewCellTextLabels() {

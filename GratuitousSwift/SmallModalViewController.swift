@@ -22,7 +22,7 @@ class SmallModalViewController: UIViewController, CustomAnimatedTransitionable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.systemTextSizeDidChange(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
         self.configureDynamicTextLabels()
         
         if self.peekMode == true {

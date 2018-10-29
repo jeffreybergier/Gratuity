@@ -75,8 +75,8 @@ final class SplitBillTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.prepareFontsAndColors()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSCurrentLocaleDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
     }
     
     @objc private func currencySignChanged(notification: NSNotification?) {

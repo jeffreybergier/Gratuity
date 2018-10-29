@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1042DD9DC4E2CCC9155EA729 /* Pods_Gratuity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3770A3E29597CE25FE9233F2 /* Pods_Gratuity.framework */; };
-		1749FBD6340FB1C14F683A87 /* Pods_GratuityWatch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FB94AF573C62CCB98EDF8C /* Pods_GratuityWatch_Extension.framework */; };
+		0D02E7975A4754D0716511A3 /* Pods_GratuityWatch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D667F9CE287671BE3ACAECF5 /* Pods_GratuityWatch_Extension.framework */; };
+		56799F304991A7A84FCA7CDB /* Pods_Gratuity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CEFF625C2F8EDCCCA96F52 /* Pods_Gratuity.framework */; };
 		73048CF41BBCEBC400D8EAA6 /* JSBPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */; };
 		732CFE6A1BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */; };
 		732CFE6C1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732CFE6B1BCA2E310096AB06 /* GratuitousWatchLocalizedStrings.swift */; };
@@ -137,11 +137,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1CEF29F22142D1BEB8C26155 /* Pods-GratuityWatch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratuityWatch Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension.debug.xcconfig"; sourceTree = "<group>"; };
-		3770A3E29597CE25FE9233F2 /* Pods_Gratuity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gratuity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		54FB94AF573C62CCB98EDF8C /* Pods_GratuityWatch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GratuityWatch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5624F62AF87021893A8B73B9 /* Pods-Gratuity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gratuity.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity.release.xcconfig"; sourceTree = "<group>"; };
-		59B24410EC519253B452447B /* Pods-Gratuity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gratuity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity.debug.xcconfig"; sourceTree = "<group>"; };
+		55CEFF625C2F8EDCCCA96F52 /* Pods_Gratuity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gratuity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6734472D1EEAD1C6E86F2E9F /* Pods-GratuityWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratuityWatch Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
+		6EF0430E3634B61365A7E90E /* Pods-Gratuity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gratuity.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity.release.xcconfig"; sourceTree = "<group>"; };
 		73011BDF1AD04F90001F6D71 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 		73011BE61AD05AFA001F6D71 /* WatchInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchInfoViewController.swift; sourceTree = "<group>"; };
 		73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBPurchaseManager.swift; sourceTree = "<group>"; };
@@ -228,16 +226,25 @@
 		73FF9EA11BBE4BE400F9278C /* RMAppReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAppReceipt.m; sourceTree = "<group>"; };
 		73FF9EA31BBE4ED000F9278C /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStore.h; sourceTree = "<group>"; };
 		73FF9EA41BBE4ED000F9278C /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStore.m; sourceTree = "<group>"; };
-		B23D76F07341B402BD7823F1 /* Pods-GratuityWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratuityWatch Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
+		8CA7F37E472DE246571B78C0 /* Pods-GratuityWatch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratuityWatch Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		97CE4A86F716CD5CEA37C820 /* Pods-Gratuity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gratuity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity.debug.xcconfig"; sourceTree = "<group>"; };
+		D667F9CE287671BE3ACAECF5 /* Pods_GratuityWatch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GratuityWatch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2F998AFE2B993F5C25E0E94C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		733D02A31BBA4C2D00E40EC5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				733D02E41BBA505600E40EC5 /* StoreKit.framework in Frameworks */,
-				1042DD9DC4E2CCC9155EA729 /* Pods_Gratuity.framework in Frameworks */,
+				56799F304991A7A84FCA7CDB /* Pods_Gratuity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,13 +252,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1749FBD6340FB1C14F683A87 /* Pods_GratuityWatch_Extension.framework in Frameworks */,
+				0D02E7975A4754D0716511A3 /* Pods_GratuityWatch_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A5FDF2790B1DAA3C3C2F72E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				97CE4A86F716CD5CEA37C820 /* Pods-Gratuity.debug.xcconfig */,
+				6EF0430E3634B61365A7E90E /* Pods-Gratuity.release.xcconfig */,
+				8CA7F37E472DE246571B78C0 /* Pods-GratuityWatch Extension.debug.xcconfig */,
+				6734472D1EEAD1C6E86F2E9F /* Pods-GratuityWatch Extension.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		73011BE51AD05AD3001F6D71 /* Watch Info View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,7 +379,7 @@
 				73A755B31A87F8E80038E023 /* Common Files */,
 				73A18D591A2A9525002180DD /* Frameworks */,
 				7382510219E60EED00CD2B28 /* Products */,
-				800AFDFD38FE21974E511AC6 /* Pods */,
+				3A5FDF2790B1DAA3C3C2F72E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -413,8 +431,8 @@
 			children = (
 				7371F6CB1BB4ED2600048EC2 /* StoreKit.framework */,
 				73A18D5A1A2A9525002180DD /* WatchKit.framework */,
-				3770A3E29597CE25FE9233F2 /* Pods_Gratuity.framework */,
-				54FB94AF573C62CCB98EDF8C /* Pods_GratuityWatch_Extension.framework */,
+				55CEFF625C2F8EDCCCA96F52 /* Pods_Gratuity.framework */,
+				D667F9CE287671BE3ACAECF5 /* Pods_GratuityWatch_Extension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -516,17 +534,6 @@
 			name = "Objective-C";
 			sourceTree = "<group>";
 		};
-		800AFDFD38FE21974E511AC6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				59B24410EC519253B452447B /* Pods-Gratuity.debug.xcconfig */,
-				5624F62AF87021893A8B73B9 /* Pods-Gratuity.release.xcconfig */,
-				1CEF29F22142D1BEB8C26155 /* Pods-GratuityWatch Extension.debug.xcconfig */,
-				B23D76F07341B402BD7823F1 /* Pods-GratuityWatch Extension.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -534,14 +541,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 733D02B51BBA4C2D00E40EC5 /* Build configuration list for PBXNativeTarget "Gratuity" */;
 			buildPhases = (
-				774E60E97EB61A843E3C1076 /* Check Pods Manifest.lock */,
+				F2EA0754CBB40225E6A748FD /* [CP] Check Pods Manifest.lock */,
 				733D02A21BBA4C2D00E40EC5 /* Sources */,
 				733D02A31BBA4C2D00E40EC5 /* Frameworks */,
 				733D02A41BBA4C2D00E40EC5 /* Resources */,
 				73AEA6DC1BBB05EC004B16DE /* Embed Watch Content */,
-				92268F9152C864934AFB8DA8 /* Embed Pods Frameworks */,
-				6CF66C05130F8888AC0315C7 /* Copy Pods Resources */,
 				73FF9E9C1BBE3FAE00F9278C /* ShellScript */,
+				F11B4BF8C6C291150B18A8DC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -559,6 +565,7 @@
 			buildPhases = (
 				73AEA6B81BBB05EB004B16DE /* Resources */,
 				73AEA6DA1BBB05EC004B16DE /* Embed App Extensions */,
+				2F998AFE2B993F5C25E0E94C /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -574,13 +581,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73AEA6D91BBB05EC004B16DE /* Build configuration list for PBXNativeTarget "GratuityWatch Extension" */;
 			buildPhases = (
-				800884E44345ECBA58C6D442 /* Check Pods Manifest.lock */,
+				8739A1DE47E925D51EBDD8E3 /* [CP] Check Pods Manifest.lock */,
 				73AEA6C21BBB05EB004B16DE /* Sources */,
 				73AEA6C31BBB05EB004B16DE /* Frameworks */,
 				73AEA6C41BBB05EB004B16DE /* Resources */,
 				738C98B51BD1A6F300D14F20 /* Copy Pods Frameworks */,
-				D25EEDD411F2D7F13ECC1675 /* Copy Pods Resources */,
-				3ED746BBC45D539E0B37B903 /* Embed Pods Frameworks */,
+				0F41DA4D1589C324140F151D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -703,34 +709,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3ED746BBC45D539E0B37B903 /* Embed Pods Frameworks */ = {
+		0F41DA4D1589C324140F151D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger-watchOS/XCGLogger.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6CF66C05130F8888AC0315C7 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		738C98B51BD1A6F300D14F20 /* Copy Pods Frameworks */ = {
@@ -761,64 +759,70 @@
 			shellPath = /bin/sh;
 			shellScript = "./Pods/Fabric/Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce";
 		};
-		774E60E97EB61A843E3C1076 /* Check Pods Manifest.lock */ = {
+		8739A1DE47E925D51EBDD8E3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GratuityWatch Extension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		800884E44345ECBA58C6D442 /* Check Pods Manifest.lock */ = {
+		F11B4BF8C6C291150B18A8DC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		92268F9152C864934AFB8DA8 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger-iOS/XCGLogger.framework",
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D25EEDD411F2D7F13ECC1675 /* Copy Pods Resources */ = {
+		F2EA0754CBB40225E6A748FD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "Copy Pods Resources";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Gratuity-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -940,7 +944,7 @@
 /* Begin XCBuildConfiguration section */
 		733D02B61BBA4C2D00E40EC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 59B24410EC519253B452447B /* Pods-Gratuity.debug.xcconfig */;
+			baseConfigurationReference = 97CE4A86F716CD5CEA37C820 /* Pods-Gratuity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Gratuity.entitlements;
@@ -968,7 +972,7 @@
 		};
 		733D02B71BBA4C2D00E40EC5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5624F62AF87021893A8B73B9 /* Pods-Gratuity.release.xcconfig */;
+			baseConfigurationReference = 6EF0430E3634B61365A7E90E /* Pods-Gratuity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Gratuity.entitlements;
@@ -1119,7 +1123,7 @@
 		};
 		73AEA6D71BBB05EB004B16DE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CEF29F22142D1BEB8C26155 /* Pods-GratuityWatch Extension.debug.xcconfig */;
+			baseConfigurationReference = 8CA7F37E472DE246571B78C0 /* Pods-GratuityWatch Extension.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "GratuityWatch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1142,7 +1146,7 @@
 		};
 		73AEA6D81BBB05EB004B16DE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B23D76F07341B402BD7823F1 /* Pods-GratuityWatch Extension.release.xcconfig */;
+			baseConfigurationReference = 6734472D1EEAD1C6E86F2E9F /* Pods-GratuityWatch Extension.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "GratuityWatch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";

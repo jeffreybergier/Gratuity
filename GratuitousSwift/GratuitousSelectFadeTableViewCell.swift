@@ -26,7 +26,7 @@ class GratuitousSelectFadeTableViewCell: UITableViewCell {
     
     override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         //this timer was needed because this seems to get called slightly too soon and if the user touched the same cell again it would repeat the animation and it was jarring.
-        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "cgAnimationDidFinish:", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(self.cgAnimationDidFinish(_:)), userInfo: nil, repeats: false)
     }
     
     func cgAnimationDidFinish(timer: NSTimer?) {

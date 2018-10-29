@@ -29,7 +29,7 @@ final class SplitTotalInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
         // MARK: Configure notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
         
         // MARK: Configure Handoff
         self.updateUserActivity(HandoffTypes.SplitBillInterface.rawValue, userInfo: ["string" : "string"], webpageURL: .None)

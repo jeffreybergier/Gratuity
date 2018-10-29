@@ -61,7 +61,7 @@ final class WatchInfoViewController: SmallModalScollViewController {
         
         if let videoPlayer = self.videoPlayer {
             videoPlayer.player.seekToTime(kCMTimeZero)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoPlaybackFinished:", name: AVPlayerItemDidPlayToEndTimeNotification, object: videoPlayer.player.currentItem)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.videoPlaybackFinished(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: videoPlayer.player.currentItem)
         }
     }
     

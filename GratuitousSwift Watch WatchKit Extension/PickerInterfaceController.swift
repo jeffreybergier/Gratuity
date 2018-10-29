@@ -74,13 +74,13 @@ final class PickerInterfaceController: WKInterfaceController {
         if self.interfaceControllerConfiguredOnce == false {
             self.interfaceControllerConfiguredOnce = true
             // configure notifications
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignDidChange:", name: NSCurrentLocaleDidChangeNotification, object: .None)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignDidChange:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "billTipValueChangeByRemote:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignDidChange(_:)), name: NSCurrentLocaleDidChangeNotification, object: .None)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignDidChange(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.billTipValueChangeByRemote(_:)), name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
             
             // configure the menu
-            self.addMenuItemWithImageNamed("splitTipMenuIcon", title: PickerInterfaceController.LocalizedString.SplitTipMenuIconLabel, action: "splitTipMenuButtonTapped")
-            self.addMenuItemWithImageNamed("settingsMenuIcon", title: PickerInterfaceController.LocalizedString.SettingsMenuIconLabel, action: "settingsMenuButtonTapped")
+            self.addMenuItemWithImageNamed("splitTipMenuIcon", title: PickerInterfaceController.LocalizedString.SplitTipMenuIconLabel, action: #selector(self.splitTipMenuButtonTapped))
+            self.addMenuItemWithImageNamed("settingsMenuIcon", title: PickerInterfaceController.LocalizedString.SettingsMenuIconLabel, action: #selector(self.settingsMenuButtonTapped))
             
             // start the idle timer
             self.resetInterfaceIdleTimer()
@@ -287,6 +287,6 @@ final class PickerInterfaceController: WKInterfaceController {
 
 extension NSTimer {
     class func interfaceIdleTimer(object: AnyObject) -> NSTimer {
-        return NSTimer.scheduledTimerWithTimeInterval(3.0, target: object, selector: "interfaceIdleTimerFired:", userInfo: nil, repeats: true)
+        return NSTimer.scheduledTimerWithTimeInterval(3.0, target: object, selector: #selector(PickerInterfaceController.interfaceIdleTimerFired(_:)), userInfo: nil, repeats: true)
     }
 }

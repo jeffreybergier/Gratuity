@@ -88,10 +88,10 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         self.resetInterfaceIdleTimer()
         
         // configure notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "systemTextSizeDidChange:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: NSCurrentLocaleDidChangeNotification, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currencySignChanged:", name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setInterfaceRefreshNeeded:", name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.systemTextSizeDidChange(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: NSCurrentLocaleDidChangeNotification, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySignChanged(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.setInterfaceRefreshNeeded(_:)), name: GratuitousDefaultsObserver.NotificationKeys.BillTipValueChangedByRemote, object: .None)
 
         
         //prepare the arrays
@@ -439,7 +439,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     private func resetInterfaceIdleTimer() {
         self.interfaceIdleTimer?.invalidate()
         self.interfaceIdleTimer = nil
-        self.interfaceIdleTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "interfaceIdleTimerFired:", userInfo: nil, repeats: true)
+        self.interfaceIdleTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(self.interfaceIdleTimerFired(_:)), userInfo: nil, repeats: true)
     }
     
     @objc private func interfaceIdleTimerFired(timer: NSTimer?) {

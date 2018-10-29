@@ -25,7 +25,7 @@ final class GratuitousiOSConnectivityManager {
     private var remoteUpdateRateLimiterSet = false
     
     init() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "remoteContextUpdateNeeded:", name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.remoteContextUpdateNeeded(_:)), name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
     }
     
     deinit {
