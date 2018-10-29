@@ -102,12 +102,6 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         let purchaseManager = GratuitousPurchaseManager()
         self.preferencesSetLocally.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
         
-        JSBIPGeocoder(service: JSBIPGeoService.All).geocode() { (location, error) in
-            if let location = location as? JSBIPLocation {
-                self.preferencesSetLocally.lastLocation = location
-            }
-        }
-        
         return true
     }
     
