@@ -11,6 +11,7 @@ extension Timer {
     
     :returns: The newly-created `NSTimer` instance.
     */
+    @discardableResult
     class func scheduleWithDelay(_ delay: TimeInterval, handler: @escaping (Timer?) -> Void) -> Timer {
         let fireDate = delay + CFAbsoluteTimeGetCurrent()
         let timer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault, fireDate, 0, 0, 0, handler)
@@ -26,6 +27,7 @@ extension Timer {
     
     :returns: The newly-created `NSTimer` instance.
     */
+    @discardableResult
     class func schedule(repeatInterval interval: TimeInterval, handler: @escaping (Timer?) -> Void) -> Timer {
         let fireDate = interval + CFAbsoluteTimeGetCurrent()
         let timer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault, fireDate, interval, 0, 0, handler)

@@ -169,7 +169,7 @@ final class EmailSupportHandler {
     
     func switchAppForEmailSupport() {
         let mailStringWrongEncoding = NSString(format: "mailto:\(self.recipient)?subject=%@&body=%@" as NSString, self.subject, self.body)
-        let mailString = mailStringWrongEncoding.addingPercentEscapes(using: String.Encoding.utf8.rawValue)
+        let mailString = mailStringWrongEncoding.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
         let mailToURL = URL(string: mailString!)!
         UIApplication.shared.openURL(mailToURL)
     }

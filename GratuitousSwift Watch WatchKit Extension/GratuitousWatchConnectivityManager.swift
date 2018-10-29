@@ -66,7 +66,7 @@ extension GratuitousWatchConnectivityManager: JSBWatchConnectivityContextDelegat
 
 extension GratuitousWatchConnectivityManager: JSBWatchConnectivityFileTransferReceiverDelegate {
     func session(_ session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
-        log?.warning("Unknown File Transfer: \(fileTransfer) to Remote Device Finished with Error: \(error)")
+        log?.warning("Unknown File Transfer: \(fileTransfer) to Remote Device Finished with Error: \(String(describing: error))")
     }
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
         self.requestedCurrencySymbols = false
@@ -95,7 +95,7 @@ extension GratuitousWatchConnectivityManager {
         if self.requestedCurrencySymbols == false {
             self.requestedCurrencySymbols = true
             
-            var message = GratuitousUserDefaults(dictionary: notification?.userInfo as! NSDictionary, fallback: self.applicationPreferences).dictionaryCopyForKeys(.forWatch)
+            var message = GratuitousUserDefaults(dictionary: notification?.userInfo as NSDictionary?, fallback: self.applicationPreferences).dictionaryCopyForKeys(.forWatch)
             message["SymbolImagesRequested"] = NSNumber(value: true as Bool)
             
             self.watchConnectivityManager.session?.sendMessage(message,

@@ -253,10 +253,10 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         self.settingsButton?.sizeToFit()
         if let path = Bundle.main.path(forResource: "settingsIcon", ofType:"pdf"),
             let settingsButton = self.settingsButton {
-//                let image = ImageFromPDFFileWithHeight(path, settingsButton.frame.size.height).withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-//                settingsButton.setTitle("", for: UIControlState())
-//                settingsButton.setImage(image, for: UIControlState.Normal)
-//                settingsButton.sizeToFit()
+            let image = ImageFromPDFFileWithHeight(path, settingsButton.frame.size.height).withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            settingsButton.setTitle("", for: UIControlState())
+            settingsButton.setImage(image, for: .normal)
+            settingsButton.sizeToFit()
         }
     }
     

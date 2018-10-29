@@ -264,13 +264,15 @@ extension UIFont {
 // When App is in release build, it performs ?? operator
 // Crediting http://blog.human-friendly.com/theanswer-equals-maybeanswer-or-a-good-alternative
 
-infix operator !! { associativity right precedence 110 }
+precedencegroup DebugUnwrap { higherThan: AssignmentPrecedence }
+infix operator !! : DebugUnwrap
 func !!<A>(lhs:A?, rhs:@autoclosure ()->A)->A {
     assert(lhs != nil)
     return lhs ?? rhs()
 }
 
-infix operator /? { associativity right precedence 160 }
+precedencegroup SpecialDivision { higherThan: MultiplicationPrecedence }
+infix operator /? : SpecialDivision
 
 func /?(top: Double, bottom: Double) -> Double {
     let division = top/bottom

@@ -173,7 +173,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
         if let delegate = self.userInfoSenderDelegate {
             delegate.session(session, didFinish: userInfoTransfer, error: error)
         } else {
-            log?.info("UserInfoSenderDelegate Not Set. Ignoring UserInfo Transfer Finished: \(userInfoTransfer) with Error: \(error)")
+            log?.info("UserInfoSenderDelegate Not Set. Ignoring UserInfo Transfer Finished: \(userInfoTransfer) with Error: \(String(describing: error))")
         }
     }
     
@@ -191,7 +191,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
         if let delegate = self.fileTransferSenderDelegate {
             delegate.session(session, didFinish: fileTransfer, error: error)
         } else {
-            log?.info("FileTransferSenderDelegate Not Set. Ignoring File Transfer Finished: \(fileTransfer) with Error: \(error)")
+            log?.info("FileTransferSenderDelegate Not Set. Ignoring File Transfer Finished: \(fileTransfer) with Error: \(String(describing: error))")
         }
     }
     

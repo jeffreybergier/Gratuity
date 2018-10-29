@@ -10,7 +10,7 @@ final class GratuitousPurchaseManager: JSBPurchaseManager {
     
     override var Scej9Uj9vIrth8Ev7quaG9vob6iP8buK5ferS8yoak3Fots5El: String {
         let bytes: [CChar] = [0x63, 0x6f, 0x6d, 0x2e, 0x73, 0x61, 0x74, 0x75, 0x72, 0x64, 0x61, 0x79, 0x61, 0x70, 0x70, 0x73, 0x2e, 0x47, 0x72, 0x61, 0x74, 0x75, 0x69, 0x74, 0x79]
-        return NSString(bytes: bytes, length: bytes.count, encoding: String.Encoding.utf8.rawValue) as! String
+        return NSString(bytes: bytes, length: bytes.count, encoding: String.Encoding.utf8.rawValue) as String!
     }
     
     // MARK: Receipt Verification

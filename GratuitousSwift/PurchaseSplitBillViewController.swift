@@ -170,7 +170,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         if let splitBillProduct = self.splitBillProduct {
             let purchaseString = PurchaseSplitBillViewController.LocalizedString.PurchaseButtonText
             self.purchaseButton?.setTitle(purchaseString + " – \(self.priceString)", for: UIControlState())
-            self.descriptionParagraphLabel?.text = splitBillProduct.localizedDescription ?? ""
+            self.descriptionParagraphLabel?.text = splitBillProduct.localizedDescription
             
         } else {
             // need to request the product!!!
@@ -180,6 +180,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         }
     }
     
+    @discardableResult
     fileprivate func updateViewPlayerBounds() -> Bool {
         if let videoPlayerViewBounds = self.videoPlayerView?.bounds, let videoLayer = self.videoPlayer?.layer {
             videoLayer.frame = videoPlayerViewBounds
@@ -327,8 +328,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     fileprivate func dateIsToday(_ queryDate: Date) -> Bool {
         let calendar = Calendar.current
-        calendar.isDateInToday(queryDate)
-        return false
+        return calendar.isDateInToday(queryDate)
     }
     
     @IBAction fileprivate func didTapRestoreButton(_ sender: UIButton?) {
