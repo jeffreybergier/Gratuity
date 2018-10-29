@@ -102,9 +102,9 @@ final class SplitBillTableViewCell: UITableViewCell {
         
         var normalFont = UIFont.preferredFont(forTextStyle: .headline).withSize(headlineFontSize * 1.5)
         if #available(iOS 9.0, *) {
-            let traits = normalFont.fontDescriptor.object(forKey: UIFontDescriptorTraitsAttribute) as? NSDictionary
-            let weight = CGFloat((traits?[UIFontWeightTrait] as? NSNumber)?.floatValue !! 0.3)
-            let monospaceFont = UIFont.monospacedDigitSystemFont(ofSize: normalFont.pointSize, weight: weight)
+            let traits = normalFont.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName.traits) as? NSDictionary
+            let weight = CGFloat((traits?[UIFontDescriptor.TraitKey.weight] as? NSNumber)?.floatValue !! 0.3)
+            let monospaceFont = UIFont.monospacedDigitSystemFont(ofSize: normalFont.pointSize, weight: UIFont.Weight(rawValue: weight))
             normalFont = monospaceFont
         }
         

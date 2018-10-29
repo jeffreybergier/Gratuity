@@ -64,7 +64,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
     
     let session: WCSession? = {
         if WCSession.isSupported() {
-            return WCSession.default()
+            return WCSession.default
         } else {
             return .none
         }

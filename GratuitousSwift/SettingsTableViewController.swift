@@ -471,7 +471,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
     }
     
     // MARK: Handle View Going Away
-    func didSwipeToDismiss(_ sender: UISwipeGestureRecognizer) {
+    @objc func didSwipeToDismiss(_ sender: UISwipeGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
     

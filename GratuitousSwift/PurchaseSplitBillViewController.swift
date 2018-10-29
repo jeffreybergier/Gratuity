@@ -126,7 +126,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             
             self.updateViewPlayerBounds()
             layer.backgroundColor = UIColor.black.cgColor
-            layer.videoGravity = AVLayerVideoGravityResizeAspect
+            layer.videoGravity = AVLayerVideoGravity.resizeAspect
             
             self.videoPlayerView?.layer.addSublayer(layer)
             self.videoPlayerView?.clipsToBounds = true

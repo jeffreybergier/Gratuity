@@ -11,7 +11,7 @@ import UIKit
 final class GratuitousTableViewCell: UITableViewCell {
 
     @IBOutlet weak fileprivate var dollarTextLabel: UILabel?
-    fileprivate var labelTextAttributes = [String(): NSObject()]
+    fileprivate var labelTextAttributes: [NSAttributedStringKey: Any] = [:]
     fileprivate let originalFont = UIFont(name: "Futura-Medium", size: 35.0)
     fileprivate let currencyFormatter = GratuitousNumberFormatter(style: .respondsToLocaleChanges)
     fileprivate var currentCurrencySign: CurrencySign {
@@ -19,10 +19,10 @@ final class GratuitousTableViewCell: UITableViewCell {
     }
     var textSizeAdjustment: CGFloat = 1.0 {
         didSet {
-            if (self.labelTextAttributes["NSFont"] != nil) {
+            if (self.labelTextAttributes[.font] != nil) {
                 if let originalFont = self.originalFont {
                     let updatedFont = originalFont.withSize(originalFont.pointSize * self.textSizeAdjustment)
-                    self.labelTextAttributes["NSFont"] = updatedFont
+                    self.labelTextAttributes[.font] = updatedFont
                 }}}}
     var billAmount: Int = 0 {
         didSet {
@@ -83,9 +83,9 @@ final class GratuitousTableViewCell: UITableViewCell {
         shadow.shadowOffset = CGSize(width: 0.5, height: 0.5)
         if let font = self.originalFont {
             let attributes = [
-                NSForegroundColorAttributeName : textColor,
-                NSFontAttributeName : font.withSize(font.pointSize * self.textSizeAdjustment),
-                NSShadowAttributeName : shadow
+                NSAttributedStringKey.foregroundColor : textColor,
+                NSAttributedStringKey.font : font.withSize(font.pointSize * self.textSizeAdjustment),
+                NSAttributedStringKey.shadow : shadow
             ]
             self.labelTextAttributes = attributes
             

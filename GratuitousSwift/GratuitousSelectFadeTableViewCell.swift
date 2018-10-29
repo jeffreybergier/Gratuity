@@ -31,7 +31,7 @@ class GratuitousSelectFadeTableViewCell: UITableViewCell {
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.cgAnimationDidFinish(_:)), userInfo: nil, repeats: false)
     }
     
-    func cgAnimationDidFinish(_ timer: Timer?) {
+    @objc func cgAnimationDidFinish(_ timer: Timer?) {
         timer?.invalidate()
         
         self.animatingBorderColor = false

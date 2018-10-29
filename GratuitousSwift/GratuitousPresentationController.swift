@@ -29,7 +29,7 @@ class GratuitousPresentationController: UIPresentationController {
         return dimmingView
     }
     
-    func dimmingViewTapped(_ sender: UITapGestureRecognizer) {
+    @objc func dimmingViewTapped(_ sender: UITapGestureRecognizer) {
         if sender.state == UIGestureRecognizerState.ended {
             self.presentingViewController.dismiss(animated: true, completion: nil)
         }

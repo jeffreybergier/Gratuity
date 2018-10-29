@@ -49,8 +49,8 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     fileprivate lazy var presentationRightTransitionerDelegate = GratuitousTransitioningDelegate(type: .right, animate: true)
     fileprivate lazy var presentationBottomTransitionerDelegate = GratuitousTransitioningDelegate(type: .bottom, animate: true)
     
-    fileprivate var totalAmountTextLabelAttributes = [String : NSObject]()
-    fileprivate var tipPercentageTextLabelAttributes = [String : NSObject]()
+    fileprivate var totalAmountTextLabelAttributes = [NSAttributedStringKey : Any]()
+    fileprivate var tipPercentageTextLabelAttributes = [NSAttributedStringKey : Any]()
     fileprivate var viewDidAppearOnce = false
     fileprivate var applicationPreferences: GratuitousUserDefaults {
         get { return (UIApplication.shared.delegate as! GratuitousAppDelegate).preferences }
@@ -774,11 +774,11 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             shadow.shadowColor = GratuitousUIConstant.textShadowColor()
             shadow.shadowBlurRadius = 2.0
             shadow.shadowOffset = CGSize(width: 2.0, height: 2.0)
-            let attributes: [String : NSObject] = [
-                NSForegroundColorAttributeName : textColor!,
-                NSFontAttributeName : font,
+            let attributes: [NSAttributedStringKey : Any] = [
+                NSAttributedStringKey.foregroundColor : textColor!,
+                NSAttributedStringKey.font : font,
                 //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
-                NSShadowAttributeName : shadow
+                NSAttributedStringKey.shadow : shadow
             ]
             self.totalAmountTextLabelAttributes = attributes
             let attributedString: NSAttributedString
@@ -803,11 +803,11 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             shadow.shadowColor = GratuitousUIConstant.textShadowColor()
             shadow.shadowBlurRadius = 2.0
             shadow.shadowOffset = CGSize(width: 2.0, height: 2.0)
-            let attributes: [String : NSObject] = [
-                NSForegroundColorAttributeName : textColor!,
-                NSFontAttributeName : font,
+            let attributes: [NSAttributedStringKey : Any] = [
+                NSAttributedStringKey.foregroundColor : textColor!,
+                NSAttributedStringKey.font : font,
                 //NSTextEffectAttributeName : NSTextEffectLetterpressStyle,
-                NSShadowAttributeName : shadow
+                NSAttributedStringKey.shadow : shadow
             ]
             self.tipPercentageTextLabelAttributes = attributes
             let attributedString = NSAttributedString(string: text, attributes: self.tipPercentageTextLabelAttributes)
