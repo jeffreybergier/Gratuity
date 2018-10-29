@@ -6,6 +6,8 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
+import Foundation
+
 extension WatchInfoViewController {
     struct LocalizedString {
         static let ExtraLargeTextLabel =

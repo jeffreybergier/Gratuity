@@ -6,6 +6,8 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
+import UIKit
+
 extension GratuitousAppDelegate {
     func application(application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
         if self.window?.rootViewController?.presentedViewController == .None {

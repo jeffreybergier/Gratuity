@@ -7,7 +7,7 @@
 //
 
 import AVFoundation
-import Crashlytics
+import UIKit
 
 final class WatchInfoViewController: SmallModalScollViewController {
     
@@ -63,12 +63,6 @@ final class WatchInfoViewController: SmallModalScollViewController {
             videoPlayer.player.seekToTime(kCMTimeZero)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.videoPlaybackFinished(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: videoPlayer.player.currentItem)
         }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        Answers.logContentViewWithName(AnswersString.ViewDidAppear, contentType: .None, contentId: .None, customAttributes: .None)
     }
     
     override func viewDidDisappear(animated: Bool) {

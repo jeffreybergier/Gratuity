@@ -7,9 +7,8 @@
 //
 
 import MessageUI
-import XCGLogger
 import AVFoundation
-import Crashlytics
+import UIKit
 
 final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
@@ -39,9 +38,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         }
         return nil
     }()
-    
-    private let log = XCGLogger.defaultInstance()
-    
+        
     private let purchaseManager = GratuitousPurchaseManager()
     private var applicationPreferences: GratuitousUserDefaults {
         get { return (UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).preferences }
@@ -208,7 +205,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         dispatch_after(delayTime, dispatch_get_main_queue()) {
             self.videoPlayer?.player.play()
         }
-        Answers.logContentViewWithName(AnswersString.ViewDidAppear, contentType: .None, contentId: .None, customAttributes: .None)
     }
     
     @objc private func videoPlaybackFinished(notification: NSNotification?) {
@@ -284,7 +280,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBAction private func didTapPurchaseButton(sender: UIButton?) {
         guard let splitBillProduct = self.splitBillProduct else { return }
         self.state = .PurchaseInProgress
-        Answers.logCustomEventWithName(AnswersString.DidStartPurchase, customAttributes: .None)
         self.purchaseManager.initiatePurchaseWithPayment(SKPayment(product: splitBillProduct)) { transaction in
             // change the UI back to normal state
             self.state = .Normal
@@ -309,7 +304,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             }
             
             // lets present stuff to the user
-            let answersError: NSError?
             if let userFacingErrorTuple = self.errorForPurchaseTransaction(transaction) {
                 // an error ocurred, lets show it to the user.
                 let alertVC = UIAlertController(actions: userFacingErrorTuple.userAlertActions, error: userFacingErrorTuple.userFacingError)
@@ -317,7 +311,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                     // if this view controller has been dismissed, I don't want to try and present this error, it will fail anwyway
                     self.presentViewController(alertVC, animated: true, completion: .None)
                 }
-                answersError = userFacingErrorTuple.userFacingError
             } else {
                 switch transaction.transactionState {
                 case .Purchased, .Restored:
@@ -328,22 +321,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                 case .Deferred, .Failed, .Purchasing:
                     break //do nothing
                 }
-                answersError = transaction.error
-            }
-            
-            if purchased == true {
-                // its purchased but we need to see if it was already bought before or if its truly a new purchase
-                let calendar = NSCalendar.currentCalendar()
-                if let purchaseDate = self.purchaseManager.splitBillPurchaseData()
-                    where calendar.isDateInToday(purchaseDate) == true
-                {
-                    Answers.logPurchaseWithPrice(splitBillProduct.price, currency: splitBillProduct.priceLocale.localeIdentifier, success: NSNumber(bool: purchased), itemName: splitBillProduct.localizedTitle, itemType: "In-App-Purchase", itemId: splitBillProduct.productIdentifier, customAttributes: answersError?.dictionaryForAnswers)
-                    Answers.logCustomEventWithName(AnswersString.PurchaseSucceededNotBoughtBefore, customAttributes: answersError?.dictionaryForAnswers)
-                } else {
-                    Answers.logCustomEventWithName(AnswersString.PurchaseSucceededAlreadyBought, customAttributes: answersError?.dictionaryForAnswers)
-                }
-            } else {
-                Answers.logCustomEventWithName(AnswersString.PurchaseFailed, customAttributes: answersError?.dictionaryForAnswers)
             }
         }
     }
@@ -356,7 +333,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     @IBAction private func didTapRestoreButton(sender: UIButton?) {
         self.state = .RestoreInProgress
-        Answers.logCustomEventWithName(AnswersString.DidStartRestore, customAttributes: .None)
         self.purchaseManager.restorePurchasesWithCompletionHandler() { queue, error in
             
             // change the UI back to normal state
@@ -376,7 +352,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                         self.presentViewController(alertVC, animated: true, completion: .None)
                     }
                 }
-                Answers.logCustomEventWithName(AnswersString.RestoreFailed, customAttributes: error.dictionaryForAnswers)
             } else {
                 // restoration completed successfully
                 if splitBillPurchased == true {
@@ -385,7 +360,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                     self.dismissViewControllerAnimated(true) {
                         presentingViewController?.performSegueWithIdentifier(TipViewController.StoryboardSegues.SplitBill.rawValue, sender: self)
                     }
-                    Answers.logCustomEventWithName(AnswersString.RestoreSucceededAlreadyBought, customAttributes: .None)
                 } else {
                     // the restoration was successful, but the customer never purchased the product
                     let actions = [
@@ -399,7 +373,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
                         // if this view controller has been dismissed, I don't want to try and present this error, it will fail anwyway
                         self.presentViewController(alertVC, animated: true, completion: nil)
                     }
-                    Answers.logCustomEventWithName(AnswersString.RestoreSucceededNotBought, customAttributes: error.dictionaryForAnswers)
                 }
             }
         }
@@ -427,10 +400,8 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     private func didTapEmailSupportActionButton(action: UIAlertAction) {
         let emailManager = EmailSupportHandler(type: .GenericEmailSupport, delegate: self)
         if let mailVC = emailManager.presentableMailViewController {
-            Answers.logCustomEventWithName(AnswersString.DidOpenInternalEmail, customAttributes: .None)
             self.presentViewController(mailVC, animated: true, completion: .None)
         } else {
-            Answers.logCustomEventWithName(AnswersString.DidOpenExternalEmail, customAttributes: .None)
             emailManager.switchAppForEmailSupport()
         }
     }
@@ -459,20 +430,7 @@ extension PurchaseSplitBillViewController: MFMailComposeViewControllerDelegate {
             }
         }
         if let error = error {
-            self.log.error("Error while sending email. Error Description: \(error.description)")
-        }
-        
-        switch result {
-        case MFMailComposeResultCancelled:
-            Answers.logCustomEventWithName(AnswersString.DidCancelEmail, customAttributes: error?.dictionaryForAnswers)
-        case MFMailComposeResultSent:
-            Answers.logCustomEventWithName(AnswersString.DidSendEmail, customAttributes: error?.dictionaryForAnswers)
-        case MFMailComposeResultSaved:
-            Answers.logCustomEventWithName(AnswersString.DidSaveEmail, customAttributes: error?.dictionaryForAnswers)
-        case MFMailComposeResultFailed:
-            Answers.logCustomEventWithName(AnswersString.DidFailEmail, customAttributes: error?.dictionaryForAnswers)
-        default:
-            break
+            log?.error("Error while sending email. Error Description: \(error.description)")
         }
     }
 }

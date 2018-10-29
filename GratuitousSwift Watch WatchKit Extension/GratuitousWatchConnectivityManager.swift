@@ -6,11 +6,9 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import XCGLogger
 import WatchConnectivity
 
 final class GratuitousWatchConnectivityManager {
-    private let log = XCGLogger.defaultInstance()
     
     private var applicationPreferences: GratuitousUserDefaults {
         get { return GratuitousWatchApplicationPreferences.sharedInstance.preferences }
@@ -24,12 +22,14 @@ final class GratuitousWatchConnectivityManager {
     private var requestedCurrencySymbols = false
     
     init() {
+        /*
         #if DEBUG
-            self.log.setup(.Verbose, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .None, fileLogLevel: .None)
+            self.setup(.Verbose, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .None, fileLogLevel: .None)
         #endif
         #if RELEASE
             self.log.setup(.Warning, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .None, fileLogLevel: .None)
         #endif
+        */
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.remoteContextUpdateNeeded(_:)), name: GratuitousDefaultsObserver.NotificationKeys.RemoteContextUpdateNeeded, object: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.currencySymbolsNeededFromRemote(_:)), name: GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolsNeededFromRemote, object: .None)
     }
@@ -59,33 +59,33 @@ extension GratuitousWatchConnectivityManager: JSBWatchConnectivityContextDelegat
         do {
             try self.watchConnectivityManager.session?.updateApplicationContext(context)
         } catch {
-            self.log.error("Updating Remote Context: \(context) Failed with Error: \(error)")
+            log?.error("Updating Remote Context: \(context) Failed with Error: \(error)")
         }
     }
 }
 
 extension GratuitousWatchConnectivityManager: JSBWatchConnectivityFileTransferReceiverDelegate {
     func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
-        self.log.warning("Unknown File Transfer: \(fileTransfer) to Remote Device Finished with Error: \(error)")
+        log?.warning("Unknown File Transfer: \(fileTransfer) to Remote Device Finished with Error: \(error)")
     }
     func session(session: WCSession, didReceiveFile file: WCSessionFile) {
         self.requestedCurrencySymbols = false
         if let symbolFileName = file.metadata?["FileName"] as? String, let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first {
             let destinationURL = documentsURL.URLByAppendingPathComponent(symbolFileName)
             if NSFileManager.defaultManager().fileExistsAtPath(destinationURL.path!) == false {
-                self.log.info("Did Receive Currency Files from Remote")
+                log?.info("Did Receive Currency Files from Remote")
                 do {
                     let data = try NSData(contentsOfURL: file.fileURL, options: .DataReadingMappedIfSafe)
                     try data.writeToURL(destinationURL, options: .AtomicWrite)
                     NSNotificationCenter.defaultCenter().postNotificationName(GratuitousDefaultsObserver.NotificationKeys.CurrencySymbolChanged, object: self, userInfo: self.applicationPreferences.dictionaryCopyForKeys(.ForCurrencySymbolsNeeded))
                 } catch {
-                    self.log.error("File Save Failed with Error: \(error)")
+                    log?.error("File Save Failed with Error: \(error)")
                 }
             } else {
-                self.log.info("Did Receive Currency Files from Remote. However, they already exist locally")
+                log?.info("Did Receive Currency Files from Remote. However, they already exist locally")
             }
         } else {
-            self.log.error("No Currency Symbols Found in Received File")
+            log?.error("No Currency Symbols Found in Received File")
         }
     }
 }
@@ -104,10 +104,10 @@ extension GratuitousWatchConnectivityManager {
                 },
                 errorHandler: { error in
                     self.requestedCurrencySymbols = false
-                    self.log.error("Sending Message Failed with Error: \(error)")
+                    log?.error("Sending Message Failed with Error: \(error)")
                 }
             )
-            self.log.info("Currency Symbols Needed: Message Sent to Remote")
+            log?.info("Currency Symbols Needed: Message Sent to Remote")
         }
     }
 }

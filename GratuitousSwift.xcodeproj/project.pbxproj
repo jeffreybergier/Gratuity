@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0D02E7975A4754D0716511A3 /* Pods_GratuityWatch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D667F9CE287671BE3ACAECF5 /* Pods_GratuityWatch_Extension.framework */; };
+		24B3F6882187796E00E79DB5 /* JSBIPGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C541C8218778A40030AA57 /* JSBIPGeocoder.swift */; };
+		24C541C9218778A40030AA57 /* JSBIPGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C541C8218778A40030AA57 /* JSBIPGeocoder.swift */; };
 		56799F304991A7A84FCA7CDB /* Pods_Gratuity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CEFF625C2F8EDCCCA96F52 /* Pods_Gratuity.framework */; };
 		73048CF41BBCEBC400D8EAA6 /* JSBPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */; };
 		732CFE6A1BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732CFE691BC9F3000096AB06 /* GratuitousiOSLocalizedStrings.swift */; };
@@ -50,8 +52,6 @@
 		734D5BBD1BDD9E6300F3C24C /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 73011BDF1AD04F90001F6D71 /* en.lproj */; };
 		735DCADC1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735DCADB1BCAFB45002F2829 /* SplitTotalPurchaseInterfaceController.swift */; };
 		736262611BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736262601BD0020B00E45E40 /* GratuitousUserDefaultsDiskManager.swift */; };
-		7382AAF31BE4536C003BFFB1 /* JSBIPGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382AAF21BE4536C003BFFB1 /* JSBIPGeocoder.swift */; };
-		7382AAF41BE458D5003BFFB1 /* JSBIPGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7382AAF21BE4536C003BFFB1 /* JSBIPGeocoder.swift */; };
 		73884D531BE59C57002DA92A /* gratuityInfoDemoVideo@2x.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 73884D521BE59C57002DA92A /* gratuityInfoDemoVideo@2x.mp4 */; };
 		738C98B71BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C98B61BD205B300D14F20 /* GratuitousWatchApplicationPreferences.swift */; };
 		738C98B81BD2068000D14F20 /* GratuitousDefaultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8BB531BD0879A00D427CB /* GratuitousDefaultsObserver.swift */; };
@@ -137,6 +137,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		24C541C8218778A40030AA57 /* JSBIPGeocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBIPGeocoder.swift; sourceTree = "<group>"; };
 		55CEFF625C2F8EDCCCA96F52 /* Pods_Gratuity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gratuity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6734472D1EEAD1C6E86F2E9F /* Pods-GratuityWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratuityWatch Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
 		6EF0430E3634B61365A7E90E /* Pods-Gratuity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gratuity.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity.release.xcconfig"; sourceTree = "<group>"; };
@@ -176,7 +177,6 @@
 		7382512619E60F3900CD2B28 /* TipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		7382512A19E6473A00CD2B28 /* GratuitousTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratuitousTableViewCell.swift; sourceTree = "<group>"; };
 		7382512B19E6473A00CD2B28 /* GratuitousTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GratuitousTableViewCell.xib; sourceTree = "<group>"; };
-		7382AAF21BE4536C003BFFB1 /* JSBIPGeocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSBIPGeocoder.swift; sourceTree = "<group>"; };
 		738484D41B992E1B0044C14C /* fallbackPickerImages.data */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = fallbackPickerImages.data; sourceTree = "<group>"; };
 		738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GratuitousiOSConnectivityManager.swift; path = GratuitousSwift/GratuitousiOSConnectivityManager.swift; sourceTree = SOURCE_ROOT; };
 		73884D521BE59C57002DA92A /* gratuityInfoDemoVideo@2x.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gratuityInfoDemoVideo@2x.mp4"; sourceTree = "<group>"; };
@@ -506,7 +506,7 @@
 			children = (
 				73048CF31BBCEBC300D8EAA6 /* JSBPurchaseManager.swift */,
 				7376F8DD1B8EC5CD009CAB74 /* JSBAttributedStringImageGenerator.swift */,
-				7382AAF21BE4536C003BFFB1 /* JSBIPGeocoder.swift */,
+				24C541C8218778A40030AA57 /* JSBIPGeocoder.swift */,
 				737233DC19E8B9B70072EDB4 /* GratuitousUIConstant.swift */,
 				738484D71B993B750044C14C /* GratuitousiOSConnectivityManager.swift */,
 				7371F6CE1BB4F9BA00048EC2 /* GratuitousPurchaseManager.swift */,
@@ -546,7 +546,6 @@
 				733D02A31BBA4C2D00E40EC5 /* Frameworks */,
 				733D02A41BBA4C2D00E40EC5 /* Resources */,
 				73AEA6DC1BBB05EC004B16DE /* Embed Watch Content */,
-				73FF9E9C1BBE3FAE00F9278C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -722,33 +721,16 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GratuityWatch Extension/Pods-GratuityWatch Extension-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		73FF9E9C1BBE3FAE00F9278C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Pods/Fabric/Fabric.framework/run eb82450d442b0f7ab592d59388ece084ee77d7ce";
-		};
 		8739A1DE47E925D51EBDD8E3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-GratuityWatch Extension-checkManifestLockResult.txt",
 			);
@@ -762,15 +744,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Gratuity-checkManifestLockResult.txt",
 			);
@@ -828,11 +806,11 @@
 				733D02C61BBA4D1900E40EC5 /* SmallModalScrollViewController.swift in Sources */,
 				733D02BF1BBA4D0900E40EC5 /* GratuitousGradientView.swift in Sources */,
 				739350F51BF8F66A00A0623F /* GratuitousAppDelegate+OpenURL.swift in Sources */,
-				7382AAF31BE4536C003BFFB1 /* JSBIPGeocoder.swift in Sources */,
 				733D02C41BBA4D1900E40EC5 /* SmallModalViewController.swift in Sources */,
 				733D02C81BBA4D1F00E40EC5 /* SplitBillTableViewCell.swift in Sources */,
 				73FF9E9F1BBE497A00F9278C /* RMStoreAppReceiptVerifier.m in Sources */,
 				738C98C01BD2DE3A00D14F20 /* NSTimer+Closure.swift in Sources */,
+				24C541C9218778A40030AA57 /* JSBIPGeocoder.swift in Sources */,
 				73A87ACE1BC1C2AC006802F7 /* GratuitousErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -855,7 +833,7 @@
 				73BA966E1BD067E300CFCEC4 /* JSBDictionaryPLISTPreferenceManager.swift in Sources */,
 				738C98B91BD2082000D14F20 /* GratuitousNumberFormatter.swift in Sources */,
 				73AEA6ED1BBB0732004B16DE /* GratuitousUIColor.swift in Sources */,
-				7382AAF41BE458D5003BFFB1 /* JSBIPGeocoder.swift in Sources */,
+				24B3F6882187796E00E79DB5 /* JSBIPGeocoder.swift in Sources */,
 				738C98BF1BD2B6E400D14F20 /* JSBWatchConnectivityManager.swift in Sources */,
 				738C98B81BD2068000D14F20 /* GratuitousDefaultsObserver.swift in Sources */,
 			);

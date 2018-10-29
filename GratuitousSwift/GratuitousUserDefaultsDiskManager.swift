@@ -6,7 +6,7 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import XCGLogger
+import Foundation
 
 class GratuitousUserDefaultsDiskManager {
     
@@ -21,7 +21,6 @@ class GratuitousUserDefaultsDiskManager {
     }
     
     private let manager = JSBDictionaryPLISTPreferenceManager()
-    private let log = XCGLogger.defaultInstance()
     
     //private var writeTimerAlreadySet = false
     
@@ -44,7 +43,7 @@ class GratuitousUserDefaultsDiskManager {
             do {
                 try self.manager.writePreferencesDictionary(defaults.dictionaryCopyForKeys(.ForDisk), toLocation: .PreferencesPLISTFileWithinPreferencesURL, protection: .DataWritingFileProtectionComplete)
             } catch {
-                self.log.error("Failed to write preferences to disk with error: \(error)")
+                log?.error("Failed to write preferences to disk with error: \(error)")
             }
         }
     }
@@ -53,7 +52,7 @@ class GratuitousUserDefaultsDiskManager {
         do {
             return try self.manager.dictionaryByReadingPLISTFromDiskLocation(.PreferencesPLISTFileWithinPreferencesURL)
         } catch {
-            log.error("Failed to read preferences from disk: \(error)")
+            log?.error("Failed to read preferences from disk: \(error)")
             return .None
         }
     }

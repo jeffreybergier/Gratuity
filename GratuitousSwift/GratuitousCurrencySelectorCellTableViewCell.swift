@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
+import UIKit
+
 final class GratuitousCurrencySelectorCellTableViewCell: GratuitousSelectFadeTableViewCell {
     
     override weak var animatableTextLabel: UILabel? {

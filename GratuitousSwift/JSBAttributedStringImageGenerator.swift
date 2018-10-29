@@ -6,6 +6,8 @@
 //  Copyright © 2015 Saturday Apps. All rights reserved.
 //
 
+import UIKit
+
 class JSBAttributedStringImageGenerator {
     
     func generateImageForAttributedString(string: NSAttributedString, scale: CGFloat) -> UIImage? {

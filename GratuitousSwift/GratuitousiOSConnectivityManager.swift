@@ -7,11 +7,9 @@
 //
 
 import WatchConnectivity
-import XCGLogger
 
 @available(iOS 9, *)
 final class GratuitousiOSConnectivityManager {
-    private let log = XCGLogger.defaultInstance()
     
     private var watchConnectivityManager: JSBWatchConnectivityManager {
         return ((UIApplication.sharedApplication().delegate as! GratuitousAppDelegate).watchConnectivityManager as! JSBWatchConnectivityManager)
@@ -57,7 +55,7 @@ extension GratuitousiOSConnectivityManager {
             do {
                 try self.watchConnectivityManager.session?.updateApplicationContext(context)
             } catch {
-                self.log.error("Updating Remote Context: \(context) Failed with Error: \(error)")
+                log?.error("Updating Remote Context: \(context) Failed with Error: \(error)")
             }
         }
     }
@@ -76,17 +74,17 @@ extension GratuitousiOSConnectivityManager: JSBWatchConnectivityMessageDelegate 
     @available(iOS 9.0, *)
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
         if let currencySymbolsNeeded = (message["SymbolImagesRequested"] as? NSNumber)?.boolValue where currencySymbolsNeeded == true {
-            self.log.info("Message Received: SymbolImagesRequested")
+            log?.info("Message Received: SymbolImagesRequested")
             let currencySign = GratuitousUserDefaults(dictionary: message, fallback: self.applicationPreferences).overrideCurrencySymbol
             let imagesGenerated = self.generateAndTransferCurrencySymbolImagesForCurrencySign(currencySign)
             replyHandler(["GeneratingMessages" : NSNumber(bool: imagesGenerated)])
         } else {
-            self.log.warning("Received Unknown Message: \(message)")
+            log?.warning("Received Unknown Message: \(message)")
         }
     }
     @available(iOS 9.0, *)
     func session(session: WCSession, didReceiveMessageData messageData: NSData, replyHandler: (NSData) -> Void) {
-        self.log.info("Received Unknown MessageData: \(messageData)")
+        log?.info("Received Unknown MessageData: \(messageData)")
     }
     
     @available(iOS 9.0, *)
@@ -118,7 +116,7 @@ extension GratuitousiOSConnectivityManager: JSBWatchConnectivityFileTransferSend
     func session(session: WCSession, didFinishFileTransfer fileTransfer: WCSessionFileTransfer, error: NSError?) {
         self.applicationPreferences.currencySymbolsNeeded = false
         if let error = error {
-            self.log.error("File Transfer Failed with Error: \(error)")
+            log?.error("File Transfer Failed with Error: \(error)")
         }
     }
 }

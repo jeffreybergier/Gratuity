@@ -6,7 +6,7 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import Crashlytics
+import UIKit
 
 extension GratuitousAppDelegate {
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
@@ -18,9 +18,7 @@ extension GratuitousAppDelegate {
         components?.queryItems?.enumerate().forEach() { (index, qItem) in
             attributes["q\(index+1)-\(qItem.name)"] = qItem.value
         }
-        
-        Answers.logCustomEventWithName(AnswersString.OpenURL, customAttributes: attributes)
-        
+                
         return true
     }
 }

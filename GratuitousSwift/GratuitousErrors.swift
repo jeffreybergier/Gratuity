@@ -7,6 +7,7 @@
 //
 
 import MessageUI
+import UIKit
 
 enum StoreKitPurchaseErrorCode: Int {
     case Unknown = 0 //SKErrorUnknown

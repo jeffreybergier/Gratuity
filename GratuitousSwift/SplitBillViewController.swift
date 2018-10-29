@@ -6,7 +6,7 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import Crashlytics
+import UIKit
 
 final class SplitBillViewController: SmallModalTableViewController {
     
@@ -40,12 +40,6 @@ final class SplitBillViewController: SmallModalTableViewController {
     override func configureDynamicTextLabels() {
         super.configureDynamicTextLabels()
         self.tableView?.reloadData()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        Answers.logContentViewWithName(AnswersString.ViewDidAppear, contentType: .None, contentId: .None, customAttributes: .None)
     }
     
     private func roundedDivisionWithTop(top: Int, bottom: Int) -> Int {

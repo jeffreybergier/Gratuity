@@ -6,6 +6,8 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
+import UIKit
+
 class SmallModalScollViewController: SmallModalViewController {
     
     @IBOutlet weak var scrollView: UIScrollView?

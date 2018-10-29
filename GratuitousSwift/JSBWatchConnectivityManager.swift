@@ -14,7 +14,6 @@
 */
 
 import WatchConnectivity
-import XCGLogger
 
 enum WatchState {
     case NotSupported
@@ -60,8 +59,6 @@ protocol JSBWatchConnectivityFileTransferReceiverDelegate: class {
 
 @available (iOS 9, watchOS 2, *)
 class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
-    
-    private let log = XCGLogger.defaultInstance()
     
     // MARK: Session Activation
     
@@ -139,7 +136,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
         if let delegate = self.messageDelegate {
             delegate.session(session, didReceiveMessage: message, replyHandler: replyHandler)
         } else {
-            self.log.info("MessageDelegate Not Set: Ignoring Incoming Message: \(message)")
+            log?.info("MessageDelegate Not Set: Ignoring Incoming Message: \(message)")
         }
     }
     
@@ -148,7 +145,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
         if let delegate = self.messageDelegate {
             delegate.session(session, didReceiveMessageData: messageData, replyHandler: replyHandler)
         } else {
-            self.log.info("MessageDelegate Not Set: Ignoring Incoming Message Data: \(messageData)")
+            log?.info("MessageDelegate Not Set: Ignoring Incoming Message Data: \(messageData)")
         }
     }
     
@@ -161,7 +158,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
         if let delegate = self.contextDelegate {
             delegate.session(session, didReceiveApplicationContext: applicationContext)
         } else {
-            self.log.info("ContextDelegate Not Set: Ignoring Incoming Application Context: \(applicationContext)")
+            log?.info("ContextDelegate Not Set: Ignoring Incoming Application Context: \(applicationContext)")
         }
     }
     
@@ -170,7 +167,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
         if let delegate = self.userInfoSenderDelegate {
             delegate.session(session, didFinishUserInfoTransfer: userInfoTransfer, error: error)
         } else {
-            self.log.info("UserInfoSenderDelegate Not Set. Ignoring UserInfo Transfer Finished: \(userInfoTransfer) with Error: \(error)")
+            log?.info("UserInfoSenderDelegate Not Set. Ignoring UserInfo Transfer Finished: \(userInfoTransfer) with Error: \(error)")
         }
     }
     
@@ -179,7 +176,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
         if let delegate = self.userInfoReceiverDelegate {
             delegate.session(session, didReceiveUserInfo: userInfo)
         } else {
-            self.log.info("UserInfoReceiverDelegate Not Set. Ignoring Incoming UserInfo: \(userInfo)")
+            log?.info("UserInfoReceiverDelegate Not Set. Ignoring Incoming UserInfo: \(userInfo)")
         }
     }
     
@@ -188,7 +185,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
         if let delegate = self.fileTransferSenderDelegate {
             delegate.session(session, didFinishFileTransfer: fileTransfer, error: error)
         } else {
-            self.log.info("FileTransferSenderDelegate Not Set. Ignoring File Transfer Finished: \(fileTransfer) with Error: \(error)")
+            log?.info("FileTransferSenderDelegate Not Set. Ignoring File Transfer Finished: \(fileTransfer) with Error: \(error)")
         }
     }
     
@@ -197,7 +194,7 @@ class JSBWatchConnectivityManager: NSObject, WCSessionDelegate {
         if let delegate = self.fileTransferReceiverDelegate {
             delegate.session(session, didReceiveFile: file)
         } else {
-            self.log.info("FileTransferReceiverDelegate Not Set. Ignoring Incoming File: \(file)")
+            log?.info("FileTransferReceiverDelegate Not Set. Ignoring Incoming File: \(file)")
         }
     }
 }

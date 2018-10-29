@@ -6,6 +6,8 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
+import UIKit
+
 class GratuitousPresentationController: UIPresentationController {
     
     private lazy var _dimmingView: UIView = {

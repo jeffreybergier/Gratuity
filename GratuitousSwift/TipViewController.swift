@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-import Crashlytics
+import UIKit
 
 final class TipViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CustomAnimatedTransitionable, UIViewControllerPreviewingDelegate {
     
@@ -205,8 +205,6 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             // Launch the apple watch info screen if needed
             self.viewDidAppearOnce = true
         }
-        
-        Answers.logContentViewWithName(AnswersString.ViewDidAppear, contentType: .None, contentId: .None, customAttributes: .None)
     }
 
     private func updateTableViewsFromDisk() {
@@ -628,8 +626,6 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
         answersAttributes["LocationRegion"] = self.applicationPreferences.lastLocation?.region
         answersAttributes["LocationCountry"] = self.applicationPreferences.lastLocation?.country
         answersAttributes["LocationCountryCode"] = self.applicationPreferences.lastLocation?.countryCode
-        
-        Answers.logCustomEventWithName(AnswersString.NewTipCalculated, customAttributes: answersAttributes)
     }
     
     //MARK: Handle Table View Delegate DataSourceStuff

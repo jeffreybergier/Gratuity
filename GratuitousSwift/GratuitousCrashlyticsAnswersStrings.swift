@@ -6,6 +6,8 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
+import Foundation
+
 extension GratuitousAppDelegate {
     struct AnswersString {
         static let Launched = "iOS-ApplicationDidFinishLaunchingWithOptions"

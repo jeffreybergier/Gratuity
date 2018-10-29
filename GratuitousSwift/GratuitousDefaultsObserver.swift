@@ -8,6 +8,14 @@
 
 import Foundation
 
+protocol Log {
+    func error(log: String)
+    func info(log: String)
+    func warning(log: String)
+}
+
+let log: Log? = nil
+
 class GratuitousDefaultsObserver {
     
     func postNotificationsForLocallyChangedDefaults(old old: GratuitousUserDefaults, new: GratuitousUserDefaults) {

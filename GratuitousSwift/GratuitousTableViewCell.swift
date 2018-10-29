@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
+import UIKit
+
 final class GratuitousTableViewCell: UITableViewCell {
 
     @IBOutlet weak private var dollarTextLabel: UILabel?

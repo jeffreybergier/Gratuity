@@ -6,6 +6,9 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
+import StoreKit
+import UIKit
+
 class JSBPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
     private let paymentQueue = SKPaymentQueue.defaultQueue()

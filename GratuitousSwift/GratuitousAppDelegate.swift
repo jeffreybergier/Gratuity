@@ -6,18 +6,14 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
-import Fabric
-import Crashlytics
-import XCGLogger
+import UIKit
 
 @UIApplicationMain
 final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: Required iOS Properties Properties
     var window: UIWindow?
-    
-    let log = XCGLogger.defaultInstance()
-    
+        
     // MARK: App Preferences Management Properties
     private var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
         didSet {
@@ -81,6 +77,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch
         
+        /*
         //crashlytics intializer
         #if DEBUG
             self.log.setup(.Verbose, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .None, fileLogLevel: .None)
@@ -91,6 +88,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             self.log.info("Release Build: Loading Fabric")
             Fabric.with([Crashlytics.self(), Answers.self()])
         #endif
+        */
         
         self.window?.tintColor = GratuitousUIConstant.lightTextColor()
         self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
@@ -108,7 +106,6 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
             if let location = location as? JSBIPLocation {
                 self.preferencesSetLocally.lastLocation = location
             }
-            Answers.logCustomEventWithName(AnswersString.Launched, customAttributes: self.preferences.dictionaryCopyForKeys(.ForDisk))
         }
         
         return true
@@ -131,14 +128,11 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         answersAttributes["LocationRegion"] = self.preferences.lastLocation?.region
         answersAttributes["LocationCountry"] = self.preferences.lastLocation?.country
         answersAttributes["LocationCountryCode"] = self.preferences.lastLocation?.countryCode
-        
-        Answers.logCustomEventWithName(AnswersString.NewWatchTipCalculated, customAttributes: answersAttributes)
     }
     
     // MARK: iOS App Going to the Background
     func applicationWillResignActive(application: UIApplication) {
         self.preferencesDiskManager.writeUserDefaultsToPreferencesFile(self.preferences)
-        Answers.logCustomEventWithName(AnswersString.Backgrounded, customAttributes: self.preferences.dictionaryCopyForKeys(.ForDisk))
     }
 }
 

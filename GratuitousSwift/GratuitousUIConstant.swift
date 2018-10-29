@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
+import UIKit
+
 struct GratuitousUIConstant {
     
     static let cornerRadius = CGFloat(6.0)

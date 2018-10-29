@@ -6,14 +6,12 @@
 //  Copyright © 2015 SaturdayApps. All rights reserved.
 //
 
-import XCGLogger
+import WatchKit
 
 class GratuitousWatchApplicationPreferences {
     
     static let sharedInstance = GratuitousWatchApplicationPreferences()
-    
-    private let log = XCGLogger.defaultInstance()
-    
+        
     // MARK: App Preferences Management Properties
     private var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
         didSet {
