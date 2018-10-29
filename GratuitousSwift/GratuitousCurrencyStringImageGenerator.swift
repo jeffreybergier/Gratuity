@@ -54,7 +54,7 @@ final class GratuitousCurrencyStringImageGenerator {
             try data.write(to: dataURL, options: .atomicWrite)
             return dataURL
         } catch {
-            log?.error("Failed to save <\(self.currencyFormatter.currencySymbol)> Currency Images to Disk: \(dataURL.path)")
+            log?.error("Failed to save <\(String(describing: self.currencyFormatter.currencySymbol))> Currency Images to Disk: \(dataURL.path)")
             return .none
         }
     }

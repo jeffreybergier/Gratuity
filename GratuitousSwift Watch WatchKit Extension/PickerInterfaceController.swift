@@ -142,7 +142,7 @@ final class PickerInterfaceController: WKInterfaceController {
         let c = DefaultsCalculations(preferences: self.applicationPreferences)
         let billAmountString = self.currencyFormatter.currencyFormattedStringWithCurrencySign(self.applicationPreferences.overrideCurrencySymbol, amount: c.totalAmount)
         let largeLabelString = NSAttributedString(string: billAmountString, attributes: self.largeValueTextAttributes)
-        let tipPercentageString = "\(c.tipPercentage)\(self.currencyFormatter.percentSymbol)"
+        let tipPercentageString = "\(c.tipPercentage)\(self.currencyFormatter.percentSymbol!)"
         let smallLabelString = NSAttributedString(string: tipPercentageString, attributes: self.smallValueTextAttributes)
         self.billAmountLabel?.setAttributedText(largeLabelString)
         self.tipPercentageLabel?.setAttributedText(smallLabelString)
