@@ -1,32 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azz-ui-8Qo">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14313.18" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="azz-ui-8Qo">
+    <device id="watch44" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14238.10"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Fuuutuuura-Meeediuuum.ttf">
+        <array key="Fuuutuuura-Meeediuuum.ttf">
             <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-            <string>Fuuutuuura-Meeediuuum</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <scenes>
         <!--MainInterfaceController-->
@@ -43,26 +28,25 @@
                         </group>
                         <group width="1" height="1" alignment="left" layout="vertical" id="fNV-8L-ECv">
                             <items>
-                                <group width="1" height="0.5" alignment="center" layout="vertical" id="PW8-B0-TTS">
+                                <group width="1" height="0.59999999999999998" alignment="center" layout="vertical" id="PW8-B0-TTS">
                                     <items>
                                         <label alignment="center" text="$100" textAlignment="center" id="5zl-jE-VVr">
-                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="40"/>
                                             <variation key="device=watch38mm">
                                                 <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="36"/>
                                             </variation>
                                         </label>
                                         <label alignment="center" text="$20" textAlignment="center" id="Xsm-7V-7Bg">
-                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                             <variation key="device=watch38mm">
                                                 <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="23"/>
                                             </variation>
                                         </label>
                                     </items>
-                                    <variation key="device=watch38mm" height="0.59999999999999998"/>
                                 </group>
-                                <group width="1" height="0.5" alignment="left" id="l4m-2O-Zb9">
+                                <group width="1" height="0.40000000000000002" alignment="left" id="l4m-2O-Zb9">
                                     <items>
                                         <picker width="0.5" height="1" alignment="left" style="stack" focusStyle="sequence" indicatorMode="shownWhileFocused" id="Yf3-3J-pIU">
                                             <connections>
@@ -75,7 +59,6 @@
                                             </connections>
                                         </picker>
                                     </items>
-                                    <variation key="device=watch38mm" height="0.40000000000000002"/>
                                 </group>
                             </items>
                         </group>
@@ -101,69 +84,69 @@
                         <group width="1" alignment="left" layout="vertical" id="pot-QA-E3b">
                             <items>
                                 <label alignment="left" text="Split Bill" id="c6s-SH-Elc">
-                                    <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
                                 </label>
                                 <imageView width="1" alignment="left" image="horizontalLine" id="Hic-Hi-ck0">
-                                    <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </imageView>
                                 <group width="1" alignment="left" id="28Y-fK-ql9">
                                     <items>
                                         <label alignment="left" text="$–" id="38r-NH-vfB">
-                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
                                         <group width="2" alignment="left" id="2yK-of-nPv"/>
                                         <imageView alignment="right" verticalAlignment="center" image="faces1" contentMode="right" id="AkK-kK-kjx">
-                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
                                     </items>
                                 </group>
                                 <group width="1" alignment="left" id="VQf-tO-deK">
                                     <items>
                                         <label alignment="left" text="$–" id="0ne-Mv-fok">
-                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
                                         <group width="2" alignment="left" id="RbX-1N-iIc"/>
                                         <imageView alignment="right" verticalAlignment="center" image="faces2" contentMode="right" id="6qL-r0-b9O">
-                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
                                     </items>
                                 </group>
                                 <group width="1" alignment="left" id="Ejr-zh-Bjd">
                                     <items>
                                         <label alignment="left" text="$–" id="1pt-vb-1LT">
-                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
                                         <group width="2" alignment="left" id="dCj-wB-5T0"/>
                                         <imageView alignment="right" verticalAlignment="center" image="faces3" contentMode="right" id="eK5-6o-IYB">
-                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
                                     </items>
                                 </group>
                                 <group width="1" alignment="left" id="zcQ-Ah-6R2">
                                     <items>
                                         <label alignment="left" text="$–" id="o6k-om-SKk">
-                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
                                         <group width="2" alignment="left" id="inq-BN-kg3"/>
                                         <imageView alignment="right" verticalAlignment="center" image="faces4" contentMode="right" id="Lcz-xi-eap">
-                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
                                     </items>
                                 </group>
                                 <group width="1" alignment="left" id="HF6-SY-WvS">
                                     <items>
                                         <label alignment="left" text="$–" id="2cE-yE-JDw">
-                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                                         </label>
                                         <group width="2" alignment="left" id="8Gm-Fj-32R"/>
                                         <imageView alignment="right" verticalAlignment="center" image="faces5" contentMode="right" id="d5p-MY-fY4">
-                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
                                     </items>
                                 </group>
@@ -180,7 +163,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="120" y="-117"/>
+            <point key="canvasLocation" x="207" y="-117"/>
         </scene>
         <!--Close-->
         <scene sceneID="XNe-O0-MEj">
@@ -188,17 +171,17 @@
                 <controller identifier="SplitBillPurchaseInterfaceController" title="Close" hidesWhenLoading="NO" id="9qX-tn-KNO" customClass="SplitTotalPurchaseInterfaceController" customModule="GratuityWatch_Extension">
                     <items>
                         <label alignment="center" text="Split Bill" textAlignment="center" id="7gN-n3-oV1">
-                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                         </label>
                         <label alignment="center" text="In-App Purchase" textAlignment="center" numberOfLines="0" id="t0D-p7-TJ8">
-                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
                         </label>
                         <group height="2" alignment="left" id="Uox-Jw-hdJ"/>
                         <imageView alignment="center" image="splitBillPurchase" id="PN0-CT-3sg"/>
                         <label alignment="center" text="Handoff to your iPhone to purchase." textAlignment="center" numberOfLines="0" id="QFK-qx-ETt">
-                            <color key="textColor" red="0.78431372549019607" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.78431372549019607" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="16"/>
                         </label>
                     </items>
@@ -217,11 +200,11 @@
                 <controller identifier="SettingsInterfaceController" title="Close" hidesWhenLoading="NO" id="ffT-6F-euT" customClass="SettingsInterfaceController" customModule="GratuityWatch_Extension">
                     <items>
                         <label alignment="left" text="Suggested Tip Percentage" numberOfLines="0" id="nRC-5a-8ct">
-                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
                         </label>
                         <label alignment="right" text="–%" textAlignment="right" id="5An-PC-g8o">
-                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="27"/>
                         </label>
                         <group width="1" alignment="left" id="EcG-wP-xkF">
@@ -229,20 +212,20 @@
                                 <group alignment="left" radius="7" id="pZT-oz-Y33">
                                     <items>
                                         <slider width="1" alignment="left" continuous="YES" value="20" maximum="50" steps="51" minimumImage="SliderMinus" maximumImage="SliderPlus" id="6PC-nq-DwX">
-                                            <color key="color" red="0.58823529409999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="color" red="0.50973451137542725" green="0.0" blue="0.0082195829600095749" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="suggestedTipSliderDidChange:" destination="ffT-6F-euT" id="PGR-Uy-M1Q"/>
                                             </connections>
                                         </slider>
                                     </items>
-                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </group>
                             </items>
-                            <color key="backgroundColor" red="0.39215686274509803" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.31390437483787537" green="0.0" blue="0.0034345178864896297" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
                         <label alignment="left" text="Currency Symbol" numberOfLines="0" id="MCm-nN-GLi">
-                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="20"/>
                         </label>
                         <group alignment="left" id="tDl-Kq-9qy">
@@ -251,11 +234,11 @@
                                     <group key="contentGroup" width="1" alignment="left" id="NCo-hy-MML">
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="Local" textAlignment="left" id="mnK-Ws-IhH">
-                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.11759927868843079" green="0.11759573966264725" blue="0.11759774386882782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
@@ -263,7 +246,7 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.31390437483787537" green="0.0" blue="0.0034345178864896297" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
                         <group alignment="left" id="L24-oQ-Y5W">
@@ -272,11 +255,11 @@
                                     <group key="contentGroup" width="1" alignment="left" id="LLM-bb-dNG">
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="$" textAlignment="left" id="s2Q-zU-SDp">
-                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.11759927868843079" green="0.11759573966264725" blue="0.11759774386882782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
@@ -284,7 +267,7 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.31390437483787537" green="0.0" blue="0.0034345178864896297" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
                         <group alignment="left" id="N2Z-SX-3vI">
@@ -293,11 +276,11 @@
                                     <group key="contentGroup" width="1" alignment="left" id="Yfj-68-6ZC">
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="£" textAlignment="left" id="3qZ-4S-LId">
-                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.11759927868843079" green="0.11759573966264725" blue="0.11759774386882782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
@@ -305,7 +288,7 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.31390437483787537" green="0.0" blue="0.0034345178864896297" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
                         <group alignment="left" id="Rc9-Ue-Rkd">
@@ -314,11 +297,11 @@
                                     <group key="contentGroup" width="1" alignment="left" id="Qlu-eg-wPu">
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="€" textAlignment="left" id="HXA-pQ-4Dc">
-                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.11759927868843079" green="0.11759573966264725" blue="0.11759774386882782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
@@ -326,7 +309,7 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.31390437483787537" green="0.0" blue="0.0034345178864896297" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
                         <group alignment="left" id="87e-ws-3v4">
@@ -335,11 +318,11 @@
                                     <group key="contentGroup" width="1" alignment="left" id="eib-1d-PIU">
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="¥" textAlignment="left" id="TuF-7m-oCw">
-                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.11759927868843079" green="0.11759573966264725" blue="0.11759774386882782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
@@ -347,7 +330,7 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.31390437483787537" green="0.0" blue="0.0034345178864896297" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
                         <group alignment="left" id="6T3-Lz-wFT">
@@ -356,11 +339,11 @@
                                     <group key="contentGroup" width="1" alignment="left" id="drV-s5-wvM">
                                         <items>
                                             <label height="35" alignment="left" verticalAlignment="center" text="None" textAlignment="left" id="dCe-zf-0fa">
-                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="font" name="Fuuutuuura-Meeediuuum" family="Fuuutuuura" pointSize="24"/>
                                             </label>
                                         </items>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.11759927868843079" green="0.11759573966264725" blue="0.11759774386882782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="margins" left="5" right="3" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
@@ -368,7 +351,7 @@
                                     </connections>
                                 </button>
                             </items>
-                            <color key="backgroundColor" red="0.3921568627" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.31390437483787537" green="0.0" blue="0.0034345178864896297" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
                         </group>
                     </items>
@@ -393,8 +376,8 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="293" y="-19"/>
+            <point key="canvasLocation" x="460" y="-4"/>
         </scene>
     </scenes>
-    <color key="tintColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" red="0.7843137255" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
