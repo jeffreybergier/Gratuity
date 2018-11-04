@@ -9,7 +9,7 @@
 import AVFoundation
 import UIKit
 
-final class WatchInfoViewController: SmallModalScollViewController {
+final class WatchInfoViewController: UIViewController {
     
     @IBOutlet fileprivate weak var gratuityTitleLabel: UILabel?
     @IBOutlet fileprivate weak var gratuityParagraphLabel: UILabel?
@@ -18,18 +18,18 @@ final class WatchInfoViewController: SmallModalScollViewController {
     @IBOutlet fileprivate weak var videoPlayerView: UIView?
     
     fileprivate let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
-        if let moviePath = Bundle.main.path(forResource: "gratuityInfoDemoVideo@2x", ofType: "mp4") {
-            let player = AVPlayer(url: URL(fileURLWithPath: moviePath))
-            player.allowsExternalPlayback = false
-            player.actionAtItemEnd = AVPlayerActionAtItemEnd.none // cause the player to loop
-            let playerLayer = AVPlayerLayer(player: player)
-            return (player, playerLayer)
-        }
-        return nil
-        }()
+        guard let moviePath = Bundle.main.path(forResource: "gratuityInfoDemoVideo@2x", ofType: "mp4") else { return nil }
+        let player = AVPlayer(url: URL(fileURLWithPath: moviePath))
+        player.allowsExternalPlayback = false
+        player.actionAtItemEnd = AVPlayerActionAtItemEnd.none // cause the player to loop
+        let playerLayer = AVPlayerLayer(player: player)
+        return (player, playerLayer)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.title = WatchInfoViewController.LocalizedString.NavBarTitleLabel
         
         self.videoPlayerSurroundView?.layer.borderWidth = 1
         self.videoPlayerSurroundView?.layer.cornerRadius = GratuitousUIConstant.cornerRadius
@@ -71,7 +71,7 @@ final class WatchInfoViewController: SmallModalScollViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func configureDynamicTextLabels() {
+    private func configureDynamicTextLabels() {
         
         let headlineFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
         let headlineFontSize = headlineFont.pointSize * 2
@@ -85,9 +85,6 @@ final class WatchInfoViewController: SmallModalScollViewController {
         self.gratuitySubtitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 0.85, fallbackStyle: .headline)
         self.gratuitySubtitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.gratuitySubtitleLabel?.text = WatchInfoViewController.LocalizedString.LargeTextLabel
-        
-        //configure the navbar
-//        self.navigationBar?.items?.first?.title = WatchInfoViewController.LocalizedString.NavBarTitleLabel
 
         //configure the paragraph of text
         self.gratuityParagraphLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
@@ -102,5 +99,10 @@ final class WatchInfoViewController: SmallModalScollViewController {
                 videoPlayer.player.seek(to: kCMTimeZero)
             }
         }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.configureDynamicTextLabels()
     }
 }

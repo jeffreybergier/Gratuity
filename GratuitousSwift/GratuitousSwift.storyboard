@@ -308,7 +308,7 @@
                         <outlet property="tipPercentageTextLabelTopConstraint" destination="TnZ-0L-cV3" id="D1T-uh-FQn"/>
                         <outlet property="totalAmountTextLabel" destination="XcP-fE-KxA" id="qE9-EE-EG0"/>
                         <outlet property="totalAmountTextLabelBottomConstraint" destination="SWc-Sz-CRn" id="DQ5-bV-KEL"/>
-                        <segue destination="PgV-AZ-ABa" kind="presentation" identifier="WatchInfo" id="Kwy-a3-dj5"/>
+                        <segue destination="ffV-qO-cNC" kind="presentation" identifier="WatchInfo" id="Kwy-a3-dj5"/>
                         <segue destination="eLn-b8-9kM" kind="presentation" identifier="PurchaseSplitBill" id="iWs-XB-vkC"/>
                     </connections>
                 </viewController>
@@ -991,29 +991,11 @@
                                             <constraint firstItem="IPR-iu-zel" firstAttribute="width" secondItem="ri1-EA-AF8" secondAttribute="width" id="k4e-1H-4Gw"/>
                                         </constraints>
                                     </scrollView>
-                                    <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Z7s-S4-LFO">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <textAttributes key="titleTextAttributes">
-                                            <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
-                                        </textAttributes>
-                                        <items>
-                                            <navigationItem title="Gratuity" id="RgP-fT-kKu">
-                                                <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="hG4-Ov-lhB">
-                                                    <connections>
-                                                        <segue destination="dML-di-Rig" kind="unwind" unwindAction="unwindToViewController:" id="EBo-9d-p0O"/>
-                                                    </connections>
-                                                </barButtonItem>
-                                            </navigationItem>
-                                        </items>
-                                    </navigationBar>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="ri1-EA-AF8" secondAttribute="centerY" id="DhK-Ht-2cy"/>
                                     <constraint firstItem="ri1-EA-AF8" firstAttribute="height" secondItem="jv3-R1-bl9" secondAttribute="height" id="G9e-MN-oUB"/>
-                                    <constraint firstAttribute="trailing" secondItem="Z7s-S4-LFO" secondAttribute="trailing" id="GkB-y2-D5G"/>
-                                    <constraint firstItem="Z7s-S4-LFO" firstAttribute="top" secondItem="jv3-R1-bl9" secondAttribute="top" id="JHD-OA-fo8"/>
-                                    <constraint firstItem="Z7s-S4-LFO" firstAttribute="leading" secondItem="jv3-R1-bl9" secondAttribute="leading" id="Wtq-6z-0dt"/>
                                     <constraint firstAttribute="centerX" secondItem="ri1-EA-AF8" secondAttribute="centerX" id="cAS-NZ-xFt"/>
                                     <constraint firstItem="ri1-EA-AF8" firstAttribute="width" secondItem="jv3-R1-bl9" secondAttribute="width" id="jJp-0E-24M"/>
                                 </constraints>
@@ -1026,13 +1008,17 @@
                             <constraint firstItem="jv3-R1-bl9" firstAttribute="centerY" secondItem="I0a-mb-ZSU" secondAttribute="centerY" id="nnn-f6-Lya"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ffk-hs-H2O">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="BUA-XP-d64">
+                            <connections>
+                                <segue destination="dML-di-Rig" kind="unwind" unwindAction="unwindToViewController:" id="bvE-pH-CZ6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="contentView" destination="jv3-R1-bl9" id="dFO-3c-PIV"/>
                         <outlet property="gratuityParagraphLabel" destination="fwR-uM-jLF" id="2CH-JF-3MG"/>
                         <outlet property="gratuitySubtitleLabel" destination="i7i-VU-1If" id="ieq-nI-Sg7"/>
                         <outlet property="gratuityTitleLabel" destination="oSE-Uh-TGD" id="Wwo-H8-EGj"/>
-                        <outlet property="navigationBar" destination="Z7s-S4-LFO" id="4s9-rC-cBQ"/>
-                        <outlet property="scrollView" destination="ri1-EA-AF8" id="nzF-7B-YC4"/>
                         <outlet property="videoPlayerSurroundView" destination="c1e-UF-a4J" id="cQZ-o3-3O9"/>
                         <outlet property="videoPlayerView" destination="4gF-6N-FII" id="sKx-Gp-ymw"/>
                     </connections>
@@ -1040,7 +1026,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jrp-iL-16f" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dML-di-Rig" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="117" y="1245"/>
+            <point key="canvasLocation" x="360" y="2063"/>
         </scene>
         <!--Split Bill View Controller-->
         <scene sceneID="GV2-0q-hJS">
@@ -1211,7 +1197,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6wz-e1-yRP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="SRS-ls-S5K" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1115" y="1245"/>
+            <point key="canvasLocation" x="2111.25" y="1244.3661971830986"/>
         </scene>
         <!--Purchase Split Bill View Controller-->
         <scene sceneID="jdD-Kf-8R3">
@@ -1384,7 +1370,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RYR-wI-C8W">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="2d4-wY-Gd3">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="2d4-wY-Gd3">
                             <connections>
                                 <segue destination="1oh-P3-juZ" kind="unwind" unwindAction="unwindToViewController:" id="KE6-Cr-hSy"/>
                             </connections>
@@ -1409,7 +1395,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zf8-2t-opd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="1oh-P3-juZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1770" y="1948.943661971831"/>
+            <point key="canvasLocation" x="1209.375" y="2063.0281690140846"/>
         </scene>
         <!--Rounded Rect Modal Navigation Controller-->
         <scene sceneID="aNK-6l-nGe">
@@ -1427,7 +1413,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fdf-qI-IGl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="772.5" y="1948.943661971831"/>
+            <point key="canvasLocation" x="1209.375" y="1243.3098591549297"/>
+        </scene>
+        <!--Rounded Rect Modal Navigation Controller-->
+        <scene sceneID="oMT-gU-bG5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ffV-qO-cNC" customClass="RoundedRectModalNavigationController" customModule="Gratuity" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="y7k-ce-huS">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PgV-AZ-ABa" kind="relationship" relationship="rootViewController" id="WHd-K8-IIW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hYe-Yf-ihg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="360" y="1244"/>
         </scene>
     </scenes>
     <resources>

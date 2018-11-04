@@ -10,7 +10,7 @@ import MessageUI
 import AVFoundation
 import UIKit
 
-final class PurchaseSplitBillViewController: SmallModalScollViewController {
+final class PurchaseSplitBillViewController: UIViewController {
     
     // MARK: Instance Variables
     
@@ -29,14 +29,12 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     @IBOutlet fileprivate weak var videoPlayerView: UIView?
     
     fileprivate let videoPlayer: (player: AVPlayer, layer: AVPlayerLayer)? = {
-        if let moviePath = Bundle.main.path(forResource: "gratuityiOSDemoVideo@2x", ofType: "mp4") {
-            let player = AVPlayer(url: URL(fileURLWithPath: moviePath))
-            player.allowsExternalPlayback = false
-            player.actionAtItemEnd = AVPlayerActionAtItemEnd.none // cause the player to loop
-            let playerLayer = AVPlayerLayer(player: player)
-            return (player, playerLayer)
-        }
-        return nil
+        guard let moviePath = Bundle.main.path(forResource: "gratuityiOSDemoVideo@2x", ofType: "mp4") else { return nil }
+        let player = AVPlayer(url: URL(fileURLWithPath: moviePath))
+        player.allowsExternalPlayback = false
+        player.actionAtItemEnd = AVPlayerActionAtItemEnd.none // cause the player to loop
+        let playerLayer = AVPlayerLayer(player: player)
+        return (player, playerLayer)
     }()
         
     fileprivate let purchaseManager = GratuitousPurchaseManager()

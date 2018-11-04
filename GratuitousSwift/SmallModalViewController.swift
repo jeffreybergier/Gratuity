@@ -10,6 +10,11 @@ import UIKit
 
 class RoundedRectModalNavigationController: UINavigationController {
 
+    override var preferredContentSize: CGSize {
+        get { return CGSize(width: 320, height: 568) }
+        set { super.preferredContentSize = newValue }
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.switchOnScreenSizeToDetermineBorderSurround()
