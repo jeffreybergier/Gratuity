@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 SaturdayApps. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
 @UIApplicationMain
@@ -101,6 +102,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
         
         let purchaseManager = GratuitousPurchaseManager()
         self.preferencesSetLocally.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
         
         return true
     }
