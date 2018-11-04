@@ -18,7 +18,13 @@ import UIKit
 
 extension UINavigationController: CustomAnimatedTransitionable {
     var customTransitionType: GratuitousTransitioningDelegateType {
-        return .right
+        guard let rootVC = self.viewControllers.first else { return .right }
+        switch rootVC {
+        case is SettingsTableViewController:
+            return .right
+        default:
+            return .bottom
+        }
     }
 }
 

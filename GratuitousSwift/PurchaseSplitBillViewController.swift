@@ -112,7 +112,9 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        self.title = PurchaseSplitBillViewController.LocalizedString.NavBarTitleLabel
+
         self.purchaseManager.beginObserving()
         self.requestSplitBillProductWithCompletionHandler()
         self.state = .splitBillProductNotFoundInStoreFront
@@ -134,9 +136,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
 
     }
     
-    override func configureDynamicTextLabels() {
-        super.configureDynamicTextLabels()
-        
+    private func configureDynamicTextLabels() {
         let headlineFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
         let headlineFontSize = headlineFont.pointSize * 2
         
@@ -149,10 +149,7 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
         self.subtitleLabel?.font = UIFont.futura(style: .Medium, size: headlineFontSize * 0.85, fallbackStyle: .headline)
         self.subtitleLabel?.textColor = GratuitousUIConstant.lightTextColor()
         self.subtitleLabel?.text = PurchaseSplitBillViewController.LocalizedString.LargeTextLabel
-        
-        //configure the navigation bar
-        self.navigationBar?.items?.first?.title = PurchaseSplitBillViewController.LocalizedString.NavBarTitleLabel
-        
+
         //configure the paragraph of text
         self.descriptionParagraphLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         self.descriptionParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()
@@ -171,7 +168,6 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
             let purchaseString = PurchaseSplitBillViewController.LocalizedString.PurchaseButtonText
             self.purchaseButton?.setTitle(purchaseString + " – \(self.priceString)", for: UIControlState())
             self.descriptionParagraphLabel?.text = splitBillProduct.localizedDescription
-            
         } else {
             // need to request the product!!!
             let downloadingLocalizedString = PurchaseSplitBillViewController.LocalizedString.DownloadingAppStoreInfoButtonText
@@ -222,6 +218,11 @@ final class PurchaseSplitBillViewController: SmallModalScollViewController {
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
         coordinator.animate(alongsideTransition: { context in self.updateViewPlayerBounds() }, completion: .none)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.configureDynamicTextLabels()
     }
     
     // MARK: Purchasing

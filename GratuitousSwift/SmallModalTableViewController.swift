@@ -24,24 +24,24 @@ class SmallModalTableViewController: SmallModalViewController, UITableViewDataSo
         super.viewDidAppear(animated)
         
         // just in case its not caught by navigationBarDidChangeHeight
-        self.autoFitTableViewTopInset()
+//        self.autoFitTableViewTopInset()
     }
     
-    override func navigationBarHeightDidChange() {
-        super.navigationBarHeightDidChange()
-        self.autoFitTableViewTopInset()
-        if self.shouldScrollTableViewToTopBecauseFirstLoad == true {
-            self.tableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-            self.shouldScrollTableViewToTopBecauseFirstLoad = false
-        }
-    }
+//    override func navigationBarHeightDidChange() {
+//        super.navigationBarHeightDidChange()
+//        self.autoFitTableViewTopInset()
+//        if self.shouldScrollTableViewToTopBecauseFirstLoad == true {
+//            self.tableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+//            self.shouldScrollTableViewToTopBecauseFirstLoad = false
+//        }
+//    }
     
-    fileprivate func autoFitTableViewTopInset() {
-        if let navBar = self.navigationBar, let tableView = self.tableView {
-            tableView.contentInset.top = navBar.frame.size.height
-        }
-    }
-    
+//    fileprivate func autoFitTableViewTopInset() {
+//        if let navBar = self.navigationBar, let tableView = self.tableView {
+//            tableView.contentInset.top = navBar.frame.size.height
+//        }
+//    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
     }

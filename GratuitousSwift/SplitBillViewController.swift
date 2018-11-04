@@ -33,15 +33,14 @@ final class SplitBillViewController: SmallModalTableViewController {
         
         self.tableView?.estimatedRowHeight = 100
         self.tableView?.rowHeight = UITableViewAutomaticDimension
-        
-        self.navigationBar?.items?.first?.title = LocalizedString.TitleLabel
+        self.title = LocalizedString.TitleLabel
     }
     
-    override func configureDynamicTextLabels() {
-        super.configureDynamicTextLabels()
-        self.tableView?.reloadData()
-    }
-    
+//    override func configureDynamicTextLabels() {
+//        super.configureDynamicTextLabels()
+//        self.tableView?.reloadData()
+//    }
+
     fileprivate func roundedDivisionWithTop(_ top: Int, bottom: Int) -> Int {
         let division = Double(top)/Double(bottom)
         if division.isInfinite == false && division.isNaN == false {

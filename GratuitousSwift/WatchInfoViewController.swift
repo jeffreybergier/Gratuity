@@ -71,8 +71,7 @@ final class WatchInfoViewController: SmallModalScollViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func configureDynamicTextLabels() {
-        super.configureDynamicTextLabels()
+    func configureDynamicTextLabels() {
         
         let headlineFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
         let headlineFontSize = headlineFont.pointSize * 2
@@ -88,8 +87,8 @@ final class WatchInfoViewController: SmallModalScollViewController {
         self.gratuitySubtitleLabel?.text = WatchInfoViewController.LocalizedString.LargeTextLabel
         
         //configure the navbar
-        self.navigationBar?.items?.first?.title = WatchInfoViewController.LocalizedString.NavBarTitleLabel
-        
+//        self.navigationBar?.items?.first?.title = WatchInfoViewController.LocalizedString.NavBarTitleLabel
+
         //configure the paragraph of text
         self.gratuityParagraphLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         self.gratuityParagraphLabel?.textColor = GratuitousUIConstant.lightTextColor()

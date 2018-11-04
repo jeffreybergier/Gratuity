@@ -377,7 +377,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
                 if let buttonFrame = self.splitBillButton?.frame {
                     previewingContext.sourceRect = self.view.convert(buttonFrame, from: self.splitBillButton?.superview)
                 }
-                vc.setPeekModeEnabled()
+//                vc.setPeekModeEnabled()
                 return vc
             }
         }
@@ -389,7 +389,7 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         viewControllerToCommit.transitioningDelegate = self.presentationBottomTransitionerDelegate
         viewControllerToCommit.modalPresentationStyle = UIModalPresentationStyle.custom
-        (viewControllerToCommit as? SmallModalViewController)?.setPopModeEnabled()
+//        (viewControllerToCommit as? SmallModalViewController)?.setPopModeEnabled()
         self.present(viewControllerToCommit, animated: true, completion: .none)
     }
     
