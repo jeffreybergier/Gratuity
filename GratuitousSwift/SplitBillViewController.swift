@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SplitBillViewController: SmallModalTableViewController {
+final class SplitBillViewController: UITableViewController {
     
     fileprivate var applicationPreferences: GratuitousUserDefaults {
         return (UIApplication.shared.delegate as! GratuitousAppDelegate).preferences
@@ -35,11 +35,6 @@ final class SplitBillViewController: SmallModalTableViewController {
         self.tableView?.rowHeight = UITableViewAutomaticDimension
         self.title = LocalizedString.TitleLabel
     }
-    
-//    override func configureDynamicTextLabels() {
-//        super.configureDynamicTextLabels()
-//        self.tableView?.reloadData()
-//    }
 
     fileprivate func roundedDivisionWithTop(_ top: Int, bottom: Int) -> Int {
         let division = Double(top)/Double(bottom)
@@ -70,8 +65,8 @@ final class SplitBillViewController: SmallModalTableViewController {
             return tableView.dequeueReusableCell(withIdentifier: "DetailBiLabel")!
         }
     }
-    
-    func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? SplitBillTableViewCell else { return }
         switch indexPath.row {
         case 0:

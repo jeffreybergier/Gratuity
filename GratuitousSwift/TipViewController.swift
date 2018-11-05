@@ -295,7 +295,6 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard let segue = StoryboardSegues(rawValue: identifier) else { return true }
-        
         switch segue {
         case .SplitBill:
             if self.applicationPreferences.splitBillPurchased == true {
@@ -371,25 +370,17 @@ final class TipViewController: UIViewController, UITableViewDataSource, UITableV
             self.applicationPreferences.splitBillPurchased = purchaseManager.verifySplitBillPurchaseTransaction()
             purchased = self.applicationPreferences.splitBillPurchased
         }
-        
-        if purchased == true {
-            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "SplitBillViewController") as? SmallModalViewController {
-                if let buttonFrame = self.splitBillButton?.frame {
-                    previewingContext.sourceRect = self.view.convert(buttonFrame, from: self.splitBillButton?.superview)
-                }
-//                vc.setPeekModeEnabled()
-                return vc
-            }
-        }
-
-        return .none
+        guard
+            purchased,
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SplitBillViewController") as? RoundedRectModalNavigationController
+        else { return nil }
+        return vc
     }
     
     @available(iOS 9.0, *)
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         viewControllerToCommit.transitioningDelegate = self.presentationBottomTransitionerDelegate
         viewControllerToCommit.modalPresentationStyle = UIModalPresentationStyle.custom
-//        (viewControllerToCommit as? SmallModalViewController)?.setPopModeEnabled()
         self.present(viewControllerToCommit, animated: true, completion: .none)
     }
     
