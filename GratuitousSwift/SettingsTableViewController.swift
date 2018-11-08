@@ -348,14 +348,15 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         case 3: // about section
             switch indexPath.row {
             case 1: // Email Me Row
-                let mailVC = AutoMailViewController.newVC(with: nil)
+                let mailVC = AutoMailViewController.newVC() { _ in
+                    tableView.deselectRow(at: indexPath, animated: true)
+                }
                 self.present(mailVC, animated: true, completion: nil)
             case 2: // Review this app row
-                let appStoreString = String(format: "itms-apps://itunes.apple.com/app/id%d", self.applicationID)
-                let appStoreURL = URL(string: appStoreString)
-                if let appStoreURL = appStoreURL {
-                    UIApplication.shared.openURL(appStoreURL)
-                }
+                let appStoreString = String(format: "https://itunes.apple.com/app/waterme/id%d?action=write-review", self.applicationID)
+                guard let appStoreURL = URL(string: appStoreString) else { return }
+                UIApplication.shared.openURL(appStoreURL)
+                tableView.deselectRow(at: indexPath, animated: true)
             case 3: // Apple Watch Row
                 let presentingVC = self.presentingViewController
                 self.dismiss(animated: true, completion: { () -> Void in
