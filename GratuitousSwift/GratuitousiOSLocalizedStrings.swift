@@ -65,7 +65,7 @@ extension SettingsTableViewController {
             comment: "SettingsTableViewController: CurrencySymbolHeader: Header Text for a group of cells that allow choosing the currency symbol."
         )
         static let AboutHeader =
-        NSLocalizedString("i012 - About SaturdayApps",
+        NSLocalizedString("i012 - Support",
             comment: "SettingsTableViewController: AboutHeader: Header Text for a group of cells that explains my company SaturdayApps."
         )
         static let InAppPurchaseHeader =
@@ -255,7 +255,7 @@ extension AutoMailViewController {
     static let Recipient = "support@saturdayapps.com"
     struct LocalizedString {
         static let EmailSubject =
-            NSLocalizedString("i050 - Gratuity Support",
+            NSLocalizedString("i050 - I Love Gratuity!",
                               comment: "Support Email: Subject"
         )
         static let EmailBody =

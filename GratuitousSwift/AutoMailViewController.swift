@@ -45,11 +45,14 @@ extension AutoMailViewController: MFMailComposeViewControllerDelegate {
                                didFinishWith result: MFMailComposeResult,
                                error: Error?)
     {
-        switch result {
-        case .cancelled, .failed, .saved:
-            self.completion?(false)
-        case .sent:
-            self.completion?(true)
+        let completion = self.completion
+        controller.dismiss(animated: true) {
+            switch result {
+            case .cancelled, .failed, .saved:
+                completion?(false)
+            case .sent:
+                completion?(true)
+            }
         }
     }
 
