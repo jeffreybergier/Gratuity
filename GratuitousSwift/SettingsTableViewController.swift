@@ -348,12 +348,8 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         case 3: // about section
             switch indexPath.row {
             case 1: // Email Me Row
-                let emailManager = EmailSupportHandler(kind: .genericEmailSupport, delegate: self)
-                if let mailVC = emailManager.presentableMailViewController {
-                    self.present(mailVC, animated: true, completion: .none)
-                } else {
-                    emailManager.switchAppForEmailSupport()
-                }
+                let mailVC = AutoMailViewController.newVC(with: nil)
+                self.present(mailVC, animated: true, completion: nil)
             case 2: // Review this app row
                 let appStoreString = String(format: "itms-apps://itunes.apple.com/app/id%d", self.applicationID)
                 let appStoreURL = URL(string: appStoreString)

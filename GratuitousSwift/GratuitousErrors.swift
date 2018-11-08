@@ -115,6 +115,7 @@ extension UIAlertAction {
     enum Kind {
         case dismiss
         case emailSupport
+        case copyEmailAddress
         case buy
     }
     
@@ -124,53 +125,17 @@ extension UIAlertAction {
         switch kind {
         case .dismiss:
             title = UIAlertAction.Gratuity.LocalizedString.Dismiss
-            style = UIAlertActionStyle.cancel
+            style = .cancel
         case .emailSupport:
             title = UIAlertAction.Gratuity.LocalizedString.EmailSupport
-            style = UIAlertActionStyle.default
+            style = .default
+        case .copyEmailAddress:
+            title = AutoMailViewController.LocalizedString.CopyEmailButton
+            style = .default
         case .buy:
             title = UIAlertAction.Gratuity.LocalizedString.Buy
-            style = UIAlertActionStyle.default
+            style = .default
         }
         self.init(title: title, style: style, handler: completionHandler)
-    }
-}
-
-final class EmailSupportHandler {
-    
-    enum Kind {
-        case genericEmailSupport
-    }
-    
-    let subject: String
-    let body: String
-    let recipient = EmailSupportHandler.Recipient
-    
-    var presentableMailViewController: MFMailComposeViewController?
-
-    init(kind: Kind, delegate: MFMailComposeViewControllerDelegate) {
-        
-        switch kind {
-        case .genericEmailSupport:
-            self.subject = EmailSupportHandler.LocalizedString.EmailSubject
-            self.body = EmailSupportHandler.LocalizedString.EmailBody
-        }
-        
-        if MFMailComposeViewController.canSendMail() {
-            let mailer = MFMailComposeViewController()
-            mailer.mailComposeDelegate = delegate
-            mailer.setSubject(self.subject)
-            mailer.setToRecipients([self.recipient])
-            mailer.setMessageBody(self.body, isHTML: false)
-            
-            self.presentableMailViewController = mailer
-        }
-    }
-    
-    func switchAppForEmailSupport() {
-        let mailStringWrongEncoding = NSString(format: "mailto:\(self.recipient)?subject=%@&body=%@" as NSString, self.subject, self.body)
-        let mailString = mailStringWrongEncoding.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
-        let mailToURL = URL(string: mailString!)!
-        UIApplication.shared.openURL(mailToURL)
     }
 }

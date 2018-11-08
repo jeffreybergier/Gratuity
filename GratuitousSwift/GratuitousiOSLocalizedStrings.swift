@@ -251,16 +251,24 @@ extension NSError {
     }
 }
 
-extension EmailSupportHandler {
+extension AutoMailViewController {
     static let Recipient = "support@saturdayapps.com"
     struct LocalizedString {
         static let EmailSubject =
-        NSLocalizedString("i050 - Gratuity Support",
-            comment: "Support Email: Subject"
+            NSLocalizedString("i050 - Gratuity Support",
+                              comment: "Support Email: Subject"
         )
         static let EmailBody =
-        NSLocalizedString("i049 - BLANKSTRING",
-            comment: "Support Email: Body"
+            NSLocalizedString("i049 - BLANKSTRING",
+                              comment: "Support Email: Body"
+        )
+        static let CopyEmail =
+            NSLocalizedString("i052 - Copy my email address into your clipboard, then paste it in your favorite email app.",
+                              comment: "Alert: Email Copy: Message: Alert message that tells the user that they can copy my email address into their clipboard and paste it in their favorite email app."
+        )
+        static let CopyEmailButton =
+            NSLocalizedString("i053 - Copy Email Address",
+                              comment: "Alert: Email Copy: Button Title and Alert Title: When the user taps this button, the developers email address is copied into the users clipboard so the user can paste it into their favorite email app."
         )
     }
 }

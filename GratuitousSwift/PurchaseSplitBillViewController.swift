@@ -397,12 +397,8 @@ final class PurchaseSplitBillViewController: UIViewController {
     fileprivate var shouldDismissVCAfterEmailVCDismisses = false
     
     fileprivate func didTapEmailSupportActionButton(_ action: UIAlertAction) {
-        let emailManager = EmailSupportHandler(kind: .genericEmailSupport, delegate: self)
-        if let mailVC = emailManager.presentableMailViewController {
-            self.present(mailVC, animated: true, completion: .none)
-        } else {
-            emailManager.switchAppForEmailSupport()
-        }
+        let vc = AutoMailViewController.newVC(with: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     // MARK: Handle Going Away
