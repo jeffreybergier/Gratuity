@@ -14,10 +14,14 @@ class AutoMailViewController: MFMailComposeViewController {
     typealias Completion = (Bool) -> Void
     private var completion: Completion?
 
-    static func newVC(with completion: Completion?) -> UIViewController {
+    static func newVC(hackTintColor: UIColor?, completion: Completion?) -> UIViewController {
         switch MFMailComposeViewController.canSendMail() {
         case true:
             let vc = AutoMailViewController()
+            assert(vc.isViewLoaded)
+            if let hackTintColor = hackTintColor {
+                vc.view.tintColor = hackTintColor
+            }
             vc.completion = completion
             vc.mailComposeDelegate = vc
             vc.setSubject(AutoMailViewController.LocalizedString.EmailSubject)

@@ -397,7 +397,7 @@ final class PurchaseSplitBillViewController: UIViewController {
     fileprivate var shouldDismissVCAfterEmailVCDismisses = false
     
     fileprivate func didTapEmailSupportActionButton(_ action: UIAlertAction) {
-        let vc = AutoMailViewController.newVC(with: nil)
+        let vc = AutoMailViewController.newVC(hackTintColor: self.view.tintColor, completion: nil)
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -411,22 +411,6 @@ final class PurchaseSplitBillViewController: UIViewController {
     
     deinit {
         self.purchaseManager.endObserving()
-    }
-}
-
-// MARK: MFMailComposeViewControllerDelegate
-
-extension PurchaseSplitBillViewController: MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        self.state = .normal
-        controller.dismiss(animated: true) {
-            if self.shouldDismissVCAfterEmailVCDismisses == true {
-                self.dismiss(animated: true, completion: .none)
-            }
-        }
-        if let error = error {
-            log?.error("Error while sending email. Error Description: \(error)")
-        }
     }
 }
 

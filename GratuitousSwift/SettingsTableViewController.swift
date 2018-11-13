@@ -9,7 +9,7 @@
 import MessageUI
 import UIKit
 
-final class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+final class SettingsTableViewController: UITableViewController {
     
     // MARK: Handle TableViewController
     @IBOutlet fileprivate weak var headerLabelTipPercentage: UILabel?
@@ -348,7 +348,7 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         case 3: // about section
             switch indexPath.row {
             case 1: // Email Me Row
-                let mailVC = AutoMailViewController.newVC() { _ in
+                let mailVC = AutoMailViewController.newVC(hackTintColor: self.view.tintColor) { _ in
                     tableView.deselectRow(at: indexPath, animated: true)
                 }
                 self.present(mailVC, animated: true, completion: nil)
@@ -404,15 +404,6 @@ final class SettingsTableViewController: UITableViewController, MFMailComposeVie
         self.aboutEmailMeLabel?.text = UIAlertAction.Gratuity.LocalizedString.EmailSupport
         self.aboutReviewLabel?.text = SettingsTableViewController.LocalizedString.ReviewThisAppButton
         self.aboutWatchAppLabel?.text = SettingsTableViewController.LocalizedString.GratuityForAppleWatchButton
-    }
-
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        if let presentedViewController = self.presentedViewController {
-            presentedViewController.dismiss(animated: true, completion: nil)
-        }
-        if let error = error {
-            log?.error("Error while sending email. Error Description: \(error.localizedDescription)")
-        }
     }
     
     // MARK: Handle UI Changing
