@@ -8,4 +8,6 @@
 
 import WatchKit
 
+let log: Log? = nil
+
 class ExtensionDelegate: NSObject, WKExtensionDelegate { }

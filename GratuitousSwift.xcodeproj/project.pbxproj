@@ -538,6 +538,7 @@
 				733D02A31BBA4C2D00E40EC5 /* Frameworks */,
 				733D02A41BBA4C2D00E40EC5 /* Resources */,
 				73AEA6DC1BBB05EC004B16DE /* Embed Watch Content */,
+				7FFB0C97411BDFEC777A001C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -699,6 +700,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7FFB0C97411BDFEC777A001C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gratuity/Pods-Gratuity-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8C015369C3E4BE7206AFD910 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

@@ -14,8 +14,6 @@ protocol Log {
     func warning(_ log: String)
 }
 
-let log: Log? = nil
-
 class GratuitousDefaultsObserver {
     
     func postNotificationsForLocallyChangedDefaults(old: GratuitousUserDefaults, new: GratuitousUserDefaults) {

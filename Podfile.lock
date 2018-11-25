@@ -1,16 +1,28 @@
 PODS:
+  - ObjcExceptionBridging (1.0.1):
+    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
+  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - OpenSSL-Universal (1.0.1.k)
+  - XCGLogger (6.0.4):
+    - XCGLogger/Core (= 6.0.4)
+  - XCGLogger/Core (6.0.4):
+    - ObjcExceptionBridging
 
 DEPENDENCIES:
   - OpenSSL-Universal (= 1.0.1.k)
+  - XCGLogger (~> 6.0.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - ObjcExceptionBridging
     - OpenSSL-Universal
+    - XCGLogger
 
 SPEC CHECKSUMS:
+  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   OpenSSL-Universal: 5b864c8eb334c8e78f44e4b2eb294ee2c1891c23
+  XCGLogger: 4fc1bc0bdd5828cb8dc8da7a843536cda1bea8f3
 
-PODFILE CHECKSUM: cbd08b3bea5a278c009c70b66b32416fc4973987
+PODFILE CHECKSUM: 28e69a52ced591b5e79f09fa52972bd715ded7b1
 
 COCOAPODS: 1.5.3

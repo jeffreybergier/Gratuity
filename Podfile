@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'Gratuity' do
-	platform :ios, '8.0'
+	platform :ios, '9.3'
 	pod 'OpenSSL-Universal', '1.0.1.k'
-    ##pod 'XCGLogger', '~> 3.0'
+  pod 'XCGLogger', '~> 6.0.2'
 end

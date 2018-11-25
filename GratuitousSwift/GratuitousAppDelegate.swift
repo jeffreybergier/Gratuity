@@ -14,7 +14,7 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: Required iOS Properties Properties
     var window: UIWindow?
-        
+
     // MARK: App Preferences Management Properties
     fileprivate var _preferences: GratuitousUserDefaults = GratuitousUserDefaults.defaultsFromDisk() {
         didSet {
@@ -77,19 +77,16 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: iOS App Launch
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch
-        
-        /*
-        //crashlytics intializer
+
+        let log = XCGLogger.default
         #if DEBUG
-            self.log.setup(.Verbose, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .None, fileLogLevel: .None)
-            self.log.info("Debug Build: Not Loading Fabric")
+        log.setup(level: .verbose, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .none, fileLevel: .none)
+        log.info("Debug Build")
         #endif
         #if RELEASE
-            self.log.setup(.Warning, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .None, fileLogLevel: .None)
-            self.log.info("Release Build: Loading Fabric")
-            Fabric.with([Crashlytics.self(), Answers.self()])
+        log.setup(level: .warning, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: .none, fileLevel: .none)
+        log.info("Release Build")
         #endif
-        */
         
         self.window?.tintColor = GratuitousUIConstant.lightTextColor()
         self.window?.backgroundColor = GratuitousUIConstant.darkBackgroundColor();
@@ -132,3 +129,23 @@ final class GratuitousAppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+import XCGLogger
+
+let log: Log? = MyLogger.shared
+
+class MyLogger: Log {
+
+    static let shared = MyLogger()
+
+    private var theirLogger = XCGLogger.default
+
+    func error(_ log: String) {
+        self.theirLogger.error(log)
+    }
+    func info(_ log: String) {
+        self.theirLogger.info(log)
+    }
+    func warning(_ log: String) {
+        self.theirLogger.warning(log)
+    }
+}
